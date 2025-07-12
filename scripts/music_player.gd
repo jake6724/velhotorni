@@ -18,6 +18,7 @@ func _ready():
 	music_player.bus = "music"
 	add_child(music_player)
 	music_player.stream = track_1
+	music_player.play()
 
 	# Keep music running on pause
 	process_mode = Node.PROCESS_MODE_ALWAYS
