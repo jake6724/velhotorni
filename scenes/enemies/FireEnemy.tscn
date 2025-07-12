@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d005asbs0koie"]
+[gd_scene load_steps=20 format=3 uid="uid://d005asbs0koie"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_8gdkf"]
 [ext_resource type="Resource" uid="uid://btkmprtnsviar" path="res://data/enemies/fire_enemy.tres" id="2_ikns8"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bs1li1amcuwmf" path="res://assets/art/sprites/spr_ui_health_bg.png" id="6_meion"]
 [ext_resource type="Texture2D" uid="uid://cewaxpm870exv" path="res://assets/art/sprites/spr_enemy_fire_hit.png" id="6_yypid"]
 [ext_resource type="Texture2D" uid="uid://bcur10cf64e2x" path="res://assets/art/sprites/spr_enemy_fire_corpse.png" id="7_4wbrj"]
+[ext_resource type="Texture2D" uid="uid://dumg5so8h5d3m" path="res://assets/art/sprites/spr_ui_shield.png" id="10_vegk2"]
+[ext_resource type="Texture2D" uid="uid://04i8ln0m18xc" path="res://assets/art/sprites/spr_ui_weak.png" id="11_be3nk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikns8"]
 radius = 8.06226
@@ -374,3 +376,13 @@ grow_horizontal = 2
 value = 100.0
 texture_under = ExtResource("6_meion")
 texture_progress = ExtResource("5_lcirn")
+
+[node name="Shield" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(16, 3)
+texture = ExtResource("10_vegk2")
+
+[node name="Weak" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(16, 3)
+texture = ExtResource("11_be3nk")

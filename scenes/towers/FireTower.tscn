@@ -8,12 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://8k0oajw470vq" path="res://assets/art/sprites/spr_ui_cross.png" id="5_3x3sf"]
 [ext_resource type="Texture2D" uid="uid://2sexc1kk1x2h" path="res://assets/art/sprites/spr_ui_earth.png" id="5_miyej"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_53w0b"]
-size = Vector2(16, 16)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_53w0b"]
-radius = 10.4403
-
 [sub_resource type="Animation" id="Animation_bfb4r"]
 length = 0.001
 tracks/0/type = "value"
@@ -124,11 +118,22 @@ _data = {
 &"idle": SubResource("Animation_53w0b")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53w0b"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_53w0b"]
+radius = 10.4403
+
 [node name="FireTower" type="Node2D"]
 z_index = 1
 script = ExtResource("1_53w0b")
 tower_data = ExtResource("2_53w0b")
 metadata/_custom_type_script = "uid://1v42jjyvr5ed"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0mo5k")
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -153,11 +158,6 @@ scale = Vector2(1, 1.04698)
 shape = SubResource("CircleShape2D_53w0b")
 debug_color = Color(0.974735, 0, 0.424605, 0.42)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_0mo5k")
-}
-
 [node name="SwapSprite" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 1
@@ -175,5 +175,6 @@ texture = ExtResource("5_3x3sf")
 offset = Vector2(8, 8)
 
 [node name="RangeIndicator" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(8, 8)
 texture = ExtResource("4_yrnm3")

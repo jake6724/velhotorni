@@ -7,6 +7,8 @@ extends Area2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collider: CollisionShape2D = $CollisionShape2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
+@onready var shield: Sprite2D = $Shield
+@onready var weak: Sprite2D = $Weak
 
 var path: PackedVector2Array
 var min_distance: float = 2
@@ -51,9 +53,16 @@ func _ready():
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
 func take_damage(damage_recieved: float, tower_element: GameManager.Element):
+	# Hit by resisted element
 	if tower_element == element or tower_element == strong_against:
+		weak.hide()
+		shield.show()
 		damage_recieved *= negative_modifier
-	else: # Tower is strong against enemy
+
+	# Hit by weak-to element
+	else:
+		weak.show()
+		shield.hide()
 		damage_recieved *= positive_modifier
 
 	if not %HealthBar.is_visible():
@@ -115,6 +124,8 @@ func on_animation_finished(anim_name):
 
 func die() -> void:
 	%HealthBar.hide()
+	shield.hide()
+	weak.hide()
 	can_attack = false
 	is_alive = false
 	is_dead.emit(self)

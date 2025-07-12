@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://chcjfnhrohafj"]
+[gd_scene load_steps=20 format=3 uid="uid://chcjfnhrohafj"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_56s5r"]
 [ext_resource type="Resource" uid="uid://3s36fwvetrlm" path="res://data/enemies/water_enemy.tres" id="2_cjl7e"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dc00cdqdkoyvl" path="res://assets/art/sprites/spr_enemy_water_walk.png" id="5_pa8pg"]
 [ext_resource type="Texture2D" uid="uid://b7b2hyyxd53c5" path="res://assets/art/sprites/spr_enemy_water_hit.png" id="6_8r56n"]
 [ext_resource type="Texture2D" uid="uid://rwec3xnhkxkf" path="res://assets/art/sprites/spr_ui_health_bar.png" id="6_pa8pg"]
+[ext_resource type="Texture2D" uid="uid://dumg5so8h5d3m" path="res://assets/art/sprites/spr_ui_shield.png" id="10_luo25"]
+[ext_resource type="Texture2D" uid="uid://04i8ln0m18xc" path="res://assets/art/sprites/spr_ui_weak.png" id="11_dnkfd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cjl7e"]
 radius = 8.06226
@@ -352,6 +354,7 @@ texture = ExtResource("2_lo6ju")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 z_index = 1
 position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_cjl7e")
@@ -375,3 +378,13 @@ grow_horizontal = 2
 value = 100.0
 texture_under = ExtResource("5_73bmd")
 texture_progress = ExtResource("6_pa8pg")
+
+[node name="Shield" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(16, 3)
+texture = ExtResource("10_luo25")
+
+[node name="Weak" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(16, 3)
+texture = ExtResource("11_dnkfd")
