@@ -6,8 +6,10 @@ extends Control
 @onready var music_volume_slider: HSlider = %MusicVolumeSlider
 @onready var music_check_box: CheckBox = %MusicCheckBox
 @onready var resume_button: Button = %ResumeButton
-
+@onready var exit_button: Button = %ExitButton
 @export var main: Main # Set in editor
+
+var main_menu: PackedScene = load("res://scenes/MainMenu.tscn") # Don't make pre-load; weird circular dep issue
 
 func _ready():
 	#process_mode = Node.PROCESS_MODE_WHEN_PAUSED
@@ -23,8 +25,9 @@ func _ready():
 	music_volume_slider.value_changed.connect(on_music_volume_changed)
 	music_check_box.pressed.connect(on_music_check_pressed)
 
-	# Resume
+	# Resume/exit buttons
 	resume_button.pressed.connect(on_resume_button_pressed)
+	exit_button.pressed.connect(on_exit_button_pressed)
 
 func on_sfx_volume_changed(_value):
 	if _value == 0:
@@ -54,3 +57,6 @@ func on_music_check_pressed():
 
 func on_resume_button_pressed():
 	main.unpause_game_with_menu()
+
+func on_exit_button_pressed():
+	get_tree().change_scene_to_packed(main_menu)

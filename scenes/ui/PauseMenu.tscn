@@ -5,13 +5,13 @@
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="1_vb6pq"]
 [ext_resource type="Theme" uid="uid://6kjtqajiemqv" path="res://assets/MenuButtonTheme.tres" id="4_5twic"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5dsq"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5twic"]
-
 [sub_resource type="Theme" id="Theme_n5dsq"]
 CheckBox/icons/checked = null
 CheckBox/styles/pressed = null
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5dsq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5twic"]
 
 [node name="PauseMenu" type="Control"]
 z_index = 4096
@@ -67,25 +67,10 @@ theme_override_fonts/font = ExtResource("1_vb6pq")
 theme_override_font_sizes/font_size = 16
 text = "Game paused"
 
-[node name="ResumeButton" type="Button" parent="NinePatchRect/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme = ExtResource("4_5twic")
-theme_type_variation = &"FlatButton"
-theme_override_colors/font_hover_color = Color(0.678431, 0.709804, 0.741176, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0.678431, 0.709804, 0.741176, 1)
-theme_override_fonts/font = ExtResource("1_vb6pq")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n5dsq")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_5twic")
-text = "Resume"
-
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 8
 mouse_filter = 2
 
 [node name="MusicSettings" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
@@ -147,3 +132,39 @@ texture_filter = 1
 layout_mode = 2
 theme = SubResource("Theme_n5dsq")
 button_pressed = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = -2
+
+[node name="ResumeButton" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("4_5twic")
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_hover_color = Color(0.678431, 0.709804, 0.741176, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.678431, 0.709804, 0.741176, 1)
+theme_override_fonts/font = ExtResource("1_vb6pq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n5dsq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5twic")
+text = "Resume"
+
+[node name="ExitButton" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("4_5twic")
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_hover_color = Color(0.678431, 0.709804, 0.741176, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.678431, 0.709804, 0.741176, 1)
+theme_override_fonts/font = ExtResource("1_vb6pq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n5dsq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5twic")
+text = "Exit"

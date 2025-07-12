@@ -7,15 +7,11 @@ extends Control
 var main_scene: PackedScene = preload("res://scenes/Main.tscn")
 
 func _ready() -> void:
+	print(main_scene)
 	# Connect to signals
 	start_button.pressed.connect(_on_play_button_pressed)
 	credits_button.pressed.connect(_on_credits_button_pressed)
 	tutorial_button.pressed.connect(_on_tutorial_button_pressed)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if Input.is_key_pressed(KEY_ESCAPE):
-		get_tree().quit()
 
 func _on_play_button_pressed() -> void:
 	GameManager.level_index = 1
