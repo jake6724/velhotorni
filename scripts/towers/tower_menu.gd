@@ -11,6 +11,7 @@ extends Control
 @onready var wave_number: Label = %WaveNumber
 @onready var level_number: Label = %LevelNumber
 @onready var progress: Label = %Progress
+@onready var fast_forward: TextureButton = %FastForward
 
 var ui_tower_sprites: Dictionary[GameManager.Element, Texture] = {
 	GameManager.Element.FIRE: preload("res://assets/art/sprites/spr_ui_tower_fire.png"),
@@ -48,6 +49,9 @@ func _ready():
 	wave_button.mouse_entered.connect(on_mouse_entered_button)
 	wave_button.mouse_exited.connect(on_mouse_exited_button)
 
+	fast_forward.button_down.connect(on_start_fast_forward)
+	fast_forward.button_up.connect(on_stop_fast_forward)
+
 	# Configure timers
 	wave_number_timer.timeout.connect(on_wave_number_timer_timeout)
 	wave_number_timer.one_shot = true
@@ -60,10 +64,12 @@ func _ready():
 func hide_placement_phase() -> void:
 	tower_buttons.hide()
 	wave_button.hide()
+	fast_forward.show()
 
 func show_placement_phase() -> void:
 	tower_buttons.show()
 	wave_button.show()
+	fast_forward.hide()
 
 func show_level_number() -> void:
 	# level_number.text = "Level " + str(GameManager.level_index + 1)
@@ -78,12 +84,6 @@ func on_button_pressed(pressed_button: TextureButton):
 		"firebutton": tower_selected.emit("fire")
 		"waterbutton": tower_selected.emit("water")
 		"earthbutton": tower_selected.emit("earth")
-
-func on_wave_number_timer_timeout():
-	wave_number.hide()
-
-func on_level_number_timer_timeout():
-	level_number.hide()
 
 ## Intended to be called by `player_controller` to directly update gold count
 func update_gold(new_amount: int) -> void:
@@ -114,6 +114,18 @@ func on_wave_button_pressed() -> void:
 	wave_number.show()
 	wave_number_timer.start(wave_number_duration)
 	start_wave.emit()
+
+func on_wave_number_timer_timeout():
+	wave_number.hide()
+
+func on_level_number_timer_timeout():
+	level_number.hide()
+
+func on_start_fast_forward():
+	Engine.time_scale = 2
+
+func on_stop_fast_forward():
+	Engine.time_scale = 1
 
 func on_mouse_entered_button():
 	mouse_entered_button.emit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ciicsqtfh31fh"]
+[gd_scene load_steps=12 format=3 uid="uid://ciicsqtfh31fh"]
 
 [ext_resource type="Script" uid="uid://dhbvh3ym8unk4" path="res://scripts/towers/tower_menu.gd" id="1_c8bcu"]
 [ext_resource type="Texture2D" uid="uid://b8c4r7msm3cdi" path="res://assets/art/sprites/spr_ui_coin_big.png" id="2_opq3w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b8wt5ykepyrjo" path="res://assets/art/sprites/spr_ui_triangle.png" id="4_638he"]
 [ext_resource type="Texture2D" uid="uid://bod2y1cmadsde" path="res://assets/art/sprites/spr_ui_wavebutton.png" id="5_gfj4e"]
 [ext_resource type="Texture2D" uid="uid://d3uwhutrtqgwi" path="res://assets/art/sprites/spr_ui_coin_small.png" id="6_g5j4q"]
+[ext_resource type="Texture2D" uid="uid://drednump7huu" path="res://assets/art/sprites/spr_ui_fastbutton.png" id="6_opq3w"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="7_r3bjd"]
 [ext_resource type="Texture2D" uid="uid://ducm8wc7gd0vx" path="res://assets/art/sprites/spr_ui_tower_fire.png" id="8_4bluh"]
 [ext_resource type="Texture2D" uid="uid://qaa0yn4cxbck" path="res://assets/art/sprites/spr_ui_tower_earth.png" id="9_rh755"]
@@ -95,6 +96,15 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 texture_normal = ExtResource("5_gfj4e")
+
+[node name="FastForward" type="TextureButton" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture_normal = ExtResource("6_opq3w")
 
 [node name="WaveNumber" type="Label" parent="MarginContainer"]
 unique_name_in_owner = true
