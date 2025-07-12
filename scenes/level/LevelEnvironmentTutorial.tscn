@@ -1079,6 +1079,6 @@ visible = false
 [node name="TowerMenu" parent="Reference(LEAVE_INVISIBLE)" instance=ExtResource("9_dit66")]
 
 [node name="UI" type="CanvasLayer" parent="."]
-layer = 128
+layer = 0
 
 [node name="TutorialUI" parent="UI" instance=ExtResource("13_5ute2")]

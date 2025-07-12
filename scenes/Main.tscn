@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c6gn0gwhvt2he" path="res://scripts/main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dmftkyu1m0r7n" path="res://scenes/ui/RoundInfo.tscn" id="3_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://btulqisr6vlgj" path="res://scenes/player/PlayerController.tscn" id="4_rarhs"]
-[ext_resource type="PackedScene" uid="uid://dubhjspmje3uk" path="res://scenes/ui/DialogueBox.tscn" id="4_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://cyqs2ueeu4k80" path="res://scenes/ui/PauseMenu.tscn" id="5_vcsgt"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0bbpv")
@@ -11,12 +11,10 @@ script = ExtResource("1_0bbpv")
 [node name="PlayerController" parent="." instance=ExtResource("4_rarhs")]
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="PauseMenu" parent="UI" node_paths=PackedStringArray("main") instance=ExtResource("5_vcsgt")]
+visible = false
+main = NodePath("../..")
 
 [node name="RoundInfo" parent="UI" instance=ExtResource("3_0bbpv")]
-
-[node name="DialogueBox" parent="UI" instance=ExtResource("4_vcsgt")]
-visible = false
-offset_left = -36.0
-offset_top = -98.0
-offset_right = 118.0
-offset_bottom = 38.0

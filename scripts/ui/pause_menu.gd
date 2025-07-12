@@ -1,7 +1,56 @@
 class_name PauseMenu
 extends Control
 
+@onready var sfx_volume_slider: HSlider = %SFXVolumeSlider
+@onready var sfx_check_box: CheckBox = %SFXCheckBox
+@onready var music_volume_slider: HSlider = %MusicVolumeSlider
+@onready var music_check_box: CheckBox = %MusicCheckBox
+@onready var resume_button: Button = %ResumeButton
 
+@export var main: Main # Set in editor
 
 func _ready():
+	#process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+
+	# SFX
+	sfx_volume_slider.value = SFXPlayer.volume_linear
+	sfx_volume_slider.value_changed.connect(on_sfx_volume_changed)
+	sfx_check_box.pressed.connect(on_sfx_check_pressed)
+
+	# Music
+	music_volume_slider.value = MusicPlayer.volume_linear
+	music_volume_slider.value_changed.connect(on_music_volume_changed)
+	music_check_box.pressed.connect(on_music_check_pressed)
+
+	# Resume
+	resume_button.pressed.connect(on_resume_button_pressed)
+
+func on_sfx_volume_changed(_value):
+	if _value == 0:
+		sfx_check_box.button_pressed = false
+	else:
+		sfx_check_box.button_pressed = true
+	SFXPlayer.update_bus_volume(_value)
+
+func on_sfx_check_pressed():
+	if sfx_check_box.button_pressed: # Checked
+		SFXPlayer.update_bus_volume(sfx_volume_slider.value)
+	else:
+		SFXPlayer.update_bus_volume(0)
+
+func on_music_volume_changed(_value):
+	if _value == 0:
+		music_check_box.button_pressed = false
+	else:
+		music_check_box.button_pressed = true
+	MusicPlayer.update_bus_volume(_value)
+
+func on_music_check_pressed():
+	if music_check_box.button_pressed: # Checked
+		MusicPlayer.update_bus_volume(music_volume_slider.value)
+	else:
+		MusicPlayer.update_bus_volume(0)
+
+func on_resume_button_pressed():
+	main.unpause_game_with_menu()
