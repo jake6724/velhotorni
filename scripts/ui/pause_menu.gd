@@ -59,4 +59,5 @@ func on_resume_button_pressed():
 	main.unpause_game_with_menu()
 
 func on_exit_button_pressed():
+	GameManager.clear_level()
 	get_tree().change_scene_to_packed(main_menu)

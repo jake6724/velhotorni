@@ -4,13 +4,13 @@ extends Node
 enum Element {FIRE, WATER, EARTH}
 var cell_size: int = 16
 
-var main_scene: PackedScene = preload("res://scenes/Main.tscn")
-var main_menu_scene: PackedScene = preload("res://scenes/MainMenu.tscn")
+var main_scene: PackedScene = load("res://scenes/Main.tscn")
+var main_menu_scene: PackedScene = load("res://scenes/MainMenu.tscn")
 var main: Node2D
 
-var level_zero: PackedScene = preload("res://scenes/level/LevelEnvironmentZero.tscn")
-var level_tutorial: PackedScene = preload("res://scenes/level/LevelEnvironmentTutorial.tscn")
-var level_one: PackedScene = preload("res://scenes/level/LevelEnvironmentOne.tscn")
+var level_zero: PackedScene = load("res://scenes/level/LevelEnvironmentZero.tscn")
+var level_tutorial: PackedScene = load("res://scenes/level/LevelEnvironmentTutorial.tscn")
+var level_one: PackedScene = load("res://scenes/level/LevelEnvironmentOne.tscn")
 
 var levels: Array[PackedScene] = [level_tutorial, level_one]
 # var levels: Array[PackedScene] = [level_zero]
