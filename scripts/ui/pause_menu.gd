@@ -12,7 +12,6 @@ extends Control
 var main_menu: PackedScene = load("res://scenes/MainMenu.tscn") # Don't make pre-load; weird circular dep issue
 
 func _ready():
-	#process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 	# SFX
@@ -59,5 +58,6 @@ func on_resume_button_pressed():
 	main.unpause_game_with_menu()
 
 func on_exit_button_pressed():
+	main.unpause_game_with_menu()
 	GameManager.clear_level()
-	get_tree().change_scene_to_packed(main_menu)
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")

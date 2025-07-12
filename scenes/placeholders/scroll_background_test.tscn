@@ -7,8 +7,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lw6xl"]
 shader = ExtResource("1_chaq1")
-shader_parameter/xSpeed = 0.6
-shader_parameter/ySpeed = -0.6
+shader_parameter/xSpeed = 0.3
+shader_parameter/ySpeed = -0.3
 
 [node name="ScrollBackgroundTest" type="Control"]
 layout_mode = 3
