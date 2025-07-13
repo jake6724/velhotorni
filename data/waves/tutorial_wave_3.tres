@@ -7,5 +7,5 @@
 [resource]
 script = ExtResource("1_2mrye")
 data = Array[ExtResource("1_xho8i")]([ExtResource("2_dlah6"), ExtResource("2_dlah6"), ExtResource("2_dlah6"), ExtResource("2_dlah6"), ExtResource("2_dlah6"), ExtResource("2_dlah6"), ExtResource("2_dlah6"), ExtResource("2_dlah6"), ExtResource("2_dlah6"), ExtResource("2_dlah6"), ExtResource("2_dlah6"), ExtResource("2_dlah6")])
-reward = 20.0
+reward = 8.0
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
