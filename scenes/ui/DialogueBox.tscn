@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dubhjspmje3uk"]
+[gd_scene load_steps=6 format=3 uid="uid://dubhjspmje3uk"]
 
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/spr_ui_box2.png" id="1_ggoq5"]
-[ext_resource type="Texture2D" uid="uid://brh7p8hgt6qn2" path="res://assets/art/sprites/spr_player.png" id="2_bjuha"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="2_nfm5p"]
 [ext_resource type="Script" uid="uid://brt1wcqcr54ey" path="res://scripts/ui/dialogue_box.gd" id="2_rdkif"]
+[ext_resource type="Texture2D" uid="uid://b4fge8q2ko1pe" path="res://assets/art/sprites/spr_ui_portrait_mage.png" id="4_bjuha"]
+[ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="5_rdkif"]
 
 [node name="DialogueBox" type="NinePatchRect"]
 z_index = 101
@@ -14,10 +15,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -112.0
-offset_right = -14.0
-offset_bottom = -19.0
+offset_left = -105.0
+offset_top = -85.0
+offset_right = 105.0
+offset_bottom = 85.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -37,52 +38,63 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2.0
-offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
 
-[node name="Label" type="Label" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("2_nfm5p")
-theme_override_font_sizes/font_size = 8
-text = " ( Spacebar to continue ("
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 15
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource("2_bjuha")
+theme_override_constants/separation = 14
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_bjuha")
 stretch_mode = 2
 
-[node name="Dialogue" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_rdkif")
+theme_override_font_sizes/font_size = 16
+text = "- Tutorial -"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Dialogue" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_nfm5p")
 theme_override_font_sizes/font_size = 8
-text = "
-"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
+autowrap_mode = 3
+
+[node name="PressToContinue" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_nfm5p")
+theme_override_font_sizes/font_size = 8
+text = " Spacebar to
+ continue"
+horizontal_alignment = 1
+vertical_alignment = 1
