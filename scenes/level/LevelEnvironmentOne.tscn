@@ -1051,7 +1051,7 @@ sources/0 = SubResource("TileSetAtlasSource_ylovj")
 [node name="LevelEnvironmentOne" type="Node2D"]
 z_index = -1
 script = ExtResource("1_c2pc5")
-level_name = "Level One"
+level_name = "- Get Hyped -"
 initial_gold = 150
 waves = Array[ExtResource("2_dl2pb")]([ExtResource("2_grsr5"), ExtResource("4_vykbn"), ExtResource("5_vykbn"), ExtResource("6_per2q"), ExtResource("7_ruy10"), ExtResource("8_f4p11"), ExtResource("9_ixecb"), ExtResource("10_1rson"), ExtResource("11_68fm7"), ExtResource("12_2aeab")])
 
