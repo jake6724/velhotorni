@@ -13,7 +13,7 @@ func _ready() -> void:
 	credits_button.pressed.connect(_on_credits_button_pressed)
 
 func _on_play_button_pressed() -> void:
-	GameManager.level_index = 1
+	GameManager.level_index = 2
 	GameManager.configure_active_level()
 	SceneTransition.change_scene(main_scene)
 	
