@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cfco8mo2bfg3b"]
+[gd_scene load_steps=19 format=4 uid="uid://cfco8mo2bfg3b"]
 
 [ext_resource type="Script" uid="uid://f60hwpg87qo0" path="res://scripts/level/tutorial_level_environment.gd" id="1_xwifi"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_xfk66"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://deixtoq82gyis" path="res://scenes/level/Waypoint.tscn" id="8_8amrt"]
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="9_dit66"]
 [ext_resource type="PackedScene" uid="uid://nifbpm4btkyy" path="res://scenes/ui/TutorialUI.tscn" id="13_5ute2"]
+[ext_resource type="Texture2D" uid="uid://bwonyc48uhooj" path="res://assets/art/sprites/spr_mask_fog.png" id="15_8amrt"]
+[ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="16_3dlar"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ylovj"]
 texture = ExtResource("6_485kb")
@@ -1044,6 +1046,11 @@ texture = ExtResource("6_485kb")
 [sub_resource type="TileSet" id="TileSet_grsr5"]
 sources/0 = SubResource("TileSetAtlasSource_ylovj")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ydbv7"]
+shader = ExtResource("16_3dlar")
+shader_parameter/xSpeed = 0.01
+shader_parameter/ySpeed = -0.01
+
 [node name="LevelEnvironmentTutorial" type="Node2D"]
 z_index = -1
 script = ExtResource("1_xwifi")
@@ -1082,3 +1089,12 @@ visible = false
 layer = 0
 
 [node name="TutorialUI" parent="UI" instance=ExtResource("13_5ute2")]
+
+[node name="WeatherScroll" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ydbv7")
+position = Vector2(200, 128)
+texture = ExtResource("15_8amrt")
+region_enabled = true
+region_rect = Rect2(0, 0, 400, 192)
