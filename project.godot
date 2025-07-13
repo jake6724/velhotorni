@@ -26,6 +26,7 @@ EnemySpawner="*res://scripts/enemies/enemy_spawner.gd"
 WorldGrid="*res://scripts/world_grid.gd"
 SFXPlayer="*res://scripts/sfx_player.gd"
 MusicPlayer="*res://scripts/music_player.gd"
+SceneTransition="*res://scenes/ui/scene_transition.tscn"
 
 [display]
 
