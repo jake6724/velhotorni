@@ -6,7 +6,7 @@ var track_1: AudioStreamOggVorbis = preload("res://audio/music/Theme-1_Auto.ogg"
 # var track_2: AudioStreamOggVorbis = preload("res://audio/music/Theme-2_Auto.ogg")
 var start_track = track_1
 
-var volume_linear: float = .2
+var volume_linear: float = .4
 var bus_index: int
 
 func _ready():
