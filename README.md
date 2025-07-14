@@ -1,1 +1,1 @@
-# Play the game [HERE](https://jake6724.github.io/tower_defense_jam/)
+# Play the game on [Itch.io!](https://jake-aldridge.itch.io/velhotorni)
