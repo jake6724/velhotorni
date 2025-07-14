@@ -19,10 +19,16 @@ func _ready():
 	sfx_volume_slider.value_changed.connect(on_sfx_volume_changed)
 	sfx_check_box.pressed.connect(on_sfx_check_pressed)
 
+	if SFXPlayer.volume_linear == 0:
+		sfx_check_box.button_pressed = false
+
 	# Music
 	music_volume_slider.value = MusicPlayer.bus_volume_linear
 	music_volume_slider.value_changed.connect(on_music_volume_changed)
 	music_check_box.pressed.connect(on_music_check_pressed)
+
+	if MusicPlayer.bus_volume_linear == 0:
+		music_check_box.button_pressed = false			
 
 	# Resume/exit buttons
 	resume_button.pressed.connect(on_resume_button_pressed)
@@ -33,12 +39,15 @@ func on_sfx_volume_changed(_value):
 		sfx_check_box.button_pressed = false
 	else:
 		sfx_check_box.button_pressed = true
+	SFXPlayer.volume_linear = _value
 	SFXPlayer.update_bus_volume(_value)
 
 func on_sfx_check_pressed():
 	if sfx_check_box.button_pressed: # Checked
+		SFXPlayer.volume_linear = sfx_volume_slider.value
 		SFXPlayer.update_bus_volume(sfx_volume_slider.value)
 	else:
+		SFXPlayer.volume_linear = 0
 		SFXPlayer.update_bus_volume(0)
 
 func on_music_volume_changed(_value):
