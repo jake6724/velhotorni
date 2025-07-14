@@ -60,4 +60,4 @@ func on_resume_button_pressed():
 func on_exit_button_pressed():
 	main.unpause_game_with_menu()
 	GameManager.clear_level()
-	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+	SceneTransition.change_scene(main_menu)

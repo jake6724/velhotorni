@@ -79,6 +79,11 @@ unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_ur1ae")
 text = "1-10"
 
@@ -105,36 +110,6 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 texture_normal = ExtResource("6_opq3w")
-
-[node name="WaveNumber" type="Label" parent="MarginContainer"]
-unique_name_in_owner = true
-visible = false
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 4
-theme_override_constants/outline_size = 0
-theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/font = ExtResource("3_ur1ae")
-theme_override_font_sizes/font_size = 64
-text = "Wave 3"
-
-[node name="LevelNumber" type="Label" parent="MarginContainer"]
-unique_name_in_owner = true
-visible = false
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
-theme_override_colors/font_outline_color = Color(0.0941176, 0.0941176, 0.25098, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 4
-theme_override_constants/shadow_outline_size = -2
-theme_override_fonts/font = ExtResource("3_ur1ae")
-theme_override_font_sizes/font_size = 64
-text = "Level 1"
 
 [node name="TowerButtons" type="HBoxContainer" parent="MarginContainer"]
 unique_name_in_owner = true
@@ -253,3 +228,44 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("10_e3xib")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 90.0
+grow_horizontal = 2
+
+[node name="WaveNumber" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_ur1ae")
+theme_override_font_sizes/font_size = 16
+text = "Wave 3"
+
+[node name="LevelNumber" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = -2
+theme_override_fonts/font = ExtResource("3_ur1ae")
+theme_override_font_sizes/font_size = 16
+text = "Level 1"

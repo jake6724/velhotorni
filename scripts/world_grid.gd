@@ -23,8 +23,10 @@ var valid_atlas_coords: Array[Vector2i] = [ # Tiles that towers CAN be placed on
 	Vector2i(2,8),Vector2i(3,8),Vector2i(4,8),Vector2i(5,8),Vector2i(6,8),
 	Vector2i(0,9),Vector2i(1,9),Vector2i(2,9),Vector2i(3,9),Vector2i(4,9),Vector2i(5,9),
 	Vector2i(0,10),Vector2i(1,10),Vector2i(2,10),Vector2i(3,10),Vector2i(4,10),Vector2i(5,10),
-	Vector2i(0,11),Vector2i(1,11),Vector2i(2,11),Vector2i(3,11),Vector2i(4,11),
-	Vector2i(3,12),Vector2i(4,12),
+	Vector2i(0,11),Vector2i(1,11),Vector2i(2,11),Vector2i(3,11),Vector2i(4,11), Vector2i(5,11),
+	Vector2i(0,12),Vector2i(3,12),Vector2i(4,12),Vector2i(5,12),
+	Vector2i(3,13),Vector2i(4,13), 
+	Vector2i(3,14),Vector2i(4,14),
 ]
 
 

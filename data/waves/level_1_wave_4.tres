@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://cjgavyk2t226r" path="res://data/spawn/water_half.tres" id="3_fbetm"]
 [ext_resource type="Resource" uid="uid://dhgm83gmh1vcw" path="res://data/spawn/fire_quarter.tres" id="4_dfl52"]
 [ext_resource type="Resource" uid="uid://dna6k11dppmyk" path="res://data/spawn/fire_1.tres" id="5_4k6co"]
-[ext_resource type="Resource" path="res://data/spawn/earth_half.tres" id="6_h0auv"]
+[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/earth_half.tres" id="6_h0auv"]
 [ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/earth_1.tres" id="7_ykvya"]
 [ext_resource type="Resource" uid="uid://dpn12fls6ike1" path="res://data/spawn/water_quarter.tres" id="8_cxtla"]
 

@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d37yx87886ct2"]
+[gd_scene load_steps=4 format=3 uid="uid://d37yx87886ct2"]
 
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="1_chaq1"]
 [ext_resource type="Texture2D" uid="uid://ctm22yndbrhy3" path="res://assets/art/sprites/spr_ui_scroll.png" id="2_chaq1"]
-[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/spr_ui_box2.png" id="3_67v2q"]
-[ext_resource type="Texture2D" uid="uid://dmda72qgk1nbj" path="res://assets/art/sprites/spr_tower_earth.png" id="4_xt0p4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lw6xl"]
 shader = ExtResource("1_chaq1")
@@ -46,45 +44,3 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_chaq1")
 stretch_mode = 1
-
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-z_index = -1
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -78.5
-offset_top = -48.0
-offset_right = 78.5
-offset_bottom = 48.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_67v2q")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="Fairy" type="TextureRect" parent="NinePatchRect"]
-visible = false
-z_index = -1
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("4_xt0p4")
-stretch_mode = 2

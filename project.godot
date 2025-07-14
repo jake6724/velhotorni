@@ -13,6 +13,10 @@ config_version=5
 config/name="tower_defense_jam"
 run/main_scene="uid://yaumfsyoni78"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/bg_color=Color(0.0941176, 0.0941176, 0.25098, 1)
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="uid://df0lpdhv8ra1k"
 
 [autoload]
@@ -22,6 +26,7 @@ EnemySpawner="*res://scripts/enemies/enemy_spawner.gd"
 WorldGrid="*res://scripts/world_grid.gd"
 SFXPlayer="*res://scripts/sfx_player.gd"
 MusicPlayer="*res://scripts/music_player.gd"
+SceneTransition="*res://scenes/ui/scene_transition.tscn"
 
 [display]
 

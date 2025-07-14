@@ -11,9 +11,9 @@ var main: Node2D
 var level_zero: PackedScene = load("res://scenes/level/LevelEnvironmentZero.tscn")
 var level_tutorial: PackedScene = load("res://scenes/level/LevelEnvironmentTutorial.tscn")
 var level_one: PackedScene = load("res://scenes/level/LevelEnvironmentOne.tscn")
-# var level_two: PackedScene = load("")
+var level_two: PackedScene = load("res://scenes/level/LevelEnvironmentTwo.tscn")
 
-var levels: Array[PackedScene] = [level_tutorial, level_one, ]
+var levels: Array[PackedScene] = [level_tutorial, level_one, level_two]
 # var levels: Array[PackedScene] = [level_zero]
 var level_index: int = 0
 var active_level: LevelEnvironment

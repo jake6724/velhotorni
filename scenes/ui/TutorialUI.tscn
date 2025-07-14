@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://nifbpm4btkyy"]
+[gd_scene load_steps=3 format=3 uid="uid://nifbpm4btkyy"]
 
 [ext_resource type="PackedScene" uid="uid://dubhjspmje3uk" path="res://scenes/ui/DialogueBox.tscn" id="1_1hs27"]
 [ext_resource type="Script" uid="uid://db06u0qolifvo" path="res://scripts/ui/tutorial_ui.gd" id="1_j5iru"]
-[ext_resource type="Texture2D" uid="uid://b8wt5ykepyrjo" path="res://assets/art/sprites/spr_ui_triangle.png" id="3_kffba"]
 
 [node name="TutorialUI" type="Control"]
 z_index = 100
@@ -21,115 +20,82 @@ script = ExtResource("1_j5iru")
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-offset_left = -93.0
-offset_top = -46.5
-offset_right = 93.0
-offset_bottom = 46.5
 
-[node name="Dialogue" parent="DialogueBox1/MarginContainer/MarginContainer/HBoxContainer" index="1"]
-text = "Monsters are attacking the realm!
-Quickly, Summon spirits to defend!"
+[node name="Dialogue" parent="DialogueBox1/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
+text = "A horde of elemental undead are about to storm your mage's tower!
+
+Summon familiars to help!
+"
 
 [node name="DialogueBox2" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-offset_left = -93.0
-offset_top = -46.0
-offset_right = 112.0
-offset_bottom = 65.0
 
-[node name="TextureRect" parent="DialogueBox2/MarginContainer/MarginContainer/HBoxContainer" index="0"]
-texture = ExtResource("3_kffba")
+[node name="Dialogue" parent="DialogueBox2/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
+text = "Each familiar
+is strong against the following element in the cycle!
 
-[node name="Dialogue" parent="DialogueBox2/MarginContainer/MarginContainer/HBoxContainer" index="1"]
-text = "Each spirit is strong against the next element in the cycle! 
-
-Look in the top right for a reminder!"
+note the pyramid!
+"
 
 [node name="DialogueBox3" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-offset_left = -93.0
-offset_top = -46.5
-offset_right = 93.0
-offset_bottom = 46.5
 
-[node name="Dialogue" parent="DialogueBox3/MarginContainer/MarginContainer/HBoxContainer" index="1"]
-text = "Click the fire spirit to transform it into a nature spririt!"
+[node name="Dialogue" parent="DialogueBox3/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
+text = "touch the -fire- familiar to turn it into a -nature- familiar!"
 
 [node name="DialogueBox4" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-offset_left = -93.0
-offset_top = -46.5
-offset_right = 93.0
-offset_bottom = 46.5
 
-[node name="Dialogue" parent="DialogueBox4/MarginContainer/MarginContainer/HBoxContainer" index="1"]
-text = "You now have enough mana to summon a nature spirit!"
+[node name="Dialogue" parent="DialogueBox4/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
+text = "You've gathered enough mana to summon a -nature- familiar!"
 
 [node name="DialogueBox5" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-offset_left = -93.0
-offset_top = -46.5
-offset_right = 93.0
-offset_bottom = 46.5
 
-[node name="Dialogue" parent="DialogueBox5/MarginContainer/MarginContainer/HBoxContainer" index="1"]
-text = "Spirits will revert to their original element after each wave..."
+[node name="Dialogue" parent="DialogueBox5/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
+text = "Familiars will revert to their -original- element after each wave!"
 
 [node name="DialogueBox6" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-offset_left = -93.0
-offset_top = -46.5
-offset_right = 93.0
-offset_bottom = 46.5
 
-[node name="Dialogue" parent="DialogueBox6/MarginContainer/MarginContainer/HBoxContainer" index="1"]
-text = "Click the nature spirit to transform it into a water spririt!"
+[node name="Dialogue" parent="DialogueBox6/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
+text = "touch the -nature- familiar to turn it into a -water- familiar!"
 
 [node name="DialogueBox7" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-offset_left = -93.0
-offset_top = -46.5
-offset_right = 93.0
-offset_bottom = 46.5
 
-[node name="Dialogue" parent="DialogueBox7/MarginContainer/MarginContainer/HBoxContainer" index="1"]
-text = "You now have enough mana to summon a water spirit!"
+[node name="Dialogue" parent="DialogueBox7/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
+text = "You've gathered enough mana to summon a -water- familiar!"
 
 [node name="DialogueBox8" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-offset_left = -93.0
-offset_top = -46.5
-offset_right = 93.0
-offset_bottom = 46.5
 
-[node name="Dialogue" parent="DialogueBox8/MarginContainer/MarginContainer/HBoxContainer" index="1"]
-text = "Be prepared to switch each spirit during this final wave!"
+[node name="Dialogue" parent="DialogueBox8/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
+text = "Be prepared to switch -each- familiar during this final wave!"
 
 [node name="DialogueBox9" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-offset_left = -93.0
-offset_top = -46.5
-offset_right = 93.0
-offset_bottom = 46.5
 
-[node name="Dialogue" parent="DialogueBox9/MarginContainer/MarginContainer/HBoxContainer" index="1"]
-text = "Spirits can transform once per wave..."
+[node name="Dialogue" parent="DialogueBox9/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
+text = "Familiars can transform 
+-only once-
+per wave!"
 
 [editable path="DialogueBox1"]
 [editable path="DialogueBox2"]

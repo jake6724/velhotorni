@@ -13,14 +13,15 @@ func _ready() -> void:
 	credits_button.pressed.connect(_on_credits_button_pressed)
 
 func _on_play_button_pressed() -> void:
-	GameManager.level_index = 1
+	GameManager.level_index = 2
 	GameManager.configure_active_level()
-	get_tree().change_scene_to_packed(main_scene)
+	SceneTransition.change_scene(main_scene)
+	
 
 func _on_tutorial_button_pressed() ->void :
 	GameManager.level_index = 0
 	GameManager.configure_active_level()
-	get_tree().change_scene_to_packed(main_scene)
+	SceneTransition.change_scene(main_scene)
 
 func _on_credits_button_pressed() -> void:
 	$Credits.show()

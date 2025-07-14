@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=9 format=3 uid="uid://4j2sbrbej8t6"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_icf8c"]
+[ext_resource type="Resource" uid="uid://dna6k11dppmyk" path="res://data/spawn/fire_1.tres" id="2_ycksq"]
+[ext_resource type="Resource" uid="uid://8uj44s234ppj" path="res://data/spawn/fire_half.tres" id="3_7m0u3"]
+[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/earth_1.tres" id="4_38v0p"]
+[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/earth_half.tres" id="5_8tb7c"]
+[ext_resource type="Resource" uid="uid://bdfy3y0cceel0" path="res://data/spawn/water_1.tres" id="6_a4wjx"]
+[ext_resource type="Resource" uid="uid://cjgavyk2t226r" path="res://data/spawn/water_half.tres" id="7_ft6ua"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="8_8b0sa"]
+
+[resource]
+script = ExtResource("8_8b0sa")
+data = Array[ExtResource("1_icf8c")]([ExtResource("2_ycksq"), ExtResource("3_7m0u3"), ExtResource("3_7m0u3"), ExtResource("3_7m0u3"), ExtResource("4_38v0p"), ExtResource("5_8tb7c"), ExtResource("5_8tb7c"), ExtResource("5_8tb7c"), ExtResource("6_a4wjx"), ExtResource("7_ft6ua"), ExtResource("7_ft6ua"), ExtResource("7_ft6ua")])
+reward = 50.0
+metadata/_custom_type_script = "uid://cskry1sw3vqba"
