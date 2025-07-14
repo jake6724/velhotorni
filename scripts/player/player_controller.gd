@@ -105,10 +105,9 @@ func spawn_tower(tower_name: String, world_pos: Vector2, is_transform: bool=fals
 				selected_tower_name = ""
 				return [true, tower]
 			else:
-				print("Space occupied")
+				SFXPlayer.play_sfx("click_2")
 				return [false, null]
 		else:
-			print("Invalid position")
 			return [false, null]
 	else:
 		return [false, null]
@@ -118,11 +117,16 @@ func on_tower_selected(tower_name: String) -> void:
 	if gold >= prices[tower_name]:
 		selected_tower_name = tower_name
 
+		match tower_name:
+			"fire": SFXPlayer.play_sfx("fire_click")
+			"earth": SFXPlayer.play_sfx("earth_click")
+			"water": SFXPlayer.play_sfx("water_click")
+
 		# Indicator
 		indicator.tower_sprite.texture = textures[tower_name]
 		indicator.show()
 	else:
-		print("Not enough gold")
+		SFXPlayer.play_sfx("click_2")
 
 func on_tower_transform(tower: Tower) -> void:
 	# Only allow transformation if player not in placement phase and not tower was not previously transformed this wave
@@ -142,7 +146,12 @@ func on_tower_transform(tower: Tower) -> void:
 		# Spawn new tower, add to set
 		var new_tower: Tower = spawn_tower(next_tower_name, _world_pos, true)[1]
 		transformed_towers[new_tower] = 0
-		
+
+		SFXPlayer.play_sfx("click_1")
+
+	else:
+		SFXPlayer.play_sfx("click_2")
+
 func get_next_tower_name(tower: Tower) -> String:
 	# fire -> earth -> water -> fire
 	match tower.element:
@@ -200,12 +209,14 @@ func reset_towers() -> void:
 	pre_wave_towers = []
 
 func on_tower_hovered(tower: Tower):
-	if tower.can_transform:
-		if not placement_enabled:
+	if not placement_enabled:
+		if tower.can_transform:
 			if transformed_towers.has(tower) and not tower.cross_sprite.is_visible():
 				tower.cross_sprite.show()
 			else:
 				tower.swap_sprite.show()
+		else:
+			tower.cross_sprite.show()		
 
 func on_tower_unhovered(tower: Tower):
 	if not placement_enabled:

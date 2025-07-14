@@ -5,6 +5,7 @@ var num_players: int = 32
 var players: Array[AudioStreamPlayer] = []
 var volume_linear: float = .2
 var bus_index: int
+signal victory_sfx_complete
 
 var sfxs: Dictionary[String, AudioStreamOggVorbis] = {
 	"fire_shot": preload("res://audio/sfx/Fire_Shot.ogg"),
@@ -17,6 +18,13 @@ var sfxs: Dictionary[String, AudioStreamOggVorbis] = {
 	"fire_explosion": preload("res://audio/sfx/Fire_Explosion.ogg"),
 	"earth_explosion": preload("res://audio/sfx/Earth_Explosion.ogg"),
 	"water_explosion": preload("res://audio/sfx/Water_Explosion.ogg"),
+	"click_1": preload("res://audio/sfx/Click_1_8bit.ogg"),
+	"click_2": preload("res://audio/sfx/Click_2_8bit.ogg"),
+	"fire_click": preload("res://audio/sfx/Fire_Click.ogg"),
+	"earth_click": preload("res://audio/sfx/Earth_Click.ogg"),
+	"water_click": preload("res://audio/sfx/Water_Click.ogg"),
+	"base_explosion": preload("res://audio/sfx/Tower_Explosion.ogg"),
+	"victory": preload("res://audio/sfx/Victory_8bit.ogg"),
 }
 
 func _ready():
@@ -37,6 +45,10 @@ func play_sfx(sfx_name: String):
 	var p: AudioStreamPlayer = get_best_player()
 	p.stream = sfx_stream
 	p.play()
+
+	await p.finished
+	if sfx_name == "victory":
+		victory_sfx_complete.emit()
 
 ## Return the first available or least recently used AudioStreamPlayer
 func get_best_player() -> AudioStreamPlayer:
