@@ -14,9 +14,9 @@ config/name="tower_defense_jam"
 run/main_scene="uid://yaumfsyoni78"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0.0941176, 0.0941176, 0.25098, 1)
-boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
+boot_splash/image="uid://c5n4cc0k6ij2x"
 config/icon="uid://df0lpdhv8ra1k"
 
 [autoload]

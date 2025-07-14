@@ -1058,7 +1058,7 @@ shader_parameter/ySpeed = -0.01
 [node name="LevelEnvironmentTwo" type="Node2D"]
 z_index = -1
 script = ExtResource("1_bbfh2")
-level_name = "- Get Hyped -"
+level_name = "- Slumbering Hills -"
 initial_gold = 25
 waves = Array[ExtResource("2_s1w0f")]([ExtResource("3_bbfh2"), ExtResource("4_s1w0f"), ExtResource("5_thqhp"), ExtResource("6_vux6d"), ExtResource("7_gls1o"), ExtResource("3_s1w0f"), ExtResource("9_neryw"), ExtResource("10_t1xic"), ExtResource("11_e63f8"), ExtResource("12_4jlcc")])
 

@@ -1,8 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://nifbpm4btkyy"]
+[gd_scene load_steps=13 format=3 uid="uid://nifbpm4btkyy"]
 
 [ext_resource type="PackedScene" uid="uid://dubhjspmje3uk" path="res://scenes/ui/DialogueBox.tscn" id="1_1hs27"]
 [ext_resource type="Script" uid="uid://db06u0qolifvo" path="res://scripts/ui/tutorial_ui.gd" id="1_j5iru"]
+[ext_resource type="Texture2D" uid="uid://caq3sqwpslhyv" path="res://assets/art/sprites/spr_ui_portrait_orb.png" id="3_eaobj"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="3_kffba"]
+[ext_resource type="Texture2D" uid="uid://caqhhjchopmuq" path="res://assets/art/sprites/spr_ui_portrait_cursor.png" id="4_ll34v"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/spr_ui_box3.png" id="4_valf7"]
+[ext_resource type="Texture2D" uid="uid://d1igu4817m082" path="res://assets/art/sprites/spr_ui_portrait_earth.png" id="5_w5mlv"]
+[ext_resource type="Texture2D" uid="uid://dpl7p5u4vdbmy" path="res://assets/art/sprites/spr_ui_portrait_water.png" id="6_21cc2"]
 
 [sub_resource type="Theme" id="Theme_valf7"]
 
@@ -41,17 +46,21 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
+[node name="TextureRect" parent="DialogueBox2/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("3_eaobj")
+
 [node name="Dialogue" parent="DialogueBox2/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
 text = "Each familiar
 is strong against the following element in the cycle!
-
-note the pyramid!
 "
 
 [node name="DialogueBox3" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+
+[node name="TextureRect" parent="DialogueBox3/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("4_ll34v")
 
 [node name="Dialogue" parent="DialogueBox3/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
 text = "touch the -fire- familiar to turn it into a -nature- familiar!"
@@ -60,6 +69,9 @@ text = "touch the -fire- familiar to turn it into a -nature- familiar!"
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+
+[node name="TextureRect" parent="DialogueBox4/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("5_w5mlv")
 
 [node name="Dialogue" parent="DialogueBox4/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
 text = "You've gathered enough mana to summon a -nature- familiar!"
@@ -77,6 +89,9 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
+[node name="TextureRect" parent="DialogueBox6/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("4_ll34v")
+
 [node name="Dialogue" parent="DialogueBox6/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
 text = "touch the -nature- familiar to turn it into a -water- familiar!"
 
@@ -85,12 +100,19 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
+[node name="TextureRect" parent="DialogueBox7/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("6_21cc2")
+
 [node name="Dialogue" parent="DialogueBox7/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
 text = "You've gathered enough mana to summon a -water- familiar!"
 
 [node name="DialogueBox8" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
+
+[node name="TextureRect" parent="DialogueBox8/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("4_ll34v")
 
 [node name="Dialogue" parent="DialogueBox8/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
 text = "Be prepared to switch -each- familiar during this final wave!"
@@ -114,7 +136,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_top = 0
+theme_override_constants/margin_top = 5
 
 [node name="SkipButton" type="Button" parent="MarginContainer"]
 unique_name_in_owner = true
@@ -134,6 +156,30 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_kffba")
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_valf7")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_eaobj")
 text = "Skip Tutorial"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/SkipButton"]
+z_index = -1
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -10.0
+offset_right = 60.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("4_valf7")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 7
 
 [editable path="DialogueBox1"]
 [editable path="DialogueBox2"]
