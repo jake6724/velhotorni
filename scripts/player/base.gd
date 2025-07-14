@@ -16,7 +16,6 @@ func _ready():
 func _physics_process(_delta):
 	if is_alive:
 		ap.play("idle")
-
 	else:
 		%Darkness.modulate.a = (ap.current_animation_position / ap.current_animation_length)
 
@@ -28,6 +27,7 @@ func take_damage(damage_recieved: int):
 	if health <= 0:
 		is_alive = false
 		%HealthLabel.hide()
+		SFXPlayer.play_sfx("base_explosion")
 		ap.play("die")
 
 func on_animation_finished(anin_name: String):

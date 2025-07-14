@@ -38,7 +38,7 @@ var level_number_timer: Timer = Timer.new()
 var level_number_duration: float = 2.0
 
 func _ready():
-	# Configure buttons
+	# Configure tower buttons
 	var buttons: Array[TextureButton] = [fire_button, water_button, earth_button]
 	for b: TextureButton in buttons:
 			b.pressed.connect(on_button_pressed.bind(b))

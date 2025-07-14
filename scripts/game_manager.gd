@@ -13,7 +13,7 @@ var level_tutorial: PackedScene = load("res://scenes/level/LevelEnvironmentTutor
 var level_one: PackedScene = load("res://scenes/level/LevelEnvironmentOne.tscn")
 var level_two: PackedScene = load("res://scenes/level/LevelEnvironmentTwo.tscn")
 
-var levels: Array[PackedScene] = [level_tutorial, level_one, level_two]
+var levels: Array[PackedScene] = [level_zero, level_tutorial, level_one, level_two]
 # var levels: Array[PackedScene] = [level_zero]
 var level_index: int = 0
 var active_level: LevelEnvironment
@@ -23,7 +23,7 @@ var active_spawn_location: Vector2 # In world coordinates
 var base: Base
 
 var level_complete_timer: Timer = Timer.new()
-var level_complete_duration: float = 2
+var level_complete_duration: float = 3
 
 var fast_forward_speed: int = 2
 
@@ -79,6 +79,15 @@ func on_level_complete(): # Emitted by EnemySpawner
 		main.round_info.show_level_complete()
 
 	level_complete_timer.start(level_complete_duration)
+
+	MusicPlayer.fade_out()
+	await MusicPlayer.fade_out_complete
+
+	SFXPlayer.play_sfx("victory")
+	await SFXPlayer.victory_sfx_complete
+
+	MusicPlayer.fade_in()
+	await MusicPlayer.fade_in_complete
 
 func on_level_complete_message_finished():
 	# Exit to main menu if last level

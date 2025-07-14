@@ -20,7 +20,7 @@ func _ready():
 	sfx_check_box.pressed.connect(on_sfx_check_pressed)
 
 	# Music
-	music_volume_slider.value = MusicPlayer.volume_linear
+	music_volume_slider.value = MusicPlayer.bus_volume_linear
 	music_volume_slider.value_changed.connect(on_music_volume_changed)
 	music_check_box.pressed.connect(on_music_check_pressed)
 

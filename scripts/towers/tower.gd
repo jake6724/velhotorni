@@ -20,6 +20,7 @@ var transform_timer: Timer = Timer.new()
 var transform_delay: float = 1.0
 
 var can_transform: bool = false
+var transform_delay_complete: bool = false
 
 # Tower stats
 var damage: float
@@ -171,7 +172,7 @@ func on_transform_area_pressed(_viewport, _event, _shape_idx) -> void:
 		if Input.is_action_just_pressed("left_click"):
 			can_transform = false
 			transform_tower.emit()
-
+		
 func on_attack_timer_timeout() -> void:
 	can_attack = true
 
