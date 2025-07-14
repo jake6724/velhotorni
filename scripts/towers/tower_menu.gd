@@ -120,6 +120,7 @@ func on_wave_number_timer_timeout():
 
 func on_level_number_timer_timeout():
 	level_number.hide()
+	$AnimationPlayer.play("flash")
 
 func on_start_fast_forward():
 	Engine.time_scale = 2
