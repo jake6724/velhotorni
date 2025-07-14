@@ -43,16 +43,20 @@ func on_sfx_check_pressed():
 
 func on_music_volume_changed(_value):
 	if _value == 0:
+		MusicPlayer.bus_volume_linear = _value
 		music_check_box.button_pressed = false
 	else:
 		music_check_box.button_pressed = true
+	MusicPlayer.bus_volume_linear = _value
 	MusicPlayer.update_bus_volume(_value)
 
 func on_music_check_pressed():
 	if music_check_box.button_pressed: # Checked
+		MusicPlayer.bus_volume_linear = music_volume_slider.value
 		MusicPlayer.update_bus_volume(music_volume_slider.value)
 	else:
-		MusicPlayer.update_bus_volume(0)
+		MusicPlayer.bus_volume_linear = 0.0
+		MusicPlayer.update_bus_volume(0.0)
 
 func on_resume_button_pressed():
 	main.unpause_game_with_menu()

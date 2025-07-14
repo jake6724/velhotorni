@@ -48,7 +48,11 @@ func update_bus_volume(new_bus_volume_linear: float):
 	AudioServer.set_bus_volume_linear(bus_index, new_bus_volume_linear)
 
 func fade_out(fade_duration: float=.25) -> void:
-	prev_player_volume_linear = music_player.volume_linear
+	if bus_volume_linear == 0:
+		prev_player_volume_linear = 0
+	else:
+		prev_player_volume_linear = music_player.volume_linear
+	
 	var fade_tween = create_tween()
 	AudioServer.set_bus_volume_linear(bus_index, bus_volume_linear)
 	fade_tween.tween_property(music_player, "volume_linear", 0, fade_duration)
@@ -59,6 +63,6 @@ func fade_out(fade_duration: float=.25) -> void:
 
 func fade_in(fade_duration: float=.25) -> void:
 	var fade_tween = create_tween()
-	fade_tween.tween_property(music_player, "volume_linear", prev_player_volume_linear, fade_duration).from(0)
+	fade_tween.tween_property(music_player, "volume_linear", bus_volume_linear, fade_duration).from(0)
 	await fade_tween.finished
 	fade_in_complete.emit()
