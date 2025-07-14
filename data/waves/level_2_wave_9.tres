@@ -1,16 +1,14 @@
-[gd_resource type="Resource" script_class="Wave" load_steps=9 format=3 uid="uid://c0mpynitqim1l"]
+[gd_resource type="Resource" script_class="Wave" load_steps=7 format=3 uid="uid://c70bw65fhywif"]
 
-[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_u764e"]
-[ext_resource type="Resource" uid="uid://dna6k11dppmyk" path="res://data/spawn/fire_1.tres" id="2_erg88"]
-[ext_resource type="Resource" uid="uid://8uj44s234ppj" path="res://data/spawn/fire_half.tres" id="3_goau5"]
-[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/earth_1.tres" id="4_5rmak"]
-[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/earth_half.tres" id="5_tyw6n"]
-[ext_resource type="Resource" uid="uid://bdfy3y0cceel0" path="res://data/spawn/water_1.tres" id="6_e0ddr"]
-[ext_resource type="Resource" uid="uid://cjgavyk2t226r" path="res://data/spawn/water_half.tres" id="7_3f56o"]
-[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="8_qnuiy"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_l05gm"]
+[ext_resource type="Resource" uid="uid://cyr81a3nwhowi" path="res://data/spawn/earth_tenth.tres" id="2_6jwte"]
+[ext_resource type="Resource" uid="uid://b55hgxwadlt4s" path="res://data/spawn/earth_eighth.tres" id="2_o7kmj"]
+[ext_resource type="Resource" uid="uid://dna6k11dppmyk" path="res://data/spawn/fire_1.tres" id="2_vaimd"]
+[ext_resource type="Resource" uid="uid://bgnpocl01wghd" path="res://data/spawn/fire_tenth.tres" id="4_up36s"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="8_0atic"]
 
 [resource]
-script = ExtResource("8_qnuiy")
-data = Array[ExtResource("1_u764e")]([ExtResource("2_erg88"), ExtResource("3_goau5"), ExtResource("3_goau5"), ExtResource("3_goau5"), ExtResource("4_5rmak"), ExtResource("5_tyw6n"), ExtResource("5_tyw6n"), ExtResource("5_tyw6n"), ExtResource("6_e0ddr"), ExtResource("7_3f56o"), ExtResource("7_3f56o"), ExtResource("7_3f56o")])
-reward = 50.0
+script = ExtResource("8_0atic")
+data = Array[ExtResource("1_l05gm")]([ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_6jwte"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_o7kmj"), ExtResource("2_vaimd"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s"), ExtResource("4_up36s")])
+reward = 25.0
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
