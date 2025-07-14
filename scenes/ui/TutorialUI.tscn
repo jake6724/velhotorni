@@ -118,6 +118,7 @@ theme_override_constants/margin_top = 0
 
 [node name="SkipButton" type="Button" parent="MarginContainer"]
 unique_name_in_owner = true
+visible = false
 z_index = 101
 z_as_relative = false
 layout_mode = 2

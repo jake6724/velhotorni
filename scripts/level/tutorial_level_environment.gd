@@ -25,6 +25,9 @@ func on_enemy_spawned():
 		show_dialogue()
 		main.pause_game()
 
+	if enemy_count == 5:
+		ui.skip_button.show()
+
 	if enemy_count == 19:
 		show_dialogue()
 		main.pause_game()
@@ -54,5 +57,6 @@ func show_dialogue():
 func _input(_event):
 	if Input.is_action_just_pressed("spacebar"):
 		main.unpause_game()
-		active_db.hide()
+		if active_db:
+			active_db.hide()
 		ui.mouse_filter = Control.MOUSE_FILTER_IGNORE

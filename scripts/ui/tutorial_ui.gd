@@ -10,6 +10,7 @@ extends Control
 @onready var db_7: DialogueBox = %DialogueBox7
 @onready var db_8: DialogueBox = %DialogueBox8
 @onready var db_9: DialogueBox = %DialogueBox9
+@onready var skip_button: Button = %SkipButton
 
 var main_scene: PackedScene = load("res://scenes/Main.tscn")
 
@@ -21,10 +22,10 @@ func _ready():
 	for db in dbs:
 		db.hide()	
 
-	%SkipButton.pressed.connect(on_skip_button_pressed)
+	skip_button.pressed.connect(on_skip_button_pressed)
 
 func on_skip_button_pressed():
-	print("Skip pressed")
 	GameManager.level_index = 1
+	GameManager.clear_level()
 	GameManager.configure_active_level()
 	SceneTransition.change_scene(main_scene)
