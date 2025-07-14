@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv1j0q7gxj4x0"]
+[gd_scene load_steps=3 format=3 uid="uid://421d4m7r6dw3"]
 
 [ext_resource type="VideoStream" uid="uid://cw1j1c40j5tea" path="res://assets/video/vid_intro.ogv" id="1_45dpb"]
 [ext_resource type="Script" uid="uid://c1vunqub1vni" path="res://scripts/intro.gd" id="1_hc7eg"]

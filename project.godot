@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="tower_defense_jam"
-run/main_scene="uid://dv1j0q7gxj4x0"
+run/main_scene="uid://421d4m7r6dw3"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0.0941176, 0.0941176, 0.25098, 1)
 boot_splash/fullsize=false
