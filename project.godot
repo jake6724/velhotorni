@@ -18,6 +18,7 @@ boot_splash/fullsize=false
 boot_splash/use_filter=false
 boot_splash/image="uid://c5n4cc0k6ij2x"
 config/icon="uid://df0lpdhv8ra1k"
+boot_splash/minimum_display_time=3000
 
 [autoload]
 

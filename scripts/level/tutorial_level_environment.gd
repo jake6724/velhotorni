@@ -29,6 +29,7 @@ func on_enemy_spawned():
 		ui.skip_button.show()
 
 	if enemy_count == 19:
+		ui.skip_button.hide()
 		show_dialogue()
 		main.pause_game()
 
