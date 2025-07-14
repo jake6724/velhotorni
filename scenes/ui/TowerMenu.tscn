@@ -32,11 +32,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_top = 4
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 theme_override_constants/separation = 134
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer4"]
@@ -44,6 +46,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/separation = -3
 
 [node name="GoldIcon" type="TextureRect" parent="MarginContainer/HBoxContainer4/HBoxContainer3"]
@@ -72,6 +75,7 @@ vertical_alignment = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+mouse_filter = 2
 theme_override_constants/separation = 7
 
 [node name="Progress" type="Label" parent="MarginContainer/HBoxContainer4/HBoxContainer4"]
