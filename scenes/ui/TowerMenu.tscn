@@ -100,6 +100,8 @@ texture = ExtResource("4_638he")
 
 [node name="WaveButton" type="TextureButton" parent="MarginContainer"]
 unique_name_in_owner = true
+z_index = 1
+z_as_relative = false
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 8
