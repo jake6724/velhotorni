@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="1_tkl00"]
 [ext_resource type="Resource" uid="uid://dna6k11dppmyk" path="res://data/spawn/fire_1.tres" id="2_3yb68"]
 [ext_resource type="Resource" uid="uid://dhgm83gmh1vcw" path="res://data/spawn/fire_quarter.tres" id="3_2aop3"]
-[ext_resource type="Resource" path="res://data/spawn/earth_half.tres" id="4_3yb68"]
+[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/earth_half.tres" id="4_3yb68"]
 [ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/earth_1.tres" id="5_gkavl"]
 [ext_resource type="Resource" uid="uid://cjgavyk2t226r" path="res://data/spawn/water_half.tres" id="6_3yb68"]
 [ext_resource type="Resource" uid="uid://bdfy3y0cceel0" path="res://data/spawn/water_1.tres" id="7_gkavl"]
@@ -12,5 +12,5 @@
 [resource]
 script = ExtResource("1_tkl00")
 data = Array[ExtResource("1_46bf5")]([ExtResource("2_3yb68"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("4_3yb68"), ExtResource("4_3yb68"), ExtResource("5_gkavl"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("6_3yb68"), ExtResource("6_3yb68"), ExtResource("6_3yb68"), ExtResource("7_gkavl"), ExtResource("3_2aop3"), ExtResource("3_2aop3"), ExtResource("3_2aop3")])
-reward = 100.0
+reward = 75.0
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
