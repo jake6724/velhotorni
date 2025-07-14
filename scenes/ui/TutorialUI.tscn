@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://nifbpm4btkyy"]
+[gd_scene load_steps=9 format=3 uid="uid://nifbpm4btkyy"]
 
 [ext_resource type="PackedScene" uid="uid://dubhjspmje3uk" path="res://scenes/ui/DialogueBox.tscn" id="1_1hs27"]
 [ext_resource type="Script" uid="uid://db06u0qolifvo" path="res://scripts/ui/tutorial_ui.gd" id="1_j5iru"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="3_kffba"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/spr_ui_box3.png" id="4_valf7"]
 
 [sub_resource type="Theme" id="Theme_valf7"]
 
@@ -90,6 +91,7 @@ text = "You've gathered enough mana to summon a -water- familiar!"
 
 [node name="DialogueBox8" parent="." instance=ExtResource("1_1hs27")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 
 [node name="Dialogue" parent="DialogueBox8/MarginContainer/HBoxContainer/MarginContainer2" index="1"]
@@ -114,7 +116,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_top = 0
+theme_override_constants/margin_top = 5
 
 [node name="SkipButton" type="Button" parent="MarginContainer"]
 unique_name_in_owner = true
@@ -134,6 +136,30 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_kffba")
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_valf7")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_eaobj")
 text = "Skip Tutorial"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/SkipButton"]
+z_index = -1
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -10.0
+offset_right = 60.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("4_valf7")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 7
 
 [editable path="DialogueBox1"]
 [editable path="DialogueBox2"]
