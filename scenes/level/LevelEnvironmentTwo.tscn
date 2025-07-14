@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_bbfh2"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_s1w0f"]
-[ext_resource type="Resource" uid="uid://clqa80e364hlv" path="res://data/waves/level_1_wave_1.tres" id="3_thqhp"]
-[ext_resource type="Resource" uid="uid://b2k0ej8olsrk6" path="res://data/waves/level_1_wave_2.tres" id="4_vux6d"]
-[ext_resource type="Resource" uid="uid://btppwg4aw5ylv" path="res://data/waves/level_1_wave_3.tres" id="5_gls1o"]
-[ext_resource type="Resource" uid="uid://bcqmgmjnq0col" path="res://data/waves/level_1_wave_4.tres" id="6_vy1xi"]
-[ext_resource type="Resource" uid="uid://bek0k6j2he5vb" path="res://data/waves/level_1_wave_5.tres" id="7_neryw"]
-[ext_resource type="Resource" uid="uid://ljlt0ciacxqf" path="res://data/waves/level_1_wave_6.tres" id="8_t1xic"]
-[ext_resource type="Resource" uid="uid://dhj8d3aolp5io" path="res://data/waves/level_1_wave_7.tres" id="9_e63f8"]
-[ext_resource type="Resource" uid="uid://clo7mog475mcb" path="res://data/waves/level_1_wave_8.tres" id="10_4jlcc"]
-[ext_resource type="Resource" uid="uid://bq7prrutysry1" path="res://data/waves/level_1_wave_9.tres" id="11_a7e1y"]
-[ext_resource type="Resource" uid="uid://cejkodtychq1c" path="res://data/waves/level_1_wave_10.tres" id="12_ei8x6"]
+[ext_resource type="Resource" uid="uid://6cs1ovtpgbh3" path="res://data/waves/level_2_wave_1.tres" id="3_bbfh2"]
+[ext_resource type="Resource" uid="uid://cet51kdci6lm1" path="res://data/waves/level_2_wave_6.tres" id="3_s1w0f"]
+[ext_resource type="Resource" uid="uid://bpy2supejx8j8" path="res://data/waves/level_2_wave_2.tres" id="4_s1w0f"]
+[ext_resource type="Resource" uid="uid://b7wmri4urpakv" path="res://data/waves/level_2_wave_3.tres" id="5_thqhp"]
+[ext_resource type="Resource" uid="uid://cfggyb1786fw" path="res://data/waves/level_2_wave_4.tres" id="6_vux6d"]
+[ext_resource type="Resource" uid="uid://dcij2qun7i705" path="res://data/waves/level_2_wave_5.tres" id="7_gls1o"]
+[ext_resource type="Resource" uid="uid://dpf6ywv5qdcj8" path="res://data/waves/level_2_wave_7.tres" id="9_neryw"]
+[ext_resource type="Resource" uid="uid://4j2sbrbej8t6" path="res://data/waves/level_2_wave_8.tres" id="10_t1xic"]
+[ext_resource type="Resource" uid="uid://c0mpynitqim1l" path="res://data/waves/level_2_wave_9.tres" id="11_e63f8"]
+[ext_resource type="Resource" uid="uid://b83gebfa8fq3p" path="res://data/waves/level_2_wave_10.tres" id="12_4jlcc"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/spr_environment_atlas.png" id="13_086qu"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/player/Base.tscn" id="14_nfknx"]
 [ext_resource type="Script" uid="uid://cy2dgc1h1mhqd" path="res://scripts/level/waypoint_manager.gd" id="15_nstg6"]
@@ -1059,8 +1059,8 @@ shader_parameter/ySpeed = -0.01
 z_index = -1
 script = ExtResource("1_bbfh2")
 level_name = "- Get Hyped -"
-initial_gold = 150
-waves = Array[ExtResource("2_s1w0f")]([ExtResource("3_thqhp"), ExtResource("4_vux6d"), ExtResource("5_gls1o"), ExtResource("6_vy1xi"), ExtResource("7_neryw"), ExtResource("8_t1xic"), ExtResource("9_e63f8"), ExtResource("10_4jlcc"), ExtResource("11_a7e1y"), ExtResource("12_ei8x6")])
+initial_gold = 25
+waves = Array[ExtResource("2_s1w0f")]([ExtResource("3_bbfh2"), ExtResource("4_s1w0f"), ExtResource("5_thqhp"), ExtResource("6_vux6d"), ExtResource("7_gls1o"), ExtResource("3_s1w0f"), ExtResource("9_neryw"), ExtResource("10_t1xic"), ExtResource("11_e63f8"), ExtResource("12_4jlcc")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

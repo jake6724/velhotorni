@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=12 format=3 uid="uid://b7wmri4urpakv"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_1lp51"]
+[ext_resource type="Resource" uid="uid://dna6k11dppmyk" path="res://data/spawn/fire_1.tres" id="2_rbi20"]
+[ext_resource type="Resource" uid="uid://8uj44s234ppj" path="res://data/spawn/fire_half.tres" id="3_0euf0"]
+[ext_resource type="Resource" uid="uid://dwrmah3aq741h" path="res://data/spawn/water_7half.tres" id="4_0euf0"]
+[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/earth_1.tres" id="4_6khe4"]
+[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/earth_half.tres" id="5_bwdew"]
+[ext_resource type="Resource" uid="uid://da6oow5yf66ii" path="res://data/spawn/fire_eighth.tres" id="6_0euf0"]
+[ext_resource type="Resource" uid="uid://bdfy3y0cceel0" path="res://data/spawn/water_1.tres" id="6_p64v4"]
+[ext_resource type="Resource" uid="uid://bpgyidhyvooxc" path="res://data/spawn/fire_5.tres" id="7_rbi20"]
+[ext_resource type="Resource" uid="uid://cjgavyk2t226r" path="res://data/spawn/water_half.tres" id="7_x88jp"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="8_vqbh0"]
+
+[resource]
+script = ExtResource("8_vqbh0")
+data = Array[ExtResource("1_1lp51")]([ExtResource("6_p64v4"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("7_x88jp"), ExtResource("4_0euf0"), ExtResource("2_rbi20"), ExtResource("6_0euf0"), ExtResource("6_0euf0"), ExtResource("6_0euf0"), ExtResource("6_0euf0"), ExtResource("6_0euf0"), ExtResource("3_0euf0"), ExtResource("3_0euf0"), ExtResource("3_0euf0"), ExtResource("3_0euf0"), ExtResource("3_0euf0"), ExtResource("3_0euf0"), ExtResource("3_0euf0"), ExtResource("3_0euf0"), ExtResource("3_0euf0"), ExtResource("6_0euf0"), ExtResource("6_0euf0"), ExtResource("6_0euf0"), ExtResource("6_0euf0"), ExtResource("6_0euf0"), ExtResource("6_0euf0"), ExtResource("7_rbi20"), ExtResource("4_6khe4"), ExtResource("5_bwdew"), ExtResource("5_bwdew"), ExtResource("5_bwdew"), ExtResource("5_bwdew"), ExtResource("5_bwdew"), ExtResource("5_bwdew"), ExtResource("5_bwdew"), ExtResource("5_bwdew"), ExtResource("5_bwdew"), ExtResource("5_bwdew")])
+reward = 50.0
+metadata/_custom_type_script = "uid://cskry1sw3vqba"
