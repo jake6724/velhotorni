@@ -3,7 +3,7 @@ extends Node
 
 var num_players: int = 32
 var players: Array[AudioStreamPlayer] = []
-var volume_linear: float = .1
+var volume_linear: float = .2
 var bus_index: int
 
 var sfxs: Dictionary[String, AudioStreamOggVorbis] = {
