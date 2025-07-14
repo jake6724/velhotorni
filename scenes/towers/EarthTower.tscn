@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://fbdpqm6a86de"]
+[gd_scene load_steps=14 format=3 uid="uid://fbdpqm6a86de"]
 
 [ext_resource type="Script" uid="uid://1v42jjyvr5ed" path="res://scripts/towers/tower.gd" id="1_nus1c"]
 [ext_resource type="Texture2D" uid="uid://dh30ocxr6uk5n" path="res://assets/art/sprites/spr_tower_earth_idle.png" id="2_nus1c"]
 [ext_resource type="Resource" uid="uid://dscca5hkneedb" path="res://data/towers/earth.tres" id="2_tncdu"]
+[ext_resource type="Texture2D" uid="uid://cy76j8i8ym8mf" path="res://assets/art/sprites/spr_environment_light.png" id="3_m20iu"]
 [ext_resource type="Texture2D" uid="uid://bytque4pb4xlc" path="res://assets/art/sprites/spr_ui_swap.png" id="4_xdyxa"]
 [ext_resource type="Texture2D" uid="uid://8k0oajw470vq" path="res://assets/art/sprites/spr_ui_cross.png" id="5_aa3id"]
 [ext_resource type="Texture2D" uid="uid://bt1v03t0h2bp6" path="res://assets/art/sprites/spr_ui_water.png" id="5_jcr74"]
@@ -64,6 +65,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Light:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_nus1c"]
 resource_name = "idle"
@@ -117,6 +130,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Light:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tncdu"]
 _data = {
@@ -128,6 +153,11 @@ _data = {
 script = ExtResource("1_nus1c")
 tower_data = ExtResource("2_tncdu")
 metadata/_custom_type_script = "uid://1v42jjyvr5ed"
+
+[node name="Light" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("3_m20iu")
+hframes = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
