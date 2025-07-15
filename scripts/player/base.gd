@@ -27,9 +27,13 @@ func take_damage(damage_recieved: int):
 	if health <= 0:
 		is_alive = false
 		%HealthLabel.hide()
+
+		MusicPlayer.fade_out()
+		await MusicPlayer.fade_out_complete
 		SFXPlayer.play_sfx("base_explosion")
 		ap.play("die")
 
 func on_animation_finished(anin_name: String):
 	if anin_name == "die":
 		base_destroyed.emit()
+		MusicPlayer.fade_in()

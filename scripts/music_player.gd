@@ -52,8 +52,6 @@ func fade_out(fade_duration: float=.25) -> void:
 	await fade_tween.finished
 	fade_out_complete.emit()
 
-# The problem is I want to tween a property of AudioServer that can't really be tweened the normal way
-
 func fade_in(fade_duration: float=.25) -> void:
 	var fade_tween = create_tween()
 	fade_tween.tween_property(music_player, "volume_linear", bus_volume_linear, fade_duration).from(0)

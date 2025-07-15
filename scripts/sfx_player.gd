@@ -1,11 +1,12 @@
 # Autoloader
 extends Node
 
-var num_players: int = 32
+var num_players: int = 128
 var players: Array[AudioStreamPlayer] = []
 var volume_linear: float = .2
 var bus_index: int
 signal victory_sfx_complete
+signal base_explosion_sfx_complete
 
 var sfxs: Dictionary[String, AudioStreamOggVorbis] = {
 	"fire_shot": preload("res://audio/sfx/Fire_Shot.ogg"),
@@ -49,6 +50,8 @@ func play_sfx(sfx_name: String):
 	await p.finished
 	if sfx_name == "victory":
 		victory_sfx_complete.emit()
+	elif sfx_name == "base_explosion":
+		base_explosion_sfx_complete.emit()
 
 ## Return the first available or least recently used AudioStreamPlayer
 func get_best_player() -> AudioStreamPlayer:
