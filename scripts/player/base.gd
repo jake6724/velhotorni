@@ -19,7 +19,6 @@ func _physics_process(_delta):
 	else:
 		%Darkness.modulate.a = (ap.current_animation_position / ap.current_animation_length)
 
-
 func take_damage(damage_recieved: int):
 	health -= damage_recieved
 	%HealthLabel.text = str(health)
@@ -27,6 +26,8 @@ func take_damage(damage_recieved: int):
 	if health <= 0:
 		is_alive = false
 		%HealthLabel.hide()
+
+		GameManager.level_failed = true
 
 		MusicPlayer.fade_out()
 		await MusicPlayer.fade_out_complete

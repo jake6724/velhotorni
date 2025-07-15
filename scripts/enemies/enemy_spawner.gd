@@ -32,7 +32,7 @@ func _ready():
 func configure_level(active_level: LevelEnvironment):
 	level_waves = active_level.waves
 
-func clear_level():
+func clear_level() -> void:
 	for child in get_children():
 		if child is Enemy:
 			child.queue_free()
@@ -44,11 +44,11 @@ func clear_level():
 	enemy_index = 0
 	
 ## Intended to be triggered directly by `player_controller`
-func start_wave():
+func start_wave() -> void:
 	active_wave = level_waves[wave_index]
 	can_spawn_enemy = true
 
-func _physics_process(_delta):
+func _physics_process(_delta) -> void:
 	# Only process if a wave is active	
 	if active_wave:
 		# Check if wave is over
@@ -60,7 +60,7 @@ func _physics_process(_delta):
 			wave_complete.emit()
 			can_spawn_enemy = false
 
-			if wave_index == level_waves.size():
+			if wave_index == level_waves.size() and GameManager.level_failed == false:
 				level_complete.emit()
 
 		elif can_spawn_enemy and enemy_index < active_wave.data.size():
@@ -73,7 +73,7 @@ func _physics_process(_delta):
 			spawn_timer.start(spawn_delay)
 			can_spawn_enemy = false
 		
-func spawn_enemy(enemy_type: GameManager.Element):
+func spawn_enemy(enemy_type: GameManager.Element) -> void:
 	# Configure new enemy
 	var new_enemy: Enemy = enemies[enemy_type].instantiate()
 	new_enemy.position = GameManager.active_spawn_location
@@ -91,5 +91,5 @@ func on_enemy_died(enemy: Enemy) -> void:
 		enemy.play_explosion_sfx()
 	enemy_died.emit()
 
-func on_spawn_timer_timeout():
+func on_spawn_timer_timeout() -> void:
 	can_spawn_enemy = true

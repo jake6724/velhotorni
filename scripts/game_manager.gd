@@ -23,6 +23,7 @@ var base: Base
 
 var level_complete_timer: Timer = Timer.new()
 var level_complete_duration: float = 3
+var level_failed: bool = false
 
 var fast_forward_speed: int = 2
 
@@ -46,6 +47,7 @@ func configure_level():
 
 	base = active_level.base
 	base.base_destroyed.connect(start_level)
+	level_failed = false
 
 	# Configure Autoloaders
 	WorldGrid.generate_grid()
