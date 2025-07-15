@@ -44,7 +44,7 @@ func _ready():
 	health = data.health
 
 	# speed = data.speed
-	speed = .1
+	speed = data.speed
 	element = data.element
 
 	set_resistances()
