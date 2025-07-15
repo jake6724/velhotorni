@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bnmd4f0giohj6"]
+[gd_scene load_steps=22 format=4 uid="uid://bnmd4f0giohj6"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_bbfh2"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_s1w0f"]
@@ -14,8 +14,6 @@
 [ext_resource type="Resource" uid="uid://dcij2qun7i705" path="res://data/waves/level_2_wave_5.tres" id="7_gls1o"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/spr_environment_atlas.png" id="13_086qu"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/player/Base.tscn" id="14_nfknx"]
-[ext_resource type="Script" uid="uid://cy2dgc1h1mhqd" path="res://scripts/level/waypoint_manager.gd" id="15_nstg6"]
-[ext_resource type="PackedScene" uid="uid://deixtoq82gyis" path="res://scenes/level/Waypoint.tscn" id="16_sxfxi"]
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="17_r41la"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="18_cu0i6"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/spr_mask_cloud.png" id="19_bbfh2"]
@@ -1050,6 +1048,12 @@ texture = ExtResource("13_086qu")
 [sub_resource type="TileSet" id="TileSet_vf6od"]
 sources/0 = SubResource("TileSetAtlasSource_l0twk")
 
+[sub_resource type="Curve2D" id="Curve2D_iensy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 144, 0, 0, 0, 0, 64, 144, 0, 0, 0, 0, 64, 112, 0, 0, 0, 0, 192, 112, 0, 0, 0, 0, 192, 192, 0, 0, 0, 0, 224, 192, 0, 0, 0, 0, 224, 160, 0, 0, 0, 0, 320, 160, 0, 0, 0, 0, 320, 192, 0, 0, 0, 0, 352, 192, 0, 0, 0, 0, 352, 112)
+}
+point_count = 11
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1rson"]
 shader = ExtResource("18_cu0i6")
 shader_parameter/xSpeed = 0.01
@@ -1072,53 +1076,8 @@ collision_enabled = false
 [node name="Base" parent="." instance=ExtResource("14_nfknx")]
 position = Vector2(360, 80)
 
-[node name="WaypointManager" type="Node2D" parent="."]
-script = ExtResource("15_nstg6")
-metadata/_custom_type_script = "uid://cy2dgc1h1mhqd"
-
-[node name="Waypoint" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(0, 144)
-
-[node name="Waypoint2" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(64, 144)
-
-[node name="Waypoint3" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(64, 112)
-
-[node name="Waypoint4" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(192, 112)
-
-[node name="Waypoint5" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(193, 193)
-
-[node name="Waypoint6" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(225, 193)
-
-[node name="Waypoint7" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(226, 161)
-
-[node name="Waypoint8" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(278, 161)
-
-[node name="Waypoint9" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(320, 161)
-
-[node name="Waypoint10" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(321, 192)
-
-[node name="Waypoint11" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(353, 193)
-
-[node name="Waypoint12" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(353, 150)
-
-[node name="Waypoint13" parent="WaypointManager" instance=ExtResource("16_sxfxi")]
-position = Vector2(352, 112)
-
-[node name="UI Reference" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="TowerMenu" parent="UI Reference" instance=ExtResource("17_r41la")]
+[node name="EnemyPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_iensy")
 
 [node name="WeatherScroll" type="Sprite2D" parent="."]
 z_index = -1
@@ -1129,3 +1088,8 @@ position = Vector2(200, 128)
 texture = ExtResource("19_bbfh2")
 region_enabled = true
 region_rect = Rect2(0, 0, 400, 192)
+
+[node name="UI Reference" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TowerMenu" parent="UI Reference" instance=ExtResource("17_r41la")]

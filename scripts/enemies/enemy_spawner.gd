@@ -1,6 +1,7 @@
 # Autoloader
 extends Node
 
+var active_level: LevelEnvironment
 var level_waves: Array[Wave] = []
 var active_wave: Wave
 var wave_index: int = 0
@@ -23,14 +24,14 @@ signal enemy_spawned
 signal enemy_died
 
 func _ready():
+	# Enemy spawner manually configured and reset by GameManager
 	# Configure Timer
 	spawn_timer.timeout.connect(on_spawn_timer_timeout)
 	add_child(spawn_timer)
 
-	# Enemy spawner manually start and reset by GameManager
-
-func configure_level(active_level: LevelEnvironment):
-	level_waves = active_level.waves
+func configure_level(_active_level: LevelEnvironment):
+	active_level = _active_level
+	level_waves = _active_level.waves
 
 func clear_level() -> void:
 	for child in get_children():
@@ -79,16 +80,31 @@ func spawn_enemy(enemy_type: GameManager.Element) -> void:
 	new_enemy.position = GameManager.active_spawn_location
 	new_enemy.is_dead.connect(on_enemy_died)
 	add_child(new_enemy)
-
 	active_enemies.append(new_enemy)
+
+	configure_enemy_pathing(new_enemy)
+
 	enemy_spawned.emit()
+
+func configure_enemy_pathing(enemy: Enemy) -> void:
+	# Create new PathFollow2D + RemoteTransform2D for enemy to follow EnemyPath with
+	# EnemyPath2D is a node in the level, add a pathfollow to move along it, and a remote transform which will update the 
+	# enemies position
+	var new_path_follow: PathFollow2D = PathFollow2D.new()
+	active_level.enemy_path.add_child(new_path_follow)
+
+	var new_remote_transform: RemoteTransform2D = RemoteTransform2D.new()
+	new_remote_transform.update_rotation = false
+	new_remote_transform.update_scale = false
+	new_path_follow.add_child(new_remote_transform)
+
+	enemy.path_follow = new_path_follow
+	new_remote_transform.remote_path = enemy.get_path()
 
 func on_enemy_died(enemy: Enemy) -> void:
 	var index = active_enemies.find(enemy)
 	if index != -1:
 		active_enemies.remove_at(index)
-		enemy.ap.play("die") # This may not need to be here and could MAYBE go in enemy. Not sure if queue_free() would cause race condition or issues...
-		enemy.play_explosion_sfx()
 	enemy_died.emit()
 
 func on_spawn_timer_timeout() -> void:

@@ -12,8 +12,11 @@ var level_zero: PackedScene = load("res://scenes/level/LevelEnvironmentZero.tscn
 var level_tutorial: PackedScene = load("res://scenes/level/LevelEnvironmentTutorial.tscn")
 var level_one: PackedScene = load("res://scenes/level/LevelEnvironmentOne.tscn")
 var level_two: PackedScene = load("res://scenes/level/LevelEnvironmentTwo.tscn")
+var test_level: PackedScene = load("res://scenes/level/LevelEnvironmentTest.tscn")
 
 var levels: Array[PackedScene] = [level_tutorial, level_one, level_two]
+# var levels: Array[PackedScene] = [test_level]
+
 var level_index: int = 0
 var active_level: LevelEnvironment
 var active_path: PackedVector2Array
@@ -42,8 +45,6 @@ func configure_active_level():
 func configure_level():
 	main = get_tree().root.get_node("Main")
 	main.add_child(active_level)
-	active_path = convert_path_to_world((active_level.waypoint_manager.get_waypoint_path()))
-	active_spawn_location = (active_path[0])
 
 	base = active_level.base
 	base.base_destroyed.connect(start_level)
@@ -52,6 +53,7 @@ func configure_level():
 	# Configure Autoloaders
 	WorldGrid.generate_grid()
 	WorldGrid.configure_tilemap(active_level.tilemap)
+
 	EnemySpawner.configure_level(active_level)
 
 func start_level():

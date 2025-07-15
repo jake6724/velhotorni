@@ -7,10 +7,14 @@ extends Area2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collider: CollisionShape2D = $CollisionShape2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
+@onready var health_bar: TextureProgressBar = $HealthBar
 @onready var shield: Sprite2D = $Shield
 @onready var weak: Sprite2D = $Weak
 
-var path: PackedVector2Array
+# Pathing 
+var path_follow: PathFollow2D # Update `progress_ration` to move along path
+
+# var path: PackedVectprior2Array
 var min_distance: float = 2
 
 # Enemy Stats from Enemy Data Resource
@@ -36,10 +40,11 @@ var walk_resume_pos: float
 signal is_dead
 
 func _ready():
-	path = GameManager.active_path.duplicate() # Enemies MUST use their own local copy
+	# path = GameManager.active_path.duplicate() # Enemies MUST use their own local copy
 	health = data.health
 
-	speed = data.speed
+	# speed = data.speed
+	speed = .1
 	element = data.element
 
 	set_resistances()
@@ -65,35 +70,28 @@ func take_damage(damage_recieved: float, tower_element: GameManager.Element):
 		shield.hide()
 		damage_recieved *= positive_modifier
 
-	if not %HealthBar.is_visible():
-		%HealthBar.show()
+	if not health_bar.is_visible():
+		health_bar.show()
 
 	health -= damage_recieved
 	var v = (health / max_health) * 100
-	%HealthBar.value = v
+	health_bar.value = v
 
 	if health <= 0:
 		die()
-		return true
 	else:
 		walk_resume_pos = ap.get_current_animation_position()
 		ap.play("hit")
-		return false
 
 func _physics_process(delta):
 	move(delta)
 
 func move(delta) -> void:
-	if path and is_alive:
+	if is_alive and path_follow.progress_ratio < .99:
+		path_follow.progress_ratio += (speed * delta)
 		ap.play("walk")
-		if position.distance_to(path[0]) < min_distance:
-			position = path[0]
-			path.remove_at(0)
-		else:
-			position = (position + ((path[0] - position).normalized() * speed * delta * Engine.time_scale)) # Fixed with pixel snap in project settings, but not perfect
-
 	else:
-		if can_attack:
+		if is_alive:
 			base.take_damage(damage)
 			die()
 
@@ -123,14 +121,18 @@ func on_animation_finished(anim_name):
 		queue_free()
 
 func die() -> void:
-	%HealthBar.hide()
-	shield.hide()
-	weak.hide()
-	can_attack = false
 	is_alive = false
+	collider.disabled = true
+	ap.play("die")
+	play_explosion_sfx()
 	is_dead.emit(self)
 
-func play_explosion_sfx():
+	# Hide graphics
+	health_bar.hide()
+	shield.hide()
+	weak.hide()
+
+func play_explosion_sfx(): # This could be simplified by passing the sfx thru data file and making it a member var
 	match element:
 		GameManager.Element.FIRE: SFXPlayer.play_sfx("fire_explosion")
 		GameManager.Element.EARTH: SFXPlayer.play_sfx("water_explosion")

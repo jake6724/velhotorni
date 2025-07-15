@@ -84,7 +84,7 @@ func _ready():
 
 func _physics_process(_delta):	
 	if can_attack:
-		update_active_target()
+		active_target = get_active_target()
 		if active_target:
 			attack()
 			can_attack = false
@@ -97,23 +97,17 @@ func attack() -> void:
 	spawn_bullet()
 	play_shot_sfx()
 
-func update_active_target() -> void:
-	var selected_target: Enemy
-	var shortest_path = INF
-	var shortest_distance_to_waypoint = Vector2(INF, INF)
+func get_active_target() -> Enemy:
+	var max_progress: float = -INF
 
-	if in_range_targets.size() == 0:
-		active_target = null
-		return
-
-	for enemy: Enemy in in_range_targets: 
-		if enemy.is_alive and enemy.path.size() < shortest_path: # May need to remove if dead here
-			shortest_path = enemy.path.size()
-			# check distance to next WP in path
-			if enemy.path and (position - enemy.path[0]) <= shortest_distance_to_waypoint:
-				selected_target = enemy
-
-	active_target = selected_target
+	if in_range_targets.size() != 0:
+		for enemy: Enemy in in_range_targets:
+			if enemy.path_follow.progress_ratio > max_progress:
+				max_progress = enemy.path_follow.progress_ratio
+				active_target = enemy
+		return active_target
+	else: 
+		return null
 
 func on_enemy_is_dead(enemy: Enemy) -> void:
 	var index = in_range_targets.find(enemy)
