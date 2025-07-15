@@ -26,7 +26,26 @@ func _ready():
 	# Configure AudioStreamPlayer
 	music_player.bus = "music"
 	add_child(music_player)
-	update_active_track()
+
+	# Play tracks back to back
+	music_player.finished.connect(on_track_finished)
+
+	active_track = track_1
+	music_player.stream = active_track
+	music_player.play()
+	# update_active_track()
+
+func on_track_finished():
+	if active_track == track_1:
+		active_track = track_2
+		music_player.stream = active_track
+		await get_tree().create_timer(.5).timeout
+		music_player.play()
+	else:
+		active_track = track_1
+		music_player.stream = active_track
+		await get_tree().create_timer(.5).timeout
+		music_player.play()
 
 func update_active_track():
 	fade_out()

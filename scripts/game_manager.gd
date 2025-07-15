@@ -85,10 +85,8 @@ func on_level_complete(): # Emitted by EnemySpawner
 	SFXPlayer.play_sfx("victory")
 	await SFXPlayer.victory_sfx_complete
 
-	MusicPlayer.update_active_track()
-
-	# MusicPlayer.fade_in()
-	# await MusicPlayer.fade_in_complete
+	MusicPlayer.fade_in()
+	await MusicPlayer.fade_in_complete
 
 func on_level_complete_message_finished():
 	# Exit to main menu if last level
