@@ -1,4 +1,5 @@
 # Play the game on [Itch.io!](https://jake-aldridge.itch.io/velhotorni)
+# Play the latest [Github build](https://jake6724.github.io/tower_defense_jam/)
 
 ### A fresh take on classic tower defense, make in 1 week for the Artist's Tavern Game Jam Summer 2025
 
