@@ -53,6 +53,11 @@ func play_sfx(sfx_name: String):
 	elif sfx_name == "base_explosion":
 		base_explosion_sfx_complete.emit()
 
+func play_sfx_resource(sfx_res: AudioStreamOggVorbis):
+	var p: AudioStreamPlayer = get_best_player()
+	p.stream = sfx_res
+	p.play()
+
 ## Return the first available or least recently used AudioStreamPlayer
 func get_best_player() -> AudioStreamPlayer:
 	# Check if there are any used players

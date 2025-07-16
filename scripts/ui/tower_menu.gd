@@ -49,8 +49,8 @@ func _ready():
 	wave_button.mouse_entered.connect(on_mouse_entered_button)
 	wave_button.mouse_exited.connect(on_mouse_exited_button)
 
-	# fast_forward.button_down.connect(on_start_fast_forward)
-	# fast_forward.button_up.connect(on_stop_fast_forward)
+	fast_forward.button_down.connect(on_start_fast_forward)
+	fast_forward.button_up.connect(on_stop_fast_forward)
 
 	# Configure timers
 	wave_number_timer.timeout.connect(on_wave_number_timer_timeout)
@@ -64,12 +64,12 @@ func _ready():
 func hide_placement_phase() -> void:
 	tower_buttons.hide()
 	wave_button.hide()
-	# fast_forward.show()
+	fast_forward.show()
 
 func show_placement_phase() -> void:
 	tower_buttons.show()
 	wave_button.show()
-	# fast_forward.hide()
+	fast_forward.hide()
 
 func show_level_number() -> void:
 	# level_number.text = "Level " + str(GameManager.level_index + 1)

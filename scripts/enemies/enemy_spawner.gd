@@ -12,12 +12,18 @@ var spawn_rate: float = 1.0 # Time between enemy spawn, in seconds
 var can_spawn_enemy: bool = false
 var active_enemies: Array[Enemy] = []
 
-var enemies: Dictionary[GameManager.Element, PackedScene] = {
-	GameManager.Element.FIRE: preload("res://scenes/enemies/FireEnemy.tscn"),
-	GameManager.Element.WATER: preload("res://scenes/enemies/WaterEnemy.tscn"),
-	GameManager.Element.EARTH: preload("res://scenes/enemies/EarthEnemy.tscn"),
-}
+# var enemies: Dictionary[GameManager.Element, PackedScene] = {
+# 	GameManager.Element.FIRE: preload("res://scenes/enemies/FireEnemy.tscn"),
+# 	GameManager.Element.WATER: preload("res://scenes/enemies/WaterEnemy.tscn"),
+# 	GameManager.Element.EARTH: preload("res://scenes/enemies/EarthEnemy.tscn"),
+# }
 
+var enemy_scene: PackedScene = preload("res://scenes/enemies/Enemy.tscn")
+var enemy_data: Dictionary[GameManager.Element, EnemyData] = {
+	GameManager.Element.FIRE: preload("res://data/enemies/enemy_fire_data.tres"),
+	GameManager.Element.EARTH: preload("res://data/enemies/enemy_earth_data.tres"),
+	GameManager.Element.WATER: preload("res://data/enemies/enemy_water_data.tres"),
+}
 # Signals
 signal wave_complete
 signal level_complete
@@ -76,16 +82,16 @@ func _physics_process(_delta) -> void:
 			spawn_timer.start(spawn_delay)
 			can_spawn_enemy = false
 		
-func spawn_enemy(enemy_type: GameManager.Element) -> void:
+func spawn_enemy(element: GameManager.Element) -> void:
 	# Configure new enemy
-	var new_enemy: Enemy = enemies[enemy_type].instantiate()
+	var new_enemy: Enemy = enemy_scene.instantiate()
+	new_enemy.data = enemy_data[element]
 	new_enemy.position = GameManager.active_spawn_location
 	new_enemy.is_dead.connect(on_enemy_died)
 	add_child(new_enemy)
 	active_enemies.append(new_enemy)
 
 	configure_enemy_pathing(new_enemy)
-
 	enemy_spawned.emit()
 
 func configure_enemy_pathing(enemy: Enemy) -> void:

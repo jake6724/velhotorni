@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://cwvipuex2alcf"]
+
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_34htb"]
+[ext_resource type="Texture2D" uid="uid://c8noara2guef1" path="res://assets/art/atlases/atlas_earth_enemy.png" id="1_btw44"]
+[ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://audio/sfx/Earth_Explosion.ogg" id="2_p0i6k"]
+
+[resource]
+script = ExtResource("1_34htb")
+health = 120.0
+speed = 20.0
+element = 2
+atlas = ExtResource("1_btw44")
+explosion_sfx = ExtResource("2_p0i6k")
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

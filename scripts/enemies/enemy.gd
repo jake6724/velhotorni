@@ -18,12 +18,13 @@ var path_follow: PathFollow2D # Update `progress_ration` to move along path
 var min_distance: float = 2
 
 # Enemy Stats from Enemy Data Resource
-var max_health: float # Do not set manually; used in health bar calc
+var max_health: float # Do not set manually; used in health bar
 var health: float
 var speed: float
 var element: GameManager.Element
 var weak_against: GameManager.Element
 var strong_against: GameManager.Element
+var atlas: Texture
 
 var negative_modifier: float = .5
 var positive_modifier: float = 2.0
@@ -43,9 +44,11 @@ func _ready():
 	health = data.health
 	speed = data.speed
 	element = data.element
+	atlas = data.atlas
 	max_health = health
 	base = GameManager.base
 	set_resistances()
+	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
 
 func _physics_process(delta):
@@ -92,7 +95,7 @@ func die() -> void:
 	is_alive = false
 	collider.disabled = true
 	ap.play("die")
-	play_explosion_sfx()
+	SFXPlayer.play_sfx_resource(data.explosion_sfx)
 	is_dead.emit(self)
 
 	# Hide graphics
@@ -125,8 +128,8 @@ func on_animation_finished(anim_name):
 	if anim_name == "corpse":
 		queue_free()
 
-func play_explosion_sfx(): # This could be simplified by passing the sfx thru data file and making it a member var
-	match element:
-		GameManager.Element.FIRE: SFXPlayer.play_sfx("fire_explosion")
-		GameManager.Element.EARTH: SFXPlayer.play_sfx("water_explosion")
-		GameManager.Element.WATER: SFXPlayer.play_sfx("earth_explosion")
+# func play_explosion_sfx(): # This could be simplified by passing the sfx thru data file and making it a member var
+# 	match element:
+# 		GameManager.Element.FIRE: SFXPlayer.play_sfx("fire_explosion")
+# 		GameManager.Element.EARTH: SFXPlayer.play_sfx("water_explosion")
+# 		GameManager.Element.WATER: SFXPlayer.play_sfx("earth_explosion")
