@@ -40,20 +40,25 @@ var walk_resume_pos: float
 signal is_dead
 
 func _ready():
-	# path = GameManager.active_path.duplicate() # Enemies MUST use their own local copy
 	health = data.health
-
-	# speed = data.speed
 	speed = data.speed
 	element = data.element
-
-	set_resistances()
-
 	max_health = health
-
 	base = GameManager.base
-
+	set_resistances()
 	ap.animation_finished.connect(on_animation_finished)
+
+func _physics_process(delta):
+	move(delta)
+
+func move(delta) -> void:
+	if is_alive and path_follow.progress_ratio < .99:
+		path_follow.progress += (speed * delta)
+		ap.play("walk")
+	else:
+		if is_alive:
+			base.take_damage(damage)
+			die()
 	
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
@@ -83,17 +88,17 @@ func take_damage(damage_recieved: float, tower_element: GameManager.Element):
 		walk_resume_pos = ap.get_current_animation_position()
 		ap.play("hit")
 
-func _physics_process(delta):
-	move(delta)
+func die() -> void:
+	is_alive = false
+	collider.disabled = true
+	ap.play("die")
+	play_explosion_sfx()
+	is_dead.emit(self)
 
-func move(delta) -> void:
-	if is_alive and path_follow.progress_ratio < .99:
-		path_follow.progress_ratio += (speed * delta)
-		ap.play("walk")
-	else:
-		if is_alive:
-			base.take_damage(damage)
-			die()
+	# Hide graphics
+	health_bar.hide()
+	shield.hide()
+	weak.hide()
 
 func set_resistances() -> void:
 	match element:
@@ -119,18 +124,6 @@ func on_animation_finished(anim_name):
 
 	if anim_name == "corpse":
 		queue_free()
-
-func die() -> void:
-	is_alive = false
-	collider.disabled = true
-	ap.play("die")
-	play_explosion_sfx()
-	is_dead.emit(self)
-
-	# Hide graphics
-	health_bar.hide()
-	shield.hide()
-	weak.hide()
 
 func play_explosion_sfx(): # This could be simplified by passing the sfx thru data file and making it a member var
 	match element:

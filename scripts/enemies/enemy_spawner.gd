@@ -2,6 +2,7 @@
 extends Node
 
 var active_level: LevelEnvironment
+var enemy_path_length: float
 var level_waves: Array[Wave] = []
 var active_wave: Wave
 var wave_index: int = 0
@@ -31,6 +32,7 @@ func _ready():
 
 func configure_level(_active_level: LevelEnvironment):
 	active_level = _active_level
+	enemy_path_length = active_level.enemy_path.curve.get_baked_length()
 	level_waves = _active_level.waves
 
 func clear_level() -> void:
