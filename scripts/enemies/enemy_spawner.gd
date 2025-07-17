@@ -12,12 +12,6 @@ var spawn_rate: float = 1.0 # Time between enemy spawn, in seconds
 var can_spawn_enemy: bool = false
 var active_enemies: Array[Enemy] = []
 
-# var enemies: Dictionary[GameManager.Element, PackedScene] = {
-# 	GameManager.Element.FIRE: preload("res://scenes/enemies/FireEnemy.tscn"),
-# 	GameManager.Element.WATER: preload("res://scenes/enemies/WaterEnemy.tscn"),
-# 	GameManager.Element.EARTH: preload("res://scenes/enemies/EarthEnemy.tscn"),
-# }
-
 var enemy_scene: PackedScene = preload("res://scenes/enemies/Enemy.tscn")
 var enemy_data: Dictionary[GameManager.Element, EnemyData] = {
 	GameManager.Element.FIRE: preload("res://data/enemies/enemy_fire_data.tres"),

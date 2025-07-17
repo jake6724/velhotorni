@@ -127,9 +127,3 @@ func on_animation_finished(anim_name):
 
 	if anim_name == "corpse":
 		queue_free()
-
-# func play_explosion_sfx(): # This could be simplified by passing the sfx thru data file and making it a member var
-# 	match element:
-# 		GameManager.Element.FIRE: SFXPlayer.play_sfx("fire_explosion")
-# 		GameManager.Element.EARTH: SFXPlayer.play_sfx("water_explosion")
-# 		GameManager.Element.WATER: SFXPlayer.play_sfx("earth_explosion")
