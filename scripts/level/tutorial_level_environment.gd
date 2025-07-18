@@ -59,6 +59,6 @@ func _input(_event):
 	if Input.is_action_just_pressed("spacebar") or Input.is_action_just_pressed("left_click"):
 		main.unpause_game()
 		if active_db:
-			SFXPlayer.play_sfx("click_1")
+			# SFXPlayer.play_sfx("click_1")
 			active_db.hide()
 		ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
