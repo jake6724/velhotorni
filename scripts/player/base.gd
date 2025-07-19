@@ -17,22 +17,23 @@ func _physics_process(_delta):
 	if is_alive:
 		ap.play("idle")
 	else:
-		%Darkness.modulate.a = (ap.current_animation_position / ap.current_animation_length)
+		%Darkness.modulate.a = (ap.current_animation_position / ap.current_animation_length) + .01
 
 func take_damage(damage_recieved: int):
-	health -= damage_recieved
-	update_health_label(health)
+	if is_alive:
+		health -= damage_recieved
+		update_health_label(health)
 
-	if health <= 0:
-		is_alive = false
-		%HealthLabel.hide()
+		if health <= 0:
+			is_alive = false
+			%HealthLabel.hide()
 
-		GameManager.level_failed = true
+			# GameManager.level_failed = true
 
-		MusicPlayer.fade_out()
-		await MusicPlayer.fade_out_complete
-		SFXPlayer.play_sfx("base_explosion")
-		ap.play("die")
+			MusicPlayer.fade_out()
+			await MusicPlayer.fade_out_complete
+			SFXPlayer.play_sfx("base_explosion")
+			ap.play("die")
 
 func update_health_label(new_health: int) -> void:
 	%HealthLabel.text = str(new_health)
@@ -41,3 +42,5 @@ func on_animation_finished(anin_name: String):
 	if anin_name == "die":
 		base_destroyed.emit()
 		MusicPlayer.fade_in()
+		is_alive = true
+		%Darkness.modulate.a = 0

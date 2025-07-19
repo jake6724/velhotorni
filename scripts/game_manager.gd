@@ -27,13 +27,14 @@ var level_complete_duration: float = 3
 var level_failed: bool = false
 
 var base: Base
-var fast_forward_speed: int = 2
+var fast_forward_speed: int = 10
 
 # Wave checkpoint data
 var checkpoint_gold: int
 var checkpoint_wave_index: int
 var checkpoint_active_towers: Array[Tower]
 var checkpoint_base_health: int
+var is_wave_failed = false
 
 signal wave_failed
 
@@ -107,6 +108,7 @@ func on_level_complete_message_finished():
 		start_level()
 
 func on_wave_failed()-> void:
+	is_wave_failed = true
 	EnemySpawner.on_wave_failed() # Called manually to avoid race-conditions with PlayerController
 
 	base.health = checkpoint_base_health

@@ -30,8 +30,8 @@ var gold: int
 var reward: float
 
 # Wave Checkpoint data
-var checkpoint_gold: int
-var checkpoint_active_towers: Array[Tower]
+var checkpoint_gold: int = gold
+var checkpoint_active_towers: Array[Tower] = active_towers
 
 func _ready():
 	gold = GameManager.active_level.initial_gold
@@ -57,6 +57,7 @@ func _ready():
 	EnemySpawner.wave_complete.connect(on_wave_complete)
 	EnemySpawner.enemy_died.connect(on_enemy_died)
 
+	# Connect to GameManager
 	GameManager.wave_failed.connect(on_wave_failed)
 
 func _process(_delta):
@@ -124,9 +125,13 @@ func on_start_wave() -> void:
 	EnemySpawner.start_wave()
 	reward = EnemySpawner.active_wave.reward
 
+	# GameManager
+	GameManager.is_wave_failed = false
+
 	SFXPlayer.play_sfx("go")
 
 func on_wave_complete() -> void:
+	print("PC on wave complete called")
 	# Update variables
 	placement_enabled = true	
 	gold += int(reward)
@@ -139,24 +144,23 @@ func on_wave_complete() -> void:
 		reset_towers()
 		tower_menu.update_progress()
 
-	# Checkpoint playerController data
-	checkpoint_gold = gold
-	checkpoint_active_towers = active_towers
-	GameManager.set_checkpoint_base_health() # kind of a round-about way to do this...
+	set_checkpoints()
 
 func on_wave_failed() -> void:
 	placement_enabled = true
+	tower_menu.show_placement_phase()
 	gold = checkpoint_gold
 	update_tower_button_sprites()
-	tower_menu.update_progress()
 
 	# Remove uncheckpointed towers from active_towers, delete them and update world grid
 	# Iterate backwards to avoid null pointer since editing list in place
 	for i in range(active_towers.size() - 1, -1, -1):
 		if active_towers[i] not in checkpoint_active_towers:
-			active_towers.remove_at(i)
 			WorldGrid.data[GameManager.world_to_grid(active_towers[i].position)] = false
 			active_towers[i].queue_free()
+			active_towers.remove_at(i)
+
+	tower_menu.update_progress()
 
 func reset_towers() -> void:
 	for tower: Tower in active_towers:
@@ -197,6 +201,12 @@ func _input(_event):
 
 	if click_enabled and Input.is_action_just_pressed("right_click"):
 		selected_tower_element = GameManager.Element.NONE
+
+func set_checkpoints() -> void:
+	# Checkpoint playerController data
+	checkpoint_gold = gold
+	checkpoint_active_towers = active_towers
+	GameManager.set_checkpoint_base_health() # kind of a round-about way to do this...
 
 func update_tower_button_sprites() -> void:
 	tower_menu.set_tower_button_sprites(gold, prices[GameManager.Element.FIRE],prices[GameManager.Element.EARTH],prices[GameManager.Element.WATER])
