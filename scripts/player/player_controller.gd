@@ -23,7 +23,7 @@ var placement_indicator: PackedScene = preload("res://scenes/towers/PlacementInd
 var indicator: Node2D
 
 var click_enabled: bool = true
-var selected_tower_element: GameManager.Element
+var selected_tower_element: GameManager.Element = GameManager.Element.NONE
 var active_towers: Array[Tower] = []
 var placement_enabled: bool = true
 var gold: int
@@ -148,10 +148,8 @@ func on_tower_transform(tower: Tower) -> void:
 func on_tower_hovered(tower: Tower):
 	if not placement_enabled: # Only show transform sprites if in combat phase
 		if tower.can_transform:
-			# tower.swap_sprite.hide() # TODO: might be unecessary
 			tower.swap_sprite.show()
 		else:
-			# tower.cross_sprite.hide() # TODO: might be unecessary
 			tower.cross_sprite.show()	
 
 func on_tower_unhovered(tower: Tower):
