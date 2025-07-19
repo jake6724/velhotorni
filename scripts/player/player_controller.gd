@@ -62,7 +62,7 @@ func _process(_delta):
 
 func spawn_tower(element: GameManager.Element, world_pos: Vector2) -> bool:
 	# Do not allow placement during combat
-	if placement_enabled:
+	if placement_enabled and selected_tower_element != GameManager.Element.NONE:
 		var grid_pos: Vector2 = GameManager.world_to_grid(world_pos)
 		if grid_pos in WorldGrid.data and WorldGrid.data[grid_pos]:
 			# Spawn and configure new tower
