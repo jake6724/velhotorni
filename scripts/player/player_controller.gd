@@ -29,8 +29,11 @@ var placement_enabled: bool = true
 var gold: int
 var reward: float
 
+# Wave Checkpoint data
+var checkpoint_gold: int
+var checkpoint_active_towers: Array[Tower]
+
 func _ready():
-	# ** EVERYTHING in here will only be done ONCE. If something needs to be done each level, put in configure_level()
 	gold = GameManager.active_level.initial_gold
 
 	# Configure connection to tower menu
@@ -54,6 +57,8 @@ func _ready():
 	EnemySpawner.wave_complete.connect(on_wave_complete)
 	EnemySpawner.enemy_died.connect(on_enemy_died)
 
+	GameManager.wave_failed.connect(on_wave_failed)
+
 func _process(_delta):
 	if placement_enabled and selected_tower_element != GameManager.Element.NONE:
 		indicator.position = GameManager.grid_to_world(GameManager.world_to_grid(get_global_mouse_position()))
@@ -61,7 +66,7 @@ func _process(_delta):
 		indicator.hide()
 
 func spawn_tower(element: GameManager.Element, world_pos: Vector2) -> bool:
-	# Do not allow placement during combat
+	# Do not allow placement during combat, do not allow NONE type turrets to spawn
 	if placement_enabled and selected_tower_element != GameManager.Element.NONE:
 		var grid_pos: Vector2 = GameManager.world_to_grid(world_pos)
 		if grid_pos in WorldGrid.data and WorldGrid.data[grid_pos]:
@@ -133,6 +138,25 @@ func on_wave_complete() -> void:
 		tower_menu.update_gold(int(gold))
 		reset_towers()
 		tower_menu.update_progress()
+
+	# Checkpoint playerController data
+	checkpoint_gold = gold
+	checkpoint_active_towers = active_towers
+	GameManager.set_checkpoint_base_health() # kind of a round-about way to do this...
+
+func on_wave_failed() -> void:
+	placement_enabled = true
+	gold = checkpoint_gold
+	update_tower_button_sprites()
+	tower_menu.update_progress()
+
+	# Remove uncheckpointed towers from active_towers, delete them and update world grid
+	# Iterate backwards to avoid null pointer since editing list in place
+	for i in range(active_towers.size() - 1, -1, -1):
+		if active_towers[i] not in checkpoint_active_towers:
+			active_towers.remove_at(i)
+			WorldGrid.data[GameManager.world_to_grid(active_towers[i].position)] = false
+			active_towers[i].queue_free()
 
 func reset_towers() -> void:
 	for tower: Tower in active_towers:

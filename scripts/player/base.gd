@@ -21,7 +21,7 @@ func _physics_process(_delta):
 
 func take_damage(damage_recieved: int):
 	health -= damage_recieved
-	%HealthLabel.text = str(health)
+	update_health_label(health)
 
 	if health <= 0:
 		is_alive = false
@@ -33,6 +33,9 @@ func take_damage(damage_recieved: int):
 		await MusicPlayer.fade_out_complete
 		SFXPlayer.play_sfx("base_explosion")
 		ap.play("die")
+
+func update_health_label(new_health: int) -> void:
+	%HealthLabel.text = str(new_health)
 
 func on_animation_finished(anin_name: String):
 	if anin_name == "die":

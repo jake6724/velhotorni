@@ -12,11 +12,8 @@ var spawn_rate: float = 1.0 # Time between enemy spawn, in seconds
 var can_spawn_enemy: bool = false
 var active_enemies: Array[Enemy] = []
 
-# var enemies: Dictionary[GameManager.Element, PackedScene] = {
-# 	GameManager.Element.FIRE: preload("res://scenes/enemies/FireEnemy.tscn"),
-# 	GameManager.Element.WATER: preload("res://scenes/enemies/WaterEnemy.tscn"),
-# 	GameManager.Element.EARTH: preload("res://scenes/enemies/EarthEnemy.tscn"),
-# }
+# Checkpoint data
+var checkpoint_wave_index: int
 
 var enemy_scene: PackedScene = preload("res://scenes/enemies/Enemy.tscn")
 var enemy_data: Dictionary[GameManager.Element, EnemyData] = {
@@ -32,7 +29,6 @@ signal enemy_died
 
 func _ready():
 	# Enemy spawner manually configured and reset by GameManager
-	# Configure Timer
 	spawn_timer.timeout.connect(on_spawn_timer_timeout)
 	add_child(spawn_timer)
 
@@ -57,7 +53,18 @@ func start_wave() -> void:
 	active_wave = level_waves[wave_index]
 	can_spawn_enemy = true
 
+## Called manually by `GameManager` to avoid race-conditions with `PlayerController`.
+func on_wave_failed() -> void:
+	for child in get_children():
+		if child is Enemy:
+			child.queue_free()
+	active_enemies = []
+	wave_index = checkpoint_wave_index
+	enemy_index = 0
+	active_wave = level_waves[wave_index]
+
 func _physics_process(_delta) -> void:
+	# TODO: This can move out of here and into a function that is called in on_enemy_died() or something less performance heavy
 	# Only process if a wave is active	
 	if active_wave:
 		# Check if wave is over
@@ -68,6 +75,8 @@ func _physics_process(_delta) -> void:
 			enemy_index = 0
 			wave_complete.emit()
 			can_spawn_enemy = false
+			# Checkpoint EnemySpawner data
+			checkpoint_wave_index = wave_index
 
 			if wave_index == level_waves.size() and GameManager.level_failed == false:
 				level_complete.emit()

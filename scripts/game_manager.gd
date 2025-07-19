@@ -17,18 +17,25 @@ var test_level: PackedScene = load("res://scenes/level/LevelEnvironmentTest.tscn
 var levels: Array[PackedScene] = [level_tutorial, level_one, level_two]
 # var levels: Array[PackedScene] = [test_level]
 
-var level_index: int = 0
+var level_index: int = 0 # Set in main_menu.gd
 var active_level: LevelEnvironment
 var active_path: PackedVector2Array
 var active_spawn_location: Vector2 # In world coordinates
-
-var base: Base
 
 var level_complete_timer: Timer = Timer.new()
 var level_complete_duration: float = 3
 var level_failed: bool = false
 
+var base: Base
 var fast_forward_speed: int = 2
+
+# Wave checkpoint data
+var checkpoint_gold: int
+var checkpoint_wave_index: int
+var checkpoint_active_towers: Array[Tower]
+var checkpoint_base_health: int
+
+signal wave_failed
 
 func _ready():
 	# configure_level() called in main - level only configured when main is ready to parent it
@@ -47,13 +54,12 @@ func configure_level():
 	main.add_child(active_level)
 
 	base = active_level.base
-	base.base_destroyed.connect(start_level)
+	base.base_destroyed.connect(on_wave_failed)
 	level_failed = false
 
 	# Configure Autoloaders
 	WorldGrid.generate_grid()
 	WorldGrid.configure_tilemap(active_level.tilemap)
-
 	EnemySpawner.configure_level(active_level)
 
 func start_level():
@@ -100,16 +106,21 @@ func on_level_complete_message_finished():
 	else:
 		start_level()
 
+func on_wave_failed()-> void:
+	EnemySpawner.on_wave_failed() # Called manually to avoid race-conditions with PlayerController
+
+	base.health = checkpoint_base_health
+	base.update_health_label(base.health) # TODO: Use set()
+	wave_failed.emit()
+
+func set_checkpoint_base_health() -> void:
+	checkpoint_base_health = base.health
+
 func _input(_event):
 	if Input.is_action_pressed("fast_forward"):
 		Engine.time_scale = fast_forward_speed
 	if Input.is_action_just_released("fast_forward"):
 		Engine.time_scale = 1.0
-
-func convert_path_to_world(path) -> PackedVector2Array:
-	for i in range(path.size()):
-		path[i] = GameManager.grid_to_world(path[i])
-	return path
 
 func grid_to_world(_pos: Vector2) -> Vector2:
 	return _pos * cell_size

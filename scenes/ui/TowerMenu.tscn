@@ -84,7 +84,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_c8bcu")
-metadata/_custom_type_script = "uid://dhbvh3ym8unk4"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
