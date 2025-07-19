@@ -7,8 +7,8 @@ var bus_volume_linear: float = .4
 var bus_index: int
 var prev_player_volume_linear = .4
 
-var track_1: AudioStreamOggVorbis = preload("res://audio/music/Theme-1_Auto.ogg")
-var track_2: AudioStreamOggVorbis = preload("res://audio/music/Theme_2_8bit.ogg")
+var track_1: AudioStreamOggVorbis = preload("res://assets/audio/music/Theme-1_Auto.ogg")
+var track_2: AudioStreamOggVorbis = preload("res://assets/audio/music/Theme_2_8bit.ogg")
 var tracks: Array[AudioStreamOggVorbis] = [track_1, track_1, track_2]
 var active_track: AudioStreamOggVorbis = track_1
 
@@ -32,7 +32,7 @@ func _ready():
 
 	# Start
 	music_player.stream = active_track
-	music_player.play()
+	#music_player.play()
 
 func update_bus_volume(new_bus_volume_linear: float):
 	AudioServer.set_bus_volume_linear(bus_index, new_bus_volume_linear)

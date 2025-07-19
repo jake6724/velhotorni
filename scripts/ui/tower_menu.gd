@@ -81,15 +81,16 @@ func show_level_number() -> void:
 func on_button_pressed(pressed_button: TextureButton):
 	var b_name: String = pressed_button.name.to_lower()
 	match b_name:
-		"firebutton": tower_selected.emit("fire")
-		"waterbutton": tower_selected.emit("water")
-		"earthbutton": tower_selected.emit("earth")
+		"firebutton": tower_selected.emit(GameManager.Element.FIRE)
+		"earthbutton": tower_selected.emit(GameManager.Element.EARTH)
+		"waterbutton": tower_selected.emit(GameManager.Element.WATER)
 
 ## Intended to be called by `player_controller` to directly update gold count
 func update_gold(new_amount: int) -> void:
 	gold.text = str(new_amount)
 
 func set_tower_button_sprites(_gold: float, fire_price: int , earth_price: int, water_price: int):
+	# TODO: Convert this to a loop
 	# Set Fire
 	if _gold >= fire_price:
 		fire_button.texture_normal = ui_tower_sprites[GameManager.Element.FIRE]

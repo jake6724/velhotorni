@@ -1,7 +1,7 @@
 # Autoloader
 extends Node
 
-enum Element {FIRE, WATER, EARTH}
+enum Element {FIRE, WATER, EARTH, NONE}
 var cell_size: int = 16
 
 var main_scene: PackedScene = load("res://scenes/Main.tscn")

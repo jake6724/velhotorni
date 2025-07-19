@@ -7,3 +7,4 @@ extends Resource
 @export var attack_range: float
 @export var num_targets: int
 @export var tower_name: String
+@export var atlas: Texture

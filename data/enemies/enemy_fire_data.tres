@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d01v81ufk0jvj" path="res://assets/art/atlases/atlas_enemy_fire.png" id="1_cgk3x"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_fkp6s"]
-[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://audio/sfx/Fire_Explosion.ogg" id="2_144xj"]
+[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_144xj"]
 
 [resource]
 script = ExtResource("1_fkp6s")

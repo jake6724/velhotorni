@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=2 format=3 uid="uid://bplk0h2miw0yo"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=3 format=3 uid="uid://bplk0h2miw0yo"]
 
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_fc8g7"]
+[ext_resource type="Texture2D" uid="uid://b58tie4p0ydsh" path="res://assets/art/atlases/atlas_tower_water.png" id="1_hmqpk"]
 
 [resource]
 script = ExtResource("1_fc8g7")
@@ -10,4 +11,5 @@ speed = 0.2
 attack_range = 50.0
 num_targets = 1
 tower_name = "water"
+atlas = ExtResource("1_hmqpk")
 metadata/_custom_type_script = "uid://v7b6nq74b314"

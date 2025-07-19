@@ -17,10 +17,10 @@ var active_target: Enemy
 var in_range_targets: Array[Enemy] = []
 var attack_timer: Timer = Timer.new()
 var transform_timer: Timer = Timer.new()
-var transform_delay: float = 1.0
+var transform_delay: float = 0.1
 
-var can_transform: bool = false
-var transform_delay_complete: bool = false
+var can_transform: bool = true # Set to true after brief delay in on_transform_timer_timeout()
+# var transform_delay_complete: bool = false
 
 # Tower stats
 var damage: float
@@ -30,6 +30,15 @@ var num_targets: int
 var element: GameManager.Element
 var tower_name: String
 var can_attack: bool = true
+
+var base_element: GameManager.Element = GameManager.Element.NONE
+
+# Tower data (for transformations)
+var tower_resources: Dictionary[GameManager.Element, TowerData] = {
+	GameManager.Element.FIRE: preload("res://data/towers/fire.tres"),
+	GameManager.Element.EARTH: preload("res://data/towers/earth.tres"),
+	GameManager.Element.WATER: preload("res://data/towers/water.tres"),
+}
 
 # Bullets
 var bullets: Dictionary[GameManager.Element, PackedScene] = {
@@ -46,13 +55,6 @@ signal tower_hovered
 signal tower_unhovered
 
 func _ready():
-	element = tower_data.element
-	damage = tower_data.damage
-	speed = tower_data.speed
-	attack_range = tower_data.attack_range
-	num_targets = tower_data.num_targets
-	tower_name = tower_data.tower_name
-	
 	# Configure Area2D
 	area.area_entered.connect(on_area_entered)
 	area.area_exited.connect(on_area_exited)
@@ -79,8 +81,40 @@ func _ready():
 	add_child(transform_timer)
 	transform_timer.start(transform_delay) # time until you can transform a tower (so it doesn't when you click to spawn it)
 
-	debug_attack_line.width = 4
-	add_child(debug_attack_line)
+## Used to update `Tower` class with data from a `TowerData` resource. Must be called immeadiately after a tower is instantiated
+## by `PlayerController`. Used in `transform()` and `revert()` as well. **MUST be called after `Tower` has been added to scene
+func configure_tower(_element: GameManager.Element) -> void:
+	tower_data = tower_resources[_element]
+
+	# Set vars from data resource assigned above
+	element = tower_data.element
+	damage = tower_data.damage
+	speed = tower_data.speed
+	attack_range = tower_data.attack_range
+	num_targets = tower_data.num_targets
+	tower_name = tower_data.tower_name
+	sprite.texture = tower_data.atlas
+
+	if base_element == GameManager.Element.NONE:
+		base_element = element
+
+## Transform into the next tower type in the cycle if `can_transform` is `true`
+func transform() -> void:
+	var new_element = GameManager.Element
+	match element:
+		GameManager.Element.FIRE: new_element = GameManager.Element.EARTH
+		GameManager.Element.EARTH: new_element = GameManager.Element.WATER
+		GameManager.Element.WATER: new_element = GameManager.Element.FIRE
+	configure_tower(new_element)
+	can_transform = false
+	swap_sprite.hide()
+	cross_sprite.show()
+
+func revert() -> void:
+	configure_tower(base_element)
+	cross_sprite.hide()
+	swap_sprite.hide()
+	can_transform = true
 
 func _physics_process(_delta):	
 	if can_attack:
@@ -162,10 +196,8 @@ func on_mouse_exited_transform_area():
 	tower_unhovered.emit(self)
 
 func on_transform_area_pressed(_viewport, _event, _shape_idx) -> void:
-	if can_transform:
-		if Input.is_action_just_pressed("left_click"):
-			can_transform = false
-			transform_tower.emit()
+	if Input.is_action_just_pressed("left_click"):
+		transform_tower.emit()
 		
 func on_attack_timer_timeout() -> void:
 	can_attack = true

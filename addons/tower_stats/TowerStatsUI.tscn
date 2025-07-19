@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://c18rmavtv6fn7"]
+
+[ext_resource type="Script" uid="uid://mry03h3a545f" path="res://addons/tower_stats/tower_stats_ui.gd" id="1_cks25"]
+[ext_resource type="PackedScene" uid="uid://50sf7q416hib" path="res://addons/tower_stats/TowerStatsTable.tscn" id="2_tld67"]
+
+[node name="TestScene" type="VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+offset_right = 300.0
+offset_bottom = 400.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_cks25")
+metadata/_custom_type_script = "uid://mry03h3a545f"
+
+[node name="FireTowerStatsTable" parent="." instance=ExtResource("2_tld67")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="NatureTowerStatsTable" parent="." instance=ExtResource("2_tld67")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="WaterTowerStatsTable" parent="." instance=ExtResource("2_tld67")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0

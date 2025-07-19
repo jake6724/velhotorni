@@ -1,0 +1,173 @@
+[gd_scene load_steps=2 format=3 uid="uid://50sf7q416hib"]
+
+[ext_resource type="Script" uid="uid://cuf60r8ihkrew" path="res://addons/tower_stats/tower_stats_table.gd" id="1_cks25"]
+
+[node name="TowerStatsTable" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_cks25")
+metadata/_custom_type_script = "uid://cuf60r8ihkrew"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_right = 140.0
+offset_bottom = 131.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TowerName" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Tower Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+columns = 4
+
+[node name="EnemyType" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Enemy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DPS" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "DPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TTK" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "TTK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HTK" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "HTK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FireEnemy" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Fire"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FireDPS" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FireTTK" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FireHTK" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NatureEnemy" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Nature"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NatureDPS" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NatureTTK" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NatureHTK" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaterEnemy" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Water"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaterDPS" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaterTTK" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaterHTK" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
