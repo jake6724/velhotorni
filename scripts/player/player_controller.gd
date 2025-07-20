@@ -135,7 +135,6 @@ func on_start_wave() -> void:
 	SFXPlayer.play_sfx("go")
 
 func on_wave_complete() -> void:
-	print("PC on wave complete called")
 	# Update variables
 	placement_enabled = true	
 	gold += int(reward)
@@ -161,7 +160,6 @@ func on_wave_failed() -> void:
 	for i in range(active_towers.size() - 1, -1, -1):
 		if active_towers[i] not in checkpoint_active_towers:
 			WorldGrid.data[GameManager.world_to_grid(active_towers[i].position)] = true
-			print("Tower to qf: ", active_towers[i])
 			active_towers[i].queue_free()
 			active_towers.remove_at(i)
 
