@@ -27,7 +27,7 @@ var level_complete_duration: float = 3
 var level_failed: bool = false
 
 var base: Base
-var fast_forward_speed: int = 10
+var fast_forward_speed: int = 2
 
 # Wave checkpoint data
 var checkpoint_gold: int
