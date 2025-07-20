@@ -52,4 +52,4 @@ func on_animation_finished(anin_name: String):
 		is_alive = true
 		%Darkness.modulate.a = 0
 		health = max_health
-		%HealthLabel.hide()
+		%HealthLabel.show()

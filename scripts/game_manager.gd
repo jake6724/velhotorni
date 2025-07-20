@@ -77,7 +77,7 @@ func clear_level():
 	active_level = null
 	active_path = []
 	active_spawn_location = Vector2()
-	base.base_destroyed.disconnect(start_level)
+	base.base_destroyed.disconnect(on_wave_failed)
 	base = null
 	EnemySpawner.clear_level()
 
