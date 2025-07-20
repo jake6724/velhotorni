@@ -114,6 +114,7 @@ func on_wave_failed()-> void:
 	base.health = checkpoint_base_health
 	base.update_health_label(base.health) # TODO: Use set()
 	wave_failed.emit()
+	is_wave_failed = false
 
 func set_checkpoint_base_health() -> void:
 	checkpoint_base_health = base.health

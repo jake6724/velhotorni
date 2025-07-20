@@ -57,34 +57,10 @@ func start_wave() -> void:
 	# Checkpoint EnemySpawner data
 	checkpoint_wave_index = wave_index
 
-# func _physics_process(_delta) -> void:
-# 	# TODO: This can move out of here and into a function that is called in on_enemy_died() or something less performance heavy
-# 	# Only process if a wave is active	
-# 	if active_wave:
-# 		# Check if wave is over
-# 		if enemy_index == active_wave.data.size() and active_enemies.size() == 0:
-# 			# Wave complete (could be a function)
-# 			active_wave = null
-# 			wave_index += 1
-# 			enemy_index = 0
-# 			wave_complete.emit()
-# 			can_spawn_enemy = false
-			
-# 			if wave_index == level_waves.size() and GameManager.level_failed == false:
-# 				level_complete.emit()
-
-# 		elif can_spawn_enemy and enemy_index < active_wave.data.size():
-# 			var spawn_element: GameManager.Element = active_wave.data[enemy_index].element
-# 			var spawn_delay: float = active_wave.data[enemy_index].delay
-# 			spawn_enemy(spawn_element)
-# 			enemy_index += 1
-		
-# 			# Restart spawn timer
-# 			spawn_timer.start(spawn_delay)
-# 			can_spawn_enemy = false
-
 func check_wave_complete() -> bool:
 	print("is_wave_failed: ", GameManager.is_wave_failed)
+	print("enemy_index == active_wave.data.size(): ", enemy_index == active_wave.data.size())
+	print("active_enemies.size() == 0 ", active_enemies.size() == 0)
 	if enemy_index == active_wave.data.size() and active_enemies.size() == 0 and GameManager.is_wave_failed == false:
 		print("Check wave complete internal pass")
 		return true
@@ -121,10 +97,9 @@ func on_enemy_died(enemy: Enemy) -> void:
 		active_enemies.remove_at(index)
 	enemy_died.emit()
 
-	if active_wave:
-		if check_wave_complete():
-			print("Check wave complete passed")
-			on_wave_complete()
+	if active_wave and check_wave_complete():
+		print("Check wave complete passed")
+		on_wave_complete()
 
 		check_level_complete()
 
@@ -165,3 +140,30 @@ func configure_enemy_pathing(enemy: Enemy) -> void:
 
 	enemy.path_follow = new_path_follow
 	new_remote_transform.remote_path = enemy.get_path()
+
+
+# func _physics_process(_delta) -> void:
+# 	# TODO: This can move out of here and into a function that is called in on_enemy_died() or something less performance heavy
+# 	# Only process if a wave is active	
+# 	if active_wave:
+# 		# Check if wave is over
+# 		if enemy_index == active_wave.data.size() and active_enemies.size() == 0:
+# 			# Wave complete (could be a function)
+# 			active_wave = null
+# 			wave_index += 1
+# 			enemy_index = 0
+# 			wave_complete.emit()
+# 			can_spawn_enemy = false
+			
+# 			if wave_index == level_waves.size() and GameManager.level_failed == false:
+# 				level_complete.emit()
+
+# 		elif can_spawn_enemy and enemy_index < active_wave.data.size():
+# 			var spawn_element: GameManager.Element = active_wave.data[enemy_index].element
+# 			var spawn_delay: float = active_wave.data[enemy_index].delay
+# 			spawn_enemy(spawn_element)
+# 			enemy_index += 1
+		
+# 			# Restart spawn timer
+# 			spawn_timer.start(spawn_delay)
+# 			can_spawn_enemy = false

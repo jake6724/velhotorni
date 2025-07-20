@@ -26,15 +26,19 @@ var click_enabled: bool = true
 var selected_tower_element: GameManager.Element = GameManager.Element.NONE
 var active_towers: Array[Tower] = []
 var placement_enabled: bool = true
-var gold: int
+var gold: int:
+	set(value):
+		gold = value
+		tower_menu.update_gold(gold)
 var reward: float
 
 # Wave Checkpoint data
-var checkpoint_gold: int = gold
-var checkpoint_active_towers: Array[Tower] = active_towers
+var checkpoint_gold: int
+var checkpoint_active_towers: Array[Tower] = []
 
 func _ready():
 	gold = GameManager.active_level.initial_gold
+	checkpoint_gold = gold
 
 	# Configure connection to tower menu
 	tower_menu.tower_selected.connect(on_tower_selected)
@@ -42,7 +46,7 @@ func _ready():
 	tower_menu.mouse_exited_button.connect(on_mouse_exited_button)
 
 	tower_menu.show_level_number()
-	tower_menu.update_gold(gold) # get this from GameManager active_level
+	# tower_menu.update_gold(gold) # get this from GameManager active_level
 	update_tower_button_sprites()
 	tower_menu.update_progress()
 	tower_menu.start_wave.connect(on_start_wave)
@@ -90,7 +94,7 @@ func spawn_tower(element: GameManager.Element, world_pos: Vector2) -> bool:
 			# Clean up indicator
 			indicator.hide()
 			update_tower_button_sprites()
-			tower_menu.update_gold(gold)
+			# tower_menu.update_gold(gold)
 			play_tower_select_sfx(element)
 
 			selected_tower_element = GameManager.Element.NONE
@@ -140,7 +144,7 @@ func on_wave_complete() -> void:
 	# Tower Menu config
 	if EnemySpawner.wave_index != EnemySpawner.level_waves.size():
 		tower_menu.show_placement_phase()
-		tower_menu.update_gold(int(gold))
+		# tower_menu.update_gold(int(gold))
 		reset_towers()
 		tower_menu.update_progress()
 
@@ -156,7 +160,8 @@ func on_wave_failed() -> void:
 	# Iterate backwards to avoid null pointer since editing list in place
 	for i in range(active_towers.size() - 1, -1, -1):
 		if active_towers[i] not in checkpoint_active_towers:
-			WorldGrid.data[GameManager.world_to_grid(active_towers[i].position)] = false
+			WorldGrid.data[GameManager.world_to_grid(active_towers[i].position)] = true
+			print("Tower to qf: ", active_towers[i])
 			active_towers[i].queue_free()
 			active_towers.remove_at(i)
 
@@ -193,7 +198,7 @@ func play_tower_select_sfx(element: GameManager.Element) -> void:
 
 func on_enemy_died():
 	gold += 1
-	tower_menu.update_gold(gold)
+	# tower_menu.update_gold(gold)
 
 func _input(_event):
 	if click_enabled and Input.is_action_just_pressed("left_click"):
