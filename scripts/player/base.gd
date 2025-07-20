@@ -51,5 +51,5 @@ func on_animation_finished(anin_name: String):
 		MusicPlayer.fade_in()
 		is_alive = true
 		%Darkness.modulate.a = 0
-		health = max_health
+		health = GameManager.checkpoint_base_health # TODO: This has to become internal
 		%HealthLabel.show()

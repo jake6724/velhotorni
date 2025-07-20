@@ -38,7 +38,6 @@ var checkpoint_active_towers: Array[Tower] = []
 
 func _ready():
 	gold = GameManager.active_level.initial_gold
-	checkpoint_gold = gold
 
 	# Configure connection to tower menu
 	tower_menu.tower_selected.connect(on_tower_selected)
@@ -63,6 +62,8 @@ func _ready():
 
 	# Connect to GameManager
 	GameManager.wave_failed.connect(on_wave_failed)
+
+	set_checkpoints()
 
 func _process(_delta):
 	if placement_enabled and selected_tower_element != GameManager.Element.NONE:
@@ -135,6 +136,7 @@ func on_start_wave() -> void:
 	SFXPlayer.play_sfx("go")
 
 func on_wave_complete() -> void:
+	print("Wave complete in PC")
 	# Update variables
 	placement_enabled = true	
 	gold += int(reward)
@@ -157,6 +159,7 @@ func on_wave_failed() -> void:
 
 	# Remove uncheckpointed towers from active_towers, delete them and update world grid
 	# Iterate backwards to avoid null pointer since editing list in place
+	print("active_towers = ", active_towers)
 	for i in range(active_towers.size() - 1, -1, -1):
 		if active_towers[i] not in checkpoint_active_towers:
 			WorldGrid.data[GameManager.world_to_grid(active_towers[i].position)] = true
@@ -208,8 +211,13 @@ func _input(_event):
 func set_checkpoints() -> void:
 	# Checkpoint playerController data
 	checkpoint_gold = gold
-	checkpoint_active_towers = active_towers
-	GameManager.set_checkpoint_base_health() # kind of a round-about way to do this...
+	checkpoint_active_towers = active_towers.duplicate()
+
+	print("checkpoint_active_towers = ", checkpoint_active_towers)
+
+	# Needs rework
+	if GameManager.base:
+		GameManager.set_checkpoint_base_health() # kind of a round-about way to do this...
 
 func update_tower_button_sprites() -> void:
 	tower_menu.set_tower_button_sprites(gold, prices[GameManager.Element.FIRE],prices[GameManager.Element.EARTH],prices[GameManager.Element.WATER])

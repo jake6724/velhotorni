@@ -57,12 +57,14 @@ func start_wave() -> void:
 	# Checkpoint EnemySpawner data
 	checkpoint_wave_index = wave_index
 
+## Checked within `on_enemy_died()`
 func check_wave_complete() -> bool:
 	if enemy_index == active_wave.data.size() and active_enemies.size() == 0 and GameManager.is_wave_failed == false:
 		return true
 	else:
 		return false
 
+## Called if `check_wave_complete()` returns `true`
 func on_wave_complete() -> void:
 	active_wave = null
 	wave_index += 1

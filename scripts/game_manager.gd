@@ -56,6 +56,7 @@ func configure_level():
 
 	base = active_level.base
 	base.base_destroyed.connect(on_wave_failed)
+	checkpoint_base_health = base.max_health
 	level_failed = false
 
 	# Configure Autoloaders
@@ -117,6 +118,7 @@ func on_wave_failed()-> void:
 	is_wave_failed = false
 
 func set_checkpoint_base_health() -> void:
+	print("set_checkpoint_base_health called")
 	checkpoint_base_health = base.health
 
 func _input(_event):
