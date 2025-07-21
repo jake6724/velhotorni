@@ -40,7 +40,7 @@ func configure_level(active_level: LevelEnvironment):
 ## Intended to be triggered directly by `player_controller`.
 func start_wave() -> void:
 	can_spawn_enemy = true
-	spawn_timer.start(0)
+	on_spawn_timer_timeout()
 
 ## Called when a wave is completed or failed.
 func reset() -> void:

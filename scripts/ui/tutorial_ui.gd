@@ -1,3 +1,5 @@
+# TODO: this whole shit sucks
+
 class_name TutorialUI
 extends Control
 
