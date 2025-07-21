@@ -21,9 +21,9 @@ var min_distance: float = 2
 var max_health: float # Do not set manually; used in health bar
 var health: float
 var speed: float
-var element: GameManager.Element
-var weak_against: GameManager.Element
-var strong_against: GameManager.Element
+var element: Constants.Element
+var weak_against: Constants.Element
+var strong_against: Constants.Element
 var atlas: Texture
 
 var negative_modifier: float = .5
@@ -65,7 +65,7 @@ func move(delta) -> void:
 	
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
-func take_damage(damage_recieved: float, tower_element: GameManager.Element):
+func take_damage(damage_recieved: float, tower_element: Constants.Element):
 	# Hit by resisted element
 	if tower_element == element or tower_element == strong_against:
 		weak.hide()
@@ -105,17 +105,17 @@ func die() -> void:
 
 func set_resistances() -> void:
 	match element:
-		GameManager.Element.FIRE: 
-			strong_against = GameManager.Element.EARTH
-			weak_against = GameManager.Element.WATER
+		Constants.Element.FIRE: 
+			strong_against = Constants.Element.EARTH
+			weak_against = Constants.Element.WATER
 
-		GameManager.Element.EARTH:
-			strong_against = GameManager.Element.WATER
-			weak_against = GameManager.Element.FIRE
+		Constants.Element.EARTH:
+			strong_against = Constants.Element.WATER
+			weak_against = Constants.Element.FIRE
 
-		GameManager.Element.WATER:
-			strong_against = GameManager.Element.FIRE
-			weak_against = GameManager.Element.EARTH
+		Constants.Element.WATER:
+			strong_against = Constants.Element.FIRE
+			weak_against = Constants.Element.EARTH
 
 func on_animation_finished(anim_name):
 	if anim_name == "hit":

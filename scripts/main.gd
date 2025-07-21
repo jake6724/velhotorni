@@ -3,14 +3,21 @@ extends Node2D
 
 @onready var round_info: RoundInfo = $UI/RoundInfo
 @onready var pause_menu: PauseMenu = $UI/PauseMenu
+@onready var player_controller: PlayerController = %PlayerController
 
 func _ready():
+	# Configure with data from GameManager
 	GameManager.configure_level()
+	add_child(GameManager.active_level)
+
+	# Configure PlayerController
+	player_controller.setup()
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"):
 		pause_game_with_menu()
 
+# TODO: This could go in a TimeManager ? 
 func pause_game():
 	get_tree().paused = true
 

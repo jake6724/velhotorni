@@ -1,23 +1,18 @@
 # Autoloader
 extends Node
 
-enum Element {FIRE, WATER, EARTH, NONE}
-var cell_size: int = 16
-
 var main_scene: PackedScene = load("res://scenes/Main.tscn")
 var main_menu_scene: PackedScene = load("res://scenes/MainMenu.tscn")
 var main: Node2D
 
-var level_zero: PackedScene = load("res://scenes/level/LevelEnvironmentZero.tscn")
 var level_tutorial: PackedScene = load("res://scenes/level/LevelEnvironmentTutorial.tscn")
 var level_one: PackedScene = load("res://scenes/level/LevelEnvironmentOne.tscn")
 var level_two: PackedScene = load("res://scenes/level/LevelEnvironmentTwo.tscn")
 var test_level: PackedScene = load("res://scenes/level/LevelEnvironmentTest.tscn")
 
 var levels: Array[PackedScene] = [level_tutorial, level_one, level_two]
-# var levels: Array[PackedScene] = [test_level]
 
-var level_index: int = 0 # Set in main_menu.gd
+var level_index: int = 0
 var active_level: LevelEnvironment
 var active_path: PackedVector2Array
 var active_spawn_location: Vector2 # In world coordinates
@@ -47,16 +42,16 @@ func _ready():
 	level_complete_timer.timeout.connect(on_level_complete_message_finished)
 	add_child(level_complete_timer)
 
-func configure_active_level():
+func configure_level():
+
 	active_level = levels[level_index].instantiate()
 
-func configure_level():
-	main = get_tree().root.get_node("Main")
-	main.add_child(active_level)
-
-	base = active_level.base
+	# Base stuff
+	base = active_level.base # TODO: this all needs to move out and the bug will fix (maybe level env. tracks it?)
 	base.base_destroyed.connect(on_wave_failed)
 	checkpoint_base_health = base.max_health
+
+	# Level data
 	level_failed = false
 
 	# Configure Autoloaders
@@ -126,9 +121,3 @@ func _input(_event):
 		Engine.time_scale = fast_forward_speed
 	if Input.is_action_just_released("fast_forward"):
 		Engine.time_scale = 1.0
-
-func grid_to_world(_pos: Vector2) -> Vector2:
-	return _pos * cell_size
-
-func world_to_grid(_pos: Vector2) -> Vector2:
-	return floor(_pos / cell_size)

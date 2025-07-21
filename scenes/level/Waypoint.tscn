@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://deixtoq82gyis"]
-
-[ext_resource type="Texture2D" uid="uid://cb5ifv5enqm4c" path="res://assets/placeholders/waypoint.png" id="1_fbf8n"]
-
-[node name="Waypoint" type="Sprite2D"]
-texture_filter = 1
-texture = ExtResource("1_fbf8n")
-centered = false

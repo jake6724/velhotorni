@@ -9,7 +9,5 @@ func _ready() -> void:
 	start_button.pressed.connect(_on_play_button_pressed)
 
 func _on_play_button_pressed() -> void:
-	GameManager.level_index = 1
-	GameManager.configure_active_level()
 	SceneTransition.change_scene(main_scene)
 	SFXPlayer.play_sfx("click_1")

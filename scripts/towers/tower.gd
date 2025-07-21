@@ -27,24 +27,24 @@ var damage: float
 var speed: float
 var attack_range: float = 50.0
 var num_targets: int
-var element: GameManager.Element
+var element: Constants.Element
 var tower_name: String
 var can_attack: bool = true
 
-var base_element: GameManager.Element = GameManager.Element.NONE
+var base_element: Constants.Element = Constants.Element.NONE
 
 # Tower data (for transformations)
-var tower_resources: Dictionary[GameManager.Element, TowerData] = {
-	GameManager.Element.FIRE: preload("res://data/towers/fire.tres"),
-	GameManager.Element.EARTH: preload("res://data/towers/earth.tres"),
-	GameManager.Element.WATER: preload("res://data/towers/water.tres"),
+var tower_resources: Dictionary[Constants.Element, TowerData] = {
+	Constants.Element.FIRE: preload("res://data/towers/fire.tres"),
+	Constants.Element.EARTH: preload("res://data/towers/earth.tres"),
+	Constants.Element.WATER: preload("res://data/towers/water.tres"),
 }
 
 # Bullets
-var bullets: Dictionary[GameManager.Element, PackedScene] = {
-	GameManager.Element.FIRE: preload("res://scenes/towers/bullets/FireBullet.tscn"),
-	GameManager.Element.EARTH: preload("res://scenes/towers/bullets/EarthBullet.tscn"),
-	GameManager.Element.WATER: preload("res://scenes/towers/bullets/WaterBullet.tscn"),
+var bullets: Dictionary[Constants.Element, PackedScene] = {
+	Constants.Element.FIRE: preload("res://scenes/towers/bullets/FireBullet.tscn"),
+	Constants.Element.EARTH: preload("res://scenes/towers/bullets/EarthBullet.tscn"),
+	Constants.Element.WATER: preload("res://scenes/towers/bullets/WaterBullet.tscn"),
 }
 
 # Debug
@@ -83,7 +83,7 @@ func _ready():
 
 ## Used to update `Tower` class with data from a `TowerData` resource. Must be called immeadiately after a tower is instantiated
 ## by `PlayerController`. Used in `transform()` and `revert()` as well. **MUST be called after `Tower` has been added to scene
-func configure_tower(_element: GameManager.Element) -> void:
+func configure_tower(_element: Constants.Element) -> void:
 	tower_data = tower_resources[_element]
 
 	# Set vars from data resource assigned above
@@ -95,16 +95,16 @@ func configure_tower(_element: GameManager.Element) -> void:
 	tower_name = tower_data.tower_name
 	sprite.texture = tower_data.atlas
 
-	if base_element == GameManager.Element.NONE:
+	if base_element == Constants.Element.NONE:
 		base_element = element
 
 ## Transform into the next tower type in the cycle if `can_transform` is `true`
 func transform() -> void:
-	var new_element = GameManager.Element
+	var new_element = Constants.Element
 	match element:
-		GameManager.Element.FIRE: new_element = GameManager.Element.EARTH
-		GameManager.Element.EARTH: new_element = GameManager.Element.WATER
-		GameManager.Element.WATER: new_element = GameManager.Element.FIRE
+		Constants.Element.FIRE: new_element = Constants.Element.EARTH
+		Constants.Element.EARTH: new_element = Constants.Element.WATER
+		Constants.Element.WATER: new_element = Constants.Element.FIRE
 	configure_tower(new_element)
 	can_transform = false
 	swap_sprite.hide()
@@ -183,9 +183,9 @@ func flip_to_face_active_target():
 
 func play_shot_sfx() -> void:
 	match element:
-		GameManager.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
-		GameManager.Element.EARTH: SFXPlayer.play_sfx("earth_shot")
-		GameManager.Element.WATER: SFXPlayer.play_sfx("water_shot")
+		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
+		Constants.Element.EARTH: SFXPlayer.play_sfx("earth_shot")
+		Constants.Element.WATER: SFXPlayer.play_sfx("water_shot")
 
 func on_mouse_entered_transform_area():
 	range_indicator.show()

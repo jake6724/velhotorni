@@ -7,23 +7,23 @@ extends Node2D
 # Scenes
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 
-var textures: Dictionary[GameManager.Element, Texture] = {
-	GameManager.Element.FIRE: preload("res://assets/art/sprites/spr_tower_fire.png"),
-	GameManager.Element.EARTH: preload("res://assets/art/sprites/spr_tower_earth.png"),
-	GameManager.Element.WATER: preload("res://assets/art/sprites/spr_tower_water.png"),
+var textures: Dictionary[Constants.Element, Texture] = {
+	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_tower_fire.png"),
+	Constants.Element.EARTH: preload("res://assets/art/sprites/spr_tower_earth.png"),
+	Constants.Element.WATER: preload("res://assets/art/sprites/spr_tower_water.png"),
 }
 
-var prices: Dictionary[GameManager.Element, int] = {
-	GameManager.Element.FIRE: 25,
-	GameManager.Element.EARTH: 50,
-	GameManager.Element.WATER: 75,
+var prices: Dictionary[Constants.Element, int] = {
+	Constants.Element.FIRE: 25,
+	Constants.Element.EARTH: 50,
+	Constants.Element.WATER: 75,
 }
 
 var placement_indicator: PackedScene = preload("res://scenes/towers/PlacementIndicator.tscn")
 var indicator: Node2D
 
 var click_enabled: bool = true
-var selected_tower_element: GameManager.Element = GameManager.Element.NONE
+var selected_tower_element: Constants.Element = Constants.Element.NONE
 var active_towers: Array[Tower] = []
 var placement_enabled: bool = true
 var gold: int:
@@ -37,19 +37,14 @@ var checkpoint_gold: int
 var checkpoint_active_towers: Array[Tower] = []
 
 func _ready():
-	gold = GameManager.active_level.initial_gold
-
 	# Configure connection to tower menu
 	tower_menu.tower_selected.connect(on_tower_selected)
 	tower_menu.mouse_entered_button.connect(on_mouse_entered_button)
 	tower_menu.mouse_exited_button.connect(on_mouse_exited_button)
 
-	tower_menu.show_level_number()
-	# tower_menu.update_gold(gold) # get this from GameManager active_level
-	update_tower_button_sprites()
-	tower_menu.update_progress()
 	tower_menu.start_wave.connect(on_start_wave)
 
+	# TODO: This is a function
 	# Configure indicator sprite
 	indicator = placement_indicator.instantiate()
 	indicator.modulate.a = .75
@@ -63,22 +58,28 @@ func _ready():
 	# Connect to GameManager
 	GameManager.wave_failed.connect(on_wave_failed)
 
+func setup():
+	gold = GameManager.active_level.initial_gold
 	set_checkpoints()
 
+	tower_menu.show_level_number()
+	update_tower_button_sprites() # TODO: make this a function in tower_menu, get prices from constants
+	tower_menu.update_progress()
+
 func _process(_delta):
-	if placement_enabled and selected_tower_element != GameManager.Element.NONE:
-		indicator.position = GameManager.grid_to_world(GameManager.world_to_grid(get_global_mouse_position()))
+	if placement_enabled and selected_tower_element != Constants.Element.NONE:
+		indicator.position = WorldGrid.grid_to_world(WorldGrid.world_to_grid(get_global_mouse_position()))
 	else:
 		indicator.hide()
 
-func spawn_tower(element: GameManager.Element, world_pos: Vector2) -> bool:
+func spawn_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 	# Do not allow placement during combat, do not allow NONE type turrets to spawn
-	if placement_enabled and selected_tower_element != GameManager.Element.NONE:
-		var grid_pos: Vector2 = GameManager.world_to_grid(world_pos)
+	if placement_enabled and selected_tower_element != Constants.Element.NONE:
+		var grid_pos: Vector2 = WorldGrid.world_to_grid(world_pos)
 		if grid_pos in WorldGrid.data and WorldGrid.data[grid_pos]:
 			# Spawn and configure new tower
 			var new_tower = tower_scene.instantiate()
-			new_tower.position = GameManager.grid_to_world(grid_pos) # Bring it back to world to get a clean grid point
+			new_tower.position = WorldGrid.grid_to_world(grid_pos) # Bring it back to world to get a clean grid point
 			add_child(new_tower)
 			new_tower.configure_tower(element)
 
@@ -98,7 +99,7 @@ func spawn_tower(element: GameManager.Element, world_pos: Vector2) -> bool:
 			# tower_menu.update_gold(gold)
 			play_tower_select_sfx(element)
 
-			selected_tower_element = GameManager.Element.NONE
+			selected_tower_element = Constants.Element.NONE
 			return true
 		else:
 			SFXPlayer.play_sfx("click_2")
@@ -106,15 +107,15 @@ func spawn_tower(element: GameManager.Element, world_pos: Vector2) -> bool:
 	else:
 		return false
 
-func on_tower_selected(element: GameManager.Element) -> void:
+func on_tower_selected(element: Constants.Element) -> void:
 	# Check player can afford tower
 	if gold >= prices[element]:
 		selected_tower_element = element
 
 		match element:
-			GameManager.Element.FIRE: SFXPlayer.play_sfx("fire_click")
-			GameManager.Element.EARTH: SFXPlayer.play_sfx("earth_click")
-			GameManager.Element.WATER: SFXPlayer.play_sfx("water_click")
+			Constants.Element.FIRE: SFXPlayer.play_sfx("fire_click")
+			Constants.Element.EARTH: SFXPlayer.play_sfx("earth_click")
+			Constants.Element.WATER: SFXPlayer.play_sfx("water_click")
 
 		# Indicator
 		indicator.tower_sprite.texture = textures[element]
@@ -162,7 +163,7 @@ func on_wave_failed() -> void:
 	print("active_towers = ", active_towers)
 	for i in range(active_towers.size() - 1, -1, -1):
 		if active_towers[i] not in checkpoint_active_towers:
-			WorldGrid.data[GameManager.world_to_grid(active_towers[i].position)] = true
+			WorldGrid.data[WorldGrid.world_to_grid(active_towers[i].position)] = true
 			active_towers[i].queue_free()
 			active_towers.remove_at(i)
 
@@ -191,11 +192,11 @@ func on_tower_unhovered(tower: Tower):
 		tower.swap_sprite.hide()
 		tower.cross_sprite.hide()
 
-func play_tower_select_sfx(element: GameManager.Element) -> void:
+func play_tower_select_sfx(element: Constants.Element) -> void:
 	match element:
-		GameManager.Element.FIRE: SFXPlayer.play_sfx("fire_select")
-		GameManager.Element.EARTH: SFXPlayer.play_sfx("earth_select")
-		GameManager.Element.WATER: SFXPlayer.play_sfx("water_select")
+		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_select")
+		Constants.Element.EARTH: SFXPlayer.play_sfx("earth_select")
+		Constants.Element.WATER: SFXPlayer.play_sfx("water_select")
 
 func on_enemy_died():
 	gold += 1
@@ -206,7 +207,7 @@ func _input(_event):
 		spawn_tower(selected_tower_element, get_global_mouse_position())
 
 	if click_enabled and Input.is_action_just_pressed("right_click"):
-		selected_tower_element = GameManager.Element.NONE
+		selected_tower_element = Constants.Element.NONE
 
 func set_checkpoints() -> void:
 	# Checkpoint playerController data
@@ -220,7 +221,7 @@ func set_checkpoints() -> void:
 		GameManager.set_checkpoint_base_health() # kind of a round-about way to do this...
 
 func update_tower_button_sprites() -> void:
-	tower_menu.set_tower_button_sprites(gold, prices[GameManager.Element.FIRE],prices[GameManager.Element.EARTH],prices[GameManager.Element.WATER])
+	tower_menu.set_tower_button_sprites(gold, prices[Constants.Element.FIRE],prices[Constants.Element.EARTH],prices[Constants.Element.WATER])
 
 func on_mouse_entered_button() -> void:
 	click_enabled = false

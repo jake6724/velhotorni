@@ -9,6 +9,7 @@
 script = ExtResource("1_0bbpv")
 
 [node name="PlayerController" parent="." instance=ExtResource("4_rarhs")]
+unique_name_in_owner = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 

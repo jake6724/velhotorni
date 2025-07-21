@@ -8,7 +8,7 @@ var width: int = 25
 ## Should always be indexed with Grid Coordinates
 var data: Dictionary[Vector2, bool] # true = can be placed here, false cannot
 
-# Temp for development
+# Dev only
 var tile_inidicator: PackedScene = preload("res://scenes/placeholders/TileIndicator.tscn")
 
 var active_tilemap: TileMapLayer
@@ -29,7 +29,6 @@ var valid_atlas_coords: Array[Vector2i] = [ # Tiles that towers CAN be placed on
 	Vector2i(3,14),Vector2i(4,14),
 ]
 
-
 func generate_grid() -> void:
 	# Reset values
 	data = {}
@@ -37,12 +36,11 @@ func generate_grid() -> void:
 	for y in range(height):
 		for x in range(width):
 			var grid_pos = Vector2(x,y)
-			var world_pos = GameManager.grid_to_world(grid_pos)
+			var world_pos = WorldGrid.grid_to_world(grid_pos)
 			data[grid_pos] = true
 
 			if debug:
 				spawn_placeholder(world_pos)
-
 
 func configure_tilemap(tilemap: TileMapLayer) -> void:
 	active_tilemap = tilemap
@@ -59,3 +57,9 @@ func spawn_placeholder(pos: Vector2) -> void:
 	p = tile_inidicator.instantiate()
 	p.position = pos
 	add_child(p)
+
+func grid_to_world(_pos: Vector2) -> Vector2:
+	return _pos * Constants.cell_size
+
+func world_to_grid(_pos: Vector2) -> Vector2:
+	return floor(_pos / Constants.cell_size)

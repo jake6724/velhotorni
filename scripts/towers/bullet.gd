@@ -3,7 +3,7 @@ extends Sprite2D
 
 @onready var ap: AnimationPlayer = $AnimationPlayer
 
-var element: GameManager.Element
+var element: Constants.Element
 var damage: int 
 var target: Enemy
 

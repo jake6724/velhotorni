@@ -1,7 +1,7 @@
 class_name TowerData
 extends Resource
 
-@export var element: GameManager.Element
+@export var element: Constants.Element
 @export var damage: float
 @export var speed: float
 @export var attack_range: float
