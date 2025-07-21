@@ -52,6 +52,7 @@ func on_level_complete():
 func on_level_complete_message_finished():
 	# Exit to main menu if last level
 	if level_index == levels.size():
+		level_index = 0
 		get_tree().change_scene_to_packed(main_menu_scene)
 	else:
 		load_next_level()

@@ -24,6 +24,7 @@ var gold: int:
 	set(value):
 		gold = value
 		tower_menu.update_gold(gold)
+		update_tower_button_sprites()
 var reward: float
 
 # Wave Checkpoint data
@@ -52,7 +53,7 @@ func setup():
 	set_checkpoints()
 
 	tower_menu.show_level_number()
-	update_tower_button_sprites() # TODO: make this a function in tower_menu, get prices from constants
+	#update_tower_button_sprites() # TODO: make this a function in tower_menu, get prices from constants
 	tower_menu.update_progress()
 
 func _process(_delta):
@@ -84,7 +85,7 @@ func spawn_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 
 			# Clean up indicator
 			indicator.hide()
-			update_tower_button_sprites()
+			#update_tower_button_sprites()
 			play_tower_select_sfx(element)
 
 			selected_tower_element = Constants.Element.NONE
@@ -124,7 +125,7 @@ func on_wave_complete() -> void:
 	# Update variables
 	placement_enabled = true	
 	gold += int(reward)
-	update_tower_button_sprites()
+	#update_tower_button_sprites()
 
 	# Tower Menu config
 	if WaveManager.wave_index != WaveManager.level_waves.size():
@@ -138,7 +139,7 @@ func on_wave_failed() -> void:
 	placement_enabled = true
 	tower_menu.show_placement_phase()
 	gold = checkpoint_gold
-	update_tower_button_sprites()
+	#update_tower_button_sprites()
 
 	# Remove uncheckpointed towers from active_towers, delete them and update world grid
 	# Iterate backwards to avoid null pointer since editing list in place
