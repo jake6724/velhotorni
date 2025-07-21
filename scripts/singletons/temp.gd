@@ -21,14 +21,14 @@ var level_complete_timer: Timer = Timer.new()
 var level_complete_duration: float = 3
 var level_failed: bool = false
 
-var base: Base
-var fast_forward_speed: int = 2
+# var base: Base
 
-# Wave checkpoint data
-var checkpoint_gold: int
-var checkpoint_wave_index: int
-var checkpoint_active_towers: Array[Tower]
-var checkpoint_base_health: int
+# # Wave checkpoint data
+# var checkpoint_gold: int
+# var checkpoint_wave_index: int
+# var checkpoint_active_towers: Array[Tower]
+# var checkpoint_base_health: int
+
 var is_wave_failed = false
 
 signal wave_failed
@@ -43,23 +43,21 @@ func _ready():
 	add_child(level_complete_timer)
 
 func configure_level():
+	# # Base stuff
+	# base = active_level.base # TODO: this all needs to move out and the bug will fix (maybe level env. tracks it?)
+	# base.base_destroyed.connect(on_wave_failed)
+	# checkpoint_base_health = base.max_health
 
 	active_level = levels[level_index].instantiate()
 
-	# Base stuff
-	base = active_level.base # TODO: this all needs to move out and the bug will fix (maybe level env. tracks it?)
-	base.base_destroyed.connect(on_wave_failed)
-	checkpoint_base_health = base.max_health
+	# Call other singleton's configure_level() methods
+	WorldGrid.configure_level(active_level)
+	EnemySpawner.configure_level(active_level)
 
 	# Level data
 	level_failed = false
 
-	# Configure Autoloaders
-	WorldGrid.generate_grid()
-	WorldGrid.configure_tilemap(active_level.tilemap)
-	EnemySpawner.configure_level(active_level)
-
-func start_level():
+func start_level(): # TODO: could this just be configure level ? is this really needed?
 	# Reset autoloaders
 	clear_level()
 
@@ -73,8 +71,8 @@ func clear_level():
 	active_level = null
 	active_path = []
 	active_spawn_location = Vector2()
-	base.base_destroyed.disconnect(on_wave_failed)
-	base = null
+	# base.base_destroyed.disconnect(on_wave_failed)
+	# base = null
 	EnemySpawner.clear_level()
 
 func on_level_complete(): # Emitted by EnemySpawner
@@ -107,17 +105,10 @@ func on_wave_failed()-> void:
 	is_wave_failed = true
 	EnemySpawner.on_wave_failed() # Called manually to avoid race-conditions with PlayerController
 
-	base.health = checkpoint_base_health
-	base.update_health_label(base.health) # TODO: Use set()
+	# base.health = checkpoint_base_health
+	# base.update_health_label(base.health) # TODO: Use set()
 	wave_failed.emit()
 	is_wave_failed = false
 
-func set_checkpoint_base_health() -> void:
-	print("set_checkpoint_base_health called")
-	checkpoint_base_health = base.health
-
-func _input(_event):
-	if Input.is_action_pressed("fast_forward"):
-		Engine.time_scale = fast_forward_speed
-	if Input.is_action_just_released("fast_forward"):
-		Engine.time_scale = 1.0
+# func set_checkpoint_base_health() -> void:
+# 	checkpoint_base_health = base.health

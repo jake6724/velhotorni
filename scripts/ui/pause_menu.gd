@@ -72,5 +72,5 @@ func on_resume_button_pressed():
 
 func on_exit_button_pressed():
 	main.unpause_game_with_menu()
-	GameManager.clear_level()
+	LevelManager.clear_level()
 	SceneTransition.change_scene(main_menu)

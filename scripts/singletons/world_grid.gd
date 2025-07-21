@@ -29,6 +29,11 @@ var valid_atlas_coords: Array[Vector2i] = [ # Tiles that towers CAN be placed on
 	Vector2i(3,14),Vector2i(4,14),
 ]
 
+## Intended to be called manually by `LevelManager`.
+func configure_level(active_level: LevelEnvironment) -> void:
+	generate_grid()
+	configure_tilemap(active_level.tilemap)
+
 func generate_grid() -> void:
 	# Reset values
 	data = {}

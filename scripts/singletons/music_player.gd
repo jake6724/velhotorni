@@ -71,7 +71,7 @@ func fade_in(fade_duration: float=.25) -> void:
 # func update_active_track():
 # 	fade_out()
 # 	await fade_out_complete
-# 	active_track = tracks[GameManager.level_index]
+# 	active_track = tracks[LevelManager.level_index]
 # 	music_player.stream = active_track
 # 	music_player.play()
 # 	fade_in()

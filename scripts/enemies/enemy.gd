@@ -38,7 +38,7 @@ var is_alive: bool = true
 var walk_resume_pos: float
 
 # Signals
-signal is_dead
+signal died
 
 func _ready():
 	health = data.health
@@ -46,7 +46,7 @@ func _ready():
 	element = data.element
 	atlas = data.atlas
 	max_health = health
-	base = GameManager.base
+	base = LevelManager.base
 	set_resistances()
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
@@ -96,7 +96,7 @@ func die() -> void:
 	collider.disabled = true
 	ap.play("die")
 	SFXPlayer.play_sfx_resource(data.explosion_sfx)
-	is_dead.emit(self)
+	died.emit(self)
 
 	# Hide graphics
 	health_bar.hide()

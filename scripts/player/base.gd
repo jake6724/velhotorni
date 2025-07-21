@@ -9,7 +9,8 @@ var health: int:
 		health = value
 		%HealthLabel.text = str(health)
 
-signal base_destroyed
+signal destroyed
+signal damaged
 var is_alive: bool = true
 
 func _ready():
@@ -35,7 +36,7 @@ func take_damage(damage_recieved: int):
 			print("Base is_alive: ", is_alive)
 			%HealthLabel.hide()
 
-			GameManager.is_wave_failed = true
+			LevelManager.is_wave_failed = true
 			MusicPlayer.fade_out()
 			await MusicPlayer.fade_out_complete
 			SFXPlayer.play_sfx("base_explosion")
@@ -47,9 +48,9 @@ func update_health_label(new_health: int) -> void:
 func on_animation_finished(anin_name: String):
 	# TODO: Clean this up, maybe die() like enemy?
 	if anin_name == "die":
-		base_destroyed.emit()
+		destroyed.emit()
 		MusicPlayer.fade_in()
 		is_alive = true
 		%Darkness.modulate.a = 0
-		health = GameManager.checkpoint_base_health # TODO: This has to become internal
+		health = LevelManager.checkpoint_base_health # TODO: This has to become internal
 		%HealthLabel.show()

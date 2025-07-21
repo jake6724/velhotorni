@@ -72,7 +72,7 @@ func show_placement_phase() -> void:
 	fast_forward.hide()
 
 func show_level_number() -> void:
-	level_number.text = GameManager.active_level.level_name
+	level_number.text = LevelManager.active_level.level_name
 	level_number.show()
 	# Start timer which will automatically hide level number after timeout
 	level_number_timer.start(level_number_duration)
@@ -107,7 +107,7 @@ func set_tower_button_sprites(_gold: float, fire_price: int , earth_price: int, 
 		water_button.texture_normal = locked_ui_tower_sprites[Constants.Element.WATER]
 
 func update_progress():
-	progress.text = str(GameManager.level_index) + "-" + str(EnemySpawner.wave_index+1)
+	progress.text = str(LevelManager.level_index) + "-" + str(EnemySpawner.wave_index+1)
 
 func on_wave_button_pressed() -> void:
 	wave_number.text = "Wave " + str(EnemySpawner.wave_index+1)
@@ -123,7 +123,7 @@ func on_level_number_timer_timeout():
 	$AnimationPlayer.play("flash")
 
 func on_start_fast_forward():
-	Engine.time_scale = 2
+	Engine.time_scale = Constants.FAST_FORWARD_SPEED
 
 func on_stop_fast_forward():
 	Engine.time_scale = 1

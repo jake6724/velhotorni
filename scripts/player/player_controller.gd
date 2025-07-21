@@ -55,11 +55,11 @@ func _ready():
 	EnemySpawner.wave_complete.connect(on_wave_complete)
 	EnemySpawner.enemy_died.connect(on_enemy_died)
 
-	# Connect to GameManager
-	GameManager.wave_failed.connect(on_wave_failed)
+	# Connect to LevelManager
+	LevelManager.wave_failed.connect(on_wave_failed)
 
 func setup():
-	gold = GameManager.active_level.initial_gold
+	gold = LevelManager.active_level.initial_gold
 	set_checkpoints()
 
 	tower_menu.show_level_number()
@@ -131,8 +131,8 @@ func on_start_wave() -> void:
 	EnemySpawner.start_wave()
 	reward = EnemySpawner.active_wave.reward
 
-	# GameManager
-	GameManager.is_wave_failed = false
+	# LevelManager
+	LevelManager.is_wave_failed = false
 
 	SFXPlayer.play_sfx("go")
 
@@ -217,8 +217,8 @@ func set_checkpoints() -> void:
 	print("checkpoint_active_towers = ", checkpoint_active_towers)
 
 	# Needs rework
-	if GameManager.base:
-		GameManager.set_checkpoint_base_health() # kind of a round-about way to do this...
+	if LevelManager.base:
+		LevelManager.set_checkpoint_base_health() # kind of a round-about way to do this...
 
 func update_tower_button_sprites() -> void:
 	tower_menu.set_tower_button_sprites(gold, prices[Constants.Element.FIRE],prices[Constants.Element.EARTH],prices[Constants.Element.WATER])

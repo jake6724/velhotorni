@@ -6,9 +6,9 @@ extends Node2D
 @onready var player_controller: PlayerController = %PlayerController
 
 func _ready():
-	# Configure with data from GameManager
-	GameManager.configure_level()
-	add_child(GameManager.active_level)
+	# Configure with data from LevelManager
+	LevelManager.configure_level()
+	add_child(LevelManager.active_level)
 
 	# Configure PlayerController
 	player_controller.setup()
