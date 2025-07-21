@@ -20,8 +20,6 @@ var level_failed: bool = false
 
 var is_wave_failed = false
 
-signal wave_failed
-
 func _ready():
 	# configure_level() called in main - level only configured when main is ready to parent it
 	WaveManager.all_waves_completed.connect(on_level_complete)
@@ -37,13 +35,6 @@ func configure_level(_main: Main):
 	main = _main # Reference provided by current main itself
 	active_level = levels[level_index].instantiate()
 	level_failed = false
-
-func load_next_level():
-	clear_level()
-	get_tree().change_scene_to_packed(main_scene)
-
-func clear_level():
-	active_level = null
 
 ## Observes `WaveManager.all_waves_complete`.
 func on_level_complete():
@@ -61,10 +52,13 @@ func on_level_complete():
 func on_level_complete_message_finished():
 	# Exit to main menu if last level
 	if level_index == levels.size():
-		clear_level() # Removes any lingering enemies
 		get_tree().change_scene_to_packed(main_menu_scene)
 	else:
 		load_next_level()
+
+func load_next_level():
+	# level_index has already been incremented in previous methods which call this one
+	get_tree().change_scene_to_packed(main_scene)
 
 func play_level_complete_sfx() -> void:
 	MusicPlayer.fade_out()

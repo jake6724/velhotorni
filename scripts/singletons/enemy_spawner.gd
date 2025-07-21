@@ -28,6 +28,7 @@ func _ready():
 	WaveManager.wave_started.connect(start_wave)
 	WaveManager.wave_completed.connect(reset)
 	WaveManager.wave_failed.connect(reset)
+	WaveManager.all_waves_completed.connect(reset)
 
 ## Called by LevelManager.
 func configure_level(active_level: LevelEnvironment):
