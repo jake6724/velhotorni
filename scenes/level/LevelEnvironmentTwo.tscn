@@ -1063,7 +1063,7 @@ shader_parameter/ySpeed = -0.01
 z_index = -1
 script = ExtResource("1_bbfh2")
 level_name = "- Slumbering Hills -"
-initial_gold = 25
+initial_gold = 100000000000
 waves = Array[ExtResource("2_s1w0f")]([ExtResource("3_bbfh2"), ExtResource("4_s1w0f"), ExtResource("5_thqhp"), ExtResource("6_vux6d"), ExtResource("7_gls1o"), ExtResource("3_s1w0f"), ExtResource("3_thqhp"), ExtResource("3_vux6d"), ExtResource("3_gls1o"), ExtResource("3_vy1xi")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]

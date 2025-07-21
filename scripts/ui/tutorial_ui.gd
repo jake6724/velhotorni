@@ -27,6 +27,5 @@ func _ready():
 	skip_button.pressed.connect(on_skip_button_pressed)
 
 func on_skip_button_pressed():
-	SceneTransition.change_scene(main_scene)
-	WaveManager.all_waves_completed.emit()
 	LevelManager.load_next_level()
+	WaveManager.wave_completed.emit()

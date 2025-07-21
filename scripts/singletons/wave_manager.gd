@@ -47,8 +47,7 @@ func on_wave_complete() -> void:
 	else:
 		active_wave = null
 		all_waves_completed.emit()
-		
-
+	
 	wave_index_checkpoint = wave_index
 	wave_completed.emit()
 

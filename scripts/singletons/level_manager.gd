@@ -38,9 +38,8 @@ func configure_level(_main: Main):
 
 ## Observes `WaveManager.all_waves_complete`.
 func on_level_complete():
-	level_index += 1
 	# Check if full game complete, or move to next level
-	if level_index == levels.size():
+	if level_index + 1 == levels.size():
 		main.round_info.show_game_complete()
 	else:
 		main.round_info.show_level_complete()
@@ -51,15 +50,18 @@ func on_level_complete():
 ## Observes `level_complete_timer.timeout` 
 func on_level_complete_message_finished():
 	# Exit to main menu if last level
-	if level_index == levels.size():
-		level_index = 0
-		get_tree().change_scene_to_packed(main_menu_scene)
+	if level_index + 1 == levels.size():
+		complete_game()
 	else:
 		load_next_level()
 
 func load_next_level():
-	# level_index has already been incremented in previous methods which call this one
-	get_tree().change_scene_to_packed(main_scene)
+	level_index += 1
+	SceneTransition.change_scene(main_scene)
+
+func complete_game() -> void:
+	level_index = 0
+	get_tree().change_scene_to_packed(main_menu_scene)
 
 func play_level_complete_sfx() -> void:
 	MusicPlayer.fade_out()
