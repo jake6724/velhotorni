@@ -50,8 +50,8 @@ func generate_grid() -> void:
 func configure_tilemap(tilemap: TileMapLayer) -> void:
 	active_tilemap = tilemap
 
-	for tile_coords: Vector2i in tilemap.get_used_cells():
-		var atlas_coords: Vector2i = tilemap.get_cell_atlas_coords(tile_coords) 
+	for tile_coords: Vector2i in active_tilemap.get_used_cells():
+		var atlas_coords: Vector2i = active_tilemap.get_cell_atlas_coords(tile_coords) 
 		if atlas_coords in valid_atlas_coords:
 			data[Vector2(tile_coords)] = true
 		else:
@@ -64,7 +64,7 @@ func spawn_placeholder(pos: Vector2) -> void:
 	add_child(p)
 
 func grid_to_world(_pos: Vector2) -> Vector2:
-	return _pos * Constants.cell_size
+	return _pos * Constants.CELL_SIZE
 
 func world_to_grid(_pos: Vector2) -> Vector2:
-	return floor(_pos / Constants.cell_size)
+	return floor(_pos / Constants.CELL_SIZE)

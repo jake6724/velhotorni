@@ -10,7 +10,7 @@ var enemy_count: int = 0
 
 func _ready():
 	# Connect to EnemySpawner
-	EnemySpawner.wave_complete.connect(on_wave_complete)
+	WaveManager.wave_completed.connect(on_wave_completed)
 	EnemySpawner.enemy_spawned.connect(on_enemy_spawned)
 
 	# Disable pausing
@@ -41,7 +41,7 @@ func on_enemy_spawned():
 		show_dialogue()
 		main.pause_game()	
 
-func on_wave_complete():
+func on_wave_completed():
 	show_dialogue()
 
 func show_dialogue():

@@ -13,12 +13,6 @@ var textures: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.WATER: preload("res://assets/art/sprites/spr_tower_water.png"),
 }
 
-var prices: Dictionary[Constants.Element, int] = {
-	Constants.Element.FIRE: 25,
-	Constants.Element.EARTH: 50,
-	Constants.Element.WATER: 75,
-}
-
 var placement_indicator: PackedScene = preload("res://scenes/towers/PlacementIndicator.tscn")
 var indicator: Node2D
 
@@ -44,19 +38,14 @@ func _ready():
 
 	tower_menu.start_wave.connect(on_start_wave)
 
-	# TODO: This is a function
-	# Configure indicator sprite
-	indicator = placement_indicator.instantiate()
-	indicator.modulate.a = .75
-	indicator.hide()
-	add_child(indicator)
+	configure_indicator_sprite()
 
 	# Connect to EnemySpawner
-	EnemySpawner.wave_complete.connect(on_wave_complete)
 	EnemySpawner.enemy_died.connect(on_enemy_died)
 
-	# Connect to LevelManager
-	LevelManager.wave_failed.connect(on_wave_failed)
+	# Connect to WaveManager
+	WaveManager.wave_completed.connect(on_wave_complete)
+	WaveManager.wave_failed.connect(on_wave_failed)
 
 func setup():
 	gold = LevelManager.active_level.initial_gold
@@ -91,12 +80,11 @@ func spawn_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 			# Update data
 			active_towers.append(new_tower)
 			WorldGrid.data[grid_pos] = false
-			gold -= prices[element]
+			gold -= Constants.TOWER_PRICES[element]
 
 			# Clean up indicator
 			indicator.hide()
 			update_tower_button_sprites()
-			# tower_menu.update_gold(gold)
 			play_tower_select_sfx(element)
 
 			selected_tower_element = Constants.Element.NONE
@@ -109,7 +97,7 @@ func spawn_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 
 func on_tower_selected(element: Constants.Element) -> void:
 	# Check player can afford tower
-	if gold >= prices[element]:
+	if gold >= Constants.TOWER_PRICES[element]:
 		selected_tower_element = element
 
 		match element:
@@ -127,26 +115,20 @@ func on_start_wave() -> void:
 	tower_menu.hide_placement_phase()
 	placement_enabled = false
 
-	# Enemy Spawner
-	EnemySpawner.start_wave()
-	reward = EnemySpawner.active_wave.reward
-
-	# LevelManager
-	LevelManager.is_wave_failed = false
+	WaveManager.start_wave()
+	reward = WaveManager.active_wave.reward
 
 	SFXPlayer.play_sfx("go")
 
 func on_wave_complete() -> void:
-	print("Wave complete in PC")
 	# Update variables
 	placement_enabled = true	
 	gold += int(reward)
 	update_tower_button_sprites()
 
 	# Tower Menu config
-	if EnemySpawner.wave_index != EnemySpawner.level_waves.size():
+	if WaveManager.wave_index != WaveManager.level_waves.size():
 		tower_menu.show_placement_phase()
-		# tower_menu.update_gold(int(gold))
 		reset_towers()
 		tower_menu.update_progress()
 
@@ -160,7 +142,6 @@ func on_wave_failed() -> void:
 
 	# Remove uncheckpointed towers from active_towers, delete them and update world grid
 	# Iterate backwards to avoid null pointer since editing list in place
-	print("active_towers = ", active_towers)
 	for i in range(active_towers.size() - 1, -1, -1):
 		if active_towers[i] not in checkpoint_active_towers:
 			WorldGrid.data[WorldGrid.world_to_grid(active_towers[i].position)] = true
@@ -185,7 +166,7 @@ func on_tower_hovered(tower: Tower):
 		if tower.can_transform:
 			tower.swap_sprite.show()
 		else:
-			tower.cross_sprite.show()	
+			tower.cross_sprite.show()
 
 func on_tower_unhovered(tower: Tower):
 	if not placement_enabled:
@@ -200,7 +181,6 @@ func play_tower_select_sfx(element: Constants.Element) -> void:
 
 func on_enemy_died():
 	gold += 1
-	# tower_menu.update_gold(gold)
 
 func _input(_event):
 	if click_enabled and Input.is_action_just_pressed("left_click"):
@@ -214,17 +194,17 @@ func set_checkpoints() -> void:
 	checkpoint_gold = gold
 	checkpoint_active_towers = active_towers.duplicate()
 
-	print("checkpoint_active_towers = ", checkpoint_active_towers)
-
-	# Needs rework
-	if LevelManager.base:
-		LevelManager.set_checkpoint_base_health() # kind of a round-about way to do this...
-
 func update_tower_button_sprites() -> void:
-	tower_menu.set_tower_button_sprites(gold, prices[Constants.Element.FIRE],prices[Constants.Element.EARTH],prices[Constants.Element.WATER])
+	tower_menu.set_tower_button_sprites(gold)
 
 func on_mouse_entered_button() -> void:
 	click_enabled = false
 
 func on_mouse_exited_button() -> void:
 	click_enabled = true
+
+func configure_indicator_sprite() -> void:
+	indicator = placement_indicator.instantiate()
+	indicator.modulate.a = .75
+	indicator.hide()
+	add_child(indicator)

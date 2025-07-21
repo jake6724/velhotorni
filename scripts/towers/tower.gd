@@ -143,7 +143,7 @@ func get_active_target() -> Enemy:
 	else: 
 		return null
 
-func on_enemy_is_dead(enemy: Enemy) -> void:
+func on_enemy_died(enemy: Enemy) -> void:
 	var index = in_range_targets.find(enemy)
 	if index != -1:
 		in_range_targets.remove_at(index)
@@ -154,7 +154,7 @@ func on_enemy_is_dead(enemy: Enemy) -> void:
 func on_area_entered(intruder: Area2D) -> void:
 	if intruder is Enemy:
 		in_range_targets.append(intruder)
-		intruder.is_dead.connect(on_enemy_is_dead)
+		intruder.died.connect(on_enemy_died)
 
 func on_area_exited(intruder) -> void:
 	if intruder is Enemy:
@@ -163,7 +163,7 @@ func on_area_exited(intruder) -> void:
 
 		if intruder in in_range_targets:
 			in_range_targets.remove_at(in_range_targets.find(intruder))
-			intruder.is_dead.disconnect(on_enemy_is_dead)
+			intruder.died.disconnect(on_enemy_died)
 
 func spawn_bullet() -> void:
 	var new_bullet: Bullet = bullets[element].instantiate()

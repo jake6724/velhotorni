@@ -46,7 +46,7 @@ func _ready():
 	element = data.element
 	atlas = data.atlas
 	max_health = health
-	base = LevelManager.base
+	base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 
 	set_resistances()
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
@@ -104,6 +104,7 @@ func die() -> void:
 	weak.hide()
 
 func set_resistances() -> void:
+	# TODO: JUST DEFINE THESE IN THE RESOURCE!
 	match element:
 		Constants.Element.FIRE: 
 			strong_against = Constants.Element.EARTH

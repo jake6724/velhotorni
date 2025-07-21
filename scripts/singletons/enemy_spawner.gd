@@ -1,8 +1,7 @@
 # TODO: This should maybe not a be a singleton... just a child of main? 
 
-# This node should have one job; spawn enemies
-# It should just emit the info about these enemies for wave_manager to use 
-
+# Singleton responsible for spawning enemies based on the active level's wave data
+# All enemies are a child of this class
 extends Node
 
 var active_enemies: Array[Enemy]
@@ -10,9 +9,6 @@ var enemy_index: int
 var can_spawn_enemy: bool
 var enemy_path_length: float # Per level
 var spawn_timer: Timer = Timer.new()
-
-# Checkpoint data
-var checkpoint_wave_index: int
 
 var enemy_scene: PackedScene = preload("res://scenes/enemies/Enemy.tscn")
 var enemy_data: Dictionary[Constants.Element, EnemyData] = {
@@ -25,24 +21,25 @@ signal enemy_spawned
 signal enemy_died
 
 func _ready():
-	# Enemy spawner manually configured and reset by LevelManager #TODO: Still valid? 
 	spawn_timer.timeout.connect(on_spawn_timer_timeout)
 	add_child(spawn_timer)
 
 	# Connect to WaveManager
+	WaveManager.wave_started.connect(start_wave)
 	WaveManager.wave_completed.connect(reset)
 	WaveManager.wave_failed.connect(reset)
 
+## Called by LevelManager.
 func configure_level(active_level: LevelEnvironment):
 	active_enemies = []
 	enemy_index = 0
 	can_spawn_enemy = false
 	enemy_path_length = active_level.enemy_path.curve.get_baked_length()
 	
-## Intended to be triggered directly by `player_controller`
+## Intended to be triggered directly by `player_controller`.
 func start_wave() -> void:
 	can_spawn_enemy = true
-	spawn_timer.start(0) # Self-calling after initial trigger
+	spawn_timer.start(0)
 
 ## Called when a wave is completed or failed.
 func reset() -> void:
@@ -59,6 +56,7 @@ func on_enemy_died(enemy: Enemy) -> void:
 		active_enemies.remove_at(index)
 	enemy_died.emit()
 
+## Called on `spawn_timer`'s `timeout`
 func on_spawn_timer_timeout() -> void:
 	if WaveManager.active_wave:
 		if can_spawn_enemy and enemy_index < WaveManager.active_wave.data.size():
@@ -75,7 +73,7 @@ func spawn_enemy(element: Constants.Element) -> void:
 	# Configure new enemy
 	var new_enemy: Enemy = enemy_scene.instantiate()
 	new_enemy.data = enemy_data[element]
-	new_enemy.position = LevelManager.active_spawn_location
+	# new_enemy.position = LevelManager.active_spawn_location
 	new_enemy.died.connect(on_enemy_died)
 	add_child(new_enemy)
 	active_enemies.append(new_enemy)
@@ -88,7 +86,7 @@ func configure_enemy_pathing(enemy: Enemy) -> void:
 	# EnemyPath2D is a node in the level, add a pathfollow to move along it, and a remote transform which will update the 
 	# enemies position
 	var new_path_follow: PathFollow2D = PathFollow2D.new()
-	WaveManager.active_level.enemy_path.add_child(new_path_follow)
+	LevelManager.active_level.enemy_path.add_child(new_path_follow)
 
 	var new_remote_transform: RemoteTransform2D = RemoteTransform2D.new()
 	new_remote_transform.update_rotation = false

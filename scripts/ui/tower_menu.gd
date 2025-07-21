@@ -79,7 +79,7 @@ func show_level_number() -> void:
 
 func on_button_pressed(pressed_button: TextureButton):
 	var b_name: String = pressed_button.name.to_lower()
-	match b_name:
+	match b_name: # TODO: Just use the button ref, not a string ? 
 		"firebutton": tower_selected.emit(Constants.Element.FIRE)
 		"earthbutton": tower_selected.emit(Constants.Element.EARTH)
 		"waterbutton": tower_selected.emit(Constants.Element.WATER)
@@ -88,29 +88,29 @@ func on_button_pressed(pressed_button: TextureButton):
 func update_gold(new_amount: int) -> void:
 	gold.text = str(new_amount)
 
-func set_tower_button_sprites(_gold: float, fire_price: int , earth_price: int, water_price: int):
+func set_tower_button_sprites(_gold: float):
 	# TODO: Convert this to a loop
 	# Set Fire
-	if _gold >= fire_price:
+	if _gold >= Constants.TOWER_PRICES[Constants.Element.FIRE]:
 		fire_button.texture_normal = ui_tower_sprites[Constants.Element.FIRE]
 	else:
 		fire_button.texture_normal = locked_ui_tower_sprites[Constants.Element.FIRE]
 	# Set Earth
-	if _gold >= earth_price:
+	if _gold >= Constants.TOWER_PRICES[Constants.Element.EARTH]:
 		earth_button.texture_normal = ui_tower_sprites[Constants.Element.EARTH]
 	else:
 		earth_button.texture_normal = locked_ui_tower_sprites[Constants.Element.EARTH]
 	# Set Water
-	if _gold >= water_price:
+	if _gold >= Constants.TOWER_PRICES[Constants.Element.WATER]:
 		water_button.texture_normal = ui_tower_sprites[Constants.Element.WATER]
 	else:
 		water_button.texture_normal = locked_ui_tower_sprites[Constants.Element.WATER]
 
 func update_progress():
-	progress.text = str(LevelManager.level_index) + "-" + str(EnemySpawner.wave_index+1)
+	progress.text = str(LevelManager.level_index) + "-" + str(WaveManager.wave_index+1)
 
 func on_wave_button_pressed() -> void:
-	wave_number.text = "Wave " + str(EnemySpawner.wave_index+1)
+	wave_number.text = "Wave " + str(WaveManager.wave_index+1)
 	wave_number.show()
 	wave_number_timer.start(wave_number_duration)
 	start_wave.emit()

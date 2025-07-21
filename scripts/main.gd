@@ -7,8 +7,13 @@ extends Node2D
 
 func _ready():
 	# Configure with data from LevelManager
-	LevelManager.configure_level()
+	LevelManager.configure_level(self)
 	add_child(LevelManager.active_level)
+
+	# Configure other singletons
+	WorldGrid.configure_level(LevelManager.active_level)
+	EnemySpawner.configure_level(LevelManager.active_level)
+	WaveManager.configure_level(LevelManager.active_level)
 
 	# Configure PlayerController
 	player_controller.setup()

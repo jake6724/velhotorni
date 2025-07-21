@@ -25,7 +25,5 @@ func _ready():
 	skip_button.pressed.connect(on_skip_button_pressed)
 
 func on_skip_button_pressed():
-	LevelManager.level_index = 1
-	LevelManager.clear_level()
-	LevelManager.configure_active_level()
 	SceneTransition.change_scene(main_scene)
+	LevelManager.load_next_level()

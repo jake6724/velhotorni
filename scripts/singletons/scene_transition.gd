@@ -1,3 +1,5 @@
+#*** NOTE ***
+# This script IS NOT a singleton, SceneTransition.tscn is!
 extends CanvasLayer
 
 func change_scene(target: PackedScene) -> void:

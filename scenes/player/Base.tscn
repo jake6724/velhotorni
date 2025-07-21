@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c0jbspdabhoc1"]
 
-[ext_resource type="Script" uid="uid://cns8ywst87qt" path="res://scripts/player/base.gd" id="1_iwalr"]
+[ext_resource type="Script" uid="uid://cns8ywst87qt" path="res://scripts/level/base.gd" id="1_iwalr"]
 [ext_resource type="Texture2D" uid="uid://cccu8scs778v6" path="res://assets/art/sprites/spr_base.png" id="2_w8a5b"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_roqga"]
 [ext_resource type="Texture2D" uid="uid://ci85v7oe4ghwu" path="res://assets/art/sprites/spr_base_destroyed.png" id="3_y18op"]

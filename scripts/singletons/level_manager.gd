@@ -1,4 +1,4 @@
-# Autoloader
+# Singleton responsible for managing and determing the active level
 extends Node
 
 var main_scene: PackedScene = load("res://scenes/Main.tscn")
@@ -24,22 +24,19 @@ signal wave_failed
 
 func _ready():
 	# configure_level() called in main - level only configured when main is ready to parent it
-	EnemySpawner.level_complete.connect(on_level_complete) # TODO: This needs to move to WaveManager
+	WaveManager.all_waves_completed.connect(on_level_complete)
  
 	level_complete_timer.one_shot = true
 	level_complete_timer.autostart = false
 	level_complete_timer.timeout.connect(on_level_complete_message_finished)
 	add_child(level_complete_timer)
 
-func configure_level():
-	# Level data
+## Called by `Main`. Only called when `Main` is ready to parent `active_level`. `LevelManager` 
+## triggers the `configure_level()` methods of other singletons here.
+func configure_level(_main: Main):
+	main = _main # Reference provided by current main itself
 	active_level = levels[level_index].instantiate()
 	level_failed = false
-
-	# Call other singleton's configure_level() methods
-	WorldGrid.configure_level(active_level)
-	EnemySpawner.configure_level(active_level)
-	WaveManager.configure_level(active_level)
 
 func load_next_level():
 	clear_level()
@@ -48,20 +45,19 @@ func load_next_level():
 func clear_level():
 	active_level = null
 
-	# Call other singleton's clear_level() methods
-	EnemySpawner.cleanup_enemies()
-
-func on_level_complete(): # Emitted by EnemySpawner
+## Observes `WaveManager.all_waves_complete`.
+func on_level_complete():
 	level_index += 1
+	# Check if full game complete, or move to next level
 	if level_index == levels.size():
 		main.round_info.show_game_complete()
 	else:
 		main.round_info.show_level_complete()
 
 	level_complete_timer.start(level_complete_duration)
-
 	play_level_complete_sfx()
 
+## Observes `level_complete_timer.timeout` 
 func on_level_complete_message_finished():
 	# Exit to main menu if last level
 	if level_index == levels.size():
@@ -69,13 +65,6 @@ func on_level_complete_message_finished():
 		get_tree().change_scene_to_packed(main_menu_scene)
 	else:
 		load_next_level()
-
-func on_wave_failed()-> void:
-	is_wave_failed = true
-	EnemySpawner.on_wave_failed() # Called manually to avoid race-conditions with PlayerController
-
-	wave_failed.emit()
-	is_wave_failed = false
 
 func play_level_complete_sfx() -> void:
 	MusicPlayer.fade_out()

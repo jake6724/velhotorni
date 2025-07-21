@@ -3,11 +3,12 @@ extends Node2D
 
 @onready var ap: AnimationPlayer = $AnimationPlayer
 
-var max_health: int = 10
 var health: int: 
 	set(value):
 		health = value
 		%HealthLabel.text = str(health)
+var health_checkpoint: int
+var max_health: int = 10
 
 signal destroyed
 signal damaged
@@ -15,10 +16,14 @@ var is_alive: bool = true
 
 func _ready():
 	health = max_health
-
 	%Darkness.show()
 	%Darkness.modulate.a = 0
 	ap.animation_finished.connect(on_animation_finished)
+
+	# Connect to WaveManager
+	WaveManager.wave_completed.connect(on_wave_completed)
+
+	health_checkpoint = health
 
 func _physics_process(_delta):
 	if is_alive:
@@ -52,5 +57,8 @@ func on_animation_finished(anin_name: String):
 		MusicPlayer.fade_in()
 		is_alive = true
 		%Darkness.modulate.a = 0
-		health = LevelManager.checkpoint_base_health # TODO: This has to become internal
+		health = health_checkpoint # TODO: This has to become internal
 		%HealthLabel.show()
+
+func on_wave_completed() -> void:
+	health_checkpoint = health
