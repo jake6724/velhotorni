@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_1uxtb")
 element = 0
-transform_element = 2
+transform_element = 1
 damage = 5.0
 speed = 0.1
 attack_range = 50.0

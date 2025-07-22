@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_7skyr")
-element = 2
-transform_element = 1
+element = 1
+transform_element = 2
 damage = 25.0
 speed = 0.3
 attack_range = 50.0

@@ -5,11 +5,11 @@
 
 [resource]
 script = ExtResource("1_fc8g7")
-element = 1
+element = 2
+transform_element = 0
 damage = 20.0
 speed = 0.2
 attack_range = 50.0
 num_targets = 1
-tower_name = "water"
 atlas = ExtResource("1_hmqpk")
 metadata/_custom_type_script = "uid://v7b6nq74b314"
