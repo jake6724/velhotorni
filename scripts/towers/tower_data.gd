@@ -14,4 +14,5 @@ extends Resource
 @export_category("Assets")
 ## The sprite atlas containing every animation for the tower. 
 @export var atlas: Texture
+@export var transform_hint_texture: Texture
 @export var bullet: PackedScene

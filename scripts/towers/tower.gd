@@ -12,6 +12,7 @@ extends Node2D
 @onready var collider: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var range_indicator = $RangeIndicator
+@onready var transform_hint_sprite: Sprite2D = %TransformHintSprite
 
 var active_target: Enemy
 var in_range_targets: Array[Enemy] = []
@@ -92,6 +93,7 @@ func configure_tower(_element: Constants.Element) -> void:
 	num_targets = tower_data.num_targets
 	sprite.texture = tower_data.atlas
 	transform_element = tower_data.transform_element
+	transform_hint_sprite.texture = tower_data.transform_hint_texture
 
 	if base_element == Constants.Element.NONE:
 		base_element = element
