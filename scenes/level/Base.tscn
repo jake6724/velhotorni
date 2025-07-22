@@ -198,7 +198,7 @@ vertical_alignment = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Darkness" type="TextureRect" parent="CanvasLayer"]
+[node name="Light" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 15

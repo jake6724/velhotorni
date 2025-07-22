@@ -9,9 +9,8 @@ var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 
 var textures: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_tower_fire.png"),
-	Constants.Element.EARTH: preload("res://assets/art/sprites/spr_tower_earth.png"),
-	Constants.Element.WATER: preload("res://assets/art/sprites/spr_tower_water.png"),
-}
+	Constants.Element.NATURE: preload("res://assets/art/sprites/spr_tower_earth.png"),
+	Constants.Element.WATER: preload("res://assets/art/sprites/spr_tower_water.png"),}
 
 var placement_indicator: PackedScene = preload("res://scenes/towers/PlacementIndicator.tscn")
 var indicator: Node2D
@@ -53,7 +52,6 @@ func setup():
 	set_checkpoints()
 
 	tower_menu.show_level_number()
-	#update_tower_button_sprites() # TODO: make this a function in tower_menu, get prices from constants
 	tower_menu.update_progress()
 
 func _process(_delta):
@@ -103,7 +101,7 @@ func on_tower_selected(element: Constants.Element) -> void:
 
 		match element:
 			Constants.Element.FIRE: SFXPlayer.play_sfx("fire_click")
-			Constants.Element.EARTH: SFXPlayer.play_sfx("earth_click")
+			Constants.Element.NATURE: SFXPlayer.play_sfx("earth_click")
 			Constants.Element.WATER: SFXPlayer.play_sfx("water_click")
 
 		# Indicator
@@ -125,7 +123,6 @@ func on_wave_complete() -> void:
 	# Update variables
 	placement_enabled = true	
 	gold += int(reward)
-	#update_tower_button_sprites()
 
 	# Tower Menu config
 	if WaveManager.wave_index != WaveManager.level_waves.size():
@@ -139,7 +136,6 @@ func on_wave_failed() -> void:
 	placement_enabled = true
 	tower_menu.show_placement_phase()
 	gold = checkpoint_gold
-	#update_tower_button_sprites()
 
 	# Remove uncheckpointed towers from active_towers, delete them and update world grid
 	# Iterate backwards to avoid null pointer since editing list in place
@@ -177,7 +173,7 @@ func on_tower_unhovered(tower: Tower):
 func play_tower_select_sfx(element: Constants.Element) -> void:
 	match element:
 		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_select")
-		Constants.Element.EARTH: SFXPlayer.play_sfx("earth_select")
+		Constants.Element.NATURE: SFXPlayer.play_sfx("earth_select")
 		Constants.Element.WATER: SFXPlayer.play_sfx("water_select")
 
 func on_enemy_died():

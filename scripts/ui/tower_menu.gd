@@ -15,13 +15,13 @@ extends Control
 
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_ui_tower_fire.png"),
-	Constants.Element.EARTH: preload("res://assets/art/sprites/spr_ui_tower_earth.png"),
+	Constants.Element.NATURE: preload("res://assets/art/sprites/spr_ui_tower_earth.png"),
 	Constants.Element.WATER: preload("res://assets/art/sprites/spr_ui_tower_ice.png")
 }
 
 var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_ui_tower_fire_locked.png"),
-	Constants.Element.EARTH: preload("res://assets/art/sprites/spr_ui_tower_earth_locked.png"),
+	Constants.Element.NATURE: preload("res://assets/art/sprites/spr_ui_tower_earth_locked.png"),
 	Constants.Element.WATER: preload("res://assets/art/sprites/spr_ui_tower_ice_locked.png")
 }
 
@@ -81,7 +81,7 @@ func on_button_pressed(pressed_button: TextureButton):
 	var b_name: String = pressed_button.name.to_lower()
 	match b_name: # TODO: Just use the button ref, not a string ? 
 		"firebutton": tower_selected.emit(Constants.Element.FIRE)
-		"earthbutton": tower_selected.emit(Constants.Element.EARTH)
+		"earthbutton": tower_selected.emit(Constants.Element.NATURE)
 		"waterbutton": tower_selected.emit(Constants.Element.WATER)
 
 ## Intended to be called by `player_controller` to directly update gold count
@@ -96,10 +96,10 @@ func set_tower_button_sprites(_gold: float):
 	else:
 		fire_button.texture_normal = locked_ui_tower_sprites[Constants.Element.FIRE]
 	# Set Earth
-	if _gold >= Constants.TOWER_PRICES[Constants.Element.EARTH]:
-		earth_button.texture_normal = ui_tower_sprites[Constants.Element.EARTH]
+	if _gold >= Constants.TOWER_PRICES[Constants.Element.NATURE]:
+		earth_button.texture_normal = ui_tower_sprites[Constants.Element.NATURE]
 	else:
-		earth_button.texture_normal = locked_ui_tower_sprites[Constants.Element.EARTH]
+		earth_button.texture_normal = locked_ui_tower_sprites[Constants.Element.NATURE]
 	# Set Water
 	if _gold >= Constants.TOWER_PRICES[Constants.Element.WATER]:
 		water_button.texture_normal = ui_tower_sprites[Constants.Element.WATER]

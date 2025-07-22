@@ -36,13 +36,13 @@ var base_element: Constants.Element = Constants.Element.NONE
 # Tower data (for transformations)
 var tower_resources: Dictionary[Constants.Element, TowerData] = {
 	Constants.Element.FIRE: preload("res://data/towers/fire.tres"),
-	Constants.Element.EARTH: preload("res://data/towers/earth.tres"),
+	Constants.Element.NATURE: preload("res://data/towers/earth.tres"),
 	Constants.Element.WATER: preload("res://data/towers/water.tres"),}
 
 # Bullets
 var bullets: Dictionary[Constants.Element, PackedScene] = {
 	Constants.Element.FIRE: preload("res://scenes/towers/bullets/FireBullet.tscn"),
-	Constants.Element.EARTH: preload("res://scenes/towers/bullets/EarthBullet.tscn"),
+	Constants.Element.NATURE: preload("res://scenes/towers/bullets/EarthBullet.tscn"),
 	Constants.Element.WATER: preload("res://scenes/towers/bullets/WaterBullet.tscn"),}
 
 # Debug
@@ -177,7 +177,7 @@ func flip_to_face_active_target():
 func play_shot_sfx() -> void:
 	match element:
 		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
-		Constants.Element.EARTH: SFXPlayer.play_sfx("earth_shot")
+		Constants.Element.NATURE: SFXPlayer.play_sfx("earth_shot")
 		Constants.Element.WATER: SFXPlayer.play_sfx("water_shot")
 
 func on_mouse_entered_transform_area():

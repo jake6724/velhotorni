@@ -18,12 +18,12 @@ var path_follow: PathFollow2D # Update `progress_ration` to move along path
 var min_distance: float = 2
 
 # Enemy Stats from Enemy Data Resource
+var element: Constants.Element
+var weak_against_element: Constants.Element
+var strong_against_element: Constants.Element
 var max_health: float # Do not set manually; used in health bar
 var health: float
 var speed: float
-var element: Constants.Element
-var weak_against: Constants.Element
-var strong_against: Constants.Element
 var atlas: Texture
 
 var negative_modifier: float = .5
@@ -41,13 +41,15 @@ var walk_resume_pos: float
 signal died
 
 func _ready():
+	element = data.element
+	strong_against_element = data.strong_against_element
+	weak_against_element = data.weak_against_element 
 	health = data.health
 	speed = data.speed
-	element = data.element
 	atlas = data.atlas
 	max_health = health
 	base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 
-	set_resistances()
+	# set_resistances()
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
 
@@ -67,13 +69,13 @@ func move(delta) -> void:
 ## Handles despawning enemy in the case of death.
 func take_damage(damage_recieved: float, tower_element: Constants.Element):
 	# Hit by resisted element
-	if tower_element == element or tower_element == strong_against:
+	if tower_element == element or tower_element == strong_against_element:
 		weak.hide()
 		shield.show()
 		damage_recieved *= negative_modifier
 
 	# Hit by weak-to element
-	else:
+	elif tower_element == weak_against_element:
 		weak.show()
 		shield.hide()
 		damage_recieved *= positive_modifier
@@ -103,20 +105,20 @@ func die() -> void:
 	shield.hide()
 	weak.hide()
 
-func set_resistances() -> void:
-	# TODO: JUST DEFINE THESE IN THE RESOURCE!
-	match element:
-		Constants.Element.FIRE: 
-			strong_against = Constants.Element.EARTH
-			weak_against = Constants.Element.WATER
+# func set_resistances() -> void:
+# 	# TODO: JUST DEFINE THESE IN THE RESOURCE!
+# 	match element:
+# 		Constants.Element.FIRE: 
+# 			strong_against = Constants.Element.NATURE
+# 			weak_against = Constants.Element.WATER
 
-		Constants.Element.EARTH:
-			strong_against = Constants.Element.WATER
-			weak_against = Constants.Element.FIRE
+# 		Constants.Element.NATURE:
+# 			strong_against = Constants.Element.WATER
+# 			weak_against = Constants.Element.FIRE
 
-		Constants.Element.WATER:
-			strong_against = Constants.Element.FIRE
-			weak_against = Constants.Element.EARTH
+# 		Constants.Element.WATER:
+# 			strong_against = Constants.Element.FIRE
+# 			weak_against = Constants.Element.NATURE
 
 func on_animation_finished(anim_name):
 	if anim_name == "hit":

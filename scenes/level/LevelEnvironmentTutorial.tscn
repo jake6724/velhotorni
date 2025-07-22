@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/spr_environment_atlas.png" id="6_485kb"]
 [ext_resource type="Resource" uid="uid://6xm76gx4jd6b" path="res://data/waves/tutorial_wave_4.tres" id="6_x20n4"]
 [ext_resource type="Resource" uid="uid://cycxrsfnom6xu" path="res://data/waves/tutorial_wave_5.tres" id="7_5ute2"]
-[ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/player/Base.tscn" id="7_xfk66"]
+[ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="7_xfk66"]
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="9_dit66"]
 [ext_resource type="PackedScene" uid="uid://nifbpm4btkyy" path="res://scenes/ui/TutorialUI.tscn" id="13_5ute2"]
 [ext_resource type="Texture2D" uid="uid://bwonyc48uhooj" path="res://assets/art/sprites/spr_mask_fog.png" id="15_8amrt"]

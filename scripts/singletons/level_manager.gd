@@ -11,14 +11,12 @@ var level_two: PackedScene = load("res://scenes/level/LevelEnvironmentTwo.tscn")
 var test_level: PackedScene = load("res://scenes/level/LevelEnvironmentTest.tscn")
 
 var levels: Array[PackedScene] = [level_tutorial, level_one, level_two]
-var level_index: int = 0
+var level_index: int = 1
 var active_level: LevelEnvironment
 
 var level_complete_timer: Timer = Timer.new()
 var level_complete_duration: float = 3
 var level_failed: bool = false
-
-var is_wave_failed = false
 
 func _ready():
 	# configure_level() called in main - level only configured when main is ready to parent it

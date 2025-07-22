@@ -37,7 +37,7 @@ func start_wave() -> void:
 func check_wave_complete() -> void:
 	if EnemySpawner.enemy_index == active_wave.data.size():
 		if EnemySpawner.active_enemies.size() == 0:
-			if not is_wave_failed:
+			if not is_wave_failed and LevelManager.active_level.base.health > 0: # Prevent race-condition between last enemy death and base death
 				on_wave_complete()
 
 func on_wave_complete() -> void:
