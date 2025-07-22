@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_45n4j")
-element = 2
+element = 1
 delay = 5.0
