@@ -5,7 +5,7 @@ extends Node2D
 @onready var health_bar: Label = %HealthLabel
 @onready var light: TextureRect = %Light
 
-var health: int: 
+var health: int:
 	set(value):
 		health = value
 		health_bar.text = str(health)
@@ -31,13 +31,11 @@ func _physics_process(_delta):
 	else:
 		light.modulate.a = (ap.current_animation_position / ap.current_animation_length) + .01
 
-func take_damage(damage_recieved: int):
-	if is_alive:
-		health -= damage_recieved
-		update_health_label(health)
-
-		if health <= 0:
-			die()
+func take_damage(damage_recieved: int) -> void:
+	health -= damage_recieved
+	update_health_label(health)
+	if is_alive and health <= 0:
+		die()
 
 func on_animation_finished(anin_name: String):
 	if anin_name == "die":

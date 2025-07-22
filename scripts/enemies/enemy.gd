@@ -49,7 +49,6 @@ func _ready():
 	atlas = data.atlas
 	max_health = health
 	base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 
-	# set_resistances()
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
 
@@ -57,11 +56,11 @@ func _physics_process(delta):
 	move(delta)
 
 func move(delta) -> void:
-	if is_alive and path_follow.progress_ratio < .99:
-		path_follow.progress += (speed * delta)
-		ap.play("walk")
-	else:
-		if is_alive:
+	if is_alive:
+		if path_follow.progress_ratio < .99:
+			path_follow.progress += (speed * delta)
+			ap.play("walk")
+		else:
 			base.take_damage(damage)
 			die()
 	
@@ -104,21 +103,6 @@ func die() -> void:
 	health_bar.hide()
 	shield.hide()
 	weak.hide()
-
-# func set_resistances() -> void:
-# 	# TODO: JUST DEFINE THESE IN THE RESOURCE!
-# 	match element:
-# 		Constants.Element.FIRE: 
-# 			strong_against = Constants.Element.NATURE
-# 			weak_against = Constants.Element.WATER
-
-# 		Constants.Element.NATURE:
-# 			strong_against = Constants.Element.WATER
-# 			weak_against = Constants.Element.FIRE
-
-# 		Constants.Element.WATER:
-# 			strong_against = Constants.Element.FIRE
-# 			weak_against = Constants.Element.NATURE
 
 func on_animation_finished(anim_name):
 	if anim_name == "hit":
