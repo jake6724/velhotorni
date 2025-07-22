@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=3 format=3 uid="uid://dmqkrjnii0xbf"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=4 format=3 uid="uid://dmqkrjnii0xbf"]
 
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_1uxtb"]
 [ext_resource type="Texture2D" uid="uid://l4yp0bln4h3l" path="res://assets/art/atlases/atlas_tower_fire.png" id="1_iclov"]
+[ext_resource type="PackedScene" uid="uid://dppck31xcxphl" path="res://scenes/towers/bullets/FireBullet.tscn" id="2_bnip7"]
 
 [resource]
 script = ExtResource("1_1uxtb")
 element = 0
+transform_element = 2
 damage = 5.0
 speed = 0.1
 attack_range = 50.0
 num_targets = 1
-tower_name = "fire"
 atlas = ExtResource("1_iclov")
+bullet = ExtResource("2_bnip7")
 metadata/_custom_type_script = "uid://v7b6nq74b314"

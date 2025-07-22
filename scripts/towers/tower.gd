@@ -22,13 +22,13 @@ var transform_delay: float = 0.1
 var can_transform: bool = true # Set to true after brief delay in on_transform_timer_timeout()
 # var transform_delay_complete: bool = false
 
-# Tower stats
+# Data from TowerData resource
+var element: Constants.Element
+var transform_element: Constants.Element
 var damage: float
 var speed: float
 var attack_range: float = 50.0
 var num_targets: int
-var element: Constants.Element
-var tower_name: String
 var can_attack: bool = true
 
 var base_element: Constants.Element = Constants.Element.NONE
@@ -37,15 +37,13 @@ var base_element: Constants.Element = Constants.Element.NONE
 var tower_resources: Dictionary[Constants.Element, TowerData] = {
 	Constants.Element.FIRE: preload("res://data/towers/fire.tres"),
 	Constants.Element.EARTH: preload("res://data/towers/earth.tres"),
-	Constants.Element.WATER: preload("res://data/towers/water.tres"),
-}
+	Constants.Element.WATER: preload("res://data/towers/water.tres"),}
 
 # Bullets
 var bullets: Dictionary[Constants.Element, PackedScene] = {
 	Constants.Element.FIRE: preload("res://scenes/towers/bullets/FireBullet.tscn"),
 	Constants.Element.EARTH: preload("res://scenes/towers/bullets/EarthBullet.tscn"),
-	Constants.Element.WATER: preload("res://scenes/towers/bullets/WaterBullet.tscn"),
-}
+	Constants.Element.WATER: preload("res://scenes/towers/bullets/WaterBullet.tscn"),}
 
 # Debug
 var debug_attack_line: Line2D = Line2D.new()
@@ -92,20 +90,15 @@ func configure_tower(_element: Constants.Element) -> void:
 	speed = tower_data.speed
 	attack_range = tower_data.attack_range
 	num_targets = tower_data.num_targets
-	tower_name = tower_data.tower_name
 	sprite.texture = tower_data.atlas
+	transform_element = tower_data.transform_element
 
 	if base_element == Constants.Element.NONE:
 		base_element = element
 
-## Transform into the next tower type in the cycle if `can_transform` is `true`
+## Transform into the next tower type in the cycle. Defined in `TowerData.transform_element`. 
 func transform() -> void:
-	var new_element = Constants.Element
-	match element:
-		Constants.Element.FIRE: new_element = Constants.Element.EARTH
-		Constants.Element.EARTH: new_element = Constants.Element.WATER
-		Constants.Element.WATER: new_element = Constants.Element.FIRE
-	configure_tower(new_element)
+	configure_tower(transform_element)
 	can_transform = false
 	swap_sprite.hide()
 	cross_sprite.show()
