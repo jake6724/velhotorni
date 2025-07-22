@@ -42,6 +42,10 @@ window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 mouse_cursor/custom_image="uid://d0ggh0ipjxkie"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/tabby_explorer/plugin.cfg")
+
 [input]
 
 left_click={

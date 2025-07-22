@@ -11,7 +11,7 @@ var level_two: PackedScene = load("res://scenes/level/LevelEnvironmentTwo.tscn")
 var test_level: PackedScene = load("res://scenes/level/LevelEnvironmentTest.tscn")
 
 var levels: Array[PackedScene] = [level_tutorial, level_one, level_two]
-var level_index: int = 1
+var level_index: int = 0
 var active_level: LevelEnvironment
 
 var level_complete_timer: Timer = Timer.new()

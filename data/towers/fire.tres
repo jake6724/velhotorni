@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=5 format=3 uid="uid://dmqkrjnii0xbf"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=6 format=3 uid="uid://dmqkrjnii0xbf"]
 
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_1uxtb"]
 [ext_resource type="Texture2D" uid="uid://l4yp0bln4h3l" path="res://assets/art/atlases/atlas_tower_fire.png" id="1_iclov"]
 [ext_resource type="PackedScene" uid="uid://dppck31xcxphl" path="res://scenes/towers/bullets/FireBullet.tscn" id="2_bnip7"]
 [ext_resource type="Texture2D" uid="uid://2sexc1kk1x2h" path="res://assets/art/sprites/spr_ui_earth.png" id="4_8vqjq"]
+[ext_resource type="Resource" uid="uid://dscca5hkneedb" path="res://data/towers/earth.tres" id="4_kq4e4"]
 
 [resource]
 script = ExtResource("1_1uxtb")
 element = 0
 transform_element = 1
+transform_data = ExtResource("4_kq4e4")
 damage = 5.0
 speed = 0.1
 attack_range = 50.0

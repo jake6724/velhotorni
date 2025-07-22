@@ -69,7 +69,7 @@ func spawn_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 			var new_tower = tower_scene.instantiate()
 			new_tower.position = WorldGrid.grid_to_world(grid_pos) # Bring it back to world to get a clean grid point
 			add_child(new_tower)
-			new_tower.configure_tower(element)
+			new_tower.initialize(element)
 
 			# Connect to new tower signals
 			new_tower.transform_tower.connect(on_tower_transform.bind(new_tower))

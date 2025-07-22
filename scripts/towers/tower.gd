@@ -1,8 +1,6 @@
 class_name Tower
 extends Node2D
 
-@export var tower_data: TowerData
-
 # Child references
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var swap_sprite: Sprite2D = $SwapSprite
@@ -14,28 +12,22 @@ extends Node2D
 @onready var range_indicator = $RangeIndicator
 @onready var transform_hint_sprite: Sprite2D = %TransformHintSprite
 
+# Internal data
 var active_target: Enemy
 var in_range_targets: Array[Enemy] = []
 var attack_timer: Timer = Timer.new()
 var transform_timer: Timer = Timer.new()
 var transform_delay: float = 0.1
-
 var can_transform: bool = true # Set to true after brief delay in on_transform_timer_timeout()
-# var transform_delay_complete: bool = false
-
-# Data from TowerData resource
-var element: Constants.Element
-var transform_element: Constants.Element
-var damage: float
-var speed: float
-var attack_range: float = 50.0
-var num_targets: int
 var can_attack: bool = true
 
-var base_element: Constants.Element = Constants.Element.NONE
+# TowerData resources
+var data: TowerData
+var base_data: TowerData
+var transform_data: TowerData
 
 # Tower data (for transformations)
-var tower_resources: Dictionary[Constants.Element, TowerData] = {
+var tower_data: Dictionary[Constants.Element, TowerData] = {
 	Constants.Element.FIRE: preload("res://data/towers/fire.tres"),
 	Constants.Element.NATURE: preload("res://data/towers/earth.tres"),
 	Constants.Element.WATER: preload("res://data/towers/water.tres"),}
@@ -63,53 +55,47 @@ func _ready():
 	transform_area.mouse_entered.connect(on_mouse_entered_transform_area)
 	transform_area.mouse_exited.connect(on_mouse_exited_transform_area)
 
+func initialize(element: Constants.Element):
+	base_data = tower_data[element]
+	transform_data = tower_data[base_data.transform_element]
+	data = base_data
+	update_textures()
+
 	# Configure CollisionShape2D
 	var shape: CircleShape2D = collider.shape
-	shape.radius = attack_range
-
+	shape.radius = data.attack_range	
 	range_indicator.hide()
 
 	# Configure Timers
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	attack_timer.one_shot = true
 	add_child(attack_timer)
-	attack_timer.start(speed)
+	attack_timer.start(data.speed)
 
 	transform_timer.timeout.connect(on_transform_timer_timeout)
 	transform_timer.one_shot = true
 	add_child(transform_timer)
 	transform_timer.start(transform_delay) # time until you can transform a tower (so it doesn't when you click to spawn it)
 
-## Used to update `Tower` class with data from a `TowerData` resource. Must be called immeadiately after a tower is instantiated
-## by `PlayerController`. Used in `transform()` and `revert()` as well. **MUST be called after `Tower` has been added to scene
-func configure_tower(_element: Constants.Element) -> void:
-	tower_data = tower_resources[_element]
-
-	# Set vars from data resource assigned above
-	element = tower_data.element
-	damage = tower_data.damage
-	speed = tower_data.speed
-	attack_range = tower_data.attack_range
-	num_targets = tower_data.num_targets
-	sprite.texture = tower_data.atlas
-	transform_element = tower_data.transform_element
-	transform_hint_sprite.texture = tower_data.transform_hint_texture
-
-	if base_element == Constants.Element.NONE:
-		base_element = element
-
 ## Transform into the next tower type in the cycle. Defined in `TowerData.transform_element`. 
 func transform() -> void:
-	configure_tower(transform_element)
-	can_transform = false
+	print("Transform called")
+	data = transform_data
 	swap_sprite.hide()
 	cross_sprite.show()
+	can_transform = false
+	update_textures()
 
 func revert() -> void:
-	configure_tower(base_element)
+	data = base_data
 	cross_sprite.hide()
 	swap_sprite.hide()
 	can_transform = true
+	update_textures()
+
+func update_textures() -> void:
+	sprite.texture = data.atlas
+	transform_hint_sprite.texture = data.transform_hint_texture
 
 func _physics_process(_delta):	
 	if can_attack:
@@ -117,7 +103,7 @@ func _physics_process(_delta):
 		if active_target:
 			attack()
 			can_attack = false
-			attack_timer.start(speed)
+			attack_timer.start(data.speed)
 
 	ap.play("idle")
 
@@ -128,7 +114,6 @@ func attack() -> void:
 
 func get_active_target() -> Enemy:
 	var max_progress: float = -INF
-
 	if in_range_targets.size() != 0:
 		for enemy: Enemy in in_range_targets:
 			if enemy.path_follow.progress_ratio > max_progress:
@@ -161,9 +146,9 @@ func on_area_exited(intruder) -> void:
 			intruder.died.disconnect(on_enemy_died)
 
 func spawn_bullet() -> void:
-	var new_bullet: Bullet = bullets[element].instantiate()
-	new_bullet.element = element
-	new_bullet.damage = int(damage)
+	var new_bullet: Bullet = bullets[data.element].instantiate()
+	new_bullet.element = data.element
+	new_bullet.damage = int(data.damage)
 	new_bullet.target = active_target
 	new_bullet.position += new_bullet.pos_offset
 	add_child(new_bullet)
@@ -177,7 +162,7 @@ func flip_to_face_active_target():
 			sprite.flip_h = true
 
 func play_shot_sfx() -> void:
-	match element:
+	match data.element:
 		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
 		Constants.Element.NATURE: SFXPlayer.play_sfx("earth_shot")
 		Constants.Element.WATER: SFXPlayer.play_sfx("water_shot")
