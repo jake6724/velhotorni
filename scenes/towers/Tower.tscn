@@ -97,7 +97,8 @@ texture_filter = 1
 texture = ExtResource("4_aoo5e")
 offset = Vector2(8, -8)
 
-[node name="Sprite2D" type="Sprite2D" parent="SwapSprite"]
+[node name="TransformHintSprite" type="Sprite2D" parent="SwapSprite"]
+unique_name_in_owner = true
 texture = ExtResource("5_av7pv")
 offset = Vector2(16, 0)
 
