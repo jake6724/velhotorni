@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("1_dxb1w")
-element = 1
-strong_against_element = 2
-weak_against_element = 0
+element = 2
+strong_against_element = 0
+weak_against_element = 1
 health = 200.0
 speed = 20.0
 atlas = ExtResource("1_tx7l7")
