@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_o4gyk")
-element = 1
+element = 2
 delay = 1.0
 metadata/_custom_type_script = "uid://drj0bkkfpdi50"
