@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://btrbcslh3u2xs"]
+
+[ext_resource type="Texture2D" uid="uid://bq47oi0l1ytjj" path="res://assets/art/atlases/atl_enemy_light_ghoul.png" id="1_m3cyp"]
+[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_24baa"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="3_kdnea"]
+
+[resource]
+script = ExtResource("3_kdnea")
+element = 5
+strong_against_element = 4
+weak_against_element = 1
+health = 10.0
+speed = 10.0
+atlas = ExtResource("1_m3cyp")
+explosion_sfx = ExtResource("2_24baa")
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

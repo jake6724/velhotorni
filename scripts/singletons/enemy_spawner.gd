@@ -12,9 +12,9 @@ var spawn_timer: Timer = Timer.new()
 
 var enemy_scene: PackedScene = preload("res://scenes/enemies/Enemy.tscn")
 var enemy_data: Dictionary[Constants.Element, EnemyData] = {
-	Constants.Element.FIRE: preload("res://data/enemies/enemy_data_fire.tres"),
-	Constants.Element.WIND: preload("res://data/enemies/enemy_data_wind.tres"),
-	Constants.Element.WATER: preload("res://data/enemies/enemy_data_water.tres"),}
+	Constants.Element.FIRE: preload("res://data/enemies/enemy_data_fire_ghoul.tres"),
+	Constants.Element.WIND: preload("res://data/enemies/enemy_data_wind_ghoul.tres"),
+	Constants.Element.WATER: preload("res://data/enemies/enemy_data_water_ghoul.tres"),}
 
 # Signals
 signal enemy_spawned
@@ -61,19 +61,20 @@ func on_enemy_died(enemy: Enemy) -> void:
 func on_spawn_timer_timeout() -> void:
 	if WaveManager.active_wave:
 		if can_spawn_enemy and enemy_index < WaveManager.active_wave.data.size():
-			var spawn_element: Constants.Element = WaveManager.active_wave.data[enemy_index].element
+			var spawn_data: EnemyData = WaveManager.active_wave.data[enemy_index].enemy_data
 			var spawn_delay: float = WaveManager.active_wave.data[enemy_index].delay
 
-			spawn_enemy(spawn_element)
+			spawn_enemy(spawn_data)
 			enemy_index += 1
 
 			# Restart spawn timer
 			spawn_timer.start(spawn_delay)
 
-func spawn_enemy(element: Constants.Element) -> void:
+func spawn_enemy(_enemy_data: EnemyData) -> void:
 	# Configure new enemy
 	var new_enemy: Enemy = enemy_scene.instantiate()
-	new_enemy.data = enemy_data[element]
+	new_enemy.data = _enemy_data
+	# new_enemy.data = enemy_data[element]
 	# new_enemy.position = LevelManager.active_spawn_location
 	new_enemy.died.connect(on_enemy_died)
 	add_child(new_enemy)

@@ -41,7 +41,6 @@ func check_wave_complete() -> void:
 				on_wave_complete()
 
 func on_wave_complete() -> void:
-	print("WaveManager: ", wave_completed)
 	wave_index += 1
 	if wave_index < level_waves.size():
 		active_wave = level_waves[wave_index]

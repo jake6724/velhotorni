@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://u8fs8orhyfe1"]
+
+[ext_resource type="Texture2D" uid="uid://c8noara2guef1" path="res://assets/art/atlases/atlas_wind_enemy.png" id="1_h8sg4"]
+[ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="2_ehh3g"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="3_scn5m"]
+
+[resource]
+script = ExtResource("3_scn5m")
+element = 3
+strong_against_element = 1
+weak_against_element = 5
+health = 10.0
+speed = 10.0
+atlas = ExtResource("1_h8sg4")
+explosion_sfx = ExtResource("2_ehh3g")
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

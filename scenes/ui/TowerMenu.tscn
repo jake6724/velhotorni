@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ciicsqtfh31fh"]
+[gd_scene load_steps=18 format=3 uid="uid://ciicsqtfh31fh"]
 
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_c8bcu"]
 [ext_resource type="Texture2D" uid="uid://b8c4r7msm3cdi" path="res://assets/art/sprites/spr_ui_coin_big.png" id="2_opq3w"]
@@ -10,7 +10,10 @@
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="7_r3bjd"]
 [ext_resource type="Texture2D" uid="uid://ducm8wc7gd0vx" path="res://assets/art/sprites/spr_ui_tower_fire.png" id="8_4bluh"]
 [ext_resource type="Texture2D" uid="uid://qaa0yn4cxbck" path="res://assets/art/sprites/spr_ui_tower_wind.png" id="9_rh755"]
-[ext_resource type="Texture2D" uid="uid://c3lb7onbbfx5u" path="res://assets/art/sprites/spr_ui_tower_ice.png" id="10_e3xib"]
+[ext_resource type="Texture2D" uid="uid://c3lb7onbbfx5u" path="res://assets/art/sprites/spr_ui_tower_water.png" id="10_e3xib"]
+[ext_resource type="Texture2D" uid="uid://3dti3chb4cnf" path="res://assets/art/sprites/spr_ui_tower_light.png" id="12_638he"]
+[ext_resource type="Texture2D" uid="uid://rvf7vwl6ny54" path="res://assets/art/sprites/spr_ui_tower_earth.png" id="12_gfj4e"]
+[ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/spr_ui_tower_dark.png" id="12_ur1ae"]
 
 [sub_resource type="Animation" id="Animation_a8xy1"]
 length = 0.001
@@ -295,6 +298,111 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("10_e3xib")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="MarginContainer/TowerButtons"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer4"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer4/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(7, 9)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_g5j4q")
+
+[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer4/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("7_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "75"
+
+[node name="EarthButton" type="TextureButton" parent="MarginContainer/TowerButtons/VBoxContainer4"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("12_gfj4e")
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="MarginContainer/TowerButtons"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer5"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer5/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(7, 9)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_g5j4q")
+
+[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer5/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("7_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "75"
+
+[node name="LightButton" type="TextureButton" parent="MarginContainer/TowerButtons/VBoxContainer5"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("12_638he")
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="MarginContainer/TowerButtons"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer6"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer6/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(7, 9)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_g5j4q")
+
+[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer6/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("7_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "75"
+
+[node name="DarkButton" type="TextureButton" parent="MarginContainer/TowerButtons/VBoxContainer6"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("12_ur1ae")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

@@ -1,19 +1,17 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=5 format=3 uid="uid://bplk0h2miw0yo"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=4 format=3 uid="uid://bplk0h2miw0yo"]
 
+[ext_resource type="Texture2D" uid="uid://b58tie4p0ydsh" path="res://assets/art/atlases/atl_tower_water.png" id="1_6idtf"]
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_fc8g7"]
-[ext_resource type="Texture2D" uid="uid://b58tie4p0ydsh" path="res://assets/art/atlases/atlas_tower_water.png" id="1_hmqpk"]
-[ext_resource type="Resource" uid="uid://dmqkrjnii0xbf" path="res://data/towers/tower_data_fire.tres" id="3_5fbx1"]
-[ext_resource type="Texture2D" uid="uid://ddu5dkds6mgeh" path="res://assets/art/sprites/spr_ui_fire.png" id="3_isivg"]
+[ext_resource type="Texture2D" uid="uid://cdhft8awohll1" path="res://assets/art/sprites/spr_ui_earth.png" id="3_1scag"]
 
 [resource]
 script = ExtResource("1_fc8g7")
 element = 2
 transform_element = 0
-transform_data = ExtResource("3_5fbx1")
 damage = 20.0
 speed = 0.2
 attack_range = 50.0
 num_targets = 1
-atlas = ExtResource("1_hmqpk")
-transform_hint_texture = ExtResource("3_isivg")
+atlas = ExtResource("1_6idtf")
+transform_hint_texture = ExtResource("3_1scag")
 metadata/_custom_type_script = "uid://v7b6nq74b314"

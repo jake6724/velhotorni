@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="Spawn" load_steps=2 format=3 uid="uid://dpn12fls6ike1"]
-
-[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_eyxdp"]
-
-[resource]
-script = ExtResource("1_eyxdp")
-element = 2
-delay = 0.25

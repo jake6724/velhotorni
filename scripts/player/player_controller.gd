@@ -10,7 +10,10 @@ var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var textures: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_tower_fire.png"),
 	Constants.Element.WIND: preload("res://assets/art/sprites/spr_tower_wind.png"),
-	Constants.Element.WATER: preload("res://assets/art/sprites/spr_tower_water.png"),}
+	Constants.Element.WATER: preload("res://assets/art/sprites/spr_tower_water.png"),
+	Constants.Element.EARTH: preload("res://assets/art/sprites/spr_tower_earth.png"),
+	Constants.Element.LIGHT: preload("res://assets/art/sprites/spr_tower_light.png"),
+	Constants.Element.DARK: preload("res://assets/art/sprites/spr_tower_dark.png"),}
 
 var placement_indicator: PackedScene = preload("res://scenes/towers/PlacementIndicator.tscn")
 var indicator: Node2D
@@ -23,7 +26,7 @@ var gold: int:
 	set(value):
 		gold = value
 		tower_menu.update_gold(gold)
-		update_tower_button_sprites()
+		tower_menu.set_tower_button_sprites(gold)
 var reward: float
 
 # Wave Checkpoint data
@@ -83,7 +86,6 @@ func spawn_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 
 			# Clean up indicator
 			indicator.hide()
-			#update_tower_button_sprites()
 			play_tower_select_sfx(element)
 
 			selected_tower_element = Constants.Element.NONE
@@ -101,7 +103,7 @@ func on_tower_selected(element: Constants.Element) -> void:
 
 		match element:
 			Constants.Element.FIRE: SFXPlayer.play_sfx("fire_click")
-			Constants.Element.WIND: SFXPlayer.play_sfx("earth_click")
+			Constants.Element.WIND: SFXPlayer.play_sfx("wind_click")
 			Constants.Element.WATER: SFXPlayer.play_sfx("water_click")
 
 		# Indicator
@@ -173,8 +175,9 @@ func on_tower_unhovered(tower: Tower):
 func play_tower_select_sfx(element: Constants.Element) -> void:
 	match element:
 		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_select")
-		Constants.Element.WIND: SFXPlayer.play_sfx("earth_select")
+		Constants.Element.WIND: SFXPlayer.play_sfx("wind_select")
 		Constants.Element.WATER: SFXPlayer.play_sfx("water_select")
+		_: pass # TODO: Update with more sfx, maybe have the tower paly this? 
 
 func on_enemy_died():
 	gold += 1
@@ -190,9 +193,6 @@ func set_checkpoints() -> void:
 	# Checkpoint playerController data
 	checkpoint_gold = gold
 	checkpoint_active_towers = active_towers.duplicate()
-
-func update_tower_button_sprites() -> void:
-	tower_menu.set_tower_button_sprites(gold)
 
 func on_mouse_entered_button() -> void:
 	click_enabled = false

@@ -1,6 +1,6 @@
 extends Node
 
-enum Element {FIRE, EARTH, WATER, WIND, DARK, LIGHT, NONE}
+enum Element {FIRE, WIND, WATER, EARTH, LIGHT, DARK, NONE}
 
 const FAST_FORWARD_SPEED: float = 20.0
 
@@ -10,4 +10,7 @@ const TOWER_PRICES: Dictionary[Constants.Element, int] = {
 	Constants.Element.FIRE: 25,
 	Constants.Element.WIND: 50,
 	Constants.Element.WATER: 75,
+	Constants.Element.EARTH: 75,
+	Constants.Element.LIGHT: 75,
+	Constants.Element.DARK: 75,
 }
