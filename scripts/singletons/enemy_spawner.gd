@@ -13,7 +13,7 @@ var spawn_timer: Timer = Timer.new()
 var enemy_scene: PackedScene = preload("res://scenes/enemies/Enemy.tscn")
 var enemy_data: Dictionary[Constants.Element, EnemyData] = {
 	Constants.Element.FIRE: preload("res://data/enemies/enemy_fire_data.tres"),
-	Constants.Element.NATURE: preload("res://data/enemies/enemy_earth_data.tres"),
+	Constants.Element.WIND: preload("res://data/enemies/enemy_earth_data.tres"),
 	Constants.Element.WATER: preload("res://data/enemies/enemy_water_data.tres"),}
 
 # Signals

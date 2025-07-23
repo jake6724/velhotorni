@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://potjn3pa0a7n"
-path="res://.godot/imported/spr_enemy_earth_hit.png-10c36a007c26be27e4ff16de34a7d522.ctex"
+uid="uid://c8noara2guef1"
+path="res://.godot/imported/atlas_wind_enemy.png-85bd3ebfba5e9db8e6542c08abd79037.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sprites/spr_enemy_earth_hit.png"
-dest_files=["res://.godot/imported/spr_enemy_earth_hit.png-10c36a007c26be27e4ff16de34a7d522.ctex"]
+source_file="res://assets/art/atlases/atlas_wind_enemy.png"
+dest_files=["res://.godot/imported/atlas_wind_enemy.png-85bd3ebfba5e9db8e6542c08abd79037.ctex"]
 
 [params]
 

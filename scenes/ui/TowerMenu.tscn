@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://drednump7huu" path="res://assets/art/sprites/spr_ui_fastbutton.png" id="6_opq3w"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="7_r3bjd"]
 [ext_resource type="Texture2D" uid="uid://ducm8wc7gd0vx" path="res://assets/art/sprites/spr_ui_tower_fire.png" id="8_4bluh"]
-[ext_resource type="Texture2D" uid="uid://qaa0yn4cxbck" path="res://assets/art/sprites/spr_ui_tower_earth.png" id="9_rh755"]
+[ext_resource type="Texture2D" uid="uid://qaa0yn4cxbck" path="res://assets/art/sprites/spr_ui_tower_wind.png" id="9_rh755"]
 [ext_resource type="Texture2D" uid="uid://c3lb7onbbfx5u" path="res://assets/art/sprites/spr_ui_tower_ice.png" id="10_e3xib"]
 
 [sub_resource type="Animation" id="Animation_a8xy1"]
@@ -252,7 +252,7 @@ theme_override_fonts/font = ExtResource("7_r3bjd")
 theme_override_font_sizes/font_size = 8
 text = "50"
 
-[node name="EarthButton" type="TextureButton" parent="MarginContainer/TowerButtons/VBoxContainer3"]
+[node name="WindButton" type="TextureButton" parent="MarginContainer/TowerButtons/VBoxContainer3"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2

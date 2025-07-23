@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5nl3odlo5q6d"
-path="res://.godot/imported/atlas_tower_earth.png-eb06d12c1bb0a509b0f0779d7e683f2d.ctex"
+uid="uid://j1hvhvpfvjho"
+path="res://.godot/imported/spr_bullet_wind.png-a0c0b7ac84ea46254d1dbce72459135d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/atlas_tower_earth.png"
-dest_files=["res://.godot/imported/atlas_tower_earth.png-eb06d12c1bb0a509b0f0779d7e683f2d.ctex"]
+source_file="res://assets/art/sprites/spr_bullet_wind.png"
+dest_files=["res://.godot/imported/spr_bullet_wind.png-a0c0b7ac84ea46254d1dbce72459135d.ctex"]
 
 [params]
 

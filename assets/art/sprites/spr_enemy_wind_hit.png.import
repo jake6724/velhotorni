@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh30ocxr6uk5n"
-path="res://.godot/imported/spr_tower_earth_idle.png-5354db036f5b03ec6d5b290ef63ac843.ctex"
+uid="uid://potjn3pa0a7n"
+path="res://.godot/imported/spr_enemy_wind_hit.png-fad7cd3ca2040692e7c3f89dae4ac423.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sprites/spr_tower_earth_idle.png"
-dest_files=["res://.godot/imported/spr_tower_earth_idle.png-5354db036f5b03ec6d5b290ef63ac843.ctex"]
+source_file="res://assets/art/sprites/spr_enemy_wind_hit.png"
+dest_files=["res://.godot/imported/spr_enemy_wind_hit.png-fad7cd3ca2040692e7c3f89dae4ac423.ctex"]
 
 [params]
 

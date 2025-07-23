@@ -28,14 +28,17 @@ var transform_data: TowerData
 
 # Tower data (for transformations)
 var tower_data: Dictionary[Constants.Element, TowerData] = {
-	Constants.Element.FIRE: preload("res://data/towers/fire.tres"),
-	Constants.Element.NATURE: preload("res://data/towers/earth.tres"),
-	Constants.Element.WATER: preload("res://data/towers/water.tres"),}
+	Constants.Element.FIRE: preload("res://data/towers/tower_data_fire.tres"),
+	Constants.Element.EARTH: preload("res://data/towers/tower_data_earth.tres"),
+	Constants.Element.WATER: preload("res://data/towers/tower_data_water.tres"),
+	Constants.Element.WIND: preload("res://data/towers/tower_data_wind.tres"),
+	Constants.Element.DARK: preload("res://data/towers/tower_data_dark.tres"),
+	Constants.Element.LIGHT: preload("res://data/towers/tower_data_light.tres"),}
 
 # Bullets
 var bullets: Dictionary[Constants.Element, PackedScene] = {
 	Constants.Element.FIRE: preload("res://scenes/towers/bullets/FireBullet.tscn"),
-	Constants.Element.NATURE: preload("res://scenes/towers/bullets/EarthBullet.tscn"),
+	Constants.Element.WIND: preload("res://scenes/towers/bullets/WindBullet.tscn"),
 	Constants.Element.WATER: preload("res://scenes/towers/bullets/WaterBullet.tscn"),}
 
 # Debug
@@ -79,7 +82,6 @@ func initialize(element: Constants.Element):
 
 ## Transform into the next tower type in the cycle. Defined in `TowerData.transform_element`. 
 func transform() -> void:
-	print("Transform called")
 	data = transform_data
 	swap_sprite.hide()
 	cross_sprite.show()
@@ -164,7 +166,7 @@ func flip_to_face_active_target():
 func play_shot_sfx() -> void:
 	match data.element:
 		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
-		Constants.Element.NATURE: SFXPlayer.play_sfx("earth_shot")
+		Constants.Element.WIND: SFXPlayer.play_sfx("earth_shot")
 		Constants.Element.WATER: SFXPlayer.play_sfx("water_shot")
 
 func on_mouse_entered_transform_area():

@@ -9,7 +9,7 @@ var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 
 var textures: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_tower_fire.png"),
-	Constants.Element.NATURE: preload("res://assets/art/sprites/spr_tower_earth.png"),
+	Constants.Element.WIND: preload("res://assets/art/sprites/spr_tower_wind.png"),
 	Constants.Element.WATER: preload("res://assets/art/sprites/spr_tower_water.png"),}
 
 var placement_indicator: PackedScene = preload("res://scenes/towers/PlacementIndicator.tscn")
@@ -101,7 +101,7 @@ func on_tower_selected(element: Constants.Element) -> void:
 
 		match element:
 			Constants.Element.FIRE: SFXPlayer.play_sfx("fire_click")
-			Constants.Element.NATURE: SFXPlayer.play_sfx("earth_click")
+			Constants.Element.WIND: SFXPlayer.play_sfx("earth_click")
 			Constants.Element.WATER: SFXPlayer.play_sfx("water_click")
 
 		# Indicator
@@ -173,7 +173,7 @@ func on_tower_unhovered(tower: Tower):
 func play_tower_select_sfx(element: Constants.Element) -> void:
 	match element:
 		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_select")
-		Constants.Element.NATURE: SFXPlayer.play_sfx("earth_select")
+		Constants.Element.WIND: SFXPlayer.play_sfx("earth_select")
 		Constants.Element.WATER: SFXPlayer.play_sfx("water_select")
 
 func on_enemy_died():

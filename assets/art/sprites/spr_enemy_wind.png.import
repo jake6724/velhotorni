@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2sexc1kk1x2h"
-path="res://.godot/imported/spr_ui_earth.png-6861d7a032abcd0e70697f41b1e1d0c2.ctex"
+uid="uid://cydhwhk7djl53"
+path="res://.godot/imported/spr_enemy_wind.png-afe2c469adb143611f2eeb943ad53212.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sprites/spr_ui_earth.png"
-dest_files=["res://.godot/imported/spr_ui_earth.png-6861d7a032abcd0e70697f41b1e1d0c2.ctex"]
+source_file="res://assets/art/sprites/spr_enemy_wind.png"
+dest_files=["res://.godot/imported/spr_enemy_wind.png-afe2c469adb143611f2eeb943ad53212.ctex"]
 
 [params]
 

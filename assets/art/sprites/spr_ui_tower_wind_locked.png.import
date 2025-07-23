@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwtda7bqtv044"
-path="res://.godot/imported/spr_enemy_earth_walk.png-4028dd4b8bb28f1c2f40f64a20b11436.ctex"
+uid="uid://bs8ko33qdrutr"
+path="res://.godot/imported/spr_ui_tower_wind_locked.png-9d1daf95a264650f2406a8cc6bf01395.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sprites/spr_enemy_earth_walk.png"
-dest_files=["res://.godot/imported/spr_enemy_earth_walk.png-4028dd4b8bb28f1c2f40f64a20b11436.ctex"]
+source_file="res://assets/art/sprites/spr_ui_tower_wind_locked.png"
+dest_files=["res://.godot/imported/spr_ui_tower_wind_locked.png-9d1daf95a264650f2406a8cc6bf01395.ctex"]
 
 [params]
 

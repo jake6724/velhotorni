@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmda72qgk1nbj"
-path="res://.godot/imported/spr_tower_earth.png-c589a190aed9fcdb6adb54dbe2ba2cde.ctex"
+uid="uid://2sexc1kk1x2h"
+path="res://.godot/imported/spr_ui_wind.png-2bd0acb99c9f0a8e492fd7e588d7d345.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sprites/spr_tower_earth.png"
-dest_files=["res://.godot/imported/spr_tower_earth.png-c589a190aed9fcdb6adb54dbe2ba2cde.ctex"]
+source_file="res://assets/art/sprites/spr_ui_wind.png"
+dest_files=["res://.godot/imported/spr_ui_wind.png-2bd0acb99c9f0a8e492fd7e588d7d345.ctex"]
 
 [params]
 

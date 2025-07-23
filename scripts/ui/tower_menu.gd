@@ -4,7 +4,7 @@ extends Control
 # Child References
 @onready var fire_button: TextureButton = %FireButton
 @onready var water_button: TextureButton = %WaterButton
-@onready var earth_button: TextureButton = %EarthButton
+@onready var wind_button: TextureButton = %WindButton
 @onready var tower_buttons: HBoxContainer = %TowerButtons
 @onready var gold: Label = %Gold
 @onready var wave_button: TextureButton = %WaveButton
@@ -15,13 +15,13 @@ extends Control
 
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_ui_tower_fire.png"),
-	Constants.Element.NATURE: preload("res://assets/art/sprites/spr_ui_tower_earth.png"),
+	Constants.Element.WIND: preload("res://assets/art/sprites/spr_ui_tower_wind.png"),
 	Constants.Element.WATER: preload("res://assets/art/sprites/spr_ui_tower_ice.png")
 }
 
 var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_ui_tower_fire_locked.png"),
-	Constants.Element.NATURE: preload("res://assets/art/sprites/spr_ui_tower_earth_locked.png"),
+	Constants.Element.WIND: preload("res://assets/art/sprites/spr_ui_tower_wind_locked.png"),
 	Constants.Element.WATER: preload("res://assets/art/sprites/spr_ui_tower_ice_locked.png")
 }
 
@@ -39,7 +39,7 @@ var level_number_duration: float = 2.0
 
 func _ready():
 	# Configure tower buttons
-	var buttons: Array[TextureButton] = [fire_button, water_button, earth_button]
+	var buttons: Array[TextureButton] = [fire_button, water_button, wind_button]
 	for b: TextureButton in buttons:
 			b.pressed.connect(on_button_pressed.bind(b))
 			b.mouse_entered.connect(on_mouse_entered_button)
@@ -81,7 +81,7 @@ func on_button_pressed(pressed_button: TextureButton):
 	var b_name: String = pressed_button.name.to_lower()
 	match b_name: # TODO: Just use the button ref, not a string ? 
 		"firebutton": tower_selected.emit(Constants.Element.FIRE)
-		"earthbutton": tower_selected.emit(Constants.Element.NATURE)
+		"earthbutton": tower_selected.emit(Constants.Element.WIND)
 		"waterbutton": tower_selected.emit(Constants.Element.WATER)
 
 ## Intended to be called by `player_controller` to directly update gold count
@@ -96,10 +96,10 @@ func set_tower_button_sprites(_gold: float):
 	else:
 		fire_button.texture_normal = locked_ui_tower_sprites[Constants.Element.FIRE]
 	# Set Earth
-	if _gold >= Constants.TOWER_PRICES[Constants.Element.NATURE]:
-		earth_button.texture_normal = ui_tower_sprites[Constants.Element.NATURE]
+	if _gold >= Constants.TOWER_PRICES[Constants.Element.WIND]:
+		wind_button.texture_normal = ui_tower_sprites[Constants.Element.WIND]
 	else:
-		earth_button.texture_normal = locked_ui_tower_sprites[Constants.Element.NATURE]
+		wind_button.texture_normal = locked_ui_tower_sprites[Constants.Element.WIND]
 	# Set Water
 	if _gold >= Constants.TOWER_PRICES[Constants.Element.WATER]:
 		water_button.texture_normal = ui_tower_sprites[Constants.Element.WATER]
