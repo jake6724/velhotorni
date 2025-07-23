@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://be7pwwirj4txv"
+path="res://.godot/imported/Wind_Shot .ogg-98f9991e695ebf27003419211056c6ff.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Wind_Shot .ogg"
+dest_files=["res://.godot/imported/Wind_Shot .ogg-98f9991e695ebf27003419211056c6ff.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

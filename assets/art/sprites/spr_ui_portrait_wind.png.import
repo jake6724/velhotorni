@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1igu4817m082"
-path="res://.godot/imported/spr_ui_portrait_earth.png-2c535cb708c5e0d794f2f5b8bca76103.ctex"
+path="res://.godot/imported/spr_ui_portrait_wind.png-7e94969b12f8f441f9440fc342b7dac9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sprites/spr_ui_portrait_earth.png"
-dest_files=["res://.godot/imported/spr_ui_portrait_earth.png-2c535cb708c5e0d794f2f5b8bca76103.ctex"]
+source_file="res://assets/art/sprites/spr_ui_portrait_wind.png"
+dest_files=["res://.godot/imported/spr_ui_portrait_wind.png-7e94969b12f8f441f9440fc342b7dac9.ctex"]
 
 [params]
 
