@@ -38,7 +38,8 @@ var is_alive: bool = true
 var walk_resume_pos: float
 
 # Signals
-signal died
+signal died # Pass ref to the enemy object
+signal death_position # Pass global_position
 
 func _ready():
 	element = data.element
@@ -67,37 +68,39 @@ func move(delta) -> void:
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
 func take_damage(damage_recieved: float, tower_element: Constants.Element):
-	# Hit by resisted element
-	if tower_element == element or tower_element == strong_against_element:
-		weak.hide()
-		shield.show()
-		damage_recieved *= negative_modifier
+	if is_alive:
+		# Hit by resisted element
+		if tower_element == element or tower_element == strong_against_element:
+			weak.hide()
+			shield.show()
+			damage_recieved *= negative_modifier
 
-	# Hit by weak-to element
-	elif tower_element == weak_against_element:
-		weak.show()
-		shield.hide()
-		damage_recieved *= positive_modifier
+		# Hit by weak-to element
+		elif tower_element == weak_against_element:
+			weak.show()
+			shield.hide()
+			damage_recieved *= positive_modifier
 
-	if not health_bar.is_visible():
-		health_bar.show()
+		if not health_bar.is_visible():
+			health_bar.show()
 
-	health -= damage_recieved
-	var v = (health / max_health) * 100
-	health_bar.value = v
+		health -= damage_recieved
+		var v = (health / max_health) * 100
+		health_bar.value = v
 
-	if health <= 0:
-		die()
-	else:
-		walk_resume_pos = ap.get_current_animation_position()
-		ap.play("hit")
+		if health <= 0:
+			die()
+		else:
+			walk_resume_pos = ap.get_current_animation_position()
+			ap.play("hit")
 
 func die() -> void:
 	is_alive = false
-	collider.disabled = true
+	collider.set_deferred("disabled", true) # Collisions can't be changed until pp idle time
 	ap.play("die")
 	SFXPlayer.play_sfx_resource(data.explosion_sfx)
 	died.emit(self)
+	death_position.emit(global_position)
 
 	# Hide graphics
 	health_bar.hide()

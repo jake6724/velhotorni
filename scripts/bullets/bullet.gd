@@ -32,4 +32,5 @@ func _physics_process(delta):
 
 func on_animation_finished(anim_name):
 	if anim_name == "hit":
+		print("hit")
 		queue_free()

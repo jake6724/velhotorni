@@ -7,8 +7,8 @@
 [resource]
 script = ExtResource("3_8lbc4")
 element = 0
-strong_against_element = 1
-weak_against_element = 2
+strong_against_element = 3
+weak_against_element = 4
 health = 100.0
 speed = 40.0
 atlas = ExtResource("1_sew68")
