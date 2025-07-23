@@ -33,7 +33,6 @@ func _ready():
 	if target and target.is_alive:
 		direction = global_position.direction_to(target.global_position + pos_offset)
 	else:
-		print("No target")
 		is_active = false
 		queue_free()
 

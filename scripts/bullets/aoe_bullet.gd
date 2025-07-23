@@ -27,41 +27,32 @@ func _ready():
 func _physics_process(delta):
 	if is_active:
 		ap.play("move")
+
 		if target and target.is_alive:
+			# TODO: The move function can be a pointer to the correct move function? for export vars (maybe an enum actually)?
 			global_position = global_position + ((global_position.direction_to(target.global_position + pos_offset)) * speed * delta)
 
-		if target_death_pos: # If target died, go to their death location
+		elif target and not target.is_alive:
 			if global_position.distance_to(target_death_pos + pos_offset) > min_distance:
 				global_position = global_position + ((global_position.direction_to(target_death_pos + pos_offset)) * speed * delta)
+			else:
+				explode()
+		
+		else:
+			explode()
 
-		# if target and target.is_alive:
-		# 	if global_position.distance_to(target.global_position + pos_offset) > min_distance:
-		# 		ap.play("move")
-		# 		global_position = global_position + ((global_position.direction_to(target.global_position + pos_offset)) * speed * delta)
-			
-		# 	else: # If target has been reached
-		# 		is_active = false
-		# 		target.take_damage(damage, element)
-		# 		ap.play("hit")
-
-		# else: # Do nothing if target is null or dead
-		# 	queue_free()
-
-	# #Unsure
-	# if not target or not target.is_alive:
-	# 	is_active = false
-	# 	queue_free() 
+func explode() -> void:
+	is_active = false
+	primary_collider.set_deferred("disabled", true) # unecessary ? 
+	aoe_collider.set_deferred("disabled", false)
+	ap.play("aoe_hit")
 
 func on_primary_area_entered(intruder):
 	if intruder == target:
-		is_active = false
-		primary_collider.set_deferred("disabled", true) # unecessary ? 
-		aoe_collider.set_deferred("disabled", false)
-		ap.play("aoe_hit")
+		explode()
 
 func on_aoe_area_entered(intruder):
 	if intruder is Enemy:
-		print("enemy hit with AOE")
 		intruder.take_damage(damage, element)
 	
 func on_animation_finished(anim_name):
