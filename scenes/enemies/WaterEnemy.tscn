@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://chcjfnhrohafj"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_56s5r"]
-[ext_resource type="Resource" uid="uid://3s36fwvetrlm" path="res://data/enemies/enemy_water_data.tres" id="2_cjl7e"]
+[ext_resource type="Resource" uid="uid://3s36fwvetrlm" path="res://data/enemies/enemy_data_water.tres" id="2_cjl7e"]
 [ext_resource type="Texture2D" uid="uid://cnn7fjhvwjuiy" path="res://assets/art/sprites/spr_enemy_water.png" id="2_lo6ju"]
 [ext_resource type="Texture2D" uid="uid://de54h7p3asqsg" path="res://assets/art/sprites/spr_fx_explosion_small.png" id="4_pa8pg"]
 [ext_resource type="Texture2D" uid="uid://fqffyult0aa0" path="res://assets/art/sprites/spr_enemy_water_corpse.png" id="5_8r56n"]
