@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_34htb")
-element = 1
+element = 3
 strong_against_element = 2
 weak_against_element = 0
 health = 120.0

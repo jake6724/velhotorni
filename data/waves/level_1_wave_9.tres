@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_0jabb"]
 [ext_resource type="Resource" uid="uid://bdfy3y0cceel0" path="res://data/spawn/water_1.tres" id="2_olm11"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_vah03"]
-[ext_resource type="Resource" uid="uid://b55hgxwadlt4s" path="res://data/spawn/earth_eighth.tres" id="3_j0urp"]
+[ext_resource type="Resource" uid="uid://b55hgxwadlt4s" path="res://data/spawn/wind_eighth.tres" id="3_j0urp"]
 [ext_resource type="Resource" uid="uid://cyclc6v6bbqsm" path="res://data/spawn/water_eighth.tres" id="4_aen1q"]
 
 [resource]

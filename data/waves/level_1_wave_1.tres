@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="1_uhhov"]
 [ext_resource type="Resource" uid="uid://dna6k11dppmyk" path="res://data/spawn/fire_1.tres" id="2_kqtem"]
 [ext_resource type="Resource" uid="uid://8uj44s234ppj" path="res://data/spawn/fire_half.tres" id="3_inlbq"]
-[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/earth_1.tres" id="4_pbwd2"]
-[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/earth_half.tres" id="5_167pp"]
+[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/wind_1.tres" id="4_pbwd2"]
+[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/wind_half.tres" id="5_167pp"]
 [ext_resource type="Resource" uid="uid://bdfy3y0cceel0" path="res://data/spawn/water_1.tres" id="6_7cfhg"]
 [ext_resource type="Resource" uid="uid://cjgavyk2t226r" path="res://data/spawn/water_half.tres" id="7_7lckh"]
 

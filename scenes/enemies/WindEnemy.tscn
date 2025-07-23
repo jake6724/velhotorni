@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://d2l8n2rgh5duo"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_vs1t4"]
-[ext_resource type="Resource" uid="uid://cwvipuex2alcf" path="res://data/enemies/enemy_earth_data.tres" id="2_4bdo8"]
+[ext_resource type="Resource" uid="uid://cwvipuex2alcf" path="res://data/enemies/enemy_wind_data.tres" id="2_4bdo8"]
 [ext_resource type="Texture2D" uid="uid://cydhwhk7djl53" path="res://assets/art/sprites/spr_enemy_wind.png" id="2_ha0cq"]
 [ext_resource type="Texture2D" uid="uid://de54h7p3asqsg" path="res://assets/art/sprites/spr_fx_explosion_small.png" id="4_oss8i"]
 [ext_resource type="Texture2D" uid="uid://bs1li1amcuwmf" path="res://assets/art/sprites/spr_ui_health_bg.png" id="5_1pagc"]

@@ -5,10 +5,10 @@
 [ext_resource type="Resource" uid="uid://cyclc6v6bbqsm" path="res://data/spawn/water_eighth.tres" id="2_tbatx"]
 [ext_resource type="Resource" uid="uid://dhgm83gmh1vcw" path="res://data/spawn/fire_quarter.tres" id="3_g53q7"]
 [ext_resource type="Resource" uid="uid://cjgavyk2t226r" path="res://data/spawn/water_half.tres" id="3_p6g65"]
-[ext_resource type="Resource" uid="uid://b55hgxwadlt4s" path="res://data/spawn/earth_eighth.tres" id="4_g53q7"]
+[ext_resource type="Resource" uid="uid://b55hgxwadlt4s" path="res://data/spawn/wind_eighth.tres" id="4_g53q7"]
 [ext_resource type="Resource" uid="uid://da6oow5yf66ii" path="res://data/spawn/fire_eighth.tres" id="5_4f8cd"]
 [ext_resource type="Resource" uid="uid://8uj44s234ppj" path="res://data/spawn/fire_half.tres" id="5_u5xud"]
-[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/earth_half.tres" id="7_8c6bf"]
+[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/wind_half.tres" id="7_8c6bf"]
 
 [resource]
 script = ExtResource("2_agrim")

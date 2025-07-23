@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_7skyr")
-element = 1
+element = 3
 transform_element = 2
 damage = 25.0
 speed = 0.3

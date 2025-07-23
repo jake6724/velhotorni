@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_8iyym"]
 [ext_resource type="Resource" uid="uid://dpn12fls6ike1" path="res://data/spawn/water_quarter.tres" id="2_am750"]
-[ext_resource type="Resource" uid="uid://b55hgxwadlt4s" path="res://data/spawn/earth_eighth.tres" id="3_p6yur"]
-[ext_resource type="Resource" uid="uid://hv8juvsiwnaj" path="res://data/spawn/earth_quarter.tres" id="4_am750"]
+[ext_resource type="Resource" uid="uid://b55hgxwadlt4s" path="res://data/spawn/wind_eighth.tres" id="3_p6yur"]
+[ext_resource type="Resource" uid="uid://hv8juvsiwnaj" path="res://data/spawn/wind_quarter.tres" id="4_am750"]
 [ext_resource type="Resource" uid="uid://cyclc6v6bbqsm" path="res://data/spawn/water_eighth.tres" id="4_ymoot"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="5_evues"]
 [ext_resource type="Resource" uid="uid://bdfy3y0cceel0" path="res://data/spawn/water_1.tres" id="6_ymoot"]
-[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/earth_1.tres" id="7_evues"]
+[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/wind_1.tres" id="7_evues"]
 
 [resource]
 script = ExtResource("5_evues")
