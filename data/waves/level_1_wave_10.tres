@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://c3gd54qn08ltn" path="res://data/spawn/water_tenth.tres" id="2_5nnpf"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_aqd4r"]
 [ext_resource type="Resource" uid="uid://cvwyplr8vlowv" path="res://data/spawn/water_3.tres" id="3_vlwju"]
-[ext_resource type="Resource" uid="uid://cyr81a3nwhowi" path="res://data/spawn/earth_tenth.tres" id="4_vlwju"]
-[ext_resource type="Resource" uid="uid://tq4svucmjo1e" path="res://data/spawn/earth_5.tres" id="5_vlwju"]
+[ext_resource type="Resource" uid="uid://cyr81a3nwhowi" path="res://data/spawn/wind_tenth.tres" id="4_vlwju"]
+[ext_resource type="Resource" uid="uid://tq4svucmjo1e" path="res://data/spawn/wind_5.tres" id="5_vlwju"]
 [ext_resource type="Resource" uid="uid://dna6k11dppmyk" path="res://data/spawn/fire_1.tres" id="6_fx6tl"]
 [ext_resource type="Resource" uid="uid://bgnpocl01wghd" path="res://data/spawn/fire_tenth.tres" id="7_a7nw3"]
 

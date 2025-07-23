@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_0vfno"]
 [ext_resource type="Resource" uid="uid://dna6k11dppmyk" path="res://data/spawn/fire_1.tres" id="2_n7qet"]
-[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/earth_1.tres" id="4_em352"]
+[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/wind_1.tres" id="4_em352"]
 [ext_resource type="Resource" uid="uid://dt8axxgteite3" path="res://data/spawn/water_5.tres" id="5_0vfno"]
-[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/earth_half.tres" id="5_rbmeu"]
+[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/wind_half.tres" id="5_rbmeu"]
 [ext_resource type="Resource" uid="uid://cjgavyk2t226r" path="res://data/spawn/water_half.tres" id="7_bpshr"]
-[ext_resource type="Resource" uid="uid://tq4svucmjo1e" path="res://data/spawn/earth_5.tres" id="7_n7qet"]
+[ext_resource type="Resource" uid="uid://tq4svucmjo1e" path="res://data/spawn/wind_5.tres" id="7_n7qet"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="8_bx50s"]
 
 [resource]

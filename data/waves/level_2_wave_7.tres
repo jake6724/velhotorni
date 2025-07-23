@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_xm4a5"]
 [ext_resource type="Resource" uid="uid://cyclc6v6bbqsm" path="res://data/spawn/water_eighth.tres" id="3_ef68y"]
 [ext_resource type="Resource" uid="uid://dna6k11dppmyk" path="res://data/spawn/fire_1.tres" id="3_k1kum"]
-[ext_resource type="Resource" uid="uid://b55hgxwadlt4s" path="res://data/spawn/earth_eighth.tres" id="4_jx2p2"]
+[ext_resource type="Resource" uid="uid://b55hgxwadlt4s" path="res://data/spawn/wind_eighth.tres" id="4_jx2p2"]
 [ext_resource type="Resource" uid="uid://bdfy3y0cceel0" path="res://data/spawn/water_1.tres" id="5_6hlt6"]
-[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/earth_1.tres" id="7_5v7u1"]
+[ext_resource type="Resource" uid="uid://bvmpo726bxw8o" path="res://data/spawn/wind_1.tres" id="7_5v7u1"]
 
 [resource]
 script = ExtResource("2_xm4a5")
