@@ -142,7 +142,9 @@ func on_wave_failed() -> void:
 	# Remove uncheckpointed towers from active_towers, delete them and update world grid
 	# Iterate backwards to avoid null pointer since editing list in place
 	for i in range(active_towers.size() - 1, -1, -1):
-		if active_towers[i] not in checkpoint_active_towers:
+		if active_towers[i] in checkpoint_active_towers:
+			active_towers[i].revert()
+		else:
 			WorldGrid.data[WorldGrid.world_to_grid(active_towers[i].position)] = true
 			active_towers[i].queue_free()
 			active_towers.remove_at(i)

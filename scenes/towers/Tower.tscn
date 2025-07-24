@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bpg5vj2118tkk"]
+[gd_scene load_steps=14 format=3 uid="uid://bpg5vj2118tkk"]
 
 [ext_resource type="Script" uid="uid://1v42jjyvr5ed" path="res://scripts/towers/tower.gd" id="1_cqx8d"]
 [ext_resource type="Texture2D" uid="uid://b58tie4p0ydsh" path="res://assets/art/atlases/atl_tower_water.png" id="3_gc8gn"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://2sexc1kk1x2h" path="res://assets/art/sprites/spr_ui_wind.png" id="5_av7pv"]
 [ext_resource type="Texture2D" uid="uid://8k0oajw470vq" path="res://assets/art/sprites/spr_ui_cross.png" id="6_cmp23"]
 [ext_resource type="Texture2D" uid="uid://b4g8en84fxspy" path="res://assets/placeholders/test_range.png" id="7_o8o11"]
+[ext_resource type="Texture2D" uid="uid://dralbmpfuw6ej" path="res://assets/placeholders/aoe_base_test.png" id="8_ig0xk"]
 
 [sub_resource type="Animation" id="Animation_bfb4r"]
 length = 0.001
@@ -53,6 +54,8 @@ size = Vector2(16, 16)
 radius = 10.4403
 
 [node name="Tower" type="Node2D"]
+z_index = 2
+z_as_relative = false
 script = ExtResource("1_cqx8d")
 metadata/_custom_type_script = "uid://1v42jjyvr5ed"
 
@@ -112,3 +115,8 @@ offset = Vector2(8, 8)
 visible = false
 position = Vector2(8, 8)
 texture = ExtResource("7_o8o11")
+
+[node name="AOERingPlaceholder" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("8_ig0xk")
+offset = Vector2(8, 8)

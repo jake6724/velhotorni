@@ -69,6 +69,9 @@ func move(delta) -> void:
 ## Handles despawning enemy in the case of death.
 func take_damage(damage_recieved: float, tower_element: Constants.Element):
 	if is_alive:
+
+		ap.play("hit")
+
 		# Hit by resisted element
 		if tower_element == element or tower_element == strong_against_element:
 			weak.hide()
@@ -90,9 +93,9 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 
 		if health <= 0:
 			die()
-		else:
-			walk_resume_pos = ap.get_current_animation_position()
-			ap.play("hit")
+		# else:
+		# 	walk_resume_pos = ap.get_current_animation_position()
+		# 	ap.stop()
 
 func die() -> void:
 	is_alive = false
@@ -109,8 +112,9 @@ func die() -> void:
 
 func on_animation_finished(anim_name):
 	if anim_name == "hit":
-		ap.play("walk")
-		ap.seek(walk_resume_pos)
+		print("Hit finished")
+		# ap.play("walk")
+		# ap.seek(walk_resume_pos)
 
 	if anim_name == "die":
 		ap.play("corpse")

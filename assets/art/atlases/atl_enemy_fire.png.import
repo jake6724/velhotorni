@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpvtenpe12r2k"
-path="res://.godot/imported/atlas_enemy_water.png-c9c7c81bd0c580845b6368c668e33c35.ctex"
+uid="uid://d01v81ufk0jvj"
+path="res://.godot/imported/atl_enemy_fire.png-2de62bb9cdad76b2ad8c2c976e2dce9c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/atlas_enemy_water.png"
-dest_files=["res://.godot/imported/atlas_enemy_water.png-c9c7c81bd0c580845b6368c668e33c35.ctex"]
+source_file="res://assets/art/atlases/atl_enemy_fire.png"
+dest_files=["res://.godot/imported/atl_enemy_fire.png-2de62bb9cdad76b2ad8c2c976e2dce9c.ctex"]
 
 [params]
 

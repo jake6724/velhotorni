@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8noara2guef1"
-path="res://.godot/imported/atlas_wind_enemy.png-85bd3ebfba5e9db8e6542c08abd79037.ctex"
+uid="uid://bpv0yurhjyu6o"
+path="res://.godot/imported/atl_bullet_fire.png-04205934d11e632df8d94ff509f20efa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/atlas_wind_enemy.png"
-dest_files=["res://.godot/imported/atlas_wind_enemy.png-85bd3ebfba5e9db8e6542c08abd79037.ctex"]
+source_file="res://assets/art/atlases/atl_bullet_fire.png"
+dest_files=["res://.godot/imported/atl_bullet_fire.png-04205934d11e632df8d94ff509f20efa.ctex"]
 
 [params]
 

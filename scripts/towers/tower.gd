@@ -37,14 +37,14 @@ var tower_data: Dictionary[Constants.Element, TowerData] = {
 
 # Bullets
 var bullets: Dictionary[Constants.Element, PackedScene] = {
-	Constants.Element.FIRE: preload("res://scenes/towers/bullets/FireBullet.tscn"),
-	Constants.Element.WIND: preload("res://scenes/towers/bullets/ChainBullet.tscn"),
-	Constants.Element.WATER: preload("res://scenes/towers/bullets/IceBullet.tscn"),
-	Constants.Element.EARTH: preload("res://scenes/towers/bullets/WaterBullet.tscn"),
-	Constants.Element.LIGHT: preload("res://scenes/towers/bullets/WaterBullet.tscn"),
-	Constants.Element.DARK: preload("res://scenes/towers/bullets/WaterBullet.tscn"),}
+	Constants.Element.FIRE: preload("res://scenes/bullets/AOERingBullet.tscn"),
+	Constants.Element.WIND: preload("res://scenes/bullets/ChainBullet.tscn"),
+	Constants.Element.WATER: preload("res://scenes/bullets/IceBullet.tscn"),
+	Constants.Element.EARTH: preload("res://scenes/bullets/WaterBullet.tscn"),
+	Constants.Element.LIGHT: preload("res://scenes/bullets/WaterBullet.tscn"),
+	Constants.Element.DARK: preload("res://scenes/bullets/WaterBullet.tscn"),}
 
-# Debug
+# Debugs
 var debug_attack_line: Line2D = Line2D.new()
 
 signal transform_tower
@@ -61,6 +61,7 @@ func _ready():
 	transform_area.mouse_entered.connect(on_mouse_entered_transform_area)
 	transform_area.mouse_exited.connect(on_mouse_exited_transform_area)
 
+## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
 	base_data = tower_data[element]
 	transform_data = tower_data[base_data.transform_element]
@@ -92,11 +93,12 @@ func transform() -> void:
 	update_textures()
 
 func revert() -> void:
-	data = base_data
-	cross_sprite.hide()
-	swap_sprite.hide()
-	can_transform = true
-	update_textures()
+	if not can_transform: # Has previously transformed 
+		data = base_data
+		cross_sprite.hide()
+		swap_sprite.hide()
+		can_transform = true
+		update_textures()
 
 func update_textures() -> void:
 	sprite.texture = data.atlas
