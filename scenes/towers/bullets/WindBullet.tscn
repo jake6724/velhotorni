@@ -169,7 +169,7 @@ _data = {
 &"move": SubResource("Animation_maogk")
 }
 
-[node name="EarthBullet" type="Sprite2D"]
+[node name="WindBullet" type="Sprite2D"]
 texture_filter = 1
 texture = ExtResource("1_ieavl")
 hframes = 4

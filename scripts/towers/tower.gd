@@ -38,8 +38,8 @@ var tower_data: Dictionary[Constants.Element, TowerData] = {
 # Bullets
 var bullets: Dictionary[Constants.Element, PackedScene] = {
 	Constants.Element.FIRE: preload("res://scenes/towers/bullets/FireBullet.tscn"),
-	Constants.Element.WIND: preload("res://scenes/towers/bullets/WindBullet.tscn"),
-	Constants.Element.WATER: preload("res://scenes/towers/bullets/WaterBullet.tscn"),
+	Constants.Element.WIND: preload("res://scenes/towers/bullets/ChainBullet.tscn"),
+	Constants.Element.WATER: preload("res://scenes/towers/bullets/IceBullet.tscn"),
 	Constants.Element.EARTH: preload("res://scenes/towers/bullets/WaterBullet.tscn"),
 	Constants.Element.LIGHT: preload("res://scenes/towers/bullets/WaterBullet.tscn"),
 	Constants.Element.DARK: preload("res://scenes/towers/bullets/WaterBullet.tscn"),}
@@ -170,7 +170,7 @@ func play_shot_sfx() -> void:
 	# TODO: THis should go inside bullet, play on spawn
 	match data.element:
 		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
-		Constants.Element.WIND: SFXPlayer.play_sfx("earth_shot")
+		Constants.Element.WIND: SFXPlayer.play_sfx("wind_shot")
 		Constants.Element.WATER: SFXPlayer.play_sfx("water_shot")
 		_: SFXPlayer.play_sfx("water_shot")
 

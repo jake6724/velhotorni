@@ -13,6 +13,8 @@ func _ready():
 	# Collision signals
 	primary_area.area_entered.connect(on_primary_area_entered)
 	aoe_area.area_entered.connect(on_aoe_area_entered)
+	
+	aoe_collider.disabled = true
 
 	# Animation player
 	ap.animation_finished.connect(on_animation_finished)
