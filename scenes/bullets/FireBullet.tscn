@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dppck31xcxphl"]
+[gd_scene load_steps=13 format=3 uid="uid://dppck31xcxphl"]
 
 [ext_resource type="Texture2D" uid="uid://wtib3kuu1ahl" path="res://assets/art/sprites/spr_bullet_fire.png" id="1_7vypf"]
 [ext_resource type="Script" uid="uid://6frj5j1q6awc" path="res://scripts/bullets/aoe_bullet.gd" id="2_4norr"]
-[ext_resource type="Texture2D" uid="uid://2j2km3ve3cr5" path="res://assets/art/sprites/spr_bullet_hit.png" id="3_4norr"]
+[ext_resource type="Resource" uid="uid://d1h1abwjiibhe" path="res://data/bullets/bullet_data_fire.tres" id="3_m0e7q"]
 [ext_resource type="Texture2D" uid="uid://clb7quodehgmr" path="res://assets/art/sprites/spr_fx_explosion.png" id="4_8kptb"]
+[ext_resource type="Texture2D" uid="uid://bpv0yurhjyu6o" path="res://assets/art/atlases/atl_bullet_fire.png" id="4_a7717"]
 
 [sub_resource type="Animation" id="Animation_4norr"]
 length = 0.001
@@ -54,6 +55,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame_coords")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_2ful6"]
@@ -123,7 +136,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_4norr")]
+"values": [ExtResource("4_a7717")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -147,19 +160,19 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [2]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:frame")
+tracks/3/path = NodePath(".:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_7vypf"]
@@ -235,6 +248,7 @@ texture_filter = 1
 texture = ExtResource("1_7vypf")
 hframes = 4
 script = ExtResource("2_4norr")
+data = ExtResource("3_m0e7q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

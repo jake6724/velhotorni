@@ -1,5 +1,5 @@
 class_name PiercingBullet
-extends NewBullet
+extends Bullet
 
 var _enemies_hit: int = 0
 

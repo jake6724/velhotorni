@@ -31,6 +31,10 @@ Constants="*res://scripts/singletons/constants.gd"
 WaveManager="*res://scripts/singletons/wave_manager.gd"
 LevelManager="*res://scripts/singletons/level_manager.gd"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/size/viewport_width=400

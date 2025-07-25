@@ -37,9 +37,9 @@ var tower_data: Dictionary[Constants.Element, TowerData] = {
 
 # Bullets
 var bullets: Dictionary[Constants.Element, PackedScene] = {
-	Constants.Element.FIRE: preload("res://scenes/bullets/AOERingBullet.tscn"),
-	Constants.Element.WIND: preload("res://scenes/bullets/ChainBullet.tscn"),
-	Constants.Element.WATER: preload("res://scenes/bullets/IceBullet.tscn"),
+	Constants.Element.FIRE: preload("res://scenes/bullets/FireBullet.tscn"),
+	Constants.Element.WIND: preload("res://scenes/bullets/WindBullet.tscn"),
+	Constants.Element.WATER: preload("res://scenes/bullets/WaterBullet.tscn"),
 	Constants.Element.EARTH: preload("res://scenes/bullets/WaterBullet.tscn"),
 	Constants.Element.LIGHT: preload("res://scenes/bullets/WaterBullet.tscn"),
 	Constants.Element.DARK: preload("res://scenes/bullets/WaterBullet.tscn"),}
@@ -154,10 +154,8 @@ func on_area_exited(intruder) -> void:
 
 func spawn_bullet() -> void:
 	var new_bullet: Bullet = bullets[data.element].instantiate()
-	new_bullet.element = data.element
-	new_bullet.damage = int(data.damage)
-	new_bullet.target = active_target
-	new_bullet.position += new_bullet.pos_offset
+	new_bullet.initialize(active_target, data.element, data.damage)
+	new_bullet.position += new_bullet._pos_offset
 	add_child(new_bullet)
 
 func flip_to_face_active_target():
@@ -169,7 +167,7 @@ func flip_to_face_active_target():
 			sprite.flip_h = true
 
 func play_shot_sfx() -> void:
-	# TODO: THis should go inside bullet, play on spawn
+	# TODO: THis should go inside bullet, play on spawn, make it positional too ? rework of sfx required
 	match data.element:
 		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
 		Constants.Element.WIND: SFXPlayer.play_sfx("wind_shot")

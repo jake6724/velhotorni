@@ -1,6 +1,5 @@
 class_name AOEBullet
-extends NewBullet
-
+extends Bullet
 func _physics_process(delta):
 	if is_active:
 		ap.play("move")

@@ -1,5 +1,5 @@
 class_name ChainBullet
-extends NewBullet
+extends Bullet
 
 var in_range_enemies: Array[Enemy] = []
 var chain_mode_enabled: bool = false
@@ -8,20 +8,25 @@ func _physics_process(delta):
 	if is_active:
 		if not chain_mode_enabled:
 			ap.play("move")
+			# Target exists and is alive; move toward target an start chain on collision
 			if target and target.is_alive:
 				global_position = global_position + ((global_position.direction_to(target.global_position + _pos_offset)) * data.speed * delta)
 
+			# Target exists but is dead; move toward death location and chain upon colliding with a living enemy
 			elif target and not target.is_alive:
 				if global_position.distance_to(target_death_pos + _pos_offset) > _min_distance:
 					global_position = global_position + ((global_position.direction_to(target_death_pos + _pos_offset)) * data.speed * delta)
 				else:
 					explode()
+
+			# Target does not exist; disappear immediately
 			else:
-				# Don't want this one to blow up, just fizzle out. Maybe special animation?
 				is_active = false
 				queue_free()
+		
+		# Chain mode enabled
 		else:
-			ap.play("chain")
+			ap.play("chain_move")
 			if target and target.is_alive:
 				global_position = target.global_position + _pos_offset
 			else:
@@ -30,14 +35,12 @@ func _physics_process(delta):
 
 func explode() -> void:
 	is_active = false
-	primary_collider.set_deferred("disabled", true) # unecessary ? 
+	primary_collider.set_deferred("disabled", true)
 	aoe_collider.set_deferred("disabled", false)
-	ap.play("aoe_hit")
+	ap.play("chain_hit")
 
-	# ?
 	if not chain_mode_enabled:
-			#.take_damage(damage, element)
-			chain_mode_enabled = true
+		chain_mode_enabled = true
 
 func on_primary_area_entered(intruder):
 	if intruder == target:
@@ -52,9 +55,8 @@ func on_aoe_area_entered(intruder):
 			if intruder.path_follow.progress_ratio < target.path_follow.progress_ratio:
 				in_range_enemies.append(intruder)
 
-# "hit" vs "aoe_hit" will need to be sorted out! Both could prob do the same thing 
 func on_animation_finished(anim_name):
-	if anim_name == "aoe_hit":
+	if anim_name == "chain_hit":
 		order_targets()
 
 		primary_collider.set_deferred("disabled", false) # unecessary ? 
@@ -68,11 +70,8 @@ func order_targets():
 
 func get_next_target():
 	var next_target: Enemy = null
-	while not next_target and in_range_enemies.size() > 0:
-		if in_range_enemies.size() > 0:
-			next_target = in_range_enemies.pop_front()
-		else: # qf if no more targets to move to
-			queue_free()
+	while not next_target and in_range_enemies.size() > 0:	
+		next_target = in_range_enemies.pop_front()
 
 	if next_target:
 		return next_target

@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6qmk2qf0ex8x"]
+[gd_scene load_steps=10 format=3 uid="uid://b6qmk2qf0ex8x"]
 
-[ext_resource type="Texture2D" uid="uid://cjgwl72lifxd3" path="res://assets/art/sprites/spr_bullet_water.png" id="1_byddd"]
+[ext_resource type="Texture2D" uid="uid://dbvww423w3gn1" path="res://assets/art/atlases/atl_bullet_water.png" id="1_03ur0"]
 [ext_resource type="Script" uid="uid://cpx7d6yvad41w" path="res://scripts/bullets/bullet.gd" id="2_75b6g"]
-[ext_resource type="Texture2D" uid="uid://2j2km3ve3cr5" path="res://assets/art/sprites/spr_bullet_hit.png" id="3_p0n0a"]
+[ext_resource type="Resource" uid="uid://cfrm4uwd8i0pc" path="res://data/bullets/bullet_data_water.tres" id="3_5sfm0"]
 
-[sub_resource type="Animation" id="Animation_cywa6"]
+[sub_resource type="Animation" id="Animation_4norr"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -16,7 +16,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_byddd")]
+"values": [ExtResource("1_03ur0")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -40,22 +40,22 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [2]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:frame")
+tracks/3/path = NodePath(".:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [Vector2i(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_wotdt"]
+[sub_resource type="Animation" id="Animation_8kptb"]
 resource_name = "hit"
 length = 0.2
 step = 0.05
@@ -69,7 +69,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_p0n0a")]
+"values": [ExtResource("1_03ur0")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -93,26 +93,26 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [2]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:frame")
+tracks/3/path = NodePath(".:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_mfifh"]
+[sub_resource type="Animation" id="Animation_7vypf"]
 resource_name = "move"
-length = 0.5
+length = 0.3
 loop_mode = 1
-step = 0.125
+step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -123,7 +123,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_byddd")]
+"values": [ExtResource("1_03ur0")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -147,36 +147,56 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [2]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:frame")
+tracks/3/path = NodePath(".:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cywa6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4norr"]
 _data = {
-&"RESET": SubResource("Animation_cywa6"),
-&"hit": SubResource("Animation_wotdt"),
-&"move": SubResource("Animation_mfifh")
+&"RESET": SubResource("Animation_4norr"),
+&"hit": SubResource("Animation_8kptb"),
+&"move": SubResource("Animation_7vypf")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a8hyq"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x8qnb"]
+radius = 16.0
 
 [node name="WaterBullet" type="Sprite2D"]
 texture_filter = 1
-texture = ExtResource("1_byddd")
+texture = ExtResource("1_03ur0")
 hframes = 4
+vframes = 2
 script = ExtResource("2_75b6g")
+data = ExtResource("3_5sfm0")
 metadata/_custom_type_script = "uid://cpx7d6yvad41w"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_cywa6")
+&"": SubResource("AnimationLibrary_4norr")
 }
+
+[node name="PrimaryArea" type="Area2D" parent="."]
+
+[node name="PrimaryCollider" type="CollisionShape2D" parent="PrimaryArea"]
+scale = Vector2(0.6, 0.6)
+shape = SubResource("CircleShape2D_a8hyq")
+
+[node name="AOEArea" type="Area2D" parent="."]
+
+[node name="AOECollider" type="CollisionShape2D" parent="AOEArea"]
+shape = SubResource("CircleShape2D_x8qnb")
+disabled = true
