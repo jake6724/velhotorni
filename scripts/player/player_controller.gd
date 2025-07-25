@@ -7,13 +7,14 @@ extends Node2D
 # Scenes
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 
+# TODO: Move these into placement indicator script? 
 var textures: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_tower_fire.png"),
 	Constants.Element.WIND: preload("res://assets/art/sprites/spr_tower_wind.png"),
-	Constants.Element.WATER: preload("res://assets/art/sprites/spr_tower_water.png"),
+	Constants.Element.WATER: preload("res://assets/art/sprites/spr_tower_fish.png"),
 	Constants.Element.EARTH: preload("res://assets/art/sprites/spr_tower_earth.png"),
 	Constants.Element.LIGHT: preload("res://assets/art/sprites/spr_tower_light.png"),
-	Constants.Element.DARK: preload("res://assets/art/sprites/spr_tower_dark.png"),}
+	Constants.Element.DARK: preload("res://assets/art/sprites/spr_tower_wolf.png"),}
 
 var placement_indicator: PackedScene = preload("res://scenes/towers/PlacementIndicator.tscn")
 var indicator: Node2D
