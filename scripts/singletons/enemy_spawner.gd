@@ -11,13 +11,6 @@ var enemy_path_length: float # Per level
 var spawn_timer: Timer = Timer.new()
 
 var enemy_scene: PackedScene = preload("res://scenes/enemies/Enemy.tscn")
-var enemy_data: Dictionary[Constants.Element, EnemyData] = { # TODO: Update these
-	Constants.Element.FIRE: preload("res://data/enemies/enemy_data_fire_ghoul.tres"),
-	Constants.Element.WIND: preload("res://data/enemies/enemy_data_wind_ghoul.tres"),
-	Constants.Element.WATER: preload("res://data/enemies/enemy_data_water_ghoul.tres"),
-	Constants.Element.EARTH: preload("res://data/enemies/enemy_data_water_ghoul.tres"),
-	Constants.Element.LIGHT: preload("res://data/enemies/enemy_data_water_ghoul.tres"),
-	Constants.Element.DARK: preload("res://data/enemies/enemy_data_water_ghoul.tres"),}
 
 # Signals
 signal enemy_spawned

@@ -16,4 +16,5 @@ num_targets = 1
 atlas = ExtResource("1_8ft6f")
 transform_hint_texture = ExtResource("3_p611l")
 bullet = ExtResource("2_ms340")
+bullet_speed = 100.0
 metadata/_custom_type_script = "uid://v7b6nq74b314"

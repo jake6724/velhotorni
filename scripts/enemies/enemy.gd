@@ -10,6 +10,7 @@ extends Area2D
 @onready var health_bar: TextureProgressBar = $HealthBar
 @onready var shield: Sprite2D = $Shield
 @onready var weak: Sprite2D = $Weak
+@onready var debuff_manager: DebuffManager = $DebuffManager
 
 # Pathing 
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
@@ -121,3 +122,7 @@ func on_animation_finished(anim_name):
 
 	if anim_name == "corpse":
 		queue_free()
+
+# # TODO: This could be dangerous, no type or value checks. May be TOO generic
+# func update_data_value(property_name: String, value) -> void:
+# 	data.set(property_name, value)

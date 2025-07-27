@@ -1,11 +1,7 @@
 extends Node
-
-# Combined data from EnemySpawner, Base, and PlayerController to determine and propogate wave state
-
-# TODO: be careful for race condition between tower dying and enemy dying at the same time
+# Combines data from EnemySpawner, Base, and PlayerController to determine and propogate wave state
 
 var is_wave_failed: bool
-
 var level_waves: Array[Wave] = []
 var active_wave: Wave
 var wave_index: int

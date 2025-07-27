@@ -14,4 +14,5 @@ attack_range = 50.0
 num_targets = 1
 atlas = ExtResource("1_uckxk")
 transform_hint_texture = ExtResource("3_uckxk")
+bullet_speed = 100.0
 metadata/_custom_type_script = "uid://v7b6nq74b314"

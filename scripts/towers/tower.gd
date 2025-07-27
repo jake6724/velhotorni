@@ -151,7 +151,7 @@ func on_area_exited(intruder) -> void:
 
 func spawn_bullet() -> void:
 	var new_bullet: Bullet = data.bullet.instantiate()
-	new_bullet.initialize(active_target, data.element, data.damage)
+	new_bullet.initialize(active_target, data.element, data.damage, data.debuff_data, data.bullet_speed)
 	new_bullet.position += new_bullet._pos_offset
 	add_child(new_bullet)
 

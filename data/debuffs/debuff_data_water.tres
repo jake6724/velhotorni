@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DebuffData" load_steps=3 format=3 uid="uid://cdhi44o5assts"]
+
+[ext_resource type="Script" uid="uid://cg6k06exg62lo" path="res://scripts/debuffs/debuff_slow.gd" id="1_h4nli"]
+[ext_resource type="Script" uid="uid://cm72v2ilme5nr" path="res://scripts/debuffs/debuff_data.gd" id="2_jjogy"]
+
+[resource]
+script = ExtResource("2_jjogy")
+type = 0
+priority = 4
+element = 2
+value = 90.0
+total_duration = 2.0
+repeat_duration = 0.0
+debuff_script = ExtResource("1_h4nli")
+metadata/_custom_type_script = "uid://cm72v2ilme5nr"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwkqfmnmxvrmi"]
+[gd_scene load_steps=15 format=3 uid="uid://dwkqfmnmxvrmi"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_7cewq"]
 [ext_resource type="Texture2D" uid="uid://bpvtenpe12r2k" path="res://assets/art/atlases/atl_enemy_water_ghoul.png" id="2_7cewq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://rwec3xnhkxkf" path="res://assets/art/sprites/spr_ui_health_bar.png" id="3_7cewq"]
 [ext_resource type="Texture2D" uid="uid://dumg5so8h5d3m" path="res://assets/art/sprites/spr_ui_shield.png" id="4_vtlqb"]
 [ext_resource type="Texture2D" uid="uid://04i8ln0m18xc" path="res://assets/art/sprites/spr_ui_weak.png" id="5_24b6r"]
+[ext_resource type="Script" uid="uid://bk2472hmw8gj8" path="res://scripts/debuffs/debuff_manager.gd" id="7_vtlqb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7iym1"]
 radius = 8.06226
@@ -149,3 +150,7 @@ texture = ExtResource("4_vtlqb")
 visible = false
 position = Vector2(16, 3)
 texture = ExtResource("5_24b6r")
+
+[node name="DebuffManager" type="Node2D" parent="."]
+script = ExtResource("7_vtlqb")
+metadata/_custom_type_script = "uid://bk2472hmw8gj8"

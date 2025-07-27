@@ -1,21 +1,26 @@
 class_name Debuff
 extends Node
 
-var type: Constants.Debuff
-var priority: Constants.DebuffPriority
-var element: Constants.Element
-var value: float
+var data: DebuffData
 
 var total_timer: Timer = Timer.new()
 var repeat_timer: Timer = Timer.new()
-var total_duration: float
-var repeat_duration: float
 
-func _init(_type: Constants.Debuff, _priority: Constants.DebuffPriority, _element: Constants.Element, _value: float, 
-_total_duration: float, _repeat_duration: float) -> void:
-	type = _type
-	priority = _priority
-	element = _element
-	value = _value
-	total_duration = _total_duration
-	repeat_duration = _repeat_duration
+func _init(_data: DebuffData) -> void:
+	data = _data
+
+func _ready():
+	add_child(total_timer)
+	add_child(repeat_timer)
+	total_timer.timeout.connect(on_total_timer_timeout)
+	repeat_timer.timeout.connect(on_repeat_timer_timeout)
+
+## Triggered at the end of `_ready()`
+func start_debuff() -> void:
+	pass
+
+func on_total_timer_timeout() -> void:
+	pass
+
+func on_repeat_timer_timeout() -> void:
+	pass
