@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://drednump7huu" path="res://assets/art/sprites/spr_ui_fastbutton.png" id="6_opq3w"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="7_r3bjd"]
 [ext_resource type="Texture2D" uid="uid://ducm8wc7gd0vx" path="res://assets/art/sprites/spr_ui_tower_fire.png" id="8_4bluh"]
-[ext_resource type="Texture2D" uid="uid://qaa0yn4cxbck" path="res://assets/art/sprites/spr_ui_tower_wind.png" id="9_rh755"]
+[ext_resource type="Texture2D" uid="uid://cmp3lb2x5ig6v" path="res://assets/art/sprites/spr_ui_tower_wind.png" id="9_rh755"]
 [ext_resource type="Texture2D" uid="uid://c3lb7onbbfx5u" path="res://assets/art/sprites/spr_ui_tower_water.png" id="10_e3xib"]
 [ext_resource type="Texture2D" uid="uid://3dti3chb4cnf" path="res://assets/art/sprites/spr_ui_tower_light.png" id="12_638he"]
 [ext_resource type="Texture2D" uid="uid://rvf7vwl6ny54" path="res://assets/art/sprites/spr_ui_tower_earth.png" id="12_gfj4e"]
