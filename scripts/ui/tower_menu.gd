@@ -64,7 +64,7 @@ func _ready():
 func hide_placement_phase() -> void:
 	tower_buttons.hide()
 	wave_button.hide()
-	fast_forward.show()
+	fast_forward.hide()
 
 func show_placement_phase() -> void:
 	tower_buttons.show()
