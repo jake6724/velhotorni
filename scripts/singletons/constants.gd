@@ -2,6 +2,10 @@ extends Node
 
 enum Element {FIRE, WIND, WATER, EARTH, LIGHT, DARK, NONE}
 
+# TODO: This should maybe go in debuff.gd ? 
+enum Debuff {SLOW, BURN, FREEZE, STUN, WEAKEN, KNOCKBACK,} # TODO: Drop extra gems, 
+enum DebuffPriority {LOWEST, LOW, MEDIUM, HIGH, HIGHEST}
+
 const FAST_FORWARD_SPEED: float = 20.0
 
 const CELL_SIZE: int = 16

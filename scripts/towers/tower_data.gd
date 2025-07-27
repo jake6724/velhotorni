@@ -15,4 +15,5 @@ extends Resource
 ## The sprite atlas containing every animation for the tower. 
 @export var atlas: Texture
 @export var transform_hint_texture: Texture
+## A reference to the `Bullet` scene which the `Tower` will spawn when attacking.
 @export var bullet: PackedScene

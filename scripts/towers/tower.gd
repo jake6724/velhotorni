@@ -35,15 +35,6 @@ var tower_data: Dictionary[Constants.Element, TowerData] = {
 	Constants.Element.DARK: preload("res://data/towers/tower_data_dark.tres"),
 	Constants.Element.LIGHT: preload("res://data/towers/tower_data_light.tres"),}
 
-# Bullets
-var bullets: Dictionary[Constants.Element, PackedScene] = {
-	Constants.Element.FIRE: preload("res://scenes/bullets/FireBullet.tscn"),
-	Constants.Element.WIND: preload("res://scenes/bullets/WindBullet.tscn"),
-	Constants.Element.WATER: preload("res://scenes/bullets/WaterBullet.tscn"),
-	Constants.Element.EARTH: preload("res://scenes/bullets/WaterBullet.tscn"),
-	Constants.Element.LIGHT: preload("res://scenes/bullets/WaterBullet.tscn"),
-	Constants.Element.DARK: preload("res://scenes/bullets/WaterBullet.tscn"),}
-
 # Debugs
 var debug_attack_line: Line2D = Line2D.new()
 
@@ -83,6 +74,8 @@ func initialize(element: Constants.Element):
 	transform_timer.one_shot = true
 	add_child(transform_timer)
 	transform_timer.start(transform_delay) # time until you can transform a tower (so it doesn't when you click to spawn it)
+
+	queue_redraw()
 
 ## Transform into the next tower type in the cycle. Defined in `TowerData.transform_element`. 
 func transform() -> void:
@@ -153,7 +146,7 @@ func on_area_exited(intruder) -> void:
 			intruder.died.disconnect(on_enemy_died)
 
 func spawn_bullet() -> void:
-	var new_bullet: Bullet = bullets[data.element].instantiate()
+	var new_bullet: Bullet = data.bullet.instantiate()
 	new_bullet.initialize(active_target, data.element, data.damage)
 	new_bullet.position += new_bullet._pos_offset
 	add_child(new_bullet)
@@ -191,3 +184,6 @@ func on_attack_timer_timeout() -> void:
 
 func on_transform_timer_timeout() -> void:
 	can_transform = true
+
+# func _draw():
+# 	draw_circle(Vector2.ZERO + Vector2(8,8), 85, Color.WHITE, false, -1.0)
