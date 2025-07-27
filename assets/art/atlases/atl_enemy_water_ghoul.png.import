@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpvtenpe12r2k"
-path="res://.godot/imported/atl_enemy_water.png-a804fb36a787eb88e8fc526141216924.ctex"
+path="res://.godot/imported/atl_enemy_water_ghoul.png-a94ed2d606f73e56c262e15fb0f752d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/atl_enemy_water.png"
-dest_files=["res://.godot/imported/atl_enemy_water.png-a804fb36a787eb88e8fc526141216924.ctex"]
+source_file="res://assets/art/atlases/atl_enemy_water_ghoul.png"
+dest_files=["res://.godot/imported/atl_enemy_water_ghoul.png-a94ed2d606f73e56c262e15fb0f752d3.ctex"]
 
 [params]
 

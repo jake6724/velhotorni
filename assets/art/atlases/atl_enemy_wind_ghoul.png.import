@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8noara2guef1"
-path="res://.godot/imported/atl_enemy_wind.png-7286b51904b3d013520c4bffe0cb61c1.ctex"
+path="res://.godot/imported/atl_enemy_wind_ghoul.png-e82084f93143af6c88265bce98077f1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/atl_enemy_wind.png"
-dest_files=["res://.godot/imported/atl_enemy_wind.png-7286b51904b3d013520c4bffe0cb61c1.ctex"]
+source_file="res://assets/art/atlases/atl_enemy_wind_ghoul.png"
+dest_files=["res://.godot/imported/atl_enemy_wind_ghoul.png-e82084f93143af6c88265bce98077f1a.ctex"]
 
 [params]
 

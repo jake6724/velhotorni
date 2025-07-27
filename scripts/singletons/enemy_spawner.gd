@@ -11,10 +11,13 @@ var enemy_path_length: float # Per level
 var spawn_timer: Timer = Timer.new()
 
 var enemy_scene: PackedScene = preload("res://scenes/enemies/Enemy.tscn")
-var enemy_data: Dictionary[Constants.Element, EnemyData] = {
+var enemy_data: Dictionary[Constants.Element, EnemyData] = { # TODO: Update these
 	Constants.Element.FIRE: preload("res://data/enemies/enemy_data_fire_ghoul.tres"),
 	Constants.Element.WIND: preload("res://data/enemies/enemy_data_wind_ghoul.tres"),
-	Constants.Element.WATER: preload("res://data/enemies/enemy_data_water_ghoul.tres"),}
+	Constants.Element.WATER: preload("res://data/enemies/enemy_data_water_ghoul.tres"),
+	Constants.Element.EARTH: preload("res://data/enemies/enemy_data_water_ghoul.tres"),
+	Constants.Element.LIGHT: preload("res://data/enemies/enemy_data_water_ghoul.tres"),
+	Constants.Element.DARK: preload("res://data/enemies/enemy_data_water_ghoul.tres"),}
 
 # Signals
 signal enemy_spawned
@@ -74,8 +77,6 @@ func spawn_enemy(_enemy_data: EnemyData) -> void:
 	# Configure new enemy
 	var new_enemy: Enemy = enemy_scene.instantiate()
 	new_enemy.data = _enemy_data
-	# new_enemy.data = enemy_data[element]
-	# new_enemy.position = LevelManager.active_spawn_location
 	new_enemy.died.connect(on_enemy_died)
 	add_child(new_enemy)
 	active_enemies.append(new_enemy)

@@ -20,6 +20,10 @@ var transform_timer: Timer = Timer.new()
 var transform_delay: float = 0.1
 var can_transform: bool = true # Set to true after brief delay in on_transform_timer_timeout()
 var can_attack: bool = true
+var can_show_range: bool: 
+	set(value):
+		can_show_range = value
+		queue_redraw()
 
 # TowerData resources
 var data: TowerData
@@ -62,7 +66,7 @@ func initialize(element: Constants.Element):
 	# Configure CollisionShape2D
 	var shape: CircleShape2D = collider.shape
 	shape.radius = data.attack_range	
-	range_indicator.hide()
+	can_show_range = false
 
 	# Configure Timers
 	attack_timer.timeout.connect(on_attack_timer_timeout)
@@ -75,7 +79,7 @@ func initialize(element: Constants.Element):
 	add_child(transform_timer)
 	transform_timer.start(transform_delay) # time until you can transform a tower (so it doesn't when you click to spawn it)
 
-	queue_redraw()
+	can_show_range = false
 
 ## Transform into the next tower type in the cycle. Defined in `TowerData.transform_element`. 
 func transform() -> void:
@@ -168,11 +172,12 @@ func play_shot_sfx() -> void:
 		_: SFXPlayer.play_sfx("water_shot")
 
 func on_mouse_entered_transform_area():
-	range_indicator.show()
+	can_show_range = true
+
 	tower_hovered.emit(self)
 
 func on_mouse_exited_transform_area():
-	range_indicator.hide()
+	can_show_range = false
 	tower_unhovered.emit(self)
 
 func on_transform_area_pressed(_viewport, _event, _shape_idx) -> void:
@@ -185,5 +190,7 @@ func on_attack_timer_timeout() -> void:
 func on_transform_timer_timeout() -> void:
 	can_transform = true
 
-# func _draw():
-# 	draw_circle(Vector2.ZERO + Vector2(8,8), 85, Color.WHITE, false, -1.0)
+func _draw():
+	if can_show_range:
+		draw_circle(Vector2.ZERO + Vector2(8,8), data.attack_range, Color.WHITE, false, -1.0, false)
+		# draw_arc(Vector2.ZERO + Vector2(8,8), data.attack_range, 0.0, TAU, data.attack_range, Color.WHITE)

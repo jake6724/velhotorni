@@ -51,6 +51,7 @@ _data = {
 size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tcjvg"]
+resource_local_to_scene = true
 radius = 10.4403
 
 [node name="Tower" type="Node2D"]

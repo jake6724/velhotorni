@@ -54,9 +54,15 @@ func _physics_process(delta):
 		else:
 			queue_free()
 
-	else:
-		# Move in a straight line after colliding with enemy (for hit animation)
-		global_position = global_position + (direction_at_collision * data.speed  * delta)
+	else: # TODO: Cleanup
+		if target and target.is_alive:
+			if data.follow_on_hit:
+				global_position = target.global_position + _pos_offset
+			else:
+				# Move in a straight line after colliding with enemy (for hit animation)
+				global_position = global_position + (direction_at_collision * data.speed  * delta)
+		else:
+			queue_free()
 
 func on_primary_area_entered(intruder: Node2D) -> void:
 	if is_active:

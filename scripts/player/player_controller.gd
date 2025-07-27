@@ -6,18 +6,7 @@ extends Node2D
 
 # Scenes
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
-
-# TODO: Move these into placement indicator script? 
-var textures: Dictionary[Constants.Element, Texture] = {
-	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_tower_fire.png"),
-	Constants.Element.WIND: preload("res://assets/art/sprites/spr_tower_wind.png"),
-	Constants.Element.WATER: preload("res://assets/art/sprites/spr_tower_fish.png"),
-	Constants.Element.EARTH: preload("res://assets/art/sprites/spr_tower_earth.png"),
-	Constants.Element.LIGHT: preload("res://assets/art/sprites/spr_tower_light.png"),
-	Constants.Element.DARK: preload("res://assets/art/sprites/spr_tower_wolf.png"),}
-
-var placement_indicator: PackedScene = preload("res://scenes/towers/PlacementIndicator.tscn")
-var indicator: Node2D
+var tower_to_place: Tower = null
 
 var click_enabled: bool = true
 var selected_tower_element: Constants.Element = Constants.Element.NONE
@@ -42,8 +31,6 @@ func _ready():
 
 	tower_menu.start_wave.connect(on_start_wave)
 
-	configure_indicator_sprite()
-
 	# Connect to EnemySpawner
 	EnemySpawner.enemy_died.connect(on_enemy_died)
 
@@ -59,21 +46,26 @@ func setup():
 	tower_menu.update_progress()
 
 func _process(_delta):
-	if placement_enabled and selected_tower_element != Constants.Element.NONE:
-		indicator.position = WorldGrid.grid_to_world(WorldGrid.world_to_grid(get_global_mouse_position()))
-	else:
-		indicator.hide()
+	if tower_to_place:
+		tower_to_place.position = WorldGrid.grid_to_world(WorldGrid.world_to_grid(get_global_mouse_position()))
 
-func spawn_tower(element: Constants.Element, world_pos: Vector2) -> bool:
+func create_tower(element: Constants.Element):
+	tower_to_place = tower_scene.instantiate()
+	add_child(tower_to_place)
+	tower_to_place.initialize(element)
+
+	tower_to_place.modulate.a = .75
+
+func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 	# Do not allow placement during combat, do not allow NONE type turrets to spawn
 	if placement_enabled and selected_tower_element != Constants.Element.NONE:
 		var grid_pos: Vector2 = WorldGrid.world_to_grid(world_pos)
 		if grid_pos in WorldGrid.data and WorldGrid.data[grid_pos]:
 			# Spawn and configure new tower
-			var new_tower = tower_scene.instantiate()
+			var new_tower: Tower = tower_to_place
+			tower_to_place = null # Disable movement in _process()
 			new_tower.position = WorldGrid.grid_to_world(grid_pos) # Bring it back to world to get a clean grid point
-			add_child(new_tower)
-			new_tower.initialize(element)
+			new_tower.modulate.a = 1
 
 			# Connect to new tower signals
 			new_tower.transform_tower.connect(on_tower_transform.bind(new_tower))
@@ -85,14 +77,12 @@ func spawn_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 			WorldGrid.data[grid_pos] = false
 			gold -= Constants.TOWER_PRICES[element]
 
-			# Clean up indicator
-			indicator.hide()
 			play_tower_select_sfx(element)
 
 			selected_tower_element = Constants.Element.NONE
 			return true
 		else:
-			SFXPlayer.play_sfx("click_2")
+			# SFXPlayer.play_sfx("click_2")
 			return false
 	else:
 		return false
@@ -107,9 +97,9 @@ func on_tower_selected(element: Constants.Element) -> void:
 			Constants.Element.WIND: SFXPlayer.play_sfx("wind_click")
 			Constants.Element.WATER: SFXPlayer.play_sfx("water_click")
 
-		# Indicator
-		indicator.tower_sprite.texture = textures[element]
-		indicator.show()
+
+		create_tower(element)
+
 	else:
 		SFXPlayer.play_sfx("click_2")
 
@@ -187,10 +177,12 @@ func on_enemy_died():
 
 func _input(_event):
 	if click_enabled and Input.is_action_just_pressed("left_click"):
-		spawn_tower(selected_tower_element, get_global_mouse_position())
+		place_tower(selected_tower_element, get_global_mouse_position())
 
 	if click_enabled and Input.is_action_just_pressed("right_click"):
-		selected_tower_element = Constants.Element.NONE
+		if tower_to_place:
+			tower_to_place.queue_free()
+			tower_to_place = null
 
 func set_checkpoints() -> void:
 	# Checkpoint playerController data
@@ -202,9 +194,3 @@ func on_mouse_entered_button() -> void:
 
 func on_mouse_exited_button() -> void:
 	click_enabled = true
-
-func configure_indicator_sprite() -> void:
-	indicator = placement_indicator.instantiate()
-	indicator.modulate.a = .75
-	indicator.hide()
-	add_child(indicator)

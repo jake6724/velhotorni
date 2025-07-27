@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://u8fs8orhyfe1"]
 
-[ext_resource type="Texture2D" uid="uid://c8noara2guef1" path="res://assets/art/atlases/atl_enemy_wind.png" id="1_h8sg4"]
+[ext_resource type="Texture2D" uid="uid://c8noara2guef1" path="res://assets/art/atlases/atl_enemy_wind_ghoul.png" id="1_h8sg4"]
 [ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="2_ehh3g"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="3_scn5m"]
 

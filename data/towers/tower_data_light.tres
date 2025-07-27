@@ -1,17 +1,19 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=4 format=3 uid="uid://h3wi30q1qn6i"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=5 format=3 uid="uid://h3wi30q1qn6i"]
 
 [ext_resource type="Texture2D" uid="uid://b8u7gspp5vpxa" path="res://assets/art/atlases/atl_tower_light.png" id="1_8ft6f"]
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_f600e"]
+[ext_resource type="PackedScene" uid="uid://b6qmk2qf0ex8x" path="res://scenes/bullets/WaterBullet.tscn" id="2_ms340"]
 [ext_resource type="Texture2D" uid="uid://74nqbgxv1h31" path="res://assets/art/sprites/spr_ui_dark.png" id="3_p611l"]
 
 [resource]
 script = ExtResource("1_f600e")
 element = 5
 transform_element = 0
-damage = 0.0
-speed = 0.0
-attack_range = 0.0
-num_targets = 0
+damage = 10.0
+speed = 1.0
+attack_range = 35.0
+num_targets = 1
 atlas = ExtResource("1_8ft6f")
 transform_hint_texture = ExtResource("3_p611l")
+bullet = ExtResource("2_ms340")
 metadata/_custom_type_script = "uid://v7b6nq74b314"
