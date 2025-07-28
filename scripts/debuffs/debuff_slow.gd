@@ -8,7 +8,6 @@ signal debuff_apply_slow
 signal debuff_remove_slow
 
 func start_debuff() -> void:
-	print("start_debuff")
 	debuff_apply_slow.emit(data.value)
 	total_timer.start(data.total_duration)
 

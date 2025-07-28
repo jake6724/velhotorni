@@ -36,7 +36,7 @@ var is_alive: bool = true
 
 var base: Base
 
-# Debuff stats
+# Debuffs
 var slow_percent: float = 0.0
 var is_frozen: bool = false
 var is_stunned: bool = false
@@ -59,19 +59,22 @@ func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
+	# debuff_manager.remove_active_debuff.connect(on_remove_active_debuff)
 
 func _physics_process(delta):
 	move(delta)
 
 func move(delta) -> void:
-	if not is_frozen or not is_stunned:
-		if is_alive:
+	if is_alive:
+		if not is_frozen and not is_stunned:
+			ap.play("walk")
 			if path_follow.progress_ratio < .99:
 				path_follow.progress += ((speed - (speed * (slow_percent/100))) * delta)
-				ap.play("walk")
 			else:
 				base.take_damage(damage)
 				die()
+		else:
+			ap.play("idle")
 	
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
@@ -115,11 +118,6 @@ func die() -> void:
 	weak.hide()
 
 func on_animation_finished(anim_name):
-	if anim_name == "hit":
-		print("Hit finished")
-		# ap.play("walk")
-		# ap.seek(walk_resume_pos)
-
 	if anim_name == "die":
 		ap.play("corpse")
 
@@ -135,10 +133,11 @@ func on_add_new_debuff(_debuff: Debuff) -> void:
 			"debuff_remove_slow": _debuff.connect(signal_name, Callable(self, "on_debuff_remove_slow"))
 			"debuff_apply_freeze": _debuff.connect(signal_name, Callable(self, "on_debuff_apply_freeze"))
 			"debuff_remove_freeze": _debuff.connect(signal_name, Callable(self, "on_debuff_remove_freeze"))
+			"debuff_apply_stun": _debuff.connect(signal_name, Callable(self, "on_debuff_apply_stun"))
+			"debuff_remove_stun": _debuff.connect(signal_name, Callable(self, "on_debuff_remove_stun"))
 			_: pass
 
 func on_debuff_apply_slow(_slow_percent: float) -> void:
-	print("on_debuff_apply_slow")
 	slow_percent = _slow_percent
 
 func on_debuff_remove_slow() -> void:
@@ -155,6 +154,11 @@ func on_debuff_apply_stun() -> void:
 
 func on_debuff_remove_stun() -> void:
 	is_stunned = false
+
+# func on_remove_active_debuff(_debuff: Debuff) -> void:
+# 	for signal_dict in _debuff.get_signal_list():
+# 		var signal_name: String = signal_dict["name"]
+# 		if is_connected(
 
 # # TODO: This could be dangerous, no type or value checks. May be TOO generic
 # func update_data_value(property_name: String, value) -> void:

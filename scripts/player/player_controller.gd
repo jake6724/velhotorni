@@ -181,9 +181,7 @@ func on_enemy_died():
 	gold += 1
 
 func _input(_event):
-	print("Top of input. Click_enabled: ", click_enabled)
 	if click_enabled and Input.is_action_just_pressed("left_click"):
-		print("INPUT PASSED")
 		place_tower(selected_tower_element, get_global_mouse_position())
 
 	if click_enabled and Input.is_action_just_pressed("right_click"):

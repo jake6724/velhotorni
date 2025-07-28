@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://c2m03283180o8"]
 
-[ext_resource type="Texture2D" uid="uid://j1hvhvpfvjho" path="res://assets/art/sprites/spr_bullet_wind.png" id="1_0qd8s"]
-[ext_resource type="Script" uid="uid://o4njnqkwiotf" path="res://scripts/bullets/chain_bullet.gd" id="2_0qd8s"]
-[ext_resource type="Texture2D" uid="uid://2j2km3ve3cr5" path="res://assets/art/sprites/spr_bullet_hit.png" id="3_prpe1"]
-[ext_resource type="Texture2D" uid="uid://de54h7p3asqsg" path="res://assets/art/sprites/spr_fx_explosion_small.png" id="4_0db6q"]
+[ext_resource type="Texture2D" uid="uid://j1hvhvpfvjho" path="res://assets/art/sprites/spr_bullet_wind.png" id="1_80vmf"]
+[ext_resource type="Script" uid="uid://o4njnqkwiotf" path="res://scripts/bullets/chain_bullet.gd" id="2_eyxhh"]
+[ext_resource type="Texture2D" uid="uid://de54h7p3asqsg" path="res://assets/art/sprites/spr_fx_explosion_small.png" id="3_ro60e"]
+[ext_resource type="Texture2D" uid="uid://2j2km3ve3cr5" path="res://assets/art/sprites/spr_bullet_hit.png" id="4_mliwq"]
 
 [sub_resource type="Animation" id="Animation_ieavl"]
 length = 0.001
@@ -17,7 +17,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_0qd8s")]
+"values": [ExtResource("1_80vmf")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -70,7 +70,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_0db6q")]
+"values": [ExtResource("3_ro60e")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -123,7 +123,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_0db6q")]
+"values": [ExtResource("3_ro60e")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -176,7 +176,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_prpe1")]
+"values": [ExtResource("4_mliwq")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -230,7 +230,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_0qd8s")]
+"values": [ExtResource("1_80vmf")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -284,11 +284,11 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_0db6q"]
 radius = 30.0
 
-[node name="ChainBullet" type="Sprite2D"]
+[node name="LightningBullet" type="Sprite2D"]
 texture_filter = 1
-texture = ExtResource("1_0qd8s")
+texture = ExtResource("1_80vmf")
 hframes = 4
-script = ExtResource("2_0qd8s")
+script = ExtResource("2_eyxhh")
 metadata/_custom_type_script = "uid://o4njnqkwiotf"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
