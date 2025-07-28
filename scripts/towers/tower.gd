@@ -32,7 +32,7 @@ var data: TowerData
 var base_data: TowerData
 var transform_data: TowerData
 
-var target_priority: TargetPriority = TargetPriority.HIGHEST
+var target_priority: TargetPriority = TargetPriority.FIRST
 
 # Tower data (for transformations)
 var tower_data: Dictionary[Constants.Element, TowerData] = {
