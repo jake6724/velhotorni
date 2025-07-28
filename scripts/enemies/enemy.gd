@@ -174,8 +174,9 @@ func on_debuff_remove_stun() -> void:
 func on_debuff_apply_burn(_value, _element) -> void:
 	take_damage(_value, _element)
 
-func on_debuff_remove_burn() -> void:
-	pass
+func on_debuff_remove_burn(_debuff: Debuff) -> void:
+	_debuff.debuff_apply_burn.disconnect(on_debuff_apply_burn)
+	_debuff.debuff_remove_burn.disconnect(on_debuff_remove_burn)
 
 func on_debuff_apply_weaken(_value) -> void:
 	weaken_percent = _value

@@ -1,6 +1,8 @@
 class_name Tower
 extends Node2D
 
+enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
+
 # Child references
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var swap_sprite: Sprite2D = $SwapSprite
@@ -29,6 +31,8 @@ var can_show_range: bool:
 var data: TowerData
 var base_data: TowerData
 var transform_data: TowerData
+
+var target_priority: TargetPriority = TargetPriority.LAST
 
 # Tower data (for transformations)
 var tower_data: Dictionary[Constants.Element, TowerData] = {
@@ -117,11 +121,52 @@ func attack() -> void:
 	play_shot_sfx()
 
 func get_active_target() -> Enemy:
+	match target_priority:
+		TargetPriority.FIRST: return get_first_target()
+		TargetPriority.LAST: return get_last_target()
+		TargetPriority.HIGHEST: return get_highest_target()
+		TargetPriority.LOWEST: return get_lowest_target()
+		_: return null
+
+func get_first_target() -> Enemy:
 	var max_progress: float = -INF
 	if in_range_targets.size() != 0:
 		for enemy: Enemy in in_range_targets:
 			if enemy.path_follow.progress_ratio > max_progress:
 				max_progress = enemy.path_follow.progress_ratio
+				active_target = enemy
+		return active_target
+	else: 
+		return null
+
+func get_last_target() -> Enemy:
+	var min_progress: float = INF
+	if in_range_targets.size() != 0:
+		for enemy: Enemy in in_range_targets:
+			if enemy.path_follow.progress_ratio < min_progress:
+				min_progress = enemy.path_follow.progress_ratio
+				active_target = enemy
+		return active_target
+	else: 
+		return null
+
+func get_highest_target() -> Enemy:
+	var max_health: float = -INF
+	if in_range_targets.size() != 0:
+		for enemy: Enemy in in_range_targets:
+			if enemy.health > max_health:
+				max_health = enemy.health
+				active_target = enemy
+		return active_target
+	else: 
+		return null
+
+func get_lowest_target() -> Enemy:
+	var min_health: float = INF
+	if in_range_targets.size() != 0:
+		for enemy: Enemy in in_range_targets:
+			if enemy.health < min_health:
+				min_health = enemy.health
 				active_target = enemy
 		return active_target
 	else: 

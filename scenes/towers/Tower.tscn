@@ -117,7 +117,7 @@ visible = false
 position = Vector2(8, 8)
 texture = ExtResource("7_o8o11")
 
-[node name="AOERingPlaceholder" type="Sprite2D" parent="."]
+[node name="PulseIndicator" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("8_ig0xk")
 offset = Vector2(8, 8)

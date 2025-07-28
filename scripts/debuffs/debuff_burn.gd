@@ -17,5 +17,5 @@ func on_repeat_timer_timeout() -> void:
 	repeat_timer.start(data.repeat_duration)
 
 func on_total_timer_timeout() -> void:
-	debuff_remove_burn.emit()
+	debuff_remove_burn.emit(self)
 	queue_free()
