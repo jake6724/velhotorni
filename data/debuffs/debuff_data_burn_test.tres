@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DebuffDataBurn" load_steps=2 format=3 uid="uid://dtv6wyf2lt5a"]
+
+[ext_resource type="Script" uid="uid://bff060s0bi68p" path="res://scripts/debuffs/data/debuff_data_burn.gd" id="1_3rs4f"]
+
+[resource]
+script = ExtResource("1_3rs4f")
+priority = 4
+repeat_duration = 1.0
+value = 5.0
+total_duration = 5.0

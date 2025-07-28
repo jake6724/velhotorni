@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_7efi7")
-speed = 100.0
+follow_on_hit = false
 metadata/_custom_type_script = "uid://rcjwn40slcbo"

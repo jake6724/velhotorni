@@ -26,7 +26,7 @@ func _physics_process(delta):
 		
 		# Chain mode enabled
 		else:
-			ap.play("chain_move")
+			ap.play("chain")
 			if target and target.is_alive:
 				global_position = target.global_position + _pos_offset
 			else:
@@ -44,7 +44,11 @@ func explode() -> void:
 
 func on_primary_area_entered(intruder):
 	if intruder == target:
+		
 		intruder.take_damage(data.damage, data.element)
+		if data.debuff_data and intruder.debuff_manager:
+				intruder.debuff_manager.add_debuff(data.debuff_data)
+
 		if not chain_mode_enabled:
 			chain_mode_enabled = true
 		explode()

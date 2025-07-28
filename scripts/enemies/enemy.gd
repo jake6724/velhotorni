@@ -33,11 +33,13 @@ var positive_modifier: float = 2.0
 
 var can_attack: bool = true
 var is_alive: bool = true
+var is_taking_damage = false
 
 var base: Base
 
 # Debuffs
 var slow_percent: float = 0.0
+var weaken_percent: float = 0.0
 var is_frozen: bool = false
 var is_stunned: bool = false
 
@@ -67,7 +69,8 @@ func _physics_process(delta):
 func move(delta) -> void:
 	if is_alive:
 		if not is_frozen and not is_stunned:
-			ap.play("walk")
+			if not is_taking_damage:
+				ap.play("walk")
 			if path_follow.progress_ratio < .99:
 				path_follow.progress += ((speed - (speed * (slow_percent/100))) * delta)
 			else:
@@ -80,6 +83,7 @@ func move(delta) -> void:
 ## Handles despawning enemy in the case of death.
 func take_damage(damage_recieved: float, tower_element: Constants.Element):
 	if is_alive:
+		is_taking_damage = true
 		ap.play("hit")
 
 		# Hit by resisted element
@@ -96,6 +100,9 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 
 		if not health_bar.is_visible():
 			health_bar.show()
+
+		# Apply Weaken modifier
+		damage_recieved = damage_recieved + (damage_recieved * (weaken_percent/100))
 
 		health -= damage_recieved
 		var v = (health / max_health) * 100
@@ -118,6 +125,9 @@ func die() -> void:
 	weak.hide()
 
 func on_animation_finished(anim_name):
+	if anim_name == "hit":
+		is_taking_damage = false
+
 	if anim_name == "die":
 		ap.play("corpse")
 
@@ -125,7 +135,7 @@ func on_animation_finished(anim_name):
 		queue_free()
 
 func on_add_new_debuff(_debuff: Debuff) -> void:
-	print("on_add_new_debuff", _debuff)
+	# TODO: Consider simplifying this by just checking the type of debuff? May still be a lot of lines, this is pretty decent.
 	for signal_dict in _debuff.get_signal_list():
 		var signal_name: String = signal_dict["name"]
 		match signal_name:
@@ -135,6 +145,12 @@ func on_add_new_debuff(_debuff: Debuff) -> void:
 			"debuff_remove_freeze": _debuff.connect(signal_name, Callable(self, "on_debuff_remove_freeze"))
 			"debuff_apply_stun": _debuff.connect(signal_name, Callable(self, "on_debuff_apply_stun"))
 			"debuff_remove_stun": _debuff.connect(signal_name, Callable(self, "on_debuff_remove_stun"))
+			"debuff_apply_burn": _debuff.connect(signal_name, Callable(self, "on_debuff_apply_burn"))
+			"debuff_remove_burn": _debuff.connect(signal_name, Callable(self, "on_debuff_remove_burn"))
+			"debuff_apply_weaken": _debuff.connect(signal_name, Callable(self, "on_debuff_apply_weaken"))
+			"debuff_remove_weaken": _debuff.connect(signal_name, Callable(self, "on_debuff_remove_weaken"))
+			"debuff_apply_knockback": _debuff.connect(signal_name, Callable(self, "on_debuff_apply_knockback"))
+			"debuff_remove_knockback": _debuff.connect(signal_name, Callable(self, "on_debuff_remove_knockback"))
 			_: pass
 
 func on_debuff_apply_slow(_slow_percent: float) -> void:
@@ -154,6 +170,29 @@ func on_debuff_apply_stun() -> void:
 
 func on_debuff_remove_stun() -> void:
 	is_stunned = false
+
+func on_debuff_apply_burn(_value, _element) -> void:
+	take_damage(_value, _element)
+
+func on_debuff_remove_burn() -> void:
+	pass
+
+func on_debuff_apply_weaken(_value) -> void:
+	weaken_percent = _value
+
+func on_debuff_remove_weaken() -> void:
+	weaken_percent = 0.0
+
+func on_debuff_apply_knockback(_value) -> void:
+	# path_follow.progress = max(0, path_follow.progress - _value) # Do not let progress fall below 0
+
+	var tween: Tween = get_tree().create_tween()
+	var progress_target: float = max(0, path_follow.progress - _value)
+	var _knockback_tween_speed: float = .3
+	tween.tween_property(path_follow, "progress", progress_target, _knockback_tween_speed)
+
+func on_debuff_remove_knockback() -> void:
+	pass
 
 # func on_remove_active_debuff(_debuff: Debuff) -> void:
 # 	for signal_dict in _debuff.get_signal_list():

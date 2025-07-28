@@ -49,6 +49,8 @@ func _process(_delta):
 	if tower_to_place:
 		tower_to_place.position = WorldGrid.grid_to_world(WorldGrid.world_to_grid(get_global_mouse_position()))
 
+	queue_redraw()
+
 func create_tower(element: Constants.Element):
 	# Reset previous selection
 	if tower_to_place:
@@ -199,3 +201,10 @@ func on_mouse_entered_button() -> void:
 
 func on_mouse_exited_button() -> void:
 	click_enabled = true
+
+
+# func _draw():
+
+	
+# 	draw_dashed_line(Vector2.ZERO, get_global_mouse_position(), Color.GREEN, 10)
+# 	draw_dashed_line(Vector2.ZERO, get_global_mouse_position(), Color.WHITE, 5)

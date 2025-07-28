@@ -19,21 +19,25 @@ func _ready():
 	stun_timer.timeout.connect(on_stun_timer_timeout)
 
 func add_debuff(new_debuff_data: DebuffData) -> void:
-	if check_debuff_type_present(new_debuff_data.type): # A debuff of this type is already active
-		var active_debuff: Debuff = get_active_debuff_by_type(new_debuff_data.type)
-		if active_debuff:
-			if active_debuff.data.priority > new_debuff_data.priority:
-				return
-
-			elif active_debuff.data.priority == new_debuff_data.priority:
-				if active_debuff.total_timer.time_left > new_debuff_data.total_duration:
+	if "priority" in new_debuff_data:
+		if check_debuff_type_present(new_debuff_data.type): # A debuff of this type is already active
+			var active_debuff: Debuff = get_active_debuff_by_type(new_debuff_data.type)
+			if active_debuff:
+				if active_debuff.data.priority > new_debuff_data.priority:
 					return
 
-			# This will only be reached if the active debuff priority is lower than new debuff, 
-			# or the priorities are the same but with less time left in active_debuff's total_timer
-			# than the new debuff's total_duration
-			remove_active_debuff.emit(active_debuff) # TODO: Determine if this is needed
-			active_debuff.queue_free()
+				elif active_debuff.data.priority == new_debuff_data.priority:
+					if active_debuff.total_timer.time_left > new_debuff_data.total_duration:
+						return
+
+				# This will only be reached if the active debuff priority is lower than new debuff, 
+				# or the priorities are the same but with less time left in active_debuff's total_timer
+				# than the new debuff's total_duration
+				remove_active_debuff.emit(active_debuff) # TODO: Determine if this is needed
+				active_debuff.queue_free()
+				create_debuff(new_debuff_data)
+
+		else:
 			create_debuff(new_debuff_data)
 
 	else:
@@ -57,12 +61,11 @@ func choose_best_debuff():
 	pass
 
 func create_debuff(_data: DebuffData) -> void:
-	if check_debuff_allowed(_data):
-		# Create a new Debuff object of the class defined in debuff_script
-		var new_debuff: Debuff = _data.debuff_script.new(_data)
-		add_child(new_debuff)
-		add_new_debuff.emit(new_debuff)
-		new_debuff.call_deferred("start_debuff")
+	# Create a new Debuff object of the class defined in debuff_script
+	var new_debuff: Debuff = _data.debuff_script.new(_data)
+	add_child(new_debuff)
+	add_new_debuff.emit(new_debuff)
+	new_debuff.call_deferred("start_debuff")
 
 func check_debuff_allowed(_data: DebuffData) -> bool:
 	if _data.type == Constants.Debuff.FREEZE and not can_freeze:

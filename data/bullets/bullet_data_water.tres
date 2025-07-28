@@ -1,11 +1,8 @@
-[gd_resource type="Resource" script_class="BulletData" load_steps=3 format=3 uid="uid://cfrm4uwd8i0pc"]
+[gd_resource type="Resource" script_class="BulletData" load_steps=2 format=3 uid="uid://cfrm4uwd8i0pc"]
 
-[ext_resource type="Resource" uid="uid://cdhi44o5assts" path="res://data/debuffs/debuff_data_test_slow.tres" id="1_6htla"]
 [ext_resource type="Script" uid="uid://rcjwn40slcbo" path="res://scripts/bullets/data/bullet_data.gd" id="1_8t10a"]
 
 [resource]
 script = ExtResource("1_8t10a")
 follow_on_hit = false
-speed = 100.0
-debuff_data = ExtResource("1_6htla")
 metadata/_custom_type_script = "uid://rcjwn40slcbo"
