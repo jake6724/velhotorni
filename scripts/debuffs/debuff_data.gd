@@ -16,6 +16,7 @@ extends Resource
 ## `value` is specific to the effect of the debuff, and will effect different values on the target accordingly.
 ## Example: For burn, `value` represents the damage applied
 ## each time the enemy takes burn damage.
+## For percentage values (such as slow), the number is / 100 in code, so write as a whole number: 60 = %60 slow.
 @export var value: float
 
 ## The total time that this debuff will effect the target. Once this time has been completed, the debuff will immeadiately stop,

@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="2_panid"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_05fmu")
 element = 4
 strong_against_element = 0

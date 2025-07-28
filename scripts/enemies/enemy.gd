@@ -27,22 +27,26 @@ var health: float
 var speed: float
 var atlas: Texture
 
+var damage: int = 1
 var negative_modifier: float = .5
 var positive_modifier: float = 2.0
 
-var damage: int = 1
 var can_attack: bool = true
-
-var base: Base
 var is_alive: bool = true
 
-var walk_resume_pos: float
+var base: Base
+
+# Debuff stats
+var slow_percent: float = 0.0
+var is_frozen: bool = false
+var is_stunned: bool = false
 
 # Signals
 signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
 
 func _ready():
+	data.resource_local_to_scene = true
 	element = data.element
 	strong_against_element = data.strong_against_element
 	weak_against_element = data.weak_against_element 
@@ -54,23 +58,25 @@ func _ready():
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
 
+	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
+
 func _physics_process(delta):
 	move(delta)
 
 func move(delta) -> void:
-	if is_alive:
-		if path_follow.progress_ratio < .99:
-			path_follow.progress += (speed * delta)
-			ap.play("walk")
-		else:
-			base.take_damage(damage)
-			die()
+	if not is_frozen or not is_stunned:
+		if is_alive:
+			if path_follow.progress_ratio < .99:
+				path_follow.progress += ((speed - (speed * (slow_percent/100))) * delta)
+				ap.play("walk")
+			else:
+				base.take_damage(damage)
+				die()
 	
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
 func take_damage(damage_recieved: float, tower_element: Constants.Element):
 	if is_alive:
-
 		ap.play("hit")
 
 		# Hit by resisted element
@@ -94,9 +100,6 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 
 		if health <= 0:
 			die()
-		# else:
-		# 	walk_resume_pos = ap.get_current_animation_position()
-		# 	ap.stop()
 
 func die() -> void:
 	is_alive = false
@@ -122,6 +125,36 @@ func on_animation_finished(anim_name):
 
 	if anim_name == "corpse":
 		queue_free()
+
+func on_add_new_debuff(_debuff: Debuff) -> void:
+	print("on_add_new_debuff", _debuff)
+	for signal_dict in _debuff.get_signal_list():
+		var signal_name: String = signal_dict["name"]
+		match signal_name:
+			"debuff_apply_slow": _debuff.connect(signal_name, Callable(self, "on_debuff_apply_slow"))
+			"debuff_remove_slow": _debuff.connect(signal_name, Callable(self, "on_debuff_remove_slow"))
+			"debuff_apply_freeze": _debuff.connect(signal_name, Callable(self, "on_debuff_apply_freeze"))
+			"debuff_remove_freeze": _debuff.connect(signal_name, Callable(self, "on_debuff_remove_freeze"))
+			_: pass
+
+func on_debuff_apply_slow(_slow_percent: float) -> void:
+	print("on_debuff_apply_slow")
+	slow_percent = _slow_percent
+
+func on_debuff_remove_slow() -> void:
+	slow_percent = 0.0
+
+func on_debuff_apply_freeze() -> void:
+	is_frozen = true
+
+func on_debuff_remove_freeze() -> void:
+	is_frozen = false
+
+func on_debuff_apply_stun() -> void:
+	is_stunned = true
+
+func on_debuff_remove_stun() -> void:
+	is_stunned = false
 
 # # TODO: This could be dangerous, no type or value checks. May be TOO generic
 # func update_data_value(property_name: String, value) -> void:

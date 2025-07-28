@@ -50,6 +50,11 @@ func _process(_delta):
 		tower_to_place.position = WorldGrid.grid_to_world(WorldGrid.world_to_grid(get_global_mouse_position()))
 
 func create_tower(element: Constants.Element):
+	# Reset previous selection
+	if tower_to_place:
+		tower_to_place.queue_free()
+		tower_to_place = null
+
 	tower_to_place = tower_scene.instantiate()
 	add_child(tower_to_place)
 	tower_to_place.initialize(element)
@@ -176,7 +181,9 @@ func on_enemy_died():
 	gold += 1
 
 func _input(_event):
+	print("Top of input. Click_enabled: ", click_enabled)
 	if click_enabled and Input.is_action_just_pressed("left_click"):
+		print("INPUT PASSED")
 		place_tower(selected_tower_element, get_global_mouse_position())
 
 	if click_enabled and Input.is_action_just_pressed("right_click"):

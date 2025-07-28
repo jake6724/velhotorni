@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DebuffData" load_steps=3 format=3 uid="uid://dljohkw5dk45p"]
+
+[ext_resource type="Script" path="res://scripts/debuffs/debuff_freeze.gd" id="1_1tugl"]
+[ext_resource type="Script" uid="uid://cm72v2ilme5nr" path="res://scripts/debuffs/debuff_data.gd" id="1_wxnmp"]
+
+[resource]
+script = ExtResource("1_wxnmp")
+type = 2
+priority = 4
+element = 1
+value = 0.0
+total_duration = 2.0
+repeat_duration = 0.0
+debuff_script = ExtResource("1_1tugl")
+metadata/_custom_type_script = "uid://cm72v2ilme5nr"
