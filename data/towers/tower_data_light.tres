@@ -7,8 +7,8 @@
 
 [resource]
 script = ExtResource("1_f600e")
-element = 5
-transform_element = 0
+element = 4
+transform_element = 5
 damage = 10.0
 speed = 1.0
 attack_range = 35.0

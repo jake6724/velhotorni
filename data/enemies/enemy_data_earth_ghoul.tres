@@ -6,10 +6,10 @@
 
 [resource]
 script = ExtResource("1_34htb")
-element = 1
-strong_against_element = 5
+element = 3
+strong_against_element = 4
 weak_against_element = 2
-health = 120.0
+health = 100.0
 speed = 30.0
 atlas = ExtResource("1_pb38a")
 explosion_sfx = ExtResource("2_p0i6k")
