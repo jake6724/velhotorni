@@ -11,8 +11,8 @@ var can_burn: bool = true
 
 func start_debuff() -> void:
 	debuff_apply_burn.emit(data.value, data.element)
-	total_timer.start(data.total_duration)
 	repeat_timer.start(data.repeat_duration)
+	total_timer.start(data.total_duration)
 
 func on_repeat_timer_timeout() -> void:
 	if can_burn:
