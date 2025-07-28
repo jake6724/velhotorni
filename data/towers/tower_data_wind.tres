@@ -8,8 +8,8 @@
 
 [resource]
 script = ExtResource("1_fairw")
-element = 1
-transform_element = 2
+element = 2
+transform_element = 3
 damage = 20.0
 speed = 2.0
 attack_range = 50.0
