@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_c2pc5"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_dl2pb"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/spr_environment_atlas.png" id="2_ylovj"]
-[ext_resource type="Resource" uid="uid://b2yfh77l0ppp4" path="res://data/waves/lots_of_fire.tres" id="3_vykbn"]
+[ext_resource type="Resource" uid="uid://cjs0vx1ppqdm0" path="res://data/waves/balancing_wave_wind.tres" id="3_vykbn"]
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="9_fpffg"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_k1152"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="18_f4p11"]

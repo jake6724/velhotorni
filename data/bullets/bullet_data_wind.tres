@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="BulletData" load_steps=2 format=3 uid="uid://cfr4tphoqd2fq"]
+[gd_resource type="Resource" script_class="PiercingBulletData" load_steps=2 format=3 uid="uid://cfr4tphoqd2fq"]
 
-[ext_resource type="Script" uid="uid://rcjwn40slcbo" path="res://scripts/bullets/data/bullet_data.gd" id="1_7efi7"]
+[ext_resource type="Script" uid="uid://bntcbxjuaddnc" path="res://scripts/bullets/data/piercing_bullet_data.gd" id="1_7efi7"]
 
 [resource]
 script = ExtResource("1_7efi7")
+max_pierce = 2
+max_distance = 80.0
 follow_on_hit = false
 metadata/_custom_type_script = "uid://rcjwn40slcbo"
