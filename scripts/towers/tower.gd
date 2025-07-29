@@ -86,6 +86,27 @@ func initialize(element: Constants.Element):
 
 	can_show_range = false
 
+func _physics_process(_delta):	
+	if can_attack:
+		active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
+		if active_target:
+			attack()
+			can_attack = false
+			attack_timer.start(data.speed)
+
+	ap.play("idle")
+
+func attack() -> void:
+	flip_to_face_active_target()
+	spawn_bullet()
+	play_shot_sfx()
+
+func spawn_bullet() -> void:
+	var new_bullet: Bullet = data.bullet.instantiate()
+	new_bullet.initialize(active_target, data.element, data.damage, data.debuff_data, data.bullet_speed, data.attack_range)
+	new_bullet.position += new_bullet._pos_offset
+	add_child(new_bullet)
+
 ## Transform into the next tower type in the cycle. Defined in `TowerData.transform_element`. 
 func transform() -> void:
 	data = transform_data
@@ -102,24 +123,25 @@ func revert() -> void:
 		can_transform = true
 		update_textures()
 
+func flip_to_face_active_target():
+	if active_target:
+		var direction: Vector2 = global_position.direction_to(active_target.global_position)
+		if direction > Vector2.ZERO:
+			sprite.flip_h = false
+		else:
+			sprite.flip_h = true
+
+func play_shot_sfx() -> void:
+	# TODO: THis should go inside bullet, play on spawn, make it positional too ? rework of sfx required
+	match data.element:
+		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
+		Constants.Element.WIND: SFXPlayer.play_sfx("wind_shot")
+		Constants.Element.WATER: SFXPlayer.play_sfx("water_shot")
+		_: SFXPlayer.play_sfx("water_shot")
+
 func update_textures() -> void:
 	sprite.texture = data.atlas
 	transform_hint_sprite.texture = data.transform_hint_texture
-
-func _physics_process(_delta):	
-	if can_attack:
-		active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
-		if active_target:
-			attack()
-			can_attack = false
-			attack_timer.start(data.speed)
-
-	ap.play("idle")
-
-func attack() -> void:
-	flip_to_face_active_target()
-	spawn_bullet()
-	play_shot_sfx()
 
 func on_enemy_died(enemy: Enemy) -> void:
 	var index = in_range_targets.find(enemy)
@@ -142,28 +164,6 @@ func on_area_exited(intruder) -> void:
 		if intruder in in_range_targets:
 			in_range_targets.remove_at(in_range_targets.find(intruder))
 			intruder.died.disconnect(on_enemy_died)
-
-func spawn_bullet() -> void:
-	var new_bullet: Bullet = data.bullet.instantiate()
-	new_bullet.initialize(active_target, data.element, data.damage, data.debuff_data, data.bullet_speed, data.attack_range)
-	new_bullet.position += new_bullet._pos_offset
-	add_child(new_bullet)
-
-func flip_to_face_active_target():
-	if active_target:
-		var direction: Vector2 = global_position.direction_to(active_target.global_position)
-		if direction > Vector2.ZERO:
-			sprite.flip_h = false
-		else:
-			sprite.flip_h = true
-
-func play_shot_sfx() -> void:
-	# TODO: THis should go inside bullet, play on spawn, make it positional too ? rework of sfx required
-	match data.element:
-		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
-		Constants.Element.WIND: SFXPlayer.play_sfx("wind_shot")
-		Constants.Element.WATER: SFXPlayer.play_sfx("water_shot")
-		_: SFXPlayer.play_sfx("water_shot")
 
 func on_mouse_entered_transform_area():
 	can_show_range = true
