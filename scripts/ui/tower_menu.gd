@@ -122,13 +122,15 @@ func update_progress():
 	progress.text = str(LevelManager.level_index) + "-" + str(WaveManager.wave_index+1)
 
 func on_wave_button_pressed() -> void:
-	wave_number.text = "Wave " + str(WaveManager.wave_index+1)
-	wave_number.show()
-	wave_number_timer.start(wave_number_duration)
 	start_wave.emit()
 
 func on_wave_number_timer_timeout():
 	wave_number.hide()
+
+func display_wave_info():
+	wave_number.text = "Wave " + str(WaveManager.wave_index+1)
+	wave_number.show()
+	wave_number_timer.start(wave_number_duration)
 
 func on_level_number_timer_timeout():
 	level_number.hide()

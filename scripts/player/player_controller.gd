@@ -104,20 +104,21 @@ func on_tower_selected(element: Constants.Element) -> void:
 			Constants.Element.WIND: SFXPlayer.play_sfx("wind_click")
 			Constants.Element.WATER: SFXPlayer.play_sfx("water_click")
 
-
 		create_tower(element)
 
 	else:
 		SFXPlayer.play_sfx("click_2")
 
 func on_start_wave() -> void:
-	tower_menu.hide_placement_phase()
-	placement_enabled = false
+	if not tower_to_place:
+		tower_menu.display_wave_info()
+		tower_menu.hide_placement_phase()
+		placement_enabled = false
 
-	WaveManager.start_wave()
-	reward = WaveManager.active_wave.reward
+		WaveManager.start_wave()
+		reward = WaveManager.active_wave.reward
 
-	SFXPlayer.play_sfx("go")
+		SFXPlayer.play_sfx("go")
 
 func on_wave_complete() -> void:
 	# Update variables
@@ -184,9 +185,10 @@ func on_enemy_died():
 
 func _input(_event):
 	if click_enabled and Input.is_action_just_pressed("left_click"):
+		print("passed")
 		place_tower(selected_tower_element, get_global_mouse_position())
 
-	if click_enabled and Input.is_action_just_pressed("right_click"):
+	if Input.is_action_just_pressed("right_click"):
 		if tower_to_place:
 			tower_to_place.queue_free()
 			tower_to_place = null
@@ -197,6 +199,7 @@ func set_checkpoints() -> void:
 	checkpoint_active_towers = active_towers.duplicate()
 
 func on_mouse_entered_button() -> void:
+	print("mouse_entered")
 	click_enabled = false
 
 func on_mouse_exited_button() -> void:
