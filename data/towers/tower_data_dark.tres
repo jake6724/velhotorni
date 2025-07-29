@@ -10,9 +10,9 @@
 script = ExtResource("1_ioid6")
 element = 5
 transform_element = 0
-damage = 1.0
+damage = 10.0
 speed = 0.2
-attack_range = 20.0
+attack_range = 25.0
 num_targets = 1
 atlas = ExtResource("1_xw50n")
 transform_hint_texture = ExtResource("3_xw50n")
