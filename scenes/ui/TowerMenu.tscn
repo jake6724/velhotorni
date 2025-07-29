@@ -193,14 +193,20 @@ theme_override_constants/separation = 2
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TowerButtons/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 3
+theme_override_constants/separation = 1
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer/MarginContainer/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -208,7 +214,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("6_g5j4q")
 
-[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer/MarginContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
@@ -219,7 +225,7 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("7_r3bjd")
 theme_override_font_sizes/font_size = 8
 text = "25"
-horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="FireButton" type="TextureButton" parent="MarginContainer/TowerButtons/VBoxContainer"]
 unique_name_in_owner = true
@@ -233,10 +239,15 @@ texture_normal = ExtResource("8_4bluh")
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer3"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TowerButtons/VBoxContainer3"]
 layout_mode = 2
+theme_override_constants/margin_left = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer3/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer3/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer3/MarginContainer/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -244,7 +255,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("6_g5j4q")
 
-[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer3/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer3/MarginContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
@@ -268,10 +279,15 @@ texture_normal = ExtResource("9_rh755")
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TowerButtons/VBoxContainer2"]
 layout_mode = 2
+theme_override_constants/margin_left = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer2/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer2/MarginContainer/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -279,7 +295,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("6_g5j4q")
 
-[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer2/MarginContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
@@ -303,10 +319,15 @@ texture_normal = ExtResource("10_e3xib")
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer4"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TowerButtons/VBoxContainer4"]
 layout_mode = 2
+theme_override_constants/margin_left = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer4/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer4/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer4/MarginContainer/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -314,7 +335,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("6_g5j4q")
 
-[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer4/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer4/MarginContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
@@ -338,10 +359,15 @@ texture_normal = ExtResource("12_gfj4e")
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer5"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TowerButtons/VBoxContainer5"]
 layout_mode = 2
+theme_override_constants/margin_left = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer5/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer5/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer5/MarginContainer/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -349,7 +375,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("6_g5j4q")
 
-[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer5/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer5/MarginContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
@@ -373,10 +399,15 @@ texture_normal = ExtResource("12_638he")
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer6"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TowerButtons/VBoxContainer6"]
 layout_mode = 2
+theme_override_constants/margin_left = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer6/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/VBoxContainer6/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TowerButtons/VBoxContainer6/MarginContainer/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -384,7 +415,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("6_g5j4q")
 
-[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer6/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/TowerButtons/VBoxContainer6/MarginContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
