@@ -9,10 +9,11 @@ extends Resource
 @export var atlas: Texture
 @export var explosion_sfx: AudioStreamOggVorbis
 
-@export_category("Debuff Cooldowns")
-## Cooldown time after being frozen that `Enemy` can be frozen again. In seconds.
-@export var freeze_cooldown: float
-## Cooldown time after being stunned that `Enemy` can be stunned again. In seconds.
-@export var stun_cooldown: float 
-## Cooldown time after being knockbacked that `Enemy` can be knockbacked again. In seconds.
-@export var knockback_cooldown: float
+@export_category("Debuff Multipliers")
+## Multiplier to modify how long until `Enemy` can be frozen or stunned again. This value is multiplied by the duration of
+## the first active CC debuff.
+@export var cc_multiplier: float = 1.5
+
+## Multiplier to modify the required distance travelled before `Enemy` can be knockbacked again. This value is multiplied by the distance
+## of the first active knockback debuff.
+@export var knockback_multiplier: float = 1.5

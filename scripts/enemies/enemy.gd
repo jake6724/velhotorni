@@ -62,12 +62,12 @@ func _ready():
 
 	# Configure DebuffManager
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
-	debuff_manager.freeze_cooldown = data.freeze_cooldown
-	debuff_manager.stun_cooldown = data.stun_cooldown
-	debuff_manager.knockback_cooldown = data.knockback_cooldown
+	debuff_manager.cc_multiplier = data.cc_multiplier
+	debuff_manager.knockback_multiplier = data.knockback_multiplier
 
 func _physics_process(delta):
 	move(delta)
+	debuff_manager.enemy_progress = path_follow.progress
 
 func move(delta) -> void:
 	if is_alive:

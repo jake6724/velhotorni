@@ -2,29 +2,28 @@
 class_name DebuffManager
 extends Node2D
 
-var freeze_timer: Timer = Timer.new()
-var stun_timer: Timer = Timer.new()
-var knockback_timer: Timer = Timer.new()
+@export var knockback_multiplier: float # Set by enemy
+@export var cc_multiplier: float # Set by enemy
 
-var freeze_cooldown: float
-var stun_cooldown: float
-var knockback_cooldown: float
+var cc_timer: Timer = Timer.new()
+var cc_cooldown: float
+var can_cc: bool = true
 
-var can_freeze: bool = true
-var can_stun: bool = true
 var can_knockback = true
+var knockback_reset_distance: float
+
+var enemy_progress: float:
+	set(progress):
+		enemy_progress = progress
+		check_knockback_reset_distance_reached(enemy_progress)
 
 signal add_new_debuff
 signal remove_active_debuff
 
 func _ready():
 	# Configure Cooldown Timers
-	add_child(freeze_timer)
-	add_child(stun_timer)
-	add_child(knockback_timer)
-	freeze_timer.timeout.connect(on_freeze_timer_timeout)
-	stun_timer.timeout.connect(on_stun_timer_timeout)
-	knockback_timer.timeout.connect(on_knockback_timer_timeout)
+	add_child(cc_timer)
+	cc_timer.timeout.connect(on_cc_timer_timeout)
 
 func add_debuff(new_debuff_data: DebuffData) -> void:
 
@@ -52,8 +51,8 @@ func add_debuff(new_debuff_data: DebuffData) -> void:
 
 		else:
 			create_debuff(new_debuff_data)
-	else:
-		print("Cannot apply this debuff yet (cooldown active)")
+	# else:
+	# 	print("Cannot apply this debuff yet (cooldown active)")
 
 func check_debuff_type_present(type: Constants.Debuff) -> bool:
 	for child in get_children():
@@ -70,10 +69,10 @@ func get_active_debuff_by_type(_type: Constants.Debuff) -> Debuff:
 	return null
 
 func check_debuff_allowed(_data: DebuffData) -> bool:
-	if _data.type == Constants.Debuff.FREEZE and not can_freeze:
+	if _data.type == Constants.Debuff.FREEZE and not can_cc:
 		return false
 
-	elif _data.type == Constants.Debuff.STUN and not can_stun:
+	elif _data.type == Constants.Debuff.STUN and not can_cc:
 		return false
 
 	elif _data.type == Constants.Debuff.KNOCKBACK and not can_knockback:
@@ -87,26 +86,27 @@ func create_debuff(_data: DebuffData) -> void:
 	add_child(new_debuff)
 	add_new_debuff.emit(new_debuff)
 	new_debuff.call_deferred("start_debuff")
-	start_debuff_cooldown(_data.type)
 
-func start_debuff_cooldown(_type: Constants.Debuff) -> void:
-	match _type:
-		Constants.Debuff.FREEZE: 
-			can_freeze = false
-			freeze_timer.start(freeze_cooldown)
-		Constants.Debuff.STUN: 
-			can_stun = false
-			stun_timer.start(stun_cooldown)
-		Constants.Debuff.KNOCKBACK: 
-			can_knockback = false
-			knockback_timer.start(knockback_cooldown)
-		_: pass
+	start_cc_cooldown(_data)
+	set_knockback_reset_distance(_data)
 
-func on_freeze_timer_timeout() -> void:
-	can_freeze = true
+func start_cc_cooldown(_data: DebuffData) -> void:
+	# Only set a new cooldown if not already CC'd
+	if can_cc:
+		if _data.type == Constants.Debuff.FREEZE or _data.type == Constants.Debuff.STUN:
+			can_cc = false
+			cc_cooldown = _data.total_duration * cc_multiplier
+			cc_timer.start(cc_cooldown)
 
-func on_stun_timer_timeout() -> void:
-	can_stun = true
+func set_knockback_reset_distance(_data) -> void:
+	if can_knockback and _data.type == Constants.Debuff.KNOCKBACK:
+		can_knockback = false
+		knockback_reset_distance = (enemy_progress - _data.value) + (_data.value * knockback_multiplier)
 
-func on_knockback_timer_timeout() -> void:
-	can_knockback = true
+func on_cc_timer_timeout() -> void:
+	can_cc = true
+
+func check_knockback_reset_distance_reached(progress: float) -> void:
+	if not can_knockback:
+		if progress >= knockback_reset_distance:
+			can_knockback = true
