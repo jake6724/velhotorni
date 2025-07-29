@@ -13,6 +13,7 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var range_indicator = $RangeIndicator
 @onready var transform_hint_sprite: Sprite2D = %TransformHintSprite
+@onready var tower_targeting: TowerTargeting = %TowerTargeting
 
 # Internal data
 var active_target: Enemy
@@ -107,7 +108,7 @@ func update_textures() -> void:
 
 func _physics_process(_delta):	
 	if can_attack:
-		active_target = get_active_target()
+		active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
 		if active_target:
 			attack()
 			can_attack = false
@@ -119,58 +120,6 @@ func attack() -> void:
 	flip_to_face_active_target()
 	spawn_bullet()
 	play_shot_sfx()
-
-func get_active_target() -> Enemy:
-	match target_priority:
-		TargetPriority.FIRST: return get_first_target()
-		TargetPriority.LAST: return get_last_target()
-		TargetPriority.HIGHEST: return get_highest_target()
-		TargetPriority.LOWEST: return get_lowest_target()
-		_: return null
-
-func get_first_target() -> Enemy:
-	var max_progress: float = -INF
-	if in_range_targets.size() != 0:
-		for enemy: Enemy in in_range_targets:
-			if enemy.path_follow.progress_ratio > max_progress:
-				max_progress = enemy.path_follow.progress_ratio
-				active_target = enemy
-		return active_target
-	else: 
-		return null
-
-func get_last_target() -> Enemy:
-	var min_progress: float = INF
-	if in_range_targets.size() != 0:
-		for enemy: Enemy in in_range_targets:
-			if enemy.path_follow.progress_ratio < min_progress:
-				min_progress = enemy.path_follow.progress_ratio
-				active_target = enemy
-		return active_target
-	else: 
-		return null
-
-func get_highest_target() -> Enemy:
-	var max_health: float = -INF
-	if in_range_targets.size() != 0:
-		for enemy: Enemy in in_range_targets:
-			if enemy.health > max_health:
-				max_health = enemy.health
-				active_target = enemy
-		return active_target
-	else: 
-		return null
-
-func get_lowest_target() -> Enemy:
-	var min_health: float = INF
-	if in_range_targets.size() != 0:
-		for enemy: Enemy in in_range_targets:
-			if enemy.health < min_health:
-				min_health = enemy.health
-				active_target = enemy
-		return active_target
-	else: 
-		return null
 
 func on_enemy_died(enemy: Enemy) -> void:
 	var index = in_range_targets.find(enemy)
