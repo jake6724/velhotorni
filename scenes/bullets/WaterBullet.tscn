@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b6qmk2qf0ex8x"]
 
-[ext_resource type="Texture2D" uid="uid://clm78jlieecpp" path="res://assets/art/atlases/atl_bullet_water_fish.png" id="1_5sfm0"]
+[ext_resource type="Texture2D" uid="uid://clm78jlieecpp" path="res://assets/art/atlases/bullet/atl_bullet_water_fish.png" id="1_5sfm0"]
 [ext_resource type="Script" uid="uid://cpx7d6yvad41w" path="res://scripts/bullets/bullet.gd" id="2_75b6g"]
 [ext_resource type="Resource" uid="uid://cfrm4uwd8i0pc" path="res://data/bullets/bullet_data_water.tres" id="3_5sfm0"]
 

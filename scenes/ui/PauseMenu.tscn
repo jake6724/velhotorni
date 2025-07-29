@@ -1,16 +1,16 @@
 [gd_scene load_steps=17 format=3 uid="uid://cyqs2ueeu4k80"]
 
-[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/spr_ui_box2.png" id="1_7ida2"]
+[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="1_7ida2"]
 [ext_resource type="Script" uid="uid://cl3kc6asyjctx" path="res://scripts/ui/pause_menu.gd" id="1_n5dsq"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_5twic"]
 [ext_resource type="Theme" uid="uid://6kjtqajiemqv" path="res://assets/MenuButtonTheme.tres" id="4_5twic"]
-[ext_resource type="Texture2D" uid="uid://dqu447spi1l45" path="res://assets/art/sprites/spr_ui_grabber.png" id="4_csaq8"]
-[ext_resource type="Texture2D" uid="uid://ymgijxgttmvr" path="res://assets/art/sprites/spr_ui_grabber_highlight.png" id="5_rw35d"]
+[ext_resource type="Texture2D" uid="uid://dqu447spi1l45" path="res://assets/art/sprites/ui/spr_ui_grabber.png" id="4_csaq8"]
+[ext_resource type="Texture2D" uid="uid://ymgijxgttmvr" path="res://assets/art/sprites/ui/spr_ui_grabber_highlight.png" id="5_rw35d"]
 [ext_resource type="StyleBox" uid="uid://ccpu2hqu2qyvk" path="res://scenes/ui/slider.tres" id="6_csaq8"]
 [ext_resource type="StyleBox" uid="uid://b68exu2wd7ig3" path="res://scenes/ui/grabberarea.tres" id="7_m3ie4"]
-[ext_resource type="Texture2D" uid="uid://crxnetu4w8b18" path="res://assets/art/sprites/spr_ui_checkbox.png" id="7_px486"]
-[ext_resource type="Texture2D" uid="uid://omqlfhu10s3" path="res://assets/art/sprites/spr_ui_checkbox_unchecked.png" id="8_o0a0r"]
-[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/spr_ui_box3.png" id="10_o0a0r"]
+[ext_resource type="Texture2D" uid="uid://crxnetu4w8b18" path="res://assets/art/sprites/ui/spr_ui_checkbox.png" id="7_px486"]
+[ext_resource type="Texture2D" uid="uid://omqlfhu10s3" path="res://assets/art/sprites/ui/spr_ui_checkbox_unchecked.png" id="8_o0a0r"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="10_o0a0r"]
 
 [sub_resource type="Theme" id="Theme_n5dsq"]
 CheckBox/icons/checked = null

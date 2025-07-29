@@ -20,21 +20,21 @@ extends Control
 @onready var fast_forward: TextureButton = %FastForward
 
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
-	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_ui_tower_fire.png"),
-	Constants.Element.WIND: preload("res://assets/art/sprites/spr_ui_tower_wind.png"),
-	Constants.Element.WATER: preload("res://assets/art/sprites/spr_ui_tower_water.png"),
-	Constants.Element.EARTH: preload("res://assets/art/sprites/spr_ui_tower_earth.png"),
-	Constants.Element.LIGHT: preload("res://assets/art/sprites/spr_ui_tower_light.png"),
-	Constants.Element.DARK: preload("res://assets/art/sprites/spr_ui_tower_dark.png"),
+ 	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind.png"),
+	Constants.Element.WATER: preload("res://assets/art/sprites/ui/spr_ui_tower_water.png"),
+	Constants.Element.EARTH: preload("res://assets/art/sprites/ui/spr_ui_tower_earth.png"),
+	Constants.Element.LIGHT: preload("res://assets/art/sprites/ui/spr_ui_tower_light.png"),
+	Constants.Element.DARK: preload("res://assets/art/sprites/ui/spr_ui_tower_dark.png"),
 }
 
 var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
-	Constants.Element.FIRE: preload("res://assets/art/sprites/spr_ui_tower_fire_locked.png"),
-	Constants.Element.WIND: preload("res://assets/art/sprites/spr_ui_tower_wind_locked.png"),
-	Constants.Element.WATER: preload("res://assets/art/sprites/spr_ui_tower_water_locked.png"),
-	Constants.Element.EARTH: preload("res://assets/art/sprites/spr_ui_tower_earth_locked.png"),
-	Constants.Element.LIGHT: preload("res://assets/art/sprites/spr_ui_tower_light_locked.png"),
-	Constants.Element.DARK: preload("res://assets/art/sprites/spr_ui_tower_dark_locked.png"),
+	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind_locked.png"),
+	Constants.Element.WATER: preload("res://assets/art/sprites/ui/spr_ui_tower_water_locked.png"),
+	Constants.Element.EARTH: preload("res://assets/art/sprites/ui/spr_ui_tower_earth_locked.png"),
+	Constants.Element.LIGHT: preload("res://assets/art/sprites/ui/spr_ui_tower_light_locked.png"),
+	Constants.Element.DARK: preload("res://assets/art/sprites/ui/spr_ui_tower_dark_locked.png"),
 }
 
 # Signals
