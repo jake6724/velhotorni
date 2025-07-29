@@ -37,11 +37,12 @@ func _ready() -> void:
 	_original_global_position = global_position
 	_min_distance = 11 # This is here to prevent unused warning if I just set it above
 
-func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _debuff_data, _speed: float) -> void:
+func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _debuff_data, _speed: float, _max_distance) -> void:
 	data.element = _element
 	data.damage = _damage
 	data.debuff_data = _debuff_data
 	data.speed = _speed
+	data.max_distance = _max_distance + (_max_distance * .5)
 	target = _target
 	is_active = true
 

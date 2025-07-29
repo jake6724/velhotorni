@@ -8,3 +8,4 @@ var debuff_data: DebuffData = null
 var element: Constants.Element
 var damage: float
 var speed: float
+var max_distance: float
