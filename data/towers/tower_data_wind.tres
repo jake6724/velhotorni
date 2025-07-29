@@ -10,13 +10,13 @@
 script = ExtResource("1_fairw")
 element = 1
 transform_element = 2
-damage = 20.0
+damage = 18.0
 speed = 1.25
 attack_range = 60.0
 num_targets = 1
 atlas = ExtResource("1_wsq5c")
 transform_hint_texture = ExtResource("3_g6jon")
 bullet = ExtResource("2_wsq5c")
-bullet_speed = 100.0
+bullet_speed = 125.0
 debuff_data = ExtResource("3_3hdua")
 metadata/_custom_type_script = "uid://v7b6nq74b314"
