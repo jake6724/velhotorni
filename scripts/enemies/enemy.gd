@@ -60,8 +60,11 @@ func _ready():
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
 
+	# Configure DebuffManager
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
-	# debuff_manager.remove_active_debuff.connect(on_remove_active_debuff)
+	debuff_manager.freeze_cooldown = data.freeze_cooldown
+	debuff_manager.stun_cooldown = data.stun_cooldown
+	debuff_manager.knockback_cooldown = data.knockback_cooldown
 
 func _physics_process(delta):
 	move(delta)
@@ -135,7 +138,6 @@ func on_animation_finished(anim_name):
 		queue_free()
 
 func on_add_new_debuff(_debuff: Debuff) -> void:
-	# TODO: Consider simplifying this by just checking the type of debuff? May still be a lot of lines, this is pretty decent.
 	for signal_dict in _debuff.get_signal_list():
 		var signal_name: String = signal_dict["name"]
 		match signal_name:
@@ -185,8 +187,6 @@ func on_debuff_remove_weaken() -> void:
 	weaken_percent = 0.0
 
 func on_debuff_apply_knockback(_value) -> void:
-	# path_follow.progress = max(0, path_follow.progress - _value) # Do not let progress fall below 0
-
 	var tween: Tween = get_tree().create_tween()
 	var progress_target: float = max(0, path_follow.progress - _value)
 	var _knockback_tween_speed: float = .3
@@ -194,12 +194,3 @@ func on_debuff_apply_knockback(_value) -> void:
 
 func on_debuff_remove_knockback() -> void:
 	pass
-
-# func on_remove_active_debuff(_debuff: Debuff) -> void:
-# 	for signal_dict in _debuff.get_signal_list():
-# 		var signal_name: String = signal_dict["name"]
-# 		if is_connected(
-
-# # TODO: This could be dangerous, no type or value checks. May be TOO generic
-# func update_data_value(property_name: String, value) -> void:
-# 	data.set(property_name, value)

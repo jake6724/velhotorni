@@ -14,4 +14,7 @@ health = 100.0
 speed = 30.0
 atlas = ExtResource("1_j4v0t")
 explosion_sfx = ExtResource("2_panid")
+freeze_cooldown = 0.0
+stun_cooldown = 0.0
+knockback_cooldown = 3.0
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

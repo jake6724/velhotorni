@@ -217,5 +217,6 @@ position = Vector2(16, 3)
 texture = ExtResource("5_24b6r")
 
 [node name="DebuffManager" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("7_vtlqb")
 metadata/_custom_type_script = "uid://bk2472hmw8gj8"

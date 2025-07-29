@@ -8,3 +8,11 @@ extends Resource
 @export var speed: float
 @export var atlas: Texture
 @export var explosion_sfx: AudioStreamOggVorbis
+
+@export_category("Debuff Cooldowns")
+## Cooldown time after being frozen that `Enemy` can be frozen again. In seconds.
+@export var freeze_cooldown: float
+## Cooldown time after being stunned that `Enemy` can be stunned again. In seconds.
+@export var stun_cooldown: float 
+## Cooldown time after being knockbacked that `Enemy` can be knockbacked again. In seconds.
+@export var knockback_cooldown: float
