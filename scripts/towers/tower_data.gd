@@ -22,3 +22,6 @@ extends Resource
 @export var bullet_speed: float
 ## This value may be left as <empty> if no Debuff is required.
 @export var debuff_data: DebuffData = null
+
+@export_category("Buff")
+@export var buff_data: BuffData

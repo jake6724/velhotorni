@@ -14,6 +14,9 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var range_indicator = $RangeIndicator
 @onready var transform_hint_sprite: Sprite2D = %TransformHintSprite
 @onready var tower_targeting: TowerTargeting = %TowerTargeting
+@onready var buff_manager: BuffManager = %BuffManager
+@onready var buff_area: Area2D = %BuffArea
+@onready var buff_collider: CollisionShape2D = %BuffCollider
 
 # Internal data
 var active_target: Enemy
@@ -37,12 +40,12 @@ var target_priority: TargetPriority = TargetPriority.FIRST
 
 # Tower data (for transformations)
 var tower_data: Dictionary[Constants.Element, TowerData] = {
-	Constants.Element.FIRE: preload("res://data/towers/tower_data_fire.tres"),
-	Constants.Element.EARTH: preload("res://data/towers/tower_data_earth.tres"),
-	Constants.Element.WATER: preload("res://data/towers/tower_data_water.tres"),
-	Constants.Element.WIND: preload("res://data/towers/tower_data_wind.tres"),
-	Constants.Element.DARK: preload("res://data/towers/tower_data_dark.tres"),
-	Constants.Element.LIGHT: preload("res://data/towers/tower_data_light.tres"),}
+	Constants.Element.FIRE: load("res://data/towers/tower_data_fire.tres"),
+	Constants.Element.EARTH: load("res://data/towers/tower_data_earth.tres"),
+	Constants.Element.WATER: load("res://data/towers/tower_data_water.tres"),
+	Constants.Element.WIND: load("res://data/towers/tower_data_wind.tres"),
+	Constants.Element.DARK: load("res://data/towers/tower_data_dark.tres"),
+	Constants.Element.LIGHT: load("res://data/towers/tower_data_light.tres"),}
 
 # Debugs
 var debug_attack_line: Line2D = Line2D.new()
@@ -61,17 +64,21 @@ func _ready():
 	transform_area.mouse_entered.connect(on_mouse_entered_transform_area)
 	transform_area.mouse_exited.connect(on_mouse_exited_transform_area)
 
+	# buff_manager.buff_collider = buff_collider
+
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
-	base_data = tower_data[element]
-	transform_data = tower_data[base_data.transform_element]
+	base_data = tower_data[element].duplicate()
+	transform_data = tower_data[base_data.transform_element].duplicate()
 	data = base_data
+
 	update_textures()
 
 	# Configure CollisionShape2D
 	var shape: CircleShape2D = collider.shape
 	shape.radius = data.attack_range	
 	can_show_range = false
+	buff_collider.shape.radius = data.attack_range
 
 	# Configure Timers
 	attack_timer.timeout.connect(on_attack_timer_timeout)
@@ -85,6 +92,13 @@ func initialize(element: Constants.Element):
 	transform_timer.start(transform_delay) # time until you can transform a tower (so it doesn't when you click to spawn it)
 
 	can_show_range = false
+
+	# Connect to BuffManager
+	if data.buff_data: # TODO: Cleanup - Only connect manager to an area if it has a buff to apply
+		buff_manager.buff_area = buff_area
+		buff_manager.buff_data = data.buff_data
+	buff_manager.add_new_buff.connect(on_add_new_buff) # Recieve all buffs, even if this tower doesn't have one to share
+
 
 func _physics_process(_delta):	
 	if can_attack:
@@ -188,3 +202,15 @@ func _draw():
 	if can_show_range:
 		draw_circle(Vector2.ZERO + Vector2(8,8), data.attack_range, Color.WHITE, false, -1.0, false)
 		# draw_arc(Vector2.ZERO + Vector2(8,8), data.attack_range, 0.0, TAU, data.attack_range, Color.WHITE)
+
+# Buffs
+func on_add_new_buff(new_buff: Buff):
+	print("on_add_new_buff")
+	match new_buff.data.type:
+		Buff.Type.RANGE:
+			print("Range buff signal recieved")
+			data.attack_range = data.attack_range + (data.attack_range * new_buff.data.value)
+			#TODO: functionize?
+			buff_collider.shape.radius = data.attack_range
+			collider.shape.radius =  data.attack_range
+		_: pass

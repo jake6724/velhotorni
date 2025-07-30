@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpg5vj2118tkk"]
+[gd_scene load_steps=17 format=3 uid="uid://bpg5vj2118tkk"]
 
 [ext_resource type="Script" uid="uid://1v42jjyvr5ed" path="res://scripts/towers/tower.gd" id="1_cqx8d"]
 [ext_resource type="Texture2D" uid="uid://b58tie4p0ydsh" path="res://assets/art/atlases/atl_tower_water.png" id="3_gc8gn"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b4g8en84fxspy" path="res://assets/placeholders/test_range.png" id="7_o8o11"]
 [ext_resource type="Texture2D" uid="uid://dralbmpfuw6ej" path="res://assets/placeholders/aoe_base_test.png" id="8_ig0xk"]
 [ext_resource type="Script" uid="uid://glgm0sqpjq0a" path="res://scripts/towers/tower_targeting.gd" id="9_aoo5e"]
+[ext_resource type="Script" uid="uid://n5jrnk3kfl2e" path="res://scripts/buffs/buff_manager.gd" id="10_av7pv"]
 
 [sub_resource type="Animation" id="Animation_bfb4r"]
 length = 0.001
@@ -55,6 +56,9 @@ size = Vector2(16, 16)
 resource_local_to_scene = true
 radius = 10.4403
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_av7pv"]
+resource_local_to_scene = true
+
 [node name="Tower" type="Node2D"]
 z_index = 2
 z_as_relative = false
@@ -82,6 +86,7 @@ hframes = 4
 
 [node name="TransformArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransformArea"]
 position = Vector2(8, 8)
@@ -92,7 +97,6 @@ input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(8, 8)
-scale = Vector2(1, 1.04698)
 shape = SubResource("CircleShape2D_tcjvg")
 debug_color = Color(0.974735, 0, 0.424605, 0.42)
 
@@ -126,3 +130,19 @@ offset = Vector2(8, 8)
 [node name="TowerTargeting" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("9_aoo5e")
+metadata/_custom_type_script = "uid://glgm0sqpjq0a"
+
+[node name="BuffManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10_av7pv")
+metadata/_custom_type_script = "uid://n5jrnk3kfl2e"
+
+[node name="BuffArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_mask = 2
+
+[node name="BuffCollider" type="CollisionShape2D" parent="BuffArea"]
+unique_name_in_owner = true
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_av7pv")
+debug_color = Color(0.0367547, 0.650514, 0, 0.42)

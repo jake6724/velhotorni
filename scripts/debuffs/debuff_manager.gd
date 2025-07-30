@@ -51,8 +51,6 @@ func add_debuff(new_debuff_data: DebuffData) -> void:
 
 		else:
 			create_debuff(new_debuff_data)
-	# else:
-	# 	print("Cannot apply this debuff yet (cooldown active)")
 
 func check_debuff_type_present(type: Constants.Debuff) -> bool:
 	for child in get_children():
