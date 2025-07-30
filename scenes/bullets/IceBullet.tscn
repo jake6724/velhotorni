@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://bt4rtye8wsuwu"]
 
-[ext_resource type="Texture2D" uid="uid://cjgwl72lifxd3" path="res://assets/art/sprites/spr_bullet_water.png" id="1_526pg"]
+[ext_resource type="Texture2D" uid="uid://cjgwl72lifxd3" path="res://assets/art/sprites/bullet/spr_bullet_water.png" id="1_526pg"]
 [ext_resource type="Script" uid="uid://bidlapkmguymx" path="res://scripts/bullets/piercing_bullet.gd" id="2_krw0y"]
-[ext_resource type="Texture2D" uid="uid://2j2km3ve3cr5" path="res://assets/art/sprites/spr_bullet_hit.png" id="3_fea0w"]
+[ext_resource type="Texture2D" uid="uid://2j2km3ve3cr5" path="res://assets/art/sprites/bullet/spr_bullet_hit.png" id="3_fea0w"]
 
 [sub_resource type="Animation" id="Animation_cywa6"]
 length = 0.001

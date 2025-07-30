@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://dyd66xpilo8lo"]
 
-[ext_resource type="Texture2D" uid="uid://c44ayfq1wslwa" path="res://assets/art/atlases/atl_bullet_wind.png" id="1_mwvku"]
+[ext_resource type="Texture2D" uid="uid://c44ayfq1wslwa" path="res://assets/art/atlases/bullet/atl_bullet_wind.png" id="1_mwvku"]
 [ext_resource type="Script" uid="uid://bidlapkmguymx" path="res://scripts/bullets/piercing_bullet.gd" id="2_vjwwv"]
 [ext_resource type="Script" uid="uid://bntcbxjuaddnc" path="res://scripts/bullets/data/piercing_bullet_data.gd" id="3_mwvku"]
 [ext_resource type="Texture2D" uid="uid://clb7quodehgmr" path="res://assets/art/sprites/spr_fx_explosion.png" id="4_jmyen"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2p2hqdion541"]
 
-[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/spr_ui_box2.png" id="1_hhn8t"]
+[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="1_hhn8t"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="2_i3ajf"]
 
 [node name="Control" type="NinePatchRect"]

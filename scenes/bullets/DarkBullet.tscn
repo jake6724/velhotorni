@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://deul8b0puiif7"]
 
 [ext_resource type="Script" uid="uid://cpx7d6yvad41w" path="res://scripts/bullets/bullet.gd" id="1_1kl4c"]
-[ext_resource type="Texture2D" uid="uid://j05btq4fp7jj" path="res://assets/art/atlases/atl_bullet_dark_wolf.png" id="3_ddppa"]
+[ext_resource type="Texture2D" uid="uid://j05btq4fp7jj" path="res://assets/art/atlases/bullet/atl_bullet_dark_wolf.png" id="3_ddppa"]
 [ext_resource type="Resource" uid="uid://ubk1b81j04ee" path="res://data/bullets/bullet_data_dark.tres" id="3_u70m3"]
 
 [sub_resource type="Animation" id="Animation_bpy5x"]

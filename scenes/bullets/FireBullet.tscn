@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://dppck31xcxphl"]
 
-[ext_resource type="Texture2D" uid="uid://wtib3kuu1ahl" path="res://assets/art/sprites/spr_bullet_fire.png" id="1_7vypf"]
+[ext_resource type="Texture2D" uid="uid://wtib3kuu1ahl" path="res://assets/art/sprites/bullet/spr_bullet_fire.png" id="1_7vypf"]
 [ext_resource type="Script" uid="uid://6frj5j1q6awc" path="res://scripts/bullets/aoe_bullet.gd" id="2_4norr"]
 [ext_resource type="Resource" uid="uid://d1h1abwjiibhe" path="res://data/bullets/bullet_data_fire.tres" id="3_m0e7q"]
 [ext_resource type="Texture2D" uid="uid://clb7quodehgmr" path="res://assets/art/sprites/spr_fx_explosion.png" id="4_8kptb"]
-[ext_resource type="Texture2D" uid="uid://bpv0yurhjyu6o" path="res://assets/art/atlases/atl_bullet_fire.png" id="4_a7717"]
+[ext_resource type="Texture2D" uid="uid://bpv0yurhjyu6o" path="res://assets/art/atlases/bullet/atl_bullet_fire.png" id="4_a7717"]
 
 [sub_resource type="Animation" id="Animation_4norr"]
 length = 0.001

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://due6m24tuba1u"]
 
 [ext_resource type="Script" uid="uid://00gxosycdjw" path="res://scripts/singletons/scene_transition.gd" id="1_igxph"]
-[ext_resource type="Texture2D" uid="uid://dtplsxceks36y" path="res://assets/art/sprites/spr_ui_fade_black.png" id="2_kq3v3"]
+[ext_resource type="Texture2D" uid="uid://dtplsxceks36y" path="res://assets/art/sprites/ui/spr_ui_fade_black.png" id="2_kq3v3"]
 
 [sub_resource type="Animation" id="Animation_kq3v3"]
 resource_name = "RESET"

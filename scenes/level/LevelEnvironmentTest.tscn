@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=4 uid="uid://bnmd4f0giohj6"]
 
-[ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/spr_environment_atlas.png" id="13_4vd4q"]
+[ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="13_4vd4q"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="14_rernj"]
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="17_chfa1"]
-[ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="18_cy2og"]
-[ext_resource type="Texture2D" uid="uid://bwonyc48uhooj" path="res://assets/art/sprites/spr_mask_fog.png" id="19_v6olt"]
+[ext_resource type="Shader" path="res://assets/art/scroll.gdshader" id="18_cy2og"]
+[ext_resource type="Texture2D" uid="uid://bwonyc48uhooj" path="res://assets/art/sprites/environment/spr_mask_fog.png" id="19_v6olt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bbfh2"]
 texture = ExtResource("13_4vd4q")

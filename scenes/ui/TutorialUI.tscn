@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://dubhjspmje3uk" path="res://scenes/ui/DialogueBox.tscn" id="1_1hs27"]
 [ext_resource type="Script" uid="uid://db06u0qolifvo" path="res://scripts/ui/tutorial_ui.gd" id="1_j5iru"]
-[ext_resource type="Texture2D" uid="uid://caq3sqwpslhyv" path="res://assets/art/sprites/spr_ui_portrait_orb.png" id="3_eaobj"]
+[ext_resource type="Texture2D" uid="uid://caq3sqwpslhyv" path="res://assets/art/sprites/ui/spr_ui_portrait_orb.png" id="3_eaobj"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="3_kffba"]
-[ext_resource type="Texture2D" uid="uid://caqhhjchopmuq" path="res://assets/art/sprites/spr_ui_portrait_cursor.png" id="4_ll34v"]
-[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/spr_ui_box3.png" id="4_valf7"]
-[ext_resource type="Texture2D" uid="uid://d1igu4817m082" path="res://assets/art/sprites/spr_ui_portrait_wind.png" id="5_w5mlv"]
-[ext_resource type="Texture2D" uid="uid://dpl7p5u4vdbmy" path="res://assets/art/sprites/spr_ui_portrait_water.png" id="6_21cc2"]
+[ext_resource type="Texture2D" uid="uid://caqhhjchopmuq" path="res://assets/art/sprites/ui/spr_ui_portrait_cursor.png" id="4_ll34v"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="4_valf7"]
+[ext_resource type="Texture2D" uid="uid://d1igu4817m082" path="res://assets/art/sprites/ui/spr_ui_portrait_wind.png" id="5_w5mlv"]
+[ext_resource type="Texture2D" uid="uid://dpl7p5u4vdbmy" path="res://assets/art/sprites/ui/spr_ui_portrait_water.png" id="6_21cc2"]
 
 [sub_resource type="Theme" id="Theme_valf7"]
 

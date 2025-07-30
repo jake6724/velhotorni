@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://f60hwpg87qo0" path="res://scripts/level/tutorial_level_environment.gd" id="1_xwifi"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_xfk66"]
 [ext_resource type="Resource" uid="uid://dsvr4gsryujtu" path="res://data/waves/test_wave.tres" id="3_vp43h"]
-[ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/spr_environment_atlas.png" id="6_485kb"]
+[ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="6_485kb"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="7_xfk66"]
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="9_dit66"]
 [ext_resource type="PackedScene" uid="uid://nifbpm4btkyy" path="res://scenes/ui/TutorialUI.tscn" id="13_5ute2"]
-[ext_resource type="Texture2D" uid="uid://bwonyc48uhooj" path="res://assets/art/sprites/spr_mask_fog.png" id="15_8amrt"]
-[ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="16_3dlar"]
+[ext_resource type="Texture2D" uid="uid://bwonyc48uhooj" path="res://assets/art/sprites/environment/spr_mask_fog.png" id="15_8amrt"]
+[ext_resource type="Shader" path="res://assets/art/scroll.gdshader" id="16_3dlar"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ylovj"]
 texture = ExtResource("6_485kb")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ds0l5uhxf6ha0"]
 
 [ext_resource type="Script" uid="uid://cpx7d6yvad41w" path="res://scripts/bullets/bullet.gd" id="1_jtypa"]
-[ext_resource type="Texture2D" uid="uid://dbvww423w3gn1" path="res://assets/art/atlases/atl_bullet_water.png" id="1_qswsy"]
+[ext_resource type="Texture2D" uid="uid://dbvww423w3gn1" path="res://assets/art/atlases/bullet/atl_bullet_water.png" id="1_qswsy"]
 
 [sub_resource type="Animation" id="Animation_4norr"]
 length = 0.001

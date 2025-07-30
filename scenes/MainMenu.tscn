@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://glpr25c7d5yd" path="res://scripts/main_menu.gd" id="1_yqorp"]
 [ext_resource type="PackedScene" uid="uid://d37yx87886ct2" path="res://scenes/placeholders/scroll_background_test.tscn" id="2_0ykhv"]
 [ext_resource type="Theme" uid="uid://6kjtqajiemqv" path="res://assets/MenuButtonTheme.tres" id="2_ow34m"]
-[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/spr_ui_box2.png" id="2_ucygd"]
+[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_ucygd"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_ucygd"]
-[ext_resource type="Texture2D" uid="uid://fi6ymq1x17ow" path="res://assets/art/sprites/spr_ui_menuart.png" id="5_826wr"]
-[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/spr_ui_box3.png" id="5_mipys"]
-[ext_resource type="Texture2D" uid="uid://djq3huplgujyb" path="res://assets/art/sprites/spr_ui_logo.png" id="6_ucygd"]
+[ext_resource type="Texture2D" uid="uid://fi6ymq1x17ow" path="res://assets/art/sprites/ui/spr_ui_menuart.png" id="5_826wr"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="5_mipys"]
+[ext_resource type="Texture2D" uid="uid://djq3huplgujyb" path="res://assets/art/sprites/ui/spr_ui_logo.png" id="6_ucygd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mipys"]
 
