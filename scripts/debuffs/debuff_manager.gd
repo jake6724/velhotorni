@@ -26,7 +26,6 @@ func _ready():
 	cc_timer.timeout.connect(on_cc_timer_timeout)
 
 func add_debuff(new_debuff_data: DebuffData) -> void:
-
 	if check_debuff_allowed(new_debuff_data):
 		if "priority" in new_debuff_data:
 			if check_debuff_type_present(new_debuff_data.type): # A debuff of this type is already active

@@ -15,8 +15,8 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var transform_hint_sprite: Sprite2D = %TransformHintSprite
 @onready var tower_targeting: TowerTargeting = %TowerTargeting
 @onready var buff_manager: BuffManager = %BuffManager
-@onready var buff_area: Area2D = %BuffArea
 @onready var buff_collider: CollisionShape2D = %BuffCollider
+@onready var buff_area: BuffArea = %BuffArea
 
 # Internal data
 var active_target: Enemy
@@ -57,7 +57,6 @@ signal transform_tower
 signal tower_hovered
 signal tower_unhovered
 
-signal active_buff_remove
 
 func _ready():
 	# Configure Area2D
@@ -94,10 +93,9 @@ func initialize(element: Constants.Element):
 
 	can_show_range = false
 
-	# Connect to BuffManager
+	# Connect to BuffManager and BuffArea
 	if data.buff_data: # TODO: Cleanup - Only connect manager to an area if it has a buff to apply
-		buff_manager.buff_area = buff_area
-		buff_manager.buff_data = data.buff_data
+		buff_area.buff_data = data.buff_data
 	buff_manager.add_new_buff.connect(on_add_new_buff) # Recieve all buffs, even if this tower doesn't have one to share
 	buff_manager.remove_active_buff.connect(on_remove_active_buff)
 
@@ -129,6 +127,7 @@ func transform() -> void:
 	cross_sprite.show()
 	can_transform = false
 	update_current_combat_data()
+	update_colliders()
 	update_textures()
 
 func revert() -> void:
@@ -138,6 +137,7 @@ func revert() -> void:
 		swap_sprite.hide()
 		can_transform = true
 		update_current_combat_data()
+		update_colliders()
 		update_textures()
 
 func update_current_combat_data() -> void:
@@ -214,20 +214,19 @@ func on_add_new_buff(new_buff: Buff):
 	match new_buff.data.type:
 		Buff.Type.RANGE:
 			# print("Range buff signal recieved")
-			print("Pre-buff data.attack_range: ", curr_attack_range)
-			curr_attack_range += data.attack_range * new_buff.data.value
-			print("Post-buff data.attack_range: ", curr_attack_range)
+			# print("Pre-buff data.attack_range: ", curr_attack_range)
+			curr_attack_range += data.attack_range * new_buff.data.modified_value
+			# print("Post-buff data.attack_range: ", curr_attack_range)
 			update_colliders()
 		_: pass
 
 func on_remove_active_buff(active_buff: Buff):
 	match active_buff.data.type:
 		Buff.Type.RANGE:
-			print("Pre-removal data.attack_range: ", curr_attack_range)
-			curr_attack_range -= data.attack_range * active_buff.data.value
-			print("Post-removal data.attack_range: ", curr_attack_range)
+			# print("Pre-removal data.attack_range: ", curr_attack_range)
+			curr_attack_range -= data.attack_range * active_buff.data.modified_value
+			# print("Post-removal data.attack_range: ", curr_attack_range)
 			update_colliders()
-			active_buff_remove.emit()
 
 func update_colliders() -> void:
 	buff_collider.shape.radius = curr_attack_range
