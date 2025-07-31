@@ -9,6 +9,7 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var cross_sprite: Sprite2D = $CrossSprite
 @onready var area: Area2D = $Area2D
 @onready var transform_area: Area2D = %TransformArea
+@onready var transform_collider: CollisionShape2D = %TransformCollider
 @onready var collider: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var range_indicator = $RangeIndicator
@@ -57,7 +58,6 @@ signal transform_tower
 signal tower_hovered
 signal tower_unhovered
 
-
 func _ready():
 	# Configure Area2D
 	area.area_entered.connect(on_area_entered)
@@ -67,8 +67,6 @@ func _ready():
 	transform_area.input_event.connect(on_transform_area_pressed)
 	transform_area.mouse_entered.connect(on_mouse_entered_transform_area)
 	transform_area.mouse_exited.connect(on_mouse_exited_transform_area)
-
-	# buff_manager.buff_collider = buff_collider
 
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
@@ -126,9 +124,7 @@ func transform() -> void:
 	swap_sprite.hide()
 	cross_sprite.show()
 	can_transform = false
-	update_current_combat_data()
-	update_colliders()
-	update_textures()
+	reset_tower()
 
 func revert() -> void:
 	if not can_transform: # Has previously transformed 
@@ -136,9 +132,15 @@ func revert() -> void:
 		cross_sprite.hide()
 		swap_sprite.hide()
 		can_transform = true
-		update_current_combat_data()
-		update_colliders()
-		update_textures()
+		reset_tower()
+
+## Remove all debuffs, refresh colliders so that buffs can be reapplied, update collider sizes, update textures.
+func reset_tower() -> void:
+	buff_manager.remove_all_buffs()
+	update_current_combat_data()
+	refresh_colliders()
+	update_colliders()
+	update_textures()
 
 func update_current_combat_data() -> void:
 	curr_attack_range = data.attack_range
@@ -201,7 +203,7 @@ func on_transform_area_pressed(_viewport, _event, _shape_idx) -> void:
 func on_attack_timer_timeout() -> void:
 	can_attack = true
 
-func on_transform_timer_timeout() -> void:
+func on_transform_timer_timeout() -> void: 
 	can_transform = true
 
 func _draw():
@@ -215,8 +217,11 @@ func on_add_new_buff(new_buff: Buff):
 		Buff.Type.RANGE:
 			# print("Range buff signal recieved")
 			# print("Pre-buff data.attack_range: ", curr_attack_range)
+			print("data.attack_range: ", data.attack_range)
+			print("new_buff.data.modified_value: ", new_buff.data.modified_value)
+			print("Math: ", data.attack_range * new_buff.data.modified_value)
 			curr_attack_range += data.attack_range * new_buff.data.modified_value
-			# print("Post-buff data.attack_range: ", curr_attack_range)
+			print("Post-buff curr_attack_range: ", curr_attack_range)
 			update_colliders()
 		_: pass
 
@@ -228,7 +233,13 @@ func on_remove_active_buff(active_buff: Buff):
 			# print("Post-removal data.attack_range: ", curr_attack_range)
 			update_colliders()
 
+func refresh_colliders() -> void:
+	transform_collider.disabled = true
+	await get_tree().create_timer(.1).timeout
+	transform_collider.disabled = false
+
 func update_colliders() -> void:
+	# TODO: This should use set_deferred
 	buff_collider.shape.radius = curr_attack_range
 	collider.shape.radius =  curr_attack_range
 	queue_redraw()

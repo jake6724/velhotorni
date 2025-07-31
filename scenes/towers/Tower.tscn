@@ -89,7 +89,8 @@ hframes = 4
 unique_name_in_owner = true
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransformArea"]
+[node name="TransformCollider" type="CollisionShape2D" parent="TransformArea"]
+unique_name_in_owner = true
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_ub3td")
 

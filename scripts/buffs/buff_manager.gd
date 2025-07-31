@@ -9,25 +9,27 @@ var buff_data: BuffData
 var buff_pool: Array[Buff]
 
 func add_buff(new_buff_data: BuffData, _source: BuffArea) -> void:
+	print("ADDING BUFF")
 	if not check_source_already_active(_source):
-		set_buff_data_effectiveness(new_buff_data)
-		var new_buff: Buff = create_buff(new_buff_data, _source)
+		var _modified_value: float = get_buff_data_effectiveness(new_buff_data)
+		var new_buff: Buff = create_buff(new_buff_data, _source, _modified_value)
 
 		add_child(new_buff)
 		add_new_buff.emit(new_buff)
 
-func set_buff_data_effectiveness(_buff_data: BuffData) -> void: #TODO: Rename
+func get_buff_data_effectiveness(_buff_data: BuffData) -> float: #TODO: Rename
 	print("Type count: ", get_buff_type_count(_buff_data.type))
-	print("pre-effectiveness _buff_data.modified_value: ", _buff_data.modified_value)
-	_buff_data.modified_value = _buff_data.value / (2 ** get_buff_type_count(_buff_data.type))
+	# print("pre-effectiveness _buff_data.modified_value: ", _buff_data.modified_value)
+	var _modified_value: float = _buff_data.value / (2 ** get_buff_type_count(_buff_data.type))
 	print("post-effectiveness _buff_data.modified_value: ", _buff_data.modified_value)
+	return _modified_value
 
 func get_active_buffs_duplicates_sorted_() -> Array[Buff]:
 	var sorted_buffs: Array[Buff] = []
 	for child in get_children():
 		var active_buff: Buff = child as Buff
 		if active_buff:
-			var copy_buff: Buff = create_buff(active_buff.data, active_buff.data.source)
+			var copy_buff: Buff = create_buff(active_buff.data, active_buff.data.source, active_buff.data.modified_value)
 			sorted_buffs.append(copy_buff)
 
 	sorted_buffs.sort_custom(compare_by_buff_value)
@@ -36,10 +38,10 @@ func get_active_buffs_duplicates_sorted_() -> Array[Buff]:
 func reorder_buffs() -> void:
 
 	# TODO: Check if more than 1 buff, no need to order if only 1 
-	print("REORDER BUFFS")
+	# print("REORDER BUFFS")
 	# Save a copy of all active buffs
 	var all_buffs: Array[Buff] = get_active_buffs_duplicates_sorted_()
-	print("Sorted buff duplicates: ", all_buffs)
+	# print("Sorted buff duplicates: ", all_buffs)
 
 	# Clear all the original buffs
 	remove_all_buffs()
@@ -56,11 +58,12 @@ func get_buff_type_count(_type: Buff.Type) -> int:
 	# print("Type count: ", count)
 	return count
 
-func create_buff(_data: BuffData, _source: BuffArea=null) -> Buff:
+func create_buff(_data: BuffData, _source: BuffArea, _modified_value: float) -> Buff:
 	# Create a new Buff object of the class defined in debuff_script
+	print(_data.modified_value)
 	var new_buff: Buff = Buff.new(_data.duplicate()) # Duplicate necessary if you are modifying the resource itself
-	if _source:
-		new_buff.data.source = _source
+	new_buff.data.source = _source
+	new_buff.data.modified_value = _modified_value
 	return new_buff
 
 func check_source_already_active(_source: BuffArea) -> bool:
@@ -84,7 +87,7 @@ func remove_all_buffs() -> void:
 			remove_buff(buff)
 
 func remove_buff(active_buff: Buff) -> void:
-	# print("REMOVING BUFF")
+	print("REMOVING BUFF")
 	remove_child(active_buff)
 	remove_active_buff.emit(active_buff)
 	active_buff.queue_free()
