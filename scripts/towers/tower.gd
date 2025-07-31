@@ -31,6 +31,9 @@ var can_show_range: bool:
 		can_show_range = value
 		queue_redraw()
 
+# Current Combat Data
+var curr_attack_range: float
+
 # TowerData resources
 var data: TowerData
 var base_data: TowerData
@@ -54,6 +57,8 @@ signal transform_tower
 signal tower_hovered
 signal tower_unhovered
 
+signal active_buff_remove
+
 func _ready():
 	# Configure Area2D
 	area.area_entered.connect(on_area_entered)
@@ -72,13 +77,9 @@ func initialize(element: Constants.Element):
 	transform_data = tower_data[base_data.transform_element].duplicate()
 	data = base_data
 
+	update_current_combat_data()
 	update_textures()
-
-	# Configure CollisionShape2D
-	var shape: CircleShape2D = collider.shape
-	shape.radius = data.attack_range	
-	can_show_range = false
-	buff_collider.shape.radius = data.attack_range
+	update_colliders()
 
 	# Configure Timers
 	attack_timer.timeout.connect(on_attack_timer_timeout)
@@ -98,7 +99,7 @@ func initialize(element: Constants.Element):
 		buff_manager.buff_area = buff_area
 		buff_manager.buff_data = data.buff_data
 	buff_manager.add_new_buff.connect(on_add_new_buff) # Recieve all buffs, even if this tower doesn't have one to share
-
+	buff_manager.remove_active_buff.connect(on_remove_active_buff)
 
 func _physics_process(_delta):	
 	if can_attack:
@@ -127,6 +128,7 @@ func transform() -> void:
 	swap_sprite.hide()
 	cross_sprite.show()
 	can_transform = false
+	update_current_combat_data()
 	update_textures()
 
 func revert() -> void:
@@ -135,7 +137,11 @@ func revert() -> void:
 		cross_sprite.hide()
 		swap_sprite.hide()
 		can_transform = true
+		update_current_combat_data()
 		update_textures()
+
+func update_current_combat_data() -> void:
+	curr_attack_range = data.attack_range
 
 func flip_to_face_active_target():
 	if active_target:
@@ -200,17 +206,30 @@ func on_transform_timer_timeout() -> void:
 
 func _draw():
 	if can_show_range:
-		draw_circle(Vector2.ZERO + Vector2(8,8), data.attack_range, Color.WHITE, false, -1.0, false)
-		# draw_arc(Vector2.ZERO + Vector2(8,8), data.attack_range, 0.0, TAU, data.attack_range, Color.WHITE)
+		draw_circle(Vector2.ZERO + Vector2(8,8), curr_attack_range, Color.WHITE, false, -1.0, false)
 
 # Buffs
 func on_add_new_buff(new_buff: Buff):
-	print("on_add_new_buff")
+	# print("on_add_new_buff")
 	match new_buff.data.type:
 		Buff.Type.RANGE:
-			print("Range buff signal recieved")
-			data.attack_range = data.attack_range + (data.attack_range * new_buff.data.value)
-			#TODO: functionize?
-			buff_collider.shape.radius = data.attack_range
-			collider.shape.radius =  data.attack_range
+			# print("Range buff signal recieved")
+			print("Pre-buff data.attack_range: ", curr_attack_range)
+			curr_attack_range += data.attack_range * new_buff.data.value
+			print("Post-buff data.attack_range: ", curr_attack_range)
+			update_colliders()
 		_: pass
+
+func on_remove_active_buff(active_buff: Buff):
+	match active_buff.data.type:
+		Buff.Type.RANGE:
+			print("Pre-removal data.attack_range: ", curr_attack_range)
+			curr_attack_range -= data.attack_range * active_buff.data.value
+			print("Post-removal data.attack_range: ", curr_attack_range)
+			update_colliders()
+			active_buff_remove.emit()
+
+func update_colliders() -> void:
+	buff_collider.shape.radius = curr_attack_range
+	collider.shape.radius =  curr_attack_range
+	queue_redraw()
