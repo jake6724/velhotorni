@@ -212,25 +212,16 @@ func _draw():
 
 # Buffs
 func on_add_new_buff(new_buff: Buff):
-	# print("on_add_new_buff")
 	match new_buff.data.type:
 		Buff.Type.RANGE:
-			# print("Range buff signal recieved")
-			# print("Pre-buff data.attack_range: ", curr_attack_range)
-			print("data.attack_range: ", data.attack_range)
-			print("new_buff.data.modified_value: ", new_buff.data.modified_value)
-			print("Math: ", data.attack_range * new_buff.data.modified_value)
 			curr_attack_range += data.attack_range * new_buff.data.modified_value
-			print("Post-buff curr_attack_range: ", curr_attack_range)
 			update_colliders()
 		_: pass
 
 func on_remove_active_buff(active_buff: Buff):
 	match active_buff.data.type:
 		Buff.Type.RANGE:
-			# print("Pre-removal data.attack_range: ", curr_attack_range)
 			curr_attack_range -= data.attack_range * active_buff.data.modified_value
-			# print("Post-removal data.attack_range: ", curr_attack_range)
 			update_colliders()
 
 func refresh_colliders() -> void:
@@ -239,7 +230,6 @@ func refresh_colliders() -> void:
 	transform_collider.disabled = false
 
 func update_colliders() -> void:
-	# TODO: This should use set_deferred
 	buff_collider.shape.radius = curr_attack_range
 	collider.shape.radius =  curr_attack_range
 	queue_redraw()

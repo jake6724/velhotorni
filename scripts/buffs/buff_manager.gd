@@ -5,26 +5,25 @@ signal add_new_buff
 signal remove_active_buff
 
 var buff_data: BuffData
-
 var buff_pool: Array[Buff]
 
 func add_buff(new_buff_data: BuffData, _source: BuffArea) -> void:
-	print("ADDING BUFF")
 	if not check_source_already_active(_source):
-		var _modified_value: float = get_buff_data_effectiveness(new_buff_data)
-		var new_buff: Buff = create_buff(new_buff_data, _source, _modified_value)
-
+		var new_buff: Buff = create_buff(new_buff_data, _source, calc_buff_modified_value(new_buff_data))
 		add_child(new_buff)
 		add_new_buff.emit(new_buff)
 
-func get_buff_data_effectiveness(_buff_data: BuffData) -> float: #TODO: Rename
-	print("Type count: ", get_buff_type_count(_buff_data.type))
-	# print("pre-effectiveness _buff_data.modified_value: ", _buff_data.modified_value)
+func calc_buff_modified_value(_buff_data: BuffData) -> float:
 	var _modified_value: float = _buff_data.value / (2 ** get_buff_type_count(_buff_data.type))
-	print("post-effectiveness _buff_data.modified_value: ", _buff_data.modified_value)
 	return _modified_value
 
-func get_active_buffs_duplicates_sorted_() -> Array[Buff]:
+func create_buff(_data: BuffData, _source: BuffArea, _modified_value: float) -> Buff:
+	var new_buff: Buff = Buff.new(_data.duplicate())
+	new_buff.data.source = _source
+	new_buff.data.modified_value = _modified_value
+	return new_buff
+
+func get_prioritized_buff_duplicates_by_type() -> Array[Buff]:
 	var sorted_buffs: Array[Buff] = []
 	for child in get_children():
 		var active_buff: Buff = child as Buff
@@ -35,36 +34,35 @@ func get_active_buffs_duplicates_sorted_() -> Array[Buff]:
 	sorted_buffs.sort_custom(compare_by_buff_value)
 	return sorted_buffs
 
-func reorder_buffs() -> void:
+func prioritize_buffs() -> void:
+	if get_children().size() > 1:
+		# Save a copy of all active buffs
+		var buffs: Array[Buff] = get_prioritized_buff_duplicates_by_type()
 
-	# TODO: Check if more than 1 buff, no need to order if only 1 
-	# print("REORDER BUFFS")
-	# Save a copy of all active buffs
-	var all_buffs: Array[Buff] = get_active_buffs_duplicates_sorted_()
-	# print("Sorted buff duplicates: ", all_buffs)
+		# Clear all the original buffs
+		remove_all_buffs()
 
-	# Clear all the original buffs
-	remove_all_buffs()
+		# Add the duplicates in the correct order
+		for buff: Buff in buffs:
+			add_buff(buff.data, buff.data.source)
 
-	# Add the duplicates back, now in the correct order
-	for buff: Buff in all_buffs:
-		add_buff(buff.data, buff.data.source)
+func remove_all_buffs() -> void:
+	for child in get_children():
+		var buff: Buff = child as Buff
+		if buff:
+			remove_buff(buff)
+
+func remove_buff(active_buff: Buff) -> void:
+	remove_child(active_buff)
+	remove_active_buff.emit(active_buff)
+	active_buff.queue_free()
 
 func get_buff_type_count(_type: Buff.Type) -> int:
 	var count: int = 0
 	for child in get_children():
 		if child is Buff and child.data.type == _type:
 			count += 1
-	# print("Type count: ", count)
 	return count
-
-func create_buff(_data: BuffData, _source: BuffArea, _modified_value: float) -> Buff:
-	# Create a new Buff object of the class defined in debuff_script
-	print(_data.modified_value)
-	var new_buff: Buff = Buff.new(_data.duplicate()) # Duplicate necessary if you are modifying the resource itself
-	new_buff.data.source = _source
-	new_buff.data.modified_value = _modified_value
-	return new_buff
 
 func check_source_already_active(_source: BuffArea) -> bool:
 	for child in get_children():
@@ -74,23 +72,10 @@ func check_source_already_active(_source: BuffArea) -> bool:
 
 func get_buff_by_source(_source: BuffArea) -> Buff:
 	for child in get_children():
-		print(child)
 		if child is Buff:
 			if child.data.source == _source:
 				return child
 	return null
-
-func remove_all_buffs() -> void:
-	for child in get_children():
-		var buff: Buff = child as Buff
-		if buff:
-			remove_buff(buff)
-
-func remove_buff(active_buff: Buff) -> void:
-	print("REMOVING BUFF")
-	remove_child(active_buff)
-	remove_active_buff.emit(active_buff)
-	active_buff.queue_free()
 
 func compare_by_buff_value(buff_a: Buff, buff_b: Buff) -> bool:
 	return buff_a.data.value > buff_b.data.value
