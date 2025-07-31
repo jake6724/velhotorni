@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="9_dit66"]
 [ext_resource type="PackedScene" uid="uid://nifbpm4btkyy" path="res://scenes/ui/TutorialUI.tscn" id="13_5ute2"]
 [ext_resource type="Texture2D" uid="uid://bwonyc48uhooj" path="res://assets/art/sprites/environment/spr_mask_fog.png" id="15_8amrt"]
-[ext_resource type="Shader" path="res://assets/art/scroll.gdshader" id="16_3dlar"]
+[ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="16_3dlar"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ylovj"]
 texture = ExtResource("6_485kb")
@@ -1054,6 +1054,7 @@ shader_parameter/ySpeed = -0.01
 [node name="LevelEnvironmentTutorial" type="Node2D"]
 z_index = -1
 script = ExtResource("1_xwifi")
+level_name = "- Tutorial -"
 initial_gold = 25
 waves = Array[ExtResource("2_xfk66")]([ExtResource("3_vp43h")])
 metadata/_custom_type_script = "uid://f60hwpg87qo0"

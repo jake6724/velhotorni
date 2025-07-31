@@ -8,7 +8,6 @@ var main: Node2D # Reference used to change RoundInfo UI
 var level_tutorial: PackedScene = load("res://scenes/level/LevelEnvironmentTutorial.tscn")
 var level_one: PackedScene = load("res://scenes/level/LevelEnvironmentOne.tscn")
 var level_two: PackedScene = load("res://scenes/level/LevelEnvironmentTwo.tscn")
-var test_level: PackedScene = load("res://scenes/level/LevelEnvironmentTest.tscn")
 
 var levels: Array[PackedScene] = [level_tutorial, level_one, level_two]
 var level_index: int = 1
@@ -56,6 +55,13 @@ func on_level_complete_message_finished():
 func load_next_level():
 	level_index += 1
 	SceneTransition.change_scene(main_scene)
+
+func load_specific_level(_level_environment):
+	level_index = levels.find(_level_environment)
+	print(level_index)
+	if level_index != -1:
+		# level_index = _level_index
+		SceneTransition.change_scene(main_scene)
 
 func complete_game() -> void:
 	level_index = 0

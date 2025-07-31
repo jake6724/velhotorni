@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://dmaqu5q51kdoh" path="res://data/waves/test_wave_2.tres" id="3_vykbn"]
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="9_fpffg"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_k1152"]
-[ext_resource type="Shader" path="res://assets/art/scroll.gdshader" id="18_f4p11"]
+[ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="18_f4p11"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="19_ixecb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ylovj"]
@@ -1053,7 +1053,7 @@ shader_parameter/ySpeed = -0.01
 [node name="LevelEnvironmentOne" type="Node2D"]
 z_index = -1
 script = ExtResource("1_c2pc5")
-level_name = "- Wildflower Road-"
+level_name = "- Wildflower Road -"
 initial_gold = 500
 waves = Array[ExtResource("2_dl2pb")]([ExtResource("3_vykbn")])
 
