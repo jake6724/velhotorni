@@ -1,14 +1,18 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=2 format=3 uid="uid://dscca5hkneedb"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=4 format=3 uid="uid://dscca5hkneedb"]
 
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_7skyr"]
+[ext_resource type="Texture2D" uid="uid://chaltceraasei" path="res://assets/art/atlases/tower/atl_tower_earth.png" id="1_w305r"]
+[ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="2_uckxk"]
 
 [resource]
 script = ExtResource("1_7skyr")
-element = 0
-transform_element = 0
+element = 3
+transform_element = 4
 damage = 0.0
 speed = 0.0
 attack_range = 0.0
 num_targets = 0
+atlas = ExtResource("1_w305r")
 bullet_speed = 0.0
+buff_data_list = Array[ExtResource("2_uckxk")]([])
 metadata/_custom_type_script = "uid://v7b6nq74b314"

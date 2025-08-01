@@ -1,11 +1,13 @@
 class_name BuffArea
 extends Area2D
 
-var buff_data: BuffData:
-	set(data):
-		buff_data = data
-		area_entered.connect(on_area_entered) # Only look for allies if a buff to apply is set
-		area_exited.connect(on_area_exited)
+var buff_data_list: Array[BuffData] = []
+
+## Called directly by parent tower
+func initialize(_buff_data_list: Array[BuffData]) -> void:
+	buff_data_list = _buff_data_list.duplicate()
+	area_entered.connect(on_area_entered) # Only look for allies if a buff to apply is set
+	area_exited.connect(on_area_exited)
 
 func on_area_entered(intruder) -> void:
 	if intruder.owner != owner and intruder.owner is Tower and intruder.owner.data.element != Constants.Element.LIGHT:	
@@ -14,11 +16,15 @@ func on_area_entered(intruder) -> void:
 func on_area_exited(intruder) -> void:
 	if intruder.owner != owner and intruder.owner is Tower and intruder.owner.data.element != Constants.Element.LIGHT:	
 		var ally_buff_manager: BuffManager = intruder.owner.buff_manager
-		var active_buff: Buff = ally_buff_manager.get_buff_by_source(self)
-		if active_buff:
-			ally_buff_manager.remove_buff(active_buff)
-			ally_buff_manager.prioritize_buffs()
+		var active_buffs: Array[Buff] = ally_buff_manager.get_buffs_by_source(self) # TODO: Get all buffs from a source!
+		for buff: Buff in active_buffs:
+			ally_buff_manager.remove_buff(buff)
+		ally_buff_manager.prioritize_buffs()
 
 func apply_buff_to_ally(ally_buff_manager: BuffManager) -> void:
-	ally_buff_manager.add_buff(buff_data.duplicate(), self)
+	for buff_data: BuffData in buff_data_list:
+		ally_buff_manager.add_buff(buff_data.duplicate(), self)
 	ally_buff_manager.prioritize_buffs()
+
+# func _draw():
+# 	# draw_

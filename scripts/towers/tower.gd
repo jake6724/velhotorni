@@ -1,3 +1,5 @@
+# TODO: Maybe go back to using data.damage etc, and set base_data_damage ? 
+
 class_name Tower
 extends Node2D
 
@@ -34,6 +36,8 @@ var can_show_range: bool:
 
 # Current Combat Data
 var curr_attack_range: float
+var curr_attack_speed: float
+var curr_damage: float
 
 # TowerData resources
 var data: TowerData
@@ -82,7 +86,7 @@ func initialize(element: Constants.Element):
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	attack_timer.one_shot = true
 	add_child(attack_timer)
-	attack_timer.start(data.speed)
+	attack_timer.start(curr_attack_speed)
 
 	transform_timer.timeout.connect(on_transform_timer_timeout)
 	transform_timer.one_shot = true
@@ -92,10 +96,12 @@ func initialize(element: Constants.Element):
 	can_show_range = false
 
 	# Connect to BuffManager and BuffArea
-	if data.buff_data: # TODO: Cleanup - Only connect manager to an area if it has a buff to apply
-		buff_area.buff_data = data.buff_data
+	if data.buff_data_list.size() > 0: # TODO: Cleanup - Only connect manager to an area if it has a buff to apply
+		buff_area.initialize(data.buff_data_list)
+
 	buff_manager.add_new_buff.connect(on_add_new_buff) # Recieve all buffs, even if this tower doesn't have one to share
 	buff_manager.remove_active_buff.connect(on_remove_active_buff)
+
 
 func _physics_process(_delta):	
 	if can_attack:
@@ -103,7 +109,7 @@ func _physics_process(_delta):
 		if active_target:
 			attack()
 			can_attack = false
-			attack_timer.start(data.speed)
+			attack_timer.start(curr_attack_speed)
 
 	ap.play("idle")
 
@@ -114,7 +120,7 @@ func attack() -> void:
 
 func spawn_bullet() -> void:
 	var new_bullet: Bullet = data.bullet.instantiate()
-	new_bullet.initialize(active_target, data.element, data.damage, data.debuff_data, data.bullet_speed, data.attack_range)
+	new_bullet.initialize(active_target, data.element, curr_damage, data.debuff_data, data.bullet_speed, data.attack_range)
 	new_bullet.position += new_bullet._pos_offset
 	add_child(new_bullet)
 
@@ -144,6 +150,8 @@ func reset_tower() -> void:
 
 func update_current_combat_data() -> void:
 	curr_attack_range = data.attack_range
+	curr_attack_speed = data.speed
+	curr_damage = data.damage
 
 func flip_to_face_active_target():
 	if active_target:
@@ -211,18 +219,27 @@ func _draw():
 		draw_circle(Vector2.ZERO + Vector2(8,8), curr_attack_range, Color.WHITE, false, -1.0, false)
 
 # Buffs
-func on_add_new_buff(new_buff: Buff):
-	match new_buff.data.type:
+func on_add_new_buff(buff: Buff):
+	match buff.data.type:
 		Buff.Type.RANGE:
-			curr_attack_range += data.attack_range * new_buff.data.modified_value
+			curr_attack_range += data.attack_range * buff.data.modified_valued
 			update_colliders()
+		Buff.Type.ATTACK_SPEED:
+			curr_attack_speed = max(.01, curr_attack_speed - data.speed * buff.data.modified_value)
+		Buff.Type.DAMAGE:
+			curr_damage += data.damage * buff.data.modified_value
 		_: pass
 
-func on_remove_active_buff(active_buff: Buff):
-	match active_buff.data.type:
+func on_remove_active_buff(buff: Buff):
+	match buff.data.type:
 		Buff.Type.RANGE:
-			curr_attack_range -= data.attack_range * active_buff.data.modified_value
+			curr_attack_range -= data.attack_range * buff.data.modified_value
 			update_colliders()
+		Buff.Type.ATTACK_SPEED:
+			curr_attack_speed += data.speed * buff.data.modified_value
+		Buff.Type.DAMAGE:
+			curr_damage -= data.damage * buff.data.modified_value
+		_: pass
 
 func refresh_colliders() -> void:
 	transform_collider.disabled = true

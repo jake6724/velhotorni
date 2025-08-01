@@ -8,10 +8,10 @@ var buff_data: BuffData
 var buff_pool: Array[Buff]
 
 func add_buff(new_buff_data: BuffData, _source: BuffArea) -> void:
-	if not check_source_already_active(_source):
-		var new_buff: Buff = create_buff(new_buff_data, _source, calc_buff_modified_value(new_buff_data))
-		add_child(new_buff)
-		add_new_buff.emit(new_buff)
+	# if not check_source_already_active(_source):
+	var new_buff: Buff = create_buff(new_buff_data, _source, calc_buff_modified_value(new_buff_data))
+	add_child(new_buff)
+	add_new_buff.emit(new_buff)
 
 func calc_buff_modified_value(_buff_data: BuffData) -> float:
 	var _modified_value: float = _buff_data.value / (2 ** get_buff_type_count(_buff_data.type))
@@ -70,12 +70,13 @@ func check_source_already_active(_source: BuffArea) -> bool:
 			return true
 	return false
 
-func get_buff_by_source(_source: BuffArea) -> Buff:
+func get_buffs_by_source(_source: BuffArea) -> Array[Buff]:
+	var buff_list: Array[Buff] = []
 	for child in get_children():
 		if child is Buff:
 			if child.data.source == _source:
-				return child
-	return null
+				buff_list.append(child)
+	return buff_list
 
 func compare_by_buff_value(buff_a: Buff, buff_b: Buff) -> bool:
 	return buff_a.data.value > buff_b.data.value

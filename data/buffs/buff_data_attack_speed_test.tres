@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BuffData" load_steps=2 format=3 uid="uid://bdgaolf2cemxm"]
+
+[ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_tbghc"]
+
+[resource]
+script = ExtResource("1_tbghc")
+type = 1
+value = 0.2
+metadata/_custom_type_script = "uid://cxqxpioy3ppam"
