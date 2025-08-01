@@ -18,7 +18,6 @@ func on_area_exited(intruder) -> void:
 		if active_buff:
 			ally_buff_manager.remove_buff(active_buff)
 			ally_buff_manager.prioritize_buffs()
-			# ally_buff_manager.test()
 
 func apply_buff_to_ally(ally_buff_manager: BuffManager) -> void:
 	ally_buff_manager.add_buff(buff_data.duplicate(), self)
