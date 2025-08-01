@@ -57,6 +57,17 @@ func remove_buff(active_buff: Buff) -> void:
 	remove_active_buff.emit(active_buff)
 	active_buff.queue_free()
 
+func test() -> void:
+	var x = []
+	for child in get_children():
+		x.append(child)
+		remove_child(child)
+
+	await get_tree().create_timer(.1).timeout
+	
+	for child in x:
+		add_child(child)
+
 func get_buff_type_count(_type: Buff.Type) -> int:
 	var count: int = 0
 	for child in get_children():

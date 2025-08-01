@@ -11,4 +11,3 @@ func _ready():
 
 func on_level_hovered(_level_name) -> void:
 	level_name_label.text = _level_name
- 
