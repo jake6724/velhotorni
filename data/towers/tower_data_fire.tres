@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_1uxtb"]
 [ext_resource type="Texture2D" uid="uid://l4yp0bln4h3l" path="res://assets/art/atlases/tower/atl_tower_fire.png" id="1_vod4o"]
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="2_elw1t"]
-[ext_resource type="PackedScene" uid="uid://dppck31xcxphl" path="res://scenes/level/bullets/FireBullet.tscn" id="2_vod4o"]
+[ext_resource type="PackedScene" uid="uid://dppck31xcxphl" path="res://scenes/bullets/FireBullet.tscn" id="2_vod4o"]
 [ext_resource type="Resource" uid="uid://dtv6wyf2lt5a" path="res://data/debuffs/debuff_data_burn_test.tres" id="3_m3y00"]
 [ext_resource type="Texture2D" uid="uid://wnb4niuilf1x" path="res://assets/art/sprites/ui/spr_ui_wind.png" id="4_vod4o"]
 
