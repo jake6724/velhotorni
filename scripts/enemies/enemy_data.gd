@@ -1,6 +1,7 @@
 class_name EnemyData
 extends Resource
 
+@export var size: Enemy.Size
 @export var element: Constants.Element
 @export var strong_against_element: Constants.Element
 @export var weak_against_element: Constants.Element

@@ -1,6 +1,8 @@
 class_name Enemy
 extends Area2D
 
+enum Size {SMALL, MEDIUM, LARGE}
+
 @export var data: EnemyData
 
 # Child references
@@ -14,8 +16,8 @@ extends Area2D
 
 # Pathing 
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
+var prev_global_position: Vector2 # Used for flipping sprite
 
-# var path: PackedVectprior2Array
 var min_distance: float = 2
 
 # Enemy Stats from Enemy Data Resource
@@ -74,6 +76,11 @@ func move(delta) -> void:
 		if not is_frozen and not is_stunned:
 			if not is_taking_damage:
 				ap.play("walk")
+
+			if path_follow.rotation_degrees >= 91: # Flip when moving right
+				sprite.flip_h = true
+			else: 
+				sprite.flip_h = false
 			if path_follow.progress_ratio < .99:
 				path_follow.progress += ((speed - (speed * (slow_percent/100))) * delta)
 			else:
@@ -81,6 +88,8 @@ func move(delta) -> void:
 				die()
 		else:
 			ap.play("idle")
+
+	prev_global_position = global_position
 	
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.

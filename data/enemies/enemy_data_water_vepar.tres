@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://blulg7nnexa6s"]
+
+[ext_resource type="Texture2D" uid="uid://db1t1ah5kjgjj" path="res://assets/art/atlases/enemy/atl_enemy_water_vepar.png" id="1_wd1l5"]
+[ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="2_1km5w"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="3_slqhw"]
+
+[resource]
+script = ExtResource("3_slqhw")
+size = 2
+element = 2
+strong_against_element = 3
+weak_against_element = 1
+health = 500.0
+speed = 20.0
+atlas = ExtResource("1_wd1l5")
+explosion_sfx = ExtResource("2_1km5w")
+cc_multiplier = 1.5
+knockback_multiplier = 1.5
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://byay4dg3p4xil"]
+
+[ext_resource type="Texture2D" uid="uid://dai8bwe40k3wj" path="res://assets/art/atlases/enemy/atl_enemy_light_kusekuse.png" id="1_k1lhv"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_ndxlo"]
+[ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="2_ajpra"]
+
+[resource]
+script = ExtResource("1_ndxlo")
+size = 2
+element = 4
+strong_against_element = 5
+weak_against_element = 3
+health = 500.0
+speed = 30.0
+atlas = ExtResource("1_k1lhv")
+explosion_sfx = ExtResource("2_ajpra")
+cc_multiplier = 1.5
+knockback_multiplier = 1.5
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

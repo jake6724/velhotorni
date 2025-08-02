@@ -10,7 +10,10 @@ var can_spawn_enemy: bool
 var enemy_path_length: float # Per level
 var spawn_timer: Timer = Timer.new()
 
-var enemy_scene: PackedScene = preload("res://scenes/enemies/Enemy.tscn")
+var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
+	Enemy.Size.MEDIUM: preload("res://scenes/enemies/Enemy.tscn"),
+	Enemy.Size.LARGE: preload("res://scenes/enemies/LargeEnemy.tscn"),
+}
 
 # Signals
 signal enemy_spawned
@@ -68,7 +71,7 @@ func on_spawn_timer_timeout() -> void:
 
 func spawn_enemy(_enemy_data: EnemyData) -> void:
 	# Configure new enemy
-	var new_enemy: Enemy = enemy_scene.instantiate()
+	var new_enemy: Enemy = enemy_scenes[_enemy_data.size].instantiate()
 	new_enemy.data = _enemy_data
 	new_enemy.died.connect(on_enemy_died)
 	add_child(new_enemy)
@@ -82,6 +85,7 @@ func configure_enemy_pathing(enemy: Enemy) -> void:
 	# EnemyPath2D is a node in the level, add a pathfollow to move along it, and a remote transform which will update the 
 	# enemies position
 	var new_path_follow: PathFollow2D = PathFollow2D.new()
+	new_path_follow.rotates = true
 	LevelManager.active_level.enemy_path.add_child(new_path_follow)
 
 	var new_remote_transform: RemoteTransform2D = RemoteTransform2D.new()

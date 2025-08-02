@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://cmds30uxri0o0"]
+
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_wqfdg"]
+[ext_resource type="Texture2D" uid="uid://bsm8bg8lr2ga5" path="res://assets/art/atlases/enemy/atl_enemy_dark_armor.png" id="1_xegma"]
+[ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="2_sv3rr"]
+
+[resource]
+script = ExtResource("1_wqfdg")
+size = 2
+element = 5
+strong_against_element = 0
+weak_against_element = 4
+health = 500.0
+speed = 10.0
+atlas = ExtResource("1_xegma")
+explosion_sfx = ExtResource("2_sv3rr")
+cc_multiplier = 1.5
+knockback_multiplier = 1.5
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

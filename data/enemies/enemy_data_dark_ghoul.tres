@@ -7,6 +7,7 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_05fmu")
+size = 0
 element = 5
 strong_against_element = 0
 weak_against_element = 4
