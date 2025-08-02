@@ -87,6 +87,7 @@ func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 			play_tower_select_sfx(element)
 
 			selected_tower_element = Constants.Element.NONE
+			tower_menu.show_shop()
 			return true
 		else:
 			# SFXPlayer.play_sfx("click_2")
@@ -105,6 +106,7 @@ func on_tower_selected(element: Constants.Element) -> void:
 			Constants.Element.WATER: SFXPlayer.play_sfx("water_click")
 
 		create_tower(element)
+		tower_menu.hide_shop()
 
 	else:
 		SFXPlayer.play_sfx("click_2")
@@ -192,6 +194,7 @@ func _input(_event):
 
 	if Input.is_action_just_pressed("right_click"):
 		if tower_to_place:
+			tower_menu.show_placement_phase()
 			tower_to_place.queue_free()
 			tower_to_place = null
 

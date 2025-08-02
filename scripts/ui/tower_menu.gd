@@ -83,6 +83,14 @@ func show_placement_phase() -> void:
 	wave_button.show()
 	fast_forward.hide()
 
+func hide_shop() -> void:
+	tower_buttons.hide()
+	wave_button.hide()
+
+func show_shop() -> void:
+	tower_buttons.show()
+	wave_button.show()
+
 func show_level_number() -> void:
 	level_number.text = LevelManager.active_level.level_name
 	level_number.show()

@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("3_scn5m")
+size = 1
 element = 1
 strong_against_element = 2
 weak_against_element = 0
@@ -13,4 +14,6 @@ health = 100.0
 speed = 30.0
 atlas = ExtResource("1_h8sg4")
 explosion_sfx = ExtResource("2_ehh3g")
+cc_multiplier = 1.5
+knockback_multiplier = 1.5
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

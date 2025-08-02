@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://dxbpiwiuxg8xp"]
+
+[ext_resource type="Texture2D" uid="uid://csvkuy7cttbbn" path="res://assets/art/atlases/enemy/atl_enemy_earth_mushroom.png" id="1_lson4"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_xye8s"]
+[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_mw7lj"]
+
+[resource]
+script = ExtResource("1_xye8s")
+size = 1
+element = 3
+strong_against_element = 4
+weak_against_element = 2
+health = 50.0
+speed = 30.0
+atlas = ExtResource("1_lson4")
+explosion_sfx = ExtResource("2_mw7lj")
+cc_multiplier = 1.5
+knockback_multiplier = 1.5
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"
