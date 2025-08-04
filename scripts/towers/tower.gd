@@ -222,7 +222,7 @@ func _draw():
 func on_add_new_buff(buff: Buff):
 	match buff.data.type:
 		Buff.Type.RANGE:
-			curr_attack_range += data.attack_range * buff.data.modified_valued
+			curr_attack_range += data.attack_range * buff.data.modified_value
 			update_colliders()
 		Buff.Type.ATTACK_SPEED:
 			curr_attack_speed = max(.01, curr_attack_speed - data.speed * buff.data.modified_value)
