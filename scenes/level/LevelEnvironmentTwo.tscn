@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="13_086qu"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="14_nfknx"]
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="17_r41la"]
-[ext_resource type="Shader" path="res://assets/art/scroll.gdshader" id="18_cu0i6"]
+[ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="18_cu0i6"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="19_bbfh2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l0twk"]

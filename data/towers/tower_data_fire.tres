@@ -4,14 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://l4yp0bln4h3l" path="res://assets/art/atlases/tower/atl_tower_fire.png" id="1_vod4o"]
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="2_elw1t"]
 [ext_resource type="PackedScene" uid="uid://dppck31xcxphl" path="res://scenes/bullets/FireBullet.tscn" id="2_vod4o"]
-[ext_resource type="Resource" uid="uid://dtv6wyf2lt5a" path="res://data/debuffs/debuff_data_burn_test.tres" id="3_m3y00"]
+[ext_resource type="Resource" uid="uid://ddoy0mrmvm6u2" path="res://data/debuffs/debuff_data_burn_fire.tres" id="4_elw1t"]
 [ext_resource type="Texture2D" uid="uid://wnb4niuilf1x" path="res://assets/art/sprites/ui/spr_ui_wind.png" id="4_vod4o"]
 
 [resource]
 script = ExtResource("1_1uxtb")
 element = 0
 transform_element = 1
-damage = 4.0
+damage = 2.5
 speed = 0.3
 attack_range = 40.0
 num_targets = 1
@@ -19,6 +19,6 @@ atlas = ExtResource("1_vod4o")
 transform_hint_texture = ExtResource("4_vod4o")
 bullet = ExtResource("2_vod4o")
 bullet_speed = 100.0
-debuff_data = ExtResource("3_m3y00")
+debuff_data = ExtResource("4_elw1t")
 buff_data_list = Array[ExtResource("2_elw1t")]([])
 metadata/_custom_type_script = "uid://v7b6nq74b314"

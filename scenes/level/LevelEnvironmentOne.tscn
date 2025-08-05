@@ -10,7 +10,7 @@
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="18_f4p11"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="19_ixecb"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ylovj"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpffg"]
 texture = ExtResource("2_ylovj")
 0:0/0 = 0
 1:0/0 = 0
@@ -1038,7 +1038,7 @@ texture = ExtResource("2_ylovj")
 31:31/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_grsr5"]
-sources/0 = SubResource("TileSetAtlasSource_ylovj")
+sources/0 = SubResource("TileSetAtlasSource_fpffg")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k1152"]
 texture = ExtResource("5_fpffg")
