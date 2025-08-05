@@ -13,26 +13,12 @@ var tile_inidicator: PackedScene = preload("res://scenes/placeholders/TileIndica
 
 var active_tilemap: TileMapLayer
 
-var valid_atlas_coords: Array[Vector2i] = [ # Tiles that towers CAN be placed on; defined by tileset atlas coordinates
-	Vector2i(0,0),Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0),Vector2i(6,0),
-	Vector2i(0,1),Vector2i(1,1),Vector2i(2,1),Vector2i(3,1),Vector2i(4,1),Vector2i(5,1),Vector2i(6,1),
-	Vector2i(0,2),Vector2i(1,2),Vector2i(2,2),
-	Vector2i(0,3),Vector2i(1,3),
-	Vector2i(0,4),Vector2i(1,4),
-	Vector2i(5,7),Vector2i(6,7),
-	Vector2i(2,8),Vector2i(3,8),Vector2i(4,8),Vector2i(5,8),Vector2i(6,8),
-	Vector2i(0,9),Vector2i(1,9),Vector2i(2,9),Vector2i(3,9),Vector2i(4,9),Vector2i(5,9),
-	Vector2i(0,10),Vector2i(1,10),Vector2i(2,10),Vector2i(3,10),Vector2i(4,10),Vector2i(5,10),
-	Vector2i(0,11),Vector2i(1,11),Vector2i(2,11),Vector2i(3,11),Vector2i(4,11), Vector2i(5,11),
-	Vector2i(0,12),Vector2i(3,12),Vector2i(4,12),Vector2i(5,12),
-	Vector2i(3,13),Vector2i(4,13), 
-	Vector2i(3,14),Vector2i(4,14),
-]
+var valid_atlas_coords: Array[Vector2i] = [Vector2i(2,0)]
 
 ## Intended to be called manually by `LevelManager`.
 func configure_level(active_level: LevelEnvironment) -> void:
 	generate_grid()
-	configure_tilemap(active_level.tilemap)
+	configure_tilemap(active_level.level_mask_layer)
 
 func generate_grid() -> void:
 	# Reset values

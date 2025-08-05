@@ -26,7 +26,7 @@ func _ready():
 	cc_timer.timeout.connect(on_cc_timer_timeout)
 
 func add_debuff(new_debuff_data: DebuffData) -> void:
-	if check_debuff_allowed(new_debuff_data):
+	if check_cc_cooldowns(new_debuff_data):
 		if "priority" in new_debuff_data:
 			if check_debuff_type_present(new_debuff_data.type): # A debuff of this type is already active
 				var active_debuff: Debuff = get_active_debuff_by_type(new_debuff_data.type)
@@ -65,7 +65,7 @@ func get_active_debuff_by_type(_type: Constants.Debuff) -> Debuff:
 				return child
 	return null
 
-func check_debuff_allowed(_data: DebuffData) -> bool:
+func check_cc_cooldowns(_data: DebuffData) -> bool:
 	if _data.type == Constants.Debuff.FREEZE and not can_cc:
 		return false
 

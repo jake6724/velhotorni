@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Wave" load_steps=11 format=3 uid="uid://eam1d2svyu7v"]
+[gd_resource type="Resource" script_class="Wave" load_steps=11 format=3 uid="uid://bo2rtxxd8xxln"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_hm1rf"]
 [ext_resource type="Resource" uid="uid://b6mmygvf76vlc" path="res://data/spawn/spawn_kuse_1.tres" id="2_a5avg"]
