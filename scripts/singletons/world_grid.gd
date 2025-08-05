@@ -13,7 +13,7 @@ var tile_inidicator: PackedScene = preload("res://scenes/placeholders/TileIndica
 
 var active_tilemap: TileMapLayer
 
-var valid_atlas_coords: Array[Vector2i] = [Vector2i(2,0)]
+var valid_atlas_coords: Array[Vector2i] = [Vector2i(2,0)] # Green tiles in atl_level_mask
 
 ## Intended to be called manually by `LevelManager`.
 func configure_level(active_level: LevelEnvironment) -> void:

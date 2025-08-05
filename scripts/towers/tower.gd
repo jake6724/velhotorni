@@ -34,10 +34,18 @@ var can_show_range: bool:
 		can_show_range = value
 		queue_redraw()
 
-# Current Combat Data
-var curr_attack_range: float
-var curr_attack_speed: float
+# Combat Data
+var curr_range: float
+var curr_speed: float
 var curr_damage: float
+
+var damage_level: int = 0
+var speed_level: int = 0
+var range_level: int = 0
+
+const DAMAGE_MODIFIER: float = 0.5
+const RANGE_MODIFIER: float = 0.2
+const SPEED_MODIFIER: float = 0.33
 
 # TowerData resources
 var data: TowerData
@@ -86,7 +94,7 @@ func initialize(element: Constants.Element):
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	attack_timer.one_shot = true
 	add_child(attack_timer)
-	attack_timer.start(curr_attack_speed)
+	attack_timer.start(curr_speed)
 
 	transform_timer.timeout.connect(on_transform_timer_timeout)
 	transform_timer.one_shot = true
@@ -109,7 +117,7 @@ func _physics_process(_delta):
 		if active_target:
 			attack()
 			can_attack = false
-			attack_timer.start(curr_attack_speed)
+			attack_timer.start(curr_speed)
 
 	ap.play("idle")
 
@@ -149,9 +157,10 @@ func reset_tower() -> void:
 	update_textures()
 
 func update_current_combat_data() -> void:
-	curr_attack_range = data.attack_range
-	curr_attack_speed = data.speed
-	curr_damage = data.damage
+	# TODO: Buffs?
+	curr_damage = data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))  
+	curr_speed = data.speed / (1.0 + (speed_level * SPEED_MODIFIER))
+	curr_range = data.range * (1.0 + (range_level * RANGE_MODIFIER))
 
 func flip_to_face_active_target():
 	if active_target:
@@ -216,16 +225,16 @@ func on_transform_timer_timeout() -> void:
 
 func _draw():
 	if can_show_range:
-		draw_circle(Vector2.ZERO + Vector2(8,8), curr_attack_range, Color.WHITE, false, -1.0, false)
+		draw_circle(Vector2.ZERO + Vector2(8,8), curr_range, Color.WHITE, false, -1.0, false)
 
 # Buffs
 func on_add_new_buff(buff: Buff):
 	match buff.data.type:
 		Buff.Type.RANGE:
-			curr_attack_range += data.attack_range * buff.data.modified_value
+			curr_range += data.attack_range * buff.data.modified_value
 			update_colliders()
 		Buff.Type.ATTACK_SPEED:
-			curr_attack_speed = max(.01, curr_attack_speed - data.speed * buff.data.modified_value)
+			curr_speed = max(.01, curr_speed - data.speed * buff.data.modified_value)
 		Buff.Type.DAMAGE:
 			curr_damage += data.damage * buff.data.modified_value
 		_: pass
@@ -233,10 +242,10 @@ func on_add_new_buff(buff: Buff):
 func on_remove_active_buff(buff: Buff):
 	match buff.data.type:
 		Buff.Type.RANGE:
-			curr_attack_range -= data.attack_range * buff.data.modified_value
+			curr_range -= data.attack_range * buff.data.modified_value
 			update_colliders()
 		Buff.Type.ATTACK_SPEED:
-			curr_attack_speed += data.speed * buff.data.modified_value
+			curr_speed += data.speed * buff.data.modified_value
 		Buff.Type.DAMAGE:
 			curr_damage -= data.damage * buff.data.modified_value
 		_: pass
@@ -247,6 +256,6 @@ func refresh_colliders() -> void:
 	transform_collider.disabled = false
 
 func update_colliders() -> void:
-	buff_collider.shape.radius = curr_attack_range
-	collider.shape.radius =  curr_attack_range
+	buff_collider.shape.radius = curr_range
+	collider.shape.radius =  curr_range
 	queue_redraw()
