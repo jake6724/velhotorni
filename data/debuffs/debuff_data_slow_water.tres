@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_ucjn5")
 priority = 4
-value = 60.0
-total_duration = 1.0
+value = 85.0
+total_duration = 0.65
