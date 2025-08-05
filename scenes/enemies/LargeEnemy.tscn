@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://hnxttmgepy4x" path="res://assets/placeholders/enemy_placeholder.png" id="8_phgce"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xk6ri"]
-radius = 13.0
+radius = 8.0
 
 [sub_resource type="Animation" id="Animation_hpe7p"]
 length = 0.001
@@ -185,7 +185,7 @@ vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
-position = Vector2(8, 4)
+position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_xk6ri")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -5,6 +5,11 @@
 [resource]
 script = ExtResource("1_3rs4f")
 priority = 2
+<<<<<<< HEAD
 repeat_duration = 0.5
 value = 1.0
+=======
+repeat_duration = 2.0
+value = 3.0
+>>>>>>> a418d70e842b00dc5721564ace6f40b99d5998f1
 total_duration = 5.7
