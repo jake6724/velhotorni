@@ -1067,7 +1067,7 @@ shader_parameter/ySpeed = -0.01
 z_index = -1
 script = ExtResource("1_c2pc5")
 level_name = "- Wildflower Road -"
-initial_gold = 500
+initial_gold = 1000
 waves = Array[ExtResource("2_dl2pb")]([ExtResource("3_vykbn")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]

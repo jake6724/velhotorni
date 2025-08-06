@@ -4,6 +4,7 @@ class_name Tower
 extends Node2D
 
 enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
+var level_upgrade_price: int = 25
 
 # Child references
 @onready var sprite: Sprite2D = $Sprite2D
@@ -26,8 +27,8 @@ var active_target: Enemy
 var in_range_targets: Array[Enemy] = []
 var attack_timer: Timer = Timer.new()
 var transform_timer: Timer = Timer.new()
-var transform_delay: float = 0.1
-var can_transform: bool = true # Set to true after brief delay in on_transform_timer_timeout()
+var transform_delay: float = .75
+var can_transform: bool = false # Set to true after brief delay in on_transform_timer_timeout()
 var can_attack: bool = true
 var can_show_range: bool: 
 	set(value):
@@ -35,13 +36,38 @@ var can_show_range: bool:
 		queue_redraw()
 
 # Combat Data
-var curr_range: float
-var curr_speed: float
 var curr_damage: float
+var curr_speed: float
+var curr_range: float
 
-var damage_level: int = 0
-var speed_level: int = 0
-var range_level: int = 0
+# Preview data (used in tower upgrade menu)
+var preview_damage: float
+var preview_speed: float
+var preview_range: float
+
+var level: int = 0
+var damage_level: int = 0:
+	set(value):
+		damage_level = value
+		level += 1
+		level_upgrade_price = min(level_upgrade_price + 25, 75)
+		update_current_combat_data()
+		update_preview_combat_data()
+var speed_level: int = 0:
+	set(value):
+		speed_level = value
+		level += 1
+		level_upgrade_price = min(level_upgrade_price + 25, 75)
+		update_current_combat_data()
+		update_preview_combat_data()
+var range_level: int = 0:
+	set(value):
+		range_level = value
+		level += 1
+		level_upgrade_price = min(level_upgrade_price + 25, 75)
+		update_current_combat_data()
+		update_preview_combat_data()
+		update_colliders()
 
 const DAMAGE_MODIFIER: float = 0.5
 const RANGE_MODIFIER: float = 0.2
@@ -66,7 +92,7 @@ var tower_data: Dictionary[Constants.Element, TowerData] = {
 # Debugs
 var debug_attack_line: Line2D = Line2D.new()
 
-signal transform_tower
+signal tower_clicked
 signal tower_hovered
 signal tower_unhovered
 
@@ -87,6 +113,7 @@ func initialize(element: Constants.Element):
 	data = base_data
 
 	update_current_combat_data()
+	update_preview_combat_data()
 	update_textures()
 	update_colliders()
 
@@ -162,6 +189,11 @@ func update_current_combat_data() -> void:
 	curr_speed = data.speed / (1.0 + (speed_level * SPEED_MODIFIER))
 	curr_range = data.attack_range * (1.0 + (range_level * RANGE_MODIFIER))
 
+func update_preview_combat_data() -> void:
+	preview_damage = data.damage + ((damage_level + 1) * (data.damage * DAMAGE_MODIFIER))  
+	preview_speed = data.speed / (1.0 + ((speed_level + 1) * SPEED_MODIFIER))
+	preview_range = data.attack_range * (1.0 + ((range_level + 1 )* RANGE_MODIFIER))
+
 func flip_to_face_active_target():
 	if active_target:
 		var direction: Vector2 = global_position.direction_to(active_target.global_position)
@@ -216,7 +248,7 @@ func on_mouse_exited_transform_area():
 
 func on_transform_area_pressed(_viewport, _event, _shape_idx) -> void:
 	if Input.is_action_just_pressed("left_click"):
-		transform_tower.emit()
+		tower_clicked.emit()
 		
 func on_attack_timer_timeout() -> void:
 	can_attack = true
