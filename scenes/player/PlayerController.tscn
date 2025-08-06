@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://btulqisr6vlgj"]
+[gd_scene load_steps=4 format=3 uid="uid://btulqisr6vlgj"]
 
 [ext_resource type="Script" uid="uid://dfvyivdwm67y1" path="res://scripts/player/player_controller.gd" id="1_ci81t"]
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="2_awcob"]
+[ext_resource type="PackedScene" uid="uid://br3yofjq2l14o" path="res://scenes/ui/TowerUpgradeMenu.tscn" id="3_23doe"]
 
 [node name="PlayerController" type="Node2D"]
 script = ExtResource("1_ci81t")
@@ -11,3 +12,6 @@ metadata/_custom_type_script = "uid://dfvyivdwm67y1"
 layer = 0
 
 [node name="TowerMenu" parent="UI" instance=ExtResource("2_awcob")]
+
+[node name="TowerUpgradeMenu" parent="UI" instance=ExtResource("3_23doe")]
+visible = false

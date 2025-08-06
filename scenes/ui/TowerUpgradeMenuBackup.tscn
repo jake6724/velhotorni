@@ -1,0 +1,628 @@
+[gd_scene load_steps=20 format=3 uid="uid://da7tngax61qcw"]
+
+[ext_resource type="Script" uid="uid://dla326rvf6d3k" path="res://scripts/ui/tower_upgrade_menu.gd" id="1_4rpun"]
+[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_2j2vy"]
+[ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_g3bw0"]
+[ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="4_hbc4e"]
+[ext_resource type="Texture2D" uid="uid://dtb1vcu8367w8" path="res://assets/art/sprites/ui/spr_ui_pointer.png" id="5_mjgey"]
+[ext_resource type="Texture2D" uid="uid://dpd0dv0dgt2jj" path="res://assets/art/sprites/ui/spr_ui_gem_small.png" id="6_ophty"]
+[ext_resource type="Texture2D" uid="uid://biu0dfqvw886x" path="res://assets/art/sprites/ui/spr_ui_divider1.png" id="7_x5j3m"]
+[ext_resource type="Texture2D" uid="uid://bahrer0xdoere" path="res://assets/art/sprites/ui/spr_ui_box4.png" id="8_eiufl"]
+[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="9_rin7k"]
+[ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="10_pxtn0"]
+[ext_resource type="Texture2D" uid="uid://dpaj01np75c8o" path="res://assets/art/sprites/ui/spr_ui_stat_rng.png" id="11_m18a7"]
+[ext_resource type="Texture2D" uid="uid://b35e2ntjvtv5c" path="res://assets/art/sprites/ui/spr_ui_stat_spcl_burn.png" id="12_p3vtv"]
+[ext_resource type="Texture2D" uid="uid://fbjwfo10n881" path="res://assets/art/sprites/ui/spr_ui_stat_target.png" id="13_877q1"]
+[ext_resource type="Texture2D" uid="uid://dugw6td7t0lel" path="res://assets/art/sprites/ui/spr_ui_stat_arrow.png" id="14_ym3hn"]
+[ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="15_vdqdo"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="16_xh7jr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wvnee"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wes0x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r51os"]
+
+[node name="TowerUpgradeMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_4rpun")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -96.0
+offset_right = 184.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2j2vy")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 9
+patch_margin_bottom = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.995035)
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Overview Bar" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(125, 20)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 65
+
+[node name="OverviewLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
+custom_minimum_size = Vector2(68, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/normal_font = ExtResource("3_g3bw0")
+theme_override_font_sizes/normal_font_size = 16
+text = "Overview"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="LevelBar" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 8
+
+[node name="CurrentLevelLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/LevelBar"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+text = "LV1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PointerIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/LevelBar"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_mjgey")
+
+[node name="NextLevelLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/LevelBar"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+text = "LV2"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RequirementBar" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="RequirementsLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/RequirementBar"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+text = "REQ:"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoinIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/RequirementBar"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_ophty")
+
+[node name="CostLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/RequirementBar"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+text = "100
+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Divider" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("7_x5j3m")
+
+[node name="HSeparator" type="HSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+theme_override_styles/separator = SubResource("StyleBoxEmpty_wvnee")
+
+[node name="Body" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="UpgradeVboxParent" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="UpgradeHeader" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="UpgradeLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/UpgradeHeader"]
+custom_minimum_size = Vector2(65, 12)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+text = "Upgrades"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/UpgradeHeader"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("7_x5j3m")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent"]
+custom_minimum_size = Vector2(75, 32)
+layout_mode = 2
+texture = ExtResource("8_eiufl")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DamageUpgrade" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect/MarginContainer/DamageUpgrade"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect/MarginContainer/DamageUpgrade/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect/MarginContainer/DamageUpgrade/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_rin7k")
+
+[node name="UpgradeLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect/MarginContainer/DamageUpgrade/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48.38, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+text = "Damage"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect/MarginContainer/DamageUpgrade/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("7_x5j3m")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect/MarginContainer/DamageUpgrade"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect/MarginContainer/DamageUpgrade/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect/MarginContainer/DamageUpgrade/HBoxContainer2"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_mjgey")
+
+[node name="Label2" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/NinePatchRect/MarginContainer/DamageUpgrade/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "3"
+
+[node name="SpeedUpgrade" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpeedUpgrade"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpeedUpgrade/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpeedUpgrade/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("10_pxtn0")
+
+[node name="UpgradeLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpeedUpgrade/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(65, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+text = "Speed
+"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpeedUpgrade/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("7_x5j3m")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpeedUpgrade"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpeedUpgrade/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpeedUpgrade/HBoxContainer2"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_mjgey")
+
+[node name="Label2" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpeedUpgrade/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "3"
+
+[node name="RangeUpgrade" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/RangeUpgrade"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/RangeUpgrade/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/RangeUpgrade/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_m18a7")
+
+[node name="UpgradeLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/RangeUpgrade/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(65, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+text = "Range
+"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/RangeUpgrade/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("7_x5j3m")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/RangeUpgrade"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/RangeUpgrade/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/RangeUpgrade/HBoxContainer2"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_mjgey")
+
+[node name="Label2" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/RangeUpgrade/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "3"
+
+[node name="SpecialUpgrade" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpecialUpgrade"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpecialUpgrade/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpecialUpgrade/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("12_p3vtv")
+
+[node name="UpgradeLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpecialUpgrade/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(65, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+text = "Special"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpecialUpgrade/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("7_x5j3m")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpecialUpgrade"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpecialUpgrade/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpecialUpgrade/HBoxContainer2"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_mjgey")
+
+[node name="Label2" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/SpecialUpgrade/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "3"
+
+[node name="Divider" type="VSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
+layout_mode = 2
+theme_override_constants/separation = 32
+theme_override_styles/separator = SubResource("StyleBoxEmpty_wes0x")
+
+[node name="Details" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
+custom_minimum_size = Vector2(0, 153.61)
+layout_mode = 2
+
+[node name="UpperHbox" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Targeting" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+
+[node name="TargetingHeader" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingHeader"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingHeader/HBoxContainer"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("13_877q1")
+
+[node name="UpgradeLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingHeader/HBoxContainer"]
+custom_minimum_size = Vector2(75, 12)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+text = "Targeting"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingHeader"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("7_x5j3m")
+
+[node name="TargetingSelect" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingSelect"]
+layout_mode = 2
+texture = ExtResource("14_ym3hn")
+flip_h = true
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingSelect"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "most health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingSelect"]
+layout_mode = 2
+texture = ExtResource("14_ym3hn")
+
+[node name="Portrait" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("15_vdqdo")
+
+[node name="Description" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details"]
+z_as_relative = false
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("8_eiufl")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/Description"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00559, 0.982061)
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/Description/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_hbc4e")
+theme_override_font_sizes/normal_font_size = 8
+scroll_active = false
+
+[node name="Divider" type="HSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_r51os")
+
+[node name="NavigationButtons" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="Specialize" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons"]
+custom_minimum_size = Vector2(90, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("16_xh7jr")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 11
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons/Specialize"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "Specialize"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Close" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons"]
+custom_minimum_size = Vector2(90, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("16_xh7jr")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 11
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons/Close"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_hbc4e")
+theme_override_font_sizes/font_size = 8
+text = "Close"
+horizontal_alignment = 1
+vertical_alignment = 1

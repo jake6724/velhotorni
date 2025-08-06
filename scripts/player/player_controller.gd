@@ -3,6 +3,7 @@ extends Node2D
 
 # Child References
 @onready var tower_menu: TowerMenu = $UI/TowerMenu
+@onready var tower_upgrade_menu: TowerUpgradeMenu = $UI/TowerUpgradeMenu
 
 # Scenes
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")

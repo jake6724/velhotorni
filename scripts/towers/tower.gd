@@ -160,7 +160,7 @@ func update_current_combat_data() -> void:
 	# TODO: Buffs?
 	curr_damage = data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))  
 	curr_speed = data.speed / (1.0 + (speed_level * SPEED_MODIFIER))
-	curr_range = data.range * (1.0 + (range_level * RANGE_MODIFIER))
+	curr_range = data.attack_range * (1.0 + (range_level * RANGE_MODIFIER))
 
 func flip_to_face_active_target():
 	if active_target:
@@ -172,6 +172,7 @@ func flip_to_face_active_target():
 
 func play_shot_sfx() -> void:
 	# TODO: THis should go inside bullet, play on spawn, make it positional too ? rework of sfx required
+	# OR maybe this should be part of tower, and tower should have positional sound node to play stuff
 	match data.element:
 		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
 		Constants.Element.WIND: SFXPlayer.play_sfx("wind_shot")
