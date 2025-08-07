@@ -114,7 +114,7 @@ func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 
 			selected_tower_element = Constants.Element.NONE
 			tower_menu.show_shop()
-			await get_tree().create_timer(.2).timeout # delay allowing tower to process input events
+			await get_tree().create_timer(.1).timeout # delay allowing tower to process input events
 			new_tower.transform_area.set_deferred("input_pickable", true)
 			return true
 		else:
