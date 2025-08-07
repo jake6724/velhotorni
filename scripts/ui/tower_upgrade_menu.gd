@@ -94,7 +94,6 @@ func update_stats() -> void:
 	upgrade_range_label.text = str(snappedf(tower.preview_range, .01))
 
 	update_debuff_stats()
-
 	update_level_labels()
 
 	cost_label.text = str(tower.level_upgrade_price)
