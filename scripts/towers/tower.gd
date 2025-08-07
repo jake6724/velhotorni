@@ -27,7 +27,7 @@ var active_target: Enemy
 var in_range_targets: Array[Enemy] = []
 var attack_timer: Timer = Timer.new()
 var transform_timer: Timer = Timer.new()
-var transform_delay: float = .75
+var transform_delay: float = .8
 var can_transform: bool = false # Set to true after brief delay in on_transform_timer_timeout()
 var can_attack: bool = true
 var can_show_range: bool: 

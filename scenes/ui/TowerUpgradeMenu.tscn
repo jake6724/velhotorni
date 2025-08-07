@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://br3yofjq2l14o"]
+[gd_scene load_steps=50 format=3 uid="uid://br3yofjq2l14o"]
 
 [ext_resource type="Script" uid="uid://dla326rvf6d3k" path="res://scripts/ui/tower_upgrade_menu.gd" id="1_4dufm"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_typcq"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="4_wvnee"]
 [ext_resource type="Texture2D" uid="uid://dtb1vcu8367w8" path="res://assets/art/sprites/ui/spr_ui_pointer.png" id="5_1xmjg"]
 [ext_resource type="Texture2D" uid="uid://biu0dfqvw886x" path="res://assets/art/sprites/ui/spr_ui_divider1.png" id="5_771jt"]
+[ext_resource type="Texture2D" uid="uid://broq3a5l86ngh" path="res://assets/art/sprites/ui/spr_ui_lvlup.png" id="8_bw1ro"]
 [ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="8_xxxlf"]
 [ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="9_ac4r8"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="10_6r12l"]
@@ -19,6 +20,24 @@
 [ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="16_r51os"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wvnee"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m87lr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw1ro"]
+atlas = ExtResource("8_bw1ro")
+region = Rect2(0, 0, 8, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ymig"]
+atlas = ExtResource("8_bw1ro")
+region = Rect2(8, 0, 8, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3s6c"]
+atlas = ExtResource("8_bw1ro")
+region = Rect2(16, 0, 8, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqg7h"]
+atlas = ExtResource("8_bw1ro")
+region = Rect2(0, 0, 8, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4rpun"]
 
@@ -222,12 +241,45 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_wvnee")
 
 [node name="Body" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
+[node name="LevelUpArrows" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
+layout_mode = 2
+theme_override_constants/separation = 21
+
+[node name="HSeparator" type="HSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+theme_override_styles/separator = SubResource("StyleBoxEmpty_m87lr")
+
+[node name="DamageLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_bw1ro")
+
+[node name="SpeedLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_0ymig")
+
+[node name="RangeLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_e3s6c")
+
+[node name="SpecialLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_tqg7h")
+
 [node name="UpgradeVboxParent" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
-custom_minimum_size = Vector2(75.835, 0)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -263,7 +315,7 @@ mouse_filter = 2
 texture = ExtResource("5_771jt")
 
 [node name="Damage" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent"]
-custom_minimum_size = Vector2(75, 32)
+custom_minimum_size = Vector2(50, 32)
 layout_mode = 2
 texture = ExtResource("15_wes0x")
 region_rect = Rect2(0, 0, 16, 16)
@@ -367,6 +419,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.934303, 0.966014)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_t2o4b")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_cgsmd")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_n4cps")
@@ -380,7 +433,7 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_nehcy")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_au007")
 
 [node name="Speed" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent"]
-custom_minimum_size = Vector2(75, 32)
+custom_minimum_size = Vector2(50, 32)
 layout_mode = 2
 texture = ExtResource("15_wes0x")
 region_rect = Rect2(0, 0, 16, 16)
@@ -494,7 +547,7 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_yi3fk")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bw1ro")
 
 [node name="Range" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent"]
-custom_minimum_size = Vector2(75, 32)
+custom_minimum_size = Vector2(50, 32)
 layout_mode = 2
 texture = ExtResource("15_wes0x")
 region_rect = Rect2(0, 0, 16, 16)
@@ -607,7 +660,7 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_yi3fk")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bw1ro")
 
 [node name="Special" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent"]
-custom_minimum_size = Vector2(90, 32)
+custom_minimum_size = Vector2(80, 32)
 layout_mode = 2
 texture = ExtResource("15_wes0x")
 region_rect = Rect2(0, 0, 16, 16)
@@ -724,7 +777,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_bw1ro")
 [node name="Divider" type="VSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 32
+theme_override_constants/separation = 24
 theme_override_styles/separator = SubResource("StyleBoxEmpty_wes0x")
 
 [node name="Details" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
@@ -739,9 +792,9 @@ mouse_filter = 2
 theme_override_constants/separation = 40
 
 [node name="Targeting" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
-mouse_filter = 2
 
 [node name="TargetingHeader" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting"]
 layout_mode = 2
@@ -789,6 +842,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+mouse_filter = 1
 texture_normal = ExtResource("13_xjkok")
 flip_h = true
 
@@ -798,7 +852,7 @@ custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_wvnee")
 theme_override_font_sizes/font_size = 8
-text = "most health"
+text = "FIRST"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -807,9 +861,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+mouse_filter = 1
 texture_normal = ExtResource("13_xjkok")
 
 [node name="Portrait" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 2

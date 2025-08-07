@@ -8,9 +8,14 @@ extends Node2D
 # Scenes
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var tower_to_place: Tower = null
-var tower_to_upgrade: Tower = null
+var tower_to_upgrade: Tower = null:
+	set(value):
+		tower_to_upgrade = value
+		if value:
+			tower_upgrade_menu.tower = value
 
 var click_enabled: bool = true
+var can_open_tower_upgrades: bool = true
 var selected_tower_element: Constants.Element = Constants.Element.NONE
 var active_towers: Array[Tower] = []
 var placement_enabled: bool = true
@@ -38,6 +43,7 @@ func _ready():
 	tower_upgrade_menu.range_button_pressed.connect(on_range_button_pressed)
 	tower_upgrade_menu.special_button_pressed.connect(on_special_button_pressed)
 	tower_upgrade_menu.close_button_pressed.connect(on_tower_upgrade_close_button_pressed)
+	tower_upgrade_menu.target_priority_changed.connect(on_tower_priority_changed)
 
 	# Connect to EnemySpawner
 	EnemySpawner.enemy_died.connect(on_enemy_died)
@@ -173,7 +179,7 @@ func on_tower_clicked(tower: Tower) -> void:
 		SFXPlayer.play_sfx("click_1")
 
 	elif placement_enabled and tower.can_transform: # Upgrade tower
-		set_tower_to_upgrade(tower)
+		tower_to_upgrade = tower
 		tower_upgrade_menu.show()
 		tower_menu.hide()
 
@@ -203,7 +209,8 @@ func on_enemy_died():
 
 func _input(_event):
 	if click_enabled and Input.is_action_just_pressed("left_click"):
-		if not tower_to_upgrade:
+		if not tower_to_upgrade and selected_tower_element != Constants.Element.NONE:
+			get_viewport().set_input_as_handled() # Prevent this input from propagating to tower and opening menu
 			place_tower(selected_tower_element, get_global_mouse_position())
 
 	if Input.is_action_just_pressed("right_click"):
@@ -211,6 +218,8 @@ func _input(_event):
 			tower_menu.show_placement_phase()
 			tower_to_place.queue_free()
 			tower_to_place = null
+
+	# can_open_tower_upgrades = true
 
 func set_checkpoints() -> void:
 	# Checkpoint playerController data
@@ -226,16 +235,10 @@ func on_mouse_exited_button() -> void:
 # Tower Upgrade Menu functions 
 # TODO: Maybe some of this should move into the tower, or a tower upgrade component in tower?
 func check_gold_upgrade_requirement() -> bool:
-	print("gold: ", gold)
-	print("level_upgrade_price: ", tower_to_upgrade.level_upgrade_price)
 	if gold >= tower_to_upgrade.level_upgrade_price:
 		return true
 	else:
 		return false
-
-func set_tower_to_upgrade(_tower: Tower) -> void:
-	tower_to_upgrade = _tower
-	tower_upgrade_menu.tower =_tower
 
 func on_damage_button_pressed() -> void:
 	if tower_to_upgrade.damage_level < 3:
@@ -243,6 +246,7 @@ func on_damage_button_pressed() -> void:
 			gold -= tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.damage_level += 1
 			tower_upgrade_menu.update_stats()
+			tower_upgrade_menu.update_damage_level_arrow()
 
 func on_speed_button_pressed() -> void:
 	if tower_to_upgrade.speed_level < 3:
@@ -250,6 +254,7 @@ func on_speed_button_pressed() -> void:
 			gold -= tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.speed_level += 1
 			tower_upgrade_menu.update_stats()
+			tower_upgrade_menu.update_speed_level_arrow()
 
 func on_range_button_pressed() -> void:
 	if tower_to_upgrade.range_level < 3:
@@ -257,6 +262,7 @@ func on_range_button_pressed() -> void:
 			gold -= tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.range_level += 1
 			tower_upgrade_menu.update_stats()
+			tower_upgrade_menu.update_range_level_arrow()
 
 func on_special_button_pressed() -> void:
 	pass
@@ -265,6 +271,11 @@ func on_tower_upgrade_close_button_pressed() -> void:
 	tower_upgrade_menu.hide()
 	tower_menu.show()
 	tower_to_upgrade = null
+
+func on_tower_priority_changed(priority: Tower.TargetPriority):
+	if tower_to_upgrade:
+		tower_to_upgrade.target_priority = priority
+		tower_upgrade_menu.set_target_priority_data(tower_to_upgrade.target_priority)
 
 # func _draw():	
 # 	draw_dashed_line(Vector2.ZERO, get_global_mouse_position(), Color.GREEN, 10)
