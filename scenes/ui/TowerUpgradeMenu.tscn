@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://br3yofjq2l14o"]
+[gd_scene load_steps=51 format=3 uid="uid://br3yofjq2l14o"]
 
 [ext_resource type="Script" uid="uid://dla326rvf6d3k" path="res://scripts/ui/tower_upgrade_menu.gd" id="1_4dufm"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_typcq"]
@@ -21,25 +21,10 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wvnee"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m87lr"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bw1ro"]
-atlas = ExtResource("8_bw1ro")
-region = Rect2(0, 0, 8, 0)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ymig"]
-atlas = ExtResource("8_bw1ro")
-region = Rect2(8, 0, 8, 0)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e3s6c"]
-atlas = ExtResource("8_bw1ro")
-region = Rect2(16, 0, 8, 0)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tqg7h"]
-atlas = ExtResource("8_bw1ro")
-region = Rect2(0, 0, 8, 0)
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4rpun"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i414"]
+atlas = ExtResource("8_bw1ro")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t2o4b"]
 
@@ -84,6 +69,24 @@ region = Rect2(0, 0, 8, 0)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yi3fk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bw1ro"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m87lr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw1ro"]
+atlas = ExtResource("8_bw1ro")
+region = Rect2(0, 0, 8, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ymig"]
+atlas = ExtResource("8_bw1ro")
+region = Rect2(8, 0, 8, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3s6c"]
+atlas = ExtResource("8_bw1ro")
+region = Rect2(16, 0, 8, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqg7h"]
+atlas = ExtResource("8_bw1ro")
+region = Rect2(0, 0, 8, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wes0x"]
 
@@ -245,39 +248,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="LevelUpArrows" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
-layout_mode = 2
-theme_override_constants/separation = 21
-
-[node name="HSeparator" type="HSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
-layout_mode = 2
-theme_override_constants/separation = 6
-theme_override_styles/separator = SubResource("StyleBoxEmpty_m87lr")
-
-[node name="DamageLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(8, 16)
-layout_mode = 2
-texture = SubResource("AtlasTexture_bw1ro")
-
-[node name="SpeedLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(8, 16)
-layout_mode = 2
-texture = SubResource("AtlasTexture_0ymig")
-
-[node name="RangeLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(8, 16)
-layout_mode = 2
-texture = SubResource("AtlasTexture_e3s6c")
-
-[node name="SpecialLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(8, 16)
-layout_mode = 2
-texture = SubResource("AtlasTexture_tqg7h")
-
 [node name="UpgradeVboxParent" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
@@ -296,7 +266,14 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_4rpun")
 
-[node name="UpgradeLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/UpgradeHeader"]
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/UpgradeHeader"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/UpgradeHeader/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7i414")
+
+[node name="UpgradeLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/UpgradeHeader/HBoxContainer"]
 custom_minimum_size = Vector2(65, 12)
 layout_mode = 2
 size_flags_vertical = 0
@@ -774,10 +751,43 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_6r12l")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_yi3fk")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bw1ro")
 
+[node name="LevelUpArrows" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
+layout_mode = 2
+theme_override_constants/separation = 21
+
+[node name="HSeparator" type="HSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+theme_override_styles/separator = SubResource("StyleBoxEmpty_m87lr")
+
+[node name="DamageLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_bw1ro")
+
+[node name="SpeedLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_0ymig")
+
+[node name="RangeLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_e3s6c")
+
+[node name="SpecialLevelArrow" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/LevelUpArrows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_tqg7h")
+
 [node name="Divider" type="VSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 16
 theme_override_styles/separator = SubResource("StyleBoxEmpty_wes0x")
 
 [node name="Details" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
