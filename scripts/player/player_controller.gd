@@ -265,7 +265,12 @@ func on_range_button_pressed() -> void:
 			tower_upgrade_menu.update_range_level_arrow()
 
 func on_special_button_pressed() -> void:
-	pass
+	if tower_to_upgrade.special_level < 3:
+		if tower_to_upgrade and check_gold_upgrade_requirement():
+			gold -= tower_to_upgrade.level_upgrade_price
+			tower_to_upgrade.special_level += 1
+			tower_upgrade_menu.update_stats()
+			tower_upgrade_menu.update_special_level_arrow()
 
 func on_tower_upgrade_close_button_pressed() -> void:
 	tower_upgrade_menu.hide()

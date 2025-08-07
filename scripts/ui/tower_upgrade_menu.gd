@@ -171,5 +171,5 @@ func update_speed_level_arrow() -> void:
 func update_range_level_arrow() -> void:
 	range_level_arrow.texture.region = Rect2((8 * tower.range_level), 0, 8, 0)
 
-# func update_special_level_arrow() -> void:
-# 	special_level_arrow.texture.region = Rect2((8 * tower.), 0, 8, 0)
+func update_special_level_arrow() -> void:
+	special_level_arrow.texture.region = Rect2((8 * tower.special_level), 0, 8, 0)

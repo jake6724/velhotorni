@@ -1,6 +1,9 @@
 class_name Debuff
 extends Node
 
+enum Type {SLOW, STUN, FREEZE, BURN, WEAKEN, KNOCKBACK,}
+enum Priority {LOWEST, LOW, MEDIUM, HIGH, HIGHEST}
+
 var data: DebuffData
 
 var total_timer: Timer = Timer.new()

@@ -9,7 +9,7 @@ signal debuff_remove_stun
 
 func start_debuff() -> void:
 	debuff_apply_stun.emit()
-	total_timer.start(data.total_duration)
+	total_timer.start(data.modified_total_duration)
 
 func on_total_timer_timeout() -> void:
 	debuff_remove_stun.emit()

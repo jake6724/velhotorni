@@ -45,33 +45,53 @@ var preview_damage: float
 var preview_speed: float
 var preview_range: float
 
+const MAX_LEVEL_PRICE: int = 75
+const LEVEL_COST_INCREMENT: int = 25
 var level: int = 0
 var damage_level: int = 0:
 	set(value):
 		damage_level = value
 		level += 1
-		level_upgrade_price = min(level_upgrade_price + 25, 75)
+		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
 		update_current_combat_data()
 		update_preview_combat_data()
+
 var speed_level: int = 0:
 	set(value):
 		speed_level = value
 		level += 1
-		level_upgrade_price = min(level_upgrade_price + 25, 75)
+		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
 		update_current_combat_data()
 		update_preview_combat_data()
+
 var range_level: int = 0:
 	set(value):
 		range_level = value
 		level += 1
-		level_upgrade_price = min(level_upgrade_price + 25, 75)
+		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
 		update_current_combat_data()
 		update_preview_combat_data()
 		update_colliders()
 
+var special_level: int = 0:
+	set(value):
+		special_level = value
+		level += 1
+		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
+		update_current_combat_data()
+		update_preview_combat_data()
+		update_debuff_data()
+
 const DAMAGE_MODIFIER: float = 0.5
 const RANGE_MODIFIER: float = 0.2
 const SPEED_MODIFIER: float = 0.33
+
+const BURN_DAMAGE_MODIFIER: float = 0.75
+const KNOCKBACK_DISTANCE_MODIFIER: float = 0.5
+const SLOW_DURATION_MODIFIER: float = 0.3333
+const FREEZE_DURATION_MODIFIER: float = 0.3333
+const STUN_DURATION_MODIFIER: float = 0.3333
+const WEAKEN_DURATION_MODIFIER: float = 1
 
 # TowerData resources
 var data: TowerData
@@ -114,6 +134,7 @@ func initialize(element: Constants.Element):
 
 	update_current_combat_data()
 	update_preview_combat_data()
+	update_debuff_data()
 	update_textures()
 	update_colliders()
 
@@ -179,6 +200,7 @@ func revert() -> void:
 func reset_tower() -> void:
 	buff_manager.remove_all_buffs()
 	update_current_combat_data()
+	update_preview_combat_data()
 	refresh_colliders()
 	update_colliders()
 	update_textures()
@@ -193,6 +215,21 @@ func update_preview_combat_data() -> void:
 	preview_damage = data.damage + ((damage_level + 1) * (data.damage * DAMAGE_MODIFIER))  
 	preview_speed = data.speed / (1.0 + ((speed_level + 1) * SPEED_MODIFIER))
 	preview_range = data.attack_range * (1.0 + ((range_level + 1 )* RANGE_MODIFIER))
+
+func update_debuff_data() -> void:
+	match data.debuff_data.type:
+		Debuff.Type.BURN: 
+			data.debuff_data.modified_value = data.debuff_data.value + ((data.debuff_data.value * BURN_DAMAGE_MODIFIER) * special_level)
+		Debuff.Type.KNOCKBACK: 
+			data.debuff_data.modified_value = data.debuff_data.value + ((data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * special_level)
+		Debuff.Type.SLOW:
+			data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * special_level)
+		Debuff.Type.FREEZE:
+			data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * special_level)
+		Debuff.Type.STUN:
+			data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * special_level)
+		Debuff.Type.WEAKEN:
+			data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * special_level)
 
 func flip_to_face_active_target():
 	if active_target:

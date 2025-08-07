@@ -8,4 +8,4 @@ extends DebuffData
 var debuff_script: Script = preload("res://scripts/debuffs/debuff_knockback.gd")
 
 func _init():
-	type = Constants.Debuff.KNOCKBACK
+	type = Debuff.Type.KNOCKBACK

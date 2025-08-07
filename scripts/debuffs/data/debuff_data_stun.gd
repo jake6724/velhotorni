@@ -4,4 +4,4 @@ extends DebuffData
 var debuff_script: Script = preload("res://scripts/debuffs/debuff_stun.gd")
 
 func _init():
-	type = Constants.Debuff.STUN
+	type = Debuff.Type.STUN

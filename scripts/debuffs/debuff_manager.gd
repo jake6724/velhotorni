@@ -51,14 +51,14 @@ func add_debuff(new_debuff_data: DebuffData) -> void:
 		else:
 			create_debuff(new_debuff_data)
 
-func check_debuff_type_present(type: Constants.Debuff) -> bool:
+func check_debuff_type_present(type: Debuff.Type) -> bool:
 	for child in get_children():
 		if child is Debuff:
 			if child.data.type == type:
 				return true
 	return false
 
-func get_active_debuff_by_type(_type: Constants.Debuff) -> Debuff:
+func get_active_debuff_by_type(_type: Debuff.Type) -> Debuff:
 	for child in get_children():
 		if child is Debuff:
 			if child.data.type == _type:
@@ -66,13 +66,13 @@ func get_active_debuff_by_type(_type: Constants.Debuff) -> Debuff:
 	return null
 
 func check_cc_cooldowns(_data: DebuffData) -> bool:
-	if _data.type == Constants.Debuff.FREEZE and not can_cc:
+	if _data.type == Debuff.Type.FREEZE and not can_cc:
 		return false
 
-	elif _data.type == Constants.Debuff.STUN and not can_cc:
+	elif _data.type == Debuff.Type.STUN and not can_cc:
 		return false
 
-	elif _data.type == Constants.Debuff.KNOCKBACK and not can_knockback:
+	elif _data.type == Debuff.Type.KNOCKBACK and not can_knockback:
 		return false
 	
 	return true
@@ -90,15 +90,15 @@ func create_debuff(_data: DebuffData) -> void:
 func start_cc_cooldown(_data: DebuffData) -> void:
 	# Only set a new cooldown if not already CC'd
 	if can_cc:
-		if _data.type == Constants.Debuff.FREEZE or _data.type == Constants.Debuff.STUN:
+		if _data.type == Debuff.Type.FREEZE or _data.type == Debuff.Type.STUN:
 			can_cc = false
 			cc_cooldown = _data.total_duration * cc_multiplier
 			cc_timer.start(cc_cooldown)
 
 func set_knockback_reset_distance(_data) -> void:
-	if can_knockback and _data.type == Constants.Debuff.KNOCKBACK:
+	if can_knockback and _data.type == Debuff.Type.KNOCKBACK:
 		can_knockback = false
-		knockback_reset_distance = (enemy_progress - _data.value) + (_data.value * knockback_multiplier)
+		knockback_reset_distance = (enemy_progress - _data.modified_value) + (_data.modified_value * knockback_multiplier)
 
 func on_cc_timer_timeout() -> void:
 	can_cc = true

@@ -7,7 +7,10 @@ extends Resource
 @export var total_duration: float
 
 ## The `Constants.Debuff` type of the debuff. Options include `SLOW`, `BURN`, `FREEZE`, `STUN`, `WEAKEN`, `KNOCKBACK`.
-var type: Constants.Debuff
+var type: Debuff.Type
 
 ## `Constant.Element` value.
 var element: Constants.Element # TODO: this should just come from the bullet? 
+
+var modified_total_duration: float = total_duration
+var modified_value: float

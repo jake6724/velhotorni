@@ -8,4 +8,4 @@ extends DebuffData
 var debuff_script: Script = preload("res://scripts/debuffs/debuff_weaken.gd")
 
 func _init():
-	type = Constants.Debuff.WEAKEN
+	type = Debuff.Type.WEAKEN
