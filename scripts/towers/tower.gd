@@ -221,34 +221,36 @@ func update_preview_combat_data() -> void:
 	preview_range = data.attack_range * (1.0 + ((range_level + 1 )* RANGE_MODIFIER))
 
 func update_debuff_data() -> void:
-	match data.debuff_data.type:
-		Debuff.Type.BURN: 
-			data.debuff_data.modified_value = data.debuff_data.value + ((data.debuff_data.value * BURN_DAMAGE_MODIFIER) * special_level)
-		Debuff.Type.KNOCKBACK: 
-			data.debuff_data.modified_value = data.debuff_data.value + ((data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * special_level)
-		Debuff.Type.SLOW:
-			data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * special_level)
-		Debuff.Type.FREEZE:
-			data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * special_level)
-		Debuff.Type.STUN:
-			data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * special_level)
-		Debuff.Type.WEAKEN:
-			data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * special_level)
+	if data.debuff_data:
+		match data.debuff_data.type:
+			Debuff.Type.BURN: 
+				data.debuff_data.modified_value = data.debuff_data.value + ((data.debuff_data.value * BURN_DAMAGE_MODIFIER) * special_level)
+			Debuff.Type.KNOCKBACK: 
+				data.debuff_data.modified_value = data.debuff_data.value + ((data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * special_level)
+			Debuff.Type.SLOW:
+				data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * special_level)
+			Debuff.Type.FREEZE:
+				data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * special_level)
+			Debuff.Type.STUN:
+				data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * special_level)
+			Debuff.Type.WEAKEN:
+				data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * special_level)
 
 func update_preview_debuff_data() -> void:
-	match data.debuff_data.type:
-		Debuff.Type.BURN: 
-			data.debuff_data.preview_modified_value = data.debuff_data.value + ((data.debuff_data.value * BURN_DAMAGE_MODIFIER) * special_level + 1)
-		Debuff.Type.KNOCKBACK: 
-			data.debuff_data.preview_modified_value = data.debuff_data.value + ((data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * special_level + 1)
-		Debuff.Type.SLOW:
-			data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * special_level + 1)
-		Debuff.Type.FREEZE:
-			data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * special_level + 1)
-		Debuff.Type.STUN:
-			data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * special_level + 1)
-		Debuff.Type.WEAKEN:
-			data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * special_level + 1)
+	if data.debuff_data:
+		match data.debuff_data.type:
+			Debuff.Type.BURN: 
+				data.debuff_data.preview_modified_value = data.debuff_data.value + ((data.debuff_data.value * BURN_DAMAGE_MODIFIER) * special_level + 1)
+			Debuff.Type.KNOCKBACK: 
+				data.debuff_data.preview_modified_value = data.debuff_data.value + ((data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * special_level + 1)
+			Debuff.Type.SLOW:
+				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * special_level + 1)
+			Debuff.Type.FREEZE:
+				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * special_level + 1)
+			Debuff.Type.STUN:
+				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * special_level + 1)
+			Debuff.Type.WEAKEN:
+				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * special_level + 1)
 
 func flip_to_face_active_target():
 	if active_target:

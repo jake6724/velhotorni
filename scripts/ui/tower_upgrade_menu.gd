@@ -95,8 +95,7 @@ func update_stats() -> void:
 
 	update_debuff_stats()
 
-	current_level_label.text = str("LV",tower.level + 1)
-	next_level_label.text = str("LV",tower.level + 2)
+	update_level_labels()
 
 	cost_label.text = str(tower.level_upgrade_price)
 
@@ -120,6 +119,17 @@ func update_debuff_stats() -> void:
 		Debuff.Type.WEAKEN:
 			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
 			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+
+func update_level_labels() -> void:
+	if tower.level < 12:
+		print("test")
+		current_level_label.text = str("LV",tower.level + 1)
+		next_level_label.text = str("LV",tower.level + 2)
+	else:
+		print("max")
+		current_level_label.text = str("LV",tower.level + 1)
+		next_level_label.text = str("MAX")
+
 
 func update_description(_text) -> void:
 	desc.text = _text
