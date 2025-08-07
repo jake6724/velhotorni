@@ -25,6 +25,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7i414"]
 atlas = ExtResource("8_bw1ro")
+region = Rect2(16, 0, 8, 16)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t2o4b"]
 
@@ -268,15 +269,18 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_4rpun")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/UpgradeHeader"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/UpgradeHeader/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 texture = SubResource("AtlasTexture_7i414")
 
 [node name="UpgradeLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/UpgradeHeader/HBoxContainer"]
 custom_minimum_size = Vector2(65, 12)
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("4_wvnee")
 theme_override_font_sizes/normal_font_size = 8
