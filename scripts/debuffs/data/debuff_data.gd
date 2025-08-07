@@ -14,3 +14,6 @@ var element: Constants.Element # TODO: this should just come from the bullet?
 
 var modified_total_duration: float = total_duration
 var modified_value: float
+
+var preview_modified_total_duration: float
+var preview_modified_value: float

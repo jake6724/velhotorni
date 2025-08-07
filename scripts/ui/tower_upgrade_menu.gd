@@ -93,13 +93,33 @@ func update_stats() -> void:
 	current_range_label.text = str(snappedf(tower.curr_range, .01))
 	upgrade_range_label.text = str(snappedf(tower.preview_range, .01))
 
-	# current_special_label.text = str(tower.damage_level + 1)
-	# upgraded_special_label.text = str(tower.damage_level + 2)
+	update_debuff_stats()
 
 	current_level_label.text = str("LV",tower.level + 1)
 	next_level_label.text = str("LV",tower.level + 2)
 
 	cost_label.text = str(tower.level_upgrade_price)
+
+func update_debuff_stats() -> void:
+	match tower.data.debuff_data.type:
+		Debuff.Type.BURN:
+			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_value, .01))
+			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_value, .01))
+		Debuff.Type.KNOCKBACK:
+			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_value, .01))
+			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_value, .01))
+		Debuff.Type.SLOW:
+			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
+			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+		Debuff.Type.FREEZE:
+			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
+			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+		Debuff.Type.STUN:
+			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
+			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+		Debuff.Type.WEAKEN:
+			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
+			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
 
 func update_description(_text) -> void:
 	desc.text = _text
@@ -160,7 +180,7 @@ func set_all_level_arrows() -> void:
 	update_damage_level_arrow()
 	update_speed_level_arrow()
 	update_range_level_arrow()
-	# update_special_level_arrow() 
+	update_special_level_arrow() 
 
 func update_damage_level_arrow() -> void:
 	damage_level_arrow.texture.region = Rect2((8 * tower.damage_level), 0, 8, 0)
