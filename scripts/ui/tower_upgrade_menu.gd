@@ -99,25 +99,26 @@ func update_stats() -> void:
 	cost_label.text = str(tower.level_upgrade_price)
 
 func update_debuff_stats() -> void:
-	match tower.data.debuff_data.type:
-		Debuff.Type.BURN:
-			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_value, .01))
-			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_value, .01))
-		Debuff.Type.KNOCKBACK:
-			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_value, .01))
-			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_value, .01))
-		Debuff.Type.SLOW:
-			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
-			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
-		Debuff.Type.FREEZE:
-			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
-			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
-		Debuff.Type.STUN:
-			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
-			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
-		Debuff.Type.WEAKEN:
-			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
-			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+	if tower.data.debuff_data:
+		match tower.data.debuff_data.type:
+			Debuff.Type.BURN:
+				current_special_label.text = str(snappedf(tower.data.debuff_data.modified_value, .01))
+				upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_value, .01))
+			Debuff.Type.KNOCKBACK:
+				current_special_label.text = str(snappedf(tower.data.debuff_data.modified_value, .01))
+				upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_value, .01))
+			Debuff.Type.SLOW:
+				current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
+				upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+			Debuff.Type.FREEZE:
+				current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
+				upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+			Debuff.Type.STUN:
+				current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
+				upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+			Debuff.Type.WEAKEN:
+				current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
+				upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
 
 func update_level_labels() -> void:
 	if tower.level < 12:

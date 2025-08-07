@@ -94,9 +94,9 @@ func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 		var grid_pos: Vector2 = WorldGrid.world_to_grid(world_pos)
 		if grid_pos in WorldGrid.data and WorldGrid.data[grid_pos]:
 			# Spawn and configure new tower
-			tower_to_place.transform_area.input_pickable = false
 			var new_tower: Tower = tower_to_place # tower_to_place BECOMES new_tower, same tower ref
 			tower_to_place = null # Disable movement in _process()
+			new_tower.transform_area.input_pickable = false
 			new_tower.position = WorldGrid.grid_to_world(grid_pos) # Bring it back to world to get a clean grid point
 			new_tower.modulate.a = 1
 
