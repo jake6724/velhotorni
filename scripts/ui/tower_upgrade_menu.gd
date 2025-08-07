@@ -121,11 +121,9 @@ func update_debuff_stats() -> void:
 
 func update_level_labels() -> void:
 	if tower.level < 12:
-		print("test")
 		current_level_label.text = str("LV",tower.level + 1)
 		next_level_label.text = str("LV",tower.level + 2)
 	else:
-		print("max")
 		current_level_label.text = str("LV",tower.level + 1)
 		next_level_label.text = str("MAX")
 

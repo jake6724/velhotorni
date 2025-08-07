@@ -792,7 +792,7 @@ texture = SubResource("AtlasTexture_tqg7h")
 [node name="Divider" type="VSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxEmpty_wes0x")
 
 [node name="Details" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
@@ -804,7 +804,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(215, 0)
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 50
 
 [node name="Targeting" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
 unique_name_in_owner = true
@@ -882,7 +882,6 @@ texture_normal = ExtResource("13_xjkok")
 [node name="Portrait" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 8
 mouse_filter = 2
 texture = ExtResource("14_xjkok")
 

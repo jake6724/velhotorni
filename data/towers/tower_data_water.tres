@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://bplk0h2miw0yo"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=8 format=3 uid="uid://bplk0h2miw0yo"]
 
 [ext_resource type="Texture2D" uid="uid://bwleb0cvscrkm" path="res://assets/art/sprites/tower/spr_tower_water_fish_idle.png" id="1_6idtf"]
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_fc8g7"]
 [ext_resource type="PackedScene" uid="uid://b6qmk2qf0ex8x" path="res://scenes/bullets/WaterBullet.tscn" id="2_1scag"]
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="2_l860k"]
 [ext_resource type="Texture2D" uid="uid://cdhft8awohll1" path="res://assets/art/sprites/ui/spr_ui_earth.png" id="3_1scag"]
-[ext_resource type="Resource" path="res://data/debuffs/debuff_data_slow_water.tres" id="4_l860k"]
+[ext_resource type="Resource" uid="uid://wu5nsovo6hnf" path="res://data/debuffs/debuff_data_slow_water.tres" id="4_l860k"]
+[ext_resource type="Texture2D" uid="uid://dfi1sbq52o3jw" path="res://assets/art/sprites/ui/spr_ui_tower_water_fish.png" id="5_ivdd0"]
 
 [resource]
 script = ExtResource("1_fc8g7")
@@ -17,6 +18,7 @@ attack_range = 45.0
 num_targets = 1
 atlas = ExtResource("1_6idtf")
 transform_hint_texture = ExtResource("3_1scag")
+portrait = ExtResource("5_ivdd0")
 bullet = ExtResource("2_1scag")
 bullet_speed = 150.0
 debuff_data = ExtResource("4_l860k")

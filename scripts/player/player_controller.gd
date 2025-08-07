@@ -5,7 +5,6 @@ extends Node2D
 @onready var tower_menu: TowerMenu = $UI/TowerMenu
 @onready var tower_upgrade_menu: TowerUpgradeMenu = $UI/TowerUpgradeMenu
 
-# Scenes
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var tower_to_place: Tower = null
 var tower_to_upgrade: Tower = null:
@@ -15,6 +14,7 @@ var tower_to_upgrade: Tower = null:
 			tower_upgrade_menu.tower = value
 
 var click_enabled: bool = true
+var is_tower_hovered: bool = false
 var can_open_tower_upgrades: bool = true
 var selected_tower_element: Constants.Element = Constants.Element.NONE
 var active_towers: Array[Tower] = []
@@ -65,6 +65,17 @@ func _process(_delta):
 
 	queue_redraw()
 
+func _input(_event):
+	if click_enabled and Input.is_action_just_pressed("left_click"):
+		if not tower_to_upgrade and selected_tower_element != Constants.Element.NONE: # Place a new tower
+			place_tower(selected_tower_element, get_global_mouse_position())
+
+	if Input.is_action_just_pressed("right_click"): # Clear tower to place
+		if tower_to_place:
+			tower_menu.show_placement_phase()
+			tower_to_place.queue_free()
+			tower_to_place = null
+
 func create_tower(element: Constants.Element):
 	# Reset previous selection
 	if tower_to_place:
@@ -73,6 +84,7 @@ func create_tower(element: Constants.Element):
 
 	tower_to_place = tower_scene.instantiate()
 	add_child(tower_to_place)
+	tower_to_place.transform_area.input_pickable = false
 	tower_to_place.initialize(element)
 
 	tower_to_place.modulate.a = .75
@@ -83,7 +95,7 @@ func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 		var grid_pos: Vector2 = WorldGrid.world_to_grid(world_pos)
 		if grid_pos in WorldGrid.data and WorldGrid.data[grid_pos]:
 			# Spawn and configure new tower
-			var new_tower: Tower = tower_to_place
+			var new_tower: Tower = tower_to_place # tower_to_place BECOMES new_tower, same tower ref
 			tower_to_place = null # Disable movement in _process()
 			new_tower.position = WorldGrid.grid_to_world(grid_pos) # Bring it back to world to get a clean grid point
 			new_tower.modulate.a = 1
@@ -102,6 +114,8 @@ func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 
 			selected_tower_element = Constants.Element.NONE
 			tower_menu.show_shop()
+			await get_tree().create_timer(.2).timeout # delay allowing tower to process input events
+			new_tower.transform_area.set_deferred("input_pickable", true)
 			return true
 		else:
 			# SFXPlayer.play_sfx("click_2")
@@ -124,6 +138,18 @@ func on_tower_selected(element: Constants.Element) -> void:
 
 	else:
 		SFXPlayer.play_sfx("click_2")
+
+func on_tower_clicked(tower: Tower) -> void:
+	if not placement_enabled and tower.can_transform: # Transform tower
+		tower.transform()
+		SFXPlayer.play_sfx("click_1")
+
+	elif placement_enabled and not tower_to_place and tower.can_transform: # Upgrade tower
+		tower_to_upgrade = tower
+		tower_upgrade_menu.show()
+		tower_menu.hide()
+
+	else: pass # Tower not ready to be interacted with (just placed)
 
 func on_start_wave() -> void:
 	# Disable wave start if actively placing a tower, or no towers placed
@@ -173,19 +199,8 @@ func reset_towers() -> void:
 	for tower: Tower in active_towers:
 		tower.revert()
 
-func on_tower_clicked(tower: Tower) -> void:
-	if not placement_enabled and tower.can_transform: # Transform tower
-		tower.transform()
-		SFXPlayer.play_sfx("click_1")
-
-	elif placement_enabled and tower.can_transform: # Upgrade tower
-		tower_to_upgrade = tower
-		tower_upgrade_menu.show()
-		tower_menu.hide()
-
-	else: pass # Tower not ready to be interacted with (just placed)
-
 func on_tower_hovered(tower: Tower):
+	is_tower_hovered = true
 	if not placement_enabled: # Only show transform sprites if in combat phase
 		if tower.can_transform:
 			tower.swap_sprite.show()
@@ -206,20 +221,6 @@ func play_tower_select_sfx(element: Constants.Element) -> void:
 
 func on_enemy_died():
 	gold += 1
-
-func _input(_event):
-	if click_enabled and Input.is_action_just_pressed("left_click"):
-		if not tower_to_upgrade and selected_tower_element != Constants.Element.NONE:
-			get_viewport().set_input_as_handled() # Prevent this input from propagating to tower and opening menu
-			place_tower(selected_tower_element, get_global_mouse_position())
-
-	if Input.is_action_just_pressed("right_click"):
-		if tower_to_place:
-			tower_menu.show_placement_phase()
-			tower_to_place.queue_free()
-			tower_to_place = null
-
-	# can_open_tower_upgrades = true
 
 func set_checkpoints() -> void:
 	# Checkpoint playerController data

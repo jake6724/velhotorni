@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://dcfain1omg1p0"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=8 format=3 uid="uid://dcfain1omg1p0"]
 
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_fairw"]
 [ext_resource type="Texture2D" uid="uid://thbvex13wqml" path="res://assets/art/sprites/tower/spr_tower_wind_bird_idle.png" id="1_wsq5c"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dd61xpdmh7ixu" path="res://scenes/bullets/WindBullet.tscn" id="2_wsq5c"]
 [ext_resource type="Resource" uid="uid://fem5s7qur7b8" path="res://data/debuffs/debuff_data_knockback_test.tres" id="3_3hdua"]
 [ext_resource type="Texture2D" uid="uid://bt1v03t0h2bp6" path="res://assets/art/sprites/ui/spr_ui_water.png" id="3_g6jon"]
+[ext_resource type="Texture2D" uid="uid://cmp3lb2x5ig6v" path="res://assets/art/sprites/ui/spr_ui_tower_wind.png" id="5_jiedl"]
 
 [resource]
 script = ExtResource("1_fairw")
@@ -17,6 +18,7 @@ attack_range = 60.0
 num_targets = 1
 atlas = ExtResource("1_wsq5c")
 transform_hint_texture = ExtResource("3_g6jon")
+portrait = ExtResource("5_jiedl")
 bullet = ExtResource("2_wsq5c")
 bullet_speed = 150.0
 debuff_data = ExtResource("3_3hdua")

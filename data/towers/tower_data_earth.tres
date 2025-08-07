@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://dscca5hkneedb"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=8 format=3 uid="uid://dscca5hkneedb"]
 
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_7skyr"]
 [ext_resource type="Texture2D" uid="uid://chaltceraasei" path="res://assets/art/atlases/tower/atl_tower_earth.png" id="1_w305r"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://5bk31tu4ddy2" path="res://scenes/bullets/EarthBullet.tscn" id="3_v7v5i"]
 [ext_resource type="Resource" uid="uid://b5qq4hdvun2td" path="res://data/debuffs/debuff_data_slow_earth.tres" id="4_aswkh"]
 [ext_resource type="Texture2D" uid="uid://bpvgv3s34e6g5" path="res://assets/art/sprites/ui/spr_ui_light.png" id="5_aswkh"]
+[ext_resource type="Texture2D" uid="uid://rvf7vwl6ny54" path="res://assets/art/sprites/ui/spr_ui_tower_earth.png" id="5_o6fw3"]
 
 [resource]
 script = ExtResource("1_7skyr")
@@ -17,6 +18,7 @@ attack_range = 32.0
 num_targets = 0
 atlas = ExtResource("1_w305r")
 transform_hint_texture = ExtResource("5_aswkh")
+portrait = ExtResource("5_o6fw3")
 bullet = ExtResource("3_v7v5i")
 bullet_speed = 1.0
 debuff_data = ExtResource("4_aswkh")

@@ -27,7 +27,7 @@ var active_target: Enemy
 var in_range_targets: Array[Enemy] = []
 var attack_timer: Timer = Timer.new()
 var transform_timer: Timer = Timer.new()
-var transform_delay: float = .8
+var transform_delay: float = .1
 var can_transform: bool = false # Set to true after brief delay in on_transform_timer_timeout()
 var can_attack: bool = true
 var can_show_range: bool: 
@@ -159,7 +159,6 @@ func initialize(element: Constants.Element):
 
 	buff_manager.add_new_buff.connect(on_add_new_buff) # Recieve all buffs, even if this tower doesn't have one to share
 	buff_manager.remove_active_buff.connect(on_remove_active_buff)
-
 
 func _physics_process(_delta):	
 	if can_attack:
@@ -297,17 +296,17 @@ func on_area_exited(intruder) -> void:
 
 func on_mouse_entered_transform_area():
 	can_show_range = true
-
 	tower_hovered.emit(self)
 
 func on_mouse_exited_transform_area():
 	can_show_range = false
 	tower_unhovered.emit(self)
 
+# Click-input check
 func on_transform_area_pressed(_viewport, _event, _shape_idx) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		tower_clicked.emit()
-		
+			
 func on_attack_timer_timeout() -> void:
 	can_attack = true
 
