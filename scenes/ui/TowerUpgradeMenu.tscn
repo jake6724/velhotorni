@@ -933,8 +933,53 @@ size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/separation = 10
 
+[node name="Undo" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons"]
+visible = false
+custom_minimum_size = Vector2(65, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("16_r51os")
+region_rect = Rect2(1, 1, 30, 29)
+patch_margin_left = 11
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons/Undo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_wvnee")
+theme_override_font_sizes/font_size = 8
+text = "Undo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpecializeButton" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons/Undo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0ymig")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_e3s6c")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tqg7h")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7i414")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7hf42")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_cunbv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8syc2")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_xtrui")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6r12l")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_yi3fk")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bw1ro")
+
 [node name="Specialize" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons"]
-custom_minimum_size = Vector2(90, 30)
+custom_minimum_size = Vector2(65, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -954,7 +999,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_wvnee")
 theme_override_font_sizes/font_size = 8
-text = "Specialize"
+text = "Evolve"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -979,7 +1024,7 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_yi3fk")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bw1ro")
 
 [node name="Close" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons"]
-custom_minimum_size = Vector2(90, 30)
+custom_minimum_size = Vector2(65, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

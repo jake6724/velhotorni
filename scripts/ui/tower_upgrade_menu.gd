@@ -102,8 +102,12 @@ func update_stats() -> void:
 
 func update_debuff_stats() -> void:
 	if tower.data.debuff_data:
-		current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
-		upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+		if tower.data.debuff_data.type == Debuff.Type.BURN or Debuff.Type.KNOCKBACK:
+			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_value, .01))
+			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_value, .01))
+		else:
+			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
+			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
 
 func update_buff_stats() -> void:
 	if tower.data.buff_data_list and tower.data.buff_data_list[0]:

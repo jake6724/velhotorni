@@ -1,5 +1,3 @@
-# TODO: Maybe go back to using data.damage etc, and set base_data_damage ? 
-
 class_name Tower
 extends Node2D
 
@@ -238,7 +236,7 @@ func update_preview_combat_data() -> void:
 func update_debuff_data() -> void:
 	if data.debuff_data:
 		match data.debuff_data.type:
-			Debuff.Type.BURN: 
+			Debuff.Type.BURN:
 				data.debuff_data.modified_value = data.debuff_data.value + ((data.debuff_data.value * BURN_DAMAGE_MODIFIER) * special_level)
 			Debuff.Type.KNOCKBACK: 
 				data.debuff_data.modified_value = data.debuff_data.value + ((data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * special_level)
