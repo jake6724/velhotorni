@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://c3y1nkewtuylq"]
+
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_3u0mi"]
+[ext_resource type="Texture2D" uid="uid://ufilevm47cx" path="res://assets/art/atlases/enemy/atl_enemy_dark_gravestone.png" id="1_53332"]
+[ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="2_pv0ik"]
+
+[resource]
+script = ExtResource("1_3u0mi")
+size = 2
+element = 5
+strong_against_element = 0
+weak_against_element = 4
+health = 100.0
+speed = 20.0
+atlas = ExtResource("1_53332")
+explosion_sfx = ExtResource("2_pv0ik")
+cc_multiplier = 1.5
+knockback_multiplier = 1.5
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://da3imqy44otyc"]
+
+[ext_resource type="Resource" uid="uid://3j4u544ha5xs" path="res://data/enemies/enemy_data_wind_flatwoods.tres" id="1_52tac"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_kmswk"]
+
+[resource]
+script = ExtResource("1_kmswk")
+enemy_data = ExtResource("1_52tac")
+delay = 1.0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

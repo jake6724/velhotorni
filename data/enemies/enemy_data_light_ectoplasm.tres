@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://bkreby1oa0uo0"]
+
+[ext_resource type="Texture2D" uid="uid://ch0bt4tbqo6p6" path="res://assets/art/atlases/enemy/atl_enemy_light_ectoplasm.png" id="1_2viro"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_b0wyv"]
+[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_mtdpf"]
+
+[resource]
+script = ExtResource("1_b0wyv")
+size = 2
+element = 4
+strong_against_element = 5
+weak_against_element = 3
+health = 100.0
+speed = 20.0
+atlas = ExtResource("1_2viro")
+explosion_sfx = ExtResource("2_mtdpf")
+cc_multiplier = 1.5
+knockback_multiplier = 1.5
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"
