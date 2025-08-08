@@ -22,8 +22,13 @@ var special_debuff_button_hovered_options: Dictionary[Debuff.Type, String] = {
 	Debuff.Type.WEAKEN: special_debuff_weaken,}
 
 var special_buff_range: String = "Increases the range of allied towers"
+var special_buff_damage: String = "Increases the damage of allied towers"
+var special_buff_speed: String = "Increases the speed of allied towers"
+
 var special_buff_button_hovered_options: Dictionary[Buff.Type, String] = {
+	Buff.Type.DAMAGE: special_buff_damage,
 	Buff.Type.RANGE: special_buff_range,
+	Buff.Type.SPEED: special_buff_speed,
 }
 
 var targeting_hovered_options: Dictionary[Tower.TargetPriority, String] = {

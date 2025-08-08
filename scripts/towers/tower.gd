@@ -39,11 +39,21 @@ var can_show_range: bool:
 var curr_damage: float
 var curr_speed: float
 var curr_range: float
+var _leveled_damage: float
+var _leveled_speed: float
+var _leveled_range: float 
+
+var _damage_buff: float = 0.0
+var _speed_buff: float = 0.0
+var _range_buff: float = 0.0
 
 # Preview data (used in tower upgrade menu)
 var preview_damage: float
 var preview_speed: float
 var preview_range: float
+var _preview_leveled_damage: float
+var _preview_leveled_range: float
+var _preview_leveled_speed: float
 
 const MAX_LEVEL_PRICE: int = 75
 const LEVEL_COST_INCREMENT: int = 25
@@ -90,7 +100,7 @@ const FREEZE_DURATION_MODIFIER: float = 0.3333
 const STUN_DURATION_MODIFIER: float = 0.3333
 const WEAKEN_DURATION_MODIFIER: float = 1
 
-const RANGE_BUFF_LEVEL_MODIFIER: float = .33
+const RANGE_BUFF_LEVEL_MODIFIER: float = .5
 const DAMAGE_BUFF_LEVEL_MODIFIER: float = .33
 const SPEED_BUFF_LEVEL_MODIFIER: float = .33
 
@@ -208,16 +218,22 @@ func reset_tower() -> void:
 	update_textures()
 
 func update_current_combat_data() -> void:
-	# TODO: Buffs?
-	curr_damage = data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))  
-	curr_speed = data.speed / (1.0 + (speed_level * SPEED_MODIFIER))
-	curr_range = data.attack_range * (1.0 + (range_level * RANGE_MODIFIER))
+	_leveled_damage = data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))  
+	_leveled_speed = data.speed / (1.0 + (speed_level * SPEED_MODIFIER))
+	_leveled_range = data.attack_range * (1.0 + (range_level * RANGE_MODIFIER))
+	curr_damage = _leveled_damage + _damage_buff
+	curr_speed = _leveled_speed + _speed_buff
+	curr_range = _leveled_range + _range_buff
 	update_preview_combat_data()
 
 func update_preview_combat_data() -> void:
-	preview_damage = data.damage + ((damage_level + 1) * (data.damage * DAMAGE_MODIFIER))  
-	preview_speed = data.speed / (1.0 + ((speed_level + 1) * SPEED_MODIFIER))
-	preview_range = data.attack_range * (1.0 + ((range_level + 1 )* RANGE_MODIFIER))
+	_preview_leveled_damage = data.damage + ((damage_level + 1) * (data.damage * DAMAGE_MODIFIER))
+	_preview_leveled_speed = data.speed / (1.0 + ((speed_level + 1) * SPEED_MODIFIER))
+	_preview_leveled_range = data.attack_range * (1.0 + ((range_level + 1 )* RANGE_MODIFIER))
+
+	preview_damage = _preview_leveled_damage + _damage_buff
+	preview_speed = _preview_leveled_speed + _speed_buff
+	preview_range = _preview_leveled_range + _range_buff
 
 func update_debuff_data() -> void:
 	if data.debuff_data:
@@ -345,24 +361,28 @@ func _draw():
 func on_add_new_buff(buff: Buff):
 	match buff.data.type:
 		Buff.Type.RANGE:
-			curr_range += data.attack_range * buff.data.modified_value
+			_range_buff += _leveled_range * buff.data.modified_value
 			update_colliders()
 		Buff.Type.SPEED:
-			curr_speed = max(.01, curr_speed - data.speed * buff.data.modified_value)
+			_speed_buff +=  -(_leveled_speed * buff.data.modified_value)
 		Buff.Type.DAMAGE:
-			curr_damage += data.damage * buff.data.modified_value
+			_damage_buff += _leveled_damage * buff.data.modified_value
 		_: pass
+
+	update_current_combat_data()
 
 func on_remove_active_buff(buff: Buff):
 	match buff.data.type:
 		Buff.Type.RANGE:
-			curr_range -= data.attack_range * buff.data.modified_value
+			_range_buff -= _leveled_range * buff.data.modified_value
 			update_colliders()
 		Buff.Type.SPEED:
-			curr_speed += data.speed * buff.data.modified_value
+			_speed_buff -=  -(_leveled_speed * buff.data.modified_value)
 		Buff.Type.DAMAGE:
-			curr_damage -= data.damage * buff.data.modified_value
+			_damage_buff -= _leveled_damage * buff.data.modified_value
 		_: pass
+
+	update_current_combat_data()
 
 func refresh_transform_collider() -> void:
 	transform_collider.disabled = true
