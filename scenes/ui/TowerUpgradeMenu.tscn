@@ -250,7 +250,7 @@ size_flags_vertical = 4
 mouse_filter = 2
 
 [node name="UpgradeVboxParent" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
-custom_minimum_size = Vector2(75, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

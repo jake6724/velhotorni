@@ -4,7 +4,6 @@ extends Node
 signal add_new_buff
 signal remove_active_buff
 
-var buff_data: BuffData
 var buff_pool: Array[Buff]
 
 func add_buff(new_buff_data: BuffData, _source: BuffArea) -> void:
@@ -14,7 +13,7 @@ func add_buff(new_buff_data: BuffData, _source: BuffArea) -> void:
 	add_new_buff.emit(new_buff)
 
 func calc_buff_modified_value(_buff_data: BuffData) -> float:
-	var _modified_value: float = _buff_data.value / (2 ** get_buff_type_count(_buff_data.type))
+	var _modified_value: float = _buff_data.leveled_value / (2 ** get_buff_type_count(_buff_data.type))
 	return _modified_value
 
 func create_buff(_data: BuffData, _source: BuffArea, _modified_value: float) -> Buff:

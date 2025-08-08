@@ -54,7 +54,6 @@ var damage_level: int = 0:
 		level += 1
 		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
 		update_current_combat_data()
-		update_preview_combat_data()
 
 var speed_level: int = 0:
 	set(value):
@@ -62,7 +61,6 @@ var speed_level: int = 0:
 		level += 1
 		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
 		update_current_combat_data()
-		update_preview_combat_data()
 
 var range_level: int = 0:
 	set(value):
@@ -70,7 +68,6 @@ var range_level: int = 0:
 		level += 1
 		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
 		update_current_combat_data()
-		update_preview_combat_data()
 		update_colliders()
 
 var special_level: int = 0:
@@ -78,10 +75,8 @@ var special_level: int = 0:
 		special_level = value
 		level += 1
 		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
-		update_current_combat_data()
-		update_preview_combat_data()
 		update_debuff_data()
-		update_preview_debuff_data()
+		update_buff_data()
 
 const DAMAGE_MODIFIER: float = 0.5
 const RANGE_MODIFIER: float = 0.2
@@ -93,6 +88,10 @@ const SLOW_DURATION_MODIFIER: float = 0.3333
 const FREEZE_DURATION_MODIFIER: float = 0.3333
 const STUN_DURATION_MODIFIER: float = 0.3333
 const WEAKEN_DURATION_MODIFIER: float = 1
+
+const RANGE_BUFF_LEVEL_MODIFIER: float = .33
+const DAMAGE_BUFF_LEVEL_MODIFIER: float = .33
+const SPEED_BUFF_LEVEL_MODIFIER: float = .33
 
 # TowerData resources
 var data: TowerData
@@ -129,14 +128,14 @@ func _ready():
 
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
-	base_data = tower_data[element].duplicate()
-	transform_data = tower_data[base_data.transform_element].duplicate()
+	base_data = get_tower_data_copy(tower_data[element])
+	# base_data = tower_data[element].duplicate(true)
+	transform_data = get_tower_data_copy(tower_data[base_data.transform_element])
 	data = base_data
 
 	update_current_combat_data()
-	update_preview_combat_data()
 	update_debuff_data()
-	update_preview_debuff_data()
+	update_buff_data()
 	update_textures()
 	update_colliders()
 
@@ -154,10 +153,10 @@ func initialize(element: Constants.Element):
 	can_show_range = false
 
 	# Connect to BuffManager and BuffArea
-	if data.buff_data_list.size() > 0: # TODO: Cleanup - Only connect manager to an area if it has a buff to apply
-		buff_area.initialize(data.buff_data_list)
+	if data.buff_data_list.size() > 0:
+		buff_area.initialize()
 
-	buff_manager.add_new_buff.connect(on_add_new_buff) # Recieve all buffs, even if this tower doesn't have one to share
+	buff_manager.add_new_buff.connect(on_add_new_buff)
 	buff_manager.remove_active_buff.connect(on_remove_active_buff)
 
 func _physics_process(_delta):	
@@ -201,9 +200,8 @@ func revert() -> void:
 func reset_tower() -> void:
 	buff_manager.remove_all_buffs()
 	update_current_combat_data()
-	update_preview_combat_data()
 	update_debuff_data()
-	update_preview_debuff_data()
+	update_buff_data()
 	refresh_colliders()
 	update_colliders()
 	update_textures()
@@ -213,6 +211,7 @@ func update_current_combat_data() -> void:
 	curr_damage = data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))  
 	curr_speed = data.speed / (1.0 + (speed_level * SPEED_MODIFIER))
 	curr_range = data.attack_range * (1.0 + (range_level * RANGE_MODIFIER))
+	update_preview_combat_data()
 
 func update_preview_combat_data() -> void:
 	preview_damage = data.damage + ((damage_level + 1) * (data.damage * DAMAGE_MODIFIER))  
@@ -234,6 +233,7 @@ func update_debuff_data() -> void:
 				data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * special_level)
 			Debuff.Type.WEAKEN:
 				data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * special_level)
+		update_preview_debuff_data()
 
 func update_preview_debuff_data() -> void:
 	if data.debuff_data:
@@ -250,6 +250,29 @@ func update_preview_debuff_data() -> void:
 				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * (special_level + 1))
 			Debuff.Type.WEAKEN:
 				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * (special_level + 1))
+
+func update_buff_data() -> void:
+	if data.buff_data_list and data.buff_data_list[0]:
+		match data.buff_data_list[0].type:
+			Buff.Type.RANGE:
+				data.buff_data_list[0].leveled_value = data.buff_data_list[0].value + ((data.buff_data_list[0].value * RANGE_BUFF_LEVEL_MODIFIER) * special_level)
+			Buff.Type.DAMAGE:
+				data.buff_data_list[0].leveled_value = data.buff_data_list[0].value + ((data.buff_data_list[0].value * DAMAGE_BUFF_LEVEL_MODIFIER) * special_level)
+			Buff.Type.SPEED:
+				data.buff_data_list[0].leveled_value = data.buff_data_list[0].value + ((data.buff_data_list[0].value * SPEED_BUFF_LEVEL_MODIFIER) * special_level)
+		
+		buff_area.buff_data_list = data.buff_data_list.duplicate(true)
+		update_preview_buff_data()
+
+func update_preview_buff_data() -> void:
+	if data.buff_data_list and data.buff_data_list[0]:
+		match data.buff_data_list[0].type:
+			Buff.Type.RANGE:
+				data.buff_data_list[0].preview_leveled_value = data.buff_data_list[0].value + ((data.buff_data_list[0].value * RANGE_BUFF_LEVEL_MODIFIER) * (special_level + 1))
+			Buff.Type.DAMAGE:
+				data.buff_data_list[0].preview_leveled_value = data.buff_data_list[0].value + ((data.buff_data_list[0].value * DAMAGE_BUFF_LEVEL_MODIFIER) * (special_level + 1))
+			Buff.Type.SPEED:
+				data.buff_data_list[0].preview_leveled_value = data.buff_data_list[0].value + ((data.buff_data_list[0].value * SPEED_BUFF_LEVEL_MODIFIER) * (special_level + 1))
 
 func flip_to_face_active_target():
 	if active_target:
@@ -323,7 +346,7 @@ func on_add_new_buff(buff: Buff):
 		Buff.Type.RANGE:
 			curr_range += data.attack_range * buff.data.modified_value
 			update_colliders()
-		Buff.Type.ATTACK_SPEED:
+		Buff.Type.SPEED:
 			curr_speed = max(.01, curr_speed - data.speed * buff.data.modified_value)
 		Buff.Type.DAMAGE:
 			curr_damage += data.damage * buff.data.modified_value
@@ -334,7 +357,7 @@ func on_remove_active_buff(buff: Buff):
 		Buff.Type.RANGE:
 			curr_range -= data.attack_range * buff.data.modified_value
 			update_colliders()
-		Buff.Type.ATTACK_SPEED:
+		Buff.Type.SPEED:
 			curr_speed += data.speed * buff.data.modified_value
 		Buff.Type.DAMAGE:
 			curr_damage -= data.damage * buff.data.modified_value
@@ -349,3 +372,13 @@ func update_colliders() -> void:
 	buff_collider.shape.radius = curr_range
 	collider.shape.radius =  curr_range
 	queue_redraw()
+
+## Returns a deep, custom copy of a `TowerData` resource
+func get_tower_data_copy(_input_data: TowerData) -> TowerData:
+	var new_data: TowerData = _input_data.duplicate(true)
+
+	# duplicate(true) on a CR will NOT deep-copy arrays or dicts; do that manually here
+	new_data.buff_data_list = []
+	for buff_data: BuffData in _input_data.buff_data_list:
+		new_data.buff_data_list.append(buff_data.duplicate(true))
+	return new_data

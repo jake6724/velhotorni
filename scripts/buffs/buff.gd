@@ -1,7 +1,7 @@
 class_name Buff
 extends Node
 
-enum Type {RANGE, ATTACK_SPEED, DAMAGE}
+enum Type {RANGE, SPEED, DAMAGE}
 
 var data: BuffData
 

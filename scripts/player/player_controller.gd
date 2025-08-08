@@ -85,12 +85,11 @@ func create_tower(element: Constants.Element):
 	tower_to_place = tower_scene.instantiate()
 	add_child(tower_to_place)
 	tower_to_place.initialize(element)
-
 	tower_to_place.modulate.a = .75
 
 func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 	# Do not allow placement during combat, do not allow NONE type turrets to spawn
-	if placement_enabled and selected_tower_element != Constants.Element.NONE:
+	if placement_enabled and selected_tower_element != Constants.Element.NONE and tower_to_place:
 		var grid_pos: Vector2 = WorldGrid.world_to_grid(world_pos)
 		if grid_pos in WorldGrid.data and WorldGrid.data[grid_pos]:
 			# Spawn and configure new tower
