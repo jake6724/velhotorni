@@ -96,6 +96,7 @@ func update_stats() -> void:
 	update_debuff_stats()
 	update_buff_stats()
 	update_level_labels()
+	update_ui_text()
 
 	cost_label.text = str(tower.level_upgrade_price)
 
@@ -103,34 +104,11 @@ func update_debuff_stats() -> void:
 	if tower.data.debuff_data:
 		current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
 		upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
-		# match tower.data.debuff_data.type:
-		# 	Debuff.Type.BURN:
-		# 		current_special_label.text = str(snappedf(tower.data.debuff_data.modified_value, .01))
-		# 		upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_value, .01))
-		# 	Debuff.Type.KNOCKBACK:
-		# 		current_special_label.text = str(snappedf(tower.data.debuff_data.modified_value, .01))
-		# 		upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_value, .01))
-		# 	Debuff.Type.SLOW:
-		# 		current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
-		# 		upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
-		# 	Debuff.Type.FREEZE:
-		# 		current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
-		# 		upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
-		# 	Debuff.Type.STUN:
-		# 		current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
-		# 		upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
-		# 	Debuff.Type.WEAKEN:
-		# 		current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
-		# 		upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
 
 func update_buff_stats() -> void:
 	if tower.data.buff_data_list and tower.data.buff_data_list[0]:
 		current_special_label.text = str(snappedf(tower.data.buff_data_list[0].leveled_value, .01))
 		upgraded_special_label.text = str(snappedf(tower.data.buff_data_list[0].preview_leveled_value, .01))
-		# match tower.buff_data_list[0].type:
-		# 	Buff.Type.RANGE:
-				# current_special_label.text = str(snappedf(tower.buff_data_list[0].leveled_value, .01))
-				# upgraded_special_label.text = str(snappedf(tower.buff_data_list[0].preview_leveled_value, .01))
 
 func update_level_labels() -> void:
 	if tower.level < 12:
@@ -139,6 +117,15 @@ func update_level_labels() -> void:
 	else:
 		current_level_label.text = str("LV",tower.level + 1)
 		next_level_label.text = str("MAX")
+
+func update_ui_text() -> void:
+	special_button.mouse_entered.disconnect(update_description)
+
+	if tower.data.debuff_data:
+		special_button.mouse_entered.connect(update_description.bind(ui_text.special_debuff_button_hovered_options[tower.data.debuff_data.type]))
+
+	if tower.data.buff_data_list and tower.data.buff_data_list[0]:
+		special_button.mouse_entered.connect(update_description.bind(ui_text.special_buff_button_hovered_options[tower.data.buff_data_list[0].type]))
 
 
 func update_description(_text) -> void:
