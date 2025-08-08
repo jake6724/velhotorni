@@ -49,7 +49,7 @@ var tower: Tower = null:
 		set_portrait(tower.data.portrait)
 		set_all_level_arrows()
 
-var ui_text: UIText = UIText.new()
+var ui_text: TowerUpgradeMenuUIText = TowerUpgradeMenuUIText.new()
 
 signal damage_button_pressed
 signal speed_button_pressed

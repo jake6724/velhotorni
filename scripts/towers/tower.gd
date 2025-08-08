@@ -77,6 +77,7 @@ var special_level: int = 0:
 		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
 		update_debuff_data()
 		update_buff_data()
+		refresh_buff_collider()
 
 const DAMAGE_MODIFIER: float = 0.5
 const RANGE_MODIFIER: float = 0.2
@@ -202,7 +203,7 @@ func reset_tower() -> void:
 	update_current_combat_data()
 	update_debuff_data()
 	update_buff_data()
-	refresh_colliders()
+	refresh_transform_collider()
 	update_colliders()
 	update_textures()
 
@@ -363,10 +364,15 @@ func on_remove_active_buff(buff: Buff):
 			curr_damage -= data.damage * buff.data.modified_value
 		_: pass
 
-func refresh_colliders() -> void:
+func refresh_transform_collider() -> void:
 	transform_collider.disabled = true
 	await get_tree().create_timer(.1).timeout
 	transform_collider.disabled = false
+
+func refresh_buff_collider() -> void:
+	buff_collider.disabled = true
+	await get_tree().create_timer(.1).timeout
+	buff_collider.disabled = false
 
 func update_colliders() -> void:
 	buff_collider.shape.radius = curr_range
