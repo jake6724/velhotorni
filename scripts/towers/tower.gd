@@ -401,7 +401,7 @@ func update_colliders() -> void:
 func get_tower_data_copy(_input_data: TowerData) -> TowerData:
 	var new_data: TowerData = _input_data.duplicate(true)
 
-	# duplicate(true) on a CR will NOT deep-copy arrays or dicts; do that manually here
+	# duplicate(true) on a custom-resource will NOT deep-copy arrays or dicts; do that manually here
 	new_data.buff_data_list = []
 	for buff_data: BuffData in _input_data.buff_data_list:
 		new_data.buff_data_list.append(buff_data.duplicate(true))

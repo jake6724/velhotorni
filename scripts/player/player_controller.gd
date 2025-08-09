@@ -12,6 +12,7 @@ var tower_to_upgrade: Tower = null:
 		tower_to_upgrade = value
 		if value:
 			tower_upgrade_menu.tower = value
+			tower_upgrade_menu.update_stats(gold)
 
 var click_enabled: bool = true
 var is_tower_hovered: bool = false
@@ -245,7 +246,7 @@ func on_damage_button_pressed() -> void:
 		if tower_to_upgrade and check_gold_upgrade_requirement():
 			gold -= tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.damage_level += 1
-			tower_upgrade_menu.update_stats()
+			tower_upgrade_menu.update_stats(gold)
 			tower_upgrade_menu.update_damage_level_arrow()
 
 func on_speed_button_pressed() -> void:
@@ -253,7 +254,7 @@ func on_speed_button_pressed() -> void:
 		if tower_to_upgrade and check_gold_upgrade_requirement():
 			gold -= tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.speed_level += 1
-			tower_upgrade_menu.update_stats()
+			tower_upgrade_menu.update_stats(gold)
 			tower_upgrade_menu.update_speed_level_arrow()
 
 func on_range_button_pressed() -> void:
@@ -261,7 +262,7 @@ func on_range_button_pressed() -> void:
 		if tower_to_upgrade and check_gold_upgrade_requirement():
 			gold -= tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.range_level += 1
-			tower_upgrade_menu.update_stats()
+			tower_upgrade_menu.update_stats(gold)
 			tower_upgrade_menu.update_range_level_arrow()
 
 func on_special_button_pressed() -> void:
@@ -269,7 +270,7 @@ func on_special_button_pressed() -> void:
 		if tower_to_upgrade and check_gold_upgrade_requirement():
 			gold -= tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.special_level += 1
-			tower_upgrade_menu.update_stats()
+			tower_upgrade_menu.update_stats(gold)
 			tower_upgrade_menu.update_special_level_arrow()
 
 func on_tower_upgrade_close_button_pressed() -> void:
@@ -281,7 +282,7 @@ func on_tower_priority_changed(priority: Tower.TargetPriority):
 	if tower_to_upgrade:
 		tower_to_upgrade.target_priority = priority
 		tower_upgrade_menu.set_target_priority_data(tower_to_upgrade.target_priority)
-		tower_upgrade_menu.update_stats()
+		tower_upgrade_menu.update_stats(gold)
 
 # func _draw():	
 # 	draw_dashed_line(Vector2.ZERO, get_global_mouse_position(), Color.GREEN, 10)

@@ -46,13 +46,13 @@ var target_priority_index: int = 0
 
 @onready var requirements_bar: HBoxContainer = %RequirementBar
 @onready var cost_label: RichTextLabel = %CostLabel
+@onready var current_gold_label: RichTextLabel = %CurrentGoldLabel
 
 @onready var desc: RichTextLabel = $%Description
 
 var tower: Tower = null:
 	set(_tower):
 		tower = _tower
-		update_stats()
 		set_target_priority_data(tower.target_priority)
 		set_portrait(tower.data.portrait)
 		set_all_level_arrows()
@@ -96,7 +96,7 @@ func _ready():
 	level_bar.mouse_entered.connect(update_description.bind(ui_text.level_hovered))
 	level_bar.mouse_exited.connect(clear_description)
 
-func update_stats() -> void:
+func update_stats(player_gold: int = 0) -> void:
 	current_damage_label.text = str(snappedf(tower.curr_damage,.01))
 	upgraded_damage_label.text = str(snappedf(tower.preview_damage, .01))
 	if tower.damage_level < 3:
@@ -106,8 +106,8 @@ func update_stats() -> void:
 		upgraded_damage_label.hide()
 		damage_pointer_icon.hide()
 
-	current_speed_label.text = str(snappedf(tower.curr_speed, .01))
-	upgraded_speed_label.text = str(snappedf(tower.preview_speed, .01))
+	current_speed_label.text = str(snappedf((1 / tower.curr_speed), .01))
+	upgraded_speed_label.text = str(snappedf((1 / tower.preview_speed), .01))
 	if tower.speed_level < 3:	
 		upgraded_speed_label.show()
 		speed_pointer_icon.show()
@@ -127,7 +127,7 @@ func update_stats() -> void:
 	update_debuff_stats()
 	update_buff_stats()
 	update_level_labels()
-	update_ui_text()
+	update_ui_text(player_gold)
 
 func update_debuff_stats() -> void:
 	if tower.data.debuff_data:
@@ -169,7 +169,7 @@ func update_level_labels() -> void:
 		next_level_label.hide()
 		level_pointer_icon.hide()
 
-func update_ui_text() -> void:
+func update_ui_text(player_gold) -> void:
 	special_button.mouse_entered.disconnect(update_description)
 
 	if tower.data.debuff_data:
@@ -182,6 +182,7 @@ func update_ui_text() -> void:
 	targeting.mouse_entered.connect(update_description.bind(ui_text.targeting_hovered_options[tower.target_priority]))
 
 	cost_label.text = str(tower.level_upgrade_price)
+	current_gold_label.text = str(player_gold)
 
 func update_description(_text) -> void:
 	desc.text = _text

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://br3yofjq2l14o"]
+[gd_scene load_steps=52 format=3 uid="uid://br3yofjq2l14o"]
 
 [ext_resource type="Script" uid="uid://dla326rvf6d3k" path="res://scripts/ui/tower_upgrade_menu.gd" id="1_4dufm"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_typcq"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="4_wvnee"]
 [ext_resource type="Texture2D" uid="uid://dtb1vcu8367w8" path="res://assets/art/sprites/ui/spr_ui_pointer.png" id="5_1xmjg"]
 [ext_resource type="Texture2D" uid="uid://biu0dfqvw886x" path="res://assets/art/sprites/ui/spr_ui_divider1.png" id="5_771jt"]
+[ext_resource type="Texture2D" uid="uid://c44luhsbbspnf" path="res://assets/placeholders/slash.png" id="7_0ymig"]
 [ext_resource type="Texture2D" uid="uid://broq3a5l86ngh" path="res://assets/art/sprites/ui/spr_ui_lvlup.png" id="8_bw1ro"]
 [ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="8_xxxlf"]
 [ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="9_ac4r8"]
@@ -94,6 +95,7 @@ region = Rect2(0, 0, 8, 0)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r51os"]
 
 [node name="TowerUpgradeMenu" type="Control"]
+modulate = Color(1, 1, 1, 0.901961)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -149,9 +151,10 @@ theme_override_constants/separation = 0
 [node name="Overview Bar" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(125, 20)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 0
 mouse_filter = 2
-theme_override_constants/separation = 65
+theme_override_constants/separation = 52
 
 [node name="OverviewLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
 custom_minimum_size = Vector2(68, 0)
@@ -229,12 +232,31 @@ texture = ExtResource("3_wyh1y")
 
 [node name="CostLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/RequirementBar"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 0)
+custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("4_wvnee")
 theme_override_font_sizes/normal_font_size = 8
 text = "25"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/RequirementBar"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_0ymig")
+stretch_mode = 2
+
+[node name="CurrentGoldLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/RequirementBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_wvnee")
+theme_override_font_sizes/normal_font_size = 8
+text = "2500"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1

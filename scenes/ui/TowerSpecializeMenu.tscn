@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://klolb6rmuatb"]
+[gd_scene load_steps=9 format=3 uid="uid://klolb6rmuatb"]
 
-[ext_resource type="Script" path="res://scripts/ui/tower_specialize_menu.gd" id="1_jp6ly"]
+[ext_resource type="Script" uid="uid://de6jp835jamo4" path="res://scripts/ui/tower_specialize_menu.gd" id="1_jp6ly"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_4bqn4"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_vryqd"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="4_xhbua"]
 [ext_resource type="Texture2D" uid="uid://biu0dfqvw886x" path="res://assets/art/sprites/ui/spr_ui_divider1.png" id="5_28amf"]
 [ext_resource type="Texture2D" uid="uid://bahrer0xdoere" path="res://assets/art/sprites/ui/spr_ui_box4.png" id="7_a7r6p"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="7_arjim"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jd3gn"]
 
@@ -139,8 +140,26 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Option1" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer"]
+[node name="Hbox" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/Hbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = -2
+
+[node name="Option1Name" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/Hbox/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("7_arjim")
+theme_override_font_sizes/font_size = 8
+text = "Plasma"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/Hbox/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_28amf")

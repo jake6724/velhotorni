@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ciicsqtfh31fh"]
+[gd_scene load_steps=21 format=3 uid="uid://ciicsqtfh31fh"]
 
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_c8bcu"]
 [ext_resource type="Texture2D" uid="uid://b8c4r7msm3cdi" path="res://assets/art/sprites/ui/spr_ui_coin_big.png" id="2_opq3w"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://3dti3chb4cnf" path="res://assets/art/sprites/ui/spr_ui_tower_light.png" id="12_638he"]
 [ext_resource type="Texture2D" uid="uid://rvf7vwl6ny54" path="res://assets/art/sprites/ui/spr_ui_tower_earth.png" id="12_gfj4e"]
 [ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="12_ur1ae"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="15_r3bjd"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="16_r3bjd"]
+[ext_resource type="Texture2D" uid="uid://biu0dfqvw886x" path="res://assets/art/sprites/ui/spr_ui_divider1.png" id="17_4bluh"]
 
 [sub_resource type="Animation" id="Animation_a8xy1"]
 length = 0.001
@@ -97,7 +100,9 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.000255346
 mouse_filter = 2
+theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -434,6 +439,130 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("12_ur1ae")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+custom_minimum_size = Vector2(80, 112)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("15_r3bjd")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/NinePatchRect/MarginContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("16_r3bjd")
+theme_override_font_sizes/normal_font_size = 8
+text = "Fire
+Dmg: 10
+Spd: 200
+Rng: 4
+SPC: 11
+
+Strong against wind enemies"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("16_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "Fire"
+
+[node name="Damage" type="HBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Damage"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "DMG:"
+
+[node name="Label2" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Damage"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "2"
+
+[node name="Speed" type="HBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Speed"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "SPd:"
+
+[node name="Label2" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Speed"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = ".3"
+
+[node name="Range" type="HBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Range"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "RNG:"
+
+[node name="Label2" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Range"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "45"
+
+[node name="Special" type="HBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Special"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "SPC:"
+
+[node name="Label2" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Special"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "3"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_4bluh")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("16_r3bjd")
+theme_override_font_sizes/normal_font_size = 8
+text = "Apply burn to enemies"
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
