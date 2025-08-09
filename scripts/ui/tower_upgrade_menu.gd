@@ -14,15 +14,20 @@ components that could handle their own update functionality
 
 @onready var current_damage_label: Label = %CurrentDamageLabel
 @onready var upgraded_damage_label: Label = %UpgradedDamageLabel
+@onready var damage_pointer_icon: TextureRect = %DamagePointerIcon
 @onready var current_speed_label: Label = %CurrentSpeedLabel
 @onready var upgraded_speed_label: Label = %UpgradedSpeedLabel
+@onready var speed_pointer_icon: TextureRect = %SpeedPointerIcon
 @onready var current_range_label: Label = %CurrentRangeLabel
 @onready var upgrade_range_label: Label = %UpgradedRangeLabel
+@onready var range_pointer_icon: TextureRect = %RangePointerIcon
 @onready var current_special_label: Label = %CurrentSpecialLabel
 @onready var upgraded_special_label: Label = %UpgradedSpecialLabel   
+@onready var special_pointer_icon: TextureRect = %SpecialPointerIcon
 
 @onready var current_level_label: Label = %CurrentLevelLabel
 @onready var next_level_label: Label = %NextLevelLabel
+@onready var level_pointer_icon: TextureRect = %LevelPointerIcon
 
 @onready var targeting: VBoxContainer = %Targeting 
 @onready var target_left_button: TextureButton = %TargetLeftButton
@@ -37,6 +42,9 @@ var target_priority_index: int = 0
 
 @onready var portrait: TextureRect = %Portrait
 
+@onready var level_bar: HBoxContainer = %LevelBar
+
+@onready var requirements_bar: HBoxContainer = %RequirementBar
 @onready var cost_label: RichTextLabel = %CostLabel
 
 @onready var desc: RichTextLabel = $%Description
@@ -78,45 +86,88 @@ func _ready():
 
 	close_button.pressed.connect(on_close_button_pressed)
 
-	targeting.mouse_entered.connect(update_description.bind(ui_text.targeting_hovered))
 	targeting.mouse_exited.connect(clear_description)
 	target_left_button.pressed.connect(on_target_left_button_pressed)
 	target_right_button.pressed.connect(on_target_right_button_pressed)
 
+	requirements_bar.mouse_entered.connect(update_description.bind(ui_text.requirements_hovered))
+	requirements_bar.mouse_exited.connect(clear_description)
+
+	level_bar.mouse_entered.connect(update_description.bind(ui_text.level_hovered))
+	level_bar.mouse_exited.connect(clear_description)
+
 func update_stats() -> void:
 	current_damage_label.text = str(snappedf(tower.curr_damage,.01))
 	upgraded_damage_label.text = str(snappedf(tower.preview_damage, .01))
+	if tower.damage_level < 3:
+		upgraded_damage_label.show()
+		damage_pointer_icon.show()
+	else:
+		upgraded_damage_label.hide()
+		damage_pointer_icon.hide()
 
 	current_speed_label.text = str(snappedf(tower.curr_speed, .01))
 	upgraded_speed_label.text = str(snappedf(tower.preview_speed, .01))
+	if tower.speed_level < 3:	
+		upgraded_speed_label.show()
+		speed_pointer_icon.show()
+	else:
+		upgraded_speed_label.hide()
+		speed_pointer_icon.hide()
 
 	current_range_label.text = str(snappedf(tower.curr_range, .01))
 	upgrade_range_label.text = str(snappedf(tower.preview_range, .01))
+	if tower.range_level < 3:
+		upgrade_range_label.show()
+		range_pointer_icon.show()
+	else:
+		upgrade_range_label.hide()
+		range_pointer_icon.hide()
 
 	update_debuff_stats()
 	update_buff_stats()
 	update_level_labels()
 	update_ui_text()
 
-	cost_label.text = str(tower.level_upgrade_price)
-
 func update_debuff_stats() -> void:
 	if tower.data.debuff_data:
-		current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
-		upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+		if tower.data.debuff_data.type == Debuff.Type.BURN or tower.data.debuff_data.type == Debuff.Type.KNOCKBACK:
+			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_value, .01))
+			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_value, .01))
+		else:
+			current_special_label.text = str(snappedf(tower.data.debuff_data.modified_total_duration, .01))
+			upgraded_special_label.text = str(snappedf(tower.data.debuff_data.preview_modified_total_duration, .01))
+
+		if tower.special_level < 3:
+			upgraded_special_label.show()
+			special_pointer_icon.show()
+		else:
+			upgraded_special_label.hide()
+			special_pointer_icon.hide()
 
 func update_buff_stats() -> void:
 	if tower.data.buff_data_list and tower.data.buff_data_list[0]:
 		current_special_label.text = str(snappedf(tower.data.buff_data_list[0].leveled_value, .01))
 		upgraded_special_label.text = str(snappedf(tower.data.buff_data_list[0].preview_leveled_value, .01))
 
+		if tower.special_level < 3:
+			upgraded_special_label.show()
+			special_pointer_icon.show()
+		else:
+			upgraded_special_label.hide()
+			special_pointer_icon.hide()
+
+
 func update_level_labels() -> void:
 	if tower.level < 12:
 		current_level_label.text = str("LV",tower.level + 1)
 		next_level_label.text = str("LV",tower.level + 2)
+		next_level_label.show()
+		level_pointer_icon.show()
 	else:
 		current_level_label.text = str("LV",tower.level + 1)
-		next_level_label.text = str("MAX")
+		next_level_label.hide()
+		level_pointer_icon.hide()
 
 func update_ui_text() -> void:
 	special_button.mouse_entered.disconnect(update_description)
@@ -127,6 +178,10 @@ func update_ui_text() -> void:
 	if tower.data.buff_data_list and tower.data.buff_data_list[0]:
 		special_button.mouse_entered.connect(update_description.bind(ui_text.special_buff_button_hovered_options[tower.data.buff_data_list[0].type]))
 
+	if targeting.is_connected("mouse_entered", update_description): targeting.mouse_entered.disconnect(update_description)
+	targeting.mouse_entered.connect(update_description.bind(ui_text.targeting_hovered_options[tower.target_priority]))
+
+	cost_label.text = str(tower.level_upgrade_price)
 
 func update_description(_text) -> void:
 	desc.text = _text
@@ -151,9 +206,11 @@ func on_close_button_pressed() -> void:
 
 func on_target_left_button_pressed() -> void:
 	target_priority_changed.emit(get_prev_target_priority())
+	update_description(ui_text.targeting_hovered_options[tower.target_priority])
 
 func on_target_right_button_pressed() -> void:
 	target_priority_changed.emit(get_next_target_priority())
+	update_description(ui_text.targeting_hovered_options[tower.target_priority])
 
 func get_next_target_priority() -> Tower.TargetPriority:
 	match tower.target_priority:
@@ -172,7 +229,6 @@ func get_prev_target_priority() -> Tower.TargetPriority:
 		_: return Tower.TargetPriority.FIRST
 
 func set_target_priority_data(priority: Tower.TargetPriority):
-	ui_text.targeting_hovered = ui_text.targeting_hovered_options[priority]
 	match priority:
 		Tower.TargetPriority.FIRST: target_priority_label.text = "FIRST"
 		Tower.TargetPriority.LAST: target_priority_label.text = "LAST"
