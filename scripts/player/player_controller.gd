@@ -281,6 +281,7 @@ func on_tower_priority_changed(priority: Tower.TargetPriority):
 	if tower_to_upgrade:
 		tower_to_upgrade.target_priority = priority
 		tower_upgrade_menu.set_target_priority_data(tower_to_upgrade.target_priority)
+		tower_upgrade_menu.update_stats()
 
 # func _draw():	
 # 	draw_dashed_line(Vector2.ZERO, get_global_mouse_position(), Color.GREEN, 10)

@@ -164,32 +164,37 @@ scroll_active = false
 vertical_alignment = 1
 
 [node name="LevelBar" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
-layout_direction = 2
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 8
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 0
 
 [node name="CurrentLevelLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/LevelBar"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_fonts/font = ExtResource("4_wvnee")
 theme_override_font_sizes/font_size = 8
 text = "LV0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PointerIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/LevelBar"]
+[node name="LevelPointerIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/LevelBar"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 4
 texture = ExtResource("5_1xmjg")
 
 [node name="NextLevelLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/LevelBar"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_fonts/font = ExtResource("4_wvnee")
 theme_override_font_sizes/font_size = 8
 text = "LV0"
@@ -197,6 +202,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RequirementBar" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
+unique_name_in_owner = true
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 0
@@ -206,6 +212,7 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("4_wvnee")
 theme_override_font_sizes/normal_font_size = 8
 text = "REQ:"
@@ -224,6 +231,7 @@ texture = ExtResource("3_wyh1y")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("4_wvnee")
 theme_override_font_sizes/normal_font_size = 8
 text = "25"
@@ -378,7 +386,8 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/Damage/MarginContainer/Info/HBoxContainer2"]
+[node name="DamagePointerIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/Damage/MarginContainer/Info/HBoxContainer2"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -493,7 +502,8 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/Speed/MarginContainer/Info/HBoxContainer2"]
+[node name="SpeedPointerIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/Speed/MarginContainer/Info/HBoxContainer2"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -606,7 +616,8 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/Range/MarginContainer/Info/HBoxContainer2"]
+[node name="RangePointerIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/Range/MarginContainer/Info/HBoxContainer2"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -721,7 +732,8 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/Special/MarginContainer/Info/HBoxContainer2"]
+[node name="SpecialPointerIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/UpgradeVboxParent/Special/MarginContainer/Info/HBoxContainer2"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -854,11 +866,12 @@ mouse_filter = 2
 
 [node name="TargetLeftButton" type="TextureButton" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingSelect"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
 mouse_filter = 1
 texture_normal = ExtResource("13_xjkok")
+stretch_mode = 0
 flip_h = true
 
 [node name="TargetPriorityLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingSelect"]
@@ -873,11 +886,13 @@ vertical_alignment = 1
 
 [node name="TargetRightButton" type="TextureButton" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingSelect"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
 texture_normal = ExtResource("13_xjkok")
+stretch_mode = 0
 
 [node name="Portrait" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
 unique_name_in_owner = true
