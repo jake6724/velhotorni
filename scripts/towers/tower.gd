@@ -91,18 +91,18 @@ var special_level: int = 0:
 
 const DAMAGE_MODIFIER: float = 0.5
 const RANGE_MODIFIER: float = 0.2
-const SPEED_MODIFIER: float = 0.33
+const SPEED_MODIFIER: float = 0.3334
 
 const BURN_DAMAGE_MODIFIER: float = 0.75
 const KNOCKBACK_DISTANCE_MODIFIER: float = 0.5
-const SLOW_DURATION_MODIFIER: float = 0.3333
-const FREEZE_DURATION_MODIFIER: float = 0.3333
-const STUN_DURATION_MODIFIER: float = 0.3333
+const SLOW_DURATION_MODIFIER: float = 0.3334
+const FREEZE_DURATION_MODIFIER: float = 0.3334
+const STUN_DURATION_MODIFIER: float = 0.3334
 const WEAKEN_DURATION_MODIFIER: float = 1
 
 const RANGE_BUFF_LEVEL_MODIFIER: float = .5
-const DAMAGE_BUFF_LEVEL_MODIFIER: float = .33
-const SPEED_BUFF_LEVEL_MODIFIER: float = .33
+const DAMAGE_BUFF_LEVEL_MODIFIER: float = .3334
+const SPEED_BUFF_LEVEL_MODIFIER: float = .3334
 
 # TowerData resources
 var data: TowerData
