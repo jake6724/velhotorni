@@ -481,12 +481,22 @@ Strong against wind enemies"
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("16_r3bjd")
 theme_override_font_sizes/font_size = 8
 text = "Fire"
+
+[node name="Label2" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("16_r3bjd")
+theme_override_font_sizes/font_size = 8
+text = "H"
 
 [node name="Damage" type="HBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
