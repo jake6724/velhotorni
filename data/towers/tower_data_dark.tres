@@ -23,4 +23,5 @@ bullet = ExtResource("2_p4k1s")
 bullet_speed = 200.0
 debuff_data = ExtResource("3_bvyfy")
 buff_data_list = Array[ExtResource("2_v7jih")]([])
+tower_name = "Dark"
 metadata/_custom_type_script = "uid://v7b6nq74b314"

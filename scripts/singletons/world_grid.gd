@@ -2,7 +2,7 @@ extends Node
 
 @export var debug: bool = false
 
-var height: int = 25
+var height: int = 14
 var width: int = 25
 
 ## Should always be indexed with Grid Coordinates

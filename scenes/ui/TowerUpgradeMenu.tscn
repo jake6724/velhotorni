@@ -95,7 +95,7 @@ region = Rect2(0, 0, 8, 0)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r51os"]
 
 [node name="TowerUpgradeMenu" type="Control"]
-modulate = Color(1, 1, 1, 0.901961)
+modulate = Color(1, 1, 1, 0.941176)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

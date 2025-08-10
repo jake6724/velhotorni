@@ -19,6 +19,9 @@ extends Control
 @onready var progress: Label = %Progress
 @onready var fast_forward: TextureButton = %FastForward
 
+@onready var left_tower_info_panel: TowerInfoPanel = %LeftTowerInfoPanel
+@onready var right_tower_info_panel: TowerInfoPanel = %RightTowerInfoPanel
+
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
  	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
 	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind.png"),
@@ -54,7 +57,7 @@ func _ready():
 	all_tower_buttons = [fire_button, water_button, wind_button, earth_button, light_button, dark_button]
 	for b: TextureButton in all_tower_buttons:
 			b.pressed.connect(on_button_pressed.bind(b))
-			b.mouse_entered.connect(on_mouse_entered_button)
+			b.mouse_entered.connect(on_mouse_entered_button.bind(b))
 			b.mouse_exited.connect(on_mouse_exited_button)
 
 	wave_button.pressed.connect(on_wave_button_pressed)
@@ -150,8 +153,38 @@ func on_start_fast_forward():
 func on_stop_fast_forward():
 	Engine.time_scale = 1
 
-func on_mouse_entered_button():
-	mouse_entered_button.emit()
+func on_mouse_entered_button(_button: TextureButton):
+	var element: Constants.Element
+	match _button:
+			fire_button: element = Constants.Element.FIRE
+			wind_button: element = Constants.Element.WIND
+			water_button: element = Constants.Element.WATER
+			earth_button: element = Constants.Element.EARTH
+			light_button: element = Constants.Element.LIGHT
+			dark_button:element = Constants.Element.DARK
+			wave_button: element = Constants.Element.NONE
+
+	mouse_entered_button.emit(element)
 
 func on_mouse_exited_button():
 	mouse_exited_button.emit()
+
+# Info panel functions
+func show_tower_info_panel(_tower: Tower) -> void:
+	if _tower.global_position.x > ((WorldGrid.width * Constants.CELL_SIZE) / 2):
+		left_tower_info_panel.update_stats(_tower)
+		left_tower_info_panel.show()
+	else:
+		right_tower_info_panel.update_stats(_tower)
+		right_tower_info_panel.show()
+
+func hide_tower_info_panels() -> void:
+	left_tower_info_panel.hide()
+	right_tower_info_panel.hide()
+
+func show_tower_info_panel_shop(_tower_data: TowerData) -> void:
+	left_tower_info_panel.update_stats_shop(_tower_data)
+	left_tower_info_panel.show()
+
+func hide_tower_info_panel_shop() -> void:
+	left_tower_info_panel.hide()

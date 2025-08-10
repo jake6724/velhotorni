@@ -109,15 +109,6 @@ var transform_data: TowerData
 
 var target_priority: TargetPriority = TargetPriority.FIRST
 
-# Tower data (for transformations)
-var tower_data: Dictionary[Constants.Element, TowerData] = {
-	Constants.Element.FIRE: load("res://data/towers/tower_data_fire.tres"),
-	Constants.Element.EARTH: load("res://data/towers/tower_data_earth.tres"),
-	Constants.Element.WATER: load("res://data/towers/tower_data_water.tres"),
-	Constants.Element.WIND: load("res://data/towers/tower_data_wind.tres"),
-	Constants.Element.DARK: load("res://data/towers/tower_data_dark.tres"),
-	Constants.Element.LIGHT: load("res://data/towers/tower_data_light.tres"),}
-
 # Debugs
 var debug_attack_line: Line2D = Line2D.new()
 
@@ -137,9 +128,9 @@ func _ready():
 
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
-	base_data = get_tower_data_copy(tower_data[element])
+	base_data = get_tower_data_copy(Constants.tower_data[element])
 	# base_data = tower_data[element].duplicate(true)
-	transform_data = get_tower_data_copy(tower_data[base_data.transform_element])
+	transform_data = get_tower_data_copy(Constants.tower_data[base_data.transform_element])
 	data = base_data
 
 	update_current_combat_data()

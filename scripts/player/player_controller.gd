@@ -15,7 +15,6 @@ var tower_to_upgrade: Tower = null:
 			tower_upgrade_menu.update_stats(gold)
 
 var click_enabled: bool = true
-var is_tower_hovered: bool = false
 var can_open_tower_upgrades: bool = true
 var selected_tower_element: Constants.Element = Constants.Element.NONE
 var active_towers: Array[Tower] = []
@@ -200,17 +199,23 @@ func reset_towers() -> void:
 		tower.revert()
 
 func on_tower_hovered(tower: Tower):
-	is_tower_hovered = true
 	if not placement_enabled: # Only show transform sprites if in combat phase
 		if tower.can_transform:
 			tower.swap_sprite.show()
 		else:
 			tower.cross_sprite.show()
 
+	if placement_enabled:
+		await get_tree().create_timer(.01).timeout # Make sure this always runs AFTER unhovered
+		tower_menu.show_tower_info_panel(tower)
+
 func on_tower_unhovered(tower: Tower):
 	if not placement_enabled:
 		tower.swap_sprite.hide()
 		tower.cross_sprite.hide()
+
+	if placement_enabled:
+		tower_menu.hide_tower_info_panels()
 
 func play_tower_select_sfx(element: Constants.Element) -> void:
 	match element:
@@ -227,10 +232,14 @@ func set_checkpoints() -> void:
 	checkpoint_gold = gold
 	checkpoint_active_towers = active_towers.duplicate()
 
-func on_mouse_entered_button() -> void:
+func on_mouse_entered_button(_element) -> void:
+	if _element != Constants.Element.NONE:
+		print(Constants.tower_data[_element])
+		tower_menu.show_tower_info_panel_shop(Constants.tower_data[_element])
 	click_enabled = false
 
 func on_mouse_exited_button() -> void:
+	tower_menu.hide_tower_info_panel_shop()
 	click_enabled = true
 
 # Tower Upgrade Menu functions 
