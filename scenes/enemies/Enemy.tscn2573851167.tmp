@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dwkqfmnmxvrmi"]
+[gd_scene load_steps=16 format=3 uid="uid://dwkqfmnmxvrmi"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_7cewq"]
 [ext_resource type="Texture2D" uid="uid://bpvtenpe12r2k" path="res://assets/art/atlases/enemy/atl_enemy_water_ghoul.png" id="2_7cewq"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dumg5so8h5d3m" path="res://assets/art/sprites/ui/spr_ui_shield.png" id="4_vtlqb"]
 [ext_resource type="Texture2D" uid="uid://04i8ln0m18xc" path="res://assets/art/sprites/ui/spr_ui_weak.png" id="5_24b6r"]
 [ext_resource type="Script" uid="uid://bk2472hmw8gj8" path="res://scripts/debuffs/debuff_manager.gd" id="7_vtlqb"]
-[ext_resource type="Script" uid="uid://bk0wvciq3qs4s" path="res://scripts/boons/boon_area.gd" id="8_24b6r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7iym1"]
 radius = 8.06226
@@ -170,9 +169,6 @@ _data = {
 &"walk": SubResource("Animation_jsdvy")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_24b6r"]
-radius = 16.0
-
 [node name="Enemy" type="Area2D"]
 script = ExtResource("1_7cewq")
 metadata/_custom_type_script = "uid://dn6bxxa2tg45m"
@@ -224,12 +220,3 @@ texture = ExtResource("5_24b6r")
 unique_name_in_owner = true
 script = ExtResource("7_vtlqb")
 metadata/_custom_type_script = "uid://bk2472hmw8gj8"
-
-[node name="BoonArea" type="Area2D" parent="."]
-script = ExtResource("8_24b6r")
-metadata/_custom_type_script = "uid://bk0wvciq3qs4s"
-
-[node name="BoonCollider" type="CollisionShape2D" parent="BoonArea"]
-position = Vector2(8, 8)
-shape = SubResource("CircleShape2D_24b6r")
-debug_color = Color(1.61238e-06, 0.650282, 0.102136, 0.42)
