@@ -241,6 +241,11 @@ func on_boon_triggered(boon: Boon) -> void:
 			collider.set_deferred("disabled", true)
 		Boon.Type.SPEED: 
 			speed += (data.speed * boon.value)
+		Boon.Type.DAMAGE:
+			damage += (data.damage * boon.value)
+			print("Booned damage: ", damage)
+		Boon.Type.STEALTH:
+			collider.set_deferred("disabled", true)
 		_: pass
 
 func on_boon_expired(boon: Boon) -> void:
@@ -249,5 +254,10 @@ func on_boon_expired(boon: Boon) -> void:
 			collider.set_deferred("disabled", false)
 		Boon.Type.SPEED:
 			speed -= (data.speed * boon.value)
+		Boon.Type.DAMAGE:
+			damage -= (data.damage * boon.value)
+			print("Reduced damage: ", damage)
+		Boon.Type.STEALTH:
+			collider.set_deferred("disabled", false)
 		_: pass
 	boon_manager.on_boon_expired(boon)

@@ -1,7 +1,7 @@
 class_name Boon
 extends Node
 
-enum Type {HEAL, CONCEAL, SPEED}
+enum Type {HEAL, CONCEAL, SPEED, DAMAGE, STEALTH}
 enum Mode {TIMER, COLLISION}
 
 signal boon_triggered

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_rhkv5")
 mode = 0
-self_cast = false
+self_cast = true
 ally_cast = true
 cast_speed = 3.0
 cast_radius = 50.0
