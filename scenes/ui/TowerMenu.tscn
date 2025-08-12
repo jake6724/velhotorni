@@ -454,6 +454,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 
 [node name="WaveInfoPanel" parent="MarginContainer" instance=ExtResource("16_r3bjd")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0

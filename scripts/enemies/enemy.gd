@@ -166,7 +166,6 @@ func on_animation_finished(anim_name):
 		queue_free()
 
 # Debuffs
-
 func on_add_new_debuff(_debuff: Debuff) -> void:
 	for signal_dict in _debuff.get_signal_list():
 		var signal_name: String = signal_dict["name"]
@@ -247,7 +246,7 @@ func on_boon_triggered(boon: Boon) -> void:
 			print("Booned damage: ", damage)
 		Boon.Type.STEALTH:
 			collider.set_deferred("disabled", true)
-			sprite.modulate.a = .6
+			sprite.modulate.a = .65
 			death_position.emit(global_position)
 		_: pass
 
