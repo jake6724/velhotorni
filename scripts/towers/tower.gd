@@ -129,15 +129,15 @@ func _ready():
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
 	base_data = get_tower_data_copy(Constants.tower_data[element])
-	# base_data = tower_data[element].duplicate(true)
-	transform_data = get_tower_data_copy(Constants.tower_data[base_data.transform_element])
+	transform_data = get_tower_data_copy(Constants.tower_data[Constants.get_next_element(element)])
 	data = base_data
 
-	update_current_combat_data()
-	update_debuff_data()
-	update_buff_data()
-	update_textures()
-	update_colliders()
+	reset_tower()
+	# update_current_combat_data()
+	# update_debuff_data()
+	# update_buff_data()
+	# update_textures()
+	# update_colliders()
 
 	# Configure Timers
 	attack_timer.timeout.connect(on_attack_timer_timeout)
@@ -180,7 +180,7 @@ func spawn_bullet() -> void:
 	new_bullet.position += new_bullet._pos_offset
 	add_child(new_bullet)
 
-## Transform into the next tower type in the cycle. Defined in `TowerData.transform_element`. 
+## Transform into the next tower type in the cycle. 
 func transform() -> void:
 	data = transform_data
 	swap_sprite.hide()
@@ -195,6 +195,12 @@ func revert() -> void:
 		swap_sprite.hide()
 		can_transform = true
 		reset_tower()
+
+func evolve(selected_element: Constants.Element) -> void:
+	base_data = get_tower_data_copy(Constants.tower_data[selected_element])
+	transform_data = get_tower_data_copy(Constants.tower_data[Constants.get_next_element(selected_element)])
+	data = base_data
+	reset_tower()
 
 ## Remove all debuffs, refresh colliders so that buffs can be reapplied, update collider sizes, update textures.
 func reset_tower() -> void:

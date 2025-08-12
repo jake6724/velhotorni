@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://be7is6do1p012"]
+[gd_scene load_steps=15 format=3 uid="uid://dj75iwdbovlfo"]
 
 [ext_resource type="Texture2D" uid="uid://wtib3kuu1ahl" path="res://assets/art/sprites/bullet/spr_bullet_fire.png" id="1_ci3yt"]
 [ext_resource type="Script" uid="uid://c4048xaid5utu" path="res://scripts/bullets/pulse_bullet.gd" id="2_bljms"]
