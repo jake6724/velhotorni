@@ -6,8 +6,8 @@
 [ext_resource type="Resource" uid="uid://b6ar8i47q6jl0" path="res://data/spawn/spawn_light_ectoplasm_1.tres" id="3_7htjx"]
 [ext_resource type="Resource" uid="uid://diy4ykka03hoc" path="res://data/spawn/spawn_dark_gravestone_1.tres" id="4_qwhj5"]
 [ext_resource type="Resource" uid="uid://da3imqy44otyc" path="res://data/spawn/spawn_wind_flatwoods_1.tres" id="5_fv588"]
-[ext_resource type="Resource" uid="uid://25em23upunww" path="res://data/spawn/spawn_armor_1.tres" id="6_x6o3h"]
-[ext_resource type="Resource" uid="uid://b6mmygvf76vlc" path="res://data/spawn/spawn_kuse_1.tres" id="7_2ueu2"]
+[ext_resource type="Resource" uid="uid://25em23upunww" path="res://data/spawn/spawn_dark_armor_1.tres" id="6_x6o3h"]
+[ext_resource type="Resource" uid="uid://b6mmygvf76vlc" path="res://data/spawn/spawn_light_kuse_1.tres" id="7_2ueu2"]
 
 [resource]
 script = ExtResource("2_0eqh1")
