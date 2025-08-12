@@ -9,7 +9,7 @@ func _physics_process(delta):
 		if not chain_mode_enabled:
 			ap.play("move")
 			# Target exists and is alive; move toward target an start chain on collision
-			if target and target.is_alive:
+			if target and target.is_alive and not target.collider.disabled:
 				global_position = global_position + ((global_position.direction_to(target.global_position + _pos_offset)) * data.speed * delta)
 
 			# Target exists but is dead; move toward death location and chain upon colliding with a living enemy
