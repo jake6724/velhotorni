@@ -247,6 +247,7 @@ func on_boon_triggered(boon: Boon) -> void:
 			print("Booned damage: ", damage)
 		Boon.Type.STEALTH:
 			collider.set_deferred("disabled", true)
+			sprite.modulate.a = .6
 			death_position.emit(global_position)
 		_: pass
 
@@ -260,6 +261,7 @@ func on_boon_expired(boon: Boon) -> void:
 			damage -= (data.damage * boon.value)
 			print("Reduced damage: ", damage)
 		Boon.Type.STEALTH:
+			sprite.modulate.a = 1
 			collider.set_deferred("disabled", false)
 		_: pass
 	boon_manager.on_boon_expired(boon)
