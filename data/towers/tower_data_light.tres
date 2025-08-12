@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_f600e"]
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="2_b2u2v"]
 [ext_resource type="PackedScene" uid="uid://dyd66xpilo8lo" path="res://scenes/bullets/LightBullet.tscn" id="2_ms340"]
-[ext_resource type="Resource" uid="uid://bvtlv2esmmf64" path="res://data/buffs/buff_data_range_test.tres" id="3_b2u2v"]
+[ext_resource type="Resource" uid="uid://bvtlv2esmmf64" path="res://data/buffs/buff_data_range_light_all.tres" id="3_b2u2v"]
 [ext_resource type="Texture2D" uid="uid://74nqbgxv1h31" path="res://assets/art/sprites/ui/spr_ui_dark.png" id="3_p611l"]
 [ext_resource type="Texture2D" uid="uid://3dti3chb4cnf" path="res://assets/art/sprites/ui/spr_ui_tower_light.png" id="5_006ys"]
 

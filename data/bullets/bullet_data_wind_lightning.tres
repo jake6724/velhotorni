@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PiercingBulletData" load_steps=2 format=3 uid="uid://3omrqjrwrmdn"]
+
+[ext_resource type="Script" uid="uid://bntcbxjuaddnc" path="res://scripts/bullets/data/piercing_bullet_data.gd" id="1_ju0yv"]
+
+[resource]
+script = ExtResource("1_ju0yv")
+max_pierce = 2
+follow_on_hit = false
+metadata/_custom_type_script = "uid://rcjwn40slcbo"
