@@ -10,6 +10,9 @@ extends Resource
 @export var atlas: Texture
 @export var explosion_sfx: AudioStreamOggVorbis
 
+@export_category("Boon")
+@export var boon_data: BoonData
+
 @export_category("Debuff Multipliers")
 ## Multiplier to modify how long until `Enemy` can be frozen or stunned again. This value is multiplied by the duration of
 ## the first active CC debuff.

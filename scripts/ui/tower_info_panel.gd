@@ -68,7 +68,6 @@ func update_desc(_text: String) -> void:
 
 func update_stats_shop(_tower_data: TowerData) -> void:
 	if _tower_data:
-		print(_tower_data.tower_name)
 		name_label.text = _tower_data.tower_name
 		damage_label.text = str(snappedf(_tower_data.damage, .01))
 		speed_label.text = str(snappedf((1 / _tower_data.speed), .01))

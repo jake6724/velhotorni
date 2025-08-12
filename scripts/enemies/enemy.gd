@@ -13,6 +13,8 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var shield: Sprite2D = $Shield
 @onready var weak: Sprite2D = $Weak
 @onready var debuff_manager: DebuffManager = $DebuffManager
+@onready var boon_area: BoonArea = $BoonArea
+@onready var boon_manager: BoonManager = $BoonManager
 
 # Pathing 
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
@@ -24,10 +26,14 @@ var min_distance: float = 2
 var element: Constants.Element
 var weak_against_element: Constants.Element
 var strong_against_element: Constants.Element
-var max_health: float # Do not set manually; used in health bar
-var health: float
 var speed: float
 var atlas: Texture
+
+var max_health: float # Do not set manually; used in health bar
+var health: float:
+	set(new_health):
+		health = new_health
+		health_bar.value = (health / max_health) * 100
 
 var damage: int = 1
 var negative_modifier: float = .5
@@ -66,6 +72,12 @@ func _ready():
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
 	debuff_manager.cc_multiplier = data.cc_multiplier
 	debuff_manager.knockback_multiplier = data.knockback_multiplier
+
+	# Configure Boons
+	if data.boon_data:
+		boon_area.initialize(data.boon_data)
+		boon_area.owner = self
+	boon_manager.boon_connected.connect(on_boon_connected)
 
 func _physics_process(delta):
 	move(delta)
@@ -117,8 +129,6 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 		damage_recieved = damage_recieved + (damage_recieved * (weaken_percent/100))
 
 		health -= damage_recieved
-		var v = (health / max_health) * 100
-		health_bar.value = v
 
 		if health <= 0:
 			die()
@@ -145,6 +155,8 @@ func on_animation_finished(anim_name):
 
 	if anim_name == "corpse":
 		queue_free()
+
+# Debuffs
 
 func on_add_new_debuff(_debuff: Debuff) -> void:
 	for signal_dict in _debuff.get_signal_list():
@@ -203,3 +215,15 @@ func on_debuff_apply_knockback(_value) -> void:
 
 func on_debuff_remove_knockback() -> void:
 	pass
+
+# Boons
+func on_boon_connected(new_boon: Boon) -> void:
+	new_boon.boon_triggered.connect(on_boon_triggered.bind(new_boon))
+	boon_manager.add_boon(new_boon)
+
+func on_boon_triggered(boon: Boon) -> void:
+	match boon.type:
+		Boon.Type.HEAL:
+			if (health + boon.value) > max_health: health = max_health
+			else:
+				health += boon.value

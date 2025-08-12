@@ -87,7 +87,7 @@ hframes = 4
 
 [node name="TransformArea" type="Area2D" parent="."]
 unique_name_in_owner = true
-collision_layer = 2
+collision_mask = 0
 
 [node name="TransformCollider" type="CollisionShape2D" parent="TransformArea"]
 unique_name_in_owner = true
@@ -95,6 +95,8 @@ position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_ub3td")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 16
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -141,7 +143,7 @@ metadata/_custom_type_script = "uid://n5jrnk3kfl2e"
 
 [node name="BuffArea" type="Area2D" parent="."]
 unique_name_in_owner = true
-collision_mask = 2
+collision_layer = 5
 script = ExtResource("11_cmp23")
 
 [node name="BuffCollider" type="CollisionShape2D" parent="BuffArea"]

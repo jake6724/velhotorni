@@ -61,7 +61,7 @@ func _ready():
 			b.mouse_exited.connect(on_mouse_exited_button)
 
 	wave_button.pressed.connect(on_wave_button_pressed)
-	wave_button.mouse_entered.connect(on_mouse_entered_button)
+	wave_button.mouse_entered.connect(on_mouse_entered_button.bind(wave_button))
 	wave_button.mouse_exited.connect(on_mouse_exited_button)
 
 	fast_forward.button_down.connect(on_start_fast_forward)

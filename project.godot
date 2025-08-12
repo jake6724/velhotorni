@@ -89,6 +89,16 @@ x={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="TowerTransform"
+2d_physics/layer_2="TowerEnemyDetection"
+2d_physics/layer_3="TowerBuffArea"
+2d_physics/layer_5="Enemy"
+2d_physics/layer_6="EnemyBoonArea"
+2d_physics/layer_9="Base"
+2d_physics/layer_10="Bullet"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
