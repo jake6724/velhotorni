@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BoonData" load_steps=2 format=3 uid="uid://boppi7subnk6u"]
+
+[ext_resource type="Script" uid="uid://dlf5v11rla3hp" path="res://scripts/boons/data/boon_data.gd" id="1_rhkv5"]
+
+[resource]
+script = ExtResource("1_rhkv5")
+mode = 0
+self_cast = false
+ally_cast = true
+cast_speed = 3.0
+cast_radius = 50.0
+type = 2
+value = 1.0
+one_shot = false
+manual_disable = false
+total_duration = 1.0
+repeats = false
+repeat_duration = 0.0
+metadata/_custom_type_script = "uid://dlf5v11rla3hp"

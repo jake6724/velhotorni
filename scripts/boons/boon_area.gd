@@ -17,25 +17,38 @@ func initialize(_boon_data: BoonData):
 			cast_timer.start(boon_data.cast_speed)
 
 		Boon.Mode.COLLISION:
-			boon_collider.area_entered.connect(on_buff_area_entered)
-			boon_collider.area_exited.connect(on_buff_area_exited)
-			
+			area_entered.connect(on_buff_area_entered)
+			area_exited.connect(on_buff_area_exited)
+
 func on_cast_timer_timeout() -> void:
 	var allies: Array[Area2D] = get_overlapping_areas()
 	for ally in allies:
-		if boon_data.ally_cast and ally != self.owner:
-			ally.boon_manager.connect_boon(create_boon(boon_data))
-
-		elif boon_data.self_cast and ally == self.owner:
-			ally.boon_manager.connect_boon(create_boon(boon_data))
+		connect_boon(ally.owner)
 
 	cast_timer.start(boon_data.cast_speed)
 
-func on_buff_area_entered(ally) -> void:
-	ally.boon_manager.connect_boon(create_boon(boon_data))
+func on_buff_area_entered(intruder) -> void:
+	connect_boon(intruder.owner)
 
-func on_buff_area_exited(ally) -> void:
-	ally.boon_manager.remove_boon_from_source(self)
+func on_buff_area_exited(intruder) -> void:
+	if intruder.owner:
+		intruder.owner.boon_manager.expire_boon_by_source(self)
+
+## Handle the logic for determining if an boon should be connected to self or enemy
+func connect_boon(enemy: Enemy) -> void: 
+	if enemy:
+		if boon_data.ally_cast and enemy != self.owner:
+			enemy.boon_manager.connect_boon(create_boon(boon_data))
+
+		elif boon_data.self_cast and enemy == self.owner:
+			enemy.boon_manager.connect_boon(create_boon(boon_data))
+
+func disconnect_boon(enemy: Enemy) -> void:
+	if boon_data.ally_cast and enemy != self.owner:
+		enemy.owner.boon_manager.expire_boon_by_source(self)
+
+	elif boon_data.self_cast and enemy == self.owner:
+		enemy.owner.boon_manager.expire_boon_by_source(self)
 
 func create_boon(_boon_data) -> Boon:
 	var new_boon: Boon = Boon.new(_boon_data)

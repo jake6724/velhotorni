@@ -8,14 +8,13 @@ func connect_boon(_new_boon: Boon) -> void:
 	boon_connected.emit(_new_boon)
 
 func add_boon(boon: Boon) -> void:
-	boon.boon_expired.connect(on_boon_expired.bind(boon))
 	add_child(boon)
 
-func remove_boon_by_source(match_source: BoonArea) -> void:
+func expire_boon_by_source(match_source: BoonArea) -> void:
 	for child in get_children():
 		var boon: Boon = child as Boon
 		if boon.source == match_source:
-			boon.queue_free()
+			boon.boon_expired.emit()
 
 func calc_boon_modified_value(boon: Boon) -> float:
 	return (boon.value / (2 ** get_boon_count_by_type(boon.type)))

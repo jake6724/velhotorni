@@ -7,6 +7,7 @@ extends Resource
 @export var weak_against_element: Constants.Element
 @export var health: float
 @export var speed: float
+@export var damage: int = 1
 @export var atlas: Texture
 @export var explosion_sfx: AudioStreamOggVorbis
 

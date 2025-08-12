@@ -96,6 +96,7 @@ x={
 2d_physics/layer_3="TowerBuffArea"
 2d_physics/layer_5="Enemy"
 2d_physics/layer_6="EnemyBoonArea"
+2d_physics/layer_7="EnemyReceiveBoonArea"
 2d_physics/layer_9="Base"
 2d_physics/layer_10="Bullet"
 

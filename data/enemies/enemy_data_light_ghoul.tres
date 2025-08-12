@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bq47oi0l1ytjj" path="res://assets/art/atlases/enemy/atl_enemy_light_ghoul.png" id="1_m3cyp"]
 [ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_24baa"]
-[ext_resource type="Resource" uid="uid://orapod0kx5ad" path="res://data/boon_heal_test.tres" id="2_kdnea"]
+[ext_resource type="Resource" uid="uid://boppi7subnk6u" path="res://data/boons/boon_data_speed_test.tres" id="2_kdnea"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="3_kdnea"]
 
 [resource]
@@ -13,6 +13,7 @@ strong_against_element = 5
 weak_against_element = 3
 health = 100.0
 speed = 30.0
+damage = 7
 atlas = ExtResource("1_m3cyp")
 explosion_sfx = ExtResource("2_24baa")
 boon_data = ExtResource("2_kdnea")

@@ -12,5 +12,7 @@ extends Resource
 @export var type: Boon.Type
 @export var value: float
 @export var one_shot: bool
+@export var manual_disable: bool
 @export var total_duration: float
+@export var repeats: bool
 @export var repeat_duration: float

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dwkqfmnmxvrmi"]
+[gd_scene load_steps=20 format=3 uid="uid://dwkqfmnmxvrmi"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_7cewq"]
 [ext_resource type="Texture2D" uid="uid://bpvtenpe12r2k" path="res://assets/art/atlases/enemy/atl_enemy_water_ghoul.png" id="2_7cewq"]
@@ -175,6 +175,9 @@ _data = {
 resource_local_to_scene = true
 radius = 16.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tboc4"]
+resource_local_to_scene = true
+
 [node name="Enemy" type="Area2D"]
 collision_layer = 16
 collision_mask = 256
@@ -231,7 +234,7 @@ metadata/_custom_type_script = "uid://bk2472hmw8gj8"
 
 [node name="BoonArea" type="Area2D" parent="."]
 collision_layer = 32
-collision_mask = 16
+collision_mask = 64
 script = ExtResource("8_24b6r")
 metadata/_custom_type_script = "uid://bk0wvciq3qs4s"
 
@@ -243,3 +246,12 @@ debug_color = Color(1.61238e-06, 0.650282, 0.102136, 0.42)
 [node name="BoonManager" type="Node" parent="."]
 script = ExtResource("9_tboc4")
 metadata/_custom_type_script = "uid://dvux67kw0w7d0"
+
+[node name="BoonReceiveArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="BoonReceiveCollider" type="CollisionShape2D" parent="BoonReceiveArea"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_tboc4")
+debug_color = Color(0.561146, 0.559576, 0, 0.42)

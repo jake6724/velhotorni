@@ -14,7 +14,10 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var weak: Sprite2D = $Weak
 @onready var debuff_manager: DebuffManager = $DebuffManager
 @onready var boon_area: BoonArea = $BoonArea
+@onready var boon_collider: CollisionShape2D = $BoonArea/BoonCollider
 @onready var boon_manager: BoonManager = $BoonManager
+@onready var boon_receive_area: Area2D = $BoonReceiveArea
+@onready var boon_receive_collider: CollisionShape2D = $BoonReceiveArea/BoonReceiveCollider
 
 # Pathing 
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
@@ -35,7 +38,7 @@ var health: float:
 		health = new_health
 		health_bar.value = (health / max_health) * 100
 
-var damage: int = 1
+var damage: int
 var negative_modifier: float = .5
 var positive_modifier: float = 2.0
 
@@ -62,6 +65,7 @@ func _ready():
 	weak_against_element = data.weak_against_element 
 	health = data.health
 	speed = data.speed
+	damage = data.damage
 	atlas = data.atlas
 	max_health = health
 	base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 
@@ -135,6 +139,11 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 
 func die() -> void:
 	is_alive = false
+
+	# Give time for collision boons to be removed
+	boon_collider.set_deferred("disabled", true)
+	await get_tree().create_timer(.1).timeout
+
 	collider.set_deferred("disabled", true) # Collisions can't be changed until pp idle time
 	ap.play("die")
 	SFXPlayer.play_sfx_resource(data.explosion_sfx)
@@ -219,6 +228,7 @@ func on_debuff_remove_knockback() -> void:
 # Boons
 func on_boon_connected(new_boon: Boon) -> void:
 	new_boon.boon_triggered.connect(on_boon_triggered.bind(new_boon))
+	new_boon.boon_expired.connect(on_boon_expired.bind(new_boon))
 	boon_manager.add_boon(new_boon)
 
 func on_boon_triggered(boon: Boon) -> void:
@@ -227,3 +237,17 @@ func on_boon_triggered(boon: Boon) -> void:
 			if (health + boon.value) > max_health: health = max_health
 			else:
 				health += boon.value
+		Boon.Type.CONCEAL:
+			collider.set_deferred("disabled", true)
+		Boon.Type.SPEED: 
+			speed += (data.speed * boon.value)
+		_: pass
+
+func on_boon_expired(boon: Boon) -> void:
+	match boon.type:
+		Boon.Type.CONCEAL:
+			collider.set_deferred("disabled", false)
+		Boon.Type.SPEED:
+			speed -= (data.speed * boon.value)
+		_: pass
+	boon_manager.on_boon_expired(boon)
