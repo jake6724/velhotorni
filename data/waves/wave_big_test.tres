@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Wave" load_steps=6 format=3 uid="uid://d2pqudhiiqfgw"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_aj15i"]
-[ext_resource type="Resource" uid="uid://b6mmygvf76vlc" path="res://data/spawn/spawn_kuse_1.tres" id="2_itwof"]
+[ext_resource type="Resource" uid="uid://b6mmygvf76vlc" path="res://data/spawn/spawn_light_kuse_1.tres" id="2_itwof"]
 [ext_resource type="Resource" uid="uid://cqh4w6poaaob6" path="res://data/spawn/spawn_water_vepar_1.tres" id="3_itwof"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="3_j5ngq"]
-[ext_resource type="Resource" uid="uid://25em23upunww" path="res://data/spawn/spawn_armor_1.tres" id="4_j5ngq"]
+[ext_resource type="Resource" uid="uid://25em23upunww" path="res://data/spawn/spawn_dark_armor_1.tres" id="4_j5ngq"]
 
 [resource]
 script = ExtResource("3_j5ngq")
