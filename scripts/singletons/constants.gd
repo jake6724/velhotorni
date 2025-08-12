@@ -24,23 +24,23 @@ var tower_data: Dictionary[Constants.Element, TowerData] = {
 	Element.WIND: load("res://data/towers/tower_data_wind.tres"),
 	Element.DARK: load("res://data/towers/tower_data_dark.tres"),
 	Element.LIGHT: load("res://data/towers/tower_data_light.tres"),
-	Element.LAVA: load("res://data/towers/tower_data_lava.tres"),
-	Element.PLASMA: load("res://data/towers/tower_data_plasma.tres"),
-	Element.STORM: load("res://data/towers/tower_data_storm.tres"),
-	Element.LIGHTNING: load("res://data/towers/tower_data_lightning.tres"),
-	Element.ICE: load("res://data/towers/tower_data_ice.tres"),
-	Element.FLOOD: load("res://data/towers/tower_data_flood.tres"),
-	Element.MUD: load("res://data/towers/tower_data_mud.tres"),
-	Element.CRYSTAL: load("res://data/towers/tower_data_crystal.tres"),
-	Element.SPIRIT: load("res://data/towers/tower_data_spirit.tres"),
-	Element.SUN: load("res://data/towers/tower_data_sun.tres"),
-	Element.CURSE: load("res://data/towers/tower_data_curse.tres"),
-	Element.VOID: load("res://data/towers/tower_data_void.tres"),
+	Element.LAVA: load("res://data/towers/tower_data_fire_lava.tres"),
+	Element.PLASMA: load("res://data/towers/tower_data_fire_plasma.tres"),
+	Element.STORM: load("res://data/towers/tower_data_wind_storm.tres"),
+	Element.LIGHTNING: load("res://data/towers/tower_data_wind_lightning.tres"),
+	Element.ICE: load("res://data/towers/tower_data_water_ice.tres"),
+	Element.FLOOD: load("res://data/towers/tower_data_water_flood.tres"),
+	Element.MUD: load("res://data/towers/tower_data_earth_mud.tres"),
+	Element.CRYSTAL: load("res://data/towers/tower_data_earth_crystal.tres"),
+	Element.SPIRIT: load("res://data/towers/tower_data_light_spirit.tres"),
+	Element.SUN: load("res://data/towers/tower_data_light_sun.tres"),
+	Element.CURSE: load("res://data/towers/tower_data_dark_curse.tres"),
+	Element.VOID: load("res://data/towers/tower_data_dark_void.tres"),
 }
 
 func get_next_element(_element: Element) -> Element:
 	match _element:
-		Element.FIRE: return Element.PLASMA
+		Element.FIRE: return Element.WIND
 		Element.WIND: return Element.WATER
 		Element.WATER: return Element.EARTH
 		Element.EARTH: return Element.LIGHT
