@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl2jfi3hfgtdj"]
+
+[ext_resource type="Script" uid="uid://celgbrmvc2054" path="res://scripts/ui/wave_info_panel.gd" id="1_5i6j5"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_qrg85"]
+
+[node name="WaveInfoPanel" type="NinePatchRect"]
+custom_minimum_size = Vector2(150, 50)
+offset_right = 120.0
+offset_bottom = 21.0
+texture = ExtResource("1_qrg85")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 11
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+script = ExtResource("1_5i6j5")
+metadata/_custom_type_script = "uid://celgbrmvc2054"

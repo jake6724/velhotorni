@@ -239,6 +239,7 @@ func on_boon_triggered(boon: Boon) -> void:
 				health += boon.value
 		Boon.Type.CONCEAL:
 			collider.set_deferred("disabled", true)
+			death_position.emit(global_position)
 		Boon.Type.SPEED: 
 			speed += (data.speed * boon.value)
 		Boon.Type.DAMAGE:
@@ -246,6 +247,7 @@ func on_boon_triggered(boon: Boon) -> void:
 			print("Booned damage: ", damage)
 		Boon.Type.STEALTH:
 			collider.set_deferred("disabled", true)
+			death_position.emit(global_position)
 		_: pass
 
 func on_boon_expired(boon: Boon) -> void:

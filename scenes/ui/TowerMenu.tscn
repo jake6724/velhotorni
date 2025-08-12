@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ciicsqtfh31fh"]
+[gd_scene load_steps=20 format=3 uid="uid://ciicsqtfh31fh"]
 
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_c8bcu"]
 [ext_resource type="Texture2D" uid="uid://b8c4r7msm3cdi" path="res://assets/art/sprites/ui/spr_ui_coin_big.png" id="2_opq3w"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://rvf7vwl6ny54" path="res://assets/art/sprites/ui/spr_ui_tower_earth.png" id="12_gfj4e"]
 [ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="12_ur1ae"]
 [ext_resource type="PackedScene" uid="uid://ndrrlrv5t215" path="res://scenes/ui/TowerInfoPanel.tscn" id="15_g5j4q"]
+[ext_resource type="PackedScene" uid="uid://dl2jfi3hfgtdj" path="res://scenes/ui/WaveInfoPanel.tscn" id="16_r3bjd"]
 
 [sub_resource type="Animation" id="Animation_a8xy1"]
 length = 0.001
@@ -451,6 +452,11 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+
+[node name="WaveInfoPanel" parent="MarginContainer" instance=ExtResource("16_r3bjd")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
