@@ -256,10 +256,12 @@ func set_all_level_arrows() -> void:
 	update_special_level_arrow() 
 
 func check_can_evolve() -> void:
-	if tower.data.element > 5:
-		specialize.hide()
-	else:
+	var option_1_element: Constants.Element = Constants.get_evolve_element_1(tower.data.element)
+	var option_2_element: Constants.Element = Constants.get_evolve_element_2(tower.data.element)
+	if tower.data.element < 6 and (TowerGlobalData.tower_evolution_status[option_1_element] or TowerGlobalData.tower_evolution_status[option_2_element]):
 		specialize.show()
+	else:
+		specialize.hide()
 
 func update_damage_level_arrow() -> void:
 	damage_level_arrow.texture.region = Rect2((8 * tower.damage_level), 0, 8, 0)

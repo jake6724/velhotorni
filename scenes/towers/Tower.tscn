@@ -143,7 +143,7 @@ metadata/_custom_type_script = "uid://n5jrnk3kfl2e"
 
 [node name="BuffArea" type="Area2D" parent="."]
 unique_name_in_owner = true
-collision_layer = 5
+collision_layer = 4
 script = ExtResource("11_cmp23")
 
 [node name="BuffCollider" type="CollisionShape2D" parent="BuffArea"]

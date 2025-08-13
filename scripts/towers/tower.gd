@@ -37,9 +37,9 @@ var can_show_range: bool:
 var curr_damage: float
 var curr_speed: float
 var curr_range: float
-var _leveled_damage: float
-var _leveled_speed: float
-var _leveled_range: float 
+var _leveled_damage: float = 0.0
+var _leveled_speed: float = 0.0
+var _leveled_range: float = 0.0
 
 var _damage_buff: float = 0.0
 var _speed_buff: float = 0.0
@@ -59,30 +59,26 @@ var level: int = 0
 var damage_level: int = 0:
 	set(value):
 		damage_level = value
-		level += 1
-		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
+		increment_level()
 		update_current_combat_data()
 
 var speed_level: int = 0:
 	set(value):
 		speed_level = value
-		level += 1
-		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
+		increment_level()
 		update_current_combat_data()
 
 var range_level: int = 0:
 	set(value):
 		range_level = value
-		level += 1
-		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
+		increment_level()
 		update_current_combat_data()
 		update_colliders()
 
 var special_level: int = 0:
 	set(value):
 		special_level = value
-		level += 1
-		level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
+		increment_level()
 		update_debuff_data()
 		update_buff_data()
 		refresh_buff_collider()
@@ -151,10 +147,6 @@ func initialize(element: Constants.Element):
 
 	can_show_range = false
 
-	# Connect to BuffManager and BuffArea
-	if data.buff_data_list.size() > 0:
-		buff_area.initialize()
-
 	buff_manager.add_new_buff.connect(on_add_new_buff)
 	buff_manager.remove_active_buff.connect(on_remove_active_buff)
 
@@ -208,6 +200,7 @@ func reset_tower() -> void:
 	update_debuff_data()
 	update_buff_data()
 	refresh_transform_collider()
+	refresh_buff_collider()
 	update_colliders()
 	update_textures()
 
@@ -217,6 +210,7 @@ func update_current_combat_data() -> void:
 	_leveled_range = data.attack_range * (1.0 + (range_level * RANGE_MODIFIER))
 	curr_damage = _leveled_damage + _damage_buff
 	curr_speed = _leveled_speed + _speed_buff
+	print(data.tower_name," - curr_speed: ", curr_speed)
 	curr_range = _leveled_range + _range_buff
 	update_preview_combat_data()
 
@@ -263,6 +257,15 @@ func update_preview_debuff_data() -> void:
 				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * (special_level + 1))
 
 func update_buff_data() -> void:
+	# Connect to BuffArea
+	if data.buff_data_list.size() > 0:
+		buff_area.initialize()
+	else:
+		buff_area.uninitialize()
+
+	for buff_data: BuffData in data.buff_data_list:
+		buff_data.leveled_value = buff_data.value
+
 	if data.buff_data_list and data.buff_data_list[0]:
 		match data.buff_data_list[0].type:
 			Buff.Type.RANGE:
@@ -305,6 +308,10 @@ func play_shot_sfx() -> void:
 func update_textures() -> void:
 	sprite.texture = data.atlas
 	transform_hint_sprite.texture = data.transform_hint_texture
+
+func increment_level() -> void:
+	level += 1
+	level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
 
 func on_enemy_died(enemy: Enemy) -> void:
 	var index = in_range_targets.find(enemy)

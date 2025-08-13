@@ -26,8 +26,6 @@ signal option_2_selected
 signal close_button_pressed
 signal back_button_pressed
 
-var option_1_data: TowerData
-var option_2_data: TowerData 
 var ui_text: TowerEvolveMenuUIText = TowerEvolveMenuUIText.new()
 
 var animation_timer: Timer = Timer.new()
@@ -47,8 +45,8 @@ func _ready():
 	animation_timer.start()
 
 func update_stats(_tower: Tower) -> void:
-	option_1_data = Constants.tower_data[Constants.get_evolve_element_1(_tower.data.element)]
-	option_2_data = Constants.tower_data[Constants.get_evolve_element_2(_tower.data.element)]
+	var option_1_data: TowerData = Constants.tower_data[Constants.get_evolve_element_1(_tower.data.element)]
+	var option_2_data: TowerData = Constants.tower_data[Constants.get_evolve_element_2(_tower.data.element)]
 
 	option_1_label.text = option_1_data.tower_name
 	option_2_label.text = option_2_data.tower_name
@@ -64,25 +62,37 @@ func update_stats(_tower: Tower) -> void:
 	option_1_button.pressed.connect(on_option_1_select_pressed.bind(option_1_data.element))
 	option_2_button.pressed.connect(on_option_2_select_pressed.bind(option_2_data.element))
 
-	set_level_stats(_tower)
+	set_level_stats(_tower, option_1_data, option_2_data)
 
-func set_level_stats(_tower: Tower) -> void:
-	if _tower.level < 3:
-		option_1_select_label.hide()
-		option_2_select_label.hide()
-		option_1_button.disabled = true
-		option_2_button.disabled = true
-		option_1_lock_icon.show()
-		option_2_lock_icon.show()
-		info.text = ui_text.info_locked
+func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: TowerData) -> void:
+	option_1_select_label.hide()
+	option_2_select_label.hide()
+	option_1_button.disabled = true
+	option_2_button.disabled = true
+	option_1_lock_icon.show()
+	option_2_lock_icon.show()
+	info.text = ui_text.info_locked
+
+	if TowerGlobalData.tower_evolution_status[_option_1_data.element]:
+		option_1.show()
 	else:
-		option_1_select_label.show()
-		option_2_select_label.show()
-		option_1_button.disabled = false
-		option_2_button.disabled = false
-		option_1_lock_icon.hide()
-		option_2_lock_icon.hide()
-		info.text = ui_text.info_unlocked
+		option_1.hide()
+
+	if TowerGlobalData.tower_evolution_status[_option_2_data.element]:
+		option_2.show()
+	else:
+		option_2.hide()
+		
+	if _tower.level > 2:
+			option_1_select_label.show()
+			option_1_lock_icon.hide()
+			option_1_button.disabled = false
+
+			option_2_select_label.show()
+			option_2_lock_icon.hide()
+			option_2_button.disabled = false
+
+			info.text = ui_text.info_unlocked
 
 func on_option_1_select_pressed(_element: Constants.Element) -> void:
 	option_1_selected.emit(_element)

@@ -297,6 +297,7 @@ func on_specialize_button_pressed() -> void:
 func on_option_selected(_element: Constants.Element) -> void:
 	if tower_to_upgrade:
 		tower_to_upgrade.evolve(_element)
+		TowerGlobalData.tower_evolution_status[_element] = false
 		tower_specialize_menu.hide()
 		tower_to_upgrade = null
 		tower_menu.show()

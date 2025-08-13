@@ -30,6 +30,7 @@ SceneTransition="*res://scenes/ui/SceneTransition.tscn"
 Constants="*res://scripts/singletons/constants.gd"
 WaveManager="*res://scripts/singletons/wave_manager.gd"
 LevelManager="*res://scripts/singletons/level_manager.gd"
+TowerGlobalData="*res://scripts/singletons/tower_global_data.gd"
 
 [debug]
 

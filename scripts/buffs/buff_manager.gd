@@ -7,7 +7,6 @@ signal remove_active_buff
 var buff_pool: Array[Buff]
 
 func add_buff(new_buff_data: BuffData, _source: BuffArea) -> void:
-	# if not check_source_already_active(_source):
 	var new_buff: Buff = create_buff(new_buff_data, _source, calc_buff_modified_value(new_buff_data))
 	add_child(new_buff)
 	add_new_buff.emit(new_buff)
@@ -22,7 +21,19 @@ func create_buff(_data: BuffData, _source: BuffArea, _modified_value: float) -> 
 	new_buff.data.modified_value = _modified_value
 	return new_buff
 
-func get_prioritized_buff_duplicates_by_type() -> Array[Buff]:
+func prioritize_buffs() -> void:
+	if get_children().size() > 1:
+		# Save a copy of all active buffs
+		var buffs: Array[Buff] = get_sorted_buff_duplicates_by_type()
+
+		# Clear all the original buffs
+		remove_all_buffs()
+
+		# Add the duplicates in the correct order
+		for buff: Buff in buffs:
+			add_buff(buff.data, buff.data.source)
+
+func get_sorted_buff_duplicates_by_type() -> Array[Buff]:
 	var sorted_buffs: Array[Buff] = []
 	for child in get_children():
 		var active_buff: Buff = child as Buff
@@ -32,18 +43,6 @@ func get_prioritized_buff_duplicates_by_type() -> Array[Buff]:
 
 	sorted_buffs.sort_custom(compare_by_buff_value)
 	return sorted_buffs
-
-func prioritize_buffs() -> void:
-	if get_children().size() > 1:
-		# Save a copy of all active buffs
-		var buffs: Array[Buff] = get_prioritized_buff_duplicates_by_type()
-
-		# Clear all the original buffs
-		remove_all_buffs()
-
-		# Add the duplicates in the correct order
-		for buff: Buff in buffs:
-			add_buff(buff.data, buff.data.source)
 
 func remove_all_buffs() -> void:
 	for child in get_children():

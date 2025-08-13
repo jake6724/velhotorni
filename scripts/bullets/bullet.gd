@@ -33,6 +33,8 @@ func _ready() -> void:
 	if target and target.is_alive:
 		_target_direction = global_position.direction_to(target.global_position + _pos_offset)
 		target.death_position.connect(on_target_died)
+		if _target_direction == Vector2.ZERO:
+			queue_free()
 
 	_original_global_position = global_position
 	_min_distance = 11 # This is here to prevent unused warning if I just set it above

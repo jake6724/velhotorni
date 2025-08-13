@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_y3hjw")
 type = 2
-value = 5.0
+value = 0.1
 modified_value = 0.0
 leveled_value = 0.0
 preview_leveled_value = 0.0

@@ -14,6 +14,7 @@ func _ready():
 	WorldGrid.configure_level(LevelManager.active_level)
 	EnemySpawner.configure_level(LevelManager.active_level)
 	WaveManager.configure_level(LevelManager.active_level)
+	TowerGlobalData.reset()
 
 	# Configure PlayerController
 	player_controller.setup()

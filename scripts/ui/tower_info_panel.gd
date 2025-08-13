@@ -15,7 +15,8 @@ func update_stats(_tower: Tower) -> void:
 	if _tower:
 		name_label.text = _tower.data.tower_name
 		damage_label.text = str(snappedf(_tower.curr_damage, .01))
-		speed_label.text = str(snappedf((1 / _tower.curr_speed), .01))
+		#speed_label.text = str(snappedf((1 / _tower.curr_speed), .01))
+		speed_label.text = str(snappedf(_tower.curr_speed, .01))
 		range_label.text = str(snappedf(_tower.curr_range, .01))
 
 		update_debuff_stats(_tower)
@@ -70,7 +71,8 @@ func update_stats_shop(_tower_data: TowerData) -> void:
 	if _tower_data:
 		name_label.text = _tower_data.tower_name
 		damage_label.text = str(snappedf(_tower_data.damage, .01))
-		speed_label.text = str(snappedf((1 / _tower_data.speed), .01))
+		# speed_label.text = str(snappedf((1 / _tower_data.speed), .01))
+		speed_label.text = str(snappedf(_tower_data.speed, .01))
 		range_label.text = str(snappedf(_tower_data.attack_range, .01))
 
 		update_debuff_stats_shop(_tower_data)
