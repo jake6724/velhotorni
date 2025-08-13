@@ -10,6 +10,8 @@ components that could handle their own update functionality
 @onready var speed_button: Button = %SpeedButton
 @onready var range_button: Button = %RangeButton
 @onready var special_button: Button = %SpecialButton
+
+@onready var specialize_button: Button = %SpecializeButton
 @onready var close_button: Button = %CloseButton
 
 @onready var current_damage_label: Label = %CurrentDamageLabel
@@ -64,6 +66,7 @@ signal speed_button_pressed
 signal range_button_pressed
 signal special_button_pressed
 signal target_priority_changed
+signal specialize_button_pressed
 signal close_button_pressed
 
 func _ready():
@@ -85,6 +88,7 @@ func _ready():
 	special_button.pressed.connect(on_special_button_pressed)
 
 	close_button.pressed.connect(on_close_button_pressed)
+	specialize_button.pressed.connect(on_specialize_button_pressed)
 
 	targeting.mouse_exited.connect(clear_description)
 	target_left_button.pressed.connect(on_target_left_button_pressed)
@@ -204,6 +208,9 @@ func on_special_button_pressed() -> void:
 
 func on_close_button_pressed() -> void:
 	close_button_pressed.emit()
+
+func on_specialize_button_pressed() -> void:
+	specialize_button_pressed.emit()
 
 func on_target_left_button_pressed() -> void:
 	target_priority_changed.emit(get_prev_target_priority())

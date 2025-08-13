@@ -14,7 +14,7 @@ extends Resource
 @export var attack_range: float
 @export_category("Assets")
 ## The sprite atlas containing every animation for the tower. 
-@export var atlas: Texture
+@export var atlas: Texture2D
 @export var transform_hint_texture: Texture
 @export var portrait: Texture
 ## A reference to the `Bullet` scene which the `Tower` will spawn when attacking.

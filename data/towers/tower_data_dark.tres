@@ -14,7 +14,6 @@ element = 5
 damage = 10.0
 speed = 0.25
 attack_range = 30.0
-num_targets = 1
 atlas = ExtResource("1_xw50n")
 transform_hint_texture = ExtResource("3_xw50n")
 portrait = ExtResource("5_un32t")

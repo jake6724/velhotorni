@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("2_1i8ph")
-element = 1
+element = 9
 damage = 10.0
 speed = 1.0
 attack_range = 50.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://klolb6rmuatb"]
+[gd_scene load_steps=38 format=3 uid="uid://klolb6rmuatb"]
 
 [ext_resource type="Script" uid="uid://de6jp835jamo4" path="res://scripts/ui/tower_specialize_menu.gd" id="1_jp6ly"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_4bqn4"]
@@ -7,12 +7,72 @@
 [ext_resource type="Texture2D" uid="uid://biu0dfqvw886x" path="res://assets/art/sprites/ui/spr_ui_divider1.png" id="5_28amf"]
 [ext_resource type="Texture2D" uid="uid://bahrer0xdoere" path="res://assets/art/sprites/ui/spr_ui_box4.png" id="7_a7r6p"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="7_arjim"]
+[ext_resource type="Texture2D" uid="uid://1uqt6tbq3h47" path="res://assets/art/atlases/tower/atl_tower_water_ice.png" id="8_jj2tk"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="9_jwp3p"]
+[ext_resource type="Texture2D" uid="uid://dlof8lvxe6bit" path="res://assets/art/atlases/tower/atl_tower_water_flood.png" id="10_iojpp"]
+[ext_resource type="Texture2D" uid="uid://dugw6td7t0lel" path="res://assets/art/sprites/ui/spr_ui_stat_arrow.png" id="11_5anb3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jd3gn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwp3p"]
+resource_local_to_scene = true
+atlas = ExtResource("8_jj2tk")
+region = Rect2(16, 0, 16, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iojpp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5anb3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kdgql"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w47gl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6c7w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m8hub"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5i5g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4bqn4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vryqd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xhbua"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_28amf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5anb3"]
+atlas = ExtResource("10_iojpp")
+region = Rect2(0, 0, 16, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xjuqm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a7r6p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pb7j0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bt2i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qdmfe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jpi52"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ew6oc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_unsky"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eyyqs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rhmyn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pqkkn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_te63n"]
 
 [node name="TowerSpecializeMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_jp6ly")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
@@ -71,6 +131,7 @@ offset_right = 68.0
 offset_bottom = 10.0
 grow_vertical = 2
 size_flags_horizontal = 0
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("3_vryqd")
 theme_override_font_sizes/normal_font_size = 16
 text = "Specialize"
@@ -118,7 +179,8 @@ mouse_filter = 2
 theme_override_constants/separation = 22
 
 [node name="Option1" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
-custom_minimum_size = Vector2(150, 150)
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 136.325)
 layout_mode = 2
 size_flags_horizontal = 6
 texture = ExtResource("7_a7r6p")
@@ -135,31 +197,288 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Hbox" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/Hbox"]
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="Option1Name" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/Hbox/VBoxContainer"]
+[node name="Option1Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("7_arjim")
 theme_override_font_sizes/font_size = 8
-text = "Plasma"
+text = "Ice"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/Hbox/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("5_28amf")
+
+[node name="Option1Image" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_jwp3p")
+stretch_mode = 2
+
+[node name="Option1Desc" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(138, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("7_arjim")
+theme_override_font_sizes/normal_font_size = 8
+text = "Powerful single-target freeze"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Option1Select" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox"]
+custom_minimum_size = Vector2(65, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_jwp3p")
+region_rect = Rect2(1, 1, 30, 29)
+patch_margin_left = 11
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/Option1Select"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_xhbua")
+theme_override_font_sizes/font_size = 8
+text = "Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Option1Button" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/Option1Select"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0146557
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iojpp")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5anb3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kdgql")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_w47gl")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_c6c7w")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m8hub")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m5i5g")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4bqn4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vryqd")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_xhbua")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_28amf")
+
+[node name="Option2" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 136.325)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("7_a7r6p")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBox" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = -2
+
+[node name="Option2Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("7_arjim")
+theme_override_font_sizes/font_size = 8
+text = "Ice"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_28amf")
+
+[node name="Option2Image" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_5anb3")
+stretch_mode = 2
+
+[node name="Option2Desc" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(138, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("7_arjim")
+theme_override_font_sizes/normal_font_size = 8
+text = "Massive, piercing knockback"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Option2Select" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox"]
+custom_minimum_size = Vector2(65, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_jwp3p")
+region_rect = Rect2(1, 1, 30, 29)
+patch_margin_left = 11
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/Option2Select"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_xhbua")
+theme_override_font_sizes/font_size = 8
+text = "Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Option2Button" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/Option2Select"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iojpp")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5anb3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kdgql")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_w47gl")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_c6c7w")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m8hub")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m5i5g")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4bqn4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vryqd")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_xhbua")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_28amf")
+
+[node name="HSeparator2" type="HSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xjuqm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 250
+
+[node name="BackButton" type="TextureButton" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+texture_normal = ExtResource("11_5anb3")
+stretch_mode = 0
+flip_h = true
+
+[node name="Close" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(65, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = ExtResource("9_jwp3p")
+region_rect = Rect2(1, 1, 30, 29)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Close"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_xhbua")
+theme_override_font_sizes/font_size = 8
+text = "Close"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Close"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.000831637
+mouse_filter = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a7r6p")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_pb7j0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2bt2i")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_qdmfe")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jpi52")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_ew6oc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_unsky")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_eyyqs")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rhmyn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pqkkn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_te63n")
