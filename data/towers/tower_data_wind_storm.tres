@@ -1,21 +1,23 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=6 format=3 uid="uid://sc7ik8ml0dsq"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://cdk0eilkyl58d"]
 
 [ext_resource type="Texture2D" uid="uid://c6otfvi4swb8m" path="res://assets/art/atlases/tower/atl_tower_wind_storm.png" id="1_5kima"]
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_jedo3"]
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="2_1i8ph"]
+[ext_resource type="Resource" uid="uid://cmnb46o7w5d2k" path="res://data/debuffs/debuff_data_knockback_storm.tres" id="2_4icc0"]
 [ext_resource type="PackedScene" uid="uid://bajhh4nomahh0" path="res://scenes/bullets/WindStormBullet.tscn" id="3_5kima"]
 [ext_resource type="Texture2D" uid="uid://bt1v03t0h2bp6" path="res://assets/art/sprites/ui/spr_ui_water.png" id="4_4icc0"]
 
 [resource]
 script = ExtResource("2_1i8ph")
 element = 1
-damage = 10.0
+damage = 25.0
 speed = 1.0
-attack_range = 50.0
+attack_range = 60.0
 atlas = ExtResource("1_5kima")
 transform_hint_texture = ExtResource("4_4icc0")
 bullet = ExtResource("3_5kima")
 bullet_speed = 200.0
+debuff_data = ExtResource("2_4icc0")
 buff_data_list = Array[ExtResource("1_jedo3")]([])
 tower_name = "Storm"
 metadata/_custom_type_script = "uid://v7b6nq74b314"
