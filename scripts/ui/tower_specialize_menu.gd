@@ -1,6 +1,8 @@
 class_name TowerSpecializeMenu
 extends Control
 
+# TODO: use a setter for hide/slow to disable animations
+
 @onready var option_1: NinePatchRect = %Option1
 @onready var option_2: NinePatchRect = %Option2
 @onready var option_1_label: Label = %Option1Label
@@ -28,9 +30,21 @@ var option_1_data: TowerData
 var option_2_data: TowerData 
 var ui_text: TowerEvolveMenuUIText = TowerEvolveMenuUIText.new()
 
+var animation_timer: Timer = Timer.new()
+var animation_time: float = .25
+var animation_anim_x_increment: float = 16.0
+var animation_anim_x_max: float = 48.0
+var anim_x: float = 0.0
+var anim_w: float = 16.0
+var anim_y: float = 0.0
+var anim_h: float = 0.0
+
 func _ready():
 	close_button.pressed.connect(on_close_button_pressed)
 	back_button.pressed.connect(on_back_button_pressed)
+	add_child(animation_timer)
+	animation_timer.timeout.connect(on_animation_timer_timeout)
+	animation_timer.start()
 
 func update_stats(_tower: Tower) -> void:
 	option_1_data = Constants.tower_data[Constants.get_evolve_element_1(_tower.data.element)]
@@ -81,3 +95,15 @@ func on_close_button_pressed() -> void:
 
 func on_back_button_pressed() -> void:
 	back_button_pressed.emit()
+
+func on_animation_timer_timeout() -> void:
+	animate_atlas_textures()
+	animation_timer.start(animation_time)
+
+func animate_atlas_textures() -> void:
+	anim_x += animation_anim_x_increment
+	if anim_x > animation_anim_x_max:
+		anim_x = 0
+	if option_1_image.texture and option_2_image.texture:
+		option_1_image.texture.region = Rect2(anim_x, anim_y, anim_w, anim_h)
+		option_2_image.texture.region = Rect2(anim_x, anim_y, anim_w, anim_h)

@@ -18,7 +18,7 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_jwp3p"]
 resource_local_to_scene = true
 atlas = ExtResource("8_jj2tk")
-region = Rect2(16, 0, 16, 0)
+region = Rect2(48, 0, 16, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iojpp"]
 
@@ -223,7 +223,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_vryqd")
 theme_override_font_sizes/font_size = 16
-text = "PLASMA"
+text = "Tower Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -249,7 +249,7 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("7_arjim")
 theme_override_font_sizes/normal_font_size = 8
-text = "Powerful single-target freeze"
+text = "Evolution description"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -359,13 +359,14 @@ theme_override_constants/separation = -2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("7_arjim")
-theme_override_font_sizes/font_size = 8
-text = "Ice"
+theme_override_fonts/font = ExtResource("3_vryqd")
+theme_override_font_sizes/font_size = 16
+text = "Tower Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/VBoxContainer"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("5_28amf")
@@ -386,7 +387,7 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("7_arjim")
 theme_override_font_sizes/normal_font_size = 8
-text = "Massive, piercing knockback"
+text = "Evolution Description"
 horizontal_alignment = 1
 vertical_alignment = 1
 
