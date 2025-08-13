@@ -12,9 +12,9 @@
 [resource]
 script = ExtResource("2_nwbdq")
 element = 15
-damage = 1.0
-speed = 1.0
-attack_range = 50.0
+damage = 50.0
+speed = 1.2
+attack_range = 85.0
 atlas = ExtResource("1_syovx")
 transform_hint_texture = ExtResource("6_o8v4p")
 bullet = ExtResource("4_jysy1")

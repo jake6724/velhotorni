@@ -10,13 +10,13 @@
 [resource]
 script = ExtResource("2_r7fcr")
 element = 11
-damage = 1.0
-speed = 1.0
-attack_range = 50.0
+damage = 40.0
+speed = 0.85
+attack_range = 45.0
 atlas = ExtResource("1_yo347")
 transform_hint_texture = ExtResource("4_0ojx8")
 bullet = ExtResource("3_5rid4")
-bullet_speed = 100.0
+bullet_speed = 200.0
 debuff_data = ExtResource("4_5rid4")
 buff_data_list = Array[ExtResource("1_xugjd")]([])
 tower_name = "Ice"

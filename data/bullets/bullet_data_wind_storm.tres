@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_57wuu")
-max_pierce = 2
+max_pierce = 5
 follow_on_hit = false
 metadata/_custom_type_script = "uid://rcjwn40slcbo"
