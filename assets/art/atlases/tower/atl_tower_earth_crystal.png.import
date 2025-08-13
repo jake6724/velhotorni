@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://em4sf66s0r1b"
-path="res://.godot/imported/atlas_tower_void.png-34b4b94502cceadaa607efb84b86a5e7.ctex"
+uid="uid://cia3n3yo10tsr"
+path="res://.godot/imported/atl_tower_earth_crystal.png-8d7293070ef4bd6ef0c5fbe175173d43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/tower/atlas_tower_void.png"
-dest_files=["res://.godot/imported/atlas_tower_void.png-34b4b94502cceadaa607efb84b86a5e7.ctex"]
+source_file="res://assets/art/atlases/tower/atl_tower_earth_crystal.png"
+dest_files=["res://.godot/imported/atl_tower_earth_crystal.png-8d7293070ef4bd6ef0c5fbe175173d43.ctex"]
 
 [params]
 

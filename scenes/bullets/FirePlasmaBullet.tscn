@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2m03283180o8"]
+[gd_scene load_steps=10 format=3 uid="uid://bw272633o5sfg"]
 
-[ext_resource type="Texture2D" uid="uid://bpv0yurhjyu6o" path="res://assets/art/atlases/bullet/atl_bullet_fire.png" id="1_u6v6q"]
-[ext_resource type="Script" uid="uid://o4njnqkwiotf" path="res://scripts/bullets/chain_bullet.gd" id="2_eyxhh"]
-[ext_resource type="Resource" uid="uid://cfr4tphoqd2fq" path="res://data/bullets/bullet_data_wind.tres" id="3_eyxhh"]
+[ext_resource type="Script" uid="uid://bidlapkmguymx" path="res://scripts/bullets/piercing_bullet.gd" id="1_l1jkn"]
+[ext_resource type="Resource" uid="uid://c25cdjvceweh2" path="res://data/bullets/bullet_data_fire_plasma.tres" id="3_3o4c8"]
+[ext_resource type="Texture2D" uid="uid://bpv0yurhjyu6o" path="res://assets/art/atlases/bullet/atl_bullet_fire.png" id="4_q8apf"]
 
 [sub_resource type="Animation" id="Animation_ieavl"]
 length = 0.001
@@ -40,7 +40,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_u6v6q")]
+"values": [ExtResource("4_q8apf")]
 }
 
 [sub_resource type="Animation" id="Animation_4urau"]
@@ -93,7 +93,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_u6v6q")]
+"values": [ExtResource("4_q8apf")]
 }
 
 [sub_resource type="Animation" id="Animation_maogk"]
@@ -147,30 +147,30 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_u6v6q")]
+"values": [ExtResource("4_q8apf")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4urau"]
+resource_local_to_scene = true
 _data = {
 &"RESET": SubResource("Animation_ieavl"),
 &"hit": SubResource("Animation_4urau"),
 &"move": SubResource("Animation_maogk")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0qd8s"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_3o4c8"]
 radius = 5.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0db6q"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_q8apf"]
 radius = 30.0
 
-[node name="LightningBullet" type="Sprite2D"]
-texture_filter = 1
-texture = ExtResource("1_u6v6q")
+[node name="FirePlasmaBullet" type="Sprite2D"]
+texture = ExtResource("4_q8apf")
 hframes = 4
 vframes = 2
-script = ExtResource("2_eyxhh")
-data = ExtResource("3_eyxhh")
-metadata/_custom_type_script = "uid://o4njnqkwiotf"
+script = ExtResource("1_l1jkn")
+data = ExtResource("3_3o4c8")
+metadata/_custom_type_script = "uid://bidlapkmguymx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -182,12 +182,12 @@ collision_layer = 512
 collision_mask = 16
 
 [node name="PrimaryCollider" type="CollisionShape2D" parent="PrimaryArea"]
-shape = SubResource("CircleShape2D_0qd8s")
+shape = SubResource("CircleShape2D_3o4c8")
 
 [node name="AOEArea" type="Area2D" parent="."]
 collision_layer = 512
 collision_mask = 16
 
 [node name="AOECollider" type="CollisionShape2D" parent="AOEArea"]
-shape = SubResource("CircleShape2D_0db6q")
+shape = SubResource("CircleShape2D_q8apf")
 disabled = true

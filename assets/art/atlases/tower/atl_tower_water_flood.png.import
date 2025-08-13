@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy44hd56xu17i"
-path="res://.godot/imported/atlas_tower_mud.png-017346393fa87442007f67fb20bb8e00.ctex"
+uid="uid://dlof8lvxe6bit"
+path="res://.godot/imported/atl_tower_water_flood.png-fca50bd6908bdec6e7d71428d954474b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/tower/atlas_tower_mud.png"
-dest_files=["res://.godot/imported/atlas_tower_mud.png-017346393fa87442007f67fb20bb8e00.ctex"]
+source_file="res://assets/art/atlases/tower/atl_tower_water_flood.png"
+dest_files=["res://.godot/imported/atl_tower_water_flood.png-fca50bd6908bdec6e7d71428d954474b.ctex"]
 
 [params]
 

@@ -128,12 +128,6 @@ func _ready():
 
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
-	
-	print(element)
-	print(Constants.tower_data[element])
-	print(Constants.tower_data[Constants.get_next_element(element)])
-	
-
 	base_data = get_tower_data_copy(Constants.tower_data[element])
 	transform_data = get_tower_data_copy(Constants.tower_data[Constants.get_next_element(element)])
 	data = base_data

@@ -1,16 +1,23 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=3 format=3 uid="uid://ria547ksda6"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://ria547ksda6"]
 
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_5kjju"]
+[ext_resource type="Texture2D" uid="uid://cttctfsnln8k7" path="res://assets/art/atlases/tower/atl_tower_fire_plasma.png" id="1_v7dg2"]
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="2_oe7gi"]
+[ext_resource type="PackedScene" uid="uid://bw272633o5sfg" path="res://scenes/bullets/FirePlasmaBullet.tscn" id="3_aoppd"]
+[ext_resource type="Resource" uid="uid://ecvitwr7sxq8" path="res://data/debuffs/debuff_data_burn_plasma.tres" id="4_5i7bn"]
+[ext_resource type="Texture2D" uid="uid://wnb4niuilf1x" path="res://assets/art/sprites/ui/spr_ui_wind.png" id="4_aoppd"]
 
 [resource]
 script = ExtResource("2_oe7gi")
-element = 0
-damage = 0.0
-speed = 0.0
-attack_range = 0.0
-num_targets = 0
-bullet_speed = 0.0
+element = 8
+damage = 1.0
+speed = 1.0
+attack_range = 50.0
+atlas = ExtResource("1_v7dg2")
+transform_hint_texture = ExtResource("4_aoppd")
+bullet = ExtResource("3_aoppd")
+bullet_speed = 100.0
+debuff_data = ExtResource("4_5i7bn")
 buff_data_list = Array[ExtResource("1_5kjju")]([])
-tower_name = ""
+tower_name = "Plasma"
 metadata/_custom_type_script = "uid://v7b6nq74b314"

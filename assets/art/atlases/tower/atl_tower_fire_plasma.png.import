@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6otfvi4swb8m"
-path="res://.godot/imported/atlas_tower_storm.png-6e5e2b7be2154ff088816348a36d0f5f.ctex"
+uid="uid://cttctfsnln8k7"
+path="res://.godot/imported/atl_tower_fire_plasma.png-149a6c7dae27a1986ba419bb0f2a0027.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/tower/atlas_tower_storm.png"
-dest_files=["res://.godot/imported/atlas_tower_storm.png-6e5e2b7be2154ff088816348a36d0f5f.ctex"]
+source_file="res://assets/art/atlases/tower/atl_tower_fire_plasma.png"
+dest_files=["res://.godot/imported/atl_tower_fire_plasma.png-149a6c7dae27a1986ba419bb0f2a0027.ctex"]
 
 [params]
 

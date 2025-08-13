@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2m03283180o8"]
+[gd_scene load_steps=10 format=3 uid="uid://xie3flu7b1ur"]
 
-[ext_resource type="Texture2D" uid="uid://bpv0yurhjyu6o" path="res://assets/art/atlases/bullet/atl_bullet_fire.png" id="1_u6v6q"]
-[ext_resource type="Script" uid="uid://o4njnqkwiotf" path="res://scripts/bullets/chain_bullet.gd" id="2_eyxhh"]
-[ext_resource type="Resource" uid="uid://cfr4tphoqd2fq" path="res://data/bullets/bullet_data_wind.tres" id="3_eyxhh"]
+[ext_resource type="Script" uid="uid://cpx7d6yvad41w" path="res://scripts/bullets/bullet.gd" id="1_ljcx4"]
+[ext_resource type="Texture2D" uid="uid://clm78jlieecpp" path="res://assets/art/atlases/bullet/atl_bullet_water_fish.png" id="1_wy4s6"]
+[ext_resource type="Resource" uid="uid://bmyqdsi5uohgk" path="res://data/bullets/bullet_data_water_flood.tres" id="3_wy4s6"]
 
 [sub_resource type="Animation" id="Animation_ieavl"]
 length = 0.001
@@ -40,7 +40,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_u6v6q")]
+"values": [ExtResource("1_wy4s6")]
 }
 
 [sub_resource type="Animation" id="Animation_4urau"]
@@ -93,7 +93,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_u6v6q")]
+"values": [ExtResource("1_wy4s6")]
 }
 
 [sub_resource type="Animation" id="Animation_maogk"]
@@ -147,30 +147,31 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_u6v6q")]
+"values": [ExtResource("1_wy4s6")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4urau"]
+resource_local_to_scene = true
 _data = {
 &"RESET": SubResource("Animation_ieavl"),
 &"hit": SubResource("Animation_4urau"),
 &"move": SubResource("Animation_maogk")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0qd8s"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_2yceh"]
 radius = 5.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0db6q"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_lnoib"]
 radius = 30.0
 
-[node name="LightningBullet" type="Sprite2D"]
-texture_filter = 1
-texture = ExtResource("1_u6v6q")
+[node name="WaterFloodBullet" type="Sprite2D"]
+texture = ExtResource("1_wy4s6")
 hframes = 4
 vframes = 2
-script = ExtResource("2_eyxhh")
-data = ExtResource("3_eyxhh")
-metadata/_custom_type_script = "uid://o4njnqkwiotf"
+frame = 4
+script = ExtResource("1_ljcx4")
+data = ExtResource("3_wy4s6")
+metadata/_custom_type_script = "uid://cpx7d6yvad41w"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -182,12 +183,12 @@ collision_layer = 512
 collision_mask = 16
 
 [node name="PrimaryCollider" type="CollisionShape2D" parent="PrimaryArea"]
-shape = SubResource("CircleShape2D_0qd8s")
+shape = SubResource("CircleShape2D_2yceh")
 
 [node name="AOEArea" type="Area2D" parent="."]
 collision_layer = 512
 collision_mask = 16
 
 [node name="AOECollider" type="CollisionShape2D" parent="AOEArea"]
-shape = SubResource("CircleShape2D_0db6q")
+shape = SubResource("CircleShape2D_lnoib")
 disabled = true

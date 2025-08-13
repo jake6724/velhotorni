@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kmi2frmpbjor"
-path="res://.godot/imported/atlas_tower_sun.png-686154901286fadc5d7e5d1209d52d9a.ctex"
+uid="uid://em4sf66s0r1b"
+path="res://.godot/imported/atl_tower_dark_void.png-d56c719aad77338e00914e0c7c252c2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/tower/atlas_tower_sun.png"
-dest_files=["res://.godot/imported/atlas_tower_sun.png-686154901286fadc5d7e5d1209d52d9a.ctex"]
+source_file="res://assets/art/atlases/tower/atl_tower_dark_void.png"
+dest_files=["res://.godot/imported/atl_tower_dark_void.png-d56c719aad77338e00914e0c7c252c2b.ctex"]
 
 [params]
 

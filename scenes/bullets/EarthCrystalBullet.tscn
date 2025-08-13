@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2m03283180o8"]
+[gd_scene load_steps=10 format=3 uid="uid://lq856dmc4h4"]
 
-[ext_resource type="Texture2D" uid="uid://bpv0yurhjyu6o" path="res://assets/art/atlases/bullet/atl_bullet_fire.png" id="1_u6v6q"]
-[ext_resource type="Script" uid="uid://o4njnqkwiotf" path="res://scripts/bullets/chain_bullet.gd" id="2_eyxhh"]
-[ext_resource type="Resource" uid="uid://cfr4tphoqd2fq" path="res://data/bullets/bullet_data_wind.tres" id="3_eyxhh"]
+[ext_resource type="Script" uid="uid://bidlapkmguymx" path="res://scripts/bullets/piercing_bullet.gd" id="1_62ydg"]
+[ext_resource type="Texture2D" uid="uid://dbvww423w3gn1" path="res://assets/art/atlases/bullet/atl_bullet_water.png" id="1_pr7tp"]
+[ext_resource type="Resource" uid="uid://bebyj24hv3lfs" path="res://data/bullets/bullet_data_earth_crystal.tres" id="3_pr7tp"]
 
-[sub_resource type="Animation" id="Animation_ieavl"]
+[sub_resource type="Animation" id="Animation_cywa6"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -33,17 +33,29 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:texture")
+tracks/2/path = NodePath(".:frame_coords")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_u6v6q")]
+"values": [Vector2i(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_pr7tp")]
 }
 
-[sub_resource type="Animation" id="Animation_4urau"]
+[sub_resource type="Animation" id="Animation_wotdt"]
 resource_name = "hit"
 length = 0.2
 step = 0.05
@@ -78,7 +90,7 @@ tracks/2/path = NodePath(".:frame_coords")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"times": PackedFloat32Array(0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
@@ -93,10 +105,10 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_u6v6q")]
+"values": [ExtResource("1_pr7tp")]
 }
 
-[sub_resource type="Animation" id="Animation_maogk"]
+[sub_resource type="Animation" id="Animation_mfifh"]
 resource_name = "move"
 length = 0.5
 loop_mode = 1
@@ -147,34 +159,33 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_u6v6q")]
+"values": [ExtResource("1_pr7tp")]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4urau"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cywa6"]
 _data = {
-&"RESET": SubResource("Animation_ieavl"),
-&"hit": SubResource("Animation_4urau"),
-&"move": SubResource("Animation_maogk")
+&"RESET": SubResource("Animation_cywa6"),
+&"hit": SubResource("Animation_wotdt"),
+&"move": SubResource("Animation_mfifh")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0qd8s"]
-radius = 5.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_62ydg"]
+radius = 8.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0db6q"]
-radius = 30.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1f511"]
+radius = 32.0
 
-[node name="LightningBullet" type="Sprite2D"]
-texture_filter = 1
-texture = ExtResource("1_u6v6q")
+[node name="EarthCrystalBullet" type="Sprite2D"]
+texture = ExtResource("1_pr7tp")
 hframes = 4
 vframes = 2
-script = ExtResource("2_eyxhh")
-data = ExtResource("3_eyxhh")
-metadata/_custom_type_script = "uid://o4njnqkwiotf"
+script = ExtResource("1_62ydg")
+data = ExtResource("3_pr7tp")
+metadata/_custom_type_script = "uid://bidlapkmguymx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_4urau")
+&"": SubResource("AnimationLibrary_cywa6")
 }
 
 [node name="PrimaryArea" type="Area2D" parent="."]
@@ -182,12 +193,13 @@ collision_layer = 512
 collision_mask = 16
 
 [node name="PrimaryCollider" type="CollisionShape2D" parent="PrimaryArea"]
-shape = SubResource("CircleShape2D_0qd8s")
+scale = Vector2(0.6, 0.6)
+shape = SubResource("CircleShape2D_62ydg")
 
 [node name="AOEArea" type="Area2D" parent="."]
 collision_layer = 512
 collision_mask = 16
 
 [node name="AOECollider" type="CollisionShape2D" parent="AOEArea"]
-shape = SubResource("CircleShape2D_0db6q")
+shape = SubResource("CircleShape2D_1f511")
 disabled = true

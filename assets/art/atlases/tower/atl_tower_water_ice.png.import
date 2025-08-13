@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tkqj02dpk5jb"
-path="res://.godot/imported/atlas_tower_spirit.png-a1c3a4b495ce40d0bc4333e2f5b0edd4.ctex"
+uid="uid://1uqt6tbq3h47"
+path="res://.godot/imported/atl_tower_water_ice.png-919ef2b318ff5e82c3247a7606fc28d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/tower/atlas_tower_spirit.png"
-dest_files=["res://.godot/imported/atlas_tower_spirit.png-a1c3a4b495ce40d0bc4333e2f5b0edd4.ctex"]
+source_file="res://assets/art/atlases/tower/atl_tower_water_ice.png"
+dest_files=["res://.godot/imported/atl_tower_water_ice.png-919ef2b318ff5e82c3247a7606fc28d6.ctex"]
 
 [params]
 

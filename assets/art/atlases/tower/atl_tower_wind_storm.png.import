@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1spe6jwuokia"
-path="res://.godot/imported/atlas_tower_lava.png-76fdb82e46dc2e2b7d57dccc582ec976.ctex"
+uid="uid://c6otfvi4swb8m"
+path="res://.godot/imported/atl_tower_wind_storm.png-25f364e8b56e9240fa8a017d60d57a12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/tower/atlas_tower_lava.png"
-dest_files=["res://.godot/imported/atlas_tower_lava.png-76fdb82e46dc2e2b7d57dccc582ec976.ctex"]
+source_file="res://assets/art/atlases/tower/atl_tower_wind_storm.png"
+dest_files=["res://.godot/imported/atl_tower_wind_storm.png-25f364e8b56e9240fa8a017d60d57a12.ctex"]
 
 [params]
 

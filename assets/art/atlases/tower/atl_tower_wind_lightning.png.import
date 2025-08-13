@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ihpbmx5elr1q"
-path="res://.godot/imported/atlas_tower_curse.png-336b82232227301e47c41f7f9af7e967.ctex"
+uid="uid://bqypyifq66o2d"
+path="res://.godot/imported/atl_tower_wind_lightning.png-b53a74de431ddd8bc5c4dc79621eef5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/tower/atlas_tower_curse.png"
-dest_files=["res://.godot/imported/atlas_tower_curse.png-336b82232227301e47c41f7f9af7e967.ctex"]
+source_file="res://assets/art/atlases/tower/atl_tower_wind_lightning.png"
+dest_files=["res://.godot/imported/atl_tower_wind_lightning.png-b53a74de431ddd8bc5c4dc79621eef5e.ctex"]
 
 [params]
 
