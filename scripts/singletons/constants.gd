@@ -18,12 +18,12 @@ const TOWER_PRICES: Dictionary[Constants.Element, int] = {
 }
 
 var tower_data: Dictionary[Constants.Element, TowerData] = {
-	Element.FIRE: load("res://data/towers/tower_data_fire_lava.tres"),
-	Element.WIND: load("res://data/towers/tower_data_wind_lightning.tres"),
-	Element.WATER: load("res://data/towers/tower_data_water_flood.tres"),
-	Element.EARTH: load("res://data/towers/tower_data_earth_crystal.tres"),
-	Element.LIGHT: load("res://data/towers/tower_data_light_sun.tres"),
-	Element.DARK: load("res://data/towers/tower_data_dark_void.tres"),
+	Element.FIRE: load("res://data/towers/tower_data_fire_plasma.tres"),
+	Element.WIND: load("res://data/towers/tower_data_wind_storm.tres"),
+	Element.WATER: load("res://data/towers/tower_data_water_ice.tres"),
+	Element.EARTH: load("res://data/towers/tower_data_earth_mud.tres"),
+	Element.LIGHT: load("res://data/towers/tower_data_light_spirit.tres"),
+	Element.DARK: load("res://data/towers/tower_data_dark_curse.tres"),
 	Element.LAVA: load("res://data/towers/tower_data_fire_lava.tres"),
 	Element.PLASMA: load("res://data/towers/tower_data_fire_plasma.tres"),
 	Element.STORM: load("res://data/towers/tower_data_wind_storm.tres"),

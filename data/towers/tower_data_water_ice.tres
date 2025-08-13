@@ -1,15 +1,23 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=3 format=3 uid="uid://cb8ydn2kpr07l"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://cb8ydn2kpr07l"]
 
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_xugjd"]
+[ext_resource type="Texture2D" uid="uid://1uqt6tbq3h47" path="res://assets/art/atlases/tower/atl_tower_water_ice.png" id="1_yo347"]
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="2_r7fcr"]
+[ext_resource type="PackedScene" uid="uid://bt4rtye8wsuwu" path="res://scenes/bullets/WaterIceBullet.tscn" id="3_5rid4"]
+[ext_resource type="Texture2D" uid="uid://cdhft8awohll1" path="res://assets/art/sprites/ui/spr_ui_earth.png" id="4_0ojx8"]
+[ext_resource type="Resource" uid="uid://cynqcqgn1jfy6" path="res://data/debuffs/debuff_data_freeze_ice.tres" id="4_5rid4"]
 
 [resource]
 script = ExtResource("2_r7fcr")
-element = 0
-damage = 0.0
-speed = 0.0
-attack_range = 0.0
-bullet_speed = 0.0
+element = 11
+damage = 1.0
+speed = 1.0
+attack_range = 50.0
+atlas = ExtResource("1_yo347")
+transform_hint_texture = ExtResource("4_0ojx8")
+bullet = ExtResource("3_5rid4")
+bullet_speed = 100.0
+debuff_data = ExtResource("4_5rid4")
 buff_data_list = Array[ExtResource("1_xugjd")]([])
 tower_name = "Ice"
 metadata/_custom_type_script = "uid://v7b6nq74b314"
