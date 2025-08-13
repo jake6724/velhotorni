@@ -12,6 +12,7 @@ components that could handle their own update functionality
 @onready var special_button: Button = %SpecialButton
 
 @onready var specialize_button: Button = %SpecializeButton
+@onready var specialize: NinePatchRect = %Specialize
 @onready var close_button: Button = %CloseButton
 
 @onready var current_damage_label: Label = %CurrentDamageLabel
@@ -132,6 +133,7 @@ func update_stats(player_gold: int = 0) -> void:
 	update_buff_stats()
 	update_level_labels()
 	update_ui_text(player_gold)
+	check_can_evolve()
 
 func update_debuff_stats() -> void:
 	if tower.data.debuff_data:
@@ -252,6 +254,12 @@ func set_all_level_arrows() -> void:
 	update_speed_level_arrow()
 	update_range_level_arrow()
 	update_special_level_arrow() 
+
+func check_can_evolve() -> void:
+	if tower.data.element > 5:
+		specialize.hide()
+	else:
+		specialize.show()
 
 func update_damage_level_arrow() -> void:
 	damage_level_arrow.texture.region = Rect2((8 * tower.damage_level), 0, 8, 0)

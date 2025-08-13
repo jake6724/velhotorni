@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://klolb6rmuatb"]
+[gd_scene load_steps=39 format=3 uid="uid://klolb6rmuatb"]
 
 [ext_resource type="Script" uid="uid://de6jp835jamo4" path="res://scripts/ui/tower_specialize_menu.gd" id="1_jp6ly"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_4bqn4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://1uqt6tbq3h47" path="res://assets/art/atlases/tower/atl_tower_water_ice.png" id="8_jj2tk"]
 [ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="9_jwp3p"]
 [ext_resource type="Texture2D" uid="uid://dlof8lvxe6bit" path="res://assets/art/atlases/tower/atl_tower_water_flood.png" id="10_iojpp"]
+[ext_resource type="Texture2D" uid="uid://dk11u8iqk0tk5" path="res://assets/art/sprites/ui/lock.png" id="10_kdgql"]
 [ext_resource type="Texture2D" uid="uid://dugw6td7t0lel" path="res://assets/art/sprites/ui/spr_ui_stat_arrow.png" id="11_5anb3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jd3gn"]
@@ -121,6 +122,7 @@ size_flags_vertical = 0
 mouse_filter = 2
 
 [node name="OverviewLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
+visible = false
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 1
 anchors_preset = 4
@@ -138,7 +140,7 @@ text = "Specialize"
 scroll_active = false
 vertical_alignment = 1
 
-[node name="CurrentLevelLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
+[node name="Info" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 1
@@ -155,7 +157,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_xhbua")
 theme_override_font_sizes/font_size = 8
-text = "Select one"
+text = "lvl 3 required to evolve"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -219,13 +221,14 @@ theme_override_constants/separation = -2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("7_arjim")
-theme_override_font_sizes/font_size = 8
-text = "Ice"
+theme_override_fonts/font = ExtResource("3_vryqd")
+theme_override_font_sizes/font_size = 16
+text = "PLASMA"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/VBoxContainer"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("5_28amf")
@@ -251,7 +254,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Option1Select" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox"]
-custom_minimum_size = Vector2(65, 30)
+custom_minimum_size = Vector2(65, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -262,7 +265,9 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 11
 
-[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/Option1Select"]
+[node name="Option1SelectLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/Option1Select"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -295,6 +300,23 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4bqn4")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_vryqd")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_xhbua")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_28amf")
+
+[node name="Option1LockIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/Option1Select"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.555
+anchor_right = 0.5
+anchor_bottom = 0.555
+offset_left = -7.5
+offset_top = -10.0415
+offset_right = 8.5
+offset_bottom = 5.95853
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_kdgql")
 
 [node name="Option2" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
 unique_name_in_owner = true
@@ -369,7 +391,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Option2Select" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox"]
-custom_minimum_size = Vector2(65, 30)
+custom_minimum_size = Vector2(65, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -380,7 +402,9 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 11
 
-[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/Option2Select"]
+[node name="Option2SelectLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/Option2Select"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -413,6 +437,23 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_vryqd")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_xhbua")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_28amf")
 
+[node name="Option2LockIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/Option2Select"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.555
+anchor_right = 0.5
+anchor_bottom = 0.555
+offset_left = -7.5
+offset_top = -10.0415
+offset_right = 8.5
+offset_bottom = 5.95853
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_kdgql")
+
 [node name="HSeparator2" type="HSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
@@ -430,7 +471,6 @@ custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-mouse_filter = 2
 texture_normal = ExtResource("11_5anb3")
 stretch_mode = 0
 flip_h = true
@@ -470,7 +510,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.000831637
-mouse_filter = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_a7r6p")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_pb7j0")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_2bt2i")

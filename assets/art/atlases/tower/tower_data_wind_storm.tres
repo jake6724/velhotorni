@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=6 format=3 uid="uid://sc7ik8ml0dsq"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=6 format=3 uid="uid://dfinagrn1l6uo"]
 
 [ext_resource type="Texture2D" uid="uid://c6otfvi4swb8m" path="res://assets/art/atlases/tower/atl_tower_wind_storm.png" id="1_3abci"]
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="2_tex6e"]

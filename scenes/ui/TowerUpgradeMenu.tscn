@@ -1017,6 +1017,7 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_yi3fk")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bw1ro")
 
 [node name="Specialize" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(65, 30)
 layout_mode = 2
 size_flags_horizontal = 4

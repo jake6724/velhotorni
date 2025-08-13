@@ -55,8 +55,8 @@ func get_next_element(_element: Element) -> Element:
 		Element.FLOOD: return Element.CRYSTAL
 		Element.MUD: return Element.SPIRIT
 		Element.CRYSTAL: return Element.SUN
-		Element.SPIRIT: return Element.LAVA
-		Element.SUN: return Element.PLASMA
+		Element.SPIRIT: return Element.CURSE
+		Element.SUN: return Element.VOID
 		Element.CURSE: return Element.LAVA
 		Element.VOID: return Element.PLASMA
 

@@ -44,12 +44,14 @@ func _ready():
 	tower_upgrade_menu.range_button_pressed.connect(on_range_button_pressed)
 	tower_upgrade_menu.special_button_pressed.connect(on_special_button_pressed)
 	tower_upgrade_menu.specialize_button_pressed.connect(on_specialize_button_pressed)
-	tower_upgrade_menu.close_button_pressed.connect(on_tower_upgrade_close_button_pressed)
+	tower_upgrade_menu.close_button_pressed.connect(on_close_menu)
 	tower_upgrade_menu.target_priority_changed.connect(on_tower_priority_changed)
 
 	# Connect to tower evolve menu
 	tower_specialize_menu.option_1_selected.connect(on_option_selected)
 	tower_specialize_menu.option_2_selected.connect(on_option_selected)
+	tower_specialize_menu.close_button_pressed.connect(on_close_menu)
+	tower_specialize_menu.back_button_pressed.connect(on_tower_specialize_menu_back_button_pressed)
 
 	# Connect to EnemySpawner
 	EnemySpawner.enemy_died.connect(on_enemy_died)
@@ -299,11 +301,15 @@ func on_option_selected(_element: Constants.Element) -> void:
 		tower_to_upgrade = null
 		tower_menu.show()
 
-
-func on_tower_upgrade_close_button_pressed() -> void:
+func on_close_menu() -> void:
 	tower_upgrade_menu.hide()
+	tower_specialize_menu.hide()
 	tower_menu.show()
 	tower_to_upgrade = null
+
+func on_tower_specialize_menu_back_button_pressed() -> void:
+	tower_specialize_menu.hide()
+	tower_upgrade_menu.show()
 
 func on_tower_priority_changed(priority: Tower.TargetPriority):
 	if tower_to_upgrade:

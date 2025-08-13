@@ -1,7 +1,6 @@
 class_name TowerEvolveMenuUIText
 extends Object
 
-
 var evolve_desc_lava: String = "Evolve into a lava tower"
 var evolve_desc_plasma: String = "Evolve into a plasma tower"
 var evolve_desc_storm: String = "Evolve into a storm tower"
@@ -28,3 +27,6 @@ var evolve_desc_options: Dictionary[Constants.Element, String] = {
 	Constants.Element.CURSE: evolve_desc_curse,
 	Constants.Element.VOID: evolve_desc_void,
 }
+
+var info_locked: String = "Tower must be lvl 3 or higher to evolve"
+var info_unlocked: String = "Choose an evolution"
