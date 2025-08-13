@@ -53,7 +53,7 @@ func update_stats(_tower: Tower) -> void:
 	set_level_stats(_tower)
 
 func set_level_stats(_tower: Tower) -> void:
-	if _tower.level < 2:
+	if _tower.level < 3:
 		option_1_select_label.hide()
 		option_2_select_label.hide()
 		option_1_button.disabled = true
