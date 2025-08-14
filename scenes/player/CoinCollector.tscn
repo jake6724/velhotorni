@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bno5o5pbi8s3e"]
+
+[ext_resource type="Script" uid="uid://6jxi4ylbl1ca" path="res://scripts/player/coin_collector.gd" id="1_m1gr8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1gr8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_56ru5"]
+radius = 42.0
+
+[node name="CoinCollector" type="Node2D"]
+script = ExtResource("1_m1gr8")
+metadata/_custom_type_script = "uid://6jxi4ylbl1ca"
+
+[node name="CollectArea" type="Area2D" parent="."]
+position = Vector2(6, 8)
+collision_layer = 0
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_m1gr8")
+
+[node name="MagnetArea" type="Area2D" parent="."]
+position = Vector2(-2, 8)
+collision_layer = 0
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
+position = Vector2(8, 0)
+shape = SubResource("CircleShape2D_56ru5")

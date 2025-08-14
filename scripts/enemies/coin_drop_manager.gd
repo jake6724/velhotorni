@@ -7,13 +7,13 @@ const JITTER_MAX: float = 20
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func spawn_coin_drop(_global_pos) -> void:
-	print("Spawning coin")
-	var new_coin_drop: CoinDrop = coin_drop_scene.instantiate()
-	add_child(new_coin_drop)
-	new_coin_drop.global_position = apply_jitter(_global_pos)
+	var coin: CoinDrop = coin_drop_scene.instantiate()
+	add_child(coin)
+	coin.global_position = _global_pos
+	coin.destination = calc_destination(_global_pos)
+	coin.destination_direction = coin.global_position.direction_to(coin.destination)
 
 func on_enemy_spawned(_enemy: Enemy) -> void:
-	print("Connecting to enemy")
 	_enemy.death_position.connect(spawn_coin_drop)
 
 func _physics_process(delta):
@@ -21,11 +21,15 @@ func _physics_process(delta):
 		var coin: CoinDrop = child as CoinDrop
 		if coin:
 			coin.countdown -= delta
-			if coin.countdown <= 0:
-				print("Deleting coin!")
+			if coin.countdown > 0:
+				if not coin.destination_reached:
+					coin.global_position += coin.destination_direction * coin.speed * delta
+					if abs(coin.global_position.distance_to(coin.destination)) < 1:
+						coin.destination_reached = true
+			else:
 				coin.queue_free()
 
-func apply_jitter(_global_pos) -> Vector2:
+func calc_destination(_global_pos) -> Vector2:
 	var jx: float = rng.randf_range(JITTER_MIN, JITTER_MAX)
 	var jy: float = rng.randf_range(JITTER_MIN, JITTER_MAX)
 	var jitter_offset: Vector2 = Vector2(jx, jy)

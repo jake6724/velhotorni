@@ -7,6 +7,8 @@
 radius = 8.0
 
 [node name="CoinDrop" type="Area2D"]
+collision_layer = 1024
+collision_mask = 0
 script = ExtResource("1_wk5kd")
 metadata/_custom_type_script = "uid://t377p3mdag50"
 
