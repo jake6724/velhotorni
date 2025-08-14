@@ -74,8 +74,6 @@ func _ready():
 
 	# Configure DebuffManager
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
-	debuff_manager.cc_multiplier = data.cc_multiplier
-	debuff_manager.knockback_multiplier = data.knockback_multiplier
 
 	# Configure Boons
 	if data.boon_data:

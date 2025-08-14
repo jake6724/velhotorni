@@ -180,6 +180,8 @@ radius = 16.0
 resource_local_to_scene = true
 
 [node name="BigEnemy" type="Area2D"]
+collision_layer = 16
+collision_mask = 256
 script = ExtResource("1_nrfk0")
 metadata/_custom_type_script = "uid://dn6bxxa2tg45m"
 
