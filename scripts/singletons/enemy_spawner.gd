@@ -17,6 +17,7 @@ var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
 
 # Signals
 signal enemy_spawned
+signal enemy_spawned_with_ref
 signal enemy_died
 
 func _ready():
@@ -79,6 +80,7 @@ func spawn_enemy(_enemy_data: EnemyData) -> void:
 
 	configure_enemy_pathing(new_enemy)
 	enemy_spawned.emit()
+	enemy_spawned_with_ref.emit(new_enemy)
 
 func configure_enemy_pathing(enemy: Enemy) -> void:
 	# Create new PathFollow2D + RemoteTransform2D for enemy to follow EnemyPath with

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://wksrm8dx51sh"]
+
+[ext_resource type="Script" uid="uid://t377p3mdag50" path="res://scripts/enemies/coin_drop.gd" id="1_wk5kd"]
+[ext_resource type="Texture2D" uid="uid://c01agh3yt3cka" path="res://assets/art/sprites/spr_coin.png" id="2_ddb0w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vraoe"]
+radius = 8.0
+
+[node name="CoinDrop" type="Area2D"]
+script = ExtResource("1_wk5kd")
+metadata/_custom_type_script = "uid://t377p3mdag50"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ddb0w")
+centered = false
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+z_index = 100
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_vraoe")

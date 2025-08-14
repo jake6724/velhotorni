@@ -210,7 +210,6 @@ func update_current_combat_data() -> void:
 	_leveled_range = data.attack_range * (1.0 + (range_level * RANGE_MODIFIER))
 	curr_damage = _leveled_damage + _damage_buff
 	curr_speed = _leveled_speed + _speed_buff
-	print(data.tower_name," - curr_speed: ", curr_speed)
 	curr_range = _leveled_range + _range_buff
 	update_preview_combat_data()
 

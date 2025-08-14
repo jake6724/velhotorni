@@ -4,6 +4,7 @@ extends Node2D
 @onready var round_info: RoundInfo = $UI/RoundInfo
 @onready var pause_menu: PauseMenu = $UI/PauseMenu
 @onready var player_controller: PlayerController = %PlayerController
+@onready var coin_drop_manager: CoinDropManager = %CoinDropManager
 
 func _ready():
 	# Configure with data from LevelManager
@@ -18,6 +19,9 @@ func _ready():
 
 	# Configure PlayerController
 	player_controller.setup()
+
+	# Configure CoinDrop Manager
+	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"):
