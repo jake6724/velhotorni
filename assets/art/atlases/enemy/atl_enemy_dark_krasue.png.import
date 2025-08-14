@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1wklbtqaouya"
-path="res://.godot/imported/atl_enemy_dark_ghoul.png-8909c4f6afc9ef04a14e29e606eaa81e.ctex"
+uid="uid://8y31xggs5m2x"
+path="res://.godot/imported/atl_enemy_dark_krasue.png-07e68a6aab1b3c5445f93de63556684e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/atlases/enemy/atl_enemy_dark_ghoul.png"
-dest_files=["res://.godot/imported/atl_enemy_dark_ghoul.png-8909c4f6afc9ef04a14e29e606eaa81e.ctex"]
+source_file="res://assets/art/atlases/enemy/atl_enemy_dark_krasue.png"
+dest_files=["res://.godot/imported/atl_enemy_dark_krasue.png-07e68a6aab1b3c5445f93de63556684e.ctex"]
 
 [params]
 

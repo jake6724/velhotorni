@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://dcgsh3oncfpfm"]
+
+[ext_resource type="Texture2D" uid="uid://8y31xggs5m2x" path="res://assets/art/atlases/enemy/atl_enemy_dark_krasue.png" id="1_84k60"]
+[ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="2_schxq"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="3_urnaj"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("3_urnaj")
+size = 1
+element = 5
+strong_against_element = 0
+weak_against_element = 4
+health = 100.0
+speed = 30.0
+damage = 1
+atlas = ExtResource("1_84k60")
+explosion_sfx = ExtResource("2_schxq")
+cc_multiplier = 1.5
+knockback_multiplier = 1.5
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"
