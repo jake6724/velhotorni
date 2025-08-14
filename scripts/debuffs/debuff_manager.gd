@@ -7,9 +7,11 @@ extends Node2D
 const KNOCKBACK_INCREMENT: float = 0.1
 
 var cc_timer: Timer = Timer.new()
-var cc_cooldown: float = .1
-var cc_cooldown_increment: float = .05
 var can_cc: bool = true
+var stun_cooldown: float = .1
+var stun_cooldown_increment: float = .05
+var freeze_cooldown: float = .5
+var freeze_cooldown_increment: float = .25 
 
 var can_knockback = true
 var knockback_reset_distance: float
@@ -94,9 +96,17 @@ func set_can_cc(_data: DebuffData) -> void:
 		if _data.type == Debuff.Type.FREEZE or _data.type == Debuff.Type.STUN:
 			can_cc = false
 
-func start_cc_cooldown() -> void:
-	cc_timer.start(cc_cooldown)
-	cc_cooldown += cc_cooldown_increment
+func start_cc_cooldown(_debuff_type: Debuff.Type) -> void:
+	var _cd: float
+	match _debuff_type:
+		Debuff.Type.STUN: 
+			cc_timer.start(stun_cooldown)
+			stun_cooldown += stun_cooldown_increment
+
+		Debuff.Type.FREEZE:
+			cc_timer.start(freeze_cooldown)
+			freeze_cooldown += freeze_cooldown_increment
+		_: pass
 
 func on_cc_timer_timeout() -> void:
 	can_cc = true
