@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://dchwryr6e5jhv"]
+
+[ext_resource type="Resource" path="res://data/enemies/enemy_data_dark_krasue.tres" id="1_nahc6"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_ghswo"]
+
+[resource]
+script = ExtResource("2_ghswo")
+enemy_data = ExtResource("1_nahc6")
+delay = 0.5
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"
