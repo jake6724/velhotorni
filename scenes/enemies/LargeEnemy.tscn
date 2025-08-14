@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://7whhtl0yo72s"]
+[gd_scene load_steps=21 format=3 uid="uid://7whhtl0yo72s"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_nrfk0"]
 [ext_resource type="Texture2D" uid="uid://dai8bwe40k3wj" path="res://assets/art/atlases/enemy/atl_enemy_light_kusekuse.png" id="2_phgce"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://04i8ln0m18xc" path="res://assets/art/sprites/ui/spr_ui_weak.png" id="6_vktg2"]
 [ext_resource type="Script" uid="uid://bk2472hmw8gj8" path="res://scripts/debuffs/debuff_manager.gd" id="7_06uup"]
 [ext_resource type="Texture2D" uid="uid://hnxttmgepy4x" path="res://assets/placeholders/enemy_placeholder.png" id="8_phgce"]
+[ext_resource type="Script" uid="uid://bk0wvciq3qs4s" path="res://scripts/boons/boon_area.gd" id="9_vubms"]
+[ext_resource type="Script" uid="uid://dvux67kw0w7d0" path="res://scripts/boons/boon_manager.gd" id="10_sfnwf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xk6ri"]
 radius = 8.0
@@ -170,6 +172,13 @@ _data = {
 &"walk": SubResource("Animation_jsdvy")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vktg2"]
+resource_local_to_scene = true
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_06uup"]
+resource_local_to_scene = true
+
 [node name="BigEnemy" type="Area2D"]
 script = ExtResource("1_nrfk0")
 metadata/_custom_type_script = "uid://dn6bxxa2tg45m"
@@ -229,3 +238,27 @@ visible = false
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("8_phgce")
+
+[node name="BoonArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 64
+script = ExtResource("9_vubms")
+metadata/_custom_type_script = "uid://bk0wvciq3qs4s"
+
+[node name="BoonCollider" type="CollisionShape2D" parent="BoonArea"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_vktg2")
+debug_color = Color(1.61238e-06, 0.650282, 0.102136, 0.42)
+
+[node name="BoonManager" type="Node" parent="."]
+script = ExtResource("10_sfnwf")
+metadata/_custom_type_script = "uid://dvux67kw0w7d0"
+
+[node name="BoonReceiveArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="BoonReceiveCollider" type="CollisionShape2D" parent="BoonReceiveArea"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_06uup")
+debug_color = Color(0.561146, 0.559576, 0, 0.42)
