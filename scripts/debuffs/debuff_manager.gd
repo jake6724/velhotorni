@@ -4,9 +4,11 @@ extends Node2D
 
 @export var knockback_multiplier: float # Set by enemy
 @export var cc_multiplier: float # Set by enemy
+const KNOCKBACK_INCREMENT: float = 0.1
 
 var cc_timer: Timer = Timer.new()
-var cc_cooldown: float
+var cc_cooldown: float = .1
+var cc_cooldown_increment: float = .05
 var can_cc: bool = true
 
 var can_knockback = true
@@ -84,24 +86,26 @@ func create_debuff(_data: DebuffData) -> void:
 	add_new_debuff.emit(new_debuff)
 	new_debuff.call_deferred("start_debuff")
 
-	start_cc_cooldown(_data)
+	set_can_cc(_data)
 	set_knockback_reset_distance(_data)
 
-func start_cc_cooldown(_data: DebuffData) -> void:
-	# Only set a new cooldown if not already CC'd
+func set_can_cc(_data: DebuffData) -> void:
 	if can_cc:
 		if _data.type == Debuff.Type.FREEZE or _data.type == Debuff.Type.STUN:
 			can_cc = false
-			cc_cooldown = _data.total_duration * cc_multiplier
-			cc_timer.start(cc_cooldown)
+
+func start_cc_cooldown() -> void:
+	cc_timer.start(cc_cooldown)
+	cc_cooldown += cc_cooldown_increment
+
+func on_cc_timer_timeout() -> void:
+	can_cc = true
 
 func set_knockback_reset_distance(_data) -> void:
 	if can_knockback and _data.type == Debuff.Type.KNOCKBACK:
 		can_knockback = false
 		knockback_reset_distance = (enemy_progress - _data.modified_value) + (_data.modified_value * knockback_multiplier)
-
-func on_cc_timer_timeout() -> void:
-	can_cc = true
+		# knockback_multiplier += KNOCKBACK_INCREMENT
 
 func check_knockback_reset_distance_reached(progress: float) -> void:
 	if not can_knockback:

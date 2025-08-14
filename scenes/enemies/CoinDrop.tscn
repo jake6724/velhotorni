@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c01agh3yt3cka" path="res://assets/art/sprites/spr_coin.png" id="2_ddb0w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vraoe"]
-radius = 8.0
+radius = 5.0
 
 [node name="CoinDrop" type="Area2D"]
 collision_layer = 1024

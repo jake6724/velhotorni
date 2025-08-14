@@ -11,8 +11,15 @@ components that could handle their own update functionality
 @onready var range_button: Button = %RangeButton
 @onready var special_button: Button = %SpecialButton
 
+@onready var damage: NinePatchRect = %Damage
+@onready var speed: NinePatchRect = %Speed
+@onready var range: NinePatchRect = %Range
+@onready var special: NinePatchRect = %Special
+
 @onready var specialize_button: Button = %SpecializeButton
 @onready var specialize: NinePatchRect = %Specialize
+
+@onready var close: NinePatchRect = %Close
 @onready var close_button: Button = %CloseButton
 
 @onready var current_damage_label: Label = %CurrentDamageLabel
@@ -101,6 +108,27 @@ func _ready():
 	level_bar.mouse_entered.connect(update_description.bind(ui_text.level_hovered))
 	level_bar.mouse_exited.connect(clear_description)
 
+	# Connect highlighting
+	damage.mouse_entered.connect(highlight_ui_element.bind(damage))
+	damage.mouse_exited.connect(un_highlight_ui_element.bind(damage))
+	speed.mouse_entered.connect(highlight_ui_element.bind(speed))
+	speed.mouse_exited.connect(un_highlight_ui_element.bind(speed))
+	range.mouse_entered.connect(highlight_ui_element.bind(range))
+	range.mouse_exited.connect(un_highlight_ui_element.bind(range))
+	special.mouse_entered.connect(highlight_ui_element.bind(special))
+	special.mouse_exited.connect(un_highlight_ui_element.bind(special))
+
+	target_left_button.mouse_entered.connect(highlight_ui_element.bind(target_left_button))
+	target_left_button.mouse_exited.connect(un_highlight_ui_element.bind(target_left_button))
+	target_right_button.mouse_entered.connect(highlight_ui_element.bind(target_right_button))
+	target_right_button.mouse_exited.connect(un_highlight_ui_element.bind(target_right_button))
+
+	close.mouse_entered.connect(highlight_ui_element.bind(close))
+	close.mouse_exited.connect(un_highlight_ui_element.bind(close))
+
+	specialize.mouse_entered.connect(highlight_ui_element.bind(specialize))
+	specialize.mouse_exited.connect(un_highlight_ui_element.bind(specialize))
+
 func update_stats(player_gold: int = 0) -> void:
 	current_damage_label.text = str(snappedf(tower.curr_damage,.01))
 	upgraded_damage_label.text = str(snappedf(tower.preview_damage, .01))
@@ -162,7 +190,6 @@ func update_buff_stats() -> void:
 		else:
 			upgraded_special_label.hide()
 			special_pointer_icon.hide()
-
 
 func update_level_labels() -> void:
 	if tower.level < 12:
@@ -274,3 +301,9 @@ func update_range_level_arrow() -> void:
 
 func update_special_level_arrow() -> void:
 	special_level_arrow.texture.region = Rect2((8 * tower.special_level), 0, 8, 0)
+
+func highlight_ui_element(ui_element: Control) -> void:
+	ui_element.modulate = Color(Constants.ui_color_select)
+
+func un_highlight_ui_element(ui_element: Control) -> void:
+	ui_element.modulate = Color.WHITE

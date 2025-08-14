@@ -5,7 +5,9 @@ extends Node2D
 @onready var magnet_area: Area2D = $MagnetArea
 
 var magnetized_coins: Array[CoinDrop] = []
-const MAGNET_SPEED: float = 125
+const MAGNET_SPEED: float = 300
+
+signal coin_collected
 
 func _ready():
 	collect_area.area_entered.connect(on_collect_area_entered)
@@ -28,7 +30,9 @@ func on_collect_area_entered(intruder) -> void:
 		if index != -1:
 			magnetized_coins.remove_at(magnetized_coins.find(coin))
 		
+		coin_collected.emit()
 		coin.queue_free()
+		
 
 func on_magnet_area_entered(intruder) -> void:
 	var coin: CoinDrop = intruder as CoinDrop

@@ -5,6 +5,7 @@ extends Node2D
 @onready var tower_menu: TowerMenu = $UI/TowerMenu
 @onready var tower_upgrade_menu: TowerUpgradeMenu = $UI/TowerUpgradeMenu
 @onready var tower_specialize_menu: TowerSpecializeMenu = $UI/TowerSpecializeMenu
+@onready var coin_collector: CoinCollector = $CoinCollector
 
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var tower_to_place: Tower = null
@@ -59,6 +60,9 @@ func _ready():
 	# Connect to WaveManager
 	WaveManager.wave_completed.connect(on_wave_complete)
 	WaveManager.wave_failed.connect(on_wave_failed)
+
+	# Connect to CoinCollector
+	coin_collector.coin_collected.connect(on_coin_collected)
 
 func setup():
 	gold = LevelManager.active_level.initial_gold
@@ -233,6 +237,9 @@ func play_tower_select_sfx(element: Constants.Element) -> void:
 		_: pass # TODO: Update with more sfx, maybe have the tower paly this? 
 
 func on_enemy_died():
+	pass
+
+func on_coin_collected():
 	gold += 1
 
 func set_checkpoints() -> void:
@@ -317,7 +324,6 @@ func on_tower_priority_changed(priority: Tower.TargetPriority):
 		tower_to_upgrade.target_priority = priority
 		tower_upgrade_menu.set_target_priority_data(tower_to_upgrade.target_priority)
 		tower_upgrade_menu.update_stats(gold)
-
 # func _draw():	
 # 	draw_dashed_line(Vector2.ZERO, get_global_mouse_position(), Color.GREEN, 10)
 # 	draw_dashed_line(Vector2.ZERO, get_global_mouse_position(), Color.WHITE, 5)

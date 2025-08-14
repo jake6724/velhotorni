@@ -34,6 +34,7 @@ TowerGlobalData="*res://scripts/singletons/tower_global_data.gd"
 
 [debug]
 
+gdscript/warnings/shadowed_global_identifier=0
 gdscript/warnings/integer_division=0
 gdscript/warnings/narrowing_conversion=0
 

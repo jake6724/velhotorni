@@ -1,6 +1,8 @@
 class_name CoinDropManager
 extends Node
 
+## Manages all of the inidividual coin drops. Does not handle collection, see coin_collector.gd
+
 var coin_drop_scene: PackedScene = preload("res://scenes/enemies/CoinDrop.tscn")
 const JITTER_MIN: float = -20
 const JITTER_MAX: float = 20
@@ -24,8 +26,17 @@ func _physics_process(delta):
 			if coin.countdown > 0:
 				if not coin.destination_reached:
 					coin.global_position += coin.destination_direction * coin.speed * delta
-					if abs(coin.global_position.distance_to(coin.destination)) < 1:
+					if abs(coin.global_position - coin.destination) < Vector2(1,1) or abs(coin.global_position - coin.destination) > Vector2(25,25):
 						coin.destination_reached = true
+					
+				if coin.countdown < coin.blink_start:
+					if coin.blink_checkpoint == 0.0:
+						coin.blink_checkpoint = coin.countdown
+
+					if coin.countdown <= (coin.blink_checkpoint - coin.blink_rate):
+						coin.visible = not coin.visible
+						coin.blink_checkpoint = coin.countdown
+						coin.blink_rate = coin.blink_rate - (coin.blink_rate * coin.blink_rate_multiplier)
 			else:
 				coin.queue_free()
 

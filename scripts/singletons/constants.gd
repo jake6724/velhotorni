@@ -8,6 +8,9 @@ const FAST_FORWARD_SPEED: float = 20.0
 
 const CELL_SIZE: int = 16
 
+const ui_color_base: String = "#adb5bd"
+const ui_color_select: String = "#98a8f8"
+
 const TOWER_PRICES: Dictionary[Constants.Element, int] = {
 	Element.FIRE: 50,
 	Element.WIND: 55,

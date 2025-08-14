@@ -195,12 +195,14 @@ func on_debuff_apply_freeze() -> void:
 
 func on_debuff_remove_freeze() -> void:
 	is_frozen = false
+	debuff_manager.start_cc_cooldown()
 
 func on_debuff_apply_stun() -> void:
 	is_stunned = true
 
 func on_debuff_remove_stun() -> void:
 	is_stunned = false
+	debuff_manager.start_cc_cooldown()
 
 func on_debuff_apply_burn(_value, _element) -> void:
 	take_damage(_value, _element)
