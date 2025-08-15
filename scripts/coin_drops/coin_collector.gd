@@ -33,7 +33,6 @@ func on_collect_area_entered(intruder) -> void:
 		coin_collected.emit()
 		coin.queue_free()
 		
-
 func on_magnet_area_entered(intruder) -> void:
 	var coin: CoinDrop = intruder as CoinDrop
 	if coin:

@@ -8,6 +8,9 @@ const JITTER_MIN: float = -20
 const JITTER_MAX: float = 20
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+func _ready():
+	WaveManager.wave_failed.connect(on_wave_failed)
+
 func spawn_coin_drop(_global_pos) -> void:
 	var coin: CoinDrop = coin_drop_scene.instantiate()
 	add_child(coin)
@@ -45,3 +48,9 @@ func calc_destination(_global_pos) -> Vector2:
 	var jy: float = rng.randf_range(JITTER_MIN, JITTER_MAX)
 	var jitter_offset: Vector2 = Vector2(jx, jy)
 	return _global_pos + jitter_offset
+
+func on_wave_failed() -> void:
+	for child in get_children():
+		var coin: CoinDrop = child as CoinDrop
+		if coin:
+			coin.queue_free()

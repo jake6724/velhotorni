@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c6gn0gwhvt2he" path="res://scripts/main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dmftkyu1m0r7n" path="res://scenes/ui/RoundInfo.tscn" id="3_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://btulqisr6vlgj" path="res://scenes/player/PlayerController.tscn" id="4_rarhs"]
-[ext_resource type="Script" uid="uid://gu8su5txi8b8" path="res://scripts/enemies/coin_drop_manager.gd" id="5_c01mt"]
+[ext_resource type="Script" uid="uid://gu8su5txi8b8" path="res://scripts/coin_drops/coin_drop_manager.gd" id="5_c01mt"]
 [ext_resource type="PackedScene" uid="uid://cyqs2ueeu4k80" path="res://scenes/ui/PauseMenu.tscn" id="5_vcsgt"]
 
 [node name="Main" type="Node2D"]

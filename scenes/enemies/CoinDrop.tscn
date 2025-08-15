@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://wksrm8dx51sh"]
 
-[ext_resource type="Script" uid="uid://t377p3mdag50" path="res://scripts/enemies/coin_drop.gd" id="1_wk5kd"]
+[ext_resource type="Script" uid="uid://t377p3mdag50" path="res://scripts/coin_drops/coin_drop.gd" id="1_wk5kd"]
 [ext_resource type="Texture2D" uid="uid://c01agh3yt3cka" path="res://assets/art/sprites/spr_coin.png" id="2_ddb0w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vraoe"]

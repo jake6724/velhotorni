@@ -11,7 +11,7 @@ signal base_explosion_sfx_complete
 var sfxs: Dictionary[String, AudioStreamOggVorbis] = {
 	"fire_shot": preload("res://assets/audio/sfx/Fire_Shot.ogg"),
 	"water_shot": preload("res://assets/audio/sfx/Water_Shot.ogg"),
-	"wind_shot": preload("res://assets/audio/sfx/wind_Shot .ogg"),
+	"wind_shot": preload("res://assets/audio/sfx/Wind_Shot.ogg"),
 	"go": preload("res://assets/audio/sfx/Go_2.ogg"),
 	"fire_select": preload("res://assets/audio/sfx/Fire_Selection.ogg"),
 	"wind_select": preload("res://assets/audio/sfx/Wind_Selection.ogg"),

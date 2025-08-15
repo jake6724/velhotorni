@@ -3,6 +3,7 @@ extends Bullet
 
 func _physics_process(_delta):
 	if is_active:
+		scale = Vector2(1.5, 1.5)
 		is_active = false
 		ap.play("pulse")
 

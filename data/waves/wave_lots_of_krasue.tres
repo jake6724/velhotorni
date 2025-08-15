@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=4 format=3 uid="uid://de1v4aby50v21"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_awvnn"]
+[ext_resource type="Resource" uid="uid://bwulu1o4kofy2" path="res://data/spawn/spawn_dark_krasue_1.tres" id="2_6a6u2"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_k4y0v"]
+
+[resource]
+script = ExtResource("2_k4y0v")
+data = Array[ExtResource("1_awvnn")]([ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2"), ExtResource("2_6a6u2")])
+reward = 0.0
+metadata/_custom_type_script = "uid://cskry1sw3vqba"
