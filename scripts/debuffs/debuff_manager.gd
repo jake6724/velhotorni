@@ -105,7 +105,7 @@ func on_freeze_timer_timeout() -> void:
 
 func set_knockback_reset_distance(_data) -> void:
 	print("current progress: ", enemy_progress)
-	knockback_reset_distance = (enemy_progress + (knockback_reset_distance_interval * times_knocked_back)) * knockback_multiplier
+	knockback_reset_distance = enemy_progress + ((knockback_reset_distance_interval * times_knocked_back) * knockback_multiplier)
 	print("knockback_reset_distance: ", knockback_reset_distance)
 	times_knocked_back += 1
 
