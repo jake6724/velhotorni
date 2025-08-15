@@ -7,7 +7,7 @@ var freeze_timer: Timer = Timer.new()
 
 var stun_cooldown: float = .1
 var can_stun: bool = true
-const STUN_COOLDOWN_INCREMENT: float = .05
+const STUN_COOLDOWN_INCREMENT: float = .1
 
 var freeze_cooldown: float = .5
 var can_freeze: bool = true
@@ -26,6 +26,9 @@ var enemy_progress: float:
 
 signal add_new_debuff
 signal remove_active_debuff
+
+func _process(delta):
+	print(can_stun)
 
 func _ready():
 	# Configure Cooldown Timers
@@ -86,9 +89,9 @@ func check_can_cc(_data: DebuffData) -> bool:
 func start_cc_cooldown(_debuff_type: Debuff.Type) -> void:
 	match _debuff_type:
 		Debuff.Type.STUN: 
+			print("Starting stun cooldown: ", stun_cooldown)
 			stun_timer.start(stun_cooldown)
 			stun_cooldown += STUN_COOLDOWN_INCREMENT
-			print("Stun cooldown: ", stun_cooldown)
 
 		Debuff.Type.FREEZE:
 			freeze_timer.start(freeze_cooldown)
@@ -96,6 +99,7 @@ func start_cc_cooldown(_debuff_type: Debuff.Type) -> void:
 		_: pass
 
 func on_stun_timer_timeout() -> void:
+	print("Stun complete")
 	can_stun = true
 
 func on_freeze_timer_timeout() -> void:
