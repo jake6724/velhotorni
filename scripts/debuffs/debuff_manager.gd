@@ -104,15 +104,12 @@ func on_freeze_timer_timeout() -> void:
 	can_freeze = true
 
 func set_knockback_reset_distance(_data) -> void:
-	print("current progress: ", enemy_progress)
 	knockback_reset_distance = enemy_progress + ((knockback_reset_distance_interval * times_knocked_back) * knockback_multiplier)
-	print("knockback_reset_distance: ", knockback_reset_distance)
 	times_knocked_back += 1
 
 func check_knockback_reset_distance_reached(progress: float) -> void:
 	if not can_knockback:
 		if progress >= knockback_reset_distance:
-			print(knockback_reset_distance, " knockback distance reached, progress = ", progress)
 			can_knockback = true
 
 func check_debuff_type_present(type: Debuff.Type) -> bool:
