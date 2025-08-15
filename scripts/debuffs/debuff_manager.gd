@@ -88,6 +88,7 @@ func start_cc_cooldown(_debuff_type: Debuff.Type) -> void:
 		Debuff.Type.STUN: 
 			stun_timer.start(stun_cooldown)
 			stun_cooldown += STUN_COOLDOWN_INCREMENT
+			print("Stun cooldown: ", stun_cooldown)
 
 		Debuff.Type.FREEZE:
 			freeze_timer.start(freeze_cooldown)
