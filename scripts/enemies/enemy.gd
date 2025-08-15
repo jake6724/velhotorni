@@ -246,7 +246,6 @@ func on_boon_triggered(boon: Boon) -> void:
 			speed += (data.speed * boon.value)
 		Boon.Type.DAMAGE:
 			damage += (data.damage * boon.value)
-			print("Booned damage: ", damage)
 		Boon.Type.STEALTH:
 			collider.set_deferred("disabled", true)
 			sprite.modulate.a = .65
@@ -261,7 +260,6 @@ func on_boon_expired(boon: Boon) -> void:
 			speed -= (data.speed * boon.value)
 		Boon.Type.DAMAGE:
 			damage -= (data.damage * boon.value)
-			print("Reduced damage: ", damage)
 		Boon.Type.STEALTH:
 			sprite.modulate.a = 1
 			collider.set_deferred("disabled", false)

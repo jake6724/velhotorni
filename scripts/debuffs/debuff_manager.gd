@@ -89,7 +89,6 @@ func check_can_cc(_data: DebuffData) -> bool:
 func start_cc_cooldown(_debuff_type: Debuff.Type) -> void:
 	match _debuff_type:
 		Debuff.Type.STUN: 
-			print("Starting stun cooldown: ", stun_cooldown)
 			stun_timer.start(stun_cooldown)
 			stun_cooldown += STUN_COOLDOWN_INCREMENT
 
@@ -99,7 +98,6 @@ func start_cc_cooldown(_debuff_type: Debuff.Type) -> void:
 		_: pass
 
 func on_stun_timer_timeout() -> void:
-	print("Stun complete")
 	can_stun = true
 
 func on_freeze_timer_timeout() -> void:
@@ -107,11 +105,13 @@ func on_freeze_timer_timeout() -> void:
 
 func set_knockback_reset_distance(_data) -> void:
 	knockback_reset_distance = (enemy_progress + (knockback_reset_distance_interval * times_knocked_back)) * knockback_multiplier
+	print("knockback_reset_distance: ", knockback_reset_distance)
 	times_knocked_back += 1
 
 func check_knockback_reset_distance_reached(progress: float) -> void:
 	if not can_knockback:
 		if progress >= knockback_reset_distance:
+			print(knockback_reset_distance, "passed, progress = ", progress)
 			can_knockback = true
 
 func check_debuff_type_present(type: Debuff.Type) -> bool:
