@@ -15,6 +15,9 @@ func _init(_data: DebuffData) -> void:
 func _ready():
 	add_child(total_timer)
 	add_child(repeat_timer)
+
+	total_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+
 	total_timer.timeout.connect(on_total_timer_timeout)
 	repeat_timer.timeout.connect(on_repeat_timer_timeout)
 
