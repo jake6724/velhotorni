@@ -27,17 +27,16 @@ var enemy_progress: float:
 signal add_new_debuff
 signal remove_active_debuff
 
-# func _process(delta):
-# 	print(can_stun)
-
 func _ready():
 	# Configure Cooldown Timers
 	add_child(stun_timer)
 	add_child(freeze_timer)
 	stun_timer.one_shot = true
+	freeze_timer.one_shot = true
+	stun_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	freeze_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	stun_timer.timeout.connect(on_stun_timer_timeout)
 	freeze_timer.timeout.connect(on_freeze_timer_timeout)
-
 
 func add_debuff(new_debuff_data: DebuffData) -> void:
 	if check_can_cc(new_debuff_data):
