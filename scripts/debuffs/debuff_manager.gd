@@ -34,6 +34,7 @@ func _ready():
 	# Configure Cooldown Timers
 	add_child(stun_timer)
 	add_child(freeze_timer)
+	stun_timer.one_shot = true
 	stun_timer.timeout.connect(on_stun_timer_timeout)
 	freeze_timer.timeout.connect(on_freeze_timer_timeout)
 
