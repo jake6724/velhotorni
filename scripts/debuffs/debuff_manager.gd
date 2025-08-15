@@ -27,8 +27,8 @@ var enemy_progress: float:
 signal add_new_debuff
 signal remove_active_debuff
 
-func _process(delta):
-	print(can_stun)
+# func _process(delta):
+# 	print(can_stun)
 
 func _ready():
 	# Configure Cooldown Timers
