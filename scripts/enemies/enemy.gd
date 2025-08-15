@@ -74,6 +74,7 @@ func _ready():
 
 	# Configure DebuffManager
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
+	debuff_manager.knockback_multiplier = data.knockback_multiplier
 
 	# Configure Boons
 	if data.boon_data:
@@ -189,6 +190,7 @@ func on_debuff_remove_slow() -> void:
 	slow_percent = 0.0
 
 func on_debuff_apply_freeze() -> void:
+
 	is_frozen = true
 
 func on_debuff_remove_freeze() -> void:
