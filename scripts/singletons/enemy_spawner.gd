@@ -30,6 +30,9 @@ func _ready():
 	WaveManager.wave_failed.connect(reset)
 	WaveManager.all_waves_completed.connect(reset)
 
+# func _physics_process(_delta):
+# 	sort_enemies_z_index_by_progress()
+
 ## Called by LevelManager.
 func configure_level(active_level: LevelEnvironment):
 	active_enemies = []
@@ -87,6 +90,7 @@ func spawn_enemy(_enemy_data: EnemyData) -> void:
 	configure_enemy_pathing(new_enemy)
 	enemy_spawned.emit()
 	enemy_spawned_with_ref.emit(new_enemy)
+	# sort_enemies_z_index()
 
 func configure_enemy_pathing(enemy: Enemy) -> void:
 	# Create new PathFollow2D + RemoteTransform2D for enemy to follow EnemyPath with
@@ -108,3 +112,13 @@ func remove_all_enemies() -> void:
 	for child in get_children():
 		if child is Enemy:
 			child.queue_free()
+
+func sort_enemies_z_index_by_progress() -> void:
+	var offset: int = active_enemies.size()
+	active_enemies.sort_custom(compare_by_progress_ratio)
+	for enemy: Enemy in active_enemies:
+		enemy.sprite.z_index = offset
+		offset -= 1
+
+func compare_by_progress_ratio(enemy_a: Enemy, enemy_b: Enemy) -> bool:
+	return enemy_a.path_follow.progress_ratio > enemy_b.path_follow.progress_ratio

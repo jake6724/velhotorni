@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=4 format=3 uid="uid://ug83h80mgmk3"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_mgssu"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_sb2r2"]
+[ext_resource type="Resource" uid="uid://daypgtvog0225" path="res://data/spawn/spawn_fire_ghoul_half.tres" id="2_wa7fg"]
+
+[resource]
+script = ExtResource("2_sb2r2")
+data = Array[ExtResource("1_mgssu")]([ExtResource("2_wa7fg"), ExtResource("2_wa7fg"), ExtResource("2_wa7fg"), ExtResource("2_wa7fg"), ExtResource("2_wa7fg")])
+reward = 0.0
+metadata/_custom_type_script = "uid://cskry1sw3vqba"
