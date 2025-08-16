@@ -4,11 +4,11 @@ enum Element {
 	FIRE, WIND, WATER, EARTH, LIGHT, DARK, NONE,
 	LAVA, PLASMA, STORM, LIGHTNING, ICE, FLOOD, MUD, CRYSTAL, SPIRIT, SUN, CURSE, VOID}
 
-const FAST_FORWARD_SPEED: float = 2
+const FAST_FORWARD_SPEED: float = 20
 
 const CELL_SIZE: int = 16
 
-const ui_color_base: String = "#adb5bd"
+# const ui_color_base: String = "#adb5bd"
 const ui_color_select: String = "#98a8f8"
 
 const TOWER_PRICES: Dictionary[Constants.Element, int] = {

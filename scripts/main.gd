@@ -5,11 +5,15 @@ extends Node2D
 @onready var pause_menu: PauseMenu = $UI/PauseMenu
 @onready var player_controller: PlayerController = %PlayerController
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
+@onready var camera: Camera2D = $Camera2D
+
+var active_level: LevelEnvironment
 
 func _ready():
 	# Configure with data from LevelManager
 	LevelManager.configure_level(self)
-	add_child(LevelManager.active_level)
+	active_level = LevelManager.active_level
+	add_child(active_level)
 
 	# Configure other singletons
 	WorldGrid.configure_level(LevelManager.active_level)
@@ -22,6 +26,9 @@ func _ready():
 
 	# Configure CoinDrop Manager
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
+
+	# Configure Camera
+	active_level.base.damaged.connect(camera.apply_shake)
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"):

@@ -85,6 +85,7 @@ func _input(_event):
 	if Input.is_action_just_pressed("right_click"): # Clear tower to place
 		if tower_to_place:
 			tower_menu.show_placement_phase()
+			hide_tower_buff_ranges()
 			tower_to_place.queue_free()
 			tower_to_place = null
 
@@ -98,6 +99,8 @@ func create_tower(element: Constants.Element):
 	add_child(tower_to_place)
 	tower_to_place.initialize(element)
 	tower_to_place.modulate.a = .75
+
+	show_tower_buff_ranges()
 
 func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 	# Do not allow placement during combat, do not allow NONE type turrets to spawn
@@ -122,6 +125,8 @@ func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 			gold -= Constants.TOWER_PRICES[element]
 
 			play_tower_select_sfx(element)
+
+			hide_tower_buff_ranges()
 
 			selected_tower_element = Constants.Element.NONE
 			tower_menu.show_shop()
@@ -209,6 +214,14 @@ func on_wave_failed() -> void:
 func reset_towers() -> void:
 	for tower: Tower in active_towers:
 		tower.revert()
+
+func show_tower_buff_ranges() -> void:
+	for tower: Tower in active_towers:
+		tower.can_show_buff_range = true
+
+func hide_tower_buff_ranges() -> void:
+	for tower: Tower in active_towers:
+		tower.can_show_buff_range = false
 
 func on_tower_hovered(tower: Tower):
 	if not placement_enabled: # Only show transform sprites if in combat phase

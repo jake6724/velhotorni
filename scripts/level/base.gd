@@ -13,6 +13,7 @@ var health_checkpoint: int
 var max_health: int = 10
 
 signal destroyed
+signal damaged
 var is_alive: bool = true
 
 func _ready():
@@ -34,6 +35,7 @@ func _physics_process(_delta):
 func take_damage(damage_recieved: int) -> void:
 	health -= damage_recieved
 	update_health_label(health)
+	damaged.emit()
 	if is_alive and health <= 0:
 		die()
 

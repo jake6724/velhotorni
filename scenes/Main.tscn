@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://vb1cipw2nthp"]
+[gd_scene load_steps=7 format=3 uid="uid://vb1cipw2nthp"]
 
 [ext_resource type="Script" uid="uid://c6gn0gwhvt2he" path="res://scripts/main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dmftkyu1m0r7n" path="res://scenes/ui/RoundInfo.tscn" id="3_0bbpv"]
+[ext_resource type="Script" uid="uid://ckfb2xehi2wqu" path="res://scripts/player/player_camera.gd" id="3_c01mt"]
 [ext_resource type="PackedScene" uid="uid://btulqisr6vlgj" path="res://scenes/player/PlayerController.tscn" id="4_rarhs"]
 [ext_resource type="Script" uid="uid://gu8su5txi8b8" path="res://scripts/coin_drops/coin_drop_manager.gd" id="5_c01mt"]
 [ext_resource type="PackedScene" uid="uid://cyqs2ueeu4k80" path="res://scenes/ui/PauseMenu.tscn" id="5_vcsgt"]
@@ -11,6 +12,13 @@ script = ExtResource("1_0bbpv")
 
 [node name="PlayerController" parent="." instance=ExtResource("4_rarhs")]
 unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(1.18113, 0.710342)
+anchor_mode = 0
+script = ExtResource("3_c01mt")
+power = 2.0
+decay = 20.0
 
 [node name="CoinDropManager" type="Node" parent="."]
 unique_name_in_owner = true

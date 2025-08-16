@@ -1,53 +1,22 @@
 extends Camera2D
 
-var zoom_speed: float = 0.1
-var drag_sensitivity: float = 1.0
-var camera_move_speed: float = 35
-var target_zoom: Vector2 = Vector2(1.0, 1.0)
-var lerp_weight: float = .25
-var is_panning: bool = false
+@export var power: float
+@export var decay: float 
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var curr_power: float
 
-# # Decent values for real gameplay
-# # Bigger numbers, closer to ground
-# ## Smaller numbers, further out from ground
-# var zoom_min: Vector2 = Vector2(0.5, 0.5)
-# var zoom_max: Vector2 = Vector2(2, 2)
+func apply_shake() -> void:
+	curr_power = power
 
-# # Dev values
-var zoom_min: Vector2 = Vector2(0.1, 0.1)
-var zoom_max: Vector2 = Vector2(2, 2)
+func _process(delta):
+	if Input.is_action_just_pressed("x"):
+		apply_shake()
 
-# Consider moving to process
-# May get laggy
-func _physics_process(delta):
-	if zoom != target_zoom:
-		zoom = clamp(lerp(zoom, target_zoom, lerp_weight), zoom_min, zoom_max)
-
-	# WASD or arrow movement
-	var input_vector = Input.get_vector("move_camera_left", "move_camera_right", "move_camera_up", "move_camera_down")
-	if input_vector != Vector2(0,0):
-		is_panning = true
-		var new_camera_vector = (input_vector * camera_move_speed) / zoom
-		position += ((new_camera_vector * camera_move_speed) * delta)
+	if curr_power > .1:
+		curr_power = snappedf(lerpf(curr_power, 0, decay * delta), 0.01)
+		offset = get_random_offset()
 	else:
-		is_panning = false
+		offset = Vector2.ZERO
 
-func _input(event):
-
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			var new_zoom = zoom + Vector2(zoom_speed, zoom_speed) # Used to surpress "zoom cannot be zero" 
-			if new_zoom < zoom_max:
-				target_zoom += Vector2(zoom_speed, zoom_speed)
-			else:
-				target_zoom = zoom_max
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			var new_zoom = zoom - Vector2(zoom_speed, zoom_speed)
-			if new_zoom > zoom_min:
-				target_zoom -= Vector2(zoom_speed, zoom_speed)
-			else: 
-				target_zoom = zoom_min
-				
-	if not is_panning:
-		if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
-			position -= (event.relative * drag_sensitivity)
+func get_random_offset() -> Vector2:
+	return Vector2(rng.randf_range(-curr_power, curr_power), rng.randf_range(-curr_power, curr_power))
