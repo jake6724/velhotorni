@@ -9,9 +9,6 @@ func apply_shake() -> void:
 	curr_power = power
 
 func _process(delta):
-	if Input.is_action_just_pressed("x"):
-		apply_shake()
-
 	if curr_power > .1:
 		curr_power = snappedf(lerpf(curr_power, 0, decay * delta), 0.01)
 		offset = get_random_offset()

@@ -71,20 +71,28 @@ func create_debuff(_data: DebuffData) -> void:
 	new_debuff.call_deferred("start_debuff")
 
 func check_can_cc(_data: DebuffData) -> bool:
-	if _data.type == Debuff.Type.FREEZE and can_freeze:
-		can_freeze = false
-		return true
+	match _data.type:
+		Debuff.Type.FREEZE:
+			if can_freeze:
+				can_freeze = false
+				return true
+			else:
+				return false
+		Debuff.Type.STUN:
+			if can_stun:
+				can_stun = false
+				return true
+			else:
+				return false
+		Debuff.Type.KNOCKBACK:
+			if can_knockback:
+				can_knockback = false
+				set_knockback_reset_distance(_data)
+				return true
+			else:
+				return false
 
-	elif _data.type == Debuff.Type.STUN and can_stun:
-		can_stun = false
-		return true
-
-	elif _data.type == Debuff.Type.KNOCKBACK and can_knockback:
-		can_knockback = false
-		set_knockback_reset_distance(_data)
-		return true
-	
-	return false
+		_: return true
 
 func start_cc_cooldown(_debuff_type: Debuff.Type) -> void:
 	match _debuff_type:

@@ -19,6 +19,13 @@ extends Control
 @onready var progress: Label = %Progress
 @onready var fast_forward: TextureButton = %FastForward
 
+@onready var fire_price_label: Label = %FirePriceLabel
+@onready var wind_price_label: Label = %WindPriceLabel
+@onready var water_price_label: Label = %WaterPriceLabel
+@onready var earth_price_label: Label = %EarthPriceLabel
+@onready var light_price_label: Label = %LightPriceLabel
+@onready var dark_price_label: Label = %DarkPriceLabel
+
 @onready var left_tower_info_panel: TowerInfoPanel = %LeftTowerInfoPanel
 @onready var right_tower_info_panel: TowerInfoPanel = %RightTowerInfoPanel
 
@@ -52,6 +59,21 @@ var wave_number_duration: float = 1.0
 var level_number_timer: Timer = Timer.new()
 var level_number_duration: float = 2.0
 
+var opened: bool = true
+
+# func _input(_event):
+# 	if Input.is_action_just_pressed("x"):
+# 		if opened:
+# 			var tween: Tween = get_tree().create_tween()
+# 			await tween.tween_property(tower_buttons, "theme_override_constants/separation", -32, .25).finished
+# 			tower_buttons.hide()
+# 			opened = not opened
+# 		else:
+# 			tower_buttons.show()
+# 			var tween: Tween = get_tree().create_tween()
+# 			tween.tween_property(tower_buttons, "theme_override_constants/separation", 0, .25)
+# 			opened = not opened
+
 func _ready():
 	# Configure tower buttons
 	all_tower_buttons = [fire_button, water_button, wind_button, earth_button, light_button, dark_button]
@@ -75,6 +97,8 @@ func _ready():
 	level_number_timer.timeout.connect(on_level_number_timer_timeout)
 	level_number_timer.one_shot = true
 	add_child(level_number_timer)
+
+	set_price_labels()
 
 func hide_placement_phase() -> void:
 	tower_buttons.hide()
@@ -188,3 +212,11 @@ func show_tower_info_panel_shop(_tower_data: TowerData) -> void:
 
 func hide_tower_info_panel_shop() -> void:
 	left_tower_info_panel.hide()
+
+func set_price_labels() -> void:
+	fire_price_label.text = str(Constants.TOWER_PRICES[Constants.Element.FIRE])
+	wind_price_label.text = str(Constants.TOWER_PRICES[Constants.Element.WIND])
+	water_price_label.text = str(Constants.TOWER_PRICES[Constants.Element.WATER])
+	earth_price_label.text = str(Constants.TOWER_PRICES[Constants.Element.EARTH])
+	light_price_label.text = str(Constants.TOWER_PRICES[Constants.Element.LIGHT])
+	dark_price_label.text = str(Constants.TOWER_PRICES[Constants.Element.DARK])
