@@ -175,7 +175,7 @@ func attack() -> void:
 
 func spawn_bullet() -> void:
 	var new_bullet: Bullet = data.bullet.instantiate()
-	new_bullet.initialize(active_target, data.element, curr_damage, data.debuff_data, data.bullet_speed, data.attack_range)
+	new_bullet.initialize(active_target, data.base_element, curr_damage, data.debuff_data, data.bullet_speed, data.attack_range)
 	new_bullet.position += new_bullet._pos_offset
 	add_child(new_bullet)
 

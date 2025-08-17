@@ -4,6 +4,7 @@ extends Resource
 @export_category("Elements")
 ## The base element of the `Tower`. `Tower` will revert back to this after wave completes.
 @export var element: Constants.Element
+@export var base_element: Constants.Element
 ## The next element in the cycle from `element`. The `Tower` will transform into this element.
 # @export var specialize_1: Constants.Element
 # @export var specialize_2: Constants.Element

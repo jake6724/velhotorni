@@ -10,6 +10,7 @@
 [resource]
 script = ExtResource("2_o2pta")
 element = 17
+base_element = 5
 damage = 10.0
 speed = 0.25
 attack_range = 50.0

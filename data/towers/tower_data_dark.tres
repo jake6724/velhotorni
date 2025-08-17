@@ -11,6 +11,7 @@
 [resource]
 script = ExtResource("1_ioid6")
 element = 5
+base_element = 5
 damage = 10.0
 speed = 0.25
 attack_range = 30.0
