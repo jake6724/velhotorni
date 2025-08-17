@@ -91,7 +91,6 @@ func check_can_cc(_data: DebuffData) -> bool:
 				return true
 			else:
 				return false
-
 		_: return true
 
 func start_cc_cooldown(_debuff_type: Debuff.Type) -> void:
