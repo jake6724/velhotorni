@@ -7,11 +7,11 @@ var freeze_timer: Timer = Timer.new()
 
 var stun_cooldown: float = .1
 var can_stun: bool = true
-const STUN_COOLDOWN_INCREMENT: float = .1
+const STUN_COOLDOWN_INCREMENT: float = .06
 
 var freeze_cooldown: float = .5
 var can_freeze: bool = true
-const FREEZE_COOLDOWN_INCREMENT: float = .25 
+const FREEZE_COOLDOWN_INCREMENT: float = .2 
 
 var can_knockback = true
 var knockback_reset_distance: float
