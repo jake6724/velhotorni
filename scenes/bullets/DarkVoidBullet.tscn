@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://clm78jlieecpp" path="res://assets/art/atlases/bullet/atl_bullet_water_fish.png" id="1_hcg3i"]
 [ext_resource type="Script" uid="uid://bidlapkmguymx" path="res://scripts/bullets/piercing_bullet.gd" id="2_7itjb"]
-[ext_resource type="Resource" uid="uid://b0tiiq1idgyfd" path="res://data/bullets/bullet_data_dark_void.tres" id="3_7itjb"]
+[ext_resource type="Resource" uid="uid://colescdl2snaw" path="res://data/bullets/bullet_data_dark_void.tres" id="3_7itjb"]
 
 [sub_resource type="Animation" id="Animation_4norr"]
 length = 0.001
