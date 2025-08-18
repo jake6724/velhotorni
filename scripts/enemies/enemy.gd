@@ -137,7 +137,7 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 			die()
 
 func die() -> void:
-	print(Time.get_unix_time_from_system())
+	# print(Time.get_unix_time_from_system())
 	is_alive = false
 
 	# Give time for collision boons to be removed

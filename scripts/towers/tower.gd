@@ -38,7 +38,7 @@ var can_show_buff_range: bool:
 		can_show_buff_range = value
 		queue_redraw()
 
-var buff_range_transparency: float = .3
+var buff_range_transparency: float = .9
 var color_buff_range_indicator: String = "#94ffbd"
 
 # Combat Data
