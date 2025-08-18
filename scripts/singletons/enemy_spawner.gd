@@ -30,8 +30,8 @@ func _ready():
 	WaveManager.wave_failed.connect(reset)
 	WaveManager.all_waves_completed.connect(reset)
 
-# func _physics_process(_delta):
-# 	sort_enemies_z_index_by_progress()
+func _physics_process(_delta): # TODO: It would be great to not call this on tick
+	sort_enemies_z_index_by_progress()
 
 ## Called by LevelManager.
 func configure_level(active_level: LevelEnvironment):

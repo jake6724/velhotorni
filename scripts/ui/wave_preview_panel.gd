@@ -41,11 +41,9 @@ func get_all_wave_preview_data(active_level: LevelEnvironment):
 			Constants.Element.LIGHT: ((light_count / total_count) * 100),
 			Constants.Element.DARK: ((dark_count / total_count) * 100),
 		}
-		print(wave_results)
 		wave_previews.append(wave_results)
 
 func set_preview_labels(wave_index: int) -> void:
-	print("TEST!")
 	var data: Dictionary = get_wave_preview_data(wave_index)
 	fire_label.text = str(int(snappedf(data[Constants.Element.FIRE],1)))
 	wind_label.text = str(int(snappedf(data[Constants.Element.WIND],1)))

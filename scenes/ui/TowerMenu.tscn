@@ -149,6 +149,7 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_ur1ae")
+theme_override_font_sizes/font_size = 32
 text = "24-10"
 
 [node name="WavePreviewPanel" parent="MarginContainer/MarginContainer" instance=ExtResource("4_g5j4q")]

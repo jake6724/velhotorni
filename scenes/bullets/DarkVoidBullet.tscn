@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dj6idrhasxy8x"]
 
 [ext_resource type="Texture2D" uid="uid://clm78jlieecpp" path="res://assets/art/atlases/bullet/atl_bullet_water_fish.png" id="1_hcg3i"]
-[ext_resource type="Script" uid="uid://cpx7d6yvad41w" path="res://scripts/bullets/bullet.gd" id="1_kw00j"]
+[ext_resource type="Script" uid="uid://bidlapkmguymx" path="res://scripts/bullets/piercing_bullet.gd" id="2_7itjb"]
 [ext_resource type="Resource" uid="uid://b0tiiq1idgyfd" path="res://data/bullets/bullet_data_dark_void.tres" id="3_7itjb"]
 
 [sub_resource type="Animation" id="Animation_4norr"]
@@ -155,9 +155,9 @@ radius = 16.0
 texture = ExtResource("1_hcg3i")
 hframes = 4
 vframes = 2
-script = ExtResource("1_kw00j")
+script = ExtResource("2_7itjb")
 data = ExtResource("3_7itjb")
-metadata/_custom_type_script = "uid://cpx7d6yvad41w"
+metadata/_custom_type_script = "uid://bidlapkmguymx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
