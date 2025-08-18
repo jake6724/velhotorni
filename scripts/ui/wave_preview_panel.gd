@@ -1,5 +1,5 @@
-class_name WaveInfoPanel
-extends NinePatchRect 
+class_name WavePreviewPanel
+extends PanelContainer
 
 @onready var fire_label: Label = %FireLabel
 @onready var wind_label: Label = %WindLabel
@@ -45,8 +45,8 @@ func get_all_wave_preview_data(active_level: LevelEnvironment):
 		wave_previews.append(wave_results)
 
 func set_preview_labels(wave_index: int) -> void:
+	print("TEST!")
 	var data: Dictionary = get_wave_preview_data(wave_index)
-
 	fire_label.text = str(int(snappedf(data[Constants.Element.FIRE],1)))
 	wind_label.text = str(int(snappedf(data[Constants.Element.WIND],1)))
 	water_label.text = str(int(snappedf(data[Constants.Element.WATER],1)))

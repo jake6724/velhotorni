@@ -29,6 +29,8 @@ extends Control
 @onready var left_tower_info_panel: TowerInfoPanel = %LeftTowerInfoPanel
 @onready var right_tower_info_panel: TowerInfoPanel = %RightTowerInfoPanel
 
+@onready var wave_preview_panel: WavePreviewPanel = %WavePreviewPanel
+
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
  	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
 	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind.png"),
@@ -41,7 +43,7 @@ var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
 	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind_locked.png"),
-	Constants.Element.WATER: preload("res://assets/art/sprites/ui/spr_ui_tower_water_locked.png"),
+	Constants.Element.WATER: preload("res://assets/art/sprites/ui/spr_ui_tower_water_fish_locked.png"),
 	Constants.Element.EARTH: preload("res://assets/art/sprites/ui/spr_ui_tower_earth_locked.png"),
 	Constants.Element.LIGHT: preload("res://assets/art/sprites/ui/spr_ui_tower_light_locked.png"),
 	Constants.Element.DARK: preload("res://assets/art/sprites/ui/spr_ui_tower_dark_locked.png"),
@@ -61,18 +63,18 @@ var level_number_duration: float = 2.0
 
 var opened: bool = true
 
-# func _input(_event):
-# 	if Input.is_action_just_pressed("x"):
-# 		if opened:
-# 			var tween: Tween = get_tree().create_tween()
-# 			await tween.tween_property(tower_buttons, "theme_override_constants/separation", -32, .25).finished
-# 			tower_buttons.hide()
-# 			opened = not opened
-# 		else:
-# 			tower_buttons.show()
-# 			var tween: Tween = get_tree().create_tween()
-# 			tween.tween_property(tower_buttons, "theme_override_constants/separation", 0, .25)
-# 			opened = not opened
+func _input(_event):
+	if Input.is_action_just_pressed("x"):
+		if opened:
+			var tween: Tween = get_tree().create_tween()
+			await tween.tween_property(tower_buttons, "theme_override_constants/separation", -32, .25).finished
+			tower_buttons.hide()
+			opened = not opened
+		else:
+			tower_buttons.show()
+			var tween: Tween = get_tree().create_tween()
+			tween.tween_property(tower_buttons, "theme_override_constants/separation", 0, .25)
+			opened = not opened
 
 func _ready():
 	# Configure tower buttons
@@ -103,11 +105,13 @@ func _ready():
 func hide_placement_phase() -> void:
 	tower_buttons.hide()
 	wave_button.hide()
+	wave_preview_panel.hide()
 	fast_forward.show()
 
 func show_placement_phase() -> void:
 	tower_buttons.show()
 	wave_button.show()
+	wave_preview_panel.show()
 	fast_forward.hide()
 
 func hide_shop() -> void:
@@ -220,3 +224,6 @@ func set_price_labels() -> void:
 	earth_price_label.text = str(Constants.TOWER_PRICES[Constants.Element.EARTH])
 	light_price_label.text = str(Constants.TOWER_PRICES[Constants.Element.LIGHT])
 	dark_price_label.text = str(Constants.TOWER_PRICES[Constants.Element.DARK])
+
+func set_wave_preview(wave_index: int) -> void:
+	wave_preview_panel.set_preview_labels(wave_index)

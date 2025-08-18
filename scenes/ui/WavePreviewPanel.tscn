@@ -1,57 +1,52 @@
-[gd_scene load_steps=12 format=3 uid="uid://dl2jfi3hfgtdj"]
+[gd_scene load_steps=13 format=3 uid="uid://bqprjjk6xa3t6"]
 
-[ext_resource type="Script" uid="uid://celgbrmvc2054" path="res://scripts/ui/wave_info_panel.gd" id="1_5i6j5"]
-[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_qrg85"]
-[ext_resource type="Texture2D" uid="uid://b62ll37upwjx3" path="res://assets/art/sprites/ui/spr_ui_element_icons.png" id="3_era8b"]
-[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="4_b2xdc"]
-[ext_resource type="Texture2D" uid="uid://cys3s6kcc47k8" path="res://assets/art/sprites/ui/percent.png" id="4_era8b"]
+[ext_resource type="Script" uid="uid://cyau3v5m1skmx" path="res://scripts/ui/wave_preview_panel.gd" id="1_6pj70"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_3613h"]
+[ext_resource type="Texture2D" uid="uid://b62ll37upwjx3" path="res://assets/art/sprites/ui/spr_ui_element_icons.png" id="2_6ve7x"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="3_6pj70"]
+[ext_resource type="Texture2D" uid="uid://cys3s6kcc47k8" path="res://assets/art/sprites/ui/percent.png" id="4_tsw5n"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qq3wy"]
-atlas = ExtResource("3_era8b")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ve7x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pj70"]
+atlas = ExtResource("2_6ve7x")
 region = Rect2(10, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o0vwl"]
-atlas = ExtResource("3_era8b")
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsw5n"]
+atlas = ExtResource("2_6ve7x")
 region = Rect2(0, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o0qm0"]
-atlas = ExtResource("3_era8b")
+[sub_resource type="AtlasTexture" id="AtlasTexture_grkvx"]
+atlas = ExtResource("2_6ve7x")
 region = Rect2(0, 10, 9, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c5esy"]
-atlas = ExtResource("3_era8b")
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf8g8"]
+atlas = ExtResource("2_6ve7x")
 region = Rect2(10, 10, 9, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6igii"]
-atlas = ExtResource("3_era8b")
+[sub_resource type="AtlasTexture" id="AtlasTexture_coro5"]
+atlas = ExtResource("2_6ve7x")
 region = Rect2(20, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_itp2p"]
-atlas = ExtResource("3_era8b")
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n1vj"]
+atlas = ExtResource("2_6ve7x")
 region = Rect2(20, 10, 10, 10)
 
-[node name="WaveInfoPanel" type="NinePatchRect"]
-offset_left = 8.0
-offset_right = 232.0
-offset_bottom = 24.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("1_qrg85")
+[node name="WavePreviewPanel" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6ve7x")
+script = ExtResource("1_6pj70")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_3613h")
 region_rect = Rect2(1, 1, 30, 30)
-patch_margin_left = 11
-patch_margin_top = 10
+patch_margin_left = 10
+patch_margin_top = 8
 patch_margin_right = 10
 patch_margin_bottom = 11
-script = ExtResource("1_5i6j5")
-metadata/_custom_type_script = "uid://celgbrmvc2054"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -62,7 +57,6 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="Fire" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = -1
@@ -72,13 +66,13 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("AtlasTexture_qq3wy")
+texture = SubResource("AtlasTexture_6pj70")
 stretch_mode = 2
 
 [node name="FireLabel" type="Label" parent="MarginContainer/HBoxContainer/Fire"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_fonts/font = ExtResource("3_6pj70")
 theme_override_font_sizes/font_size = 8
 text = "100"
 
@@ -87,7 +81,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_era8b")
+texture = ExtResource("4_tsw5n")
 stretch_mode = 2
 
 [node name="Wind" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -100,13 +94,13 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("AtlasTexture_o0vwl")
+texture = SubResource("AtlasTexture_tsw5n")
 stretch_mode = 2
 
 [node name="WindLabel" type="Label" parent="MarginContainer/HBoxContainer/Wind"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_fonts/font = ExtResource("3_6pj70")
 theme_override_font_sizes/font_size = 8
 text = "50"
 
@@ -115,7 +109,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_era8b")
+texture = ExtResource("4_tsw5n")
 stretch_mode = 2
 
 [node name="Water" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -128,13 +122,13 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("AtlasTexture_o0qm0")
+texture = SubResource("AtlasTexture_grkvx")
 stretch_mode = 2
 
 [node name="WaterLabel" type="Label" parent="MarginContainer/HBoxContainer/Water"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_fonts/font = ExtResource("3_6pj70")
 theme_override_font_sizes/font_size = 8
 text = "50"
 
@@ -143,7 +137,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_era8b")
+texture = ExtResource("4_tsw5n")
 stretch_mode = 2
 
 [node name="Earth" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -156,13 +150,13 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("AtlasTexture_c5esy")
+texture = SubResource("AtlasTexture_wf8g8")
 stretch_mode = 2
 
 [node name="EarthLabel" type="Label" parent="MarginContainer/HBoxContainer/Earth"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_fonts/font = ExtResource("3_6pj70")
 theme_override_font_sizes/font_size = 8
 text = "50"
 
@@ -171,7 +165,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_era8b")
+texture = ExtResource("4_tsw5n")
 stretch_mode = 2
 
 [node name="Light" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -184,13 +178,13 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("AtlasTexture_6igii")
+texture = SubResource("AtlasTexture_coro5")
 stretch_mode = 2
 
 [node name="LightLabel" type="Label" parent="MarginContainer/HBoxContainer/Light"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_fonts/font = ExtResource("3_6pj70")
 theme_override_font_sizes/font_size = 8
 text = "50"
 
@@ -199,7 +193,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_era8b")
+texture = ExtResource("4_tsw5n")
 stretch_mode = 2
 
 [node name="Dark" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -212,13 +206,13 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("AtlasTexture_itp2p")
+texture = SubResource("AtlasTexture_2n1vj")
 stretch_mode = 2
 
 [node name="DarkLabel" type="Label" parent="MarginContainer/HBoxContainer/Dark"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_fonts/font = ExtResource("3_6pj70")
 theme_override_font_sizes/font_size = 8
 text = "50"
 
@@ -227,5 +221,5 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_era8b")
+texture = ExtResource("4_tsw5n")
 stretch_mode = 2

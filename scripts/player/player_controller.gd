@@ -64,12 +64,14 @@ func _ready():
 	# Connect to CoinCollector
 	coin_collector.coin_collected.connect(on_coin_collected)
 
-func setup():
+func setup(): # Active level has been set by the time main calls this method
 	gold = LevelManager.active_level.initial_gold
 	set_checkpoints()
 
 	tower_menu.show_level_number()
 	tower_menu.update_progress()
+	tower_menu.wave_preview_panel.get_all_wave_preview_data(LevelManager.active_level)
+	tower_menu.set_wave_preview(WaveManager.wave_index)
 
 func _process(_delta):
 	if tower_to_place:
@@ -191,6 +193,7 @@ func on_wave_complete() -> void:
 		tower_menu.show_placement_phase()
 		reset_towers()
 		tower_menu.update_progress()
+		tower_menu.set_wave_preview(WaveManager.wave_index)
 
 	set_checkpoints()
 
