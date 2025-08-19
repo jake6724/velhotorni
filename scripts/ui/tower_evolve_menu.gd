@@ -9,15 +9,15 @@ extends Control
 @onready var option_2_label: Label = %Option2Label
 @onready var option_1_desc: RichTextLabel = %Option1Desc
 @onready var option_2_desc: RichTextLabel = %Option2Desc
-@onready var option_1_select_label: Label = %Option1SelectLabel
-@onready var option_2_select_label: Label = %Option2SelectLabel
+# @onready var option_1_select_label: Label = %Option1SelectLabel
+# @onready var option_2_select_label: Label = %Option2SelectLabel
 @onready var option_1_lock_icon: TextureRect = %Option1LockIcon
 @onready var option_2_lock_icon: TextureRect = %Option2LockIcon
 @onready var option_1_image: TextureRect = %Option1Image
 @onready var option_2_image: TextureRect = %Option2Image
 @onready var option_1_button: Button = %Option1Button
 @onready var option_2_button: Button = %Option2Button
-@onready var back_button: TextureButton = %BackButton
+@onready var back_button: Button = %BackButton
 @onready var close_button: Button = %CloseButton
 @onready var info: Label = %Info
 
@@ -65,8 +65,8 @@ func update_stats(_tower: Tower) -> void:
 	set_level_stats(_tower, option_1_data, option_2_data)
 
 func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: TowerData) -> void:
-	option_1_select_label.hide()
-	option_2_select_label.hide()
+	# option_1_select_label.hide()
+	# option_2_select_label.hide()
 	option_1_button.disabled = true
 	option_2_button.disabled = true
 	option_1_lock_icon.show()
@@ -84,11 +84,11 @@ func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: T
 		option_2.hide()
 		
 	if _tower.level > 2:
-			option_1_select_label.show()
+			# option_1_select_label.show()
 			option_1_lock_icon.hide()
 			option_1_button.disabled = false
 
-			option_2_select_label.show()
+			# option_2_select_label.show()
 			option_2_lock_icon.hide()
 			option_2_button.disabled = false
 

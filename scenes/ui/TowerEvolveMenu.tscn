@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://klolb6rmuatb"]
+[gd_scene load_steps=37 format=3 uid="uid://klolb6rmuatb"]
 
 [ext_resource type="Script" uid="uid://de6jp835jamo4" path="res://scripts/ui/tower_evolve_menu.gd" id="1_jp6ly"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_4bqn4"]
@@ -8,48 +8,41 @@
 [ext_resource type="Texture2D" uid="uid://bahrer0xdoere" path="res://assets/art/sprites/ui/spr_ui_box4.png" id="7_a7r6p"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="7_arjim"]
 [ext_resource type="Texture2D" uid="uid://1uqt6tbq3h47" path="res://assets/art/atlases/tower/atl_tower_water_ice.png" id="8_jj2tk"]
-[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="8_m5i5g"]
-[ext_resource type="Texture2D" uid="uid://djswlwxy5xp5g" path="res://assets/art/sprites/ui/plus.png" id="9_4bqn4"]
 [ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="9_jwp3p"]
-[ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="10_4bqn4"]
-[ext_resource type="Texture2D" uid="uid://dlof8lvxe6bit" path="res://assets/art/atlases/tower/atl_tower_water_flood.png" id="10_iojpp"]
 [ext_resource type="Texture2D" uid="uid://dk11u8iqk0tk5" path="res://assets/art/sprites/ui/lock.png" id="10_kdgql"]
-[ext_resource type="Texture2D" uid="uid://dugw6td7t0lel" path="res://assets/art/sprites/ui/spr_ui_stat_arrow.png" id="11_5anb3"]
-[ext_resource type="Texture2D" uid="uid://dpaj01np75c8o" path="res://assets/art/sprites/ui/spr_ui_stat_rng.png" id="11_vryqd"]
-[ext_resource type="Texture2D" uid="uid://b35e2ntjvtv5c" path="res://assets/art/sprites/ui/spr_ui_stat_spcl_burn.png" id="12_xhbua"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jd3gn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_20i1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d0oil"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m50ok"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_emqvh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u17k8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qs88u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t36ky"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1kigj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y83wt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mg6hi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gjhns"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jwp3p"]
 resource_local_to_scene = true
 atlas = ExtResource("8_jj2tk")
 region = Rect2(48, 0, 16, 0)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iojpp"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5anb3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kdgql"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w47gl"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6c7w"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m8hub"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5i5g"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4bqn4"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vryqd"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xhbua"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_28amf"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5anb3"]
-atlas = ExtResource("10_iojpp")
-region = Rect2(0, 0, 16, 0)
+[sub_resource type="AtlasTexture" id="AtlasTexture_20i1k"]
+atlas = ExtResource("8_jj2tk")
+region = Rect2(48, 0, 16, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xjuqm"]
 
@@ -77,7 +70,13 @@ region = Rect2(0, 0, 16, 0)
 
 [node name="TowerSpecializeMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_jp6ly")
 metadata/_custom_type_script = "uid://de6jp835jamo4"
@@ -128,43 +127,25 @@ size_flags_vertical = 0
 mouse_filter = 2
 
 [node name="OverviewLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
-visible = false
-custom_minimum_size = Vector2(75, 0)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -10.0
-offset_right = 68.0
-offset_bottom = 10.0
-grow_vertical = 2
-size_flags_horizontal = 0
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("3_vryqd")
-theme_override_font_sizes/normal_font_size = 16
-text = "Specialize"
-scroll_active = false
-vertical_alignment = 1
-
-[node name="Info" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(125, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -5.0
-offset_right = 16.0
-offset_bottom = 5.0
+offset_left = -37.5
+offset_top = -10.0
+offset_right = 37.5
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_xhbua")
-theme_override_font_sizes/font_size = 8
-text = "lvl 3 required to evolve"
-horizontal_alignment = 1
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_vryqd")
+theme_override_font_sizes/normal_font_size = 16
+text = "Tower Evolution"
+scroll_active = false
 vertical_alignment = 1
 
 [node name="Divider" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer"]
@@ -176,27 +157,48 @@ texture = ExtResource("5_28amf")
 [node name="HSeparator" type="HSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jd3gn")
 
 [node name="Body" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 22
+theme_override_constants/separation = 28
 
 [node name="Option1" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 136.325)
+custom_minimum_size = Vector2(165, 127.61)
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 4
 texture = ExtResource("7_a7r6p")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 5
 patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 6
+
+[node name="Option1Button" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_20i1k")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_d0oil")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m50ok")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_emqvh")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_u17k8")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_qs88u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_t36ky")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_1kigj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_y83wt")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_mg6hi")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gjhns")
 
 [node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1"]
 layout_mode = 1
@@ -211,11 +213,21 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
+[node name="Option1LockIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("10_kdgql")
+stretch_mode = 2
+
 [node name="VBox" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_vertical = 0
 mouse_filter = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox"]
 layout_mode = 2
@@ -248,224 +260,51 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_jwp3p")
 stretch_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="Damage" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="DamageIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Damage"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("8_m5i5g")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Damage"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Damage/HBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("9_4bqn4")
-stretch_mode = 2
-
-[node name="DamageLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Damage/HBoxContainer"]
+[node name="Option1Desc" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("7_arjim")
-theme_override_font_sizes/font_size = 8
-text = "2"
-
-[node name="Speed" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="SpeedIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Speed"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("10_4bqn4")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Speed"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Speed/HBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("9_4bqn4")
-stretch_mode = 2
-
-[node name="SpeedLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Speed/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_arjim")
-theme_override_font_sizes/font_size = 8
-text = "100.33"
-
-[node name="Range" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="RangeIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Range"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("11_vryqd")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Range"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Range/HBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("9_4bqn4")
-stretch_mode = 2
-
-[node name="RangeLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Range/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_arjim")
-theme_override_font_sizes/font_size = 8
-text = "45"
-
-[node name="Special" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="SpecialIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Special"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("12_xhbua")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Special"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Special/HBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("9_4bqn4")
-stretch_mode = 2
-
-[node name="SpecialLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer/VBoxContainer/Special/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_arjim")
-theme_override_font_sizes/font_size = 8
-text = "3"
-
-[node name="Option1Desc" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(58.055, 0)
-layout_mode = 2
+size_flags_vertical = 3
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("7_arjim")
 theme_override_font_sizes/normal_font_size = 8
-text = "Evolution description"
+text = "abcefghijklmnopqrstuvwxyz dddddddddabcefghijklmnopqrstuvwxyz abcefghijklmnopqrstuvwxyz "
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Option1Select" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox"]
-custom_minimum_size = Vector2(65, 32)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("9_jwp3p")
-region_rect = Rect2(1, 1, 30, 29)
-patch_margin_left = 11
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 11
-
-[node name="Option1SelectLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/Option1Select"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_xhbua")
-theme_override_font_sizes/font_size = 8
-text = "Select"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Option1Button" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/Option1Select"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 0.0146557
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iojpp")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5anb3")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_kdgql")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_w47gl")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_c6c7w")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m8hub")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_m5i5g")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4bqn4")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vryqd")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_xhbua")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_28amf")
-
-[node name="Option1LockIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option1/MarginContainer/VBox/Option1Select"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.555
-anchor_right = 0.5
-anchor_bottom = 0.555
-offset_left = -7.5
-offset_top = -10.0415
-offset_right = 8.5
-offset_bottom = 5.95853
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("10_kdgql")
-
 [node name="Option2" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 136.325)
+custom_minimum_size = Vector2(165, 127.61)
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 4
 texture = ExtResource("7_a7r6p")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 5
 patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 6
+
+[node name="Option2Button" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_20i1k")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_d0oil")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m50ok")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_emqvh")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_u17k8")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_qs88u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_t36ky")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_1kigj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_y83wt")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_mg6hi")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gjhns")
 
 [node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2"]
 layout_mode = 1
@@ -480,11 +319,21 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
+[node name="Option2LockIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("10_kdgql")
+stretch_mode = 2
+
 [node name="VBox" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_vertical = 0
 mouse_filter = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox"]
 layout_mode = 2
@@ -512,85 +361,21 @@ texture = ExtResource("5_28amf")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-texture = SubResource("AtlasTexture_5anb3")
+texture = SubResource("AtlasTexture_20i1k")
 stretch_mode = 2
 
 [node name="Option2Desc" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(138, 50)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+size_flags_vertical = 3
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("7_arjim")
 theme_override_font_sizes/normal_font_size = 8
-text = "Evolution Description"
+text = "Tower Evolution Description"
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Option2Select" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox"]
-custom_minimum_size = Vector2(65, 32)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("9_jwp3p")
-region_rect = Rect2(1, 1, 30, 29)
-patch_margin_left = 11
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 11
-
-[node name="Option2SelectLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/Option2Select"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_xhbua")
-theme_override_font_sizes/font_size = 8
-text = "Select"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Option2Button" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/Option2Select"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iojpp")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5anb3")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_kdgql")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_w47gl")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_c6c7w")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m8hub")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_m5i5g")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4bqn4")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vryqd")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_xhbua")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_28amf")
-
-[node name="Option2LockIcon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Option2/MarginContainer/VBox/Option2Select"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.555
-anchor_right = 0.5
-anchor_bottom = 0.555
-offset_left = -7.5
-offset_top = -10.0415
-offset_right = 8.5
-offset_bottom = 5.95853
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("10_kdgql")
 
 [node name="HSeparator2" type="HSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -599,19 +384,69 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_xjuqm")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 250
+theme_override_constants/separation = 26
 
-[node name="BackButton" type="TextureButton" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Back" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 24)
+custom_minimum_size = Vector2(65, 30)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
 size_flags_vertical = 4
-texture_normal = ExtResource("11_5anb3")
-stretch_mode = 0
-flip_h = true
+texture = ExtResource("9_jwp3p")
+region_rect = Rect2(1, 1, 30, 29)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00112, 1.04446)
+theme_override_fonts/font = ExtResource("4_xhbua")
+theme_override_font_sizes/font_size = 8
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Back"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.000831637
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a7r6p")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_pb7j0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2bt2i")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_qdmfe")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jpi52")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_ew6oc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_unsky")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_eyyqs")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rhmyn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pqkkn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_te63n")
+
+[node name="Info" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_xhbua")
+theme_override_font_sizes/font_size = 8
+text = "lvl 3 required to evolve"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Close" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -642,9 +477,11 @@ vertical_alignment = 1
 [node name="CloseButton" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Close"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.000831637
