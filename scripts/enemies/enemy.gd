@@ -54,6 +54,8 @@ var weaken_percent: float = 0.0
 var is_frozen: bool = false
 var is_stunned: bool = false
 
+var death_global_position: Vector2
+
 # Signals
 signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
@@ -137,8 +139,11 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 			die()
 
 func die() -> void:
+	print(self, " - ENEMY DIED - DEATH POSITION: ", global_position)
+	# print(global_position)
+	death_global_position = global_position
+	death_position.emit(global_position)
 	is_alive = false
-
 	# Give time for collision boons to be removed
 	boon_collider.set_deferred("disabled", true)
 	await get_tree().create_timer(.1).timeout
@@ -147,7 +152,6 @@ func die() -> void:
 	ap.play("die")
 	SFXPlayer.play_sfx_resource(data.explosion_sfx)
 	died.emit(self)
-	death_position.emit(global_position)
 
 	# Hide graphics
 	health_bar.hide()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://ciicsqtfh31fh"]
 
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_c8bcu"]
-[ext_resource type="Texture2D" uid="uid://b8c4r7msm3cdi" path="res://assets/art/sprites/ui/spr_ui_coin_big.png" id="2_opq3w"]
+[ext_resource type="Texture2D" uid="uid://c01agh3yt3cka" path="res://assets/art/sprites/spr_coin.png" id="2_g5j4q"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_ur1ae"]
 [ext_resource type="PackedScene" uid="uid://bqprjjk6xa3t6" path="res://scenes/ui/WavePreviewPanel.tscn" id="4_g5j4q"]
 [ext_resource type="Texture2D" uid="uid://bod2y1cmadsde" path="res://assets/art/sprites/ui/spr_ui_wavebutton.png" id="5_gfj4e"]
@@ -102,7 +102,6 @@ theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
-metadata/_edit_group_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -114,28 +113,30 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = -3
+theme_override_constants/separation = 0
 
 [node name="GoldIcon" type="TextureRect" parent="MarginContainer/MarginContainer/GoldBar"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_opq3w")
+texture = ExtResource("2_g5j4q")
 
 [node name="Gold" type="Label" parent="MarginContainer/MarginContainer/GoldBar"]
 unique_name_in_owner = true
 texture_filter = 1
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 4
 theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_ur1ae")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 text = "100000"
+horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="Progress" type="Label" parent="MarginContainer/MarginContainer"]
@@ -149,7 +150,7 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("3_ur1ae")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 text = "24-10"
 
 [node name="WavePreviewPanel" parent="MarginContainer/MarginContainer" instance=ExtResource("4_g5j4q")]

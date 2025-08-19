@@ -3,7 +3,6 @@ extends Bullet
 
 var _enemies_hit: int = 0
 
-
 func _physics_process(delta):
 	if is_active:
 		ap.play("move")

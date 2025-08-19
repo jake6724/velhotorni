@@ -13,7 +13,7 @@ func _ready():
 
 func spawn_coin_drop(_global_pos) -> void:
 	var coin: CoinDrop = coin_drop_scene.instantiate()
-	add_child(coin)
+	call_deferred("add_child", coin)
 	coin.global_position = _global_pos
 	coin.destination = calc_destination(_global_pos)
 	coin.destination_direction = coin.global_position.direction_to(coin.destination)

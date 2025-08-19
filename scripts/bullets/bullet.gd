@@ -1,6 +1,8 @@
 class_name Bullet
 extends Sprite2D
 
+enum Type {PIERCE, AOE, PULSE, INSTANT}
+
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var primary_area: Area2D = $PrimaryArea
 @onready var primary_collider: CollisionShape2D = $ PrimaryArea/PrimaryCollider
@@ -20,6 +22,15 @@ var _min_distance: float
 
 var direction_at_collision: Vector2 # Shot animation will move in this direction
 
+func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _debuff_data, _speed: float, _max_distance) -> void:
+	data.element = _element
+	data.damage = _damage
+	data.debuff_data = _debuff_data
+	data.speed = _speed
+	data.max_distance = _max_distance + (_max_distance * .5)
+	target = _target
+	is_active = true
+
 func _ready() -> void:
 	# Configure children
 	primary_area.area_entered.connect(on_primary_area_entered)
@@ -38,15 +49,6 @@ func _ready() -> void:
 
 	_original_global_position = global_position
 	_min_distance = 11 # This is here to prevent unused warning if I just set it above
-
-func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _debuff_data, _speed: float, _max_distance) -> void:
-	data.element = _element
-	data.damage = _damage
-	data.debuff_data = _debuff_data
-	data.speed = _speed
-	data.max_distance = _max_distance + (_max_distance * .5)
-	target = _target
-	is_active = true
 
 func _physics_process(delta):
 	if is_active:
