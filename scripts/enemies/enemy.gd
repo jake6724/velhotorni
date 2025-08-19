@@ -54,8 +54,6 @@ var weaken_percent: float = 0.0
 var is_frozen: bool = false
 var is_stunned: bool = false
 
-var death_global_position: Vector2
-
 # Signals
 signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
@@ -140,7 +138,6 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 
 func die() -> void:
 	is_alive = false
-	death_global_position = global_position
 	death_position.emit(global_position)
 	# Give time for collision boons to be removed
 	boon_collider.set_deferred("disabled", true)

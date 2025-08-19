@@ -7,10 +7,10 @@ func _physics_process(delta):
 		if (target and target.is_alive): #and not target.collider.disabled: 
 			global_position = global_position + ((global_position.direction_to(target.global_position + _pos_offset)) * data.speed * delta)
 
-		# Target exists but is dead; move toward death location and explode upon reaching
+		# Target exists but is dead; move toward corpse location
 		elif target and not target.is_alive:
-			if global_position.distance_to(target_death_pos + _pos_offset) > _min_distance:
-				global_position = global_position + ((global_position.direction_to(target_death_pos  + _pos_offset)) * data.speed * delta)
+			if global_position.distance_to(target.global_position + _pos_offset) > _min_distance:
+				global_position = global_position + ((global_position.direction_to(target.global_position  + _pos_offset)) * data.speed * delta)
 			else:
 				explode()
 		# Target does not exist, queue free immeadiately
@@ -36,6 +36,3 @@ func on_aoe_area_entered(intruder):
 func on_animation_finished(anim_name):
 	if anim_name == "aoe_hit":
 		queue_free()
-
-func on_target_died(enemy_death_pos: Vector2):
-	target_death_pos = enemy_death_pos

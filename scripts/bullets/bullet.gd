@@ -41,11 +41,12 @@ func _ready() -> void:
 	ap.animation_finished.connect(on_animation_finished)
 
 	# Connect to target
-	if target and target.is_alive:
-		_target_direction = global_position.direction_to(target.global_position + _pos_offset)
-		target.death_position.connect(on_target_died)
-		if _target_direction == Vector2.ZERO:
-			queue_free()
+	if target:
+		if target.is_alive:
+			_target_direction = global_position.direction_to(target.global_position + _pos_offset)
+			target.death_position.connect(on_target_died)
+			if _target_direction == Vector2.ZERO:
+				queue_free()
 	else:
 		queue_free()
 
