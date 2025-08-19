@@ -139,11 +139,9 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 			die()
 
 func die() -> void:
-	print(self, " - ENEMY DIED - DEATH POSITION: ", global_position)
-	# print(global_position)
+	is_alive = false
 	death_global_position = global_position
 	death_position.emit(global_position)
-	is_alive = false
 	# Give time for collision boons to be removed
 	boon_collider.set_deferred("disabled", true)
 	await get_tree().create_timer(.1).timeout

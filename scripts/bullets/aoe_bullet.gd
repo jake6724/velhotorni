@@ -8,19 +8,11 @@ func _physics_process(delta):
 			global_position = global_position + ((global_position.direction_to(target.global_position + _pos_offset)) * data.speed * delta)
 
 		# Target exists but is dead; move toward death location and explode upon reaching
-		elif target:
-			if not target.is_alive:
-					# print("target:", target, " - target_death_pos: ", target_death_pos)
-				# if not target.collider.disabled: # collider is NOT disabled
-					if global_position.distance_to(target.death_global_position + _pos_offset) > _min_distance:
-						global_position = global_position + ((global_position.direction_to(target.death_global_position  + _pos_offset)) * data.speed * delta)
-					else:
-						explode()
-				# else:
-				# 	print("target.collider.disabled = true")
+		elif target and not target.is_alive:
+			if global_position.distance_to(target_death_pos + _pos_offset) > _min_distance:
+				global_position = global_position + ((global_position.direction_to(target_death_pos  + _pos_offset)) * data.speed * delta)
 			else:
-				print("Target.is_alive = false")
-
+				explode()
 		# Target does not exist, queue free immeadiately
 		else:
 			queue_free()
@@ -47,4 +39,3 @@ func on_animation_finished(anim_name):
 
 func on_target_died(enemy_death_pos: Vector2):
 	target_death_pos = enemy_death_pos
-	print("BULLET SAYS ENEMY DIED - ", target_death_pos)
