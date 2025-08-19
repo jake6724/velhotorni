@@ -1,6 +1,6 @@
 [gd_scene load_steps=44 format=3 uid="uid://klolb6rmuatb"]
 
-[ext_resource type="Script" uid="uid://de6jp835jamo4" path="res://scripts/ui/tower_specialize_menu.gd" id="1_jp6ly"]
+[ext_resource type="Script" uid="uid://de6jp835jamo4" path="res://scripts/ui/tower_evolve_menu.gd" id="1_jp6ly"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_4bqn4"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_vryqd"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="4_xhbua"]
@@ -80,6 +80,7 @@ layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_jp6ly")
+metadata/_custom_type_script = "uid://de6jp835jamo4"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1

@@ -1,4 +1,4 @@
-class_name TowerSpecializeMenu
+class_name TowerEvolveMenu
 extends Control
 
 # TODO: use a setter for hide/slow to disable animations

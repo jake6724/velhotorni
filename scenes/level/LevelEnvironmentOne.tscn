@@ -1072,7 +1072,7 @@ z_as_relative = false
 script = ExtResource("1_c2pc5")
 level_name = "- Wildflower Road -"
 initial_gold = 1000
-waves = Array[ExtResource("2_dl2pb")]([ExtResource("3_6ufsd"), ExtResource("4_k1152"), ExtResource("3_74c5d"), ExtResource("3_fpffg"), ExtResource("3_gmteg"), ExtResource("3_fpffg")])
+waves = Array[ExtResource("2_dl2pb")]([ExtResource("4_k1152"), ExtResource("3_6ufsd"), ExtResource("3_74c5d"), ExtResource("3_fpffg"), ExtResource("3_gmteg"), ExtResource("3_fpffg")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

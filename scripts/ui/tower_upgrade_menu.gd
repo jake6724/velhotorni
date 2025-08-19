@@ -16,8 +16,8 @@ components that could handle their own update functionality
 @onready var range: NinePatchRect = %Range
 @onready var special: NinePatchRect = %Special
 
-@onready var specialize_button: Button = %SpecializeButton
-@onready var specialize: NinePatchRect = %Specialize
+@onready var evolve_button: Button = %EvolveButton
+@onready var evolve: NinePatchRect = %Evolve
 
 @onready var close: NinePatchRect = %Close
 @onready var close_button: Button = %CloseButton
@@ -74,7 +74,7 @@ signal speed_button_pressed
 signal range_button_pressed
 signal special_button_pressed
 signal target_priority_changed
-signal specialize_button_pressed
+signal evolve_button_pressed
 signal close_button_pressed
 
 func _ready():
@@ -96,7 +96,7 @@ func _ready():
 	special_button.pressed.connect(on_special_button_pressed)
 
 	close_button.pressed.connect(on_close_button_pressed)
-	specialize_button.pressed.connect(on_specialize_button_pressed)
+	evolve_button.pressed.connect(on_evolve_button_pressed)
 
 	targeting.mouse_exited.connect(clear_description)
 	target_left_button.pressed.connect(on_target_left_button_pressed)
@@ -126,8 +126,8 @@ func _ready():
 	close.mouse_entered.connect(highlight_ui_element.bind(close))
 	close.mouse_exited.connect(un_highlight_ui_element.bind(close))
 
-	specialize.mouse_entered.connect(highlight_ui_element.bind(specialize))
-	specialize.mouse_exited.connect(un_highlight_ui_element.bind(specialize))
+	evolve.mouse_entered.connect(highlight_ui_element.bind(evolve))
+	evolve.mouse_exited.connect(un_highlight_ui_element.bind(evolve))
 
 func update_stats(player_gold: int = 0) -> void:
 	current_damage_label.text = str(snappedf(tower.curr_damage,.01))
@@ -238,8 +238,8 @@ func on_special_button_pressed() -> void:
 func on_close_button_pressed() -> void:
 	close_button_pressed.emit()
 
-func on_specialize_button_pressed() -> void:
-	specialize_button_pressed.emit()
+func on_evolve_button_pressed() -> void:
+	evolve_button_pressed.emit()
 
 func on_target_left_button_pressed() -> void:
 	target_priority_changed.emit(get_prev_target_priority())
@@ -286,9 +286,9 @@ func check_can_evolve() -> void:
 	var option_1_element: Constants.Element = Constants.get_evolve_element_1(tower.data.element)
 	var option_2_element: Constants.Element = Constants.get_evolve_element_2(tower.data.element)
 	if tower.data.element < 6 and (TowerGlobalData.tower_evolution_status[option_1_element] or TowerGlobalData.tower_evolution_status[option_2_element]):
-		specialize.show()
+		evolve.show()
 	else:
-		specialize.hide()
+		evolve.hide()
 
 func update_damage_level_arrow() -> void:
 	damage_level_arrow.texture.region = Rect2((8 * tower.damage_level), 0, 8, 0)
