@@ -11,13 +11,13 @@
 script = ExtResource("2_1i8ph")
 element = 9
 base_element = 1
-damage = 20.0
+damage = 15.0
 speed = 1.25
-attack_range = 60.0
+attack_range = 55.0
 atlas = ExtResource("1_5kima")
 transform_hint_texture = ExtResource("4_4icc0")
 bullet = ExtResource("3_5kima")
-bullet_speed = 200.0
+bullet_speed = 150.0
 debuff_data = ExtResource("2_4icc0")
 buff_data_list = Array[ExtResource("1_jedo3")]([])
 tower_name = "Storm"
