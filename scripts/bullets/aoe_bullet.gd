@@ -4,11 +4,11 @@ func _physics_process(delta):
 	if is_active:
 		ap.play("move")
 		# Target exists and is alive; move toward target an explode on collision
-		if (target and target.is_alive): #and not target.collider.disabled: 
+		if (target and target.is_alive) and not target.collider.disabled: 
 			global_position = global_position + ((global_position.direction_to(target.global_position + _pos_offset)) * data.speed * delta)
 
 		# Target exists but is dead; move toward corpse location
-		elif target and not target.is_alive:
+		elif target and not target.is_alive and not target.collider.disabled:
 			if global_position.distance_to(target.global_position + _pos_offset) > _min_distance:
 				global_position = global_position + ((global_position.direction_to(target.global_position  + _pos_offset)) * data.speed * delta)
 			else:

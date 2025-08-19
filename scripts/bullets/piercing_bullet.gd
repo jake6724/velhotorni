@@ -13,7 +13,7 @@ func _physics_process(delta):
 		ap.play("hit")
 
 func on_primary_area_entered(intruder) -> void:
-	if is_active:
+	if is_active and _enemies_hit < data.max_pierce:
 		if intruder is Enemy:
 			intruder.take_damage(data.damage, data.element)
 			if data.debuff_data and intruder.debuff_manager:
