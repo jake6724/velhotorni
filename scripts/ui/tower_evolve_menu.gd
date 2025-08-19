@@ -9,14 +9,14 @@ extends Control
 @onready var option_2_label: Label = %Option2Label
 @onready var option_1_desc: RichTextLabel = %Option1Desc
 @onready var option_2_desc: RichTextLabel = %Option2Desc
-# @onready var option_1_select_label: Label = %Option1SelectLabel
-# @onready var option_2_select_label: Label = %Option2SelectLabel
 @onready var option_1_lock_icon: TextureRect = %Option1LockIcon
 @onready var option_2_lock_icon: TextureRect = %Option2LockIcon
 @onready var option_1_image: TextureRect = %Option1Image
 @onready var option_2_image: TextureRect = %Option2Image
 @onready var option_1_button: Button = %Option1Button
 @onready var option_2_button: Button = %Option2Button
+@onready var back: NinePatchRect = %Back
+@onready var close: NinePatchRect = %Close
 @onready var back_button: Button = %BackButton
 @onready var close_button: Button = %CloseButton
 @onready var info: Label = %Info
@@ -43,6 +43,16 @@ func _ready():
 	add_child(animation_timer)
 	animation_timer.timeout.connect(on_animation_timer_timeout)
 	animation_timer.start()
+
+	# Connect highlighting
+	close.mouse_entered.connect(highlight_ui_element.bind(close))
+	close.mouse_exited.connect(un_highlight_ui_element.bind(close))
+	back.mouse_entered.connect(highlight_ui_element.bind(back))
+	back.mouse_exited.connect(un_highlight_ui_element.bind(back))
+	option_1.mouse_entered.connect(highlight_ui_element.bind(option_1))
+	option_1.mouse_exited.connect(un_highlight_ui_element.bind(option_1))
+	option_2.mouse_entered.connect(highlight_ui_element.bind(option_2))
+	option_2.mouse_exited.connect(un_highlight_ui_element.bind(option_2))
 
 func update_stats(_tower: Tower) -> void:
 	var option_1_data: TowerData = Constants.tower_data[Constants.get_evolve_element_1(_tower.data.element)]
@@ -117,3 +127,9 @@ func animate_atlas_textures() -> void:
 	if option_1_image.texture and option_2_image.texture:
 		option_1_image.texture.region = Rect2(anim_x, anim_y, anim_w, anim_h)
 		option_2_image.texture.region = Rect2(anim_x, anim_y, anim_w, anim_h)
+
+func highlight_ui_element(ui_element: Control) -> void:
+	ui_element.self_modulate = Color(Constants.ui_color_select)
+
+func un_highlight_ui_element(ui_element: Control) -> void:
+	ui_element.self_modulate = Color.WHITE

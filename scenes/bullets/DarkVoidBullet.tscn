@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dj6idrhasxy8x"]
 
-[ext_resource type="Script" uid="uid://bidlapkmguymx" path="res://scripts/bullets/piercing_bullet.gd" id="2_7itjb"]
+[ext_resource type="Script" uid="uid://dpsy8preqv6qx" path="res://scripts/bullets/instant_bullet.gd" id="1_7itjb"]
 [ext_resource type="Resource" uid="uid://colescdl2snaw" path="res://data/bullets/bullet_data_dark_void.tres" id="3_7itjb"]
 [ext_resource type="Texture2D" uid="uid://dbvww423w3gn1" path="res://assets/art/atlases/bullet/atl_bullet_water.png" id="4_pwplc"]
 
@@ -176,9 +176,8 @@ radius = 8.0
 radius = 16.0
 
 [node name="DarkVoidBullet" type="Sprite2D"]
-script = ExtResource("2_7itjb")
+script = ExtResource("1_7itjb")
 data = ExtResource("3_7itjb")
-metadata/_custom_type_script = "uid://bidlapkmguymx"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("4_pwplc")

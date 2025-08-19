@@ -303,7 +303,7 @@ func update_special_level_arrow() -> void:
 	special_level_arrow.texture.region = Rect2((8 * tower.special_level), 0, 8, 0)
 
 func highlight_ui_element(ui_element: Control) -> void:
-	ui_element.modulate = Color(Constants.ui_color_select)
+	ui_element.self_modulate = Color(Constants.ui_color_select)
 
 func un_highlight_ui_element(ui_element: Control) -> void:
-	ui_element.modulate = Color.WHITE
+	ui_element.self_modulate = Color.WHITE

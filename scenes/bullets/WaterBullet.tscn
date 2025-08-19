@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://b6qmk2qf0ex8x"]
 
 [ext_resource type="Texture2D" uid="uid://clm78jlieecpp" path="res://assets/art/atlases/bullet/atl_bullet_water_fish.png" id="1_5sfm0"]
-[ext_resource type="Script" uid="uid://cpx7d6yvad41w" path="res://scripts/bullets/bullet.gd" id="2_75b6g"]
-[ext_resource type="Resource" uid="uid://cfrm4uwd8i0pc" path="res://data/bullets/bullet_data_water.tres" id="3_5sfm0"]
+[ext_resource type="Script" uid="uid://bidlapkmguymx" path="res://scripts/bullets/piercing_bullet.gd" id="2_5sfm0"]
+[ext_resource type="Resource" uid="uid://7qpqen107k5h" path="res://data/bullets/bullet_data_water.tres" id="3_5sfm0"]
 
 [sub_resource type="Animation" id="Animation_4norr"]
 length = 0.001
@@ -157,9 +157,9 @@ texture = ExtResource("1_5sfm0")
 hframes = 4
 vframes = 2
 frame = 4
-script = ExtResource("2_75b6g")
+script = ExtResource("2_5sfm0")
 data = ExtResource("3_5sfm0")
-metadata/_custom_type_script = "uid://cpx7d6yvad41w"
+metadata/_custom_type_script = "uid://bidlapkmguymx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

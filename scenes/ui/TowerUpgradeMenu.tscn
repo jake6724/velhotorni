@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://br3yofjq2l14o"]
+[gd_scene load_steps=53 format=3 uid="uid://br3yofjq2l14o"]
 
 [ext_resource type="Script" uid="uid://dla326rvf6d3k" path="res://scripts/ui/tower_upgrade_menu.gd" id="1_4dufm"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_typcq"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="14_xjkok"]
 [ext_resource type="Texture2D" uid="uid://bahrer0xdoere" path="res://assets/art/sprites/ui/spr_ui_box4.png" id="15_wes0x"]
 [ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="16_r51os"]
+[ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="20_e3s6c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wvnee"]
 
@@ -1036,12 +1037,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
-texture = ExtResource("16_r51os")
+texture = ExtResource("20_e3s6c")
+draw_center = false
 region_rect = Rect2(1, 1, 30, 29)
-patch_margin_left = 11
-patch_margin_top = 10
+patch_margin_left = 10
+patch_margin_top = 8
 patch_margin_right = 10
-patch_margin_bottom = 11
+patch_margin_bottom = 9
 
 [node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/NavigationButtons/Evolve"]
 layout_mode = 1
@@ -1084,7 +1086,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
-texture = ExtResource("16_r51os")
+texture = ExtResource("20_e3s6c")
+draw_center = false
 region_rect = Rect2(1, 1, 30, 29)
 patch_margin_left = 10
 patch_margin_top = 10

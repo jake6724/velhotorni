@@ -13,7 +13,7 @@ func uninitialize() -> void:
 	if is_connected("area_exited", on_area_exited): disconnect("area_exited", on_area_exited)
 
 func on_area_entered(intruder) -> void:
-	if intruder.owner != owner and intruder.owner is Tower and intruder.owner.data.element != Constants.Element.LIGHT:	
+	if intruder.owner != owner and intruder.owner is Tower and intruder.owner.data.base_element != Constants.Element.LIGHT:	
 		apply_buff_to_ally(intruder.owner.buff_manager)
 
 func apply_buff_to_ally(ally_buff_manager: BuffManager) -> void:
@@ -22,7 +22,7 @@ func apply_buff_to_ally(ally_buff_manager: BuffManager) -> void:
 	ally_buff_manager.prioritize_buffs()
 
 func on_area_exited(intruder) -> void:
-	if intruder.owner != owner and intruder.owner is Tower and intruder.owner.data.element != Constants.Element.LIGHT:	
+	if intruder.owner != owner and intruder.owner is Tower and intruder.owner.data.base_element != Constants.Element.LIGHT:	
 		var ally_buff_manager: BuffManager = intruder.owner.buff_manager
 		var active_buffs: Array[Buff] = ally_buff_manager.get_buffs_by_source(self)
 		for buff: Buff in active_buffs:

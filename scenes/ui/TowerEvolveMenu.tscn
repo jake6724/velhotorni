@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bahrer0xdoere" path="res://assets/art/sprites/ui/spr_ui_box4.png" id="7_a7r6p"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="7_arjim"]
 [ext_resource type="Texture2D" uid="uid://1uqt6tbq3h47" path="res://assets/art/atlases/tower/atl_tower_water_ice.png" id="8_jj2tk"]
-[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="9_jwp3p"]
 [ext_resource type="Texture2D" uid="uid://dk11u8iqk0tk5" path="res://assets/art/sprites/ui/lock.png" id="10_kdgql"]
+[ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="11_d0oil"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jd3gn"]
 
@@ -172,6 +172,7 @@ custom_minimum_size = Vector2(165, 127.61)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+mouse_filter = 1
 texture = ExtResource("7_a7r6p")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 5
@@ -268,7 +269,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("7_arjim")
 theme_override_font_sizes/normal_font_size = 8
-text = "abcefghijklmnopqrstuvwxyz dddddddddabcefghijklmnopqrstuvwxyz abcefghijklmnopqrstuvwxyz "
+text = "Tower Evolution Description"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -279,6 +280,7 @@ custom_minimum_size = Vector2(165, 127.61)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+mouse_filter = 1
 texture = ExtResource("7_a7r6p")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 5
@@ -294,6 +296,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_20i1k")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_d0oil")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_m50ok")
@@ -395,7 +398,8 @@ custom_minimum_size = Vector2(65, 30)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-texture = ExtResource("9_jwp3p")
+mouse_filter = 1
+texture = ExtResource("11_d0oil")
 region_rect = Rect2(1, 1, 30, 29)
 patch_margin_left = 10
 patch_margin_top = 10
@@ -425,6 +429,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.000831637
+mouse_filter = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_a7r6p")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_pb7j0")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_2bt2i")
@@ -454,7 +459,8 @@ custom_minimum_size = Vector2(65, 30)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-texture = ExtResource("9_jwp3p")
+mouse_filter = 1
+texture = ExtResource("11_d0oil")
 region_rect = Rect2(1, 1, 30, 29)
 patch_margin_left = 10
 patch_margin_top = 10
@@ -485,6 +491,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.000831637
+mouse_filter = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_a7r6p")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_pb7j0")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_2bt2i")
