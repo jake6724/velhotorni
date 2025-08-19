@@ -23,7 +23,8 @@ var level_upgrade_price: int = 25
 # Internal data
 var active_target: Enemy
 var in_range_targets: Array[Enemy] = []
-var attack_timer: Timer = Timer.new()
+# var attack_timer: Timer = Timer.new()
+var attack_time_counter: float = 0.0
 var transform_timer: Timer = Timer.new()
 var transform_delay: float = .01
 var can_transform: bool = false # Set to true after brief delay in on_transform_timer_timeout()
@@ -106,6 +107,8 @@ const RANGE_BUFF_LEVEL_MODIFIER: float = .5
 const DAMAGE_BUFF_LEVEL_MODIFIER: float = .3334
 const SPEED_BUFF_LEVEL_MODIFIER: float = .3334
 
+const FLOAT_ERROR_MARGIN: float = .00001
+
 # TowerData resources
 var data: TowerData
 var base_data: TowerData
@@ -142,11 +145,12 @@ func initialize(element: Constants.Element):
 	update_textures()
 	update_colliders()
 
-	# Configure Timers
-	attack_timer.timeout.connect(on_attack_timer_timeout)
-	attack_timer.one_shot = true
-	add_child(attack_timer)
-	attack_timer.start(curr_speed)
+	# # Configure Timers
+	# attack_timer.timeout.connect(on_attack_timer_timeout)
+	# attack_timer.one_shot = true
+	# attack_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	# add_child(attack_timer)
+	# # attack_timer.start(curr_speed)
 
 	transform_timer.timeout.connect(on_transform_timer_timeout)
 	transform_timer.one_shot = true
@@ -158,17 +162,27 @@ func initialize(element: Constants.Element):
 	buff_manager.add_new_buff.connect(on_add_new_buff)
 	buff_manager.remove_active_buff.connect(on_remove_active_buff)
 
-func _physics_process(_delta):	
+func _physics_process(delta):	
+	# Custom timer
+	if not can_attack:
+		attack_time_counter += (delta)
+		# print(attack_time_counter)
+		if attack_time_counter > (curr_speed - FLOAT_ERROR_MARGIN): #and attack_time_counter < (curr_speed + .00001):
+			# print("Pass")
+			attack_time_counter = 0.0
+			can_attack = true
+
 	if can_attack:
 		active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
 		if active_target:
 			attack()
 			can_attack = false
-			attack_timer.start(curr_speed)
+			# attack_timer.start(curr_speed)
 
 	ap.play("idle")
 
 func attack() -> void:
+	# print(Time.get_unix_time_from_system())
 	flip_to_face_active_target()
 	spawn_bullet()
 	play_shot_sfx()
@@ -355,8 +369,8 @@ func on_transform_area_pressed(_viewport, _event, _shape_idx) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		tower_clicked.emit()
 			
-func on_attack_timer_timeout() -> void:
-	can_attack = true
+# func on_attack_timer_timeout() -> void:
+# 	can_attack = true
 
 func on_transform_timer_timeout() -> void: 
 	can_transform = true
