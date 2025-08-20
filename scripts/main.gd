@@ -30,6 +30,9 @@ func _ready():
 	# Configure Camera
 	active_level.base.damaged.connect(camera.apply_shake)
 
+	# Configure TowerGlobalData
+	TowerGlobalData.reset()
+
 func _input(_event):
 	if Input.is_action_just_pressed("escape"):
 		pause_game_with_menu()
