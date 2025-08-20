@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://loutfuoic45j"]
+[gd_scene load_steps=19 format=4 uid="uid://loutfuoic45j"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_c2pc5"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_dl2pb"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://ug83h80mgmk3" path="res://data/waves/quick_fire.tres" id="3_74c5d"]
 [ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/one_fire.tres" id="3_fpffg"]
 [ext_resource type="Resource" uid="uid://de1v4aby50v21" path="res://data/waves/wave_lots_of_krasue.tres" id="3_gmteg"]
-[ext_resource type="Resource" uid="uid://pvugrhm0bcas" path="res://data/waves/wave_6_fire.tres" id="3_p5q4g"]
 [ext_resource type="Resource" uid="uid://b2yfh77l0ppp4" path="res://data/waves/lots_of_fire.tres" id="4_k1152"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="5_fpffg"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_k1152"]

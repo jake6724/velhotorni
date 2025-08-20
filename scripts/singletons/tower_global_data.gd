@@ -21,6 +21,12 @@ var tower_evolution_status: Dictionary[Constants.Element, bool] = {
 	Constants.Element.VOID: true,
 }
 
+# func _ready():
+# 	WaveManager.wave_failed.connect(reset)
+# 	WaveManager.wave_completed.connect(reset)
+
+
+
 func reset() -> void:
 	for _element in Constants.Element.values():
 		tower_evolution_status[_element] = true
