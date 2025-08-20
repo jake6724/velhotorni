@@ -17,7 +17,7 @@ unique_name_in_owner = true
 scale = Vector2(1.18113, 0.710342)
 anchor_mode = 0
 script = ExtResource("3_c01mt")
-power = 2.0
+power = 1.0
 decay = 20.0
 
 [node name="CoinDropManager" type="Node" parent="."]

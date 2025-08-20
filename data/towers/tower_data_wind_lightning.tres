@@ -11,13 +11,13 @@
 script = ExtResource("2_n4r6v")
 element = 10
 base_element = 1
-damage = 30.0
+damage = 20.0
 speed = 0.8
 attack_range = 65.0
 atlas = ExtResource("1_jfqiq")
 transform_hint_texture = ExtResource("4_ccr58")
 bullet = ExtResource("3_jfqiq")
-bullet_speed = 1250.0
+bullet_speed = 900.0
 debuff_data = ExtResource("4_jfqiq")
 buff_data_list = Array[ExtResource("1_l3akd")]([])
 tower_name = "Lightning"

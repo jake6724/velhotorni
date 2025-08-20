@@ -233,6 +233,7 @@ func update_current_combat_data() -> void:
 	curr_damage = _leveled_damage + _damage_buff
 	curr_speed = _leveled_speed + _speed_buff
 	curr_range = _leveled_range + _range_buff
+	update_colliders()
 	update_preview_combat_data()
 
 func update_preview_combat_data() -> void:
@@ -387,20 +388,17 @@ func on_add_new_buff(buff: Buff):
 	match buff.data.type:
 		Buff.Type.RANGE:
 			_range_buff += _leveled_range * buff.data.modified_value
-			update_colliders()
 		Buff.Type.SPEED:
 			_speed_buff +=  -(_leveled_speed * buff.data.modified_value)
 		Buff.Type.DAMAGE:
 			_damage_buff += _leveled_damage * buff.data.modified_value
 		_: pass
-
 	update_current_combat_data()
 
 func on_remove_active_buff(buff: Buff):
 	match buff.data.type:
 		Buff.Type.RANGE:
 			_range_buff -= _leveled_range * buff.data.modified_value
-			update_colliders()
 		Buff.Type.SPEED:
 			_speed_buff -=  -(_leveled_speed * buff.data.modified_value)
 		Buff.Type.DAMAGE:

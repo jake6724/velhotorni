@@ -3,6 +3,8 @@ extends Bullet
 
 var in_range_enemies: Array[Enemy] = []
 var chain_mode_enabled: bool = false
+var chain_count: int = 0
+const CHAIN_MAX: int = 10
 
 func _physics_process(delta):
 	if is_active:
@@ -44,7 +46,6 @@ func explode() -> void:
 
 func on_primary_area_entered(intruder):
 	if intruder == target:
-		
 		intruder.take_damage(data.damage, data.element)
 		if data.debuff_data and intruder.debuff_manager:
 				intruder.debuff_manager.add_debuff(data.debuff_data)
@@ -73,12 +74,16 @@ func order_targets():
 	in_range_enemies.sort_custom(compare_by_progress_ratio)
 
 func get_next_target():
-	var next_target: Enemy = null
-	while not next_target and in_range_enemies.size() > 0:	
-		next_target = in_range_enemies.pop_front()
+	chain_count += 1
+	if chain_count < CHAIN_MAX:
+		var next_target: Enemy = null
+		while not next_target and in_range_enemies.size() > 0:	
+			next_target = in_range_enemies.pop_front()
 
-	if next_target:
-		return next_target
+		if next_target:
+			return next_target
+		else:
+			queue_free()
 	else:
 		queue_free()
 
