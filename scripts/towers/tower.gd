@@ -23,7 +23,6 @@ var level_upgrade_price: int = 25
 # Internal data
 var active_target: Enemy
 var in_range_targets: Array[Enemy] = []
-# var attack_timer: Timer = Timer.new()
 var attack_time_counter: float = 0.0
 var transform_timer: Timer = Timer.new()
 var transform_delay: float = .01
@@ -90,6 +89,7 @@ var special_level: int = 0:
 		increment_level()
 		update_debuff_data()
 		update_buff_data()
+		update_bullet_modifier_data()
 		refresh_buff_collider()
 
 const DAMAGE_MODIFIER: float = 0.5
@@ -102,6 +102,8 @@ const SLOW_DURATION_MODIFIER: float = 0.3334
 const FREEZE_DURATION_MODIFIER: float = 0.3334
 const STUN_DURATION_MODIFIER: float = 0.3334
 const WEAKEN_DURATION_MODIFIER: float = 1
+
+const DROP_CHANCE_MODIFIER: float = .5
 
 const RANGE_BUFF_LEVEL_MODIFIER: float = .5
 const DAMAGE_BUFF_LEVEL_MODIFIER: float = .3334
@@ -142,15 +144,9 @@ func initialize(element: Constants.Element):
 	update_current_combat_data()
 	update_debuff_data()
 	update_buff_data()
+	update_bullet_modifier_data()
 	update_textures()
 	update_colliders()
-
-	# # Configure Timers
-	# attack_timer.timeout.connect(on_attack_timer_timeout)
-	# attack_timer.one_shot = true
-	# attack_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
-	# add_child(attack_timer)
-	# # attack_timer.start(curr_speed)
 
 	transform_timer.timeout.connect(on_transform_timer_timeout)
 	transform_timer.one_shot = true
@@ -177,7 +173,6 @@ func _physics_process(delta):
 		if active_target:
 			attack()
 			can_attack = false
-			# attack_timer.start(curr_speed)
 
 	ap.play("idle")
 
@@ -189,7 +184,7 @@ func attack() -> void:
 
 func spawn_bullet() -> void:
 	var new_bullet = data.bullet.instantiate()
-	new_bullet.initialize(active_target, data.base_element, curr_damage, data.debuff_data, data.bullet_speed, curr_range)
+	new_bullet.initialize(active_target, data.base_element, curr_damage, data.debuff_data, data.bullet_speed, curr_range, data.attack_range, data.bullet_modifier_data)
 	new_bullet.position += new_bullet._pos_offset
 	add_child(new_bullet)
 
@@ -209,6 +204,9 @@ func revert() -> void:
 		can_transform = true
 		reset_tower()
 
+	swap_sprite.hide()
+	cross_sprite.hide()
+
 func evolve(selected_element: Constants.Element) -> void:
 	base_data = get_tower_data_copy(Constants.tower_data[selected_element])
 	transform_data = get_tower_data_copy(Constants.tower_data[Constants.get_next_element(selected_element)])
@@ -221,6 +219,7 @@ func reset_tower() -> void:
 	update_current_combat_data()
 	update_debuff_data()
 	update_buff_data()
+	update_bullet_modifier_data()
 	refresh_transform_collider()
 	refresh_buff_collider()
 	update_colliders()
@@ -310,6 +309,19 @@ func update_preview_buff_data() -> void:
 			Buff.Type.SPEED:
 				data.buff_data_list[0].preview_leveled_value = data.buff_data_list[0].value + ((data.buff_data_list[0].value * SPEED_BUFF_LEVEL_MODIFIER) * (special_level + 1))
 
+func update_bullet_modifier_data() -> void:
+	if data.bullet_modifier_data:
+		match data.bullet_modifier_data.type:
+			BulletModifierData.Type.COIN:
+				data.bullet_modifier_data.leveled_value = ((data.bullet_modifier_data.value * DROP_CHANCE_MODIFIER) * special_level) + data.bullet_modifier_data.value
+	update_preview_bullet_modifier_data()
+
+func update_preview_bullet_modifier_data() -> void:
+	if data.bullet_modifier_data:
+		match data.bullet_modifier_data.type:
+			BulletModifierData.Type.COIN:
+				data.bullet_modifier_data.preview_leveled_value = ((data.bullet_modifier_data.value * DROP_CHANCE_MODIFIER) * (special_level + 1)) + data.bullet_modifier_data.value
+				
 func flip_to_face_active_target():
 	if active_target:
 		var direction: Vector2 = global_position.direction_to(active_target.global_position)
@@ -369,9 +381,6 @@ func on_mouse_exited_transform_area():
 func on_transform_area_pressed(_viewport, _event, _shape_idx) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		tower_clicked.emit()
-			
-# func on_attack_timer_timeout() -> void:
-# 	can_attack = true
 
 func on_transform_timer_timeout() -> void: 
 	can_transform = true

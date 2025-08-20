@@ -11,15 +11,22 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 func _ready():
 	WaveManager.wave_failed.connect(on_wave_failed)
 
-func spawn_coin_drop(_global_pos) -> void:
-	var coin: CoinDrop = coin_drop_scene.instantiate()
-	call_deferred("add_child", coin)
-	coin.global_position = _global_pos
-	coin.destination = calc_destination(_global_pos)
-	coin.destination_direction = coin.global_position.direction_to(coin.destination)
+## Called when an enemy that `CoinDropManager` is connected to dies. `CoinDropManager` connects to enemies in `on_enemy_spawned()`
+func spawn_coin_drop(_global_pos, drop_chance) -> void:
+	var roll: float = rng.randf()
+	if roll <= drop_chance:
+		var coin: CoinDrop = coin_drop_scene.instantiate()
+		call_deferred("add_child", coin)
+		coin.global_position = _global_pos
+		coin.destination = calc_destination(_global_pos)
+		coin.destination_direction = coin.global_position.direction_to(coin.destination)
+
+		drop_chance -= 1.0
+		if drop_chance > 0.0:
+			spawn_coin_drop(_global_pos, drop_chance)
 
 func on_enemy_spawned(_enemy: Enemy) -> void:
-	_enemy.death_position.connect(spawn_coin_drop)
+	_enemy.coin_dropped.connect(spawn_coin_drop)
 
 func _physics_process(delta):
 	for child in get_children():

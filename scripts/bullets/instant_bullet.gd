@@ -12,6 +12,7 @@ func _ready() -> void:
 func on_primary_area_entered(intruder) -> void:
 	if intruder is Enemy and intruder == target:
 		is_active = false
+		intruder.apply_drop_chance_bonus(data.drop_chance_bonus)
 		intruder.take_damage(data.damage, data.element)
 		if data.debuff_data and intruder.debuff_manager:
 				intruder.debuff_manager.add_debuff(data.debuff_data)

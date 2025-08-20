@@ -159,6 +159,7 @@ func update_stats(player_gold: int = 0) -> void:
 
 	update_debuff_stats()
 	update_buff_stats()
+	update_bullet_modifier_stats()
 	update_level_labels()
 	update_ui_text(player_gold)
 	check_can_evolve()
@@ -191,6 +192,11 @@ func update_buff_stats() -> void:
 			upgraded_special_label.hide()
 			special_pointer_icon.hide()
 
+func update_bullet_modifier_stats() -> void:
+	if tower.data.bullet_modifier_data:
+		current_special_label.text = str(snappedf(tower.data.bullet_modifier_data.leveled_value, .01))
+		upgraded_special_label.text = str(snappedf(tower.data.bullet_modifier_data.preview_leveled_value, .01))
+
 func update_level_labels() -> void:
 	if tower.level < 12:
 		current_level_label.text = str("LV",tower.level + 1)
@@ -210,6 +216,9 @@ func update_ui_text(player_gold) -> void:
 
 	if tower.data.buff_data_list and tower.data.buff_data_list[0]:
 		special_button.mouse_entered.connect(update_description.bind(ui_text.special_buff_button_hovered_options[tower.data.buff_data_list[0].type]))
+
+	if tower.data.bullet_modifier_data:
+		special_button.mouse_entered.connect(update_description.bind(ui_text.special_bullet_modifier_button_hovered_options[tower.data.bullet_modifier_data.type]))
 
 	if targeting.is_connected("mouse_entered", update_description): targeting.mouse_entered.disconnect(update_description)
 	targeting.mouse_entered.connect(update_description.bind(ui_text.targeting_hovered_options[tower.target_priority]))

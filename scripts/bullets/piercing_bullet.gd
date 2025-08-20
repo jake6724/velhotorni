@@ -15,6 +15,7 @@ func _physics_process(delta):
 func on_primary_area_entered(intruder) -> void:
 	if is_active and _enemies_hit < data.max_pierce:
 		if intruder is Enemy:
+			intruder.apply_drop_chance_bonus(data.drop_chance_bonus)
 			intruder.take_damage(data.damage, data.element)
 			if data.debuff_data and intruder.debuff_manager:
 				intruder.debuff_manager.add_debuff(data.debuff_data)

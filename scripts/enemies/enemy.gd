@@ -54,9 +54,12 @@ var weaken_percent: float = 0.0
 var is_frozen: bool = false
 var is_stunned: bool = false
 
+var drop_chance: float # data.drop_chance_base + drop_chance_bonus passed by bullet
+
 # Signals
 signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
+signal coin_dropped
 
 func _ready():
 	data.resource_local_to_scene = true
@@ -106,6 +109,12 @@ func move(delta) -> void:
 
 	prev_global_position = global_position
 	
+func apply_drop_chance_bonus(_drop_chance_bonus: float) -> void:
+	drop_chance = data.drop_chance_base + _drop_chance_bonus
+	
+func reset_drop_chance() -> void:
+	drop_chance = data.drop_chance_base
+
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
 func take_damage(damage_recieved: float, tower_element: Constants.Element):
@@ -141,6 +150,7 @@ func die() -> void:
 	is_alive = false
 	died.emit(self)
 	death_position.emit(global_position)
+	coin_dropped.emit(global_position, drop_chance)
 
 	collider.set_deferred("disabled", true) # Collisions can't be changed until pp idle time
 
@@ -209,6 +219,7 @@ func on_debuff_remove_stun() -> void:
 	debuff_manager.start_cc_cooldown(Debuff.Type.STUN)
 
 func on_debuff_apply_burn(_value, _element) -> void:
+	reset_drop_chance()
 	take_damage(_value, _element)
 
 func on_debuff_remove_burn(_debuff: Debuff) -> void:

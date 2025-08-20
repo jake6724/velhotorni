@@ -29,6 +29,11 @@ var special_buff_button_hovered_options: Dictionary[Buff.Type, String] = {
 	Buff.Type.SPEED: special_buff_speed,
 }
 
+var special_bullet_modifier_coin = "Increase coin drops or something"
+var special_bullet_modifier_button_hovered_options: Dictionary[BulletModifierData.Type, String] = {
+	BulletModifierData.Type.COIN: special_bullet_modifier_coin,
+}
+
 var targeting_priority_first: String = "Target the enemy farthest along on the path"
 var targeting_priority_last: String = "Target the enemy closest to the spawn point"
 var targeting_priority_highest: String = "Target the enemy with the highest current health"

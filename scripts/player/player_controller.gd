@@ -238,9 +238,9 @@ func on_tower_hovered(tower: Tower):
 		tower_menu.show_tower_info_panel(tower)
 
 func on_tower_unhovered(tower: Tower):
-	if not placement_enabled:
-		tower.swap_sprite.hide()
-		tower.cross_sprite.hide()
+	# if not placement_enabled:
+	tower.swap_sprite.hide()
+	tower.cross_sprite.hide()
 
 	if placement_enabled:
 		tower_menu.hide_tower_info_panels()

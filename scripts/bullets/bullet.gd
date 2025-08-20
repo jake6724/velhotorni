@@ -22,14 +22,18 @@ var _min_distance: float
 
 var direction_at_collision: Vector2 # Shot animation will move in this direction
 
-func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _debuff_data, _speed: float, _max_distance) -> void:
+func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _debuff_data, _speed: float, _max_distance, _base_range: float, _bullet_modifier_data: BulletModifierData) -> void:
 	data.element = _element
 	data.damage = _damage
 	data.debuff_data = _debuff_data
 	data.speed = _speed
 	data.max_distance = _max_distance + (_max_distance * .5)
+	data.base_range = _base_range
+	data.bullet_modifier_data = _bullet_modifier_data
 	target = _target
 	is_active = true
+
+	apply_bullet_modifier_data()
 
 func _ready() -> void:
 	# Configure children
@@ -42,7 +46,6 @@ func _ready() -> void:
 
 	# Connect to target
 	if target:
-	
 		_target_direction = global_position.direction_to(target.global_position + _pos_offset)
 		target.death_position.connect(on_target_died)
 		if _target_direction == Vector2.ZERO:
@@ -52,6 +55,12 @@ func _ready() -> void:
 
 	_original_global_position = global_position
 	_min_distance = 11 # This is here to prevent unused warning if I just set it above
+
+	ready_custom()
+
+## Ran at the end of bullet.gd's ready()
+func ready_custom() -> void:
+	pass
 
 func _physics_process(delta):
 	if is_active:
@@ -79,6 +88,7 @@ func on_primary_area_entered(intruder: Node2D) -> void:
 		if intruder == target:
 			direction_at_collision = global_position.direction_to(target.global_position + _pos_offset)
 			is_active = false
+			target.apply_drop_chance_bonus(data.drop_chance_bonus)
 			target.take_damage(data.damage, data.element)
 			if data.debuff_data and target.debuff_manager:
 				target.debuff_manager.add_debuff(data.debuff_data)
@@ -94,3 +104,10 @@ func on_animation_finished(anim_name: String) -> void:
 
 func on_target_died(_pos: Vector2) -> void:
 	pass
+
+func apply_bullet_modifier_data() -> void:
+	if data.bullet_modifier_data:
+		match data.bullet_modifier_data.type:
+			BulletModifierData.Type.COIN:
+				data.drop_chance_bonus = data.bullet_modifier_data.leveled_value
+			_: pass

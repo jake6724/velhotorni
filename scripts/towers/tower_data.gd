@@ -22,6 +22,7 @@ extends Resource
 @export_category("Bullet")
 @export var bullet: PackedScene
 @export var bullet_speed: float
+@export var bullet_modifier_data: BulletModifierData
 ## This value may be left as <empty> if no Debuff is required.
 @export var debuff_data: DebuffData = null
 @export_category("Buff")
