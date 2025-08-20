@@ -10,7 +10,8 @@
 [resource]
 script = ExtResource("2_cov3p")
 element = 7
-damage = 25.0
+base_element = 0
+damage = 26.0
 speed = 1.3
 attack_range = 40.0
 atlas = ExtResource("1_vi8qm")
