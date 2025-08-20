@@ -4,7 +4,7 @@ extends Bullet
 var in_range_enemies: Array[Enemy] = []
 var chain_mode_enabled: bool = false
 var chain_count: int = 0
-const CHAIN_MAX: int = 10
+const CHAIN_MAX: int = 8
 
 func _physics_process(delta):
 	if is_active:
