@@ -137,21 +137,25 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 			die()
 
 func die() -> void:
+	# Update immediatedly required death properties
 	is_alive = false
+	died.emit(self)
 	death_position.emit(global_position)
-	# Give time for collision boons to be removed
-	boon_collider.set_deferred("disabled", true)
-	await get_tree().create_timer(.1).timeout
 
 	collider.set_deferred("disabled", true) # Collisions can't be changed until pp idle time
-	ap.play("die")
-	SFXPlayer.play_sfx_resource(data.explosion_sfx)
-	died.emit(self)
 
 	# Hide graphics
 	health_bar.hide()
 	shield.hide()
 	weak.hide()
+
+	SFXPlayer.play_sfx_resource(data.explosion_sfx)
+
+	ap.play("die")
+
+	# Give time for collision boons to be removed
+	boon_collider.set_deferred("disabled", true)
+	await get_tree().create_timer(.1).timeout
 
 func on_animation_finished(anim_name):
 	if anim_name == "hit":
