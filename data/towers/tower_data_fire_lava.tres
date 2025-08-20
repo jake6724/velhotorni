@@ -11,13 +11,13 @@
 script = ExtResource("2_cov3p")
 element = 7
 base_element = 0
-damage = 26.0
+damage = 20.0
 speed = 1.3
 attack_range = 40.0
 atlas = ExtResource("1_vi8qm")
 transform_hint_texture = ExtResource("6_y4xb0")
 bullet = ExtResource("3_pkruq")
-bullet_speed = 100.0
+bullet_speed = 0.0
 debuff_data = ExtResource("4_mkh2m")
 buff_data_list = Array[ExtResource("1_2udl8")]([])
 tower_name = "Lava"
