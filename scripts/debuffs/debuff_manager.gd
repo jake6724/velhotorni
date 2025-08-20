@@ -7,7 +7,7 @@ var freeze_timer: Timer = Timer.new()
 
 var stun_cooldown: float = .1
 var can_stun: bool = true
-const STUN_COOLDOWN_INCREMENT: float = .06
+const STUN_COOLDOWN_INCREMENT: float = .05
 
 var freeze_cooldown: float = .5
 var can_freeze: bool = true
