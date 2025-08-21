@@ -413,7 +413,6 @@ func on_remove_active_buff(buff: Buff):
 		Buff.Type.DAMAGE:
 			_damage_buff -= _leveled_damage * buff.data.modified_value
 		_: pass
-
 	update_current_combat_data()
 
 func refresh_transform_collider() -> void:

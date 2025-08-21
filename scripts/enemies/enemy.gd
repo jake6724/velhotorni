@@ -18,6 +18,8 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var boon_manager: BoonManager = $BoonManager
 @onready var boon_receive_area: Area2D = $BoonReceiveArea
 @onready var boon_receive_collider: CollisionShape2D = $BoonReceiveArea/BoonReceiveCollider
+@onready var hex_area: Area2D = $HexArea
+@onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
 
 # Pathing 
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
