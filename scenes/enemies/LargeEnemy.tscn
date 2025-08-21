@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://7whhtl0yo72s"]
+[gd_scene load_steps=23 format=3 uid="uid://7whhtl0yo72s"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_nrfk0"]
 [ext_resource type="Texture2D" uid="uid://dai8bwe40k3wj" path="res://assets/art/atlases/enemy/atl_enemy_light_kusekuse.png" id="2_phgce"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bk0wvciq3qs4s" path="res://scripts/boons/boon_area.gd" id="9_vubms"]
 [ext_resource type="Script" uid="uid://dvux67kw0w7d0" path="res://scripts/boons/boon_manager.gd" id="10_sfnwf"]
 [ext_resource type="Script" uid="uid://b73facmk5sjrx" path="res://scripts/hexes/hex_area.gd" id="10_vubms"]
+[ext_resource type="Script" uid="uid://bm2jek1l03frj" path="res://scripts/enemies/enemy_indicator.gd" id="11_sfnwf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xk6ri"]
 radius = 8.0
@@ -271,3 +272,7 @@ metadata/_custom_type_script = "uid://b73facmk5sjrx"
 position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_sfnwf")
 debug_color = Color(0.373689, 0.476689, 1, 0.42)
+
+[node name="EnemyIndicator" type="Node2D" parent="."]
+script = ExtResource("11_sfnwf")
+metadata/_custom_type_script = "uid://bm2jek1l03frj"
