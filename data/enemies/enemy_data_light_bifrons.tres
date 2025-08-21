@@ -13,6 +13,7 @@ weak_against_element = 3
 health = 100.0
 speed = 20.0
 damage = 1
+drop_chance_base = 1.0
 atlas = ExtResource("1_u312f")
 explosion_sfx = ExtResource("2_le116")
 knockback_multiplier = 1.5

@@ -10,9 +10,7 @@ var data: Dictionary[Vector2, bool] # true = can be placed here, false cannot
 
 # Dev only
 var tile_inidicator: PackedScene = preload("res://scenes/placeholders/TileIndicator.tscn")
-
 var active_tilemap: TileMapLayer
-
 var valid_atlas_coords: Array[Vector2i] = [Vector2i(2,0)] # Green tiles in atl_level_mask
 
 ## Intended to be called manually by `LevelManager`.
