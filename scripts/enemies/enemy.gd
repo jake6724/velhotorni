@@ -20,6 +20,7 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var boon_receive_collider: CollisionShape2D = $BoonReceiveArea/BoonReceiveCollider
 @onready var hex_area: HexArea = $HexArea
 @onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
+@onready var indicator: EnemyIndicator = $EnemyIndicator
 
 # Pathing 
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
@@ -66,7 +67,7 @@ signal death_position # Pass global_position
 signal coin_dropped
 
 func _ready():
-	data.resource_local_to_scene = true
+	data.resource_local_to_scene = true # TODO: probably/maybe not needed
 	element = data.element
 	strong_against_element = data.strong_against_element
 	weak_against_element = data.weak_against_element 
@@ -79,6 +80,8 @@ func _ready():
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
 
+	set_pos_offset()
+
 	# Configure DebuffManager
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
 	debuff_manager.knockback_multiplier = data.knockback_multiplier
@@ -90,9 +93,10 @@ func _ready():
 	boon_manager.boon_connected.connect(on_boon_connected)
 
 	# Configure Hexes
-	if data.hex_data_list:
+	if data.hex_data_list and data.hex_data_list[0]:
 		hex_area.hex_data_list = data.hex_data_list
 		hex_area.initialize()
+		indicator.can_show_hex_range = true
 
 func _physics_process(delta):
 	move(delta)
@@ -248,6 +252,11 @@ func on_debuff_apply_knockback(_value, _total_duration) -> void:
 
 func on_debuff_remove_knockback() -> void:
 	knockback_tween.stop()
+
+func set_pos_offset() -> void:
+	match data.size:
+		Enemy.Size.MEDIUM: data.pos_offset = Vector2(8,8)
+		Enemy.Size.LARGE: data.pos_offset = Vector2(16,16)
 
 # Boons
 func on_boon_connected(new_boon: Boon) -> void:

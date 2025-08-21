@@ -11,6 +11,7 @@ extends Resource
 @export var drop_chance_base: float = 1.0
 @export var atlas: Texture
 @export var explosion_sfx: AudioStreamOggVorbis
+var pos_offset: Vector2
 
 @export_category("Boon")
 @export var boon_data: BoonData
