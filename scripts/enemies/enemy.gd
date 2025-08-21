@@ -177,8 +177,11 @@ func die() -> void:
 
 	ap.play("die")
 
-	# Give time for collision boons to be removed
+	# Give time for collision boons and hexes to be removed
 	boon_collider.set_deferred("disabled", true)
+	indicator.can_show_boon_range = false
+	hex_collider.set_deferred("disabled", true)
+	indicator.can_show_hex_range = false
 	await get_tree().create_timer(.1).timeout
 
 func on_animation_finished(anim_name):
