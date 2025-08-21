@@ -90,6 +90,7 @@ func _ready():
 	if data.boon_data:
 		boon_area.initialize(data.boon_data)
 		boon_area.owner = self
+		indicator.can_show_boon_range = true
 	boon_manager.boon_connected.connect(on_boon_connected)
 
 	# Configure Hexes

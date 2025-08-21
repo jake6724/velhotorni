@@ -24,4 +24,4 @@ func _draw():
 		draw_circle(Vector2.ZERO + owner.data.pos_offset, owner.data.hex_data_list[0].cast_radius, Color(Color(COLOR_HEX_DEFAULT),HEX_TRANSPARENCY), false, -1.0, false)
 	
 	if can_show_boon_range:
-		draw_circle(Vector2.ZERO + owner.data.pos_offset, owner.data.hex_data_list[0].cast_radius, Color(Color(COLOR_BOON_DEFAULT),BOON_TRANSPARENCY), false, -1.0, false)
+		draw_circle(Vector2.ZERO + owner.data.pos_offset, owner.data.boon_data.cast_radius, Color(Color(COLOR_BOON_DEFAULT),BOON_TRANSPARENCY), false, -1.0, false)
