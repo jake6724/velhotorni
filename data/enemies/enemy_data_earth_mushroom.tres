@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://csvkuy7cttbbn" path="res://assets/art/atlases/enemy/atl_enemy_earth_mushroom.png" id="1_lson4"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_xye8s"]
-[ext_resource type="Resource" path="res://data/boons/boon_data_speed_earth_mushroom.tres" id="2_k5pu6"]
+[ext_resource type="Resource" uid="uid://b74y7sb6vjpcp" path="res://data/boons/boon_data_speed_earth_mushroom.tres" id="2_k5pu6"]
 [ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_mw7lj"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="3_mw7lj"]
 

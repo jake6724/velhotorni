@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_keu7o")
-priority = 4
 value = 85.0
-total_duration = 0.6
+priority = 4
+total_duration = 0.55
