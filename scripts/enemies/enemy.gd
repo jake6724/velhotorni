@@ -90,6 +90,7 @@ func _ready():
 	# Configure Hexes
 	if data.hex_data_list:
 		hex_area.hex_data_list = data.hex_data_list
+		hex_area.initialize()
 
 func _physics_process(delta):
 	move(delta)

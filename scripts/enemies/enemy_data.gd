@@ -15,6 +15,9 @@ extends Resource
 @export_category("Boon")
 @export var boon_data: BoonData
 
+@export_category("Hexes")
+@export var hex_data_list: Array[HexData]
+
 ## Multiplier to modify the required distance travelled before `Enemy` can be knockbacked again. This value is multiplied by the distance
 ## of the first active knockback debuff.
 @export var knockback_multiplier: float = 1.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpg5vj2118tkk"]
+[gd_scene load_steps=19 format=3 uid="uid://bpg5vj2118tkk"]
 
 [ext_resource type="Script" uid="uid://1v42jjyvr5ed" path="res://scripts/towers/tower.gd" id="1_cqx8d"]
 [ext_resource type="Texture2D" uid="uid://b58tie4p0ydsh" path="res://assets/art/atlases/tower/atl_tower_water.png" id="3_gc8gn"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://glgm0sqpjq0a" path="res://scripts/towers/tower_targeting.gd" id="9_aoo5e"]
 [ext_resource type="Script" uid="uid://n5jrnk3kfl2e" path="res://scripts/buffs/buff_manager.gd" id="10_av7pv"]
 [ext_resource type="Script" uid="uid://b07kx8y1ebqjj" path="res://scripts/buffs/buff_area.gd" id="11_cmp23"]
+[ext_resource type="Script" uid="uid://cfmjvdcmboi5k" path="res://scripts/hexes/hex_manager.gd" id="12_o8o11"]
 
 [sub_resource type="Animation" id="Animation_bfb4r"]
 length = 0.001
@@ -151,3 +152,7 @@ unique_name_in_owner = true
 position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_cmp23")
 debug_color = Color(0.136946, 0.646193, 0, 0.42)
+
+[node name="HexManager" type="Node" parent="."]
+script = ExtResource("12_o8o11")
+metadata/_custom_type_script = "uid://cfmjvdcmboi5k"

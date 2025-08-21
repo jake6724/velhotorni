@@ -18,7 +18,7 @@ func get_hex_count_by_type(match_type: Hex.Type) -> int:
 	var count: int = 0
 	for child in get_children():
 		var hex: Hex = child as Hex
-		if hex and hex.type == match_type:
+		if hex and hex.data.type == match_type:
 			count += 1
 	return count
 
@@ -39,7 +39,7 @@ func remove_all_hexes() -> void:
 		if hex:
 			remove_hex(hex)
 
-func prioritize_hexs() -> void:
+func prioritize_hexes() -> void:
 	if get_children().size() > 1:
 		# Save a copy of all active hexs
 		var hexes: Array[Hex] = get_sorted_hex_duplicates_by_type()

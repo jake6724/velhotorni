@@ -19,6 +19,7 @@ var level_upgrade_price: int = 25
 @onready var buff_manager: BuffManager = %BuffManager
 @onready var buff_collider: CollisionShape2D = %BuffCollider
 @onready var buff_area: BuffArea = %BuffArea
+@onready var hex_manager: HexManager = $HexManager
 
 # Internal data
 var active_target: Enemy
@@ -159,8 +160,13 @@ func initialize(element: Constants.Element):
 
 	can_show_range = false
 
+	# Buff manager
 	buff_manager.add_new_buff.connect(on_add_new_buff)
 	buff_manager.remove_active_buff.connect(on_remove_active_buff)
+
+	# Hex manager
+	hex_manager.new_hex_added.connect(on_add_new_hex)
+	hex_manager.active_hex_removed.connect(on_remove_active_hex)
 
 func _physics_process(delta):	
 	# Custom timer
@@ -449,8 +455,10 @@ func on_add_new_hex(hex: Hex):
 	match hex.data.type:
 		Hex.Type.DAMAGE:
 			_hex_damage_multiplier -= hex.data.modified_value
+			print("_hex_damage_multiplier: ", _hex_damage_multiplier)
 		Hex.Type.SPEED:
 			_hex_speed_multiplier -=  -(hex.data.modified_value)
+			print("_hex_speed_multiplier: ", _hex_speed_multiplier)
 		Hex.Type.RANGE:
 			_hex_range_multiplier -= hex.data.modified_value
 		_: pass

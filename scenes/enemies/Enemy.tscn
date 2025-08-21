@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dwkqfmnmxvrmi"]
+[gd_scene load_steps=22 format=3 uid="uid://dwkqfmnmxvrmi"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_7cewq"]
 [ext_resource type="Texture2D" uid="uid://bs1li1amcuwmf" path="res://assets/art/sprites/ui/spr_ui_health_bg.png" id="2_7iym1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bk2472hmw8gj8" path="res://scripts/debuffs/debuff_manager.gd" id="7_vtlqb"]
 [ext_resource type="Script" uid="uid://bk0wvciq3qs4s" path="res://scripts/boons/boon_area.gd" id="8_24b6r"]
 [ext_resource type="Script" uid="uid://dvux67kw0w7d0" path="res://scripts/boons/boon_manager.gd" id="9_tboc4"]
+[ext_resource type="Script" uid="uid://b73facmk5sjrx" path="res://scripts/hexes/hex_area.gd" id="10_n4qy4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7iym1"]
 radius = 8.06226
@@ -260,9 +261,11 @@ shape = SubResource("CircleShape2D_tboc4")
 debug_color = Color(0.561146, 0.559576, 0, 0.42)
 
 [node name="HexArea" type="Area2D" parent="."]
+collision_layer = 128
+script = ExtResource("10_n4qy4")
+metadata/_custom_type_script = "uid://b73facmk5sjrx"
 
 [node name="HexCollider" type="CollisionShape2D" parent="HexArea"]
 position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_n4qy4")
-disabled = true
 debug_color = Color(0.373689, 0.476689, 1, 0.42)
