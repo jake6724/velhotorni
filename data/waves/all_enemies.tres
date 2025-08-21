@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_7j8ag"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_0eqh1"]
 [ext_resource type="Resource" uid="uid://cqgwq576ast5s" path="res://data/spawn/spawn_light_bifrons_1.tres" id="2_7htjx"]
-[ext_resource type="Resource" uid="uid://c1dr5uq3adbb7" path="res://data/spawn/spawn_earth_bigfoot_1.tres" id="2_d78mw"]
+[ext_resource type="Resource" path="res://data/spawn/spawn_bigfoot_1.tres" id="2_d78mw"]
 [ext_resource type="Resource" uid="uid://dgalkolspve38" path="res://data/spawn/spawn_water_kappa_1.tres" id="2_exslo"]
 [ext_resource type="Resource" uid="uid://b6ar8i47q6jl0" path="res://data/spawn/spawn_light_ectoplasm_1.tres" id="3_7htjx"]
 [ext_resource type="Resource" uid="uid://diy4ykka03hoc" path="res://data/spawn/spawn_dark_gravestone_1.tres" id="4_qwhj5"]

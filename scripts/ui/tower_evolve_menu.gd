@@ -26,6 +26,8 @@ signal option_2_selected
 signal close_button_pressed
 signal back_button_pressed
 
+const EVOLVE_LEVEL: int = 4
+
 var ui_text: TowerEvolveMenuUIText = TowerEvolveMenuUIText.new()
 
 var animation_timer: Timer = Timer.new()
@@ -93,7 +95,7 @@ func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: T
 	else:
 		option_2.hide()
 		
-	if _tower.level > 2:
+	if _tower.level >= EVOLVE_LEVEL:
 			# option_1_select_label.show()
 			option_1_lock_icon.hide()
 			option_1_button.disabled = false
