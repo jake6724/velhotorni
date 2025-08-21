@@ -53,6 +53,10 @@ var _damage_buff: float = 0.0
 var _speed_buff: float = 0.0
 var _range_buff: float = 0.0
 
+var _hex_damage_multiplier: float = 1.0
+var _hex_speed_multiplier: float = 1.0
+var _hex_range_multiplier: float = 1.0
+
 # Preview data (used in tower upgrade menu)
 var preview_damage: float
 var preview_speed: float
@@ -229,9 +233,9 @@ func update_current_combat_data() -> void:
 	_leveled_damage = data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))  
 	_leveled_speed = data.speed / (1.0 + (speed_level * SPEED_MODIFIER))
 	_leveled_range = data.attack_range * (1.0 + (range_level * RANGE_MODIFIER))
-	curr_damage = _leveled_damage + _damage_buff
-	curr_speed = _leveled_speed + _speed_buff
-	curr_range = _leveled_range + _range_buff
+	curr_damage = (_leveled_damage + _damage_buff) * _hex_damage_multiplier
+	curr_speed = (_leveled_speed + _speed_buff) * _hex_speed_multiplier
+	curr_range = (_leveled_range + _range_buff) * _hex_range_multiplier
 	update_colliders()
 	update_preview_combat_data()
 
@@ -439,3 +443,26 @@ func get_tower_data_copy(_input_data: TowerData) -> TowerData:
 	for buff_data: BuffData in _input_data.buff_data_list:
 		new_data.buff_data_list.append(buff_data.duplicate(true))
 	return new_data
+
+# Hexes
+func on_add_new_hex(hex: Hex):
+	match hex.data.type:
+		Hex.Type.DAMAGE:
+			_hex_damage_multiplier -= hex.data.modified_value
+		Hex.Type.SPEED:
+			_hex_speed_multiplier -=  -(hex.data.modified_value)
+		Hex.Type.RANGE:
+			_hex_range_multiplier -= hex.data.modified_value
+		_: pass
+	update_current_combat_data()
+
+func on_remove_active_hex(hex: Hex):
+	match hex.data.type:
+		Hex.Type.DAMAGE:
+			_hex_damage_multiplier += hex.data.modified_value
+		Hex.Type.SPEED:
+			_hex_speed_multiplier +=  -(hex.data.modified_value)
+		Hex.Type.RANGE:
+			_hex_range_multiplier += hex.data.modified_value
+		_: pass
+	update_current_combat_data()

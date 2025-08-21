@@ -18,7 +18,7 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var boon_manager: BoonManager = $BoonManager
 @onready var boon_receive_area: Area2D = $BoonReceiveArea
 @onready var boon_receive_collider: CollisionShape2D = $BoonReceiveArea/BoonReceiveCollider
-@onready var hex_area: Area2D = $HexArea
+@onready var hex_area: HexArea = $HexArea
 @onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
 
 # Pathing 
@@ -86,6 +86,10 @@ func _ready():
 		boon_area.initialize(data.boon_data)
 		boon_area.owner = self
 	boon_manager.boon_connected.connect(on_boon_connected)
+
+	# Configure Hexes
+	if data.hex_data_list:
+		hex_area.hex_data_list = data.hex_data_list
 
 func _physics_process(delta):
 	move(delta)
