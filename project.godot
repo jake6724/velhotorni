@@ -32,6 +32,7 @@ WaveManager="*res://scripts/singletons/wave_manager.gd"
 LevelManager="*res://scripts/singletons/level_manager.gd"
 TowerGlobalData="*res://scripts/singletons/tower_global_data.gd"
 TimeManager="*res://scripts/singletons/time_manager.gd"
+Telemetry="*res://scripts/singletons/telemetry.gd"
 
 [debug]
 

@@ -6,6 +6,7 @@ extends Node2D
 @onready var player_controller: PlayerController = %PlayerController
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
 @onready var camera: Camera2D = $Camera2D
+@onready var fps_label: Label = %FPSLabel
 
 var active_level: LevelEnvironment
 
@@ -32,6 +33,9 @@ func _ready():
 
 	# Configure TowerGlobalData
 	TowerGlobalData.reset()
+
+# func _process(_delta):
+# 	fps_label.text = str(Telemetry.fps)
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"):
