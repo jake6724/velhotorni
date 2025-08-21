@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://di7m2788v1nim"]
+
+[ext_resource type="Script" uid="uid://c44xbwx307gqq" path="res://scripts/level/world_map.gd" id="1_dcl7n"]
+[ext_resource type="Texture2D" uid="uid://dd44h87wnbk4t" path="res://assets/art/sprites/spr_map.png" id="2_khxq5"]
+[ext_resource type="PackedScene" uid="uid://p5xgj4rjwt1e" path="res://scenes/level/world_map/LevelButton.tscn" id="3_x502f"]
+[ext_resource type="PackedScene" uid="uid://cfco8mo2bfg3b" path="res://scenes/level/LevelEnvironmentTutorial.tscn" id="4_mm0bo"]
+[ext_resource type="PackedScene" uid="uid://loutfuoic45j" path="res://scenes/level/LevelEnvironmentOne.tscn" id="5_cimm4"]
+[ext_resource type="PackedScene" uid="uid://bnmd4f0giohj6" path="res://scenes/level/LevelEnvironmentTwo.tscn" id="6_gotyu"]
+[ext_resource type="PackedScene" uid="uid://bd07geqmwnwm4" path="res://scenes/ui/LevelInfoPanel.tscn" id="7_rds70"]
+
+[node name="WorldMap" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dcl7n")
+metadata/_custom_type_script = "uid://c44xbwx307gqq"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 224.0
+texture = ExtResource("2_khxq5")
+
+[node name="LevelButtons" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelButtonTutorial" parent="LevelButtons" instance=ExtResource("3_x502f")]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 148.0
+offset_right = 76.0
+offset_bottom = 164.0
+level_scene = ExtResource("4_mm0bo")
+
+[node name="LevelButtonOne" parent="LevelButtons" instance=ExtResource("3_x502f")]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 180.0
+offset_right = 92.0
+offset_bottom = 196.0
+level_scene = ExtResource("5_cimm4")
+
+[node name="LevelButtonTwo" parent="LevelButtons" instance=ExtResource("3_x502f")]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 180.0
+offset_right = 140.0
+offset_bottom = 196.0
+level_scene = ExtResource("6_gotyu")
+
+[node name="LevelInfoPanel" parent="." instance=ExtResource("7_rds70")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 112.0
+offset_bottom = 56.0
