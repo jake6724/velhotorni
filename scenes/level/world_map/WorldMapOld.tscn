@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://di7m2788v1nim"]
+[gd_scene load_steps=8 format=3 uid="uid://17ix726lx157"]
 
 [ext_resource type="Script" uid="uid://c44xbwx307gqq" path="res://scripts/level/world_map.gd" id="1_dcl7n"]
 [ext_resource type="Texture2D" uid="uid://dd44h87wnbk4t" path="res://assets/art/sprites/spr_map.png" id="2_khxq5"]
