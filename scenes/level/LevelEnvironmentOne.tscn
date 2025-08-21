@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="2_ylovj"]
 [ext_resource type="Resource" uid="uid://btjsovrjc4lwe" path="res://data/waves/all_enemies.tres" id="3_6ufsd"]
 [ext_resource type="Resource" uid="uid://ug83h80mgmk3" path="res://data/waves/quick_fire.tres" id="3_74c5d"]
-[ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/one_fire.tres" id="3_fpffg"]
+[ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/wave_one_fire.tres" id="3_fpffg"]
 [ext_resource type="Resource" uid="uid://de1v4aby50v21" path="res://data/waves/wave_lots_of_krasue.tres" id="3_gmteg"]
 [ext_resource type="Resource" uid="uid://bkfx2wfu1els1" path="res://data/waves/wave_boon_test_1.tres" id="3_p5q4g"]
 [ext_resource type="Resource" uid="uid://b2yfh77l0ppp4" path="res://data/waves/lots_of_fire.tres" id="4_k1152"]
@@ -1071,7 +1071,7 @@ shader_parameter/ySpeed = -0.01
 z_index = -2
 z_as_relative = false
 script = ExtResource("1_c2pc5")
-level_name = "- Wildflower Road -"
+level_name = "Wildflower Road"
 initial_gold = 1000
 waves = Array[ExtResource("2_dl2pb")]([ExtResource("3_fpffg"), ExtResource("3_p5q4g"), ExtResource("3_6ufsd"), ExtResource("4_k1152"), ExtResource("3_74c5d"), ExtResource("3_gmteg"), ExtResource("3_fpffg")])
 

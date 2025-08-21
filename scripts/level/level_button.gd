@@ -19,10 +19,8 @@ func _ready():
 			if prop_name == "level_name":
 				level_name = prop_value
 
-
 func on_pressed() -> void:
 	LevelManager.load_specific_level(level_scene)
 
 func on_mouse_hovered() -> void: 
 	level_hovered.emit(level_name)
-	print(level_name)

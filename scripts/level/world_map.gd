@@ -2,7 +2,7 @@ class_name WorldMap
 extends Control
 
 @onready var level_buttons: Control = $LevelButtons
-@onready var level_name_label: RichTextLabel = $LevelNameLabel
+@onready var level_info_panel: LevelInfoPanel = %LevelInfoPanel
 
 func _ready():
 	# Connect to level buttons
@@ -10,4 +10,4 @@ func _ready():
 		button.level_hovered.connect(on_level_hovered)
 
 func on_level_hovered(_level_name) -> void:
-	level_name_label.text = _level_name
+	level_info_panel.set_level_name(_level_name)
