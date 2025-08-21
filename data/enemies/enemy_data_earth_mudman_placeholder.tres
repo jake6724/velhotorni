@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=6 format=3 uid="uid://ban6alelfvg8s"]
+
+[ext_resource type="Texture2D" uid="uid://bvyugwb8bon7t" path="res://assets/art/atlases/enemy/atl_enemy_earth_bigfoot.png" id="1_ebejt"]
+[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_pw7co"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="3_qgenu"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="4_eaepj"]
+[ext_resource type="Resource" uid="uid://5t2v6mjqeocq" path="res://data/hexes/hex_data_speed.tres" id="4_pw7co"]
+
+[resource]
+script = ExtResource("4_eaepj")
+size = 2
+element = 3
+strong_against_element = 4
+weak_against_element = 2
+health = 500.0
+speed = 20.0
+damage = 3
+drop_chance_base = 5.0
+atlas = ExtResource("1_ebejt")
+explosion_sfx = ExtResource("2_pw7co")
+hex_data_list = Array[ExtResource("3_qgenu")]([ExtResource("4_pw7co")])
+knockback_multiplier = 1.5
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"
