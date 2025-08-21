@@ -257,7 +257,7 @@ func on_debuff_remove_knockback() -> void:
 func set_pos_offset() -> void:
 	match data.size:
 		Enemy.Size.MEDIUM: data.pos_offset = Vector2(8,8)
-		Enemy.Size.LARGE: data.pos_offset = Vector2(16,16)
+		Enemy.Size.LARGE: data.pos_offset = Vector2(8,8)
 
 # Boons
 func on_boon_connected(new_boon: Boon) -> void:
@@ -271,9 +271,7 @@ func on_boon_triggered(boon: Boon) -> void:
 			if (health + boon.value) > max_health: health = max_health
 			else:
 				health += boon.value
-		Boon.Type.CONCEAL:
-			collider.set_deferred("disabled", true)
-			death_position.emit(global_position)
+
 		Boon.Type.SPEED: 
 			speed += (data.speed * boon.value)
 		Boon.Type.DAMAGE:
@@ -290,7 +288,6 @@ func on_boon_triggered(boon: Boon) -> void:
 
 func on_boon_expired(boon: Boon) -> void:
 	match boon.type:
-		Boon.Type.CONCEAL: collider.set_deferred("disabled", false)
 		Boon.Type.SPEED: speed -= (data.speed * boon.value)
 		Boon.Type.DAMAGE: damage -= (data.damage * boon.value)
 		Boon.Type.CLEANSE: pass
