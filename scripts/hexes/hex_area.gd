@@ -1,12 +1,15 @@
 class_name HexArea
 extends Area2D
 
+@onready var collider: CollisionShape2D = $HexCollider
+
 var hex_data_list: Array[HexData] = []
 
 ## Called directly by parent tower
 func initialize() -> void:
 	if not is_connected("area_entered", on_area_entered): area_entered.connect(on_area_entered) # Only look for towers if a hex to apply is set
 	if not is_connected("area_exited", on_area_exited): area_exited.connect(on_area_exited)
+	collider.shape.radius = hex_data_list[0].cast_radius
 
 func uninitialize() -> void:
 	if is_connected("area_entered", on_area_entered): disconnect("area_entered", on_area_entered)
