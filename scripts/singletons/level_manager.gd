@@ -6,7 +6,7 @@ var main_menu_scene: PackedScene = load("res://scenes/MainMenu.tscn")
 var main: Node2D # Reference used to change RoundInfo UI
 
 var level_tutorial: PackedScene = load("res://scenes/level/LevelEnvironmentTutorial.tscn")
-var level_one: PackedScene = load("res://scenes/level/LevelEnvironmentOne.tscn")
+var level_one: PackedScene = load("res://scenes/level/1_wind/Level1.tscn")
 var level_two: PackedScene = load("res://scenes/level/LevelEnvironmentTwo.tscn")
 var level_3_a: PackedScene = load("res://scenes/level/Level3A.tscn")
 

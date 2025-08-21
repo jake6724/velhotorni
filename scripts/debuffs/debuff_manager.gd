@@ -143,4 +143,3 @@ func remove_all_debuffs() -> void:
 			remove_child(debuff)
 			debuff.on_total_timer_timeout()
 			debuff.queue_free()
-
