@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://fhwurvcdissg"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_7cmky"]
-[ext_resource type="Resource" uid="uid://btkmprtnsviar" path="res://data/enemies/enemy_data_fire_ghoul.tres" id="1_psn4k"]
+[ext_resource type="Resource" uid="uid://btkmprtnsviar" path="res://data/boons/enemy_data_fire_ghoul.tres" id="1_psn4k"]
 
 [resource]
 script = ExtResource("1_7cmky")

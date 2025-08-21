@@ -30,3 +30,9 @@ func get_boon_count_by_type(match_type: Boon.Type) -> int:
 func on_boon_expired(expired_boon: Boon) -> void:
 	remove_child(expired_boon)
 	expired_boon.queue_free()
+
+# func remove_all_boons() -> void:
+# 	for child in get_children():
+# 		var boon: Boon = child as Boon
+# 		if boon:
+# 			on_boon_expired(boon)

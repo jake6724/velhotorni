@@ -58,6 +58,8 @@ var is_stunned: bool = false
 
 var drop_chance: float # data.drop_chance_base + drop_chance_bonus passed by bullet
 
+@onready var knockback_tween: Tween
+
 # Signals
 signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
@@ -239,14 +241,13 @@ func on_debuff_apply_weaken(_value) -> void:
 func on_debuff_remove_weaken() -> void:
 	weaken_percent = 0.0
 
-func on_debuff_apply_knockback(_value) -> void:
-	var tween: Tween = get_tree().create_tween()
+func on_debuff_apply_knockback(_value, _total_duration) -> void:
+	knockback_tween = create_tween()
 	var progress_target: float = max(0, path_follow.progress - _value)
-	var _knockback_tween_speed: float = .3
-	tween.tween_property(path_follow, "progress", progress_target, _knockback_tween_speed)
+	knockback_tween.tween_property(path_follow, "progress", progress_target, _total_duration)
 
 func on_debuff_remove_knockback() -> void:
-	pass
+	knockback_tween.stop()
 
 # Boons
 func on_boon_connected(new_boon: Boon) -> void:
@@ -271,16 +272,19 @@ func on_boon_triggered(boon: Boon) -> void:
 			collider.set_deferred("disabled", true)
 			sprite.modulate.a = .65
 			death_position.emit(global_position)
+		Boon.Type.CLEANSE:
+			debuff_manager.remove_all_debuffs()
+		Boon.Type.PREVENT:
+			debuff_manager.can_debuff = false
 		_: pass
 
 func on_boon_expired(boon: Boon) -> void:
 	match boon.type:
-		Boon.Type.CONCEAL:
-			collider.set_deferred("disabled", false)
-		Boon.Type.SPEED:
-			speed -= (data.speed * boon.value)
-		Boon.Type.DAMAGE:
-			damage -= (data.damage * boon.value)
+		Boon.Type.CONCEAL: collider.set_deferred("disabled", false)
+		Boon.Type.SPEED: speed -= (data.speed * boon.value)
+		Boon.Type.DAMAGE: damage -= (data.damage * boon.value)
+		Boon.Type.CLEANSE: pass
+		Boon.Type.PREVENT: debuff_manager.can_debuff = true
 		Boon.Type.STEALTH:
 			sprite.modulate.a = 1
 			collider.set_deferred("disabled", false)

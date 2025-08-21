@@ -2,6 +2,8 @@
 class_name DebuffManager
 extends Node2D
 
+var can_debuff: bool = true
+
 var stun_timer: Timer = Timer.new()
 var freeze_timer: Timer = Timer.new()
 
@@ -39,29 +41,30 @@ func _ready():
 	freeze_timer.timeout.connect(on_freeze_timer_timeout)
 
 func add_debuff(new_debuff_data: DebuffData) -> void:
-	if check_can_cc(new_debuff_data):
-		if "priority" in new_debuff_data:
-			if check_debuff_type_present(new_debuff_data.type): # A debuff of this type is already active
-				var active_debuff: Debuff = get_active_debuff_by_type(new_debuff_data.type)
-				if active_debuff:
-					if active_debuff.data.priority > new_debuff_data.priority:
-						return
-
-					elif active_debuff.data.priority == new_debuff_data.priority:
-						if active_debuff.total_timer.time_left > new_debuff_data.total_duration:
+	if can_debuff:
+		if check_can_cc(new_debuff_data):
+			if "priority" in new_debuff_data:
+				if check_debuff_type_present(new_debuff_data.type): # A debuff of this type is already active
+					var active_debuff: Debuff = get_active_debuff_by_type(new_debuff_data.type)
+					if active_debuff:
+						if active_debuff.data.priority > new_debuff_data.priority:
 							return
 
-					# This will only be reached if the active debuff priority is lower than new debuff, 
-					# or the priorities are the same but with less time left in active_debuff's total_timer
-					# than the new debuff's total_duration
-					remove_active_debuff.emit(active_debuff) # TODO: Determine if this is needed
-					active_debuff.queue_free()
+						elif active_debuff.data.priority == new_debuff_data.priority:
+							if active_debuff.total_timer.time_left > new_debuff_data.total_duration:
+								return
+
+						# This will only be reached if the active debuff priority is lower than new debuff, 
+						# or the priorities are the same but with less time left in active_debuff's total_timer
+						# than the new debuff's total_duration
+						remove_active_debuff.emit(active_debuff) # TODO: Determine if this is needed
+						active_debuff.queue_free()
+						create_debuff(new_debuff_data)
+				else:
 					create_debuff(new_debuff_data)
+
 			else:
 				create_debuff(new_debuff_data)
-
-		else:
-			create_debuff(new_debuff_data)
 
 func create_debuff(_data: DebuffData) -> void:
 	# Create a new Debuff object of the class defined in debuff_script
@@ -132,3 +135,12 @@ func get_active_debuff_by_type(_type: Debuff.Type) -> Debuff:
 			if child.data.type == _type:
 				return child
 	return null
+
+func remove_all_debuffs() -> void:
+	for child in get_children():
+		var debuff: Debuff = child as Debuff
+		if debuff:
+			remove_child(debuff)
+			debuff.on_total_timer_timeout()
+			debuff.queue_free()
+

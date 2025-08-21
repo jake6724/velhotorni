@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://btkmprtnsviar"]
+
+[ext_resource type="Texture2D" uid="uid://d01v81ufk0jvj" path="res://assets/art/atlases/enemy/atl_enemy_fire_ghoul.png" id="1_2bn8r"]
+[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="3_63ss6"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="4_xx5rv"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="5_0j6o7"]
+
+[resource]
+script = ExtResource("5_0j6o7")
+size = 1
+element = 0
+strong_against_element = 1
+weak_against_element = 5
+health = 100.0
+speed = 30.0
+damage = 1
+drop_chance_base = 1.0
+atlas = ExtResource("1_2bn8r")
+explosion_sfx = ExtResource("3_63ss6")
+hex_data_list = Array[ExtResource("4_xx5rv")]([])
+knockback_multiplier = 1.5
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

@@ -8,7 +8,7 @@ signal debuff_apply_knockback
 signal debuff_remove_knockback
 
 func start_debuff() -> void:
-	debuff_apply_knockback.emit(data.modified_value)
+	debuff_apply_knockback.emit(data.modified_value, data.total_duration)
 	total_timer.start(data.total_duration)
 
 func on_total_timer_timeout() -> void:

@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_6a3o8")
-value = 8.0
-total_duration = 0.1
+value = 1000.0
+total_duration = 3.0

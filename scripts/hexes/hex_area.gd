@@ -13,9 +13,7 @@ func uninitialize() -> void:
 	if is_connected("area_exited", on_area_exited): disconnect("area_exited", on_area_exited)
 
 func on_area_entered(intruder) -> void:
-	print("HexArea entered")
 	if intruder.owner != owner and intruder.owner is Tower:	
-		print("Intruder was Tower")
 		apply_hex_to_tower(intruder.owner.hex_manager)
 
 func apply_hex_to_tower(tower_hex_manager: HexManager) -> void:
