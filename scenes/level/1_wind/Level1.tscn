@@ -1,8 +1,11 @@
-[gd_scene load_steps=15 format=4 uid="uid://lqrdrmmlicq1"]
+[gd_scene load_steps=18 format=4 uid="uid://lqrdrmmlicq1"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_iyprl"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_mwfbb"]
-[ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/wave_one_fire.tres" id="6_c1p6t"]
+[ext_resource type="Resource" uid="uid://d2osac2hhtw" path="res://data/waves/level_1_wave_1.tres" id="3_2jnsi"]
+[ext_resource type="Resource" uid="uid://bgaxfnv76eb8w" path="res://data/waves/level_1_wave_2.tres" id="4_skm1g"]
+[ext_resource type="Resource" uid="uid://sm54vyr53p40" path="res://data/waves/level_1_wave_3.tres" id="5_4rugk"]
+[ext_resource type="Resource" uid="uid://5o04u44l7mdr" path="res://data/waves/level_1_wave_4.tres" id="6_pqcar"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="8_obavq"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="9_ol66e"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_g4ilq"]
@@ -1067,8 +1070,8 @@ z_index = -2
 z_as_relative = false
 script = ExtResource("1_iyprl")
 level_name = "Level 1"
-initial_gold = 1000
-waves = Array[ExtResource("2_mwfbb")]([ExtResource("6_c1p6t")])
+initial_gold = 75
+waves = Array[ExtResource("2_mwfbb")]([ExtResource("3_2jnsi"), ExtResource("4_skm1g"), ExtResource("5_4rugk"), ExtResource("6_pqcar")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false
