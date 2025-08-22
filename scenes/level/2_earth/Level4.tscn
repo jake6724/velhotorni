@@ -1073,7 +1073,7 @@ z_as_relative = false
 script = ExtResource("1_05wce")
 level_name = "Level 1"
 initial_gold = 75
-waves = Array[ExtResource("2_132xv")]([ExtResource("3_rsnel"), ExtResource("4_05wce"), ExtResource("5_132xv"), ExtResource("6_ipw3t"), ExtResource("7_05wce"), ExtResource("8_132xv")])
+waves = Array[ExtResource("2_132xv")]([ExtResource("8_132xv"), ExtResource("3_rsnel"), ExtResource("4_05wce"), ExtResource("5_132xv"), ExtResource("6_ipw3t"), ExtResource("7_05wce")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false
