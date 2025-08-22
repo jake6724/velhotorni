@@ -113,12 +113,14 @@ func hide_placement_phase() -> void:
 	tower_buttons.hide()
 	wave_button.hide()
 	wave_preview_panel.hide()
+	eye.hide()
 	fast_forward.show()
 
 func show_placement_phase() -> void:
 	tower_buttons.show()
 	wave_button.show()
 	wave_preview_panel.show()
+	eye.show()
 	fast_forward.hide()
 
 func hide_shop() -> void:
