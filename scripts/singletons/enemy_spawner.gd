@@ -26,7 +26,7 @@ func _ready():
 
 	# Connect to WaveManager
 	WaveManager.wave_started.connect(start_wave)
-	WaveManager.wave_completed.connect(reset)
+	WaveManager.wave_completed.connect(on_wave_complete)
 	WaveManager.wave_failed.connect(reset)
 	WaveManager.all_waves_completed.connect(reset)
 
@@ -90,7 +90,6 @@ func spawn_enemy(_enemy_data: EnemyData) -> void:
 	configure_enemy_pathing(new_enemy)
 	enemy_spawned.emit()
 	enemy_spawned_with_ref.emit(new_enemy)
-	# sort_enemies_z_index()
 
 func configure_enemy_pathing(enemy: Enemy) -> void:
 	# Create new PathFollow2D + RemoteTransform2D for enemy to follow EnemyPath with

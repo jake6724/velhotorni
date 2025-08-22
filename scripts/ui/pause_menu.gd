@@ -74,5 +74,5 @@ func on_exit_button_pressed():
 	main.unpause_game_with_menu()
 	SceneTransition.change_scene(main_menu)
 	LevelManager.level_index = 1 # TODO: Make 0 or most recent once loading is in
-	WaveManager.wave_completed.emit()
+	WaveManager.wave_failed.emit()
   
