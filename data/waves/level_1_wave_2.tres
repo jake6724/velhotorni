@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_iv4th"]
 [ext_resource type="Resource" uid="uid://cgyc4ymcc7ln2" path="res://data/spawn/spawn_earth_ghoul_half.tres" id="2_tycxe"]
 [ext_resource type="Resource" uid="uid://wkv5k7o08hjx" path="res://data/spawn/spawn_earth_mushroom_half.tres" id="3_28wxj"]
-[ext_resource type="Resource" uid="uid://dgqkobq3y2u2s" path="res://data/spawn/spawn_earth_ghoul_3.tres" id="3_lmv0o"]
+[ext_resource type="Resource" uid="uid://cjdvi8esvs31i" path="res://data/spawn/spawn_earth_ghoul_5.tres" id="4_lmv0o"]
 
 [resource]
 script = ExtResource("2_iv4th")
-data = Array[ExtResource("1_w0uk5")]([ExtResource("2_tycxe"), ExtResource("2_tycxe"), ExtResource("3_28wxj"), ExtResource("2_tycxe"), ExtResource("3_lmv0o"), ExtResource("2_tycxe"), ExtResource("2_tycxe"), ExtResource("3_28wxj"), ExtResource("2_tycxe"), ExtResource("3_lmv0o"), ExtResource("2_tycxe"), ExtResource("2_tycxe"), ExtResource("3_28wxj"), ExtResource("2_tycxe"), ExtResource("2_tycxe")])
+data = Array[ExtResource("1_w0uk5")]([ExtResource("2_tycxe"), ExtResource("2_tycxe"), ExtResource("3_28wxj"), ExtResource("2_tycxe"), ExtResource("4_lmv0o"), ExtResource("2_tycxe"), ExtResource("2_tycxe"), ExtResource("3_28wxj"), ExtResource("2_tycxe"), ExtResource("4_lmv0o"), ExtResource("2_tycxe"), ExtResource("2_tycxe"), ExtResource("3_28wxj"), ExtResource("2_tycxe"), ExtResource("4_lmv0o")])
 reward = 60.0
 token_reward = 0
 metadata/_custom_type_script = "uid://cskry1sw3vqba"

@@ -82,7 +82,7 @@ func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: T
 	option_1_lock_icon.show()
 	option_2_lock_icon.show()
 	info.text = ui_text.info_locked
-
+	
 	if TowerGlobalData.tower_evolution_status[_option_1_data.element]:
 		option_1.show()
 	else:
@@ -93,7 +93,7 @@ func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: T
 	else:
 		option_2.hide()
 		
-	if _token > 1:
+	if _token > 0:
 			# option_1_select_label.show()
 			option_1_lock_icon.hide()
 			option_1_button.disabled = false

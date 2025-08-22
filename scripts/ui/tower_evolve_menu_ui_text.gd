@@ -30,4 +30,3 @@ var evolve_desc_options: Dictionary[Constants.Element, String] = {
 
 var info_locked: String = "LVL 3 required to evolve"
 var info_unlocked: String = "Choose an evolution"
-
