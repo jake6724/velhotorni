@@ -195,7 +195,7 @@ func on_start_wave() -> void:
 func on_wave_complete() -> void:
 	# Update variables
 	placement_enabled = true	
-	gold += int(reward)
+	# gold += int(reward)
 	token += token_reward
 
 	# Tower Menu config

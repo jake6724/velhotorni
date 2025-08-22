@@ -10,6 +10,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready():
 	WaveManager.wave_failed.connect(on_wave_failed)
+	WaveManager.wave_completed_coin_manager.connect(on_wave_complete)
 
 ## Called when an enemy that `CoinDropManager` is connected to dies. `CoinDropManager` connects to enemies in `on_enemy_spawned()`
 func spawn_coin_drop(_global_pos, drop_chance) -> void:
@@ -55,6 +56,9 @@ func calc_destination(_global_pos) -> Vector2:
 	var jy: float = rng.randf_range(JITTER_MIN, JITTER_MAX)
 	var jitter_offset: Vector2 = Vector2(jx, jy)
 	return _global_pos + jitter_offset
+
+func on_wave_complete(global_pos: Vector2, reward: int) -> void:
+	spawn_coin_drop(global_pos, reward)
 
 func on_wave_failed() -> void:
 	for child in get_children():
