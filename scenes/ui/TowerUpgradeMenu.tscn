@@ -232,15 +232,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_wyh1y")
 
-[node name="CostLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/RequirementBar"]
+[node name="CostLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/RequirementBar"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("4_wvnee")
-theme_override_font_sizes/normal_font_size = 8
+theme_override_fonts/font = ExtResource("10_6r12l")
+theme_override_font_sizes/font_size = 8
 text = "25"
-scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -251,15 +249,13 @@ size_flags_vertical = 4
 texture = ExtResource("7_0ymig")
 stretch_mode = 2
 
-[node name="CurrentGoldLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/RequirementBar"]
+[node name="CurrentGoldLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Overview Bar/RequirementBar"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("4_wvnee")
-theme_override_font_sizes/normal_font_size = 8
+theme_override_fonts/font = ExtResource("10_6r12l")
+theme_override_font_sizes/font_size = 8
 text = "2500"
-scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 

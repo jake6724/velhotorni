@@ -10,6 +10,8 @@ const CELL_SIZE: int = 16
 
 # const ui_color_base: String = "#adb5bd"
 const ui_color_select: String = "#98a8f8"
+const color_green: String = "#10a500"
+const color_red: String = "#d63100"
 
 const TOWER_PRICES: Dictionary[Constants.Element, int] = {
 	Element.FIRE: 50,

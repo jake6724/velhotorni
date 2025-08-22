@@ -55,8 +55,8 @@ var target_priority_index: int = 0
 @onready var level_bar: HBoxContainer = %LevelBar
 
 @onready var requirements_bar: HBoxContainer = %RequirementBar
-@onready var cost_label: RichTextLabel = %CostLabel
-@onready var current_gold_label: RichTextLabel = %CurrentGoldLabel
+@onready var cost_label: Label = %CostLabel
+@onready var current_gold_label: Label = %CurrentGoldLabel
 
 @onready var desc: RichTextLabel = $%Description
 
@@ -225,6 +225,14 @@ func update_ui_text(player_gold) -> void:
 
 	cost_label.text = str(tower.level_upgrade_price)
 	current_gold_label.text = str(player_gold)
+
+	set_requirement_colors(player_gold)
+
+func set_requirement_colors(player_gold) -> void:
+	if player_gold >= tower.level_upgrade_price:
+		cost_label.set("theme_override_colors/font_color",Color(Constants.color_green))
+	else:
+		cost_label.set("theme_override_colors/font_color",Color(Constants.color_red))
 
 func update_description(_text) -> void:
 	desc.text = _text
