@@ -10,4 +10,5 @@ extends Node2D
 # Export vars
 @export var level_name: String
 @export var initial_gold: int
+@export var initial_token: int
 @export var waves: Array[Wave]

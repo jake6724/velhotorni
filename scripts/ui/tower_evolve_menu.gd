@@ -26,8 +26,6 @@ signal option_2_selected
 signal close_button_pressed
 signal back_button_pressed
 
-const EVOLVE_LEVEL: int = 4
-
 var ui_text: TowerEvolveMenuUIText = TowerEvolveMenuUIText.new()
 
 var animation_timer: Timer = Timer.new()
@@ -56,7 +54,7 @@ func _ready():
 	option_2.mouse_entered.connect(highlight_ui_element.bind(option_2))
 	option_2.mouse_exited.connect(un_highlight_ui_element.bind(option_2))
 
-func update_stats(_tower: Tower) -> void:
+func update_stats(_tower: Tower, _token: int) -> void:
 	var option_1_data: TowerData = Constants.tower_data[Constants.get_evolve_element_1(_tower.data.element)]
 	var option_2_data: TowerData = Constants.tower_data[Constants.get_evolve_element_2(_tower.data.element)]
 
@@ -74,9 +72,9 @@ func update_stats(_tower: Tower) -> void:
 	option_1_button.pressed.connect(on_option_1_select_pressed.bind(option_1_data.element))
 	option_2_button.pressed.connect(on_option_2_select_pressed.bind(option_2_data.element))
 
-	set_level_stats(_tower, option_1_data, option_2_data)
+	set_level_stats(_tower, option_1_data, option_2_data, _token)
 
-func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: TowerData) -> void:
+func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: TowerData, _token: int) -> void:
 	# option_1_select_label.hide()
 	# option_2_select_label.hide()
 	option_1_button.disabled = true
@@ -95,7 +93,7 @@ func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: T
 	else:
 		option_2.hide()
 		
-	if _tower.level >= EVOLVE_LEVEL:
+	if _token > 1:
 			# option_1_select_label.show()
 			option_1_lock_icon.hide()
 			option_1_button.disabled = false

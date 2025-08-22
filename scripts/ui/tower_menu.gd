@@ -11,8 +11,11 @@ extends Control
 
 @onready var all_tower_buttons: Array[TextureButton] = []
 
-@onready var tower_buttons: HBoxContainer = %TowerButtons
 @onready var gold: Label = %Gold
+@onready var token: Label = %Token
+@onready var token_bar: HBoxContainer = %TokenBar
+
+@onready var tower_buttons: HBoxContainer = %TowerButtons
 @onready var wave_button: TextureButton = %WaveButton
 @onready var wave_number: Label = %WaveNumber
 @onready var level_number: Label = %LevelNumber
@@ -141,6 +144,14 @@ func on_button_pressed(pressed_button: TextureButton):
 func update_gold(new_amount: int) -> void:
 	gold.text = str(new_amount)
 
+## Intended to be called by `player_controller` to directly update token amount
+func update_token(new_amount: int) -> void:
+	token.text = str(new_amount)
+	if new_amount > 0:
+		token_bar.show()
+	else:
+		token_bar.hide()
+		
 func set_tower_button_sprites(_gold: float):
 	for button: TextureButton in all_tower_buttons:
 		var element: Constants.Element

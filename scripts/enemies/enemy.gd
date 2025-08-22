@@ -274,7 +274,6 @@ func on_boon_triggered(boon: Boon) -> void:
 			if (health + boon.value) > max_health: health = max_health
 			else:
 				health += boon.value
-
 		Boon.Type.SPEED: 
 			speed += (data.speed * boon.value)
 		Boon.Type.DAMAGE:

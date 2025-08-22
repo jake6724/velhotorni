@@ -27,9 +27,16 @@ var gold: int:
 		tower_menu.update_gold(gold)
 		tower_menu.set_tower_button_sprites(gold)
 var reward: float
+var token: int: 
+	set(value): 
+		token = value
+		tower_menu.update_token(value)
+		# TODO: update evo menu!
+var token_reward: int
 
 # Wave Checkpoint data
 var checkpoint_gold: int
+var checkpoint_token: int
 var checkpoint_active_towers: Array[Tower] = []
 
 func _ready():
@@ -66,6 +73,7 @@ func _ready():
 
 func setup(): # Active level has been set by the time main calls this method
 	gold = LevelManager.active_level.initial_gold
+	token = LevelManager.active_level.initial_token
 	set_checkpoints()
 
 	tower_menu.show_level_number()
@@ -178,6 +186,7 @@ func on_start_wave() -> void:
 
 		WaveManager.start_wave()
 		reward = WaveManager.active_wave.reward
+		token_reward = WaveManager.active_wave.token_reward
 
 		SFXPlayer.play_sfx("go")
 	else:
@@ -187,6 +196,7 @@ func on_wave_complete() -> void:
 	# Update variables
 	placement_enabled = true	
 	gold += int(reward)
+	token += token_reward
 
 	# Tower Menu config
 	if WaveManager.wave_index != WaveManager.level_waves.size():
@@ -201,6 +211,7 @@ func on_wave_failed() -> void:
 	placement_enabled = true
 	tower_menu.show_placement_phase()
 	gold = checkpoint_gold
+	token = checkpoint_token
 
 	# Remove uncheckpointed towers from active_towers, delete them and update world grid
 	# Iterate backwards to avoid null pointer since editing list in place
@@ -261,6 +272,7 @@ func on_coin_collected():
 func set_checkpoints() -> void:
 	# Checkpoint playerController data
 	checkpoint_gold = gold
+	checkpoint_token = token
 	checkpoint_active_towers = active_towers.duplicate()
 
 func on_mouse_entered_button(_element) -> void:
@@ -315,11 +327,12 @@ func on_special_button_pressed() -> void:
 func on_evolve_button_pressed() -> void:
 	tower_upgrade_menu.hide()
 	tower_evolve_menu.show()
-	tower_evolve_menu.update_stats(tower_to_upgrade)
+	tower_evolve_menu.update_stats(tower_to_upgrade, token)
 
 func on_option_selected(_element: Constants.Element) -> void:
 	if tower_to_upgrade:
 		tower_to_upgrade.evolve(_element)
+		token -= 1
 		TowerGlobalData.tower_evolution_status[_element] = false
 		tower_evolve_menu.hide()
 		tower_to_upgrade = null

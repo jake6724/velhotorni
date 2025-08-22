@@ -6,5 +6,6 @@
 script = ExtResource("1_gbrhb")
 type = 1
 value = 0.5
+cast_radius = 0.0
 modified_value = 0.0
 metadata/_custom_type_script = "uid://bv3a3sefp6g0m"

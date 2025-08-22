@@ -455,10 +455,8 @@ func on_add_new_hex(hex: Hex):
 	match hex.data.type:
 		Hex.Type.DAMAGE:
 			_hex_damage_multiplier -= hex.data.modified_value
-			print("_hex_damage_multiplier: ", _hex_damage_multiplier)
 		Hex.Type.SPEED:
-			_hex_speed_multiplier -=  -(hex.data.modified_value)
-			print("_hex_speed_multiplier: ", _hex_speed_multiplier)
+			_hex_speed_multiplier -=  -(hex.data.modified_value) # this value SHOULD be positive
 		Hex.Type.RANGE:
 			_hex_range_multiplier -= hex.data.modified_value
 		_: pass
