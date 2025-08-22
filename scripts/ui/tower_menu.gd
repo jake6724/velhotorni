@@ -21,6 +21,8 @@ extends Control
 @onready var level_number: Label = %LevelNumber
 @onready var progress: Label = %Progress
 @onready var fast_forward: TextureButton = %FastForward
+@onready var eye: TextureRect = %Eye
+@onready var eye_button: TextureButton = %EyeButton
 
 @onready var fire_price_label: Label = %FirePriceLabel
 @onready var wind_price_label: Label = %WindPriceLabel
@@ -93,6 +95,8 @@ func _ready():
 
 	fast_forward.button_down.connect(on_start_fast_forward)
 	fast_forward.button_up.connect(on_stop_fast_forward)
+
+	eye_button.toggled.connect(on_eye_toggled)
 
 	# Configure timers
 	wave_number_timer.timeout.connect(on_wave_number_timer_timeout)
@@ -238,3 +242,11 @@ func set_price_labels() -> void:
 
 func set_wave_preview(wave_index: int) -> void:
 	wave_preview_panel.set_preview_labels(wave_index)
+
+func on_eye_toggled(toggled_on) -> void:
+	if toggled_on:
+		tower_buttons.hide()
+		wave_button.hide()
+	else:
+		tower_buttons.show()
+		wave_button.show()
