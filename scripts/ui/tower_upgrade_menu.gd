@@ -18,6 +18,7 @@ components that could handle their own update functionality
 
 @onready var evolve_button: Button = %EvolveButton
 @onready var evolve: NinePatchRect = %Evolve
+@onready var evolve_label: Label = %EvolveLabel
 
 @onready var close: NinePatchRect = %Close
 @onready var close_button: Button = %CloseButton
@@ -59,6 +60,11 @@ var target_priority_index: int = 0
 @onready var current_gold_label: Label = %CurrentGoldLabel
 
 @onready var desc: RichTextLabel = $%Description
+
+var can_flash_evolve: bool = false
+var flash_timer: Timer = Timer.new()
+const FLASH_TIME: float = 1
+const FLASH_HIDE_TIME: float = .5
 
 var tower: Tower = null:
 	set(_tower):
@@ -128,6 +134,11 @@ func _ready():
 
 	evolve.mouse_entered.connect(highlight_ui_element.bind(evolve))
 	evolve.mouse_exited.connect(un_highlight_ui_element.bind(evolve))
+
+	# Configuring evolve flash
+	add_child(flash_timer)
+	flash_timer.autostart = false
+	flash_timer.timeout.connect(on_flash_timer_timeout)
 
 func update_stats(player_gold: int = 0) -> void:
 	current_damage_label.text = str(snappedf(tower.curr_damage,.01))
@@ -304,6 +315,11 @@ func check_can_evolve() -> void:
 	var option_2_element: Constants.Element = Constants.get_evolve_element_2(tower.data.element)
 	if tower.data.element < 6 and (TowerGlobalData.tower_evolution_status[option_1_element] or TowerGlobalData.tower_evolution_status[option_2_element]):
 		evolve.show()
+		if can_flash_evolve: 
+			flash_timer.start(FLASH_TIME)
+		else:
+			flash_timer.stop()
+			evolve_label.show()
 	else:
 		evolve.hide()
 
@@ -324,3 +340,10 @@ func highlight_ui_element(ui_element: Control) -> void:
 
 func un_highlight_ui_element(ui_element: Control) -> void:
 	ui_element.self_modulate = Color.WHITE
+
+func on_flash_timer_timeout() -> void:
+	evolve_label.hide()
+	await get_tree().create_timer(FLASH_HIDE_TIME).timeout
+	evolve_label.show()
+	# evolve_label.visible = not evolve_label.visible
+	flash_timer.start(FLASH_TIME)

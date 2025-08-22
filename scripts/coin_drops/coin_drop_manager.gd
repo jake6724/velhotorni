@@ -26,6 +26,21 @@ func spawn_coin_drop(_global_pos, drop_chance) -> void:
 		if drop_chance > 0.0:
 			spawn_coin_drop(_global_pos, drop_chance)
 
+## Called when an enemy that `CoinDropManager` is connected to dies. `CoinDropManager` connects to enemies in `on_enemy_spawned()`
+func spawn_reward(_global_pos, drop_chance) -> void:
+	var roll: float = rng.randf()
+	if roll <= drop_chance:
+		var coin: CoinDrop = coin_drop_scene.instantiate()
+		call_deferred("add_child", coin)
+		coin.global_position = _global_pos
+		coin.destination = calc_destination(_global_pos)
+		coin.destination_direction = coin.global_position.direction_to(coin.destination)
+
+		drop_chance -= 1.0
+		await get_tree().create_timer(.025).timeout
+		if drop_chance > 0.0:
+			spawn_reward(_global_pos, drop_chance)
+
 func on_enemy_spawned(_enemy: Enemy) -> void:
 	_enemy.coin_dropped.connect(spawn_coin_drop)
 
@@ -58,7 +73,7 @@ func calc_destination(_global_pos) -> Vector2:
 	return _global_pos + jitter_offset
 
 func on_wave_complete(global_pos: Vector2, reward: int) -> void:
-	spawn_coin_drop(global_pos, reward)
+	spawn_reward(global_pos, reward)
 
 func on_wave_failed() -> void:
 	for child in get_children():
