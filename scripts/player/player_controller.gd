@@ -206,6 +206,7 @@ func on_wave_complete() -> void:
 		tower_menu.set_wave_preview(WaveManager.wave_index)
 
 	set_checkpoints()
+	set_tower_checkpoints()
 
 func on_wave_failed() -> void:
 	placement_enabled = true
@@ -218,6 +219,7 @@ func on_wave_failed() -> void:
 	for i in range(active_towers.size() - 1, -1, -1):
 		if active_towers[i] in checkpoint_active_towers:
 			active_towers[i].revert()
+			active_towers[i].revert_to_checkpoint()
 		else:
 			WorldGrid.data[WorldGrid.world_to_grid(active_towers[i].position)] = true
 			active_towers[i].queue_free()
@@ -274,6 +276,10 @@ func set_checkpoints() -> void:
 	checkpoint_gold = gold
 	checkpoint_token = token
 	checkpoint_active_towers = active_towers.duplicate()
+
+func set_tower_checkpoints() -> void:
+	for tower: Tower in active_towers:
+		tower.set_checkpoint_levels()
 
 func on_mouse_entered_button(_element) -> void:
 	if _element != Constants.Element.NONE:
@@ -353,6 +359,3 @@ func on_tower_priority_changed(priority: Tower.TargetPriority):
 		tower_to_upgrade.target_priority = priority
 		tower_upgrade_menu.set_target_priority_data(tower_to_upgrade.target_priority)
 		tower_upgrade_menu.update_stats(gold)
-# func _draw():	
-# 	draw_dashed_line(Vector2.ZERO, get_global_mouse_position(), Color.GREEN, 10)
-# 	draw_dashed_line(Vector2.ZERO, get_global_mouse_position(), Color.WHITE, 5)

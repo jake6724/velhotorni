@@ -2,7 +2,6 @@ class_name Tower
 extends Node2D
 
 enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
-var level_upgrade_price: int = 25
 
 # Child references
 @onready var sprite: Sprite2D = $Sprite2D
@@ -96,6 +95,15 @@ var special_level: int = 0:
 		update_buff_data()
 		update_bullet_modifier_data()
 		refresh_buff_collider()
+
+var checkpoint_damage_level: int
+var checkpoint_speed_level: int
+var checkpoint_range_level: int
+var checkpoint_special_level: int
+var checkpoint_level: int
+
+var level_upgrade_price: int = 25
+var checkpoint_level_upgrade_price: int
 
 const DAMAGE_MODIFIER: float = 0.5
 const RANGE_MODIFIER: float = 0.2
@@ -426,14 +434,14 @@ func on_remove_active_buff(buff: Buff):
 	update_current_combat_data()
 
 func refresh_transform_collider() -> void:
-	transform_collider.disabled = true
+	transform_collider.set_deferred("disabled", true)
 	await get_tree().create_timer(.1).timeout
-	transform_collider.disabled = false
+	transform_collider.set_deferred("disabled", false)
 
 func refresh_buff_collider() -> void:
-	buff_collider.disabled = true
+	buff_collider.set_deferred("disabled", true)
 	await get_tree().create_timer(.1).timeout
-	buff_collider.disabled = false
+	buff_collider.set_deferred("disabled", false)
 
 func update_colliders() -> void:
 	buff_collider.shape.radius = curr_range
@@ -449,6 +457,22 @@ func get_tower_data_copy(_input_data: TowerData) -> TowerData:
 	for buff_data: BuffData in _input_data.buff_data_list:
 		new_data.buff_data_list.append(buff_data.duplicate(true))
 	return new_data
+
+func set_checkpoint_levels() -> void:
+	checkpoint_damage_level = damage_level
+	checkpoint_speed_level = speed_level
+	checkpoint_range_level = range_level
+	checkpoint_special_level = special_level
+	checkpoint_level = level
+	checkpoint_level_upgrade_price = level_upgrade_price
+
+func revert_to_checkpoint() -> void:
+	damage_level = checkpoint_damage_level
+	speed_level = checkpoint_speed_level
+	range_level = checkpoint_range_level
+	special_level = checkpoint_special_level
+	level = checkpoint_level
+	level_upgrade_price = checkpoint_level_upgrade_price
 
 # Hexes
 func on_add_new_hex(hex: Hex):
