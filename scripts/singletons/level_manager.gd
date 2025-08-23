@@ -9,8 +9,9 @@ var level_tutorial: PackedScene = load("res://scenes/level/LevelEnvironmentTutor
 var level_one: PackedScene = load("res://scenes/level/2_earth/Level4.tscn")
 var level_two: PackedScene = load("res://scenes/level/1_wind/Level2.tscn")
 var level_3_a: PackedScene = load("res://scenes/level/1_wind/Level3A.tscn")
+var level_10: PackedScene = load("res://scenes/level/4_fire/Level10.tscn")
 
-var levels: Array[PackedScene] = [level_tutorial, level_one, level_two, level_3_a]
+var levels: Array[PackedScene] = [level_tutorial, level_one, level_two, level_3_a, level_10]
 var level_index: int = 1
 var active_level: LevelEnvironment
 

@@ -193,10 +193,10 @@ func on_level_number_timer_timeout():
 	$AnimationPlayer.play("flash")
 
 func on_start_fast_forward():
-	Engine.time_scale = Constants.FAST_FORWARD_SPEED
+	TimeManager.set_fast_forward_speed()
 
 func on_stop_fast_forward():
-	Engine.time_scale = 1
+	TimeManager.set_normal_speed()
 
 func on_mouse_entered_button(_button: TextureButton):
 	var element: Constants.Element

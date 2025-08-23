@@ -134,6 +134,13 @@ var target_priority: TargetPriority = TargetPriority.FIRST
 # Debugs
 var debug_attack_line: Line2D = Line2D.new()
 
+var prev_enemy_progress: float
+var cur_enemy_progress: float
+var progress_diff: float
+
+
+var attack_timer: Timer = Timer.new()
+
 signal tower_clicked
 signal tower_hovered
 signal tower_unhovered
@@ -147,6 +154,11 @@ func _ready():
 	transform_area.input_event.connect(on_transform_area_pressed)
 	transform_area.mouse_entered.connect(on_mouse_entered_transform_area)
 	transform_area.mouse_exited.connect(on_mouse_exited_transform_area)
+
+	attack_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	attack_timer.autostart = false
+	attack_timer.timeout.connect(on_attack_timer_timeout)
+	add_child(attack_timer)
 
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
@@ -176,30 +188,25 @@ func initialize(element: Constants.Element):
 	hex_manager.new_hex_added.connect(on_add_new_hex)
 	hex_manager.active_hex_removed.connect(on_remove_active_hex)
 
-func _physics_process(delta):	
-	# Custom timer
-	if not can_attack:
-		attack_time_counter += (delta)
-		# print(attack_time_counter)
-		if attack_time_counter > (curr_speed - FLOAT_ERROR_MARGIN): #and attack_time_counter < (curr_speed + .00001):
-			# print("Pass")
-			attack_time_counter = 0.0
-			can_attack = true
-
-	if can_attack:
-		active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
-		if active_target:
-			attack()
-			can_attack = false
-
+	attack_timer.start(curr_speed)
 	ap.play("idle")
 
-func attack() -> void:
-	# print(Time.get_unix_time_from_system())
-	flip_to_face_active_target()
-	spawn_bullet()
-	play_shot_sfx()
+func _physics_process(_delta):	
+	if can_attack:
+		attack()
 
+func attack() -> void:
+	active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
+	if active_target:
+		can_attack = false
+		attack_timer.start(curr_speed)
+		flip_to_face_active_target()
+		spawn_bullet()
+		play_shot_sfx()
+
+func on_attack_timer_timeout() -> void:
+	can_attack = true
+	
 func spawn_bullet() -> void:
 	var new_bullet = data.bullet.instantiate()
 	new_bullet.initialize(active_target, data.base_element, curr_damage, data.debuff_data, data.bullet_speed, curr_range, data.attack_range, data.bullet_modifier_data)

@@ -31,7 +31,6 @@ var token: int:
 	set(value): 
 		token = value
 		tower_menu.update_token(value)
-		print("Token: ", token)
 		tower_upgrade_menu.can_flash_evolve = token > 0
 
 var token_reward: int

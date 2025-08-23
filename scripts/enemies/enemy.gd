@@ -66,6 +66,11 @@ signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
 signal coin_dropped
 
+# DEBUGGING ONLY
+var prev_progress_ratio: float
+var hits_to_kill: int = 0
+var frames_alive: int = 0
+
 func _ready():
 	data.resource_local_to_scene = true # TODO: probably/maybe not needed
 	element = data.element
@@ -100,8 +105,10 @@ func _ready():
 		indicator.can_show_hex_range = true
 
 func _physics_process(delta):
-	move(delta)
-	debuff_manager.enemy_progress = path_follow.progress
+	if is_alive:
+		frames_alive += 1
+		move(delta)
+		debuff_manager.enemy_progress = path_follow.progress
 
 func move(delta) -> void:
 	if is_alive:
@@ -113,16 +120,15 @@ func move(delta) -> void:
 				sprite.flip_h = true
 			else: 
 				sprite.flip_h = false
+				
 			if path_follow.progress_ratio < .99:
-				path_follow.progress += ((speed - (speed * (slow_percent/100))) * delta)
+				path_follow.progress += (speed - ((speed * (slow_percent/100)))) * delta
 			else:
 				base.take_damage(damage)
 				die()
 		else:
 			ap.play("idle")
 
-	prev_global_position = global_position
-	
 func apply_drop_chance_bonus(_drop_chance_bonus: float) -> void:
 	drop_chance = data.drop_chance_base + _drop_chance_bonus
 	
@@ -160,8 +166,8 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 			die()
 
 func die() -> void:
-	# Update immediatedly required death properties
 	is_alive = false
+	# Update immediatedly required death properties
 	died.emit(self)
 	death_position.emit(global_position)
 	coin_dropped.emit(global_position, drop_chance)
