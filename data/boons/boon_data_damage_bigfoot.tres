@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_dchcc")
-mode = 0
-self_cast = false
+mode = 1
+self_cast = true
 ally_cast = true
 cast_speed = 2.0
 cast_radius = 50.0
-type = 3
+type = 5
 value = 2.0
 one_shot = false
 manual_disable = false

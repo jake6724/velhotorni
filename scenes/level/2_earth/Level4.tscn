@@ -1,14 +1,15 @@
-[gd_scene load_steps=20 format=4 uid="uid://lqrdrmmlicq1"]
+[gd_scene load_steps=21 format=4 uid="uid://lqrdrmmlicq1"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_05wce"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_132xv"]
-[ext_resource type="Resource" uid="uid://d2osac2hhtw" path="res://data/waves/level_1_wave_1.tres" id="3_rsnel"]
-[ext_resource type="Resource" uid="uid://bgaxfnv76eb8w" path="res://data/waves/level_1_wave_2.tres" id="4_05wce"]
-[ext_resource type="Resource" uid="uid://sm54vyr53p40" path="res://data/waves/level_1_wave_3.tres" id="5_132xv"]
-[ext_resource type="Resource" uid="uid://5o04u44l7mdr" path="res://data/waves/level_1_wave_4.tres" id="6_ipw3t"]
-[ext_resource type="Resource" uid="uid://b5y63p2thp888" path="res://data/waves/level_1_wave_5.tres" id="7_05wce"]
-[ext_resource type="Resource" uid="uid://dtkjpm6c4d5ms" path="res://data/waves/level_1_wave_6.tres" id="8_132xv"]
+[ext_resource type="Resource" uid="uid://d2osac2hhtw" path="res://data/waves/level_4_wave_1.tres" id="3_rsnel"]
+[ext_resource type="Resource" uid="uid://bgaxfnv76eb8w" path="res://data/waves/level_4_wave_2.tres" id="4_05wce"]
+[ext_resource type="Resource" uid="uid://sm54vyr53p40" path="res://data/waves/level_4_wave_3.tres" id="5_132xv"]
+[ext_resource type="Resource" uid="uid://5o04u44l7mdr" path="res://data/waves/level_4_wave_4.tres" id="6_ipw3t"]
+[ext_resource type="Resource" uid="uid://b5y63p2thp888" path="res://data/waves/level_4_wave_5.tres" id="7_05wce"]
+[ext_resource type="Resource" uid="uid://dtkjpm6c4d5ms" path="res://data/waves/level_4_wave_6.tres" id="8_132xv"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="8_f3wrl"]
+[ext_resource type="Resource" uid="uid://bhc7v8cmrr8im" path="res://data/waves/level_4_wave_7.tres" id="9_ipw3t"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="9_n3won"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_wl3i3"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="11_3y1du"]
@@ -1073,7 +1074,7 @@ z_as_relative = false
 script = ExtResource("1_05wce")
 level_name = "Level 1"
 initial_gold = 75
-waves = Array[ExtResource("2_132xv")]([ExtResource("8_132xv"), ExtResource("3_rsnel"), ExtResource("4_05wce"), ExtResource("5_132xv"), ExtResource("6_ipw3t"), ExtResource("7_05wce")])
+waves = Array[ExtResource("2_132xv")]([ExtResource("3_rsnel"), ExtResource("4_05wce"), ExtResource("5_132xv"), ExtResource("6_ipw3t"), ExtResource("7_05wce"), ExtResource("8_132xv"), ExtResource("9_ipw3t")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false
