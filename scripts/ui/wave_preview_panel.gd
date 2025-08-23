@@ -26,20 +26,20 @@ func get_all_wave_preview_data(active_level: LevelEnvironment):
 		for spawn: Spawn in wave.data:
 			total_count += 1
 			match spawn.enemy_data.element:
-				Constants.Element.FIRE: fire_count += 1
-				Constants.Element.WIND: wind_count += 1
-				Constants.Element.WATER: water_count += 1
-				Constants.Element.EARTH: earth_count += 1
-				Constants.Element.LIGHT: light_count += 1
-				Constants.Element.DARK: dark_count += 1
+				Constants.Element.FIRE: fire_count += spawn.enemy_data.health
+				Constants.Element.WIND: wind_count += spawn.enemy_data.health
+				Constants.Element.WATER: water_count += spawn.enemy_data.health
+				Constants.Element.EARTH: earth_count += spawn.enemy_data.health
+				Constants.Element.LIGHT: light_count += spawn.enemy_data.health
+				Constants.Element.DARK: dark_count += spawn.enemy_data.health
 
 		var wave_results: Dictionary[Constants.Element, float] = {
-			Constants.Element.FIRE: ((fire_count / total_count) * 100),
-			Constants.Element.WIND: ((wind_count / total_count) * 100),
-			Constants.Element.WATER: ((water_count / total_count) * 100),
-			Constants.Element.EARTH: ((earth_count / total_count) * 100),
-			Constants.Element.LIGHT: ((light_count / total_count) * 100),
-			Constants.Element.DARK: ((dark_count / total_count) * 100),
+			Constants.Element.FIRE: ((fire_count / total_count)),
+			Constants.Element.WIND: ((wind_count / total_count)),
+			Constants.Element.WATER: ((water_count / total_count)),
+			Constants.Element.EARTH: ((earth_count / total_count)),
+			Constants.Element.LIGHT: ((light_count / total_count)),
+			Constants.Element.DARK: ((dark_count / total_count)),
 		}
 		wave_previews.append(wave_results)
 

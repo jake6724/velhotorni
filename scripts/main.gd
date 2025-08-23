@@ -61,10 +61,8 @@ func pause_game_with_menu():
 	get_tree().paused = true
 
 func unpause_game_with_menu():
-	print("Main unpause_game_with_menu")
 	pause_menu.hide()
 	get_tree().paused = false
 
 func set_can_pause(value: bool) -> void:
 	can_pause = value
-	print("Can pause: ", can_pause)

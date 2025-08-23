@@ -37,7 +37,7 @@ func spawn_reward(_global_pos, drop_chance) -> void:
 		coin.destination_direction = coin.global_position.direction_to(coin.destination)
 
 		drop_chance -= 1.0
-		await get_tree().create_timer(.025).timeout
+		await get_tree().create_timer(.01).timeout
 		if drop_chance > 0.0:
 			spawn_reward(_global_pos, drop_chance)
 

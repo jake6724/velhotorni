@@ -73,7 +73,6 @@ func on_music_check_pressed():
 		MusicPlayer.update_bus_volume(0.0)
 
 func on_resume_button_pressed():
-	print("Resume button pressed")
 	main.unpause_game_with_menu()
 
 func on_exit_button_pressed():
