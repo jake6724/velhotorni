@@ -34,12 +34,12 @@ func get_all_wave_preview_data(active_level: LevelEnvironment):
 				Constants.Element.DARK: dark_count += spawn.enemy_data.health
 
 		var wave_results: Dictionary[Constants.Element, float] = {
-			Constants.Element.FIRE: ((fire_count / total_count)),
-			Constants.Element.WIND: ((wind_count / total_count)),
-			Constants.Element.WATER: ((water_count / total_count)),
-			Constants.Element.EARTH: ((earth_count / total_count)),
-			Constants.Element.LIGHT: ((light_count / total_count)),
-			Constants.Element.DARK: ((dark_count / total_count)),
+			Constants.Element.FIRE: ((fire_count / total_count) * 100),
+			Constants.Element.WIND: ((wind_count / total_count)* 100),
+			Constants.Element.WATER: ((water_count / total_count) * 100),
+			Constants.Element.EARTH: ((earth_count / total_count) * 100),
+			Constants.Element.LIGHT: ((light_count / total_count) * 100),
+			Constants.Element.DARK: ((dark_count / total_count) * 100),
 		}
 		wave_previews.append(wave_results)
 
