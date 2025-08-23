@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="Wave" load_steps=5 format=3 uid="uid://b5y63p2thp888"]
+[gd_resource type="Resource" script_class="Wave" load_steps=6 format=3 uid="uid://b5y63p2thp888"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_0s0og"]
+[ext_resource type="Resource" uid="uid://da3imqy44otyc" path="res://data/spawn/spawn_wind_flatwoods_1.tres" id="2_0s0og"]
 [ext_resource type="Resource" uid="uid://bwb1t2slfgsoo" path="res://data/spawn/spawn_earth_mudman_1.tres" id="2_f15lv"]
 [ext_resource type="Resource" uid="uid://wkv5k7o08hjx" path="res://data/spawn/spawn_earth_mushroom_half.tres" id="3_fejg0"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="5_tdbve"]
 
 [resource]
 script = ExtResource("5_tdbve")
-data = Array[ExtResource("1_0s0og")]([ExtResource("2_f15lv"), ExtResource("3_fejg0"), ExtResource("2_f15lv"), ExtResource("3_fejg0"), ExtResource("2_f15lv")])
+data = Array[ExtResource("1_0s0og")]([ExtResource("2_f15lv"), ExtResource("3_fejg0"), ExtResource("2_0s0og"), ExtResource("3_fejg0"), ExtResource("2_f15lv")])
 reward = 123.0
 token_reward = 1
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
