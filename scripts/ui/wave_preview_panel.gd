@@ -24,7 +24,7 @@ func get_all_wave_preview_data(active_level: LevelEnvironment):
 		var total_count: float = 0.0
 
 		for spawn: Spawn in wave.data:
-			total_count += 1
+			total_count += spawn.enemy_data.health
 			match spawn.enemy_data.element:
 				Constants.Element.FIRE: fire_count += spawn.enemy_data.health
 				Constants.Element.WIND: wind_count += spawn.enemy_data.health
