@@ -10,7 +10,10 @@ extends Node2D
 
 var active_level: LevelEnvironment
 
+var can_pause: bool = false
+
 func _ready():
+	SceneTransition.scene_transition_complete.connect(set_can_pause.bind(true))
 	# Configure with data from LevelManager
 	LevelManager.configure_level(self)
 	active_level = LevelManager.active_level
@@ -43,7 +46,7 @@ func _ready():
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
-		if not player_controller.menu_open:
+		if can_pause and not player_controller.menu_open:
 			pause_game_with_menu()
 
 # TODO: This could go in a TimeManager ? 
@@ -61,3 +64,7 @@ func unpause_game_with_menu():
 	print("Main unpause_game_with_menu")
 	pause_menu.hide()
 	get_tree().paused = false
+
+func set_can_pause(value: bool) -> void:
+	can_pause = value
+	print("Can pause: ", can_pause)

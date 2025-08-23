@@ -9,4 +9,5 @@ func change_scene(target: PackedScene) -> void:
 	await $AnimationPlayer.animation_finished
 	get_tree().change_scene_to_packed(target)
 	$AnimationPlayer.play_backwards('dissolve')
-	scene_transition_complete.emit() # no one observing yet
+	await $AnimationPlayer.animation_finished
+	scene_transition_complete.emit()
