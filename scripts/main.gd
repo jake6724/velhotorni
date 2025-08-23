@@ -34,12 +34,17 @@ func _ready():
 	# Configure TowerGlobalData
 	TowerGlobalData.reset()
 
+	# Configure PauseMenu
+	# player_controller.menu_opened.connect(pause_menu.set_can_open.bind(false))
+	# player_controller.menu_closed.connect(pause_menu.set_can_open.bind(true))
+
 # func _process(_delta):
 # 	fps_label.text = str(Telemetry.fps)
 
 func _input(_event):
-	if Input.is_action_just_pressed("escape"):
-		pause_game_with_menu()
+	if Input.is_action_just_pressed("escape"): # TODO: Input action change
+		if not player_controller.menu_open:
+			pause_game_with_menu()
 
 # TODO: This could go in a TimeManager ? 
 func pause_game():
@@ -53,5 +58,6 @@ func pause_game_with_menu():
 	get_tree().paused = true
 
 func unpause_game_with_menu():
+	print("Main unpause_game_with_menu")
 	pause_menu.hide()
 	get_tree().paused = false

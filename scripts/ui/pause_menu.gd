@@ -34,6 +34,11 @@ func _ready():
 	resume_button.pressed.connect(on_resume_button_pressed)
 	exit_button.pressed.connect(on_exit_button_pressed)
 
+func _input(_event):
+	if Input.is_action_just_pressed("exit_menu"):
+		get_viewport().set_input_as_handled() # prevent main from re-opening in its own _input()
+		on_resume_button_pressed()
+
 func on_sfx_volume_changed(_value):
 	if _value == 0:
 		sfx_check_box.button_pressed = false
@@ -68,6 +73,7 @@ func on_music_check_pressed():
 		MusicPlayer.update_bus_volume(0.0)
 
 func on_resume_button_pressed():
+	print("Resume button pressed")
 	main.unpause_game_with_menu()
 
 func on_exit_button_pressed():
@@ -75,4 +81,3 @@ func on_exit_button_pressed():
 	SceneTransition.change_scene(main_menu)
 	LevelManager.level_index = 1 # TODO: Make 0 or most recent once loading is in
 	WaveManager.wave_failed.emit()
-  

@@ -140,6 +140,10 @@ func _ready():
 	flash_timer.autostart = false
 	flash_timer.timeout.connect(on_flash_timer_timeout)
 
+func _input(_event):
+	if Input.is_action_just_pressed("exit_menu"):
+		on_close_button_pressed()
+
 func update_stats(player_gold: int = 0) -> void:
 	current_damage_label.text = str(snappedf(tower.curr_damage,.01))
 	upgraded_damage_label.text = str(snappedf(tower.preview_damage, .01))

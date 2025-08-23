@@ -40,6 +40,8 @@ var checkpoint_gold: int
 var checkpoint_token: int
 var checkpoint_active_towers: Array[Tower] = []
 
+var menu_open: bool = false
+
 func _ready():
 	# Configure connection to tower menu
 	tower_menu.tower_selected.connect(on_tower_selected)
@@ -175,6 +177,7 @@ func on_tower_clicked(tower: Tower) -> void:
 		tower_to_upgrade = tower
 		tower_upgrade_menu.show()
 		tower_menu.hide()
+		menu_open = true
 
 	else: pass # Tower not ready to be interacted with (just placed)
 
@@ -350,6 +353,7 @@ func on_close_menu() -> void:
 	tower_evolve_menu.hide()
 	tower_menu.show()
 	tower_to_upgrade = null
+	set_deferred("menu_open", false) # Delayed so that pause_menu is not triggered by main
 
 func on_tower_evolve_menu_back_button_pressed() -> void:
 	tower_evolve_menu.hide()
