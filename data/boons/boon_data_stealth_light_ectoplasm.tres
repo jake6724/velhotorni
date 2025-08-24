@@ -4,16 +4,16 @@
 
 [resource]
 script = ExtResource("1_eafmi")
-mode = 1
+mode = 0
 self_cast = true
 ally_cast = true
-cast_speed = 5.0
+cast_speed = 3.0
 cast_radius = 40.0
 type = 3
 value = 0.0
 one_shot = false
 manual_disable = false
-total_duration = 0.0
+total_duration = 1.5
 repeats = false
 repeat_duration = 0.0
 metadata/_custom_type_script = "uid://dlf5v11rla3hp"

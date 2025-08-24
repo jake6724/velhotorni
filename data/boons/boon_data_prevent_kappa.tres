@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="BoonData" load_steps=2 format=3 uid="uid://dx165svgagn4p"]
+[gd_resource type="Resource" script_class="BoonData" load_steps=2 format=3 uid="uid://b8wgtjphbsrs4"]
 
-[ext_resource type="Script" uid="uid://dlf5v11rla3hp" path="res://scripts/boons/data/boon_data.gd" id="1_newck"]
+[ext_resource type="Script" uid="uid://dlf5v11rla3hp" path="res://scripts/boons/data/boon_data.gd" id="1_5xiij"]
 
 [resource]
-script = ExtResource("1_newck")
+script = ExtResource("1_5xiij")
 mode = 1
 self_cast = true
 ally_cast = true

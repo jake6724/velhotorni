@@ -1,14 +1,13 @@
-[gd_resource type="Resource" script_class="Wave" load_steps=6 format=3 uid="uid://5o04u44l7mdr"]
+[gd_resource type="Resource" script_class="Wave" load_steps=5 format=3 uid="uid://5o04u44l7mdr"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_vf05y"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_b6evi"]
-[ext_resource type="Resource" uid="uid://bwb1t2slfgsoo" path="res://data/spawn/spawn_earth_mudman_1.tres" id="3_gobhy"]
-[ext_resource type="Resource" uid="uid://pbs8dhexasx1" path="res://data/spawn/spawn_earth_mushroom_1.tres" id="3_m6ipi"]
-[ext_resource type="Resource" uid="uid://br4j4q6pxacas" path="res://data/spawn/spawn_wind_flatwoods_half.tres" id="3_p0aof"]
+[ext_resource type="Resource" uid="uid://biu2aricheq0l" path="res://data/spawn/spawn_light_ghoul_tenth.tres" id="2_utlr8"]
+[ext_resource type="Resource" uid="uid://de8ylowxcugvj" path="res://data/spawn/spawn_earth_mudman_half.tres" id="5_bkmlb"]
 
 [resource]
 script = ExtResource("2_b6evi")
-data = Array[ExtResource("1_vf05y")]([ExtResource("3_gobhy"), ExtResource("3_m6ipi"), ExtResource("3_p0aof")])
+data = Array[ExtResource("1_vf05y")]([ExtResource("5_bkmlb"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("2_utlr8"), ExtResource("5_bkmlb")])
 reward = 124.0
 token_reward = 0
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
