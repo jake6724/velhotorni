@@ -26,6 +26,8 @@ var gold: int:
 		gold = value
 		tower_menu.update_gold(gold)
 		tower_menu.set_tower_button_sprites(gold)
+		if placement_enabled:
+			checkpoint_gold = gold
 var reward: float
 var token: int: 
 	set(value): 
