@@ -8,9 +8,16 @@ const JITTER_MIN: float = -20
 const JITTER_MAX: float = 20
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+var reward_remaining: int = 0
+
+signal reward_completed
+
 func _ready():
 	WaveManager.wave_failed.connect(on_wave_failed)
 	WaveManager.wave_completed_coin_manager.connect(on_wave_complete)
+
+func on_enemy_spawned(_enemy: Enemy) -> void:
+	_enemy.coin_dropped.connect(spawn_coin_drop)
 
 ## Called when an enemy that `CoinDropManager` is connected to dies. `CoinDropManager` connects to enemies in `on_enemy_spawned()`
 func spawn_coin_drop(_global_pos, drop_chance) -> void:
@@ -31,6 +38,8 @@ func spawn_reward(_global_pos, drop_chance) -> void:
 	var roll: float = rng.randf()
 	if roll <= drop_chance:
 		var coin: CoinDrop = coin_drop_scene.instantiate()
+		coin.is_reward = true
+		reward_remaining += 1
 		call_deferred("add_child", coin)
 		coin.global_position = _global_pos
 		coin.destination = calc_destination(_global_pos)
@@ -41,13 +50,15 @@ func spawn_reward(_global_pos, drop_chance) -> void:
 		if drop_chance > 0.0:
 			spawn_reward(_global_pos, drop_chance)
 
-func on_enemy_spawned(_enemy: Enemy) -> void:
-	_enemy.coin_dropped.connect(spawn_coin_drop)
+func decrement_reward_remaining() -> void:
+	reward_remaining -= 1
+	if reward_remaining <= 0:
+		reward_completed.emit()
 
 func _physics_process(delta):
 	for child in get_children():
 		var coin: CoinDrop = child as CoinDrop
-		if coin:
+		if coin: # TODO: clean up all these if statements ? 
 			coin.countdown -= delta
 			if coin.countdown > 0:
 				if not coin.destination_reached:
@@ -64,6 +75,7 @@ func _physics_process(delta):
 						coin.blink_checkpoint = coin.countdown
 						coin.blink_rate = coin.blink_rate - (coin.blink_rate * coin.blink_rate_multiplier)
 			else:
+				if coin.is_reward: decrement_reward_remaining()
 				coin.queue_free()
 
 func calc_destination(_global_pos) -> Vector2:

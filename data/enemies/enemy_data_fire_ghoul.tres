@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://8uyhl7u35sho"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://btkmprtnsviar"]
 
 [ext_resource type="Texture2D" uid="uid://d01v81ufk0jvj" path="res://assets/art/atlases/enemy/atl_enemy_fire_ghoul.png" id="1_2bn8r"]
 [ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="3_63ss6"]
