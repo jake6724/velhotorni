@@ -26,8 +26,6 @@ var gold: int:
 		gold = value
 		tower_menu.update_gold(gold)
 		tower_menu.set_tower_button_sprites(gold)
-		if placement_enabled:
-			checkpoint_gold = gold
 var reward: float
 var token: int: 
 	set(value): 
@@ -70,7 +68,7 @@ func _ready():
 	EnemySpawner.enemy_died.connect(on_enemy_died)
 
 	# Connect to WaveManager
-	WaveManager.wave_completed.connect(on_wave_complete)
+	# WaveManager.wave_completed.connect(on_reward_complete)
 	WaveManager.wave_failed.connect(on_wave_failed)
 
 	# Connect to CoinCollector
@@ -198,7 +196,8 @@ func on_start_wave() -> void:
 	else:
 		SFXPlayer.play_sfx("click_2")
 
-func on_wave_complete() -> void:
+## Connected by Main. Called when CoinDropManager emits `reward_complete`
+func on_reward_complete() -> void:
 	# Update variables
 	placement_enabled = true	
 	# gold += int(reward)

@@ -27,9 +27,11 @@ func _ready():
 
 	# Configure PlayerController
 	player_controller.setup()
+	coin_drop_manager.reward_completed.connect(player_controller.on_reward_complete)
 
-	# Configure CoinDrop Manager
+	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
+	player_controller.coin_collector.reward_collected.connect(coin_drop_manager.decrement_reward_remaining)
 
 	# Configure Camera
 	active_level.base.damaged.connect(camera.apply_shake)
@@ -37,19 +39,11 @@ func _ready():
 	# Configure TowerGlobalData
 	TowerGlobalData.reset()
 
-	# Configure PauseMenu
-	# player_controller.menu_opened.connect(pause_menu.set_can_open.bind(false))
-	# player_controller.menu_closed.connect(pause_menu.set_can_open.bind(true))
-
-# func _process(_delta):
-# 	fps_label.text = str(Telemetry.fps)
-
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
 		if can_pause and not player_controller.menu_open:
 			pause_game_with_menu()
-
-# TODO: This could go in a TimeManager ? 
+			
 func pause_game():
 	get_tree().paused = true
 

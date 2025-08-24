@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://bwb1t2slfgsoo"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_6kf68"]
-[ext_resource type="Resource" uid="uid://ban6alelfvg8s" path="res://data/enemies/enemy_data_earth_mudman.tres" id="1_m6h2v"]
+[ext_resource type="Resource" uid="uid://f8gh1hh771f4" path="res://data/enemies/enemy_data_earth_mudman.tres" id="1_m6h2v"]
 
 [resource]
 script = ExtResource("1_6kf68")

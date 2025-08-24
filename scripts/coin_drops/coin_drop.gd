@@ -14,5 +14,7 @@ var blink_rate: float = .25
 var blink_rate_multiplier: float = .1
 var blink_checkpoint: float = 0.0
 
+var is_reward: bool = false
+
 func _ready():
 	ap.play("spin")
