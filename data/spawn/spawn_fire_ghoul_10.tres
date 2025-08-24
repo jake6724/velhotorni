@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://nbhhsakm1cd8"]
 
-[ext_resource type="Resource" uid="uid://btkmprtnsviar" path="res://data/enemies/enemy_data_fire_ghoul.tres" id="1_1rb7p"]
+[ext_resource type="Resource" uid="uid://8uyhl7u35sho" path="res://data/enemies/enemy_data_fire_ghoul.tres" id="1_1rb7p"]
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_ecwb2"]
 
 [resource]

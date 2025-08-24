@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://de8ylowxcugvj"]
+
+[ext_resource type="Resource" uid="uid://ban6alelfvg8s" path="res://data/enemies/enemy_data_earth_mudman.tres" id="1_vccnt"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_3ha6e"]
+
+[resource]
+script = ExtResource("2_3ha6e")
+enemy_data = ExtResource("1_vccnt")
+delay = 0.5
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"
