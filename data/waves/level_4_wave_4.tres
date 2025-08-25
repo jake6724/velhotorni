@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_vf05y"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_b6evi"]
-[ext_resource type="Resource" path="res://data/spawn/spawn_light_ghoul_tenth.tres" id="2_utlr8"]
+[ext_resource type="Resource" uid="uid://biu2aricheq0l" path="res://data/spawn/spawn_light_ghoul_tenth.tres" id="2_utlr8"]
 [ext_resource type="Resource" uid="uid://jgaba1ytd24k" path="res://data/spawn/spawn_earth_mudman_half.tres" id="5_bkmlb"]
 
 [resource]
