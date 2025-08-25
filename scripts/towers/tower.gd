@@ -19,6 +19,7 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var buff_collider: CollisionShape2D = %BuffCollider
 @onready var buff_area: BuffArea = %BuffArea
 @onready var hex_manager: HexManager = $HexManager
+@onready var tower_audio: TowerAudio = $TowerAudio
 
 # Internal data
 var active_target: Enemy
@@ -172,6 +173,7 @@ func initialize(element: Constants.Element):
 	update_bullet_modifier_data()
 	update_textures()
 	update_colliders()
+	update_audio()
 
 	transform_timer.timeout.connect(on_transform_timer_timeout)
 	transform_timer.one_shot = true
@@ -249,6 +251,7 @@ func reset_tower() -> void:
 	refresh_buff_collider()
 	update_colliders()
 	update_textures()
+	update_audio()
 
 func update_current_combat_data() -> void:
 	_leveled_damage = data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))  
@@ -356,17 +359,24 @@ func flip_to_face_active_target():
 			sprite.flip_h = true
 
 func play_shot_sfx() -> void:
-	# TODO: THis should go inside bullet, play on spawn, make it positional too ? rework of sfx required
-	# OR maybe this should be part of tower, and tower should have positional sound node to play stuff
-	match data.element:
-		Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
-		Constants.Element.WIND: SFXPlayer.play_sfx("wind_shot")
-		Constants.Element.WATER: SFXPlayer.play_sfx("water_shot")
-		_: SFXPlayer.play_sfx("water_shot")
+	tower_audio.play_shot()
+
+
+	# # TODO: THis should go inside bullet, play on spawn, make it positional too ? rework of sfx required
+	# # OR maybe this should be part of tower, and tower should have positional sound node to play stuff
+	# match data.element:
+	# 	Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
+	# 	Constants.Element.WIND: SFXPlayer.play_sfx("wind_shot")
+	# 	Constants.Element.WATER: SFXPlayer.play_sfx("water_shot")
+	# 	_: SFXPlayer.play_sfx("water_shot")
 
 func update_textures() -> void:
 	sprite.texture = data.atlas
 	transform_hint_sprite.texture = data.transform_hint_texture
+
+func update_audio() -> void: 
+	tower_audio.element = data.base_element
+	tower_audio.initialize()
 
 func increment_level() -> void:
 	level += 1
