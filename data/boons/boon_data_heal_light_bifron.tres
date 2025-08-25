@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_pnn2g")
 mode = 0
-self_cast = true
+self_cast = false
 ally_cast = true
 cast_speed = 0.2
 cast_radius = 50.0
