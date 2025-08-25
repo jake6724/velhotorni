@@ -384,7 +384,8 @@ func on_enemy_died(enemy: Enemy) -> void:
 func on_area_entered(intruder: Area2D) -> void:
 	if intruder is Enemy:
 		in_range_targets.append(intruder)
-		intruder.died.connect(on_enemy_died)
+		if not intruder.died.is_connected(on_enemy_died):
+			intruder.died.connect(on_enemy_died)
 
 func on_area_exited(intruder) -> void:
 	if intruder is Enemy:

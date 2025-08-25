@@ -42,6 +42,9 @@ var checkpoint_active_towers: Array[Tower] = []
 
 var menu_open: bool = false
 
+# Debugging
+var gold_spent: int = 0
+
 func _ready():
 	# Configure connection to tower menu
 	tower_menu.tower_selected.connect(on_tower_selected)
@@ -136,6 +139,7 @@ func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 			active_towers.append(new_tower)
 			WorldGrid.data[grid_pos] = false
 			gold -= Constants.TOWER_PRICES[element]
+			gold_spent += Constants.TOWER_PRICES[element]
 
 			play_tower_select_sfx(element)
 
@@ -193,6 +197,8 @@ func on_start_wave() -> void:
 		token_reward = WaveManager.active_wave.token_reward
 
 		SFXPlayer.play_sfx("go")
+
+		print("Gold spent: ", gold_spent)
 	else:
 		SFXPlayer.play_sfx("click_2")
 
@@ -307,6 +313,7 @@ func on_damage_button_pressed() -> void:
 	if tower_to_upgrade.damage_level < 3:
 		if tower_to_upgrade and check_gold_upgrade_requirement():
 			gold -= tower_to_upgrade.level_upgrade_price
+			gold_spent += tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.damage_level += 1
 			tower_upgrade_menu.update_stats(gold)
 			tower_upgrade_menu.update_damage_level_arrow()
@@ -315,6 +322,7 @@ func on_speed_button_pressed() -> void:
 	if tower_to_upgrade.speed_level < 3:
 		if tower_to_upgrade and check_gold_upgrade_requirement():
 			gold -= tower_to_upgrade.level_upgrade_price
+			gold_spent += tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.speed_level += 1
 			tower_upgrade_menu.update_stats(gold)
 			tower_upgrade_menu.update_speed_level_arrow()
@@ -323,6 +331,7 @@ func on_range_button_pressed() -> void:
 	if tower_to_upgrade.range_level < 3:
 		if tower_to_upgrade and check_gold_upgrade_requirement():
 			gold -= tower_to_upgrade.level_upgrade_price
+			gold_spent += tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.range_level += 1
 			tower_upgrade_menu.update_stats(gold)
 			tower_upgrade_menu.update_range_level_arrow()
@@ -331,6 +340,7 @@ func on_special_button_pressed() -> void:
 	if tower_to_upgrade.special_level < 3:
 		if tower_to_upgrade and check_gold_upgrade_requirement():
 			gold -= tower_to_upgrade.level_upgrade_price
+			gold_spent += tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.special_level += 1
 			tower_upgrade_menu.update_stats(gold)
 			tower_upgrade_menu.update_special_level_arrow()

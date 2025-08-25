@@ -10,6 +10,8 @@ extends PanelContainer
 
 var wave_previews: Array[Dictionary] = []
 
+var total_health_values: Array = []
+
 func get_wave_preview_data(wave_index: int) -> Dictionary[Constants.Element, float]:
 	return wave_previews[wave_index]
 
@@ -41,7 +43,13 @@ func get_all_wave_preview_data(active_level: LevelEnvironment):
 			Constants.Element.LIGHT: ((light_count / total_count) * 100),
 			Constants.Element.DARK: ((dark_count / total_count) * 100),
 		}
+
+		var wave_health_result = fire_count + wind_count + water_count + earth_count + light_count + dark_count
+		total_health_values.append(wave_health_result)
+
 		wave_previews.append(wave_results)
+	
+	print(total_health_values)
 
 func set_preview_labels(wave_index: int) -> void:
 	var data: Dictionary = get_wave_preview_data(wave_index)
