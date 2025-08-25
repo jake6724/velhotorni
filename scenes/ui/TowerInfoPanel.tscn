@@ -175,18 +175,22 @@ layout_mode = 2
 theme_override_constants/separation = 1
 
 [node name="DamageLVL" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_tpjsh")
 
 [node name="SpeedLVL" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_vtvi4")
 
 [node name="RangeLVL" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_v4fcr")
 
 [node name="SpecialLVL" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_y5oeb")
 

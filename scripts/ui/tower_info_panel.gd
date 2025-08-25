@@ -8,6 +8,11 @@ extends PanelContainer
 @onready var special_label: Label = %SpecialLabel
 @onready var desc: RichTextLabel = %Description
 
+@onready var damage_lvl: TextureRect = %DamageLVL
+@onready var speed_lvl: TextureRect = %SpeedLVL
+@onready var range_lvl: TextureRect = %RangeLVL
+@onready var special_lvl: TextureRect = %SpecialLVL
+
 var ui_text: TowerInfoPanelUIText = TowerInfoPanelUIText.new()
 
 func update_stats(_tower: Tower) -> void:
@@ -21,6 +26,7 @@ func update_stats(_tower: Tower) -> void:
 		update_debuff_stats(_tower)
 		update_buff_stats(_tower)
 		update_description(_tower)
+		update_lvl_icons(_tower)
 
 func update_debuff_stats(_tower: Tower) -> void:
 	if _tower:
@@ -63,6 +69,11 @@ func update_description(_tower: Tower) -> void:
 func update_desc(_text: String) -> void:
 	desc.text = _text
 
+func update_lvl_icons(_tower: Tower) -> void:
+	damage_lvl.texture.region = Rect2(_tower.damage_level * 8, 0, 8, 10)
+	speed_lvl.texture.region = Rect2(_tower.speed_level * 8, 0, 8, 10)
+	range_lvl.texture.region = Rect2(_tower.range_level * 8, 0, 8, 10)
+	special_lvl.texture.region = Rect2(_tower.special_level * 8, 0, 8, 10)
 
 ###### Shop functions ######
 
@@ -77,6 +88,7 @@ func update_stats_shop(_tower_data: TowerData) -> void:
 		update_debuff_stats_shop(_tower_data)
 		update_buff_stats_shop(_tower_data)
 		update_description_shop(_tower_data)
+		update_lvl_icons_shop(_tower_data)
 
 func update_debuff_stats_shop(_tower_data) -> void:
 	if _tower_data:
@@ -115,3 +127,9 @@ func update_description_shop(_tower_data) -> void:
 				Buff.Type.DAMAGE: update_desc(ui_text.desc_buff_damage)
 				Buff.Type.SPEED: update_desc(ui_text.desc_buff_speed)
 				Buff.Type.RANGE: update_desc(ui_text.desc_buff_range)
+
+func update_lvl_icons_shop(_tower_data: TowerData) -> void:
+	damage_lvl.texture.region = Rect2(0, 0, 8, 10)
+	speed_lvl.texture.region = Rect2(0, 0, 8, 10)
+	range_lvl.texture.region = Rect2(0, 0, 8, 10)
+	special_lvl.texture.region = Rect2(0, 0, 8, 10)
