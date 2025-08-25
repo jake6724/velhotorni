@@ -361,15 +361,6 @@ func flip_to_face_active_target():
 func play_shot_sfx() -> void:
 	tower_audio.play_shot()
 
-
-	# # TODO: THis should go inside bullet, play on spawn, make it positional too ? rework of sfx required
-	# # OR maybe this should be part of tower, and tower should have positional sound node to play stuff
-	# match data.element:
-	# 	Constants.Element.FIRE: SFXPlayer.play_sfx("fire_shot")
-	# 	Constants.Element.WIND: SFXPlayer.play_sfx("wind_shot")
-	# 	Constants.Element.WATER: SFXPlayer.play_sfx("water_shot")
-	# 	_: SFXPlayer.play_sfx("water_shot")
-
 func update_textures() -> void:
 	sprite.texture = data.atlas
 	transform_hint_sprite.texture = data.transform_hint_texture
