@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://3dti3chb4cnf" path="res://assets/art/sprites/ui/spr_ui_tower_light.png" id="12_638he"]
 [ext_resource type="Texture2D" uid="uid://rvf7vwl6ny54" path="res://assets/art/sprites/ui/spr_ui_tower_earth.png" id="12_gfj4e"]
 [ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="12_ur1ae"]
-[ext_resource type="PackedScene" uid="uid://ndrrlrv5t215" path="res://scenes/ui/TowerInfoPanel.tscn" id="15_g5j4q"]
+[ext_resource type="PackedScene" uid="uid://du0wke3a8n1k8" path="res://scenes/ui/TowerInfoPanel.tscn" id="16_pieka"]
 [ext_resource type="Texture2D" uid="uid://bghgmlb8nqr2" path="res://scenes/ui/spr_ui_compact_box.png" id="17_rh755"]
 [ext_resource type="Texture2D" uid="uid://3pw18ittvgn5" path="res://scenes/ui/eye_open.png" id="18_e3xib"]
 [ext_resource type="Texture2D" uid="uid://cqduan450w60k" path="res://scenes/ui/eye_closed.png" id="19_pieka"]
@@ -494,21 +494,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("12_ur1ae")
 
-[node name="LeftTowerInfoPanel" parent="MarginContainer" instance=ExtResource("15_g5j4q")]
-unique_name_in_owner = true
-visible = false
-z_index = 1
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-
-[node name="RightTowerInfoPanel" parent="MarginContainer" instance=ExtResource("15_g5j4q")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
 [node name="Eye" type="TextureRect" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -526,6 +511,20 @@ mouse_filter = 1
 toggle_mode = true
 texture_normal = ExtResource("18_e3xib")
 texture_pressed = ExtResource("19_pieka")
+
+[node name="LeftTowerInfoPanel" parent="MarginContainer" instance=ExtResource("16_pieka")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 8
+
+[node name="RightTowerInfoPanel" parent="MarginContainer" instance=ExtResource("16_pieka")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

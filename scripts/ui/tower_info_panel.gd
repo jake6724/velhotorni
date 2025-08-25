@@ -1,8 +1,7 @@
 class_name TowerInfoPanel
-extends NinePatchRect
+extends PanelContainer
 
 @onready var name_label: Label = %NameLabel
-@onready var targeting_label: Label = %TargetingLabel
 @onready var damage_label: Label = %DamageLabel 
 @onready var speed_label: Label = %SpeedLabel
 @onready var range_label: Label = %RangeLabel
