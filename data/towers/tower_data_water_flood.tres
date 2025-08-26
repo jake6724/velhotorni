@@ -11,13 +11,13 @@
 script = ExtResource("2_n376y")
 element = 12
 base_element = 2
-damage = 16.0
+damage = 12.0
 speed = 0.15
 attack_range = 45.0
 atlas = ExtResource("1_0bn2v")
 transform_hint_texture = ExtResource("6_wmtpu")
 bullet = ExtResource("3_0bn2v")
-bullet_speed = 100.0
+bullet_speed = 200.0
 debuff_data = ExtResource("4_0bn2v")
 buff_data_list = Array[ExtResource("1_fefpo")]([])
 tower_name = "Flood"
