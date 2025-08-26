@@ -69,7 +69,6 @@ signal coin_dropped
 # DEBUGGING ONLY
 var prev_progress_ratio: float
 var hits_to_kill: int = 0
-var frames_alive: int = 0
 
 func _ready():
 	data.resource_local_to_scene = true # TODO: probably/maybe not needed
@@ -106,7 +105,6 @@ func _ready():
 
 func _physics_process(delta):
 	if is_alive:
-		frames_alive += 1
 		move(delta)
 		debuff_manager.enemy_progress = path_follow.progress
 

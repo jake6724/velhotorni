@@ -1,5 +1,6 @@
 extends Node
 
+# True = tower evolution is unused
 var tower_evolution_status: Dictionary[Constants.Element, bool] = {
 	Constants.Element.FIRE:  true, # Not used, set here to make reset simpler
 	Constants.Element.WIND:  true, # Not used, set here to make reset simpler

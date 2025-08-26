@@ -35,6 +35,7 @@ extends Control
 @onready var right_tower_info_panel: TowerInfoPanel = %RightTowerInfoPanel
 
 @onready var wave_preview_panel: WavePreviewPanel = %WavePreviewPanel
+@onready var cycle_indicator: NinePatchRect = %CycleIndicator
 
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
  	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
@@ -114,6 +115,8 @@ func hide_placement_phase() -> void:
 	wave_button.hide()
 	wave_preview_panel.hide()
 	eye.hide()
+
+	cycle_indicator.show()
 	fast_forward.show()
 
 func show_placement_phase() -> void:
@@ -121,6 +124,8 @@ func show_placement_phase() -> void:
 	wave_button.show()
 	wave_preview_panel.show()
 	eye.show()
+
+	cycle_indicator.hide()
 	fast_forward.hide()
 
 func hide_shop() -> void:

@@ -103,6 +103,9 @@ var checkpoint_range_level: int
 var checkpoint_special_level: int
 var checkpoint_level: int
 
+var is_evolved: bool = false
+var is_evolve_checkpointed: bool = false
+
 var level_upgrade_price: int = 25
 var checkpoint_level_upgrade_price: int
 
@@ -235,12 +238,14 @@ func revert() -> void:
 	cross_sprite.hide()
 
 func evolve(selected_element: Constants.Element) -> void:
+	is_evolved = true
 	base_data = get_tower_data_copy(Constants.tower_data[selected_element])
 	transform_data = get_tower_data_copy(Constants.tower_data[Constants.get_next_element(selected_element)])
 	data = base_data
 	reset_tower()
 
-## Remove all debuffs, refresh colliders so that buffs can be reapplied, update collider sizes, update textures.
+## Wrapper for lots of smaller update functions. 
+## Remove all debuffs, refresh colliders so that buffs can be reapplied, update collider sizes, update textures, update audio.
 func reset_tower() -> void:
 	buff_manager.remove_all_buffs()
 	update_current_combat_data()
@@ -475,6 +480,9 @@ func set_checkpoint_levels() -> void:
 	checkpoint_level = level
 	checkpoint_level_upgrade_price = level_upgrade_price
 
+	if is_evolved and not is_evolve_checkpointed:
+		is_evolve_checkpointed = true
+
 func revert_to_checkpoint() -> void:
 	damage_level = checkpoint_damage_level
 	speed_level = checkpoint_speed_level
@@ -482,6 +490,17 @@ func revert_to_checkpoint() -> void:
 	special_level = checkpoint_special_level
 	level = checkpoint_level
 	level_upgrade_price = checkpoint_level_upgrade_price
+
+	if not is_evolve_checkpointed:
+		is_evolved = false
+		revert_to_base_evolution()
+
+func revert_to_base_evolution() -> void:
+	TowerGlobalData.tower_evolution_status[data.element] = true
+	base_data = get_tower_data_copy(Constants.tower_data[data.base_element])
+	transform_data = get_tower_data_copy(Constants.tower_data[Constants.get_next_element(base_data.element)])
+	data = base_data
+	reset_tower()
 
 # Hexes
 func on_add_new_hex(hex: Hex):
