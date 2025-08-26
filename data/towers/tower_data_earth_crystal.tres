@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_1m4k5"]
 [ext_resource type="Texture2D" uid="uid://cia3n3yo10tsr" path="res://assets/art/atlases/tower/atl_tower_earth_crystal.png" id="1_h0ijk"]
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="2_h0ijk"]
-[ext_resource type="PackedScene" path="res://scenes/bullets/EarthCrystalBullet.tscn" id="3_xiexo"]
+[ext_resource type="PackedScene" uid="uid://lq856dmc4h4" path="res://scenes/bullets/EarthCrystalBullet.tscn" id="3_xiexo"]
 [ext_resource type="Texture2D" uid="uid://bpvgv3s34e6g5" path="res://assets/art/sprites/ui/spr_ui_light.png" id="4_cjikw"]
 [ext_resource type="Resource" uid="uid://du87ok63ed8e5" path="res://data/bullet_modifiers/bullet_modifier_coin_crystal.tres" id="4_vi1tn"]
 
@@ -11,13 +11,13 @@
 script = ExtResource("2_h0ijk")
 element = 14
 base_element = 3
-damage = 24.0
+damage = 26.0
 speed = 0.8
 attack_range = 50.0
 atlas = ExtResource("1_h0ijk")
 transform_hint_texture = ExtResource("4_cjikw")
 bullet = ExtResource("3_xiexo")
-bullet_speed = 100.0
+bullet_speed = 150.0
 bullet_modifier_data = ExtResource("4_vi1tn")
 buff_data_list = Array[ExtResource("1_1m4k5")]([])
 tower_name = "Crystal"
