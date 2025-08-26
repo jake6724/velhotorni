@@ -99,6 +99,8 @@ func update_stats_shop(_tower_data: TowerData) -> void:
 		update_description_shop(_tower_data)
 		update_lvl_icons_shop(_tower_data)
 
+		can_lvl_icon.hide()
+
 func update_debuff_stats_shop(_tower_data) -> void:
 	if _tower_data:
 		if _tower_data.debuff_data:

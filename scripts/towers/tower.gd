@@ -71,31 +71,38 @@ const LEVEL_COST_INCREMENT: int = 25
 var level: int = 0
 var damage_level: int = 0:
 	set(value):
+		set_deferred("transform_area", false)
 		damage_level = value
 		increment_level()
 		update_current_combat_data()
+		set_deferred("transform_area", true)
 
 var speed_level: int = 0:
 	set(value):
+		set_deferred("transform_area", false)
 		speed_level = value
 		increment_level()
 		update_current_combat_data()
 
 var range_level: int = 0:
 	set(value):
+		set_deferred("transform_area", false)
 		range_level = value
 		increment_level()
 		update_current_combat_data()
 		update_colliders()
+		set_deferred("transform_area", true)
 
 var special_level: int = 0:
 	set(value):
+		set_deferred("transform_area", false)
 		special_level = value
 		increment_level()
 		update_debuff_data()
 		update_buff_data()
 		update_bullet_modifier_data()
 		refresh_buff_collider()
+		set_deferred("transform_area", true)
 
 var checkpoint_damage_level: int
 var checkpoint_speed_level: int
@@ -431,6 +438,7 @@ func on_add_new_buff(buff: Buff):
 			_range_buff += _leveled_range * buff.data.modified_value
 		Buff.Type.SPEED:
 			_speed_buff +=  -(_leveled_speed * buff.data.modified_value)
+			print(_speed_buff)
 		Buff.Type.DAMAGE:
 			_damage_buff += _leveled_damage * buff.data.modified_value
 		_: pass

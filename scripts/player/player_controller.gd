@@ -194,7 +194,7 @@ func on_start_wave() -> void:
 
 		WaveManager.start_wave()
 		reward = WaveManager.active_wave.reward
-		tokens_reward = WaveManager.active_wave.tokens_reward
+		tokens_reward = WaveManager.active_wave.token_reward
 
 		SFXPlayer.play_sfx("go")
 
@@ -352,7 +352,6 @@ func on_evolve_button_pressed() -> void:
 
 func on_option_selected(_element: Constants.Element) -> void:
 	if tower_to_upgrade:
-		print(tower_to_upgrade)
 		tower_to_upgrade.evolve(_element)
 		tokens -= 1
 		TowerGlobalData.tower_evolution_status[_element] = false

@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7s0vhwm3l6nw"]
+
+[ext_resource type="Texture2D" uid="uid://c8noara2guef1" path="res://assets/art/atlases/enemy/atl_enemy_wind_ghoul.png" id="1_o5a3v"]
+[ext_resource type="Texture2D" uid="uid://bq4m41xaxujy2" path="res://assets/art/particles/particle_heal.png" id="2_kddda"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgr7h"]
+atlas = ExtResource("1_o5a3v")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jxx2e"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8, 1, 1)
+spread = 0.0
+gravity = Vector3(0, -12, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kddda"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8, 1, 1)
+gravity = Vector3(0, 12, 0)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_wgr7h")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+amount = 4
+texture = ExtResource("2_kddda")
+process_material = SubResource("ParticleProcessMaterial_jxx2e")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_kddda")
