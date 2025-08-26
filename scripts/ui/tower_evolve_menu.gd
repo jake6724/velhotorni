@@ -75,8 +75,6 @@ func update_stats(_tower: Tower, _token: int) -> void:
 	set_level_stats(_tower, option_1_data, option_2_data, _token)
 
 func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: TowerData, _token: int) -> void:
-	# option_1_select_label.hide()
-	# option_2_select_label.hide()
 	option_1_button.disabled = true
 	option_2_button.disabled = true
 	option_1_lock_icon.show()
@@ -94,11 +92,9 @@ func set_level_stats(_tower: Tower, _option_1_data: TowerData, _option_2_data: T
 		option_2.hide()
 		
 	if _token > 0:
-			# option_1_select_label.show()
 			option_1_lock_icon.hide()
 			option_1_button.disabled = false
 
-			# option_2_select_label.show()
 			option_2_lock_icon.hide()
 			option_2_button.disabled = false
 

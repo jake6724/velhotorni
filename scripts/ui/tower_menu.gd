@@ -156,7 +156,7 @@ func update_gold(new_amount: int) -> void:
 	gold.text = str(new_amount)
 
 ## Intended to be called by `player_controller` to directly update token amount
-func update_token(new_amount: int) -> void:
+func update_tokens(new_amount: int) -> void:
 	token.text = str(new_amount)
 	if new_amount > 0:
 		token_bar.show()
@@ -220,12 +220,12 @@ func on_mouse_exited_button():
 	mouse_exited_button.emit()
 
 # Info panel functions
-func show_tower_info_panel(_tower: Tower) -> void:
+func show_tower_info_panel(_tower: Tower, _gold: int) -> void:
 	if _tower.global_position.x > ((WorldGrid.width * Constants.CELL_SIZE) / 2):
-		left_tower_info_panel.update_stats(_tower)
+		left_tower_info_panel.update_stats(_tower, _gold)
 		left_tower_info_panel.show()
 	else:
-		right_tower_info_panel.update_stats(_tower)
+		right_tower_info_panel.update_stats(_tower, _gold)
 		right_tower_info_panel.show()
 
 func hide_tower_info_panels() -> void:

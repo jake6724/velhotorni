@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://du0wke3a8n1k8"]
+[gd_scene load_steps=16 format=3 uid="uid://du0wke3a8n1k8"]
 
 [ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_iaug6"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="2_ak4j3"]
 [ext_resource type="Script" uid="uid://bcxrp1aahk8qf" path="res://scripts/ui/tower_info_panel.gd" id="2_k8i0m"]
 [ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="3_k8i0m"]
 [ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="4_twomx"]
+[ext_resource type="Texture2D" uid="uid://dhxa8cu8yjj46" path="res://assets/art/sprites/ui/spr_ui_can_lvlup.png" id="4_v4fcr"]
 [ext_resource type="Texture2D" uid="uid://dpaj01np75c8o" path="res://assets/art/sprites/ui/spr_ui_stat_rng.png" id="5_afpeg"]
 [ext_resource type="Texture2D" uid="uid://b35e2ntjvtv5c" path="res://assets/art/sprites/ui/spr_ui_stat_spcl_burn.png" id="6_c0vut"]
 [ext_resource type="Texture2D" uid="uid://qr44ws5evlmm" path="res://assets/art/sprites/ui/atl_ui_lvlup_compact.png" id="7_jo43y"]
@@ -54,6 +55,7 @@ theme_override_constants/separation = 1
 
 [node name="TopBar" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = -1
 
 [node name="NameLabel" type="Label" parent="VBoxContainer/TopBar"]
 unique_name_in_owner = true
@@ -62,6 +64,12 @@ size_flags_horizontal = 6
 theme_override_fonts/font = ExtResource("2_ak4j3")
 theme_override_font_sizes/font_size = 8
 text = "Fire"
+
+[node name="CanLVLIcon" type="TextureRect" parent="VBoxContainer/TopBar"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("4_v4fcr")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

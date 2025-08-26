@@ -15,7 +15,7 @@ var tower_to_upgrade: Tower = null:
 		print(tower_to_upgrade)
 		if value:
 			tower_upgrade_menu.tower = value
-			tower_upgrade_menu.update_stats(gold)
+			tower_upgrade_menu.update_stats(gold, tokens)
 
 var click_enabled: bool = true
 var can_open_tower_upgrades: bool = true
@@ -28,17 +28,16 @@ var gold: int:
 		tower_menu.update_gold(gold)
 		tower_menu.set_tower_button_sprites(gold)
 var reward: float
-var token: int: 
+var tokens: int: 
 	set(value): 
-		token = value
-		tower_menu.update_token(value)
-		tower_upgrade_menu.can_flash_evolve = token > 0
+		tokens = value
+		tower_menu.update_tokens(value)
 
-var token_reward: int
+var tokens_reward: int
 
 # Wave Checkpoint data
 var checkpoint_gold: int
-var checkpoint_token: int
+var checkpoint_tokens: int
 var checkpoint_active_towers: Array[Tower] = []
 
 var menu_open: bool = false
@@ -80,7 +79,7 @@ func _ready():
 
 func setup(): # Active level has been set by the time main calls this method
 	gold = LevelManager.active_level.initial_gold
-	token = LevelManager.active_level.initial_token
+	tokens = LevelManager.active_level.initial_token
 	set_checkpoints()
 
 	tower_menu.show_level_number()
@@ -195,7 +194,7 @@ func on_start_wave() -> void:
 
 		WaveManager.start_wave()
 		reward = WaveManager.active_wave.reward
-		token_reward = WaveManager.active_wave.token_reward
+		tokens_reward = WaveManager.active_wave.tokens_reward
 
 		SFXPlayer.play_sfx("go")
 
@@ -208,7 +207,7 @@ func on_reward_complete() -> void:
 	# Update variables
 	placement_enabled = true	
 	# gold += int(reward)
-	token += token_reward
+	tokens += tokens_reward
 
 	# Tower Menu config
 	if WaveManager.wave_index != WaveManager.level_waves.size():
@@ -224,7 +223,7 @@ func on_wave_failed() -> void:
 	placement_enabled = true
 	tower_menu.show_placement_phase()
 	gold = checkpoint_gold
-	token = checkpoint_token
+	tokens = checkpoint_tokens
 
 	# Remove uncheckpointed towers from active_towers, delete them and update world grid
 	# Iterate backwards to avoid null pointer since editing list in place
@@ -260,7 +259,7 @@ func on_tower_hovered(tower: Tower):
 
 	if placement_enabled:
 		await get_tree().create_timer(.01).timeout # Make sure this always runs AFTER unhovered
-		tower_menu.show_tower_info_panel(tower)
+		tower_menu.show_tower_info_panel(tower, gold)
 
 func on_tower_unhovered(tower: Tower):
 	# if not placement_enabled:
@@ -286,7 +285,7 @@ func on_coin_collected():
 func set_checkpoints() -> void:
 	# Checkpoint playerController data
 	checkpoint_gold = gold
-	checkpoint_token = token
+	checkpoint_tokens = tokens
 	checkpoint_active_towers = active_towers.duplicate()
 
 func set_tower_checkpoints() -> void:
@@ -316,7 +315,7 @@ func on_damage_button_pressed() -> void:
 			gold -= tower_to_upgrade.level_upgrade_price
 			gold_spent += tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.damage_level += 1
-			tower_upgrade_menu.update_stats(gold)
+			tower_upgrade_menu.update_stats(gold, tokens)
 			tower_upgrade_menu.update_damage_level_arrow()
 
 func on_speed_button_pressed() -> void:
@@ -325,7 +324,7 @@ func on_speed_button_pressed() -> void:
 			gold -= tower_to_upgrade.level_upgrade_price
 			gold_spent += tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.speed_level += 1
-			tower_upgrade_menu.update_stats(gold)
+			tower_upgrade_menu.update_stats(gold, tokens)
 			tower_upgrade_menu.update_speed_level_arrow()
 
 func on_range_button_pressed() -> void:
@@ -334,7 +333,7 @@ func on_range_button_pressed() -> void:
 			gold -= tower_to_upgrade.level_upgrade_price
 			gold_spent += tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.range_level += 1
-			tower_upgrade_menu.update_stats(gold)
+			tower_upgrade_menu.update_stats(gold, tokens)
 			tower_upgrade_menu.update_range_level_arrow()
 
 func on_special_button_pressed() -> void:
@@ -343,19 +342,19 @@ func on_special_button_pressed() -> void:
 			gold -= tower_to_upgrade.level_upgrade_price
 			gold_spent += tower_to_upgrade.level_upgrade_price
 			tower_to_upgrade.special_level += 1
-			tower_upgrade_menu.update_stats(gold)
+			tower_upgrade_menu.update_stats(gold, tokens)
 			tower_upgrade_menu.update_special_level_arrow()
 
 func on_evolve_button_pressed() -> void:
 	tower_upgrade_menu.hide()
 	tower_evolve_menu.show()
-	tower_evolve_menu.update_stats(tower_to_upgrade, token)
+	tower_evolve_menu.update_stats(tower_to_upgrade, tokens)
 
 func on_option_selected(_element: Constants.Element) -> void:
 	if tower_to_upgrade:
 		print(tower_to_upgrade)
 		tower_to_upgrade.evolve(_element)
-		token -= 1
+		tokens -= 1
 		TowerGlobalData.tower_evolution_status[_element] = false
 		tower_evolve_menu.hide()
 		tower_to_upgrade = null
@@ -376,4 +375,4 @@ func on_tower_priority_changed(priority: Tower.TargetPriority):
 	if tower_to_upgrade:
 		tower_to_upgrade.target_priority = priority
 		tower_upgrade_menu.set_target_priority_data(tower_to_upgrade.target_priority)
-		tower_upgrade_menu.update_stats(gold)
+		tower_upgrade_menu.update_stats(gold, tokens)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://br3yofjq2l14o"]
+[gd_scene load_steps=54 format=3 uid="uid://br3yofjq2l14o"]
 
 [ext_resource type="Script" uid="uid://dla326rvf6d3k" path="res://scripts/ui/tower_upgrade_menu.gd" id="1_4dufm"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_typcq"]
@@ -16,9 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://b35e2ntjvtv5c" path="res://assets/art/sprites/ui/spr_ui_stat_spcl_burn.png" id="11_mt5yu"]
 [ext_resource type="Texture2D" uid="uid://fbjwfo10n881" path="res://assets/art/sprites/ui/spr_ui_stat_target.png" id="12_676bd"]
 [ext_resource type="Texture2D" uid="uid://dugw6td7t0lel" path="res://assets/art/sprites/ui/spr_ui_stat_arrow.png" id="13_xjkok"]
-[ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="14_xjkok"]
 [ext_resource type="Texture2D" uid="uid://bahrer0xdoere" path="res://assets/art/sprites/ui/spr_ui_box4.png" id="15_wes0x"]
 [ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="16_r51os"]
+[ext_resource type="Texture2D" uid="uid://l4yp0bln4h3l" path="res://assets/art/atlases/tower/atl_tower_fire.png" id="18_e3s6c"]
 [ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="20_e3s6c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wvnee"]
@@ -93,6 +93,10 @@ region = Rect2(0, 0, 8, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wes0x"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hf42"]
+atlas = ExtResource("18_e3s6c")
+region = Rect2(0, 0, 15, 16)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r51os"]
 
 [node name="TowerUpgradeMenu" type="Control"]
@@ -124,6 +128,7 @@ offset_right = 192.0
 offset_bottom = 104.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 texture = ExtResource("2_typcq")
 region_rect = Rect2(1, 1, 30, 30)
 patch_margin_left = 10
@@ -849,7 +854,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(215, 0)
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 33
 
 [node name="Targeting" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
 unique_name_in_owner = true
@@ -927,11 +932,14 @@ mouse_filter = 1
 texture_normal = ExtResource("13_xjkok")
 stretch_mode = 0
 
-[node name="Portrait" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
+[node name="Idle" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("14_xjkok")
+texture = SubResource("AtlasTexture_7hf42")
+stretch_mode = 2
 
 [node name="DescriptionBorder" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details"]
 z_as_relative = false

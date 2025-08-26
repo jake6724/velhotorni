@@ -13,9 +13,11 @@ extends PanelContainer
 @onready var range_lvl: TextureRect = %RangeLVL
 @onready var special_lvl: TextureRect = %SpecialLVL
 
+@onready var can_lvl_icon: TextureRect = %CanLVLIcon
+
 var ui_text: TowerInfoPanelUIText = TowerInfoPanelUIText.new()
 
-func update_stats(_tower: Tower) -> void:
+func update_stats(_tower: Tower, _gold: int) -> void:
 	if _tower:
 		name_label.text = _tower.data.tower_name
 		damage_label.text = str(snappedf(_tower.curr_damage, .01))
@@ -27,6 +29,7 @@ func update_stats(_tower: Tower) -> void:
 		update_buff_stats(_tower)
 		update_description(_tower)
 		update_lvl_icons(_tower)
+		update_can_lvl_icon(_tower, _gold)
 
 func update_debuff_stats(_tower: Tower) -> void:
 	if _tower:
@@ -74,6 +77,12 @@ func update_lvl_icons(_tower: Tower) -> void:
 	speed_lvl.texture.region = Rect2(_tower.speed_level * 8, 0, 8, 10)
 	range_lvl.texture.region = Rect2(_tower.range_level * 8, 0, 8, 10)
 	special_lvl.texture.region = Rect2(_tower.special_level * 8, 0, 8, 10)
+
+func update_can_lvl_icon(_tower: Tower, _gold: int) -> void:
+	if _gold >= _tower.level_upgrade_price:
+		can_lvl_icon.show()
+	else:
+		can_lvl_icon.hide()
 
 ###### Shop functions ######
 

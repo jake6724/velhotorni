@@ -51,7 +51,7 @@ var target_priority_index: int = 0
 @onready var range_level_arrow: TextureRect = %RangeLevelArrow
 @onready var special_level_arrow: TextureRect = %SpecialLevelArrow
 
-@onready var portrait: TextureRect = %Portrait
+@onready var idle: TextureRect = %Idle
 
 @onready var level_bar: HBoxContainer = %LevelBar
 
@@ -63,14 +63,23 @@ var target_priority_index: int = 0
 
 var can_flash_evolve: bool = false
 var flash_timer: Timer = Timer.new()
-const FLASH_TIME: float = 1
-const FLASH_HIDE_TIME: float = .5
+const FLASH_TIME: float = .5
+const FLASH_HIDE_TIME: float = .25
+
+var animation_timer: Timer = Timer.new()
+var animation_time: float = .25
+var animation_anim_x_increment: float = 16.0
+var animation_anim_x_max: float = 48.0
+var anim_x: float = 0.0
+var anim_w: float = 16.0
+var anim_y: float = 0.0
+var anim_h: float = 0.0
 
 var tower: Tower = null:
 	set(_tower):
 		tower = _tower
 		set_target_priority_data(tower.target_priority)
-		set_portrait(tower.data.portrait)
+		set_idle(tower.data.atlas)
 		set_all_level_arrows()
 
 var ui_text: TowerUpgradeMenuUIText = TowerUpgradeMenuUIText.new()
@@ -140,11 +149,16 @@ func _ready():
 	flash_timer.autostart = false
 	flash_timer.timeout.connect(on_flash_timer_timeout)
 
+	# Configure Idle player
+	add_child(animation_timer)
+	animation_timer.timeout.connect(on_animation_timer_timeout)
+	animation_timer.start()
+
 func _input(_event):
 	if Input.is_action_just_pressed("exit_menu"):
 		on_close_button_pressed()
 
-func update_stats(player_gold: int = 0) -> void:
+func update_stats(player_gold: int = 0, player_tokens: int = 0) -> void:
 	current_damage_label.text = str(snappedf(tower.curr_damage,.01))
 	upgraded_damage_label.text = str(snappedf(tower.preview_damage, .01))
 	if tower.damage_level < 3:
@@ -177,7 +191,7 @@ func update_stats(player_gold: int = 0) -> void:
 	update_bullet_modifier_stats()
 	update_level_labels()
 	update_ui_text(player_gold)
-	check_can_evolve()
+	check_can_evolve(player_tokens)
 
 func update_debuff_stats() -> void:
 	if tower.data.debuff_data:
@@ -305,16 +319,15 @@ func set_target_priority_data(priority: Tower.TargetPriority):
 		Tower.TargetPriority.LOWEST: target_priority_label.text = "LEAST HEALTH"
 		_: pass
 
-func set_portrait(_texture: Texture) -> void:
-	portrait.texture = _texture
-
 func set_all_level_arrows() -> void:
 	update_damage_level_arrow()
 	update_speed_level_arrow()
 	update_range_level_arrow()
 	update_special_level_arrow() 
 
-func check_can_evolve() -> void:
+func check_can_evolve(player_tokens: int) -> void:
+	can_flash_evolve = player_tokens > 0
+	
 	var option_1_element: Constants.Element = Constants.get_evolve_element_1(tower.data.element)
 	var option_2_element: Constants.Element = Constants.get_evolve_element_2(tower.data.element)
 	if tower.data.element < 6 and (TowerGlobalData.tower_evolution_status[option_1_element] or TowerGlobalData.tower_evolution_status[option_2_element]):
@@ -351,3 +364,16 @@ func on_flash_timer_timeout() -> void:
 	evolve_label.show()
 	# evolve_label.visible = not evolve_label.visible
 	flash_timer.start(FLASH_TIME)
+
+func set_idle(_atlas: Texture) -> void:
+	idle.texture.atlas = _atlas
+
+func on_animation_timer_timeout() -> void:
+	animate_atlas_textures()
+	animation_timer.start(animation_time)
+
+func animate_atlas_textures() -> void:
+	anim_x += animation_anim_x_increment
+	if anim_x > animation_anim_x_max:
+		anim_x = 0
+	idle.texture.region = Rect2(anim_x, anim_y, anim_w, anim_h)
