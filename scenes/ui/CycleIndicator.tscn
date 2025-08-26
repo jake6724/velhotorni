@@ -1,0 +1,142 @@
+[gd_scene load_steps=12 format=3 uid="uid://gkcs3ve0ty6v"]
+
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_as523"]
+[ext_resource type="Texture2D" uid="uid://b62ll37upwjx3" path="res://assets/art/sprites/ui/spr_ui_element_icons.png" id="2_73163"]
+[ext_resource type="Texture2D" uid="uid://c6uhr5m2aunq0" path="res://assets/art/sprites/ui/spr_ui_cycle_elbow_left.png" id="2_u2w0i"]
+[ext_resource type="Texture2D" uid="uid://bhwejjnex11u" path="res://assets/art/sprites/ui/spr_cycle_arrow.png" id="3_q2ftc"]
+[ext_resource type="Texture2D" uid="uid://bbjnjmbupt7i5" path="res://assets/art/sprites/ui/spr_ui_cycle_elbow_right.png" id="5_q546m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2w0i"]
+atlas = ExtResource("2_73163")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q546m"]
+atlas = ExtResource("2_73163")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ghem"]
+atlas = ExtResource("2_73163")
+region = Rect2(0, 10, 9, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y4o8"]
+atlas = ExtResource("2_73163")
+region = Rect2(10, 10, 9, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18y4f"]
+atlas = ExtResource("2_73163")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73163"]
+atlas = ExtResource("2_73163")
+region = Rect2(20, 10, 10, 10)
+
+[node name="CycleIndicator" type="NinePatchRect"]
+custom_minimum_size = Vector2(160, 0)
+anchors_preset = -1
+anchor_right = 0.333
+anchor_bottom = 0.074
+offset_left = 24.0
+offset_right = 24.16
+offset_bottom = -0.98
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_as523")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(160, 19)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="TextureRect13" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_u2w0i")
+stretch_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_u2w0i")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_q2ftc")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_q546m")
+
+[node name="TextureRect9" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_q2ftc")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_3ghem")
+
+[node name="TextureRect10" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_q2ftc")
+stretch_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_4y4o8")
+stretch_mode = 2
+
+[node name="TextureRect11" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_q2ftc")
+stretch_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_18y4f")
+stretch_mode = 2
+
+[node name="TextureRect12" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_q2ftc")
+stretch_mode = 2
+
+[node name="TextureRect7" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_73163")
+
+[node name="TextureRect8" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_q546m")
+stretch_mode = 2

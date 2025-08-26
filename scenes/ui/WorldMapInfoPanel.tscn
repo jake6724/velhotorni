@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://dki5b1v23sshc"]
+
+[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="1_hj1gr"]
+[ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="2_mxfgi"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="3_nwgce"]
+[ext_resource type="Texture2D" uid="uid://c4ihtp3rdhqet" path="res://assets/art/sprites/ui/spr_ui_star.png" id="4_mxfgi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qtjoo"]
+texture = ExtResource("1_hj1gr")
+texture_margin_left = 11.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 11.0
+region_rect = Rect2(1, 1, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwgce"]
+atlas = ExtResource("4_mxfgi")
+region = Rect2(16, 0, 16, 16)
+
+[node name="PanelContainer" type="PanelContainer"]
+custom_minimum_size = Vector2(128, 152)
+offset_right = 128.0
+offset_bottom = 152.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qtjoo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_mxfgi")
+theme_override_font_sizes/font_size = 16
+text = "Wildflow Road"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_nwgce")
+theme_override_font_sizes/font_size = 8
+text = "Meadowlands "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_nwgce")
+stretch_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_nwgce")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
