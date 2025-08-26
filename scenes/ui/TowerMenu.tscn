@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ciicsqtfh31fh"]
+[gd_scene load_steps=26 format=3 uid="uid://ciicsqtfh31fh"]
 
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_c8bcu"]
 [ext_resource type="Texture2D" uid="uid://c01agh3yt3cka" path="res://assets/art/sprites/spr_coin.png" id="2_g5j4q"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bghgmlb8nqr2" path="res://scenes/ui/spr_ui_compact_box.png" id="17_rh755"]
 [ext_resource type="Texture2D" uid="uid://3pw18ittvgn5" path="res://scenes/ui/eye_open.png" id="18_e3xib"]
 [ext_resource type="Texture2D" uid="uid://cqduan450w60k" path="res://scenes/ui/eye_closed.png" id="19_pieka"]
+[ext_resource type="PackedScene" uid="uid://gkcs3ve0ty6v" path="res://scenes/ui/CycleIndicator.tscn" id="20_pieka"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5j4q"]
 atlas = ExtResource("2_g5j4q")
@@ -208,6 +209,13 @@ text = "24-10"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="CycleIndicator" parent="MarginContainer/MarginContainer" instance=ExtResource("20_pieka")]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(160, 19)
+layout_mode = 2
 size_flags_vertical = 0
 
 [node name="WaveButton" type="TextureButton" parent="MarginContainer"]
