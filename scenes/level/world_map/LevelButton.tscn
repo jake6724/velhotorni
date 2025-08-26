@@ -1,9 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://p5xgj4rjwt1e"]
+[gd_scene load_steps=4 format=3 uid="uid://p5xgj4rjwt1e"]
 
 [ext_resource type="Script" uid="uid://bb7odrhof67gn" path="res://scripts/level/level_button.gd" id="1_aglc2"]
+[ext_resource type="Texture2D" uid="uid://c4ihtp3rdhqet" path="res://assets/art/sprites/ui/spr_ui_star.png" id="2_sniiu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lesvw"]
+atlas = ExtResource("2_sniiu")
+region = Rect2(32, 0, 16, 16)
 
 [node name="LevelButton" type="Button"]
 offset_right = 16.0
 offset_bottom = 16.0
 theme_type_variation = &"FlatButton"
 script = ExtResource("1_aglc2")
+
+[node name="Stars" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = -16.0
+offset_right = 16.0
+texture = SubResource("AtlasTexture_lesvw")

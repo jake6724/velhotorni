@@ -1,10 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2ib8ofejftch"]
+[gd_scene load_steps=35 format=3 uid="uid://d2ib8ofejftch"]
 
 [ext_resource type="Script" uid="uid://c44xbwx307gqq" path="res://scripts/level/world_map.gd" id="1_dcl7n"]
 [ext_resource type="Texture2D" uid="uid://dd44h87wnbk4t" path="res://assets/art/sprites/spr_map.png" id="2_khxq5"]
 [ext_resource type="Texture2D" uid="uid://cgnu6kwnix7xs" path="res://assets/art/sprites/spr_map_ui.png" id="3_d3yqg"]
 [ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="4_nhcxh"]
 [ext_resource type="Texture2D" uid="uid://dfduv7eaio246" path="res://assets/art/sprites/spr_ui_level_toggle_icon.png" id="5_62f4w"]
+[ext_resource type="PackedScene" uid="uid://p5xgj4rjwt1e" path="res://scenes/level/world_map/LevelButton.tscn" id="6_57e8q"]
+[ext_resource type="PackedScene" uid="uid://jdo45lffrgqj" path="res://scenes/level/0_tutorial/Level0.tscn" id="7_dcl7n"]
+[ext_resource type="PackedScene" uid="uid://lqrdrmmlicq1" path="res://scenes/level/1_wind/Level1.tscn" id="8_uquye"]
+[ext_resource type="PackedScene" uid="uid://up6hhofmi3ak" path="res://scenes/level/1_wind/Level2.tscn" id="9_dx26j"]
+[ext_resource type="PackedScene" uid="uid://dks8yom7a8nwo" path="res://scenes/level/1_wind/Level3A.tscn" id="10_hp4re"]
+[ext_resource type="PackedScene" uid="uid://drn4sppwachxq" path="res://scenes/level/1_wind/Level3B.tscn" id="11_034qt"]
+[ext_resource type="PackedScene" uid="uid://lqrdrmmlicq1" path="res://scenes/level/2_earth/Level4.tscn" id="12_8samu"]
+[ext_resource type="PackedScene" uid="uid://by8trpqksx30n" path="res://scenes/level/2_earth/Level5.tscn" id="13_gci5u"]
+[ext_resource type="PackedScene" uid="uid://bivdwleylafj8" path="res://scenes/level/2_earth/Level6A.tscn" id="14_wor3q"]
+[ext_resource type="PackedScene" uid="uid://borv2pevjmbv2" path="res://scenes/level/2_earth/Level6B.tscn" id="15_xt704"]
+[ext_resource type="PackedScene" uid="uid://c2gxvanegwbi8" path="res://scenes/level/3_water/Level7.tscn" id="16_cxms0"]
+[ext_resource type="PackedScene" uid="uid://c1gvbuy5blbcq" path="res://scenes/level/3_water/Level8.tscn" id="17_vsiyd"]
+[ext_resource type="PackedScene" uid="uid://c1gyqvt2o7i0u" path="res://scenes/level/3_water/Level9A.tscn" id="18_42h52"]
+[ext_resource type="PackedScene" uid="uid://do6soiybchkuq" path="res://scenes/level/3_water/Level9B.tscn" id="19_rwbqg"]
+[ext_resource type="PackedScene" uid="uid://cvpj6vl83nhdr" path="res://scenes/level/4_fire/Level11.tscn" id="20_v7h0i"]
+[ext_resource type="PackedScene" uid="uid://b17ojrtdyllvy" path="res://scenes/level/4_fire/Level12A.tscn" id="21_gyoph"]
+[ext_resource type="PackedScene" uid="uid://6i0na4og2p8o" path="res://scenes/level/4_fire/Level12B.tscn" id="22_thhux"]
+[ext_resource type="PackedScene" uid="uid://toek2hvpeaa6" path="res://scenes/level/5_dark/Level13.tscn" id="23_3377u"]
+[ext_resource type="PackedScene" uid="uid://sj7gbg2w0hs4" path="res://scenes/level/5_dark/Level14.tscn" id="24_wo7is"]
+[ext_resource type="PackedScene" uid="uid://ctn42w62iix4v" path="res://scenes/level/5_dark/Level15A.tscn" id="25_yjmtc"]
+[ext_resource type="PackedScene" uid="uid://4g7rxfol7yvn" path="res://scenes/level/5_dark/Level15B.tscn" id="26_xlnli"]
+[ext_resource type="PackedScene" uid="uid://b12fm4a5bq6qb" path="res://scenes/level/6_light/Level16.tscn" id="27_musam"]
+[ext_resource type="PackedScene" uid="uid://bxwxebpf1oewo" path="res://scenes/level/6_light/Level17.tscn" id="28_2b0ok"]
+[ext_resource type="PackedScene" uid="uid://dn7cdfxacnj5r" path="res://scenes/level/6_light/Level18A.tscn" id="29_nc3cf"]
+[ext_resource type="PackedScene" uid="uid://fe0hsw701d4g" path="res://scenes/level/6_light/Level18B.tscn" id="30_8samu"]
+[ext_resource type="PackedScene" uid="uid://dh5rn18s6a6fb" path="res://scenes/level/7_final/Level19.tscn" id="31_gci5u"]
+[ext_resource type="PackedScene" uid="uid://e3jc02esjkjy" path="res://scenes/level/7_final/Level20.tscn" id="32_wor3q"]
+[ext_resource type="PackedScene" uid="uid://crn6164cmmn16" path="res://scenes/level/7_final/Level22.tscn" id="33_xt704"]
+[ext_resource type="PackedScene" uid="uid://dki5b1v23sshc" path="res://scenes/ui/WorldMapInfoPanel.tscn" id="34_gci5u"]
 
 [node name="WorldMap" type="Node2D"]
 script = ExtResource("1_dcl7n")
@@ -26,26 +55,32 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="UI/Control"]
+[node name="LevelUI" type="TextureRect" parent="UI/Control"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_d3yqg")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/Control"]
+[node name="LevelInfo" type="NinePatchRect" parent="UI/Control"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 32.0
-offset_bottom = -8.0
+offset_left = 8.0
+offset_top = -38.0
+offset_right = 40.0
+offset_bottom = -6.0
 grow_vertical = 0
 texture = ExtResource("4_nhcxh")
 region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 10
+patch_margin_top = 9
+patch_margin_right = 10
+patch_margin_bottom = 12
 
-[node name="TextureButton" type="TextureButton" parent="UI/Control/NinePatchRect"]
+[node name="TextureButton" type="TextureButton" parent="UI/Control/LevelInfo"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,3 +88,247 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("5_62f4w")
+
+[node name="LevelButtons" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="0LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 128.0
+offset_right = 56.0
+offset_bottom = 144.0
+level_scene = ExtResource("7_dcl7n")
+
+[node name="1LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 160.0
+offset_right = 72.0
+offset_bottom = 176.0
+level_scene = ExtResource("8_uquye")
+
+[node name="2LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 160.0
+offset_right = 120.0
+offset_bottom = 176.0
+level_scene = ExtResource("9_dx26j")
+
+[node name="3ALevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 128.0
+offset_right = 120.0
+offset_bottom = 144.0
+level_scene = ExtResource("10_hp4re")
+
+[node name="3BLevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 128.0
+offset_right = 152.0
+offset_bottom = 144.0
+level_scene = ExtResource("11_034qt")
+
+[node name="4LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 112.0
+offset_right = 88.0
+offset_bottom = 128.0
+level_scene = ExtResource("12_8samu")
+
+[node name="5LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 80.0
+offset_right = 88.0
+offset_bottom = 96.0
+level_scene = ExtResource("13_gci5u")
+
+[node name="6ALevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 80.0
+offset_right = 136.0
+offset_bottom = 96.0
+level_scene = ExtResource("14_wor3q")
+
+[node name="6BLevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 48.0
+offset_right = 136.0
+offset_bottom = 64.0
+level_scene = ExtResource("15_xt704")
+
+[node name="7LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 96.0
+offset_right = 168.0
+offset_bottom = 112.0
+level_scene = ExtResource("16_cxms0")
+
+[node name="8LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 96.0
+offset_right = 200.0
+offset_bottom = 112.0
+level_scene = ExtResource("17_vsiyd")
+
+[node name="9ALevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 64.0
+offset_right = 200.0
+offset_bottom = 80.0
+level_scene = ExtResource("18_42h52")
+
+[node name="9BLevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 32.0
+offset_right = 232.0
+offset_bottom = 48.0
+level_scene = ExtResource("19_rwbqg")
+
+[node name="10LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 128.0
+offset_right = 232.0
+offset_bottom = 144.0
+level_scene = ExtResource("20_v7h0i")
+
+[node name="11LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 144.0
+offset_right = 200.0
+offset_bottom = 160.0
+level_scene = ExtResource("20_v7h0i")
+
+[node name="12ALevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 176.0
+offset_right = 200.0
+offset_bottom = 192.0
+level_scene = ExtResource("21_gyoph")
+
+[node name="12BLevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 160.0
+offset_right = 168.0
+offset_bottom = 176.0
+level_scene = ExtResource("22_thhux")
+
+[node name="13LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 176.0
+offset_right = 264.0
+offset_bottom = 192.0
+level_scene = ExtResource("23_3377u")
+
+[node name="14LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 176.0
+offset_right = 312.0
+offset_bottom = 192.0
+level_scene = ExtResource("24_wo7is")
+
+[node name="15ALevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 144.0
+offset_right = 344.0
+offset_bottom = 160.0
+level_scene = ExtResource("25_yjmtc")
+
+[node name="15BLevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 144.0
+offset_right = 296.0
+offset_bottom = 160.0
+level_scene = ExtResource("26_xlnli")
+
+[node name="16LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 112.0
+offset_right = 328.0
+offset_bottom = 128.0
+level_scene = ExtResource("27_musam")
+
+[node name="17LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 112.0
+offset_right = 280.0
+offset_bottom = 128.0
+level_scene = ExtResource("28_2b0ok")
+
+[node name="18ALevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 80.0
+offset_right = 312.0
+offset_bottom = 96.0
+level_scene = ExtResource("29_nc3cf")
+
+[node name="18BLevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 80.0
+offset_right = 344.0
+offset_bottom = 96.0
+level_scene = ExtResource("30_8samu")
+
+[node name="19LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 48.0
+offset_right = 312.0
+offset_bottom = 64.0
+level_scene = ExtResource("31_gci5u")
+
+[node name="20LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 32.0
+offset_right = 280.0
+offset_bottom = 48.0
+level_scene = ExtResource("32_wor3q")
+
+[node name="21LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 16.0
+offset_right = 312.0
+offset_bottom = 32.0
+level_scene = ExtResource("33_xt704")
+
+[node name="22LevelButton" parent="UI/LevelButtons" instance=ExtResource("6_57e8q")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 32.0
+offset_right = 344.0
+offset_bottom = 48.0
+level_scene = ExtResource("33_xt704")
+
+[node name="PanelContainer" parent="." instance=ExtResource("34_gci5u")]
+offset_left = 240.0
+offset_right = 400.0
+size_flags_horizontal = 8
