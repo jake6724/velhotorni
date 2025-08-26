@@ -94,6 +94,7 @@ offset_right = 192.0
 offset_bottom = 104.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 texture = ExtResource("2_4bqn4")
 region_rect = Rect2(1, 1, 30, 30)
 patch_margin_left = 10

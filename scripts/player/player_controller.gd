@@ -12,6 +12,7 @@ var tower_to_place: Tower = null
 var tower_to_upgrade: Tower = null:
 	set(value):
 		tower_to_upgrade = value
+		print(tower_to_upgrade)
 		if value:
 			tower_upgrade_menu.tower = value
 			tower_upgrade_menu.update_stats(gold)
@@ -352,6 +353,7 @@ func on_evolve_button_pressed() -> void:
 
 func on_option_selected(_element: Constants.Element) -> void:
 	if tower_to_upgrade:
+		print(tower_to_upgrade)
 		tower_to_upgrade.evolve(_element)
 		token -= 1
 		TowerGlobalData.tower_evolution_status[_element] = false
