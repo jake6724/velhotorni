@@ -120,7 +120,7 @@ const DAMAGE_MODIFIER: float = 0.5
 const RANGE_MODIFIER: float = 0.2
 const SPEED_MODIFIER: float = 0.3334
 
-const BURN_DAMAGE_MODIFIER: float = 0.75
+const BURN_DAMAGE_MODIFIER: float = 1
 const KNOCKBACK_DISTANCE_MODIFIER: float = 0.5
 const SLOW_DURATION_MODIFIER: float = 0.3334
 const FREEZE_DURATION_MODIFIER: float = 0.3334
