@@ -15,6 +15,6 @@ script = ExtResource("1_aglc2")
 
 [node name="Stars" type="TextureRect" parent="."]
 layout_mode = 0
-offset_top = -16.0
 offset_right = 16.0
+offset_bottom = 16.0
 texture = SubResource("AtlasTexture_lesvw")

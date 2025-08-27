@@ -1063,6 +1063,7 @@ z_index = -2
 z_as_relative = false
 script = ExtResource("1_eds8m")
 level_name = "Level 3B"
+region = 2
 initial_gold = 1000
 waves = Array[ExtResource("2_l0qwy")]([ExtResource("6_tioql")])
 

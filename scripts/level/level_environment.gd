@@ -1,6 +1,8 @@
 class_name LevelEnvironment
 extends Node2D
 
+enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
+
 # # Child References
 @onready var enemy_path: Path2D = $EnemyPath 
 @onready var tilemap: TileMapLayer = $TileMapLayer
@@ -9,6 +11,7 @@ extends Node2D
 
 # Export vars
 @export var level_name: String
+@export var region: Region
 @export var initial_gold: int
 @export var initial_token: int
 @export var waves: Array[Wave]

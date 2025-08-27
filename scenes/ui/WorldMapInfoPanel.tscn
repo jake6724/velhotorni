@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="2_mxfgi"]
 [ext_resource type="Script" uid="uid://cs6ii1wqm8sj" path="res://scripts/ui/world_map_info_panel.gd" id="2_nwgce"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="3_nwgce"]
-[ext_resource type="Texture2D" uid="uid://c4ihtp3rdhqet" path="res://assets/art/sprites/ui/spr_ui_star.png" id="4_mxfgi"]
+[ext_resource type="Texture2D" uid="uid://ddifi16t2ehe6" path="res://assets/art/sprites/ui/spr_ui_star2.png" id="5_nwgce"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qtjoo"]
 texture = ExtResource("1_hj1gr")
@@ -14,8 +14,8 @@ texture_margin_right = 10.0
 texture_margin_bottom = 11.0
 region_rect = Rect2(1, 1, 30, 30)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nwgce"]
-atlas = ExtResource("4_mxfgi")
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtjoo"]
+atlas = ExtResource("5_nwgce")
 region = Rect2(16, 0, 16, 16)
 
 [node name="WorldMapInfoPanel" type="PanelContainer"]
@@ -29,6 +29,7 @@ script = ExtResource("2_nwgce")
 layout_mode = 2
 
 [node name="LevelName" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_mxfgi")
@@ -37,7 +38,8 @@ text = "Wildflow Road"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelRegion" type="Label" parent="VBoxContainer"]
+[node name="RegionName" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nwgce")
 theme_override_font_sizes/font_size = 8
@@ -45,8 +47,9 @@ text = "Meadowlands "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StarsIcon" type="TextureRect" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-texture = SubResource("AtlasTexture_nwgce")
-stretch_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_qtjoo")
