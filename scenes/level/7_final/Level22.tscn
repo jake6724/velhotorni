@@ -1067,6 +1067,7 @@ z_index = -2
 z_as_relative = false
 script = ExtResource("1_gho1k")
 level_name = "Level 22"
+region = 8
 initial_gold = 1000
 waves = Array[ExtResource("2_nhhry")]([ExtResource("3_md6h8"), ExtResource("4_adgce"), ExtResource("5_8wmha"), ExtResource("6_yw7s6"), ExtResource("7_jlvow"), ExtResource("6_yw7s6")])
 

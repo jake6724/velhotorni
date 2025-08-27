@@ -9,7 +9,7 @@
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="11_v2c5h"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="12_pfbjf"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpffg"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3frq3"]
 texture = ExtResource("8_pc8ms")
 0:0/0 = 0
 1:0/0 = 0
@@ -1037,9 +1037,9 @@ texture = ExtResource("8_pc8ms")
 31:31/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_grsr5"]
-sources/0 = SubResource("TileSetAtlasSource_fpffg")
+sources/0 = SubResource("TileSetAtlasSource_3frq3")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_74c5d"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bivsl"]
 texture = ExtResource("9_s0k01")
 0:0/0 = 0
 0:0/0/modulate = Color(1, 1, 1, 0.196078)
@@ -1049,7 +1049,7 @@ texture = ExtResource("9_s0k01")
 2:0/0/modulate = Color(1, 1, 1, 0.196078)
 
 [sub_resource type="TileSet" id="TileSet_6ufsd"]
-sources/0 = SubResource("TileSetAtlasSource_74c5d")
+sources/0 = SubResource("TileSetAtlasSource_bivsl")
 
 [sub_resource type="Curve2D" id="Curve2D_per2q"]
 _data = {
@@ -1067,6 +1067,7 @@ z_index = -2
 z_as_relative = false
 script = ExtResource("1_ssuxm")
 level_name = "Level 2"
+region = 2
 initial_gold = 1000
 waves = Array[ExtResource("2_3ew8m")]([ExtResource("6_tkc6j")])
 

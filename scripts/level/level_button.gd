@@ -3,6 +3,7 @@ extends Button
 
 @export var level_scene: PackedScene
 var level_name: String
+var region_name: String
 
 signal level_hovered
 
@@ -19,8 +20,20 @@ func _ready():
 			if prop_name == "level_name":
 				level_name = prop_value
 
+			if prop_name == "region":
+				match prop_value:
+					LevelEnvironment.Region.TUTORIAL: region_name = "Shores"
+					LevelEnvironment.Region.WIND: region_name = "Meadowlands"
+					LevelEnvironment.Region.EARTH: region_name = "Great Forest"
+					LevelEnvironment.Region.WATER: region_name = "ICE Mountain"
+					LevelEnvironment.Region.FIRE: region_name = "Lava Caverns"
+					LevelEnvironment.Region.DARK: region_name = "Ancient Battlegrounds"
+					LevelEnvironment.Region.LIGHT: region_name = "The Holy City"
+					LevelEnvironment.Region.FINAL: region_name = "Chaos Realm"
+					_: pass
+
 func on_pressed() -> void:
 	LevelManager.load_specific_level(level_scene)
 
 func on_mouse_hovered() -> void: 
-	level_hovered.emit(level_name)
+	level_hovered.emit(level_name, region_name)
