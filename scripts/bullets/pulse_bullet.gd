@@ -2,7 +2,7 @@ class_name PulseBullet
 extends Bullet
 
 func ready_custom() -> void:
-	var new_scale = (data.max_distance / data.base_range) - .4 # TODO: Temporary fix.
+	var new_scale = (data.tower_range / 32)
 	scale = Vector2(new_scale, new_scale)
 	is_active = false
 	ap.play("pulse")

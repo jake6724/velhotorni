@@ -22,13 +22,13 @@ var _min_distance: float
 
 var direction_at_collision: Vector2 # Shot animation will move in this direction
 
-func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _debuff_data, _speed: float, _max_distance, _base_range: float, _bullet_modifier_data: BulletModifierData) -> void:
+func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _debuff_data, _speed: float, _tower_range: float, _bullet_modifier_data: BulletModifierData) -> void:
 	data.element = _element
 	data.damage = _damage
 	data.debuff_data = _debuff_data
 	data.speed = _speed
-	data.max_distance = _max_distance + (_max_distance * .5)
-	data.base_range = _base_range
+	data.tower_range = _tower_range
+	data.max_distance = _tower_range + (_tower_range * .5)
 	data.bullet_modifier_data = _bullet_modifier_data
 	target = _target
 	is_active = true

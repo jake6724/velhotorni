@@ -22,6 +22,12 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
 @onready var indicator: EnemyIndicator = $EnemyIndicator
 
+@onready var fx_burn: AnimatedSprite2D = $FXBurn
+@onready var fx_weaken: AnimatedSprite2D = $FXWeaken
+@onready var fx_speed: AnimatedSprite2D = $FXSpeed
+@onready var fx_stun: AnimatedSprite2D = $FXStun
+@onready var fx_heal: AnimatedSprite2D = $FXHeal
+
 # Pathing 
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
 var prev_global_position: Vector2 # Used for flipping sprite
@@ -233,25 +239,37 @@ func on_debuff_remove_freeze() -> void:
 
 func on_debuff_apply_stun() -> void:
 	is_stunned = true
+	fx_stun.show()
+	fx_stun.play("stun")
 
 func on_debuff_remove_stun() -> void:
 	is_stunned = false
 	is_taking_damage = false
 	debuff_manager.start_cc_cooldown(Debuff.Type.STUN)
+	fx_stun.hide()
+	fx_stun.stop()
 
 func on_debuff_apply_burn(_value, _element) -> void:
 	reset_drop_chance()
 	take_damage(_value, _element)
+	fx_burn.show()
+	fx_burn.play("burn")
 
 func on_debuff_remove_burn(_debuff: Debuff) -> void:
 	_debuff.debuff_apply_burn.disconnect(on_debuff_apply_burn)
 	_debuff.debuff_remove_burn.disconnect(on_debuff_remove_burn)
+	fx_burn.hide()
+	fx_burn.stop()
 
 func on_debuff_apply_weaken(_value) -> void:
 	weaken_percent = _value
+	fx_weaken.show()
+	fx_weaken.play("weaken")
 
 func on_debuff_remove_weaken() -> void:
 	weaken_percent = 0.0
+	fx_weaken.hide()
+	fx_weaken.stop()
 
 func on_debuff_apply_knockback(_value, _total_duration) -> void:
 	knockback_tween = create_tween()
@@ -275,11 +293,19 @@ func on_boon_connected(new_boon: Boon) -> void:
 func on_boon_triggered(boon: Boon) -> void:
 	match boon.type:
 		Boon.Type.HEAL:
-			if (health + boon.value) > max_health: health = max_health
+			if (health + boon.value) > max_health:
+				health = max_health
 			else:
 				health += boon.value
+			fx_heal.show()
+			fx_heal.play("heal")
+			await fx_heal.animation_finished
+			fx_heal.hide()
+
 		Boon.Type.SPEED: 
 			speed += (data.speed * boon.value)
+			fx_speed.show()
+			fx_speed.play("speed")
 		Boon.Type.DAMAGE:
 			damage += (data.damage * boon.value)
 		Boon.Type.STEALTH:
@@ -294,7 +320,10 @@ func on_boon_triggered(boon: Boon) -> void:
 
 func on_boon_expired(boon: Boon) -> void:
 	match boon.type:
-		Boon.Type.SPEED: speed -= (data.speed * boon.value)
+		Boon.Type.SPEED: 
+			speed -= (data.speed * boon.value)
+			fx_speed.hide()
+			fx_speed.stop()
 		Boon.Type.DAMAGE: damage -= (data.damage * boon.value)
 		Boon.Type.CLEANSE: pass
 		Boon.Type.PREVENT: debuff_manager.can_debuff = true

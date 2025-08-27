@@ -221,7 +221,7 @@ func on_attack_timer_timeout() -> void:
 	
 func spawn_bullet() -> void:
 	var new_bullet = data.bullet.instantiate()
-	new_bullet.initialize(active_target, data.base_element, curr_damage, data.debuff_data, data.bullet_speed, curr_range, data.attack_range, data.bullet_modifier_data)
+	new_bullet.initialize(active_target, data.base_element, curr_damage, data.debuff_data, data.bullet_speed, curr_range, data.bullet_modifier_data)
 	new_bullet.position += new_bullet._pos_offset
 	add_child(new_bullet)
 

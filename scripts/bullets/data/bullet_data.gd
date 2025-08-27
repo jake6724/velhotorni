@@ -9,6 +9,6 @@ var element: Constants.Element
 var damage: float
 var speed: float
 var max_distance: float
-var base_range: float
+var tower_range: float
 var bullet_modifier_data: BulletModifierData
 var drop_chance_bonus: float = 0

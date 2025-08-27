@@ -63,8 +63,8 @@ var target_priority_index: int = 0
 
 var can_flash_evolve: bool = false
 var flash_timer: Timer = Timer.new()
-const FLASH_TIME: float = .5
-const FLASH_HIDE_TIME: float = .25
+const FLASH_TIME: float = .4
+const FLASH_HIDE_TIME: float = .15
 
 var animation_timer: Timer = Timer.new()
 var animation_time: float = .25
@@ -331,12 +331,14 @@ func check_can_evolve(player_tokens: int) -> void:
 	var option_1_element: Constants.Element = Constants.get_evolve_element_1(tower.data.element)
 	var option_2_element: Constants.Element = Constants.get_evolve_element_2(tower.data.element)
 	if tower.data.element < 6 and (TowerGlobalData.tower_evolution_status[option_1_element] or TowerGlobalData.tower_evolution_status[option_2_element]):
+		flash_timer.stop()
 		evolve.show()
+		evolve_label.show()
 		if can_flash_evolve: 
+			# evolve_label.set("theme_override_colors/font_color",Color(Constants.color_green))
 			flash_timer.start(FLASH_TIME)
-		else:
-			flash_timer.stop()
-			evolve_label.show()
+		# else:
+		# 	evolve_label.set("theme_override_colors/font_color",Color.WHITE)
 	else:
 		evolve.hide()
 
@@ -362,8 +364,8 @@ func on_flash_timer_timeout() -> void:
 	evolve_label.hide()
 	await get_tree().create_timer(FLASH_HIDE_TIME).timeout
 	evolve_label.show()
-	# evolve_label.visible = not evolve_label.visible
-	flash_timer.start(FLASH_TIME)
+	if can_flash_evolve:
+		flash_timer.start(FLASH_TIME)
 
 func set_idle(_atlas: Texture) -> void:
 	idle.texture.atlas = _atlas
