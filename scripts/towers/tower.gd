@@ -71,38 +71,38 @@ const LEVEL_COST_INCREMENT: int = 25
 var level: int = 0
 var damage_level: int = 0:
 	set(value):
-		set_deferred("transform_area", false)
 		damage_level = value
 		increment_level()
 		update_current_combat_data()
-		set_deferred("transform_area", true)
 
 var speed_level: int = 0:
 	set(value):
-		set_deferred("transform_area", false)
+		var active_speed_buffs: Array[Buff] = buff_manager.get_all_buffs_by_type(Buff.Type.SPEED)
+		for buff: Buff in active_speed_buffs:
+			on_remove_active_buff(buff)		
+
 		speed_level = value
 		increment_level()
 		update_current_combat_data()
 
+		for buff: Buff in active_speed_buffs:
+			on_add_new_buff(buff)	
+
 var range_level: int = 0:
 	set(value):
-		set_deferred("transform_area", false)
 		range_level = value
 		increment_level()
 		update_current_combat_data()
 		update_colliders()
-		set_deferred("transform_area", true)
 
 var special_level: int = 0:
 	set(value):
-		set_deferred("transform_area", false)
 		special_level = value
 		increment_level()
 		update_debuff_data()
 		update_buff_data()
 		update_bullet_modifier_data()
 		refresh_buff_collider()
-		set_deferred("transform_area", true)
 
 var checkpoint_damage_level: int
 var checkpoint_speed_level: int
@@ -231,6 +231,7 @@ func transform() -> void:
 	swap_sprite.hide()
 	cross_sprite.show()
 	can_transform = false
+	buff_area.on_transformed()
 	reset_tower()
 
 func revert() -> void:
@@ -239,6 +240,7 @@ func revert() -> void:
 		cross_sprite.hide()
 		swap_sprite.hide()
 		can_transform = true
+		buff_area.on_transformed()
 		reset_tower()
 
 	swap_sprite.hide()
@@ -260,8 +262,8 @@ func reset_tower() -> void:
 	update_buff_data()
 	update_bullet_modifier_data()
 	refresh_transform_collider()
-	refresh_buff_collider()
 	update_colliders()
+	refresh_buff_collider()
 	update_textures()
 	update_audio()
 
@@ -438,7 +440,6 @@ func on_add_new_buff(buff: Buff):
 			_range_buff += _leveled_range * buff.data.modified_value
 		Buff.Type.SPEED:
 			_speed_buff +=  -(_leveled_speed * buff.data.modified_value)
-			print(_speed_buff)
 		Buff.Type.DAMAGE:
 			_damage_buff += _leveled_damage * buff.data.modified_value
 		_: pass
@@ -457,12 +458,12 @@ func on_remove_active_buff(buff: Buff):
 
 func refresh_transform_collider() -> void:
 	transform_collider.set_deferred("disabled", true)
-	await get_tree().create_timer(.1).timeout
+	await get_tree().create_timer(.2).timeout
 	transform_collider.set_deferred("disabled", false)
 
 func refresh_buff_collider() -> void:
 	buff_collider.set_deferred("disabled", true)
-	await get_tree().create_timer(.1).timeout
+	await get_tree().create_timer(.2).timeout
 	buff_collider.set_deferred("disabled", false)
 
 func update_colliders() -> void:

@@ -94,14 +94,14 @@ func _ready():
 	if data.boon_data:
 		boon_area.initialize(data.boon_data)
 		boon_area.owner = self
-		indicator.can_show_boon_range = true
+		# indicator.can_show_boon_range = true
 	boon_manager.boon_connected.connect(on_boon_connected)
 
 	# Configure Hexes
 	if data.hex_data_list and data.hex_data_list[0]:
 		hex_area.hex_data_list = data.hex_data_list
 		hex_area.initialize()
-		indicator.can_show_hex_range = true
+		# indicator.can_show_hex_range = true
 
 func _physics_process(delta):
 	if is_alive:

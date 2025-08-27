@@ -12,7 +12,6 @@ var tower_to_place: Tower = null
 var tower_to_upgrade: Tower = null:
 	set(value):
 		tower_to_upgrade = value
-		print(tower_to_upgrade)
 		if value:
 			tower_upgrade_menu.tower = value
 			tower_upgrade_menu.update_stats(gold, tokens)

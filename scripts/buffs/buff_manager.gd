@@ -49,6 +49,14 @@ func remove_all_buffs() -> void:
 		var buff: Buff = child as Buff
 		if buff:
 			remove_buff(buff)
+			
+func get_all_buffs_by_type(_type: Buff.Type) -> Array[Buff]:
+	var result: Array[Buff] = []
+	for child in get_children():
+		var buff: Buff = child as Buff
+		if buff.data.type == _type:
+			result.append(buff)
+	return result
 
 func remove_buff(active_buff: Buff) -> void:
 	remove_child(active_buff)
@@ -74,6 +82,14 @@ func get_buffs_by_source(_source: BuffArea) -> Array[Buff]:
 		if child is Buff:
 			if child.data.source == _source:
 				buff_list.append(child)
+	return buff_list
+
+func remove_all_buffs_by_source(_source: BuffArea) -> Array[Buff]:
+	var buff_list: Array[Buff] = []
+	for child in get_children():
+		if child is Buff:
+			if child.data.source == _source:
+				remove_buff(child)
 	return buff_list
 
 func compare_by_buff_value(buff_a: Buff, buff_b: Buff) -> bool:

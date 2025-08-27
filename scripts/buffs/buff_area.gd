@@ -28,3 +28,8 @@ func on_area_exited(intruder) -> void:
 		for buff: Buff in active_buffs:
 			ally_buff_manager.remove_buff(buff)
 		ally_buff_manager.prioritize_buffs()
+
+func on_transformed() -> void:
+	var buffed_tower_transforms: Array[Area2D] = get_overlapping_areas()
+	for b: Area2D in buffed_tower_transforms:
+		b.owner.buff_manager.remove_all_buffs_by_source(self)
