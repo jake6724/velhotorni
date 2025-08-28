@@ -627,7 +627,7 @@ z_index = 1000
 position = Vector2(8, -8)
 sprite_frames = SubResource("SpriteFrames_06uup")
 animation = &"burn"
-frame_progress = 0.379351
+frame_progress = 0.487171
 
 [node name="FXHeal" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -644,7 +644,7 @@ z_index = 1000
 position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_vx0gd")
 animation = &"weaken"
-frame_progress = 0.518467
+frame_progress = 0.626287
 
 [node name="FXSpeed" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -652,7 +652,7 @@ z_index = 1000
 position = Vector2(8, -8)
 sprite_frames = SubResource("SpriteFrames_fouag")
 animation = &"speed"
-frame_progress = 0.4801
+frame_progress = 0.587919
 
 [node name="FXStun" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -660,7 +660,7 @@ z_index = 1000
 position = Vector2(8, -8)
 sprite_frames = SubResource("SpriteFrames_k2jnl")
 animation = &"stun"
-frame_progress = 0.490979
+frame_progress = 0.598798
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1

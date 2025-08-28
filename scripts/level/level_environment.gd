@@ -15,3 +15,5 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 @export var initial_gold: int
 @export var initial_token: int
 @export var waves: Array[Wave]
+
+var stars: int = 1 # Tracks the highest number of stars earned for this level
