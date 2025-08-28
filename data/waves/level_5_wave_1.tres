@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("2_lo7nt")
-data = Array[ExtResource("1_wmaeh")]([ExtResource("2_ic65t"), ExtResource("2_ic65t"), ExtResource("2_ic65t"), ExtResource("2_ic65t"), ExtResource("2_ic65t"), ExtResource("3_n4reh"), ExtResource("3_n4reh"), ExtResource("3_n4reh"), ExtResource("3_n4reh"), ExtResource("3_n4reh"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb")])
-reward = 0.0
+data = Array[ExtResource("1_wmaeh")]([ExtResource("2_ic65t"), ExtResource("2_ic65t"), ExtResource("2_ic65t"), ExtResource("2_ic65t"), ExtResource("2_ic65t"), ExtResource("2_ic65t"), ExtResource("2_ic65t"), ExtResource("3_n4reh"), ExtResource("3_n4reh"), ExtResource("3_n4reh"), ExtResource("3_n4reh"), ExtResource("3_n4reh"), ExtResource("3_n4reh"), ExtResource("3_n4reh"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb"), ExtResource("4_dsisb")])
+reward = 80.0
 token_reward = 0
 metadata/_custom_type_script = "uid://cskry1sw3vqba"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=6 format=3 uid="uid://b2smnx84hr282"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_f2ahv"]
+[ext_resource type="Resource" uid="uid://bwb1t2slfgsoo" path="res://data/spawn/spawn_earth_mudman_1.tres" id="2_ajrbn"]
+[ext_resource type="Resource" uid="uid://wkv5k7o08hjx" path="res://data/spawn/spawn_earth_mushroom_half.tres" id="3_0gnxv"]
+[ext_resource type="Resource" uid="uid://bt7eanroekcmd" path="res://data/spawn/spawn_wind_harpy_1.tres" id="4_yu0b1"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="5_8ix2w"]
+
+[resource]
+script = ExtResource("5_8ix2w")
+data = Array[ExtResource("1_f2ahv")]([ExtResource("2_ajrbn"), ExtResource("3_0gnxv"), ExtResource("3_0gnxv"), ExtResource("3_0gnxv"), ExtResource("4_yu0b1")])
+reward = 100.0
+token_reward = 0
+metadata/_custom_type_script = "uid://cskry1sw3vqba"

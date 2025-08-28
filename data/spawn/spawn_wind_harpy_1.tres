@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://bt7eanroekcmd"]
+
+[ext_resource type="Resource" uid="uid://bp1oi8pi675fq" path="res://data/enemies/enemy_data_wind_harpy.tres" id="1_ci0p0"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_o8qbc"]
+
+[resource]
+script = ExtResource("1_o8qbc")
+enemy_data = ExtResource("1_ci0p0")
+delay = 1.0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"
