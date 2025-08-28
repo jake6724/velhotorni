@@ -20,9 +20,3 @@ func set_fast_forward_speed() -> void:
 func set_normal_speed() -> void:
 	Engine.time_scale = 1
 	Engine.physics_ticks_per_second = 60 * NORMAL_SPEED
-
-# func _process(delta):
-# 	print("process delta: ", delta)
-
-# func _physics_process(delta):
-# 	print("physics delta: ", delta)

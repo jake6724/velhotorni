@@ -105,6 +105,12 @@ func _input(_event):
 			tower_to_place.queue_free()
 			tower_to_place = null
 
+	if Input.is_action_just_pressed("fast_forward"):
+		TimeManager.set_fast_forward_speed()
+	
+	if Input.is_action_just_released("fast_forward"):
+		TimeManager.set_normal_speed()
+
 func create_tower(element: Constants.Element):
 	# Reset previous selection
 	if tower_to_place:
