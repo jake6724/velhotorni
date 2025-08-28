@@ -15,9 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://dpaj01np75c8o" path="res://assets/art/sprites/ui/spr_ui_stat_rng.png" id="10_ac4r8"]
 [ext_resource type="Texture2D" uid="uid://b35e2ntjvtv5c" path="res://assets/art/sprites/ui/spr_ui_stat_spcl_burn.png" id="11_mt5yu"]
 [ext_resource type="Texture2D" uid="uid://fbjwfo10n881" path="res://assets/art/sprites/ui/spr_ui_stat_target.png" id="12_676bd"]
-[ext_resource type="Texture2D" uid="uid://dugw6td7t0lel" path="res://assets/art/sprites/ui/spr_ui_stat_arrow.png" id="13_xjkok"]
 [ext_resource type="Texture2D" uid="uid://bahrer0xdoere" path="res://assets/art/sprites/ui/spr_ui_box4.png" id="15_wes0x"]
 [ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="16_r51os"]
+[ext_resource type="Texture2D" uid="uid://brjnkoi3brlf3" path="res://assets/art/sprites/ui/spr_ui_stat_arrow_large.png" id="17_e3s6c"]
 [ext_resource type="Texture2D" uid="uid://l4yp0bln4h3l" path="res://assets/art/atlases/tower/atl_tower_fire.png" id="18_e3s6c"]
 [ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="20_e3s6c"]
 
@@ -858,7 +858,7 @@ theme_override_constants/separation = 33
 
 [node name="Targeting" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(125, 0)
+custom_minimum_size = Vector2(150, 34)
 layout_mode = 2
 
 [node name="TargetingHeader" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting"]
@@ -898,6 +898,7 @@ mouse_filter = 2
 texture = ExtResource("5_771jt")
 
 [node name="TargetingSelect" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting"]
+custom_minimum_size = Vector2(150, 16)
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
@@ -908,17 +909,16 @@ custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
-texture_normal = ExtResource("13_xjkok")
-stretch_mode = 0
-flip_h = true
+texture_normal = ExtResource("17_e3s6c")
 
 [node name="TargetPriorityLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox/Targeting/TargetingSelect"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_fonts/font = ExtResource("4_wvnee")
 theme_override_font_sizes/font_size = 8
-text = "FIRST"
+text = "FIrst"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -929,8 +929,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
-texture_normal = ExtResource("13_xjkok")
-stretch_mode = 0
+texture_normal = ExtResource("17_e3s6c")
+flip_h = true
 
 [node name="Idle" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/UpperHbox"]
 unique_name_in_owner = true

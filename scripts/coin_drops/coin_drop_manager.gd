@@ -1,14 +1,15 @@
 class_name CoinDropManager
-extends Node
+extends Node2D
 
 ## Manages all of the inidividual coin drops. Does not handle collection, see coin_collector.gd
 
 var coin_drop_scene: PackedScene = preload("res://scenes/enemies/CoinDrop.tscn")
-const JITTER_MIN: float = -20
-const JITTER_MAX: float = 20
+const JITTER: float = 7
+const REWARD_JITTER: float = 10
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 var reward_remaining: int = 0
+var direction_to_mouse: Vector2
 
 signal reward_completed
 
@@ -26,7 +27,9 @@ func spawn_coin_drop(_global_pos, drop_chance) -> void:
 		var coin: CoinDrop = coin_drop_scene.instantiate()
 		call_deferred("add_child", coin)
 		coin.global_position = _global_pos
-		coin.destination = calc_destination(_global_pos)
+		var closest_valid: Vector2 = WorldGrid.get_closest_valid_point(_global_pos)
+		coin.destination = calc_destination(closest_valid)
+		coin.destination.clamp(Vector2(0,0), Vector2(400,224))
 		coin.destination_direction = coin.global_position.direction_to(coin.destination)
 
 		drop_chance -= 1.0
@@ -42,7 +45,7 @@ func spawn_reward(_global_pos, drop_chance) -> void:
 		reward_remaining += 1
 		call_deferred("add_child", coin)
 		coin.global_position = _global_pos
-		coin.destination = calc_destination(_global_pos)
+		coin.destination = calc_reward_destination(_global_pos)
 		coin.destination_direction = coin.global_position.direction_to(coin.destination)
 
 		drop_chance -= 1.0
@@ -65,7 +68,7 @@ func _physics_process(delta):
 					coin.global_position += coin.destination_direction * coin.speed * delta
 					if abs(coin.global_position - coin.destination) < Vector2(1,1) or abs(coin.global_position - coin.destination) > Vector2(25,25):
 						coin.destination_reached = true
-					
+
 				if coin.countdown < coin.blink_start:
 					if coin.blink_checkpoint == 0.0:
 						coin.blink_checkpoint = coin.countdown
@@ -79,10 +82,17 @@ func _physics_process(delta):
 				coin.queue_free()
 
 func calc_destination(_global_pos) -> Vector2:
-	var jx: float = rng.randf_range(JITTER_MIN, JITTER_MAX)
-	var jy: float = rng.randf_range(JITTER_MIN, JITTER_MAX)
+	var jx: float = rng.randf_range(-JITTER, JITTER)
+	var jy: float = rng.randf_range(-JITTER, JITTER)
 	var jitter_offset: Vector2 = Vector2(jx, jy)
 	return _global_pos + jitter_offset
+
+func calc_reward_destination(_global_pos) -> Vector2:
+	var jx: float = rng.randf_range(-REWARD_JITTER, REWARD_JITTER)
+	var jy: float = rng.randf_range(-REWARD_JITTER, REWARD_JITTER)
+	var jitter_offset: Vector2 = Vector2(jx, jy)
+	return _global_pos + jitter_offset
+
 
 func on_wave_complete(global_pos: Vector2, reward: int) -> void:
 	spawn_reward(global_pos, reward)
@@ -92,3 +102,10 @@ func on_wave_failed() -> void:
 		var coin: CoinDrop = child as CoinDrop
 		if coin:
 			coin.queue_free()
+
+
+# float towards mouse. Else to `if not coin.destination_reached:`
+# else:
+	# 	direction_to_mouse = coin.global_position.direction_to(get_global_mouse_position())
+	# 	coin.global_position += direction_to_mouse * coin.float_speed * delta
+	# 	coin.float_speed += 1

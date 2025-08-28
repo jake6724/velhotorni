@@ -10,9 +10,6 @@ func _ready():
 	Engine.time_scale = NORMAL_SPEED
 	Engine.physics_ticks_per_second = 60 * NORMAL_SPEED
 
-	# add_child(timer)
-	# timer.ignore_time_scale = true
-
 func set_fast_forward_speed() -> void:
 	Engine.time_scale = FAST_FORWARD_SPEED
 	Engine.physics_ticks_per_second = 60 * FAST_FORWARD_SPEED

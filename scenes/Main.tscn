@@ -21,7 +21,7 @@ script = ExtResource("3_c01mt")
 power = 1.0
 decay = 20.0
 
-[node name="CoinDropManager" type="Node" parent="."]
+[node name="CoinDropManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("5_c01mt")
 metadata/_custom_type_script = "uid://gu8su5txi8b8"
