@@ -34,6 +34,7 @@ func _ready():
 	for button: LevelButton in level_buttons.get_children():
 		button.level_hovered.connect(on_level_hovered.bind(button, button.global_position))
 		button.level_unhovered.connect(on_level_unhovered.bind(button))
+		button.level_button_pressed.connect(on_level_button_pressed)
 
 	# Configure PauseMenu
 	pause_menu.parent_scene = self
@@ -59,12 +60,16 @@ func on_level_hovered(_level_name: String, _region_name: String, _level_button: 
 
 func on_level_unhovered(_level_button: LevelButton) -> void:
 	_level_button.position -= hovered_position_offset
-	if hide_timer: # TODO: not fix. maybe need to stop when level button is pressed? turn pressed from LB to signal here
-		hide_timer.start(hide_delay)
+	hide_timer.start(hide_delay)
 
 func on_hide_timer_timeout() -> void:
 	left_world_map_info_panel.hide()
 	right_world_map_info_panel.hide()
+
+func on_level_button_pressed(_level_scene: PackedScene) -> void:
+	hide_timer.stop()
+	on_hide_timer_timeout()
+	LevelManager.load_specific_level(_level_scene)
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change

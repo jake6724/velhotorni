@@ -7,6 +7,7 @@ var region_name: String
 
 signal level_hovered
 signal level_unhovered
+signal level_button_pressed
 
 func _ready():
 	pressed.connect(on_pressed)
@@ -35,7 +36,7 @@ func _ready():
 					_: pass
 
 func on_pressed() -> void:
-	LevelManager.load_specific_level(level_scene)
+	level_button_pressed.emit(level_scene)
 
 func on_mouse_hovered() -> void: 
 	level_hovered.emit(level_name, region_name)
