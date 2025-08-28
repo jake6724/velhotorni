@@ -18,6 +18,8 @@ var hide_delay: float = .35
 
 var can_pause: bool = false
 
+var exit_scene: PackedScene = load("res://scenes/MainMenu.tscn") # passed to PauseMenu
+
 func _ready():
 	SceneTransition.scene_transition_complete.connect(set_can_pause.bind(true))
 	
@@ -35,6 +37,7 @@ func _ready():
 
 	# Configure PauseMenu
 	pause_menu.parent_scene = self
+	pause_menu.exit_scene = exit_scene
 	pause_menu.restart.hide()
 
 	# LevelToggleButton

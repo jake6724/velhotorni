@@ -9,7 +9,7 @@ extends Node2D
 @onready var fps_label: Label = %FPSLabel
 
 var active_level: LevelEnvironment
-
+var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # passed to PauseMenu
 var can_pause: bool = false
 
 func _ready():
@@ -41,6 +41,7 @@ func _ready():
 
 	# Configure PauseMenu
 	pause_menu.parent_scene = self
+	pause_menu.exit_scene = exit_scene
 	pause_menu.restart.show()
 
 func _input(_event):
