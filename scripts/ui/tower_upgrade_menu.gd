@@ -190,6 +190,7 @@ func update_stats(player_gold: int = 0, player_tokens: int = 0) -> void:
 	update_buff_stats()
 	update_bullet_modifier_stats()
 	update_level_labels()
+	update_targeting()
 	update_ui_text(player_gold)
 	check_can_evolve(player_tokens)
 
@@ -256,6 +257,16 @@ func update_ui_text(player_gold) -> void:
 	current_gold_label.text = str(player_gold)
 
 	set_requirement_colors(player_gold)
+
+func update_targeting() -> void:
+	# Check if pulse tower
+	if tower.data.element == Constants.Element.EARTH or tower.data.element == Constants.Element.MUD or tower.data.element == Constants.Element.LAVA:
+		target_left_button.hide()
+		target_right_button.hide()
+		target_priority_label.text = "AOE"
+	else:
+		target_left_button.show()
+		target_right_button.show()
 
 func set_requirement_colors(player_gold) -> void:
 	if player_gold >= tower.level_upgrade_price:

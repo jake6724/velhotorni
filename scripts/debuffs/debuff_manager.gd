@@ -143,3 +143,12 @@ func remove_all_debuffs() -> void:
 			remove_child(debuff)
 			debuff.on_total_timer_timeout()
 			debuff.queue_free()
+
+func get_debuff_count_by_type(_match_type: Debuff.Type) -> int:
+	var count: int = 0
+	for child in get_children():
+		var debuff: Debuff = child as Debuff
+		if debuff:
+			if debuff.data.type == _match_type:
+				count += 1
+	return count

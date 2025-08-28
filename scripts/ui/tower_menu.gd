@@ -185,7 +185,7 @@ func set_tower_button_sprites(_gold: float):
 			button.texture_normal = locked_ui_tower_sprites[element]
 
 func update_progress():
-	progress.text = str(LevelManager.level_index) + "-" + str(WaveManager.wave_index+1)
+	progress.text = str(LevelManager.level_index-1) + "-" + str(WaveManager.wave_index+1)
 
 func on_wave_button_pressed() -> void:
 	start_wave.emit()

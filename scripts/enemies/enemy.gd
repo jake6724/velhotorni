@@ -322,11 +322,13 @@ func on_boon_triggered(boon: Boon) -> void:
 		_: pass
 
 func on_boon_expired(boon: Boon) -> void:
+	boon_manager.on_boon_expired(boon)
 	match boon.type:
 		Boon.Type.SPEED: 
 			speed -= (data.speed * boon.value)
-			fx_speed.hide()
-			fx_speed.stop()
+			if boon_manager.get_boon_count_by_type(Boon.Type.SPEED) <= 0:
+				fx_speed.hide()
+				fx_speed.stop()
 		Boon.Type.DAMAGE: damage -= boon.value
 		Boon.Type.CLEANSE: pass
 		Boon.Type.PREVENT: debuff_manager.can_debuff = true
@@ -334,4 +336,3 @@ func on_boon_expired(boon: Boon) -> void:
 			sprite.modulate.a = 1
 			collider.set_deferred("disabled", false)
 		_: pass
-	boon_manager.on_boon_expired(boon)
