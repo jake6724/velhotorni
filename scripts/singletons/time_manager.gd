@@ -3,7 +3,7 @@ extends Node
 var timer: Timer = Timer.new()
 
 const NORMAL_SPEED: float = 1
-const FAST_FORWARD_SPEED: float = 2
+const FAST_FORWARD_SPEED: float = 4
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS

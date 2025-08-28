@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ciicsqtfh31fh"]
+[gd_scene load_steps=28 format=3 uid="uid://ciicsqtfh31fh"]
 
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_c8bcu"]
 [ext_resource type="Texture2D" uid="uid://c01agh3yt3cka" path="res://assets/art/sprites/spr_coin.png" id="2_g5j4q"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bqprjjk6xa3t6" path="res://scenes/ui/WavePreviewPanel.tscn" id="4_g5j4q"]
 [ext_resource type="Texture2D" uid="uid://cftejjjnlwgfa" path="res://assets/art/sprites/spr_ui_evo_token.png" id="4_r3bjd"]
 [ext_resource type="Texture2D" uid="uid://bod2y1cmadsde" path="res://assets/art/sprites/ui/spr_ui_wavebutton.png" id="5_gfj4e"]
+[ext_resource type="PackedScene" uid="uid://bf6yg1xajihe7" path="res://scenes/ui/BossHealthbar.tscn" id="5_k0nta"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="6_72f3h"]
 [ext_resource type="Texture2D" uid="uid://d3uwhutrtqgwi" path="res://assets/art/sprites/ui/spr_ui_coin_small.png" id="6_g5j4q"]
 [ext_resource type="Texture2D" uid="uid://drednump7huu" path="res://assets/art/sprites/ui/spr_ui_fastbutton.png" id="6_opq3w"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="7_r3bjd"]
@@ -189,6 +191,25 @@ theme_override_font_sizes/font_size = 16
 text = "4"
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="BossInfo" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="BossHealthbar" parent="MarginContainer/MarginContainer/BossInfo" instance=ExtResource("5_k0nta")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="BossLabel" type="Label" parent="MarginContainer/MarginContainer/BossInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_72f3h")
+theme_override_font_sizes/font_size = 8
+text = "Rock Golem"
 
 [node name="Progress" type="Label" parent="MarginContainer/MarginContainer"]
 unique_name_in_owner = true

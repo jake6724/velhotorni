@@ -12,6 +12,7 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 # Export vars
 @export var level_name: String
 @export var region: Region
+@export var boss_name: String = "Boss"
 @export var initial_gold: int
 @export var initial_token: int
 @export var waves: Array[Wave]

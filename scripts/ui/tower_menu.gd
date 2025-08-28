@@ -37,6 +37,10 @@ extends Control
 @onready var wave_preview_panel: WavePreviewPanel = %WavePreviewPanel
 @onready var cycle_indicator: NinePatchRect = %CycleIndicator
 
+@onready var boss_info: VBoxContainer = %BossInfo
+@onready var boss_healthbar: BossHealthbar = %BossHealthbar
+@onready var boss_label: Label = %BossLabel
+
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
  	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
 	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind.png"),
@@ -127,6 +131,7 @@ func show_placement_phase() -> void:
 
 	cycle_indicator.hide()
 	fast_forward.hide()
+	boss_info.hide()
 
 func hide_shop() -> void:
 	tower_buttons.hide()
@@ -257,3 +262,11 @@ func on_eye_toggled(toggled_on) -> void:
 	else:
 		tower_buttons.show()
 		wave_button.show()
+
+# BossHealthbar
+func on_final_wave_started() -> void:
+	boss_info.show()
+	cycle_indicator.hide()
+	boss_healthbar.boss_max_health = WaveManager.boss_wave_health
+	boss_healthbar.boss_health = boss_healthbar.boss_max_health
+	boss_label.text = LevelManager.active_level.boss_name

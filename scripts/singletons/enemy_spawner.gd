@@ -10,6 +10,8 @@ var can_spawn_enemy: bool
 var enemy_path_length: float # Per level
 var spawn_timer: Timer = Timer.new()
 
+var boss_wave_active: bool = false
+
 var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
 	Enemy.Size.MEDIUM: preload("res://scenes/enemies/Enemy.tscn"),
 	Enemy.Size.LARGE: preload("res://scenes/enemies/LargeEnemy.tscn"),
@@ -20,6 +22,7 @@ signal enemy_spawned
 signal enemy_spawned_with_ref
 signal enemy_died
 signal enemy_died_with_global_pos
+signal boss_enemy_damage_recieved
 
 func _ready():
 	spawn_timer.timeout.connect(on_spawn_timer_timeout)
@@ -30,6 +33,7 @@ func _ready():
 	WaveManager.wave_completed.connect(on_wave_complete)
 	WaveManager.wave_failed.connect(reset)
 	WaveManager.all_waves_completed.connect(reset)
+	WaveManager.final_wave_started.connect(on_final_wave_started)
 
 func _physics_process(_delta): # TODO: It would be great to not call this on tick
 	sort_enemies_z_index_by_progress()
@@ -90,6 +94,11 @@ func spawn_enemy(_enemy_data: EnemyData) -> void:
 	active_enemies.append(new_enemy)
 
 	configure_enemy_pathing(new_enemy)
+
+	if boss_wave_active: 
+		new_enemy.is_boss = true
+		new_enemy.enemy_damage_recieved.connect(on_boss_enemy_damage_recieved)
+
 	enemy_spawned.emit()
 	enemy_spawned_with_ref.emit(new_enemy)
 
@@ -123,3 +132,9 @@ func sort_enemies_z_index_by_progress() -> void:
 
 func compare_by_progress_ratio(enemy_a: Enemy, enemy_b: Enemy) -> bool:
 	return enemy_a.path_follow.progress_ratio > enemy_b.path_follow.progress_ratio
+
+func on_final_wave_started():
+	boss_wave_active = true
+
+func on_boss_enemy_damage_recieved(_damage: float):
+	boss_enemy_damage_recieved.emit(_damage)
