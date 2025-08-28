@@ -1,37 +1,63 @@
-[gd_scene load_steps=8 format=3 uid="uid://dki5b1v23sshc"]
+[gd_scene load_steps=12 format=3 uid="uid://dki5b1v23sshc"]
 
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="1_hj1gr"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="2_mxfgi"]
 [ext_resource type="Script" uid="uid://cs6ii1wqm8sj" path="res://scripts/ui/world_map_info_panel.gd" id="2_nwgce"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="3_nwgce"]
+[ext_resource type="Texture2D" uid="uid://b2lq2ptppi3ux" path="res://assets/art/sprites/ui/spr_ui_wind_banner.png" id="3_vqpsd"]
 [ext_resource type="Texture2D" uid="uid://ddifi16t2ehe6" path="res://assets/art/sprites/ui/spr_ui_star2.png" id="5_nwgce"]
+[ext_resource type="Texture2D" uid="uid://go0bba7gghi8" path="res://assets/art/sprites/ui/spr_ui_divider2.png" id="5_qtjoo"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qtjoo"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
 texture = ExtResource("1_hj1gr")
-texture_margin_left = 11.0
-texture_margin_top = 10.0
-texture_margin_right = 10.0
-texture_margin_bottom = 11.0
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 8.0
 region_rect = Rect2(1, 1, 30, 30)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qtjoo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqpsd"]
 atlas = ExtResource("5_nwgce")
 region = Rect2(16, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0dsn"]
+atlas = ExtResource("5_nwgce")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tr8kg"]
+atlas = ExtResource("5_nwgce")
+region = Rect2(0, 0, 16, 16)
+
 [node name="WorldMapInfoPanel" type="PanelContainer"]
-custom_minimum_size = Vector2(160, 224)
-offset_right = 192.0
+custom_minimum_size = Vector2(152, 224)
+offset_right = 160.0
 offset_bottom = 224.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_qtjoo")
 script = ExtResource("2_nwgce")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_vqpsd")
 
 [node name="LevelName" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_mxfgi")
 theme_override_font_sizes/font_size = 16
 text = "Wildflow Road"
@@ -41,15 +67,82 @@ vertical_alignment = 1
 [node name="RegionName" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_nwgce")
 theme_override_font_sizes/font_size = 8
 text = "Meadowlands "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Divider" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_qtjoo")
+
+[node name="Vbox" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Vbox"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Vbox/HBoxContainer"]
 layout_mode = 2
-texture = SubResource("AtlasTexture_qtjoo")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_vqpsd")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Vbox/HBoxContainer"]
+custom_minimum_size = Vector2(124, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_nwgce")
+theme_override_font_sizes/font_size = 8
+text = "victory! 
+Beat the stage"
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/Vbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Vbox/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_v0dsn")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Vbox/HBoxContainer2"]
+custom_minimum_size = Vector2(124, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_nwgce")
+theme_override_font_sizes/font_size = 8
+text = "Expert! 
+No wave failures"
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/Vbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Vbox/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_tr8kg")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Vbox/HBoxContainer3"]
+custom_minimum_size = Vector2(124, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_nwgce")
+theme_override_font_sizes/font_size = 8
+text = "Master! 
+No wave failures no damage to base"
+vertical_alignment = 1
+autowrap_mode = 2

@@ -39,6 +39,10 @@ func _ready():
 	# Configure TowerGlobalData
 	TowerGlobalData.reset()
 
+	# Configure PauseMenu
+	pause_menu.parent_scene = self
+	pause_menu.restart.show()
+
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
 		if can_pause and not player_controller.menu_open:

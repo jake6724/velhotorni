@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://d2ib8ofejftch"]
+[gd_scene load_steps=66 format=3 uid="uid://d2ib8ofejftch"]
 
 [ext_resource type="Script" uid="uid://c44xbwx307gqq" path="res://scripts/level/world_map.gd" id="1_rwbqg"]
 [ext_resource type="Texture2D" uid="uid://dd44h87wnbk4t" path="res://assets/art/sprites/spr_map.png" id="2_v7h0i"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://c1gyqvt2o7i0u" path="res://scenes/level/3_water/Level9A.tscn" id="18_g53v4"]
 [ext_resource type="PackedScene" uid="uid://do6soiybchkuq" path="res://scenes/level/3_water/Level9B.tscn" id="19_m1y8g"]
 [ext_resource type="PackedScene" uid="uid://cvpj6vl83nhdr" path="res://scenes/level/4_fire/Level11.tscn" id="20_3jfjl"]
+[ext_resource type="PackedScene" uid="uid://cam0jb5m4ylm8" path="res://scenes/level/4_fire/Level10.tscn" id="20_gyoph"]
 [ext_resource type="PackedScene" uid="uid://b17ojrtdyllvy" path="res://scenes/level/4_fire/Level12A.tscn" id="21_uufd6"]
 [ext_resource type="PackedScene" uid="uid://6i0na4og2p8o" path="res://scenes/level/4_fire/Level12B.tscn" id="22_p2enm"]
 [ext_resource type="PackedScene" uid="uid://toek2hvpeaa6" path="res://scenes/level/5_dark/Level13.tscn" id="23_hvkia"]
@@ -35,12 +36,14 @@
 [ext_resource type="PackedScene" uid="uid://e3jc02esjkjy" path="res://scenes/level/7_final/Level20.tscn" id="32_xwl00"]
 [ext_resource type="PackedScene" uid="uid://crn6164cmmn16" path="res://scenes/level/7_final/Level22.tscn" id="33_kfem8"]
 [ext_resource type="Texture2D" uid="uid://cpi32inmhpq3w" path="res://assets/art/sprites/spr_map_cloud7.png" id="34_oj6n4"]
+[ext_resource type="PackedScene" uid="uid://be2jvwiw76dnx" path="res://scenes/level/7_final/Level21.tscn" id="34_thhux"]
 [ext_resource type="Texture2D" uid="uid://bv02gdtotiwu4" path="res://assets/art/sprites/spr_map_cloud6.png" id="35_xbj1r"]
 [ext_resource type="Texture2D" uid="uid://cfwwc24m5pr0a" path="res://assets/art/sprites/spr_map_cloud5.png" id="36_fysc3"]
 [ext_resource type="Texture2D" uid="uid://1efith3eqweu" path="res://assets/art/sprites/spr_map_cloud4.png" id="37_vgdhw"]
 [ext_resource type="Texture2D" uid="uid://g75ipsxxv44r" path="res://assets/art/sprites/spr_map_cloud3.png" id="38_2itq3"]
 [ext_resource type="Texture2D" uid="uid://dwmjhhi733wfc" path="res://assets/art/sprites/spr_map_cloud2.png" id="39_eahnm"]
 [ext_resource type="Texture2D" uid="uid://cj6cvql7gek83" path="res://assets/art/sprites/spr_map_cloud1.png" id="40_h7gxl"]
+[ext_resource type="PackedScene" uid="uid://cyqs2ueeu4k80" path="res://scenes/ui/PauseMenu.tscn" id="44_3377u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_chpcd"]
 atlas = ExtResource("34_oj6n4")
@@ -200,68 +203,28 @@ animations = [{
 script = ExtResource("1_rwbqg")
 metadata/_custom_type_script = "uid://c44xbwx307gqq"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_v7h0i")
 centered = false
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="LevelInfo" type="NinePatchRect" parent="UI/Control"]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -38.0
-offset_right = 40.0
-offset_bottom = -6.0
-grow_vertical = 0
-texture = ExtResource("4_thhux")
-region_rect = Rect2(1, 1, 30, 30)
-patch_margin_left = 10
-patch_margin_top = 9
-patch_margin_right = 10
-patch_margin_bottom = 12
-
-[node name="TextureButton" type="TextureButton" parent="UI/Control/LevelInfo"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("5_3377u")
-
-[node name="LevelUI" type="TextureRect" parent="UI/Control"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="LevelUI" type="TextureRect" parent="UI"]
+unique_name_in_owner = true
+offset_right = 400.0
+offset_bottom = 224.0
 texture = ExtResource("6_wo7is")
 metadata/_edit_use_anchors_ = true
 
-[node name="LevelButtons" type="Control" parent="UI"]
+[node name="LevelButtons" type="Control" parent="UI/LevelUI"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
-[node name="0LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="0LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 128.0
@@ -270,7 +233,7 @@ offset_bottom = 144.0
 level_scene = ExtResource("8_xlnli")
 metadata/_edit_use_anchors_ = true
 
-[node name="1LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="1LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 56.0
 offset_top = 160.0
@@ -279,7 +242,7 @@ offset_bottom = 176.0
 level_scene = ExtResource("9_musam")
 metadata/_edit_use_anchors_ = true
 
-[node name="2LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="2LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 104.0
 offset_top = 160.0
@@ -288,7 +251,7 @@ offset_bottom = 176.0
 level_scene = ExtResource("10_2b0ok")
 metadata/_edit_use_anchors_ = true
 
-[node name="3ALevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="3ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 104.0
 offset_top = 128.0
@@ -297,7 +260,7 @@ offset_bottom = 144.0
 level_scene = ExtResource("11_nc3cf")
 metadata/_edit_use_anchors_ = true
 
-[node name="3BLevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="3BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 136.0
 offset_top = 128.0
@@ -306,7 +269,7 @@ offset_bottom = 144.0
 level_scene = ExtResource("12_dra5x")
 metadata/_edit_use_anchors_ = true
 
-[node name="4LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="4LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 112.0
@@ -315,7 +278,7 @@ offset_bottom = 128.0
 level_scene = ExtResource("12_v7h0i")
 metadata/_edit_use_anchors_ = true
 
-[node name="5LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="5LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 80.0
@@ -324,7 +287,7 @@ offset_bottom = 96.0
 level_scene = ExtResource("13_x1bqq")
 metadata/_edit_use_anchors_ = true
 
-[node name="6ALevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="6ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 80.0
@@ -333,7 +296,7 @@ offset_bottom = 96.0
 level_scene = ExtResource("14_juthh")
 metadata/_edit_use_anchors_ = true
 
-[node name="6BLevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="6BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 48.0
@@ -342,7 +305,7 @@ offset_bottom = 64.0
 level_scene = ExtResource("15_j3os7")
 metadata/_edit_use_anchors_ = true
 
-[node name="7LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="7LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 96.0
@@ -351,7 +314,7 @@ offset_bottom = 112.0
 level_scene = ExtResource("16_yiddi")
 metadata/_edit_use_anchors_ = true
 
-[node name="8LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="8LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 184.0
 offset_top = 96.0
@@ -360,7 +323,7 @@ offset_bottom = 112.0
 level_scene = ExtResource("17_ib3k0")
 metadata/_edit_use_anchors_ = true
 
-[node name="9ALevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="9ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 184.0
 offset_top = 64.0
@@ -369,7 +332,7 @@ offset_bottom = 80.0
 level_scene = ExtResource("18_g53v4")
 metadata/_edit_use_anchors_ = true
 
-[node name="9BLevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="9BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 216.0
 offset_top = 32.0
@@ -378,16 +341,16 @@ offset_bottom = 48.0
 level_scene = ExtResource("19_m1y8g")
 metadata/_edit_use_anchors_ = true
 
-[node name="10LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="10LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 216.0
 offset_top = 128.0
 offset_right = 232.0
 offset_bottom = 144.0
-level_scene = ExtResource("20_3jfjl")
+level_scene = ExtResource("20_gyoph")
 metadata/_edit_use_anchors_ = true
 
-[node name="11LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="11LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 184.0
 offset_top = 144.0
@@ -396,7 +359,7 @@ offset_bottom = 160.0
 level_scene = ExtResource("20_3jfjl")
 metadata/_edit_use_anchors_ = true
 
-[node name="12ALevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="12ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 184.0
 offset_top = 176.0
@@ -405,7 +368,7 @@ offset_bottom = 192.0
 level_scene = ExtResource("21_uufd6")
 metadata/_edit_use_anchors_ = true
 
-[node name="12BLevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="12BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 160.0
@@ -414,7 +377,7 @@ offset_bottom = 176.0
 level_scene = ExtResource("22_p2enm")
 metadata/_edit_use_anchors_ = true
 
-[node name="13LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="13LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 248.0
 offset_top = 176.0
@@ -423,7 +386,7 @@ offset_bottom = 192.0
 level_scene = ExtResource("23_hvkia")
 metadata/_edit_use_anchors_ = true
 
-[node name="14LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="14LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 296.0
 offset_top = 176.0
@@ -432,7 +395,7 @@ offset_bottom = 192.0
 level_scene = ExtResource("24_58rp5")
 metadata/_edit_use_anchors_ = true
 
-[node name="15ALevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="15ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 328.0
 offset_top = 144.0
@@ -441,7 +404,7 @@ offset_bottom = 160.0
 level_scene = ExtResource("25_43b81")
 metadata/_edit_use_anchors_ = true
 
-[node name="15BLevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="15BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 280.0
 offset_top = 144.0
@@ -450,7 +413,7 @@ offset_bottom = 160.0
 level_scene = ExtResource("26_7scp2")
 metadata/_edit_use_anchors_ = true
 
-[node name="16LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="16LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 312.0
 offset_top = 112.0
@@ -459,7 +422,7 @@ offset_bottom = 128.0
 level_scene = ExtResource("27_ut7o1")
 metadata/_edit_use_anchors_ = true
 
-[node name="17LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="17LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 264.0
 offset_top = 112.0
@@ -468,7 +431,7 @@ offset_bottom = 128.0
 level_scene = ExtResource("28_nfq51")
 metadata/_edit_use_anchors_ = true
 
-[node name="18ALevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="18ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 296.0
 offset_top = 80.0
@@ -477,7 +440,7 @@ offset_bottom = 96.0
 level_scene = ExtResource("29_upivs")
 metadata/_edit_use_anchors_ = true
 
-[node name="18BLevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="18BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 328.0
 offset_top = 80.0
@@ -486,7 +449,7 @@ offset_bottom = 96.0
 level_scene = ExtResource("30_0bakg")
 metadata/_edit_use_anchors_ = true
 
-[node name="19LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="19LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 296.0
 offset_top = 48.0
@@ -495,7 +458,7 @@ offset_bottom = 64.0
 level_scene = ExtResource("31_gwydx")
 metadata/_edit_use_anchors_ = true
 
-[node name="20LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="20LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 264.0
 offset_top = 32.0
@@ -504,16 +467,16 @@ offset_bottom = 48.0
 level_scene = ExtResource("32_xwl00")
 metadata/_edit_use_anchors_ = true
 
-[node name="21LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="21LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 296.0
 offset_top = 16.0
 offset_right = 312.0
 offset_bottom = 32.0
-level_scene = ExtResource("33_kfem8")
+level_scene = ExtResource("34_thhux")
 metadata/_edit_use_anchors_ = true
 
-[node name="22LevelButton" parent="UI/LevelButtons" instance=ExtResource("7_yjmtc")]
+[node name="22LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
 layout_mode = 0
 offset_left = 328.0
 offset_top = 32.0
@@ -522,24 +485,63 @@ offset_bottom = 48.0
 level_scene = ExtResource("33_kfem8")
 metadata/_edit_use_anchors_ = true
 
+[node name="LevelInfo" type="NinePatchRect" parent="UI"]
+custom_minimum_size = Vector2(16, 16)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -29.0
+offset_right = 32.0
+offset_bottom = -6.0
+grow_vertical = 0
+texture = ExtResource("4_thhux")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 6
+
+[node name="LevelToggleButton" type="TextureButton" parent="UI/LevelInfo"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -9.0
+offset_right = 8.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+texture_normal = ExtResource("5_3377u")
+
 [node name="Clouds" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="7Cloud" type="AnimatedSprite2D" parent="Clouds"]
+visible = false
 position = Vector2(323, 50)
 sprite_frames = SubResource("SpriteFrames_4rt6m")
 autoplay = "default"
 
 [node name="6Cloud" type="AnimatedSprite2D" parent="Clouds"]
+visible = false
 position = Vector2(321, 103)
 sprite_frames = SubResource("SpriteFrames_vvfr3")
 autoplay = "default"
 
 [node name="5Cloud" type="AnimatedSprite2D" parent="Clouds"]
+visible = false
 position = Vector2(311, 168)
 sprite_frames = SubResource("SpriteFrames_enoa7")
 autoplay = "default"
 
 [node name="4Cloud" type="AnimatedSprite2D" parent="Clouds"]
+visible = false
 position = Vector2(184, 162)
 sprite_frames = SubResource("SpriteFrames_jg0wg")
 autoplay = "default"
@@ -562,17 +564,26 @@ position = Vector2(84, 163)
 sprite_frames = SubResource("SpriteFrames_dunfx")
 autoplay = "default"
 
-[node name="Top" type="CanvasLayer" parent="."]
+[node name="InfoPanels" type="CanvasLayer" parent="."]
+layer = 3
 
-[node name="LeftWorldMapInfoPanel" parent="Top" instance=ExtResource("3_gyoph")]
+[node name="LeftWorldMapInfoPanel" parent="InfoPanels" instance=ExtResource("3_gyoph")]
 unique_name_in_owner = true
 visible = false
-offset_right = 160.0
 
-[node name="RightWorldMapInfoPanel" parent="Top" instance=ExtResource("3_gyoph")]
+[node name="RightWorldMapInfoPanel" parent="InfoPanels" instance=ExtResource("3_gyoph")]
 unique_name_in_owner = true
 visible = false
-z_index = 1
-offset_left = 240.0
-offset_right = 400.0
-size_flags_horizontal = 8
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_right = 0.0
+grow_horizontal = 0
+
+[node name="Menu" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="PauseMenu" parent="Menu" instance=ExtResource("44_3377u")]
+unique_name_in_owner = true
+visible = false
