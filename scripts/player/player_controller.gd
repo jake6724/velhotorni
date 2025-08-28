@@ -72,6 +72,7 @@ func _ready():
 	# Connect to WaveManager
 	# WaveManager.wave_completed.connect(on_reward_complete)
 	WaveManager.wave_failed.connect(on_wave_failed)
+	WaveManager.final_wave_started.connect(on_final_wave_started)
 
 	# Connect to CoinCollector
 	coin_collector.coin_collected.connect(on_coin_collected)
@@ -218,25 +219,6 @@ func on_reward_complete() -> void:
 	set_checkpoints()
 	set_tower_checkpoints()
 
-func on_wave_failed() -> void:
-	placement_enabled = true
-	tower_menu.show_placement_phase()
-	gold = checkpoint_gold
-	tokens = checkpoint_tokens
-
-	# Remove uncheckpointed towers from active_towers, delete them and update world grid
-	# Iterate backwards to avoid null pointer since editing list in place
-	for i in range(active_towers.size() - 1, -1, -1):
-		if active_towers[i] in checkpoint_active_towers:
-			active_towers[i].revert()
-			active_towers[i].revert_to_checkpoint()
-		else:
-			WorldGrid.data[WorldGrid.world_to_grid(active_towers[i].position)] = true
-			active_towers[i].queue_free()
-			active_towers.remove_at(i)
-
-	tower_menu.update_progress()
-
 func reset_towers() -> void:
 	for tower: Tower in active_towers:
 		tower.revert()
@@ -267,6 +249,32 @@ func on_tower_unhovered(tower: Tower):
 
 	if placement_enabled:
 		tower_menu.hide_tower_info_panels()
+
+func on_wave_failed() -> void:
+	placement_enabled = true
+	tower_menu.show_placement_phase()
+	gold = checkpoint_gold
+	tokens = checkpoint_tokens
+
+	# Remove uncheckpointed towers from active_towers, delete them and update world grid
+	# Iterate backwards to avoid null pointer since editing list in place
+	for i in range(active_towers.size() - 1, -1, -1):
+		if active_towers[i] in checkpoint_active_towers:
+			active_towers[i].revert()
+			active_towers[i].revert_to_checkpoint()
+		else:
+			WorldGrid.data[WorldGrid.world_to_grid(active_towers[i].position)] = true
+			active_towers[i].queue_free()
+			active_towers.remove_at(i)
+
+	tower_menu.update_progress()
+
+func on_final_wave_started() -> void: 
+	tower_menu.on_final_wave_started()
+	EnemySpawner.boss_enemy_damage_recieved.connect(on_boss_enemy_damage_recieved)
+
+func on_boss_enemy_damage_recieved(_damage: float) -> void:
+	tower_menu.boss_healthbar.boss_health -= _damage
 
 func play_tower_select_sfx(element: Constants.Element) -> void:
 	match element:

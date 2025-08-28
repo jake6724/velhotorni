@@ -57,6 +57,8 @@ var is_taking_damage = false
 
 var base: Base
 
+var is_boss: bool = false
+
 # Debuffs
 var slow_percent: float = 0.0
 var weaken_percent: float = 0.0
@@ -71,6 +73,7 @@ var drop_chance: float # data.drop_chance_base + drop_chance_bonus passed by bul
 signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
 signal coin_dropped
+signal enemy_damage_recieved
 
 # DEBUGGING ONLY
 var prev_progress_ratio: float
@@ -164,10 +167,10 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 		# Apply Weaken modifier
 		damage_recieved = damage_recieved + (damage_recieved * (weaken_percent/100))
 
-		health -= damage_recieved
+		health = max(0, health - damage_recieved)
 
-		if health <= 0:
-			die()
+		if is_boss: enemy_damage_recieved.emit(damage_recieved)
+		if health <= 0: die()
 
 func die() -> void:
 	is_alive = false
@@ -307,7 +310,7 @@ func on_boon_triggered(boon: Boon) -> void:
 			fx_speed.show()
 			fx_speed.play("speed")
 		Boon.Type.DAMAGE:
-			damage += (data.damage * boon.value)
+			damage += boon.value
 		Boon.Type.STEALTH:
 			collider.set_deferred("disabled", true)
 			sprite.modulate.a = .65
@@ -324,7 +327,7 @@ func on_boon_expired(boon: Boon) -> void:
 			speed -= (data.speed * boon.value)
 			fx_speed.hide()
 			fx_speed.stop()
-		Boon.Type.DAMAGE: damage -= (data.damage * boon.value)
+		Boon.Type.DAMAGE: damage -= boon.value
 		Boon.Type.CLEANSE: pass
 		Boon.Type.PREVENT: debuff_manager.can_debuff = true
 		Boon.Type.STEALTH:

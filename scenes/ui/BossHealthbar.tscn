@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf6yg1xajihe7"]
+
+[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="1_3ihxg"]
+[ext_resource type="Texture2D" uid="uid://rwec3xnhkxkf" path="res://assets/art/sprites/ui/spr_ui_health_bar.png" id="2_8ei5h"]
+[ext_resource type="Script" uid="uid://dh8dom7m7onhc" path="res://scripts/ui/boss_healthbar.gd" id="2_y01lf"]
+
+[node name="BossHealthBar" type="NinePatchRect"]
+custom_minimum_size = Vector2(208, 16)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.0
+offset_right = 104.0
+offset_bottom = 16.0
+grow_horizontal = 2
+texture = ExtResource("1_3ihxg")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+script = ExtResource("2_y01lf")
+metadata/_custom_type_script = "uid://dh8dom7m7onhc"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 1
+
+[node name="ProgressBar" type="TextureProgressBar" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_right = 1
+texture_progress = ExtResource("2_8ei5h")
