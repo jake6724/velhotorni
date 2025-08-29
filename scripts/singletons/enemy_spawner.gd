@@ -2,7 +2,7 @@
 
 # Singleton responsible for spawning enemies based on the active level's wave data
 # All enemies are a child of this class
-extends Node
+extends Node2D
 
 var active_enemies: Array[Enemy]
 var enemy_index: int
@@ -25,6 +25,7 @@ signal enemy_died_with_global_pos
 signal boss_enemy_damage_recieved
 
 func _ready():
+	z_index = Constants.z_index_map["enemy_spawner"]
 	spawn_timer.timeout.connect(on_spawn_timer_timeout)
 	add_child(spawn_timer)
 
@@ -117,6 +118,8 @@ func configure_enemy_pathing(enemy: Enemy) -> void:
 
 	enemy.path_follow = new_path_follow
 	new_remote_transform.remote_path = enemy.get_path()
+
+	enemy.z_as_relative = true
 
 func remove_all_enemies() -> void:
 	for child in get_children():

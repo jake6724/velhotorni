@@ -110,3 +110,13 @@ func get_evolve_element_2(_element: Element) -> Element:
 		Element.LIGHT: return Element.SUN
 		Element.DARK: return Element.VOID
 		_: return Element.NONE
+
+var z_index_map: Dictionary[String, int] = {
+	"background": -4096,
+	"base": -1001,
+	"coin": -1000,
+	"tower": -999,
+	"enemy_spawner": 1,
+	"tower_menu": 1000,
+	"tower_upgrade_menu": 1001,
+}

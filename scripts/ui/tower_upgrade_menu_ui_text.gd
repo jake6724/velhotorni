@@ -6,7 +6,7 @@ var speed_button_hovered: String = "Shots per second"
 var range_button_hovered: String = "The max range of this tower"
 
 var special_button_hovered: String = "Special placeholder text! This will need to be different for each debuff"
-var special_debuff_burn: String = "Apply burn to enemies"
+var special_debuff_burn: String = "Burn enemies every second. Upgrades burn damage. \n\nBurn for 12 seconds"
 var special_debuff_slow: String = "Apply slow to enemies"
 var special_debuff_freeze: String = "Apply freeze to enemies"
 var special_debuff_stun: String = "Apply stun to enemies"

@@ -202,6 +202,7 @@ func on_animation_finished(anim_name):
 		is_taking_damage = false
 
 	if anim_name == "die":
+		sprite.z_index = -sprite.z_index
 		ap.play("corpse")
 
 	if anim_name == "corpse":

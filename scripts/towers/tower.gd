@@ -171,6 +171,8 @@ func _ready():
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	add_child(attack_timer)
 
+	z_index = Constants.z_index_map["tower"]
+
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
 	base_data = get_tower_data_copy(Constants.tower_data[element])
