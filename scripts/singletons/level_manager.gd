@@ -43,44 +43,26 @@ level_16, level_17, level_18a, level_18b, level_19, level_20, level_21, level_22
 var level_index: int = 5
 var active_level: LevelEnvironment
 
-var level_complete_timer: Timer = Timer.new()
-var level_complete_duration: float = 3
-var level_failed: bool = false
-
 func _ready():
 	# configure_level() called in main - level only configured when main is ready to parent it
 	WaveManager.all_waves_completed.connect(on_level_complete)
- 
-	level_complete_timer.one_shot = true
-	level_complete_timer.autostart = false
-	level_complete_timer.timeout.connect(on_level_complete_message_finished)
-	add_child(level_complete_timer)
 
 ## Called by `Main`. Only called when `Main` is ready to parent `active_level`. `LevelManager` 
 ## triggers the `configure_level()` methods of other singletons here.
 func configure_level(_main: Main):
 	main = _main # Reference provided by current main itself
 	active_level = levels[level_index].instantiate()
-	level_failed = false
 
 ## Observes `WaveManager.all_waves_complete`.
 func on_level_complete():
 	# Check if full game complete, or move to next level
 	if level_index + 1 == levels.size():
-		main.round_info.show_game_complete()
+		main.round_info.show_game_complete() # TODO: This should go back to world?
 	else:
-		main.round_info.show_level_complete()
+		main.show_level_complete()
 
-	level_complete_timer.start(level_complete_duration)
+	# level_complete_timer.start(level_complete_duration)
 	play_level_complete_sfx()
-
-## Observes `level_complete_timer.timeout` 
-func on_level_complete_message_finished():
-	# Exit to main menu if last level
-	if level_index + 1 == levels.size():
-		complete_game()
-	else:
-		load_next_level()
 
 func load_next_level():
 	level_index += 1

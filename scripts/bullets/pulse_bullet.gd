@@ -2,6 +2,7 @@ class_name PulseBullet
 extends Bullet
 
 func ready_custom() -> void:
+	z_index = Constants.z_index_map["pulse_bullet"]
 	var new_scale = (data.tower_range / 32)
 	scale = Vector2(new_scale, new_scale)
 	is_active = false

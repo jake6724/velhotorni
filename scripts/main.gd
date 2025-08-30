@@ -7,10 +7,13 @@ extends Node2D
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
 @onready var camera: Camera2D = $Camera2D
 @onready var fps_label: Label = %FPSLabel
+@onready var level_complete_panel: LevelCompletePanel = %LevelCompletePanel
 
 var active_level: LevelEnvironment
 var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # passed to PauseMenu
 var can_pause: bool = false
+
+var wave_failures: int = 0
 
 func _ready():
 	SceneTransition.scene_transition_complete.connect(set_can_pause.bind(true))
@@ -24,6 +27,9 @@ func _ready():
 	EnemySpawner.configure_level(LevelManager.active_level)
 	WaveManager.configure_level(LevelManager.active_level)
 	TowerGlobalData.reset()
+
+	# Connect to WaveManager
+	WaveManager.wave_failed.connect(on_wave_failed)
 
 	# Configure PlayerController
 	player_controller.setup()
@@ -48,7 +54,7 @@ func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
 		if can_pause and not player_controller.menu_open:
 			pause_game_with_menu()
-			
+
 func pause_game():
 	get_tree().paused = true
 
@@ -65,3 +71,23 @@ func unpause_game_with_menu():
 
 func set_can_pause(value: bool) -> void:
 	can_pause = value
+
+func on_wave_failed() -> void:
+	wave_failures += 1
+
+func show_level_complete() -> void:
+	level_complete_panel.set_stars(calc_stars())
+	player_controller.tower_menu.hide()
+	level_complete_panel.show()
+
+func calc_stars() -> int:
+	var count: int = 2
+	if wave_failures == 0:
+		count += 1
+		if active_level.base.health == 10:
+			count += 1
+	
+	if count > StarRegistry.stars[LevelManager.levels[LevelManager.level_index]]:
+		StarRegistry.stars[LevelManager.levels[LevelManager.level_index]] = count
+
+	return count

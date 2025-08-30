@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://d2ib8ofejftch"]
+[gd_scene load_steps=68 format=3 uid="uid://d2ib8ofejftch"]
 
 [ext_resource type="Script" uid="uid://c44xbwx307gqq" path="res://scripts/level/world_map.gd" id="1_rwbqg"]
 [ext_resource type="Texture2D" uid="uid://dd44h87wnbk4t" path="res://assets/art/sprites/spr_map.png" id="2_v7h0i"]
@@ -43,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://g75ipsxxv44r" path="res://assets/art/sprites/spr_map_cloud3.png" id="38_2itq3"]
 [ext_resource type="Texture2D" uid="uid://dwmjhhi733wfc" path="res://assets/art/sprites/spr_map_cloud2.png" id="39_eahnm"]
 [ext_resource type="Texture2D" uid="uid://cj6cvql7gek83" path="res://assets/art/sprites/spr_map_cloud1.png" id="40_h7gxl"]
+[ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="43_wo7is"]
 [ext_resource type="PackedScene" uid="uid://cyqs2ueeu4k80" path="res://scenes/ui/PauseMenu.tscn" id="44_3377u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_chpcd"]
@@ -198,6 +199,11 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yjmtc"]
+shader = ExtResource("43_wo7is")
+shader_parameter/xSpeed = 0.0
+shader_parameter/ySpeed = 0.0
 
 [node name="WorldMap" type="Node2D"]
 script = ExtResource("1_rwbqg")
@@ -563,6 +569,13 @@ visible = false
 position = Vector2(84, 163)
 sprite_frames = SubResource("SpriteFrames_dunfx")
 autoplay = "default"
+
+[node name="Sprite2D" type="Sprite2D" parent="Clouds"]
+material = SubResource("ShaderMaterial_yjmtc")
+position = Vector2(323, 50)
+texture = ExtResource("34_oj6n4")
+region_enabled = true
+region_rect = Rect2(0, 0, 154, 68)
 
 [node name="InfoPanels" type="CanvasLayer" parent="."]
 layer = 3

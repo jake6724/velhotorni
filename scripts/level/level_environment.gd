@@ -8,6 +8,7 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 @onready var tilemap: TileMapLayer = $TileMapLayer
 @onready var level_mask_layer: TileMapLayer = $LevelMaskLayer
 @onready var base: Base = $Base
+@onready var weather_scroll = $WeatherScroll
 
 # Export vars
 @export var level_name: String
@@ -22,3 +23,4 @@ var stars: int = 1 # Tracks the highest number of stars earned for this level
 func _ready():
 	tilemap.z_index = Constants.z_index_map["background"]
 	level_mask_layer.z_index = Constants.z_index_map["background"]
+	weather_scroll.z_index = Constants.z_index_map["weather_scroll"]

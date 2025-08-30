@@ -1,9 +1,13 @@
 class_name LevelButton
 extends Button
 
+@onready var star: TextureRect = %Star
+
 @export var level_scene: PackedScene
 var level_name: String
 var region_name: String
+
+var stars: int
 
 signal level_hovered
 signal level_unhovered
@@ -35,8 +39,17 @@ func _ready():
 					LevelEnvironment.Region.FINAL: region_name = "Chaos Realm"
 					_: pass
 
+	set_star()
+
+func set_star() -> void:
+	var count: int = StarRegistry.stars[level_scene]
+	stars = count
+	var x: int = count * 16
+	star.texture.region = Rect2(x, 0, 16, 16)
+
 func on_pressed() -> void:
-	level_button_pressed.emit(level_scene)
+	if stars > 0:
+		level_button_pressed.emit(level_scene)
 
 func on_mouse_hovered() -> void: 
 	level_hovered.emit(level_name, region_name)

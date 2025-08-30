@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://vb1cipw2nthp"]
+[gd_scene load_steps=9 format=3 uid="uid://vb1cipw2nthp"]
 
 [ext_resource type="Script" uid="uid://c6gn0gwhvt2he" path="res://scripts/main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dmftkyu1m0r7n" path="res://scenes/ui/RoundInfo.tscn" id="3_0bbpv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://gu8su5txi8b8" path="res://scripts/coin_drops/coin_drop_manager.gd" id="5_c01mt"]
 [ext_resource type="PackedScene" uid="uid://cyqs2ueeu4k80" path="res://scenes/ui/PauseMenu.tscn" id="5_vcsgt"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="7_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://cg4hr6brmiyc4" path="res://scenes/ui/LevelCompletePanel.tscn" id="8_jlsqs"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0bbpv")
@@ -50,3 +51,9 @@ theme_override_fonts/font = ExtResource("7_nxtc6")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LevelCompletePanel" parent="UI" instance=ExtResource("8_jlsqs")]
+unique_name_in_owner = true
+visible = false
+offset_top = -47.5
+offset_bottom = 47.5
