@@ -1079,7 +1079,7 @@ level_name = "Level 4"
 region = 3
 initial_gold = 7500
 initial_token = 2
-waves = Array[ExtResource("2_132xv")]([ExtResource("12_ngae5"), ExtResource("3_rsnel"), ExtResource("4_05wce"), ExtResource("5_132xv"), ExtResource("6_ipw3t"), ExtResource("7_05wce"), ExtResource("8_132xv"), ExtResource("9_ipw3t"), ExtResource("3_dra8e"), ExtResource("11_iydlx")])
+waves = Array[ExtResource("2_132xv")]([ExtResource("3_rsnel"), ExtResource("7_05wce"), ExtResource("12_ngae5"), ExtResource("4_05wce"), ExtResource("5_132xv"), ExtResource("6_ipw3t"), ExtResource("8_132xv"), ExtResource("9_ipw3t"), ExtResource("3_dra8e"), ExtResource("11_iydlx")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
