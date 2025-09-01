@@ -6,12 +6,12 @@ var speed_button_hovered: String = "Shots per second"
 var range_button_hovered: String = "The max range of this tower"
 
 var special_button_hovered: String = "Special placeholder text! This will need to be different for each debuff"
-var special_debuff_burn: String = "Burn enemies every second. Upgrades burn damage. \n\nBurn for 12 seconds"
-var special_debuff_slow: String = "Apply slow to enemies"
-var special_debuff_freeze: String = "Apply freeze to enemies"
-var special_debuff_stun: String = "Apply stun to enemies"
-var special_debuff_knockback: String = "Apply knockback to enemies"
-var special_debuff_weaken: String = "Apply weaken to enemies"
+var special_debuff_burn: String = "Upgrade burn damage \n\n Burn enemies every .5 seconds \n lasts for 6 seconds"
+var special_debuff_slow: String = "Upgrade slow duration"
+var special_debuff_freeze: String = "Upgrade freeze duration"
+var special_debuff_stun: String = "Upgrade stun duration"
+var special_debuff_knockback: String = "Upgrade knockback distance"
+var special_debuff_weaken: String = "Upgrade weaken duration"
 var special_debuff_button_hovered_options: Dictionary[Debuff.Type, String] = {
 	Debuff.Type.BURN: special_debuff_burn,
 	Debuff.Type.SLOW: special_debuff_slow,

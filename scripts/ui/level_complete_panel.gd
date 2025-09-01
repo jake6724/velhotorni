@@ -22,6 +22,7 @@ func _ready():
 	next_level_button.mouse_exited.connect(un_highlight_ui_element.bind(next_level))
 
 func set_stars(count: int) -> void:
+	count -= 1 # offset 
 	for star:TextureRect in stars:
 		star.texture.region = Rect2(0, 0, 16, 16)
 

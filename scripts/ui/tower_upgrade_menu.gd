@@ -59,7 +59,7 @@ var target_priority_index: int = 0
 @onready var cost_label: Label = %CostLabel
 @onready var current_gold_label: Label = %CurrentGoldLabel
 
-@onready var desc: RichTextLabel = $%Description
+@onready var desc: Label = $%Description
 
 var can_flash_evolve: bool = false
 var flash_timer: Timer = Timer.new()
@@ -275,6 +275,7 @@ func set_requirement_colors(player_gold) -> void:
 		cost_label.set("theme_override_colors/font_color",Color(Constants.color_red))
 
 func update_description(_text) -> void:
+	desc.text = ""
 	desc.text = _text
 
 func clear_description() -> void:

@@ -22,11 +22,15 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
 @onready var indicator: EnemyIndicator = $EnemyIndicator
 
-@onready var fx_burn: AnimatedSprite2D = $FXBurn
-@onready var fx_weaken: AnimatedSprite2D = $FXWeaken
-@onready var fx_speed: AnimatedSprite2D = $FXSpeed
-@onready var fx_stun: AnimatedSprite2D = $FXStun
-@onready var fx_heal: AnimatedSprite2D = $FXHeal
+@onready var fx_burn: AnimatedSprite2D = $Sprite2D/FXBurn
+@onready var fx_weaken: AnimatedSprite2D = $Sprite2D/FXWeaken
+@onready var fx_speed: AnimatedSprite2D = $Sprite2D/FXSpeed
+@onready var fx_stun: AnimatedSprite2D = $Sprite2D/FXStun
+@onready var fx_heal: AnimatedSprite2D = $Sprite2D/FXHeal
+@onready var fx_prevent: AnimatedSprite2D = $Sprite2D/FXPrevent
+@onready var fx_freeze: AnimatedSprite2D = $Sprite2D/FXFreeze
+@onready var fx_cleanse: AnimatedSprite2D = $Sprite2D/FXCleanse
+@onready var fx_slow: AnimatedSprite2D = $Sprite2D/FXSlow
 
 # Pathing 
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
@@ -229,17 +233,26 @@ func on_add_new_debuff(_debuff: Debuff) -> void:
 
 func on_debuff_apply_slow(_slow_percent: float) -> void:
 	slow_percent = _slow_percent
+	fx_slow.show()
+	fx_slow.play("slow")
 
 func on_debuff_remove_slow() -> void:
 	slow_percent = 0.0
+	fx_slow.hide()
+	fx_slow.stop()
 
 func on_debuff_apply_freeze() -> void:
 	is_frozen = true
+	fx_freeze.show()
+	fx_freeze.play("start_freeze")
 
 func on_debuff_remove_freeze() -> void:
 	is_frozen = false
 	is_taking_damage = false
 	debuff_manager.start_cc_cooldown(Debuff.Type.FREEZE)
+	fx_freeze.play("end_freeze")
+	await fx_freeze.animation_finished
+	fx_freeze.hide()
 
 func on_debuff_apply_stun() -> void:
 	is_stunned = true
@@ -305,7 +318,6 @@ func on_boon_triggered(boon: Boon) -> void:
 			fx_heal.play("heal")
 			await fx_heal.animation_finished
 			fx_heal.hide()
-
 		Boon.Type.SPEED: 
 			speed += (data.speed * boon.value)
 			fx_speed.show()
@@ -318,7 +330,15 @@ func on_boon_triggered(boon: Boon) -> void:
 			death_position.emit(global_position)
 		Boon.Type.CLEANSE:
 			debuff_manager.remove_all_debuffs()
+			fx_cleanse.show()
+			fx_cleanse.play("cleanse")
+			await fx_cleanse.animation_finished
+			fx_cleanse.hide()
 		Boon.Type.PREVENT:
+			fx_prevent.show()
+			fx_prevent.play("start_prevent")
+			await fx_prevent.animation_finished
+			fx_prevent.play("loop_prevent")
 			debuff_manager.can_debuff = false
 		_: pass
 
@@ -332,7 +352,12 @@ func on_boon_expired(boon: Boon) -> void:
 				fx_speed.stop()
 		Boon.Type.DAMAGE: damage -= boon.value
 		Boon.Type.CLEANSE: pass
-		Boon.Type.PREVENT: debuff_manager.can_debuff = true
+		Boon.Type.PREVENT: 
+			fx_prevent.play("end_prevent")
+			await fx_prevent.animation_finished
+			fx_prevent.hide()
+			fx_prevent.stop()
+			debuff_manager.can_debuff = true
 		Boon.Type.STEALTH:
 			sprite.modulate.a = 1
 			collider.set_deferred("disabled", false)
