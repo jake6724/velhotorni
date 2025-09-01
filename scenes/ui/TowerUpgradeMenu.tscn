@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://br3yofjq2l14o"]
+[gd_scene load_steps=55 format=3 uid="uid://br3yofjq2l14o"]
 
 [ext_resource type="Script" uid="uid://dla326rvf6d3k" path="res://scripts/ui/tower_upgrade_menu.gd" id="1_4dufm"]
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="2_typcq"]
@@ -96,6 +96,14 @@ region = Rect2(0, 0, 8, 0)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7hf42"]
 atlas = ExtResource("18_e3s6c")
 region = Rect2(0, 0, 15, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e3s6c"]
+texture = ExtResource("15_wes0x")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+draw_center = false
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r51os"]
 
@@ -941,43 +949,22 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_7hf42")
 stretch_mode = 2
 
-[node name="DescriptionBorder" type="NinePatchRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details"]
+[node name="DescriptionBorder" type="PanelContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details"]
 z_as_relative = false
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("15_wes0x")
-region_rect = Rect2(0, 0, 16, 16)
-patch_margin_left = 6
-patch_margin_top = 5
-patch_margin_right = 6
-patch_margin_bottom = 6
+theme_override_styles/panel = SubResource("StyleBoxTexture_e3s6c")
 
-[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/DescriptionBorder"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.00559, 0.982061)
-mouse_filter = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="Description" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/DescriptionBorder/MarginContainer"]
+[node name="Description" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details/DescriptionBorder"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(193.58, 0)
 layout_mode = 2
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("10_6r12l")
-theme_override_font_sizes/normal_font_size = 8
-text = "Apply burn to enemies. Upgrade to increase burn damage. 
-
-Burn lasts for 12 seconds"
-scroll_active = false
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("10_6r12l")
+theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Divider" type="HSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/Body/Details"]
 layout_mode = 2

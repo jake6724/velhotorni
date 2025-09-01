@@ -969,7 +969,7 @@ animation = &"end_prevent"
 
 [node name="FXFreeze" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
-position = Vector2(8, 8)
+position = Vector2(8, 0)
 sprite_frames = SubResource("SpriteFrames_36hdo")
 animation = &"end_freeze"
 

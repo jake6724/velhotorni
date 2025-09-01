@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cyqs2ueeu4k80"]
+[gd_scene load_steps=27 format=3 uid="uid://cyqs2ueeu4k80"]
 
 [ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="1_7ida2"]
 [ext_resource type="Script" uid="uid://cl3kc6asyjctx" path="res://scripts/ui/pause_menu.gd" id="1_n5dsq"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://omqlfhu10s3" path="res://assets/art/sprites/ui/spr_ui_checkbox_unchecked.png" id="8_o0a0r"]
 [ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="10_o0a0r"]
 [ext_resource type="PackedScene" uid="uid://bd8qcphj4essk" path="res://scenes/ui/SettingsMenu.tscn" id="11_m3ie4"]
+[ext_resource type="PackedScene" uid="uid://cywxbhd0t5saw" path="res://scenes/ui/BestiaryMenu.tscn" id="12_3wlsb"]
 
 [sub_resource type="Theme" id="Theme_n5dsq"]
 CheckBox/icons/checked = null
@@ -392,3 +393,7 @@ offset_right = 160.0
 offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="BestiaryMenu" parent="." instance=ExtResource("12_3wlsb")]
+visible = false
+layout_mode = 1
