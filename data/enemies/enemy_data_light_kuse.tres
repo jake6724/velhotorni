@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://byay4dg3p4xil"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://byay4dg3p4xil"]
 
 [ext_resource type="Texture2D" uid="uid://dai8bwe40k3wj" path="res://assets/art/atlases/enemy/atl_enemy_light_kusekuse.png" id="1_k1lhv"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_ndxlo"]
 [ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="2_ajpra"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="3_oio2f"]
 
 [resource]
 script = ExtResource("1_ndxlo")
@@ -12,8 +13,12 @@ strong_against_element = 5
 weak_against_element = 3
 health = 500.0
 speed = 30.0
+damage = 1
+drop_chance_base = 1.0
 atlas = ExtResource("1_k1lhv")
 explosion_sfx = ExtResource("2_ajpra")
-cc_multiplier = 1.5
+hex_data_list = Array[ExtResource("3_oio2f")]([])
 knockback_multiplier = 1.5
+enemy_name = "Kusekuse"
+enemy_description = "freak"
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

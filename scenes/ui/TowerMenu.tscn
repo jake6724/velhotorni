@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ciicsqtfh31fh"]
+[gd_scene load_steps=28 format=3 uid="uid://ciicsqtfh31fh"]
 
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_c8bcu"]
 [ext_resource type="Texture2D" uid="uid://c01agh3yt3cka" path="res://assets/art/sprites/spr_coin.png" id="2_g5j4q"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://3pw18ittvgn5" path="res://assets/art/sprites/ui/eye_open.png" id="18_e3xib"]
 [ext_resource type="Texture2D" uid="uid://cqduan450w60k" path="res://assets/art/sprites/ui/eye_closed.png" id="19_pieka"]
 [ext_resource type="PackedScene" uid="uid://gkcs3ve0ty6v" path="res://scenes/ui/CycleIndicator.tscn" id="20_pieka"]
+[ext_resource type="Texture2D" uid="uid://b2v2j8x8ynfjj" path="res://assets/art/sprites/ui/spr_ui_bestiary_icon.png" id="21_72f3h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5j4q"]
 atlas = ExtResource("2_g5j4q")
@@ -522,7 +523,23 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("12_ur1ae")
 
-[node name="EyeButton" type="TextureButton" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="BestiaryButton" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("21_72f3h")
+
+[node name="EyeButton" type="TextureButton" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0

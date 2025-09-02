@@ -21,4 +21,6 @@ explosion_sfx = ExtResource("3_2l4o5")
 boon_data = ExtResource("2_uoljk")
 hex_data_list = Array[ExtResource("4_1a1c4")]([])
 knockback_multiplier = 1.5
+enemy_name = ""
+enemy_description = ""
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

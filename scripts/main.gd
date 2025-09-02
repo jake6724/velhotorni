@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var round_info: RoundInfo = $UI/RoundInfo
 @onready var pause_menu: PauseMenu = $UI/PauseMenu
+@onready var bestiary_menu: BestiaryMenu = $UI/BestiaryMenu
 @onready var player_controller: PlayerController = %PlayerController
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
 @onready var camera: Camera2D = $Camera2D
@@ -33,6 +34,7 @@ func _ready():
 
 	# Configure PlayerController
 	player_controller.setup()
+	player_controller.bestiary_pressed.connect(pause_game_with_bestiary)
 	coin_drop_manager.reward_completed.connect(player_controller.on_reward_complete)
 
 	# Configure CoinDrop Manager and Coin Collector
@@ -49,6 +51,9 @@ func _ready():
 	pause_menu.parent_scene = self
 	pause_menu.exit_scene = exit_scene
 	pause_menu.restart.show()
+
+	# Configure Bestiary
+	bestiary_menu.parent_scene = self
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
@@ -67,6 +72,14 @@ func pause_game_with_menu():
 
 func unpause_game_with_menu():
 	pause_menu.hide()
+	get_tree().paused = false
+
+func pause_game_with_bestiary() -> void:
+	bestiary_menu.show()
+	get_tree().paused = true
+
+func unpause_game_with_bestiary() -> void:
+	bestiary_menu.hide()
 	get_tree().paused = false
 
 func set_can_pause(value: bool) -> void:

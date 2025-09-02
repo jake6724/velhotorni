@@ -21,7 +21,9 @@ extends Control
 @onready var level_number: Label = %LevelNumber
 @onready var progress: Label = %Progress
 @onready var fast_forward: TextureButton = %FastForward
+
 @onready var eye_button: TextureButton = %EyeButton
+@onready var bestiary_button: TextureButton = %BestiaryButton
 
 @onready var fire_price_label: Label = %FirePriceLabel
 @onready var wind_price_label: Label = %WindPriceLabel
@@ -63,6 +65,7 @@ signal tower_selected
 signal start_wave
 signal mouse_entered_button
 signal mouse_exited_button
+signal bestiary_pressed
 
 var wave_number_timer: Timer = Timer.new()
 var wave_number_duration: float = 1.0
@@ -112,6 +115,9 @@ func _ready():
 	add_child(level_number_timer)
 
 	set_price_labels()
+
+	# Configure Bestiary
+	bestiary_button.pressed.connect(on_bestiary_pressed)
 
 func hide_placement_phase() -> void:
 	tower_buttons.hide()
@@ -269,3 +275,7 @@ func on_final_wave_started() -> void:
 	boss_healthbar.boss_max_health = WaveManager.boss_wave_health
 	boss_healthbar.boss_health = boss_healthbar.boss_max_health
 	boss_label.text = LevelManager.active_level.boss_name
+
+# Bestiary
+func on_bestiary_pressed() -> void:
+	bestiary_pressed.emit()

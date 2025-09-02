@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cm8d6umfle4ia"]
+[gd_scene load_steps=21 format=3 uid="uid://dlqr2le104hll"]
 
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_3dj6l"]
 [ext_resource type="Texture2D" uid="uid://b8c4r7msm3cdi" path="res://assets/art/sprites/ui/spr_ui_coin_big.png" id="2_ifp0u"]

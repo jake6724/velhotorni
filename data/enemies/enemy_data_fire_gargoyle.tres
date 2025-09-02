@@ -19,4 +19,6 @@ atlas = ExtResource("1_545on")
 explosion_sfx = ExtResource("2_eon68")
 hex_data_list = Array[ExtResource("1_b4kcp")]([])
 knockback_multiplier = 1.5
+enemy_name = "Fire Gargoyle"
+enemy_description = "Fire region boss"
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"
