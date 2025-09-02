@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_c8bcu"]
 [ext_resource type="Texture2D" uid="uid://c01agh3yt3cka" path="res://assets/art/sprites/spr_coin.png" id="2_g5j4q"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_ur1ae"]
-[ext_resource type="PackedScene" uid="uid://bqprjjk6xa3t6" path="res://scenes/ui/WavePreviewPanel.tscn" id="4_g5j4q"]
+[ext_resource type="PackedScene" path="res://scenes/ui/WavePreviewPanel.tscn" id="4_g5j4q"]
 [ext_resource type="Texture2D" uid="uid://cftejjjnlwgfa" path="res://assets/art/sprites/spr_ui_evo_token.png" id="4_r3bjd"]
 [ext_resource type="Texture2D" uid="uid://bod2y1cmadsde" path="res://assets/art/sprites/ui/spr_ui_wavebutton.png" id="5_gfj4e"]
 [ext_resource type="PackedScene" uid="uid://bf6yg1xajihe7" path="res://scenes/ui/BossHealthbar.tscn" id="5_k0nta"]
@@ -19,8 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="12_ur1ae"]
 [ext_resource type="PackedScene" uid="uid://du0wke3a8n1k8" path="res://scenes/ui/TowerInfoPanel.tscn" id="16_pieka"]
 [ext_resource type="Texture2D" uid="uid://bghgmlb8nqr2" path="res://scenes/ui/spr_ui_compact_box.png" id="17_rh755"]
-[ext_resource type="Texture2D" uid="uid://3pw18ittvgn5" path="res://scenes/ui/eye_open.png" id="18_e3xib"]
-[ext_resource type="Texture2D" uid="uid://cqduan450w60k" path="res://scenes/ui/eye_closed.png" id="19_pieka"]
+[ext_resource type="Texture2D" uid="uid://3pw18ittvgn5" path="res://assets/art/sprites/ui/eye_open.png" id="18_e3xib"]
+[ext_resource type="Texture2D" uid="uid://cqduan450w60k" path="res://assets/art/sprites/ui/eye_closed.png" id="19_pieka"]
 [ext_resource type="PackedScene" uid="uid://gkcs3ve0ty6v" path="res://scenes/ui/CycleIndicator.tscn" id="20_pieka"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5j4q"]
@@ -523,23 +523,24 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("12_ur1ae")
 
+[node name="EyeButton" type="TextureButton" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("18_e3xib")
+texture_pressed = ExtResource("19_pieka")
+
 [node name="Eye" type="TextureRect" parent="MarginContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 texture = ExtResource("17_rh755")
 stretch_mode = 2
-
-[node name="EyeButton" type="TextureButton" parent="MarginContainer/Eye"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 1
-toggle_mode = true
-texture_normal = ExtResource("18_e3xib")
-texture_pressed = ExtResource("19_pieka")
 
 [node name="LeftTowerInfoPanel" parent="MarginContainer" instance=ExtResource("16_pieka")]
 unique_name_in_owner = true
