@@ -7,6 +7,8 @@ extends Node2D
 @onready var tower_evolve_menu: TowerEvolveMenu = $UI/TowerEvolveMenu
 @onready var coin_collector: CoinCollector = $CoinCollector
 
+signal bestiary_pressed
+
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var tower_to_place: Tower = null
 var tower_to_upgrade: Tower = null:
@@ -50,6 +52,7 @@ func _ready():
 	tower_menu.mouse_entered_button.connect(on_mouse_entered_button)
 	tower_menu.mouse_exited_button.connect(on_mouse_exited_button)
 	tower_menu.start_wave.connect(on_start_wave)
+	tower_menu.bestiary_pressed.connect(on_bestiary_pressed)
 
 	# Connect to tower upgrade menu
 	tower_upgrade_menu.damage_button_pressed.connect(on_damage_button_pressed)
@@ -378,6 +381,9 @@ func on_close_menu() -> void:
 	tower_menu.show()
 	tower_to_upgrade = null
 	set_deferred("menu_open", false) # Delayed so that pause_menu is not triggered by main
+
+func on_bestiary_pressed() -> void:
+	bestiary_pressed.emit()
 
 func on_tower_evolve_menu_back_button_pressed() -> void:
 	tower_evolve_menu.hide()

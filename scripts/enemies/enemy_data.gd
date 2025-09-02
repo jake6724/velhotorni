@@ -22,3 +22,7 @@ var pos_offset: Vector2
 ## Multiplier to modify the required distance travelled before `Enemy` can be knockbacked again. This value is multiplied by the distance
 ## of the first active knockback debuff.
 @export var knockback_multiplier: float = 1.5
+
+@export_category("Bestiary")
+@export var enemy_name: String
+@export_multiline var enemy_description: String
