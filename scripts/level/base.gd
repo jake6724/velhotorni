@@ -33,6 +33,7 @@ func _physics_process(_delta):
 		light.modulate.a = (ap.current_animation_position / ap.current_animation_length) + .01
 
 func take_damage(damage_recieved: int) -> void:
+	print("Damage recieved: ", damage_recieved)
 	health -= damage_recieved
 	update_health_label(health)
 	damaged.emit()

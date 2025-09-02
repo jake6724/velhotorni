@@ -91,6 +91,7 @@ func _ready():
 	health = data.health
 	speed = data.speed
 	damage = data.damage
+	print("Damage: ", damage)
 	atlas = data.atlas
 	max_health = health
 	base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 

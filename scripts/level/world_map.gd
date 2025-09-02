@@ -14,7 +14,7 @@ var hovered_scale_increment: Vector2 = Vector2(.1, .1)
 var hovered_position_offset: Vector2 = Vector2(0, -1)
 
 var hide_timer: Timer = Timer.new()
-var hide_delay: float = .35
+var hide_delay: float = .15
 
 var can_pause: bool = false
 

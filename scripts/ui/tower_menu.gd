@@ -21,7 +21,6 @@ extends Control
 @onready var level_number: Label = %LevelNumber
 @onready var progress: Label = %Progress
 @onready var fast_forward: TextureButton = %FastForward
-@onready var eye: TextureRect = %Eye
 @onready var eye_button: TextureButton = %EyeButton
 
 @onready var fire_price_label: Label = %FirePriceLabel
@@ -118,7 +117,7 @@ func hide_placement_phase() -> void:
 	tower_buttons.hide()
 	wave_button.hide()
 	wave_preview_panel.hide()
-	eye.hide()
+	eye_button.hide()
 
 	cycle_indicator.show()
 	fast_forward.show()
@@ -127,7 +126,7 @@ func show_placement_phase() -> void:
 	tower_buttons.show()
 	wave_button.show()
 	wave_preview_panel.show()
-	eye.show()
+	eye_button.show()
 
 	cycle_indicator.hide()
 	fast_forward.hide()
