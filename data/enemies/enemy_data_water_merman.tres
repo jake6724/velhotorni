@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://db1t1ah5kjgjj" path="res://assets/art/atlases/enemy/atl_enemy_water_vepar.png" id="1_ie048"]
 [ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="3_pn31d"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="4_f25yj"]
-[ext_resource type="Resource" path="res://data/hexes/hex_data_damage_merman.tres" id="4_ie048"]
+[ext_resource type="Resource" uid="uid://qycs71biig1y" path="res://data/hexes/hex_data_damage_merman.tres" id="4_ie048"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="5_wcmxr"]
 
 [resource]
@@ -20,4 +20,6 @@ atlas = ExtResource("1_ie048")
 explosion_sfx = ExtResource("3_pn31d")
 hex_data_list = Array[ExtResource("4_f25yj")]([ExtResource("4_ie048")])
 knockback_multiplier = 1.5
+enemy_name = ""
+enemy_description = ""
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

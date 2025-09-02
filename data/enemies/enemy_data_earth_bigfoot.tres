@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_av50y"]
 [ext_resource type="Texture2D" uid="uid://bvyugwb8bon7t" path="res://assets/art/atlases/enemy/atl_enemy_earth_bigfoot.png" id="1_ggfqb"]
 [ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_4s3ii"]
-[ext_resource type="Resource" path="res://data/boons/boon_data_conceal_earth_bigfoot.tres" id="2_v8fyb"]
+[ext_resource type="Resource" uid="uid://cstheffc1k5lv" path="res://data/boons/boon_data_conceal_earth_bigfoot.tres" id="2_v8fyb"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="4_mcjrj"]
 
 [resource]

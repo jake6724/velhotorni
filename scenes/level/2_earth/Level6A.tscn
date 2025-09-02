@@ -1072,7 +1072,7 @@ script = ExtResource("1_mw6y2")
 level_name = "Level 6A"
 region = 3
 initial_gold = 85
-waves = Array[ExtResource("2_0dxoa")]([ExtResource("3_h6g50"), ExtResource("4_p2wns"), ExtResource("5_kvvob"), ExtResource("6_oqr0h")])
+waves = Array[ExtResource("2_0dxoa")]([ExtResource("3_h6g50"), ExtResource("4_p2wns"), ExtResource("5_kvvob"), ExtResource("6_oqr0h"), null])
 
 [node name="LevelMaskLayer" type="TileMapLayer" parent="."]
 visible = false

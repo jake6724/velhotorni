@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BoonData" load_steps=2 format=3 uid="uid://b2wd0lw0o88nj"]
+[gd_resource type="Resource" script_class="BoonData" load_steps=2 format=3 uid="uid://dtd8o8erbrdr3"]
 
 [ext_resource type="Script" uid="uid://dlf5v11rla3hp" path="res://scripts/boons/data/boon_data.gd" id="1_dchcc"]
 

@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=6 format=3 uid="uid://bp1oi8pi675fq"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=6 format=3 uid="uid://lswqi13lanov"]
 
-[ext_resource type="Texture2D" uid="uid://2u7wcxsgphq0" path="res://assets/art/atlases/enemy/atl_enemy_wind_barbatos.png" id="1_xllrd"]
-[ext_resource type="Resource" uid="uid://b2wd0lw0o88nj" path="res://data/buffs/boon_data_damage_test.tres" id="2_uoljk"]
-[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="3_2l4o5"]
+[ext_resource type="Texture2D" uid="uid://b55stadqnynpd" path="res://assets/art/atlases/enemy/atl_enemy_wind_harpy.png" id="1_vyl2n"]
+[ext_resource type="Resource" uid="uid://dtd8o8erbrdr3" path="res://data/boons/boon_data_damage_harpy.tres" id="2_si1md"]
+[ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="3_uoljk"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="4_1a1c4"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="5_lllqf"]
 
@@ -16,9 +16,9 @@ health = 1000.0
 speed = 40.0
 damage = 3
 drop_chance_base = 3.0
-atlas = ExtResource("1_xllrd")
-explosion_sfx = ExtResource("3_2l4o5")
-boon_data = ExtResource("2_uoljk")
+atlas = ExtResource("1_vyl2n")
+explosion_sfx = ExtResource("3_uoljk")
+boon_data = ExtResource("2_si1md")
 hex_data_list = Array[ExtResource("4_1a1c4")]([])
 knockback_multiplier = 1.5
 enemy_name = ""
