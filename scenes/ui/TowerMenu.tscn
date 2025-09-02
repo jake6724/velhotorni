@@ -1,9 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://ciicsqtfh31fh"]
+[gd_scene load_steps=30 format=3 uid="uid://ciicsqtfh31fh"]
 
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_c8bcu"]
 [ext_resource type="Texture2D" uid="uid://c01agh3yt3cka" path="res://assets/art/sprites/spr_coin.png" id="2_g5j4q"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_ur1ae"]
-[ext_resource type="PackedScene" uid="uid://bqprjjk6xa3t6" path="res://scenes/ui/WavePreviewPanel.tscn" id="4_g5j4q"]
+[ext_resource type="PackedScene" path="res://scenes/ui/WavePreviewPanel.tscn" id="4_g5j4q"]
 [ext_resource type="Texture2D" uid="uid://cftejjjnlwgfa" path="res://assets/art/sprites/spr_ui_evo_token.png" id="4_r3bjd"]
 [ext_resource type="Texture2D" uid="uid://bod2y1cmadsde" path="res://assets/art/sprites/ui/spr_ui_wavebutton.png" id="5_gfj4e"]
 [ext_resource type="PackedScene" uid="uid://bf6yg1xajihe7" path="res://scenes/ui/BossHealthbar.tscn" id="5_k0nta"]
@@ -20,8 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://du0wke3a8n1k8" path="res://scenes/ui/TowerInfoPanel.tscn" id="16_pieka"]
 [ext_resource type="Texture2D" uid="uid://3pw18ittvgn5" path="res://assets/art/sprites/ui/eye_open.png" id="18_e3xib"]
 [ext_resource type="Texture2D" uid="uid://cqduan450w60k" path="res://assets/art/sprites/ui/eye_closed.png" id="19_pieka"]
+[ext_resource type="Texture2D" uid="uid://d4e1p57nq45w7" path="res://assets/art/sprites/ui/spr_ui_bestiary_icon_hover.png" id="20_k5e7a"]
 [ext_resource type="PackedScene" uid="uid://gkcs3ve0ty6v" path="res://scenes/ui/CycleIndicator.tscn" id="20_pieka"]
 [ext_resource type="Texture2D" uid="uid://b2v2j8x8ynfjj" path="res://assets/art/sprites/ui/spr_ui_bestiary_icon.png" id="21_72f3h"]
+[ext_resource type="Texture2D" uid="uid://dx8b6lhcvjpy1" path="res://assets/art/sprites/ui/eye_hover.png" id="23_75wig"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5j4q"]
 atlas = ExtResource("2_g5j4q")
@@ -536,8 +538,8 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 1
-toggle_mode = true
 texture_normal = ExtResource("21_72f3h")
+texture_hover = ExtResource("20_k5e7a")
 
 [node name="EyeButton" type="TextureButton" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -548,6 +550,7 @@ mouse_filter = 1
 toggle_mode = true
 texture_normal = ExtResource("18_e3xib")
 texture_pressed = ExtResource("19_pieka")
+texture_hover = ExtResource("23_75wig")
 
 [node name="LeftTowerInfoPanel" parent="MarginContainer" instance=ExtResource("16_pieka")]
 unique_name_in_owner = true
