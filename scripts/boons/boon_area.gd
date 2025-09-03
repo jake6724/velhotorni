@@ -11,6 +11,7 @@ func initialize(_boon_data: BoonData):
 	boon_collider.shape.radius = _boon_data.cast_radius
 	match boon_data.mode:
 		Boon.Mode.TIMER: 
+			print("boon_data.mode is TIMER")
 			cast_timer = Timer.new()
 			add_child(cast_timer)
 			cast_timer.timeout.connect(on_cast_timer_timeout)
@@ -24,10 +25,10 @@ func on_cast_timer_timeout() -> void:
 	var allies: Array[Area2D] = get_overlapping_areas()
 	for ally in allies:
 		connect_boon(ally.owner)
-
 	cast_timer.start(boon_data.cast_speed)
 
 func on_buff_area_entered(intruder) -> void:
+	# print("Buff area entered")
 	connect_boon(intruder.owner)
 
 func on_buff_area_exited(intruder) -> void:
@@ -36,6 +37,7 @@ func on_buff_area_exited(intruder) -> void:
 
 ## Handle the logic for determining if an boon should be connected to self or enemy
 func connect_boon(enemy: Enemy) -> void: 
+	# print("Connect boon")
 	if enemy:
 		if boon_data.ally_cast and enemy != self.owner:
 			enemy.boon_manager.connect_boon(create_boon(boon_data))

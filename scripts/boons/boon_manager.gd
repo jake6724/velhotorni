@@ -4,7 +4,10 @@ extends Node
 signal boon_connected
 
 func connect_boon(_new_boon: Boon) -> void:
-	_new_boon.value = calc_boon_modified_value(_new_boon)
+
+	if _new_boon.type != Boon.Type.DAMAGE: # Damage boons do not modify
+		_new_boon.value = calc_boon_modified_value(_new_boon)
+	# print("Boon modified value: ", _new_boon.value)
 	boon_connected.emit(_new_boon)
 
 func add_boon(boon: Boon) -> void:

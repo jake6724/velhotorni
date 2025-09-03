@@ -32,6 +32,7 @@ func _ready():
 
 	if one_shot:
 		boon_expired.emit()
+
 	elif not manual_disable:
 		add_child(total_timer)
 		total_timer.timeout.connect(on_total_timer_timeout)

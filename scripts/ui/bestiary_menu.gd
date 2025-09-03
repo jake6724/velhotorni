@@ -18,7 +18,6 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 	for entry: BestiaryEntry in entries.get_children():
-		print(entry)
 		entry.pressed.connect(on_entry_pressed.bind(entry))
 
 	close_button.pressed.connect(on_close_button_pressed)

@@ -79,4 +79,3 @@ func highlight_ui_element(ui_element: Control) -> void:
 
 func un_highlight_ui_element(ui_element: Control) -> void:
 	ui_element.self_modulate = Color.WHITE
-
