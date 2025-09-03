@@ -45,22 +45,22 @@
 [ext_resource type="Texture2D" uid="uid://cj6cvql7gek83" path="res://assets/art/sprites/spr_map_cloud1.png" id="40_h7gxl"]
 [ext_resource type="PackedScene" uid="uid://cyqs2ueeu4k80" path="res://scenes/ui/PauseMenu.tscn" id="44_3377u"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_chpcd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3377u"]
 atlas = ExtResource("34_oj6n4")
-region = Rect2(0, 0, 154, 68)
+region = Rect2(0, 0, 154, 84)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_87gs2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo7is"]
 atlas = ExtResource("34_oj6n4")
-region = Rect2(154, 0, 154, 68)
+region = Rect2(154, 0, 154, 84)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4rt6m"]
 animations = [{
 "frames": [{
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_chpcd")
+"texture": SubResource("AtlasTexture_3377u")
 }, {
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_87gs2")
+"texture": SubResource("AtlasTexture_wo7is")
 }],
 "loop": true,
 "name": &"default",
@@ -89,110 +89,110 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h4cwq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjmtc"]
 atlas = ExtResource("36_fysc3")
-region = Rect2(0, 0, 177, 80)
+region = Rect2(0, 0, 177, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ilb6a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlnli"]
 atlas = ExtResource("36_fysc3")
-region = Rect2(177, 0, 177, 80)
+region = Rect2(177, 0, 177, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_enoa7"]
 animations = [{
 "frames": [{
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_h4cwq")
+"texture": SubResource("AtlasTexture_yjmtc")
 }, {
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_ilb6a")
+"texture": SubResource("AtlasTexture_xlnli")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_te4ia"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_musam"]
 atlas = ExtResource("37_vgdhw")
-region = Rect2(0, 0, 140, 92)
+region = Rect2(0, 0, 140, 108)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ume1l"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b0ok"]
 atlas = ExtResource("37_vgdhw")
-region = Rect2(140, 0, 140, 92)
+region = Rect2(140, 0, 140, 108)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jg0wg"]
 animations = [{
 "frames": [{
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_te4ia")
+"texture": SubResource("AtlasTexture_musam")
 }, {
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_ume1l")
+"texture": SubResource("AtlasTexture_2b0ok")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xctqm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nc3cf"]
 atlas = ExtResource("38_2itq3")
-region = Rect2(0, 0, 147, 113)
+region = Rect2(0, 0, 147, 129)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_snhpd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dra5x"]
 atlas = ExtResource("38_2itq3")
-region = Rect2(147, 0, 147, 113)
+region = Rect2(147, 0, 147, 129)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r8qeu"]
 animations = [{
 "frames": [{
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_xctqm")
+"texture": SubResource("AtlasTexture_nc3cf")
 }, {
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_snhpd")
+"texture": SubResource("AtlasTexture_dra5x")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o5a1n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1bqq"]
 atlas = ExtResource("39_eahnm")
-region = Rect2(0, 0, 171, 120)
+region = Rect2(0, 0, 171, 136)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s1dlw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_juthh"]
 atlas = ExtResource("39_eahnm")
-region = Rect2(171, 0, 171, 120)
+region = Rect2(171, 0, 171, 136)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ljwyh"]
 animations = [{
 "frames": [{
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_o5a1n")
+"texture": SubResource("AtlasTexture_x1bqq")
 }, {
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_s1dlw")
+"texture": SubResource("AtlasTexture_juthh")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x7i25"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3os7"]
 atlas = ExtResource("40_h7gxl")
-region = Rect2(0, 0, 168, 90)
+region = Rect2(0, 0, 168, 106)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3j5lk"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yiddi"]
 atlas = ExtResource("40_h7gxl")
-region = Rect2(168, 0, 168, 90)
+region = Rect2(168, 0, 168, 106)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dunfx"]
 animations = [{
 "frames": [{
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_x7i25")
+"texture": SubResource("AtlasTexture_j3os7")
 }, {
 "duration": 4.0,
-"texture": SubResource("AtlasTexture_3j5lk")
+"texture": SubResource("AtlasTexture_yiddi")
 }],
 "loop": true,
 "name": &"default",
@@ -523,7 +523,7 @@ texture_normal = ExtResource("5_3377u")
 layer = 2
 
 [node name="7Cloud" type="AnimatedSprite2D" parent="Clouds"]
-position = Vector2(323, 50)
+position = Vector2(323, 42)
 sprite_frames = SubResource("SpriteFrames_4rt6m")
 autoplay = "default"
 
@@ -533,29 +533,29 @@ sprite_frames = SubResource("SpriteFrames_vvfr3")
 autoplay = "default"
 
 [node name="5Cloud" type="AnimatedSprite2D" parent="Clouds"]
-position = Vector2(311, 168)
+position = Vector2(311, 176)
 sprite_frames = SubResource("SpriteFrames_enoa7")
 autoplay = "default"
 
 [node name="4Cloud" type="AnimatedSprite2D" parent="Clouds"]
-position = Vector2(184, 162)
+position = Vector2(184, 170)
 sprite_frames = SubResource("SpriteFrames_jg0wg")
 autoplay = "default"
 
 [node name="3Cloud" type="AnimatedSprite2D" parent="Clouds"]
 visible = false
-position = Vector2(201, 72)
+position = Vector2(201, 64)
 sprite_frames = SubResource("SpriteFrames_r8qeu")
 autoplay = "default"
 
 [node name="2Cloud" type="AnimatedSprite2D" parent="Clouds"]
 visible = false
-position = Vector2(85, 76)
+position = Vector2(85, 68)
 sprite_frames = SubResource("SpriteFrames_ljwyh")
 autoplay = "default"
 
 [node name="1Cloud" type="AnimatedSprite2D" parent="Clouds"]
-position = Vector2(84, 163)
+position = Vector2(84, 171)
 sprite_frames = SubResource("SpriteFrames_dunfx")
 autoplay = "default"
 
