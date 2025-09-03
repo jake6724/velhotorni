@@ -528,6 +528,7 @@ sprite_frames = SubResource("SpriteFrames_4rt6m")
 autoplay = "default"
 
 [node name="6Cloud" type="AnimatedSprite2D" parent="Clouds"]
+visible = false
 position = Vector2(321, 103)
 sprite_frames = SubResource("SpriteFrames_vvfr3")
 autoplay = "default"
@@ -564,16 +565,14 @@ layer = 3
 
 [node name="LeftWorldMapInfoPanel" parent="InfoPanels" instance=ExtResource("3_gyoph")]
 unique_name_in_owner = true
-visible = false
+offset_left = -160.0
+offset_right = 0.0
 
 [node name="RightWorldMapInfoPanel" parent="InfoPanels" instance=ExtResource("3_gyoph")]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -160.0
-offset_right = 0.0
 grow_horizontal = 0
 
 [node name="Menu" type="CanvasLayer" parent="."]

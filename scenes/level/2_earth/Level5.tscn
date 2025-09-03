@@ -1078,7 +1078,7 @@ script = ExtResource("1_80k1k")
 level_name = "Level 5"
 region = 3
 initial_gold = 150
-waves = Array[ExtResource("2_ijwoi")]([ExtResource("3_3khdh"), ExtResource("4_yc80i"), ExtResource("5_ua14f"), ExtResource("6_dx5yt"), ExtResource("7_ogi32"), ExtResource("8_kdt60"), ExtResource("9_w1eqj"), ExtResource("10_lcqli"), ExtResource("3_iqjj3"), ExtResource("4_rxns5")])
+waves = Array[ExtResource("2_ijwoi")]([ExtResource("3_iqjj3"), ExtResource("3_3khdh"), ExtResource("4_yc80i"), ExtResource("5_ua14f"), ExtResource("6_dx5yt"), ExtResource("7_ogi32"), ExtResource("8_kdt60"), ExtResource("9_w1eqj"), ExtResource("10_lcqli"), ExtResource("4_rxns5")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

@@ -14,11 +14,12 @@ var hovered_scale_increment: Vector2 = Vector2(.1, .1)
 var hovered_position_offset: Vector2 = Vector2(0, -1)
 
 var hide_timer: Timer = Timer.new()
-var hide_delay: float = .15
+const HIDE_DELAY: float = .3
+const SLIDE_DURATION: float = .35
 
 var can_pause: bool = false
-
 var exit_scene: PackedScene = load("res://scenes/MainMenu.tscn") # passed to PauseMenu
+var panel_to_hide: WorldMapInfoPanel
 
 func _ready():
 	SceneTransition.scene_transition_complete.connect(set_can_pause.bind(true))
@@ -32,7 +33,7 @@ func _ready():
 	
 	# Connect to level buttons
 	for button: LevelButton in level_buttons.get_children():
-		button.level_hovered.connect(on_level_hovered.bind(button, button.global_position))
+		button.level_hovered.connect(on_level_hovered.bind(button))
 		button.level_unhovered.connect(on_level_unhovered.bind(button))
 		button.level_button_pressed.connect(on_level_button_pressed)
 
@@ -44,27 +45,46 @@ func _ready():
 	# LevelToggleButton
 	level_toggle_button.toggled.connect(on_level_toggled)
 
-func on_level_hovered(_level_name: String, _region_name: String, _level_button: LevelButton, _button_global_pos: Vector2) -> void:
-	hide_timer.stop()
+func on_level_hovered(_level_name: String, _region_name: String, _level_button: LevelButton) -> void:
 	_level_button.position += hovered_position_offset
-	if _button_global_pos.x >= background_width:
-		left_world_map_info_panel.set_level_name(_level_name)
-		left_world_map_info_panel.set_region(_region_name)
-		left_world_map_info_panel.show()
-		right_world_map_info_panel.hide()
-	else:
-		right_world_map_info_panel.set_level_name(_level_name)
-		right_world_map_info_panel.set_region(_region_name)
-		right_world_map_info_panel.show()
-		left_world_map_info_panel.hide()
+	
+	if _level_button.stars > 0:
+		hide_timer.stop()
+		if _level_button.global_position.x >= background_width: # Show left panel
+			left_world_map_info_panel.set_level_name(_level_name)
+			left_world_map_info_panel.set_region(_region_name)
+
+			var tween: Tween = get_tree().create_tween()
+			tween.tween_property(left_world_map_info_panel, "position", Vector2(0,0), SLIDE_DURATION)
+
+			panel_to_hide = left_world_map_info_panel
+
+			# left_world_map_info_panel.show()
+			# right_world_map_info_panel.hide()
+			
+		else:												    # Show right panel
+			right_world_map_info_panel.set_level_name(_level_name)
+			right_world_map_info_panel.set_region(_region_name)
+
+			panel_to_hide = right_world_map_info_panel
+
+			var tween: Tween = get_tree().create_tween()
+			tween.tween_property(right_world_map_info_panel, "position", Vector2(240.0,0.0), SLIDE_DURATION)
+
+			# right_world_map_info_panel.show()
+			# left_world_map_info_panel.hide()
 
 func on_level_unhovered(_level_button: LevelButton) -> void:
 	_level_button.position -= hovered_position_offset
-	hide_timer.start(hide_delay)
+	if _level_button.stars > 0:
+		hide_timer.start(HIDE_DELAY)
 
 func on_hide_timer_timeout() -> void:
-	left_world_map_info_panel.hide()
-	right_world_map_info_panel.hide()
+	# left_world_map_info_panel.hide()
+	# right_world_map_info_panel.hide()
+
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(panel_to_hide, "position", panel_to_hide.original_pos, .4)
 
 func on_level_button_pressed(_level_scene: PackedScene) -> void:
 	hide_timer.stop()
