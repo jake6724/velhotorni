@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bq6mi6ltqiwag" path="res://scripts/ui/tower_menu.gd" id="1_c8bcu"]
 [ext_resource type="Texture2D" uid="uid://c01agh3yt3cka" path="res://assets/art/sprites/spr_coin.png" id="2_g5j4q"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_ur1ae"]
-[ext_resource type="PackedScene" path="res://scenes/ui/WavePreviewPanel.tscn" id="4_g5j4q"]
+[ext_resource type="PackedScene" uid="uid://bqprjjk6xa3t6" path="res://scenes/ui/WavePreviewPanel.tscn" id="4_g5j4q"]
 [ext_resource type="Texture2D" uid="uid://cftejjjnlwgfa" path="res://assets/art/sprites/spr_ui_evo_token.png" id="4_r3bjd"]
 [ext_resource type="Texture2D" uid="uid://bod2y1cmadsde" path="res://assets/art/sprites/ui/spr_ui_wavebutton.png" id="5_gfj4e"]
 [ext_resource type="PackedScene" uid="uid://bf6yg1xajihe7" path="res://scenes/ui/BossHealthbar.tscn" id="5_k0nta"]
