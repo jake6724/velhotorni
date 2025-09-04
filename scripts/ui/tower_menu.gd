@@ -94,11 +94,11 @@ func _ready():
 	for b: TextureButton in all_tower_buttons:
 			b.pressed.connect(on_button_pressed.bind(b))
 			b.mouse_entered.connect(on_mouse_entered_button.bind(b))
-			b.mouse_exited.connect(on_mouse_exited_button)
+			b.mouse_exited.connect(on_mouse_exited_button.bind(b))
 
 	wave_button.pressed.connect(on_wave_button_pressed)
-	wave_button.mouse_entered.connect(on_mouse_entered_button.bind(wave_button))
-	wave_button.mouse_exited.connect(on_mouse_exited_button)
+	wave_button.mouse_entered.connect(on_mouse_entered_wave_button)
+	wave_button.mouse_exited.connect(on_mouse_exited_wave_button)
 
 	fast_forward.button_down.connect(on_start_fast_forward)
 	fast_forward.button_up.connect(on_stop_fast_forward)
@@ -215,6 +215,10 @@ func on_stop_fast_forward():
 
 func on_mouse_entered_button(_button: TextureButton):
 	var element: Constants.Element
+
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(_button, "position", (_button.position + Vector2(0, -3)), .1)
+
 	match _button:
 			fire_button: element = Constants.Element.FIRE
 			wind_button: element = Constants.Element.WIND
@@ -222,11 +226,18 @@ func on_mouse_entered_button(_button: TextureButton):
 			earth_button: element = Constants.Element.EARTH
 			light_button: element = Constants.Element.LIGHT
 			dark_button:element = Constants.Element.DARK
-			wave_button: element = Constants.Element.NONE
 
 	mouse_entered_button.emit(element)
 
-func on_mouse_exited_button():
+func on_mouse_exited_button(_button):
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(_button, "position", Vector2(0, -3), .1)
+	mouse_exited_button.emit()
+
+func on_mouse_entered_wave_button():
+	mouse_entered_button.emit(Constants.Element.NONE)
+
+func on_mouse_exited_wave_button():
 	mouse_exited_button.emit()
 
 # Info panel functions
