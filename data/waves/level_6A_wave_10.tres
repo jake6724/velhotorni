@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=6 format=3 uid="uid://rxi5ibv6vc6p"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_bse1q"]
+[ext_resource type="Resource" uid="uid://cqgwq576ast5s" path="res://data/spawn/spawn_light_bifron_1.tres" id="2_2bt5n"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_3hpbu"]
+[ext_resource type="Resource" uid="uid://dlwo3pbvynfam" path="res://data/spawn/spawn_earth_golem_boss_1.tres" id="3_ftq01"]
+[ext_resource type="Resource" uid="uid://dgalkolspve38" path="res://data/spawn/spawn_water_kappa_1.tres" id="4_2bt5n"]
+
+[resource]
+script = ExtResource("2_3hpbu")
+data = Array[ExtResource("1_bse1q")]([ExtResource("2_2bt5n"), ExtResource("3_ftq01"), ExtResource("4_2bt5n")])
+reward = 50.0
+token_reward = 0
+metadata/_custom_type_script = "uid://cskry1sw3vqba"

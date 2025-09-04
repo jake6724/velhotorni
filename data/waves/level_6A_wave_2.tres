@@ -7,6 +7,6 @@
 [resource]
 script = ExtResource("2_ljsvg")
 data = Array[ExtResource("1_1atob")]([ExtResource("2_etusk")])
-reward = 75.0
+reward = 76.0
 token_reward = 0
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
