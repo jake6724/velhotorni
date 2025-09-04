@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://blulg7nnexa6s"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://blulg7nnexa6s"]
 
 [ext_resource type="Texture2D" uid="uid://db1t1ah5kjgjj" path="res://assets/art/atlases/enemy/atl_enemy_water_vepar.png" id="1_wd1l5"]
 [ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="2_1km5w"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="3_1km5w"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="3_slqhw"]
 
 [resource]
@@ -12,8 +13,12 @@ strong_against_element = 3
 weak_against_element = 1
 health = 500.0
 speed = 20.0
+damage = 1
+drop_chance_base = 1.0
 atlas = ExtResource("1_wd1l5")
 explosion_sfx = ExtResource("2_1km5w")
-cc_multiplier = 1.5
+hex_data_list = Array[ExtResource("3_1km5w")]([])
 knockback_multiplier = 1.5
+enemy_name = "Vepar"
+enemy_description = "A demon born from the darkest, deepest depths of the ocean."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

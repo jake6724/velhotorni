@@ -20,5 +20,5 @@ explosion_sfx = ExtResource("3_63ss6")
 hex_data_list = Array[ExtResource("4_xx5rv")]([])
 knockback_multiplier = 1.5
 enemy_name = "Fire Ghoul"
-enemy_description = "Basic fire enemy"
+enemy_description = "Animated corpse of a violent criminal who died in a fire."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

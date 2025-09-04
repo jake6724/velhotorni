@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://cwvipuex2alcf"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://cwvipuex2alcf"]
 
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_34htb"]
 [ext_resource type="Texture2D" uid="uid://drxdyygwk651d" path="res://assets/art/atlases/enemy/atl_enemy_earth_ghoul.png" id="1_pb38a"]
 [ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="2_p0i6k"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="3_vpblo"]
 
 [resource]
 script = ExtResource("1_34htb")
@@ -12,8 +13,12 @@ strong_against_element = 4
 weak_against_element = 2
 health = 100.0
 speed = 30.0
+damage = 1
+drop_chance_base = 1.0
 atlas = ExtResource("1_pb38a")
 explosion_sfx = ExtResource("2_p0i6k")
-cc_multiplier = 1.5
+hex_data_list = Array[ExtResource("3_vpblo")]([])
 knockback_multiplier = 1.5
+enemy_name = "Carved Pumpkin"
+enemy_description = "A large squash posessed by an evil spirit."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

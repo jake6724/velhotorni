@@ -19,4 +19,6 @@ atlas = ExtResource("1_m3cyp")
 explosion_sfx = ExtResource("2_24baa")
 hex_data_list = Array[ExtResource("4_i34bl")]([])
 knockback_multiplier = 1.5
+enemy_name = "Ghost"
+enemy_description = "A small spirit doomed to wander for an eternity."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"
