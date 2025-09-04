@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_mw6y2"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_0dxoa"]
-[ext_resource type="Resource" uid="uid://4q7ppn5mcqoa" path="res://data/waves/level_6A_wave_1.tres" id="3_h6g50"]
+[ext_resource type="Resource" path="res://data/waves/level_6A_wave_1.tres" id="3_h6g50"]
 [ext_resource type="Resource" uid="uid://bjn0hdalinj5a" path="res://data/waves/level_6A_wave_2.tres" id="4_p2wns"]
 [ext_resource type="Resource" uid="uid://bgpo2vuhnakeh" path="res://data/waves/level_6A_wave_3.tres" id="5_kvvob"]
 [ext_resource type="Resource" uid="uid://dd1qtgdpd3dlc" path="res://data/waves/level_6A_wave_4.tres" id="6_oqr0h"]
@@ -1072,7 +1072,7 @@ script = ExtResource("1_mw6y2")
 level_name = "Level 6A"
 region = 3
 initial_gold = 85
-waves = Array[ExtResource("2_0dxoa")]([ExtResource("3_h6g50"), ExtResource("4_p2wns"), ExtResource("5_kvvob"), ExtResource("6_oqr0h"), null])
+waves = Array[ExtResource("2_0dxoa")]([ExtResource("3_h6g50"), ExtResource("4_p2wns"), ExtResource("5_kvvob"), ExtResource("6_oqr0h")])
 
 [node name="LevelMaskLayer" type="TileMapLayer" parent="."]
 visible = false
