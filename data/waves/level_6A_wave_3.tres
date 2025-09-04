@@ -11,6 +11,6 @@
 [resource]
 script = ExtResource("3_1og5d")
 data = Array[ExtResource("1_ytdlf")]([ExtResource("2_qk3tr"), ExtResource("2_qk3tr"), ExtResource("2_qk3tr"), ExtResource("2_qk3tr"), ExtResource("2_qk3tr"), ExtResource("2_1og5d"), ExtResource("2_t78ic"), ExtResource("3_a7cmo"), ExtResource("6_6yaua"), ExtResource("2_qk3tr"), ExtResource("2_qk3tr"), ExtResource("2_qk3tr"), ExtResource("2_qk3tr")])
-reward = 75.0
+reward = 76.0
 token_reward = 1
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
