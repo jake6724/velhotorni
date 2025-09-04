@@ -149,6 +149,7 @@ theme_override_icons/unchecked = ExtResource("9_uab20")
 button_pressed = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 
@@ -159,6 +160,7 @@ size_flags_vertical = 4
 mouse_filter = 2
 
 [node name="ResolutionLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/WindowMode"]
+visible = false
 custom_minimum_size = Vector2(103, 0)
 layout_mode = 2
 size_flags_horizontal = 4
