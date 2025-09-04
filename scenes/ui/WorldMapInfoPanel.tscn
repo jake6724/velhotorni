@@ -22,7 +22,7 @@ region_rect = Rect2(1, 1, 30, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vqpsd"]
 atlas = ExtResource("5_nwgce")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(0, 0, 17, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v0dsn"]
 atlas = ExtResource("5_nwgce")
@@ -87,7 +87,8 @@ theme_override_constants/separation = 10
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Vbox"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Vbox/HBoxContainer"]
+[node name="Star1" type="TextureRect" parent="VBoxContainer/Vbox/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -109,7 +110,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Vbox/HBoxContainer2"]
+[node name="Star2" type="TextureRect" parent="VBoxContainer/Vbox/HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -130,7 +132,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Vbox/HBoxContainer3"]
+[node name="Star3" type="TextureRect" parent="VBoxContainer/Vbox/HBoxContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

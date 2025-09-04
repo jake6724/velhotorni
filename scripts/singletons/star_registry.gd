@@ -15,7 +15,7 @@ var stars: Dictionary[PackedScene, int] = {
 	LevelManager.level_5: 1, 
 	LevelManager.level_6a: 1, 
 	LevelManager.level_6b: 1, 
-	LevelManager.level_7: 0, 
+	LevelManager.level_7: 1, 
 	LevelManager.level_8: 0, 
 	LevelManager.level_9a: 0, 
 	LevelManager.level_9b: 0, 
