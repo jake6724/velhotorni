@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://yaumfsyoni78"]
+[gd_scene load_steps=13 format=3 uid="uid://yaumfsyoni78"]
 
 [ext_resource type="Script" uid="uid://glpr25c7d5yd" path="res://scripts/main_menu.gd" id="1_yqorp"]
 [ext_resource type="PackedScene" uid="uid://d37yx87886ct2" path="res://scenes/placeholders/scroll_background_test.tscn" id="2_0ykhv"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="5_mipys"]
 [ext_resource type="Texture2D" uid="uid://djq3huplgujyb" path="res://assets/art/sprites/ui/spr_ui_logo.png" id="6_ucygd"]
 [ext_resource type="PackedScene" uid="uid://bd8qcphj4essk" path="res://scenes/ui/SettingsMenu.tscn" id="8_mipys"]
+[ext_resource type="PackedScene" uid="uid://dmbo5qx2htxpa" path="res://scenes/ui/CreditsMenu.tscn" id="10_7la6k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mipys"]
 
@@ -246,3 +247,8 @@ offset_right = 160.0
 offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CreditsMenu" parent="." instance=ExtResource("10_7la6k")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1

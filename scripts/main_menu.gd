@@ -11,6 +11,7 @@ extends Control
 
 @onready var title_menu: Control = %TitleMenu
 @onready var settings_menu: SettingsMenu = %SettingsMenu
+@onready var credits_menu: CreditsMenu = %CreditsMenu
 
 var main_scene: PackedScene = load("res://scenes/Main.tscn")
 var world_map: PackedScene = preload("res://scenes/level/world_map/WorldMap.tscn")
@@ -18,9 +19,12 @@ var world_map: PackedScene = preload("res://scenes/level/world_map/WorldMap.tscn
 func _ready() -> void:
 	# Connect to signals
 	play_button.pressed.connect(_on_play_button_pressed)
+
 	settings_button.pressed.connect(on_settings_button_pressed)
-	
 	settings_menu.back_button_pressed.connect(on_settings_menu_back_button_pressed)
+
+	credits_button.pressed.connect(on_credits_button_pressed)
+	credits_menu.back_button_pressed.connect(on_credits_menu_back_button_pressed)
 
 	# Configure Highlighting
 	play.mouse_entered.connect(highlight_ui_element.bind(play))
@@ -41,6 +45,14 @@ func on_settings_button_pressed() -> void:
 func on_settings_menu_back_button_pressed() -> void:
 	title_menu.show()
 	settings_menu.hide()
+
+func on_credits_button_pressed() -> void:
+	title_menu.hide()
+	credits_menu.show()
+
+func on_credits_menu_back_button_pressed() -> void:
+	title_menu.show()
+	credits_menu.hide()
 
 func highlight_ui_element(ui_element: Control) -> void:
 	ui_element.self_modulate = Color(Constants.ui_color_select)
