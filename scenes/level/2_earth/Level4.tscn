@@ -1,11 +1,11 @@
-[gd_scene load_steps=24 format=4 uid="uid://lqrdrmmlicq1"]
+[gd_scene load_steps=25 format=4 uid="uid://lqrdrmmlicq1"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_05wce"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_132xv"]
 [ext_resource type="Resource" uid="uid://d2ja881cmu357" path="res://data/waves/level_4_wave_8.tres" id="3_dra8e"]
 [ext_resource type="Resource" uid="uid://d2osac2hhtw" path="res://data/waves/level_4_wave_1.tres" id="3_rsnel"]
 [ext_resource type="Resource" uid="uid://bgaxfnv76eb8w" path="res://data/waves/level_4_wave_2.tres" id="4_05wce"]
-[ext_resource type="Resource" uid="uid://sm54vyr53p40" path="res://data/waves/level_4_wave_3.tres" id="5_132xv"]
+[ext_resource type="Resource" path="res://data/waves/level_4_wave_3.tres" id="5_132xv"]
 [ext_resource type="Resource" uid="uid://cmy4d2fqnkhv0" path="res://data/waves/level_4_wave_4.tres" id="6_ipw3t"]
 [ext_resource type="Resource" uid="uid://b5y63p2thp888" path="res://data/waves/level_4_wave_5.tres" id="7_05wce"]
 [ext_resource type="Resource" uid="uid://dtkjpm6c4d5ms" path="res://data/waves/level_4_wave_6.tres" id="8_132xv"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://ci1fav2pukqxt" path="res://data/waves/level_4_wave_9.tres" id="11_iydlx"]
 [ext_resource type="Resource" uid="uid://c8ui7un5cccxr" path="res://data/waves/level_4_wave_10.tres" id="12_ngae5"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="12_x5cpi"]
+[ext_resource type="Texture2D" uid="uid://bvfwq65xwqtyh" path="res://assets/art/sprites/environment/spr_foreground_branches.png" id="18_qaia5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpffg"]
 texture = ExtResource("8_f3wrl")
@@ -1110,3 +1111,8 @@ position = Vector2(200, 128)
 texture = ExtResource("12_x5cpi")
 region_enabled = true
 region_rect = Rect2(0, 0, 400, 192)
+
+[node name="ForegroundBranches" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(200, 112)
+texture = ExtResource("18_qaia5")
