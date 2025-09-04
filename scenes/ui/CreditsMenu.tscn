@@ -1,0 +1,138 @@
+[gd_scene load_steps=17 format=3 uid="uid://dmbo5qx2htxpa"]
+
+[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="1_jl2f1"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="2_glyk4"]
+[ext_resource type="Script" uid="uid://bb3pqyuxlv40q" path="res://scripts/ui/credits_menu.gd" id="2_krh5m"]
+[ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="3_8kb6f"]
+[ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="4_krh5m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kk5rt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vdfjj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h1m3d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xa3hu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1hb3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_68y5l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rigt4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71522"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_58lwe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dlnfn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yb0nr"]
+
+[node name="CreditsMenu" type="NinePatchRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -64.0
+offset_right = 96.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jl2f1")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 6
+patch_margin_right = 7
+patch_margin_bottom = 8
+script = ExtResource("2_krh5m")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_glyk4")
+theme_override_font_sizes/font_size = 8
+text = "Artist - Torspou"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_glyk4")
+theme_override_font_sizes/font_size = 8
+text = "Game Designer - Uvula"
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_glyk4")
+theme_override_font_sizes/font_size = 8
+text = "Programmer - Jake"
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_glyk4")
+theme_override_font_sizes/font_size = 8
+text = "Composer and SFX - eamc"
+
+[node name="Back" type="NinePatchRect" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(65, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 1
+texture = ExtResource("3_8kb6f")
+region_rect = Rect2(1, 1, 30, 29)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+
+[node name="Label" type="Label" parent="MarginContainer/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00112, 1.04446)
+theme_override_fonts/font = ExtResource("4_krh5m")
+theme_override_font_sizes/font_size = 8
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/Back"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.000831637
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kk5rt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_vdfjj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_h1m3d")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_xa3hu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_b1hb3")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_68y5l")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_rigt4")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_71522")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_58lwe")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_dlnfn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yb0nr")
