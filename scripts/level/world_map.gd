@@ -72,8 +72,9 @@ func on_level_unhovered(_level_button: LevelButton) -> void:
 		hide_timer.start(HIDE_DELAY)
 
 func on_hide_timer_timeout() -> void:
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(active_panel, "position", active_panel.original_pos, .4)
+	if active_panel:
+		var tween: Tween = get_tree().create_tween()
+		tween.tween_property(active_panel, "position", active_panel.original_pos, .4)
 
 func on_level_button_pressed(_level_scene: PackedScene) -> void:
 	hide_timer.stop()

@@ -486,26 +486,6 @@ offset_bottom = 48.0
 level_scene = ExtResource("33_kfem8")
 metadata/_edit_use_anchors_ = true
 
-[node name="LevelToggleButton" type="TextureButton" parent="UI"]
-unique_name_in_owner = true
-anchors_preset = -1
-anchor_left = 0.042
-anchor_top = 0.931
-anchor_right = 0.042
-anchor_bottom = 0.931
-offset_left = -16.16
-offset_top = -15.87
-offset_right = 15.84
-offset_bottom = 16.13
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-toggle_mode = true
-texture_normal = ExtResource("35_wo7is")
-texture_pressed = ExtResource("36_xlnli")
-texture_hover = ExtResource("36_yjmtc")
-
 [node name="Clouds" type="CanvasLayer" parent="."]
 layer = 2
 
@@ -548,6 +528,27 @@ autoplay = "default"
 
 [node name="InfoPanels" type="CanvasLayer" parent="."]
 layer = 3
+
+[node name="LevelToggleButton" type="TextureButton" parent="InfoPanels"]
+unique_name_in_owner = true
+z_index = 5
+anchors_preset = -1
+anchor_left = 0.042
+anchor_top = 0.931
+anchor_right = 0.042
+anchor_bottom = 0.931
+offset_left = -16.16
+offset_top = -15.87
+offset_right = 15.84
+offset_bottom = 16.13
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+toggle_mode = true
+texture_normal = ExtResource("35_wo7is")
+texture_pressed = ExtResource("36_xlnli")
+texture_hover = ExtResource("36_yjmtc")
 
 [node name="LeftWorldMapInfoPanel" parent="InfoPanels" instance=ExtResource("3_gyoph")]
 unique_name_in_owner = true

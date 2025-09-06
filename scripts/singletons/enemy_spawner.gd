@@ -7,8 +7,8 @@ extends Node2D
 var active_enemies: Array[Enemy]
 var enemy_index: int
 var can_spawn_enemy: bool
-var enemy_path_length: float # Per level
 var spawn_timer: Timer = Timer.new()
+var spawn_timer_2: Timer = Timer.new()
 
 var boss_wave_active: bool = false
 
@@ -26,8 +26,12 @@ signal boss_enemy_damage_recieved
 
 func _ready():
 	z_index = Constants.z_index_map["enemy_spawner"]
+
 	spawn_timer.timeout.connect(on_spawn_timer_timeout)
 	add_child(spawn_timer)
+
+	spawn_timer_2.timeout.connect(on_spawn_timer_2_timeout)
+	add_child(spawn_timer_2)
 
 	# Connect to WaveManager
 	WaveManager.wave_started.connect(start_wave)
@@ -40,11 +44,10 @@ func _physics_process(_delta): # TODO: It would be great to not call this on tic
 	sort_enemies_z_index_by_progress()
 
 ## Called by LevelManager.
-func configure_level(active_level: LevelEnvironment):
+func configure_level():
 	active_enemies = []
 	enemy_index = 0
 	can_spawn_enemy = false
-	enemy_path_length = active_level.enemy_path.curve.get_baked_length()
 	
 ## Intended to be triggered directly by `player_controller`.
 func start_wave() -> void:
@@ -76,25 +79,40 @@ func on_enemy_died(enemy: Enemy) -> void:
 ## Called on `spawn_timer`'s `timeout`
 func on_spawn_timer_timeout() -> void:
 	if WaveManager.active_wave:
-		if can_spawn_enemy and enemy_index < WaveManager.active_wave.data.size():
-			var spawn_data: EnemyData = WaveManager.active_wave.data[enemy_index].enemy_data
-			var spawn_delay: float = WaveManager.active_wave.data[enemy_index].delay
+		if can_spawn_enemy:
+			while enemy_index < WaveManager.active_wave.data.size():
+				if WaveManager.active_wave.data[enemy_index].path_index == 0:
+					var spawn_data: Spawn = WaveManager.active_wave.data[enemy_index]
+					var spawn_delay: float = WaveManager.active_wave.data[enemy_index].delay
 
-			spawn_enemy(spawn_data)
-			enemy_index += 1
+					spawn_enemy(spawn_data)
+					enemy_index += 1
 
-			# Restart spawn timer
-			spawn_timer.start(spawn_delay)
+					# Restart spawn timer
+					spawn_timer.start(spawn_delay)
 
-func spawn_enemy(_enemy_data: EnemyData) -> void:
+func on_spawn_timer_2_timeout() -> void:
+		if WaveManager.active_wave:
+			if can_spawn_enemy and enemy_index < WaveManager.active_wave.data.size():
+				var spawn_data: Spawn = WaveManager.active_wave.data[enemy_index]
+				var spawn_delay: float = WaveManager.active_wave.data[enemy_index].delay
+
+				spawn_enemy(spawn_data)
+				enemy_index += 1
+
+				# Restart spawn timer
+				spawn_timer.start(spawn_delay)
+
+func spawn_enemy(_spawn: Spawn) -> void:
 	# Configure new enemy
+	var _enemy_data: EnemyData = _spawn.enemy_data
 	var new_enemy: Enemy = enemy_scenes[_enemy_data.size].instantiate()
 	new_enemy.data = _enemy_data
 	new_enemy.died.connect(on_enemy_died)
 	add_child(new_enemy)
 	active_enemies.append(new_enemy)
 
-	configure_enemy_pathing(new_enemy)
+	configure_enemy_pathing(new_enemy, _spawn)
 
 	if boss_wave_active: 
 		new_enemy.is_boss = true
@@ -103,13 +121,17 @@ func spawn_enemy(_enemy_data: EnemyData) -> void:
 	enemy_spawned.emit()
 	enemy_spawned_with_ref.emit(new_enemy)
 
-func configure_enemy_pathing(enemy: Enemy) -> void:
+func configure_enemy_pathing(enemy: Enemy, _spawn: Spawn) -> void:
 	# Create new PathFollow2D + RemoteTransform2D for enemy to follow EnemyPath with
 	# EnemyPath2D is a node in the level, add a pathfollow to move along it, and a remote transform which will update the 
 	# enemies position
 	var new_path_follow: PathFollow2D = PathFollow2D.new()
 	new_path_follow.rotates = true
-	LevelManager.active_level.enemy_path.add_child(new_path_follow)
+
+	if _spawn.path_index == 0:
+		LevelManager.active_level.enemy_path.add_child(new_path_follow)
+	elif _spawn.path_index == 1:
+		LevelManager.active_level.enemy_path_2.add_child(new_path_follow)
 
 	var new_remote_transform: RemoteTransform2D = RemoteTransform2D.new()
 	new_remote_transform.update_rotation = false

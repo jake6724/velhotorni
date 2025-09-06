@@ -25,7 +25,7 @@ func _ready():
 
 	# Configure other singletons
 	WorldGrid.configure_level(LevelManager.active_level)
-	EnemySpawner.configure_level(LevelManager.active_level)
+	EnemySpawner.configure_level()
 	WaveManager.configure_level(LevelManager.active_level)
 	TowerGlobalData.reset()
 
@@ -54,6 +54,8 @@ func _ready():
 
 	# Configure Bestiary
 	bestiary_menu.parent_scene = self
+	bestiary_menu.add_entries()
+	EnemySpawner.enemy_spawned_with_ref.connect(bestiary_menu.on_enemy_spawned)
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change

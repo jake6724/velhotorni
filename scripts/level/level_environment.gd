@@ -5,6 +5,7 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 
 # # Child References
 @onready var enemy_path: Path2D = $EnemyPath 
+@onready var enemy_path_2: Path2D
 @onready var tilemap: TileMapLayer = $TileMapLayer
 @onready var level_mask_layer: TileMapLayer = $LevelMaskLayer
 @onready var base: Base = $Base
@@ -24,3 +25,4 @@ func _ready():
 	tilemap.z_index = Constants.z_index_map["background"]
 	level_mask_layer.z_index = Constants.z_index_map["background"]
 	weather_scroll.z_index = Constants.z_index_map["weather_scroll"]
+	enemy_path_2 = get_node_or_null("EnemyPath2")
