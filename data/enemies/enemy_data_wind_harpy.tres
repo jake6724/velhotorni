@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=6 format=3 uid="uid://lswqi13lanov"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=6 format=3 uid="uid://bp1oi8pi675fq"]
 
 [ext_resource type="Texture2D" uid="uid://b55stadqnynpd" path="res://assets/art/atlases/enemy/atl_enemy_wind_harpy.png" id="1_vyl2n"]
 [ext_resource type="Resource" uid="uid://dtd8o8erbrdr3" path="res://data/boons/boon_data_damage_harpy.tres" id="2_si1md"]
@@ -21,6 +21,6 @@ explosion_sfx = ExtResource("3_uoljk")
 boon_data = ExtResource("2_si1md")
 hex_data_list = Array[ExtResource("4_1a1c4")]([])
 knockback_multiplier = 1.5
-enemy_name = ""
-enemy_description = ""
+enemy_name = "Harpy"
+enemy_description = "A bird monster with the upper half of a woman."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

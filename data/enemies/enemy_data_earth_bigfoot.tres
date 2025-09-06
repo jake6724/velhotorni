@@ -22,5 +22,5 @@ boon_data = ExtResource("2_v8fyb")
 hex_data_list = Array[ExtResource("4_mcjrj")]([])
 knockback_multiplier = 1.5
 enemy_name = "Bigfoot"
-enemy_description = "multi-dimensional boss"
+enemy_description = "An elusive beast of great size and strength."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"
