@@ -1,18 +1,18 @@
 class_name TowerEvolveMenuUIText
 extends Object
 
-var evolve_desc_lava: String = "Evolve into a lava tower"
-var evolve_desc_plasma: String = "Evolve into a plasma tower"
-var evolve_desc_storm: String = "Evolve into a storm tower"
-var evolve_desc_lightning: String = "Evolve into a lightning tower"
-var evolve_desc_ice: String = "Evolve into an ice tower"
-var evolve_desc_flood: String = "Evolve into a flood tower"
-var evolve_desc_mud: String = "Evolve into a mud tower"
-var evolve_desc_crystal: String = "Evolve into a crystal tower"
-var evolve_desc_spirit: String = "Evolve into a spirit tower"
-var evolve_desc_sun: String = "Evolve into a sun tower"
-var evolve_desc_curse: String = "Evolve into a curse tower"
-var evolve_desc_void: String = "Evolve into a void tower"
+var evolve_desc_lava: String = "Powerful AOE attacks with burn"
+var evolve_desc_plasma: String = "Rapid-fire with piercing 2 and burn"
+var evolve_desc_storm: String = "Massive knockback with pierce 10"
+var evolve_desc_lightning: String = "Chain lightning bullets which stun enemies"
+var evolve_desc_ice: String = "Freeze enemies, pierce 3"
+var evolve_desc_flood: String = "Rapid-fire with slow"
+var evolve_desc_mud: String = "AOE attacks with slow"
+var evolve_desc_crystal: String = "Enemies killed by this tower may drop additional gems. Pierce 3"
+var evolve_desc_spirit: String = "Buffs allied range, speed, and damage"
+var evolve_desc_sun: String = "Long-range, high-damage"
+var evolve_desc_curse: String = "AOE explosion bullets with weaken"
+var evolve_desc_void: String = "Extremely fast attacks with weaken"
 var evolve_desc_options: Dictionary[Constants.Element, String] = {
 	Constants.Element.LAVA: evolve_desc_lava,
 	Constants.Element.PLASMA: evolve_desc_plasma,
