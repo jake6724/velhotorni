@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_wl3i3"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="11_3y1du"]
 [ext_resource type="Resource" uid="uid://ci1fav2pukqxt" path="res://data/waves/level_4_wave_9.tres" id="11_iydlx"]
-[ext_resource type="Resource" uid="uid://c8ui7un5cccxr" path="res://data/waves/level_4_wave_10.tres" id="12_ngae5"]
+[ext_resource type="Resource" path="res://data/waves/level_4_wave_10.tres" id="12_ngae5"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="12_x5cpi"]
 [ext_resource type="Texture2D" uid="uid://bvfwq65xwqtyh" path="res://assets/art/sprites/environment/spr_foreground_branches.png" id="18_qaia5"]
 
@@ -1098,7 +1098,9 @@ tile_set = SubResource("TileSet_6ufsd")
 [node name="Base" parent="." instance=ExtResource("10_wl3i3")]
 position = Vector2(360, 80)
 
-[node name="EnemyPath" type="Path2D" parent="."]
+[node name="PathParent" type="Node" parent="."]
+
+[node name="EnemyPath" type="Path2D" parent="PathParent"]
 visible = false
 curve = SubResource("Curve2D_per2q")
 

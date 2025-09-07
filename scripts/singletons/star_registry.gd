@@ -14,12 +14,12 @@ var stars: Dictionary[PackedScene, int] = {
 	LevelManager.level_4: 1, 
 	LevelManager.level_5: 1, 
 	LevelManager.level_6a: 1, 
-	LevelManager.level_6b: 1, 
+	LevelManager.level_6b: 0, 
 	LevelManager.level_7: 1, 
 	LevelManager.level_8: 0, 
 	LevelManager.level_9a: 0, 
 	LevelManager.level_9b: 0, 
-	LevelManager.level_10: 0,
+	LevelManager.level_10: 1,
 	LevelManager.level_11: 0, 
 	LevelManager.level_12a: 0, 
 	LevelManager.level_12b: 0,
@@ -41,7 +41,6 @@ var region_stars: Array[int] = [0, 0, 0 ,0 ,0 ,0, 0, 0]
 
 func _ready():
 	update_star_progress()
-	print("Region stars: ", region_stars)
 
 func update_star_progress() -> void:
 	var i: int = 0

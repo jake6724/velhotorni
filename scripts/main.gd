@@ -25,8 +25,8 @@ func _ready():
 
 	# Configure other singletons
 	WorldGrid.configure_level(LevelManager.active_level)
-	EnemySpawner.configure_level()
 	WaveManager.configure_level(LevelManager.active_level)
+	EnemySpawner.configure_level(LevelManager.active_level)
 	TowerGlobalData.reset()
 
 	# Connect to WaveManager

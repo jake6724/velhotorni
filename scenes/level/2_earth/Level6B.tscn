@@ -1052,6 +1052,10 @@ texture = ExtResource("9_byrku")
 sources/0 = SubResource("TileSetAtlasSource_74c5d")
 
 [sub_resource type="Curve2D" id="Curve2D_per2q"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 160, 0, 0, 0, 0, 224, 160, 0, 0, 0, 0, 224, 112, 0, 0, 0, 0, 288, 112, 0, 0, 0, 0, 288, 160, 0, 0, 0, 0, 352, 160, 0, 0, 0, 0, 352, 112)
+}
+point_count = 7
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1rson"]
 shader = ExtResource("11_s6pxr")

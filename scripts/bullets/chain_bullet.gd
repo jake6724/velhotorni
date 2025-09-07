@@ -72,7 +72,8 @@ func on_animation_finished(anim_name):
 		target = get_next_target()
 
 func order_targets():
-	in_range_enemies.sort_custom(compare_by_progress_ratio)
+	if in_range_enemies.size() > 1:
+		in_range_enemies.sort_custom(compare_by_progress_ratio)
 
 func get_next_target():
 	chain_count += 1
