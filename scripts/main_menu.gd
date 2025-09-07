@@ -32,7 +32,7 @@ func _ready() -> void:
 	settings.mouse_entered.connect(highlight_ui_element.bind(settings))
 	settings.mouse_exited.connect(un_highlight_ui_element.bind(settings))	
 	credits.mouse_entered.connect(highlight_ui_element.bind(credits))
-	credits.mouse_exited.connect(un_highlight_ui_element.bind(credits))	
+	credits.mouse_exited.connect(un_highlight_ui_element.bind(credits))
 
 func _on_play_button_pressed() -> void:
 	SceneTransition.change_scene(world_map)

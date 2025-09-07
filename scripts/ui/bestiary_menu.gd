@@ -30,7 +30,6 @@ func add_entries() -> void:
 		for spawn: Spawn in wave.data:
 			if spawn.enemy_data not in enemy_data_in_level:
 				enemy_data_in_level[spawn.enemy_data] = true
-				print(spawn.enemy_data.enemy_name)
 
 	for enemy_data: EnemyData in enemy_data_in_level:
 		var new_entry: BestiaryEntry = bestiary_entry_scene.instantiate()
@@ -39,7 +38,6 @@ func add_entries() -> void:
 
 		entry_map[enemy_data] = new_entry
 		entries.add_child(new_entry)
-		# new_entry.hide()
 
 func update_stats(entry: BestiaryEntry) -> void:
 	# stats.show()

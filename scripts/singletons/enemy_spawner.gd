@@ -47,7 +47,6 @@ func configure_level(active_level: LevelEnvironment):
 	can_spawn_enemy = false
 	create_spawn_timers(active_level)
 
-	print("active_level.enemy_paths.size(): ", active_level.enemy_paths.size())
 	for i in range(active_level.enemy_paths.size()):
 		path_spawns.append([])
 		path_enemy_indexes.append(0)
@@ -184,8 +183,5 @@ func sort_enemies_by_path() -> void:
 		path_enemy_indexes[i] = 0
 
 	if WaveManager.active_wave:
-		print("Pass 2")
 		for spawn: Spawn in WaveManager.active_wave.data:
 			path_spawns[spawn.path_index].append(spawn)
-
-	print("path_spawns: ", path_spawns)

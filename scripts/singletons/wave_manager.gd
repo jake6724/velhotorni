@@ -54,7 +54,6 @@ func on_wave_complete() -> void:
 		all_waves_completed.emit()
 	
 	wave_index_checkpoint = wave_index
-	print("Wave complete in WM")
 	wave_completed.emit()
 
 func on_wave_failed() -> void:

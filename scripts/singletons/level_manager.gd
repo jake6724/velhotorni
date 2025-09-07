@@ -74,7 +74,6 @@ func restart_level():
 
 func load_specific_level(_level_environment):
 	level_index = levels.find(_level_environment)
-	print(level_index)
 	if level_index != -1:
 		# level_index = _level_index
 		SceneTransition.change_scene(main_scene)
