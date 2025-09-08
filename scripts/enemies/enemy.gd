@@ -323,9 +323,7 @@ func on_boon_triggered(boon: Boon) -> void:
 			fx_speed.show()
 			fx_speed.play("speed")
 		Boon.Type.DAMAGE:
-			# print("Pre-add boon damage: ", damage)
 			damage += boon.value
-			# print("Post-add boon damage: ", damage)
 		Boon.Type.STEALTH:
 			collider.set_deferred("disabled", true)
 			sprite.modulate.a = .65
@@ -353,8 +351,6 @@ func on_boon_expired(boon: Boon) -> void:
 				fx_speed.hide()
 				fx_speed.stop()
 		Boon.Type.DAMAGE:
-			# print("Pre-remove boon damage: ", damage)
-			print(self.data.enemy_name, ": Subtracting ", boon.value , " from ", damage, " = ", damage - boon.value)
 			damage -= boon.value
 			
 		Boon.Type.CLEANSE: pass

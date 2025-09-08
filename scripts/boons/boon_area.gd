@@ -11,7 +11,6 @@ func initialize(_boon_data: BoonData):
 	boon_collider.shape.radius = _boon_data.cast_radius
 	match boon_data.mode:
 		Boon.Mode.TIMER: 
-			print("boon_data.mode is TIMER")
 			cast_timer = Timer.new()
 			add_child(cast_timer)
 			cast_timer.timeout.connect(on_cast_timer_timeout)
