@@ -22,5 +22,7 @@ boon_data = ExtResource("2_si1md")
 hex_data_list = Array[ExtResource("4_1a1c4")]([])
 knockback_multiplier = 1.5
 enemy_name = "Harpy"
-enemy_description = "A bird monster with the upper half of a woman."
+enemy_description = "Increases the damage of nearby enemies by 2
+
+A bird monster with the upper half of a woman."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

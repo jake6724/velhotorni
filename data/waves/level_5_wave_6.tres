@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_3mwkv"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_64rxu"]
 [ext_resource type="Resource" uid="uid://jgaba1ytd24k" path="res://data/spawn/spawn_earth_mudman_half.tres" id="2_xvy3u"]
-[ext_resource type="Resource" uid="uid://de3fn3wpmquev" path="res://data/spawn/spawn_water_merman_half.tres" id="3_4tcqt"]
+[ext_resource type="Resource" path="res://data/spawn/spawn_water_merman_half.tres" id="3_4tcqt"]
 
 [resource]
 script = ExtResource("2_64rxu")

@@ -22,5 +22,7 @@ boon_data = ExtResource("2_bbcu4")
 hex_data_list = Array[ExtResource("4_1xfvp")]([])
 knockback_multiplier = 1.5
 enemy_name = "Kappa"
-enemy_description = "A monster found near rivers that steals the souls of passers-by in peculiar ways."
+enemy_description = "Protects nearby enemies from negative status effects. Does not remove pre-existing effects
+
+A monster found near rivers that steals the souls of passers-by in peculiar ways."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

@@ -22,5 +22,7 @@ boon_data = ExtResource("2_dsgg7")
 hex_data_list = Array[ExtResource("4_h424w")]([])
 knockback_multiplier = 1.5
 enemy_name = "Ectoplasm"
-enemy_description = "A large writhing mass formed by the souls of many regretful men."
+enemy_description = "Stealths nearby enemies for 1.5 seconds every 3 seconds. Stealthed enemies are immune to attacks
+
+A large writhing mass formed by the souls of many regretful men."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

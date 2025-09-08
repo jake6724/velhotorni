@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://relfue1rk6le" path="res://assets/art/atlases/enemy/atl_enemy_wind_flatwoods.png" id="1_26mko"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_ohl2i"]
 [ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="2_7i6qe"]
-[ext_resource type="Resource" path="res://data/boons/boon_data_heal_wind_flatwoods.tres" id="2_vy2ro"]
+[ext_resource type="Resource" uid="uid://iblkaej3e3hs" path="res://data/boons/boon_data_heal_wind_flatwoods.tres" id="2_vy2ro"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="4_vth83"]
 
 [resource]
@@ -22,5 +22,7 @@ boon_data = ExtResource("2_vy2ro")
 hex_data_list = Array[ExtResource("4_vth83")]([])
 knockback_multiplier = 1.5
 enemy_name = "Phantom"
-enemy_description = "A large floating creature that preys on humans and livestock alike."
+enemy_description = "Heals nearby enemies for 10 health every .1 seconds
+
+A large floating creature that preys on humans and livestock alike."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

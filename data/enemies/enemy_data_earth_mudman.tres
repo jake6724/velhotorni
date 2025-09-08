@@ -21,5 +21,7 @@ explosion_sfx = ExtResource("2_qgenu")
 hex_data_list = Array[ExtResource("3_eaepj")]([ExtResource("4_p6b1n")])
 knockback_multiplier = 1.5
 enemy_name = "Mudman"
-enemy_description = "The reanimated remains of a man who drowned in a swamp."
+enemy_description = "Reduces the attack speed of nearby familiars by 0.5x
+
+The reanimated remains of a man who drowned in a swamp."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

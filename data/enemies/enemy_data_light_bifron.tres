@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_fvi1s"]
 [ext_resource type="Texture2D" uid="uid://o4yi6a6gmudw" path="res://assets/art/atlases/enemy/atl_enemy_light_bifrons.png" id="1_u312f"]
-[ext_resource type="Resource" uid="uid://3p8j08xil8f2" path="res://data/boons/boon_data_heal_light_bifron.tres" id="2_fhgfl"]
+[ext_resource type="Resource" path="res://data/boons/boon_data_heal_light_bifron.tres" id="2_fhgfl"]
 [ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="2_le116"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="3_le116"]
 
@@ -22,5 +22,7 @@ boon_data = ExtResource("2_fhgfl")
 hex_data_list = Array[ExtResource("3_le116")]([])
 knockback_multiplier = 1.5
 enemy_name = "Bifrons"
-enemy_description = "A demonic graveyard attendant. Commands many legions of evil sprits."
+enemy_description = "Heals nearby enemies for 20 health every .25 seconds
+
+A demonic graveyard attendant. Commands many legions of evil sprits."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

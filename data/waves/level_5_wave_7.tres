@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_6ra4s"]
 [ext_resource type="Resource" uid="uid://dgalkolspve38" path="res://data/spawn/spawn_water_kappa_1.tres" id="2_cpk45"]
 [ext_resource type="Resource" uid="uid://c1dr5uq3adbb7" path="res://data/spawn/spawn_earth_bigfoot_1.tres" id="3_qhyj4"]
-[ext_resource type="Resource" uid="uid://cyt1selfgjo4k" path="res://data/spawn/spawn_earth_mushroom_tenth.tres" id="5_msmuf"]
+[ext_resource type="Resource" path="res://data/spawn/spawn_earth_mushroom_tenth.tres" id="5_msmuf"]
 [ext_resource type="Resource" uid="uid://pbs8dhexasx1" path="res://data/spawn/spawn_earth_mushroom_1.tres" id="6_0mdkq"]
 
 [resource]
