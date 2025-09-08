@@ -97,7 +97,6 @@ layout_mode = 2
 size_flags_horizontal = 6
 theme_override_fonts/font = ExtResource("6_f7g8o")
 theme_override_font_sizes/font_size = 8
-text = "Fire Gargoyle"
 
 [node name="Body" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Details"]
 layout_mode = 2
@@ -111,7 +110,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("6_f7g8o")
 theme_override_font_sizes/normal_font_size = 8
-text = "This is the description for a fire gargyogled,vmjfddsfa"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -153,7 +151,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_f7g8o")
 theme_override_font_sizes/font_size = 8
-text = "10000"
+text = "-"
 
 [node name="Damage" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats"]
 layout_mode = 2
@@ -185,7 +183,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_f7g8o")
 theme_override_font_sizes/font_size = 8
-text = "10000"
+text = "-"
 
 [node name="Speed" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats"]
 layout_mode = 2
@@ -216,7 +214,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_f7g8o")
 theme_override_font_sizes/font_size = 8
-text = "10000"
+text = "-"
 
 [node name="Element" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats"]
 layout_mode = 2
