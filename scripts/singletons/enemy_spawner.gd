@@ -60,7 +60,7 @@ func start_wave() -> void:
 	for i in range(spawn_timers.size()):
 		on_spawn_timer_timeout(i)
 
-	on_spawn_timer_timeout(0) #TODO: this should be able to start with any path!
+	# on_spawn_timer_timeout(0) #TODO: this should be able to start with any path!
 
 
 ## Called when a wave is completed or failed.
