@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://c1dr5uq3adbb7" path="res://data/spawn/spawn_earth_bigfoot_1.tres" id="2_4hxdx"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_ocqco"]
 [ext_resource type="Resource" uid="uid://bt7eanroekcmd" path="res://data/spawn/spawn_wind_harpy_1.tres" id="3_ol6fv"]
-[ext_resource type="Resource" path="res://data/spawn/spawn_wind_harpy_3.tres" id="4_ol6fv"]
+[ext_resource type="Resource" uid="uid://c0yxcd2s073tx" path="res://data/spawn/spawn_wind_harpy_3.tres" id="4_ol6fv"]
 
 [resource]
 script = ExtResource("2_ocqco")
