@@ -15,14 +15,16 @@ func rotate_staff() -> void:
 		player.staff_sprite.rotation = player.aim_direction.angle()
 
 		# Set staff render order based on aim direction and horizontal axis
-		if player.aim_direction.y > 0:
+		if player.aim_direction.y < 0:
 			player.staff_sprite.z_index = player.character_sprite.z_index - 1
 		else:
 			player.staff_sprite.z_index = player.character_sprite.z_index + 1
 
-		# Set staff render order based on move direction
-		if player.move_direction.y < 0:
-			player.staff_sprite.z_index = player.character_sprite.z_index - 1
+		# # Set staff render order based on move direction
+		# if player.move_direction.y < .5:
+		# 	player.staff_sprite.z_index = player.character_sprite.z_index - 1
+		# elif player.move_direction.y > -.5:
+		# 	player.staff_sprite.z_index = player.character_sprite.z_index + 1
 
 func flip_sprite() -> void:
 	if player.aim_direction:
