@@ -430,10 +430,10 @@ func on_transform_timer_timeout() -> void:
 
 func _draw():
 	if can_show_range:
-		draw_circle(Vector2.ZERO + Vector2(8,8), curr_range, Color.WHITE, false, -1.0, false)
+		draw_circle(Vector2.ZERO + Vector2(8,8), curr_range, Color.WHITE, false, 1.0, false)
 
 	if can_show_buff_range and data.buff_data_list and data.buff_data_list[0]:
-		draw_circle(Vector2.ZERO + Vector2(8,8), curr_range, Color(color_buff_range_indicator, buff_range_transparency), false, -1.0, false)
+		draw_circle(Vector2.ZERO + Vector2(8,8), curr_range, Color(color_buff_range_indicator, buff_range_transparency), false, 1.0, false)
 
 # Buffs
 func on_add_new_buff(buff: Buff):
