@@ -11,6 +11,8 @@ var attack_delay: float = .1 # TODO: Set this each time a spell is changed
 
 var spell_fire_basic_scene: PackedScene = preload("res://scenes/Spells/SpellBasicFire.tscn")
 
+signal spell_cast
+
 func _ready():
 	attack_timer.autostart = false
 	attack_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
@@ -27,6 +29,8 @@ func spawn_spell(player_aim_direction: Vector2) -> void:
 		new_spell.global_position = spell_spawn_point.global_position
 		new_spell.z_index = player.z_index + 2 # TODO: Map this to staff likely
 		new_spell.start(player_aim_direction)
+
+		spell_cast.emit() # TODO: pass the type later maybe? 
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true

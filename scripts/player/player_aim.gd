@@ -11,15 +11,22 @@ func update_aim(_delta):
 
 func rotate_staff() -> void:
 	if player.aim_direction:
+		# Rotate staff to point at aim direction
 		player.staff_sprite.rotation = player.aim_direction.angle()
+
+		# Set staff render order based on aim direction and horizontal axis
+		if player.aim_direction.y > 0:
+			player.staff_sprite.z_index = player.character_sprite.z_index - 1
+		else:
+			player.staff_sprite.z_index = player.character_sprite.z_index + 1
+
+		# Set staff render order based on move direction
+		if player.move_direction.y < 0:
+			player.staff_sprite.z_index = player.character_sprite.z_index - 1
 
 func flip_sprite() -> void:
 	if player.aim_direction:
 		if player.aim_direction.x <= -0.001:
 			player.character_sprite.flip_h = true
-			player.staff_sprite.z_index = player.character_sprite.z_index - 1
-			print(player.staff_sprite.z_index)
 		else:
 			player.character_sprite.flip_h = false
-			player.staff_sprite.z_index = player.character_sprite.z_index + 1
-			print(player.staff_sprite.z_index)

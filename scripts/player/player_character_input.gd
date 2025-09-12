@@ -4,8 +4,8 @@ extends Node
 var movement_input: Vector2
 var aim_input: Vector2
 
-signal spell_cast
-signal dash_cast
+signal spell_input_pressed
+signal dash_input_pressed
 
 func get_movement_input() -> Vector2:
 	movement_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -18,8 +18,8 @@ func get_aim_input() -> Vector2:
 
 func _process(_delta):
 	if Input.is_action_pressed("cast_spell"): # Check every frame since it can be held. _input will only detect the first call
-		spell_cast.emit()
+		spell_input_pressed.emit()
 
 func _input(_event):
 	if Input.is_action_just_pressed("dash"):
-		dash_cast.emit()
+		dash_input_pressed.emit()

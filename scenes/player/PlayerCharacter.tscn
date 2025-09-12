@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=39 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
@@ -25,6 +25,34 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_slbhc"]
+atlas = ExtResource("3_v81jw")
+region = Rect2(0, 0, 31, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsbha"]
+atlas = ExtResource("3_v81jw")
+region = Rect2(31, 0, 31, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnayp"]
+atlas = ExtResource("3_v81jw")
+region = Rect2(62, 0, 31, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkcsf"]
+atlas = ExtResource("3_v81jw")
+region = Rect2(93, 0, 31, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adj0b"]
+atlas = ExtResource("3_v81jw")
+region = Rect2(124, 0, 31, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akj2q"]
+atlas = ExtResource("3_v81jw")
+region = Rect2(155, 0, 31, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kuao7"]
+atlas = ExtResource("3_v81jw")
+region = Rect2(186, 0, 31, 15)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_wp8q1"]
 atlas = ExtResource("3_v81jw")
 region = Rect2(0, 0, 31, 15)
@@ -33,10 +61,36 @@ region = Rect2(0, 0, 31, 15)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_slbhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsbha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnayp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkcsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adj0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akj2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kuao7")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wp8q1")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"idle",
 "speed": 5.0
 }]
 
@@ -503,7 +557,8 @@ sprite_frames = SubResource("SpriteFrames_wp8q1")
 position = Vector2(-2, 3)
 rotation = -1.5708
 sprite_frames = SubResource("SpriteFrames_laqyv")
-animation = &"new_animation"
+animation = &"idle"
+autoplay = "idle"
 offset = Vector2(4, 0)
 
 [node name="SpellSpawnPoint" type="Node2D" parent="StaffSprite"]

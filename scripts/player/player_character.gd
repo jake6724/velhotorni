@@ -5,12 +5,11 @@ extends CharacterBody2D
 @onready var player_aim: PlayerAim = $PlayerAim
 @onready var player_animation: PlayerAnimation = $PlayerAnimation
 @onready var player_input: PlayerCharacterInput = $PlayerCharacterInput
+@onready var player_spell_spawner: PlayerSpellSpawner = $SpellSpawner
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var staff_sprite: AnimatedSprite2D = $StaffSprite
 @onready var reticle_sprite: AnimatedSprite2D = $ReticleSprite
-
-@onready var spell_spawner: PlayerSpellSpawner = $SpellSpawner
 
 var speed: float = 100.0
 
@@ -23,13 +22,17 @@ var dash_timer: Timer = Timer.new()
 var dash_time: float = .1
 
 func _ready():
-	player_input.spell_cast.connect(on_spell_cast)
-	player_input.dash_cast.connect(on_dash_cast)
+	player_input.spell_input_pressed.connect(on_spell_input_pressed)
+	player_input.dash_input_pressed.connect(on_dash_input_pressed)
+
+	player_spell_spawner.spell_cast.connect(on_spell_cast)
 
 	dash_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	dash_timer.autostart = false
 	dash_timer.timeout.connect(on_dash_timer_timeout)
 	add_child(dash_timer)
+
+	staff_sprite.animation_finished.connect(on_staff_animation_finished)
 
 func _physics_process(delta): # This can go in a state eventually
 	if not dashing:
@@ -42,27 +45,31 @@ func _physics_process(delta): # This can go in a state eventually
 
 	move_and_slide()
 
-func on_spell_cast() -> void: # Use a func ref for this
-	spell_spawner.spawn_spell(aim_direction)
+func on_spell_input_pressed() -> void: # Use a func ref for this
+	player_spell_spawner.spawn_spell(aim_direction)
 
-func on_dash_cast() -> void:
-	dashing = true
-	dash_timer.start(dash_time)
+func on_dash_input_pressed() -> void:
+	if not dashing:
+		dashing = true
+		dash_timer.start(dash_time)
 
-	if move_direction:
-		if abs(move_direction.x) > abs(move_direction.y):
-			var dash_direction: Vector2 = Vector2(1 * sign(move_direction.x), 0)
-			velocity = dash_direction * dash_speed
-			print("dash_direction: ", dash_direction)
+		if move_direction:
+			if abs(move_direction.x) > abs(move_direction.y):
+				var dash_direction: Vector2 = Vector2(1 * sign(move_direction.x), 0)
+				velocity = dash_direction * dash_speed
+
+			else:
+				var dash_direction: Vector2 = Vector2(0, 1 * sign(move_direction.y))
+				velocity = dash_direction * dash_speed
 
 		else:
-			var dash_direction: Vector2 = Vector2(0, 1 * sign(move_direction.y))
-			velocity = dash_direction * dash_speed
-
-			print("dash_direction: ", dash_direction)
-
-	else:
-		velocity = Vector2(1,0) * dash_speed
+			velocity = Vector2(1,0) * dash_speed
 
 func on_dash_timer_timeout() -> void:
 	dashing = false
+
+func on_staff_animation_finished() -> void:
+	staff_sprite.play("idle")
+	
+func on_spell_cast() -> void: 
+	staff_sprite.play("fire")
