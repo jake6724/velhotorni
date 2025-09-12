@@ -3,11 +3,24 @@ extends Node2D
 
 @onready var player: PlayerCharacter = get_owner()
 
-func update_aim(_delta):
-	player.reticle_sprite.position = player.aim_direction * 100
+const RETICLE_MAX_DISTANCE: float = 50
+const RETICLE_SPEED: float = .1
 
+func update_aim(delta):
+	update_reticle()
 	flip_sprite()
 	rotate_staff()
+
+func update_reticle() -> void:
+	if player.aim_direction: # Move reticle out infront of player character
+		
+		var reticle_tween: Tween = get_tree().create_tween()
+		var target_position: Vector2 = player.spell_spawn_point.global_position + player.aim_direction * RETICLE_MAX_DISTANCE
+		reticle_tween.tween_property(player.reticle_sprite, "global_position", target_position, RETICLE_SPEED)
+
+	# else: 			     # Move reticle back to player
+	# 	var reticle_tween: Tween = get_tree().create_tween()
+	# 	reticle_tween.tween_property(player.reticle_sprite, "position", Vector2.ZERO, RETICLE_SPEED) 
 
 func rotate_staff() -> void:
 	if player.aim_direction:

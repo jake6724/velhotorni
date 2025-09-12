@@ -20,12 +20,5 @@ visible = false
 
 [node name="TowerEvolveMenu" parent="UI" instance=ExtResource("4_6ev1f")]
 visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="CoinCollector" parent="." instance=ExtResource("5_08ru5")]

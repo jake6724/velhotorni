@@ -15,8 +15,8 @@ func _ready():
 	magnet_area.area_entered.connect(on_magnet_area_entered)
 	magnet_area.area_exited.connect(on_magnet_area_exited)
 
-func _process(_delta):
-	global_position = get_global_mouse_position()
+# func _process(_delta): # Follow mouse
+# 	global_position = get_global_mouse_position()
 
 func _physics_process(delta):
 	for coin: CoinDrop in magnetized_coins:
