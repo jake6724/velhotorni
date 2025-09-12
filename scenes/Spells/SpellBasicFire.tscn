@@ -47,4 +47,4 @@ metadata/_custom_type_script = "uid://bno3qeesva7q6"
 sprite_frames = SubResource("SpriteFrames_py7lu")
 animation = &"move"
 autoplay = "move"
-frame_progress = 0.690767
+frame_progress = 0.916775

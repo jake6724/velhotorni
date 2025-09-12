@@ -1,12 +1,19 @@
 class_name PlayerCharacter
 extends CharacterBody2D
 
-@onready var character_input: PlayerCharacterInput = $PlayerCharacterInput
+# Components
+@onready var player_aim: PlayerAim = $PlayerAim
+@onready var player_animation: PlayerAnimation = $PlayerAnimation
+@onready var player_input: PlayerCharacterInput = $PlayerCharacterInput
+
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var staff_sprite: AnimatedSprite2D = $StaffSprite
+@onready var reticle_sprite: AnimatedSprite2D = $ReticleSprite
+
 @onready var spell_spawner: PlayerSpellSpawner = $SpellSpawner
 
 var speed: float = 100.0
+
 var move_direction: Vector2
 var aim_direction: Vector2
 
@@ -16,21 +23,22 @@ var dash_timer: Timer = Timer.new()
 var dash_time: float = .1
 
 func _ready():
-	character_input.spell_cast.connect(on_spell_cast)
-	character_input.dash_cast.connect(on_dash_cast)
+	player_input.spell_cast.connect(on_spell_cast)
+	player_input.dash_cast.connect(on_dash_cast)
 
 	dash_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	dash_timer.autostart = false
 	dash_timer.timeout.connect(on_dash_timer_timeout)
 	add_child(dash_timer)
 
-func _process(_delta):
+func _physics_process(delta): # This can go in a state eventually
 	if not dashing:
-		move_direction = character_input.get_movement_input()
-		velocity = move_direction * speed
+		aim_direction = player_input.get_aim_input()
+		move_direction = player_input.get_movement_input()
 
-		aim_direction = character_input.get_aim_input()
-		staff_sprite.rotation = aim_direction.angle()
+		velocity = move_direction * speed
+		player_aim.update_aim(delta)
+		player_animation.update_animation(delta)
 
 	move_and_slide()
 

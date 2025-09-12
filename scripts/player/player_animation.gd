@@ -8,8 +8,10 @@ extends Node2D
 
 var last_facing_direction: Vector2 = Vector2(0, -1)
 
-func _physics_process(_delta):
+func _ready():
+	animation_tree.active = true
 
+func update_animation(_delta):
 	var idle = !player.velocity
 
 	if !idle:
@@ -17,15 +19,3 @@ func _physics_process(_delta):
 
 	animation_tree.set("parameters/Walk/blend_position", last_facing_direction)
 	animation_tree.set("parameters/Idle/blend_position", last_facing_direction)
-
-	flip_sprite()
-
-func flip_sprite() -> void:
-	if player.aim_direction.x <= -0.001:
-		player.character_sprite.flip_h = true
-		player.staff_sprite.z_index = player.character_sprite.z_index - 1
-		print(player.staff_sprite.z_index)
-	else:
-		player.character_sprite.flip_h = false
-		player.staff_sprite.z_index = player.character_sprite.z_index + 1
-		print(player.staff_sprite.z_index)

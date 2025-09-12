@@ -8,8 +8,7 @@ signal spell_cast
 signal dash_cast
 
 func get_movement_input() -> Vector2:
-	movement_input.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	movement_input.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	movement_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	return movement_input.normalized()
 
 func get_aim_input() -> Vector2: 
