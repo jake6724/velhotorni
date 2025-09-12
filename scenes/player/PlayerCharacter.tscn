@@ -8,18 +8,18 @@
 [ext_resource type="AnimationNodeBlendSpace2D" uid="uid://bh72fgnii8gd2" path="res://scenes/animations/PlayerWalkBlend.tres" id="4_ljh2g"]
 [ext_resource type="Script" uid="uid://jvulch3v1pbm" path="res://scripts/player/player_spell_spawner.gd" id="6_g7j5r"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j4yks"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v81jw"]
 atlas = ExtResource("3_v81jw")
-region = Rect2(0, 0, 32, 16)
+region = Rect2(0, 0, 15, 31)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_laqyv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j4yks")
+"texture": SubResource("AtlasTexture_v81jw")
 }],
 "loop": true,
-"name": &"default",
+"name": &"new_animation",
 "speed": 5.0
 }]
 
@@ -480,9 +480,9 @@ frame = 18
 
 [node name="StaffSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, 3)
-rotation = -1.5708
 sprite_frames = SubResource("SpriteFrames_laqyv")
-offset = Vector2(4, 0)
+animation = &"new_animation"
+offset = Vector2(0, -4.475)
 
 [node name="SpellSpawnPoint" type="Node2D" parent="StaffSprite"]
 position = Vector2(11, 1)
