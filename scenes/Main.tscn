@@ -29,6 +29,10 @@ unique_name_in_owner = true
 script = ExtResource("5_c01mt")
 metadata/_custom_type_script = "uid://gu8su5txi8b8"
 
+[node name="PlayerCharacter" parent="." instance=ExtResource("10_lhr70")]
+unique_name_in_owner = true
+position = Vector2(208, 120)
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="UI" node_paths=PackedStringArray("main") instance=ExtResource("5_vcsgt")]
@@ -62,6 +66,3 @@ unique_name_in_owner = true
 visible = false
 offset_top = -47.5
 offset_bottom = 47.5
-
-[node name="Node2D" parent="." instance=ExtResource("10_lhr70")]
-position = Vector2(208, 120)

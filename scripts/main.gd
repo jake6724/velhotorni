@@ -5,6 +5,7 @@ extends Node2D
 @onready var pause_menu: PauseMenu = $UI/PauseMenu
 @onready var bestiary_menu: BestiaryMenu = $UI/BestiaryMenu
 @onready var player_controller: PlayerController = %PlayerController
+@onready var player_character: PlayerCharacter = %PlayerCharacter
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
 @onready var camera: Camera2D = $Camera2D
 @onready var fps_label: Label = %FPSLabel
@@ -36,6 +37,7 @@ func _ready():
 	player_controller.setup()
 	player_controller.bestiary_pressed.connect(pause_game_with_bestiary)
 	coin_drop_manager.reward_completed.connect(player_controller.on_reward_complete)
+	player_controller.coin_collector = player_character.coin_collector
 
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
