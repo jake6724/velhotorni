@@ -31,9 +31,7 @@ func _ready():
 	player_input.dash_input_pressed.connect(on_dash_input_pressed)
 
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
-
 	staff_sprite.animation_finished.connect(on_staff_animation_finished)
-
 	ap.animation_finished.connect(on_animation_finished)
 
 func _physics_process(delta): # This can go in a state eventually
@@ -64,16 +62,8 @@ func on_dash_input_pressed() -> void:
 	if not dashing:
 		dashing = true
 		ap.play("dash")
-
-		if move_input:
-			if abs(move_input.x) > abs(move_input.y):
-				var dash_direction: Vector2 = Vector2(1 * sign(move_input.x), 0)
-				velocity = dash_direction * dash_speed
-
-			else:
-				var dash_direction: Vector2 = Vector2(0, 1 * sign(move_input.y))
-				velocity = dash_direction * dash_speed
-
+		if move_input:	
+			velocity = move_input * dash_speed
 		else:
 			velocity = Vector2(1,0) * dash_speed
 

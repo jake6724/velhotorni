@@ -7,6 +7,7 @@ enum Size {SMALL, MEDIUM, LARGE}
 
 # Child references
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var light: Sprite2D = $Light
 @onready var collider: CollisionShape2D = $CollisionShape2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: TextureProgressBar = $HealthBar
@@ -96,6 +97,8 @@ func _ready():
 	base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
+
+	light.visible = data.show_light
 
 	set_pos_offset()
 
@@ -193,6 +196,8 @@ func die() -> void:
 	SFXPlayer.play_sfx_resource(data.explosion_sfx)
 
 	ap.play("die")
+
+	light.visible = false
 
 	# Give time for collision boons and hexes to be removed
 	boon_collider.set_deferred("disabled", true)

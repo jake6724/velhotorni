@@ -12,10 +12,13 @@ var move_direction: Vector2
 var active: bool = true
 var pierce_count: int = 0
 
+var original_position: Vector2
+
 func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 	area.area_entered.connect(on_area_entered)
 	area.body_entered.connect(on_body_entered)
+	original_position = global_position
 
 func initialize(_data: SpellDataBullet, cast_direction: Vector2) -> void:
 	data = _data
@@ -29,6 +32,12 @@ func initialize(_data: SpellDataBullet, cast_direction: Vector2) -> void:
 func move(delta) -> void:
 	if active:
 		global_position += move_direction * SPEED * delta
+
+		# print(abs(global_position.distance_to(original_position)))
+		# print("MAX DISTANCE: ",data.max_distance)
+		# if abs(global_position.distance_to(original_position)) > data.max_distance:
+		# 	active = false
+		# 	ap.play("hit")
 
 func _physics_process(delta):
 	move(delta)

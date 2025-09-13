@@ -1,9 +1,10 @@
-[gd_scene load_steps=122 format=3 uid="uid://7whhtl0yo72s"]
+[gd_scene load_steps=123 format=3 uid="uid://7whhtl0yo72s"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_nrfk0"]
 [ext_resource type="Texture2D" uid="uid://dai8bwe40k3wj" path="res://assets/art/atlases/enemy/atl_enemy_light_kusekuse.png" id="2_phgce"]
 [ext_resource type="Texture2D" uid="uid://dtggcoamwimd8" path="res://assets/art/atlases/fx/atl_fx_status.png" id="2_vktg2"]
 [ext_resource type="Texture2D" uid="uid://bs1li1amcuwmf" path="res://assets/art/sprites/ui/spr_ui_health_bg.png" id="3_aubve"]
+[ext_resource type="Texture2D" uid="uid://cy76j8i8ym8mf" path="res://assets/art/sprites/environment/spr_environment_light.png" id="4_06uup"]
 [ext_resource type="Texture2D" uid="uid://rwec3xnhkxkf" path="res://assets/art/sprites/ui/spr_ui_health_bar.png" id="4_vubms"]
 [ext_resource type="Texture2D" uid="uid://dumg5so8h5d3m" path="res://assets/art/sprites/ui/spr_ui_shield.png" id="5_sfnwf"]
 [ext_resource type="Texture2D" uid="uid://04i8ln0m18xc" path="res://assets/art/sprites/ui/spr_ui_weak.png" id="6_vktg2"]
@@ -988,6 +989,14 @@ position = Vector2(8, -8)
 sprite_frames = SubResource("SpriteFrames_8cejg")
 animation = &"slow"
 frame_progress = 0.602872
+
+[node name="Light" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(8, 6)
+scale = Vector2(1, 0.995824)
+texture = ExtResource("4_06uup")
+hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
