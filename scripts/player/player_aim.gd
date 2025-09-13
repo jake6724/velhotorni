@@ -6,7 +6,7 @@ extends Node2D
 const RETICLE_MAX_DISTANCE: float = 65
 const RETICLE_SPEED: float = .1
 
-const RETICLE_MIN_MAGNITUDE: float = .3
+const RETICLE_MIN_MAGNITUDE: float = .5
 
 const RETICLE_RESET_TIMER_DELAY: float = .25
 const RETICLE_RESET_POSITION_DURATION: float = .5
@@ -29,6 +29,10 @@ func update_aim():
 
 func update_reticle() -> void:
 	
+	if !aim_input:
+		player.reticle_sprite.position = Vector2.ZERO
+		return
+
 	if aim_input.length() < RETICLE_MIN_MAGNITUDE:
 		aim_input = aim_input.normalized() * RETICLE_MIN_MAGNITUDE
 
