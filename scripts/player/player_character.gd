@@ -24,7 +24,7 @@ var aim_input: Vector2
 var prev_aim_input: Vector2
 
 var dashing: bool = false
-var dash_speed: float = 400.0
+var dash_velocity: float = 400.0
 
 func _ready():
 	player_input.spell_input_pressed.connect(on_spell_input_pressed)
@@ -63,9 +63,9 @@ func on_dash_input_pressed() -> void:
 		dashing = true
 		ap.play("dash")
 		if move_input:	
-			velocity = move_input * dash_speed
+			velocity = move_input.normalized() * dash_velocity
 		else:
-			velocity = Vector2(1,0) * dash_speed
+			velocity = Vector2(1,0) * dash_velocity
 
 func on_staff_animation_finished() -> void:
 	staff_sprite.play("idle")
