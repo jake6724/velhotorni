@@ -62,10 +62,11 @@ func on_dash_input_pressed() -> void:
 	if not dashing:
 		dashing = true
 		ap.play("dash")
+		
 		if move_input:	
 			velocity = move_input.normalized() * dash_velocity
 		else:
-			velocity = Vector2(1,0) * dash_velocity
+			velocity = player_aim.aim_input.normalized() * dash_velocity
 
 func on_staff_animation_finished() -> void:
 	staff_sprite.play("idle")
