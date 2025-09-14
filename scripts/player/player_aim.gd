@@ -3,7 +3,10 @@ extends Node2D
 
 @onready var player: PlayerCharacter = get_owner()
 
+
 const RETICLE_MAX_DISTANCE: float = 65
+
+## The total duration of the tween_property call used to update the reticle's position, in seconds
 const RETICLE_SPEED: float = .1
 
 const RETICLE_MIN_MAGNITUDE: float = .3
@@ -47,14 +50,9 @@ func start_reticle_reset_timer() -> void:
 	if reticle_reset_timer.is_stopped():
 		reticle_reset_timer.start(RETICLE_RESET_TIMER_DELAY)
 
-# func on_reticle_reset_timer_timeout() -> void:
-# 	reset_reticle_position(delta)
-
 func reset_reticle_position(delta) -> void:
 	aim_input -= aim_input.normalized() * delta * reset_speed_modifier
-	#var reticle_tween: Tween = get_tree().create_tween()
-	#reticle_tween.tween_property(self, "aim_input", (aim_input.normalized() * RETICLE_MIN_MAGNITUDE), RETICLE_RESET_POSITION_DURATION)
-
+	
 func rotate_staff() -> void:
 	if aim_input:
 		# Rotate staff to point at aim direction
