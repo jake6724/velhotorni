@@ -636,7 +636,7 @@ autoplay = "idle"
 offset = Vector2(4, 0)
 
 [node name="SpellSpawnPoint" type="Node2D" parent="StaffSprite"]
-position = Vector2(12, 2)
+position = Vector2(16, 0)
 
 [node name="SpellSpawner" type="Node" parent="." node_paths=PackedStringArray("spell_spawn_point")]
 script = ExtResource("6_g7j5r")
