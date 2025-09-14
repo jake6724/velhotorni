@@ -36,8 +36,7 @@ func _ready():
 
 func _physics_process(delta): # This can go in a state eventually
 	aim_input = player_input.get_aim_input()
-
-	update_player_aim()
+	update_player_aim(delta)
 
 	if not dashing:	
 		move_input = player_input.get_movement_input()
@@ -46,12 +45,12 @@ func _physics_process(delta): # This can go in a state eventually
 	
 	move_and_slide()
 
-func update_player_aim() -> void:
+func update_player_aim(delta) -> void:
 	if aim_input:
-		player_aim.aim_input = aim_input
-		player_aim.reticle_reset_timer.stop()
+			player_aim.aim_input = aim_input						
+			player_aim.reticle_reset_timer.stop()
 	else:
-		player_aim.start_reticle_reset_timer()
+		player_aim.reset_reticle_position(delta)
 
 	player_aim.update_aim()
 
