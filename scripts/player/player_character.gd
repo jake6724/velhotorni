@@ -50,18 +50,14 @@ func _physics_process(delta): # This can go in a state eventually
 func update_player_aim(delta) -> void:
 	if aim_input:
 			player_aim.aim_input = aim_input						
-			player_aim.reticle_reset_timer.stop()
 	else:
 		player_aim.reset_reticle_position(delta)
 
 	player_aim.update_aim()
 
+## Rounds move_input to whole numbers. Makes player move in only 8 directions. Creates a deadzone from 0 to .5, since all values below .5 round down to 0
 func lock_move_input() -> void:
-	print("Raw move_input: ", move_input)
-
 	move_input = move_input.round()
-
-	print("Locked move_input: ", move_input)
 
 func on_spell_input_pressed() -> void: # Use a func ref for this
 	player_spell_spawner.spawn_spell(player_aim.aim_input)

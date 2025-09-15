@@ -17,13 +17,6 @@ script = ExtResource("1_0bbpv")
 [node name="PlayerController" parent="." instance=ExtResource("4_rarhs")]
 unique_name_in_owner = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(1.18113, 0.710342)
-anchor_mode = 0
-script = ExtResource("3_c01mt")
-power = 1.0
-decay = 20.0
-
 [node name="CoinDropManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("5_c01mt")
@@ -32,6 +25,15 @@ metadata/_custom_type_script = "uid://gu8su5txi8b8"
 [node name="PlayerCharacter" parent="." instance=ExtResource("10_lhr70")]
 unique_name_in_owner = true
 position = Vector2(208, 120)
+
+[node name="PlayerCamera" type="Camera2D" parent="PlayerCharacter"]
+unique_name_in_owner = true
+position = Vector2(-208, -120)
+scale = Vector2(1.18113, 0.710342)
+anchor_mode = 0
+script = ExtResource("3_c01mt")
+power = 1.0
+decay = 20.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -43,6 +45,7 @@ main = NodePath("../..")
 visible = false
 
 [node name="RoundInfo" parent="UI" instance=ExtResource("3_0bbpv")]
+metadata/_edit_use_anchors_ = true
 
 [node name="FPSLabel" type="Label" parent="UI"]
 unique_name_in_owner = true

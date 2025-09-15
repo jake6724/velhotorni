@@ -8,9 +8,7 @@ const RETICLE_MAX_DISTANCE: float = 65
 
 ## The total duration of the tween_property call used to update the reticle's position, in seconds
 const RETICLE_SPEED: float = .1
-
 const RETICLE_MIN_MAGNITUDE: float = .3
-
 const RETICLE_RESET_TIMER_DELAY: float = .25
 const RETICLE_RESET_POSITION_DURATION: float = 3
 
@@ -20,14 +18,7 @@ const RETICLE_RESET_POSITION_DURATION: float = 3
 
 var aim_input: Vector2 # Manully set by PlayerCharacter
 
-var reticle_reset_timer: Timer = Timer.new()
 var resetting_reticle: bool = false
-
-func _ready():
-	reticle_reset_timer.autostart = false
-	reticle_reset_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
-	# reticle_reset_timer.timeout.connect(on_reticle_reset_timer_timeout)
-	add_child(reticle_reset_timer)
 
 func update_aim():
 	update_reticle()
@@ -45,10 +36,6 @@ func update_reticle() -> void:
 	var reticle_tween: Tween = get_tree().create_tween()
 	var target_position: Vector2 = player.spell_spawn_point.global_position + (aim_input * RETICLE_MAX_DISTANCE)
 	reticle_tween.tween_property(player.reticle_sprite, "global_position", target_position, RETICLE_SPEED)
-
-func start_reticle_reset_timer() -> void:
-	if reticle_reset_timer.is_stopped():
-		reticle_reset_timer.start(RETICLE_RESET_TIMER_DELAY)
 
 func reset_reticle_position(delta) -> void:
 	aim_input -= aim_input.normalized() * delta * reset_speed_modifier

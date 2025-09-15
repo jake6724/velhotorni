@@ -7,7 +7,7 @@ extends Node2D
 @onready var player_controller: PlayerController = %PlayerController
 @onready var player_character: PlayerCharacter = %PlayerCharacter
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
-@onready var camera: Camera2D = $Camera2D
+@onready var camera: Camera2D = %PlayerCamera
 @onready var fps_label: Label = %FPSLabel
 @onready var level_complete_panel: LevelCompletePanel = %LevelCompletePanel
 
