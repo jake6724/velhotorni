@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=9 format=3 uid="uid://d038v04pkw7ra"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_lepdr"]
+[ext_resource type="Texture2D" uid="uid://mefdddf0j5ji" path="res://assets/art/atlases/enemy/atl_enemy_wind_imp.png" id="2_6gnld"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_mvfmk"]
+[ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="3_76aqa"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="4_tgow1"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="5_imsxn"]
+
+[sub_resource type="Resource" id="Resource_8lpxj"]
+script = ExtResource("5_imsxn")
+size = 2
+element = 0
+strong_against_element = 0
+weak_against_element = 0
+health = 100.0
+speed = 40.0
+damage = 1
+drop_chance_base = 1.0
+atlas = ExtResource("2_6gnld")
+show_light = false
+explosion_sfx = ExtResource("3_76aqa")
+hex_data_list = Array[ExtResource("4_tgow1")]([])
+knockback_multiplier = 1.5
+enemy_name = "Flying Wind Imp"
+enemy_description = ""
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"
+
+[sub_resource type="Resource" id="Resource_3xgk4"]
+script = ExtResource("1_lepdr")
+enemy_data = SubResource("Resource_8lpxj")
+delay = 1.0
+path_index = 0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"
+
+[resource]
+script = ExtResource("2_mvfmk")
+data = Array[ExtResource("1_lepdr")]([SubResource("Resource_3xgk4")])
+reward = 0.0
+token_reward = 0
+metadata/_custom_type_script = "uid://cskry1sw3vqba"

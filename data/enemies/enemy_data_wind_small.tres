@@ -16,6 +16,7 @@ speed = 20.0
 damage = 2
 drop_chance_base = 2.0
 atlas = ExtResource("1_526n6")
+show_light = false
 boon_data = ExtResource("2_526n6")
 hex_data_list = Array[ExtResource("1_ymv77")]([])
 knockback_multiplier = 1.5

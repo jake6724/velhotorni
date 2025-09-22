@@ -23,6 +23,8 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
 @onready var indicator: EnemyIndicator = $EnemyIndicator
 
+@onready var enemy_movement: EnemyMovement = $EnemyMovement
+
 @onready var fx_burn: AnimatedSprite2D = $Sprite2D/FXBurn
 @onready var fx_weaken: AnimatedSprite2D = $Sprite2D/FXWeaken
 @onready var fx_speed: AnimatedSprite2D = $Sprite2D/FXSpeed
@@ -38,6 +40,8 @@ var path_follow: PathFollow2D # Update `progress_ration` to move along path
 var prev_global_position: Vector2 # Used for flipping sprite
 
 var min_distance: float = 2
+
+var player: PlayerCharacter
 
 # Enemy Stats from Enemy Data Resource
 var element: Constants.Element
@@ -80,10 +84,6 @@ signal death_position # Pass global_position
 signal coin_dropped
 signal enemy_damage_recieved
 
-# DEBUGGING ONLY
-var prev_progress_ratio: float
-var hits_to_kill: int = 0
-
 func _ready():
 	data.resource_local_to_scene = true # TODO: probably/maybe not needed
 	element = data.element
@@ -119,9 +119,17 @@ func _ready():
 		hex_area.initialize()
 		# indicator.can_show_hex_range = true
 
+	# Configure EnemyMovement
+	enemy_movement.animation_requested.connect(on_animation_requested)
+	enemy_movement.sprite_flip_requested.connect(on_sprite_flip_requested)
+	enemy_movement.damage_base_requested.connect(on_damage_base_requested)
+	enemy_movement.death_requested.connect(on_death_requested)
+
 func _physics_process(delta):
 	if is_alive:
-		move(delta)
+		enemy_movement.move(delta, speed, slow_percent, is_alive, is_frozen, is_stunned, is_taking_damage,
+		global_position, player, path_follow)
+		
 		debuff_manager.enemy_progress = path_follow.progress
 
 func move(delta) -> void:
@@ -216,6 +224,23 @@ func on_animation_finished(anim_name):
 
 	if anim_name == "corpse":
 		queue_free()
+
+# Child component signal requests
+func on_animation_requested(anim_name: String) -> void:
+	ap.play(anim_name)
+
+func on_animation_queue_requested(anim_name: String) -> void:
+	ap.queue(anim_name)
+
+func on_sprite_flip_requested(flip: bool) -> void:
+	sprite.flip_h = flip
+
+func on_damage_base_requested() -> void:
+	base.take_damage(damage)
+
+func on_death_requested() -> void:
+	die()
+
 
 # Debuffs
 func on_add_new_debuff(_debuff: Debuff) -> void:

@@ -17,6 +17,7 @@ speed = 30.0
 damage = 1
 drop_chance_base = 1.0
 atlas = ExtResource("1_84k60")
+show_light = false
 explosion_sfx = ExtResource("2_schxq")
 hex_data_list = Array[ExtResource("3_schxq")]([])
 knockback_multiplier = 1.5
