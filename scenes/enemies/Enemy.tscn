@@ -1,8 +1,8 @@
-[gd_scene load_steps=123 format=3 uid="uid://dwkqfmnmxvrmi"]
+[gd_scene load_steps=131 format=3 uid="uid://dwkqfmnmxvrmi"]
 
 [ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_7cewq"]
 [ext_resource type="Texture2D" uid="uid://bs1li1amcuwmf" path="res://assets/art/sprites/ui/spr_ui_health_bg.png" id="2_7iym1"]
-[ext_resource type="Texture2D" uid="uid://d01v81ufk0jvj" path="res://assets/art/atlases/enemy/atl_enemy_fire_ghoul.png" id="2_tboc4"]
+[ext_resource type="Texture2D" uid="uid://c8noara2guef1" path="res://assets/art/atlases/enemy/atl_enemy_wind_ghoul.png" id="2_nwf2r"]
 [ext_resource type="Texture2D" uid="uid://dtggcoamwimd8" path="res://assets/art/atlases/fx/atl_fx_status.png" id="3_0apxy"]
 [ext_resource type="Texture2D" uid="uid://rwec3xnhkxkf" path="res://assets/art/sprites/ui/spr_ui_health_bar.png" id="3_7cewq"]
 [ext_resource type="Texture2D" uid="uid://cy76j8i8ym8mf" path="res://assets/art/sprites/environment/spr_environment_light.png" id="4_tw3xv"]
@@ -13,6 +13,9 @@
 [ext_resource type="Script" uid="uid://dvux67kw0w7d0" path="res://scripts/boons/boon_manager.gd" id="9_tboc4"]
 [ext_resource type="Script" uid="uid://b73facmk5sjrx" path="res://scripts/hexes/hex_area.gd" id="10_n4qy4"]
 [ext_resource type="Script" uid="uid://bm2jek1l03frj" path="res://scripts/enemies/enemy_indicator.gd" id="11_nh2d4"]
+[ext_resource type="Script" uid="uid://bukgce3exa25m" path="res://scripts/enemies/player_detection.gd" id="14_nwf2r"]
+[ext_resource type="Script" uid="uid://h6hr03y4qpcx" path="res://scripts/enemies/enemy_movement.gd" id="14_refft"]
+[ext_resource type="Script" uid="uid://7agdwr2u40hi" path="res://scripts/enemies/enemy_attack_area.gd" id="16_1y6go"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7iym1"]
 radius = 8.06226
@@ -878,14 +881,137 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_1y6go"]
+resource_name = "wind_up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_nwf2r"]
+resource_name = "attack"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(2, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_arfsn"]
+resource_name = "follow_through"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 3)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hpe7p"]
 _data = {
 &"RESET": SubResource("Animation_hpe7p"),
+&"attack": SubResource("Animation_nwf2r"),
 &"corpse": SubResource("Animation_7cewq"),
 &"die": SubResource("Animation_8axbs"),
+&"follow_through": SubResource("Animation_arfsn"),
 &"hit": SubResource("Animation_k7o7a"),
 &"idle": SubResource("Animation_vtlqb"),
-&"walk": SubResource("Animation_jsdvy")
+&"walk": SubResource("Animation_jsdvy"),
+&"wind_up": SubResource("Animation_1y6go")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_24b6r"]
@@ -897,6 +1023,12 @@ resource_local_to_scene = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n4qy4"]
 radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tw3xv"]
+radius = 11.3137
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nwf2r"]
+radius = 16.0
 
 [node name="Enemy" type="Area2D"]
 collision_layer = 16
@@ -913,7 +1045,7 @@ shape = SubResource("CircleShape2D_7iym1")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 z_as_relative = false
-texture = ExtResource("2_tboc4")
+texture = ExtResource("2_nwf2r")
 centered = false
 hframes = 4
 vframes = 4
@@ -1071,3 +1203,39 @@ debug_color = Color(0.373689, 0.476689, 1, 0.42)
 
 [node name="EnemyIndicator" type="Node2D" parent="."]
 script = ExtResource("11_nh2d4")
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 65536
+collision_mask = 16384
+script = ExtResource("14_nwf2r")
+base_detection_radius = 100.0
+chase_detection_radius = 120.0
+
+[node name="PlayerDetectionCollider" type="CollisionShape2D" parent="PlayerDetection"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_tw3xv")
+debug_color = Color(0.9678, 0, 0.471954, 0.42)
+
+[node name="EnemyMovement" type="Node2D" parent="."]
+position = Vector2(8, 8)
+script = ExtResource("14_refft")
+metadata/_custom_type_script = "uid://h6hr03y4qpcx"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyMovement"]
+avoidance_layers = 0
+avoidance_mask = 0
+debug_enabled = true
+
+[node name="EnemyMovementDebugParent" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="EnemyAttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16384
+script = ExtResource("16_1y6go")
+metadata/_custom_type_script = "uid://7agdwr2u40hi"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_nwf2r")
+debug_color = Color(0.797518, 0.422912, 0, 0.42)

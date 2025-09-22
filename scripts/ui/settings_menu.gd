@@ -35,6 +35,12 @@ func _ready():
 	back.mouse_entered.connect(highlight_ui_element.bind(back))
 	back.mouse_exited.connect(un_highlight_ui_element.bind(back))
 
+	# Configure Controller highlighting
+	back_button.focus_entered.connect(highlight_ui_element.bind(back))
+	back_button.focus_exited.connect(un_highlight_ui_element.bind(back))
+
+	# back_button.grab_focus()
+
 func on_sfx_volume_changed(_value):
 	if _value == 0:
 		sfx_check_box.button_pressed = false

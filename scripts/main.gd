@@ -7,6 +7,8 @@ extends Node2D
 @onready var player_controller: PlayerController = %PlayerController
 @onready var player_character: PlayerCharacter = %PlayerCharacter
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
+@onready var pathfinder: PathFinder = %PathFinder
+
 @onready var camera: Camera2D = %PlayerCamera
 @onready var fps_label: Label = %FPSLabel
 @onready var level_complete_panel: LevelCompletePanel = %LevelCompletePanel
@@ -29,6 +31,12 @@ func _ready():
 	WaveManager.configure_level(LevelManager.active_level)
 	EnemySpawner.configure_level(LevelManager.active_level)
 	TowerGlobalData.reset()
+
+	# # TODO: DEV ONLY for FLYING ENEMIES
+	EnemySpawner.player_character = player_character
+
+	# Configure Enemy Spawner
+	EnemySpawner.pathfinder = pathfinder
 
 	# Connect to WaveManager
 	WaveManager.wave_failed.connect(on_wave_failed)
@@ -58,6 +66,9 @@ func _ready():
 	bestiary_menu.parent_scene = self
 	bestiary_menu.add_entries()
 	EnemySpawner.enemy_spawned_with_ref.connect(bestiary_menu.on_enemy_spawned)
+
+	# Configure PathFinder
+	pathfinder.initialize()
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change

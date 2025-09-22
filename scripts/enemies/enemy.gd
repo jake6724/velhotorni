@@ -1,7 +1,7 @@
 class_name Enemy
 extends Area2D
 
-enum Size {SMALL, MEDIUM, LARGE}
+enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE}
 
 @export var data: EnemyData
 
@@ -14,6 +14,7 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var shield: Sprite2D = $Shield
 @onready var weak: Sprite2D = $Weak
 @onready var debuff_manager: DebuffManager = $DebuffManager
+@onready var knockback_tween: Tween
 @onready var boon_area: BoonArea = $BoonArea
 @onready var boon_collider: CollisionShape2D = $BoonArea/BoonCollider
 @onready var boon_manager: BoonManager = $BoonManager
@@ -22,6 +23,11 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var hex_area: HexArea = $HexArea
 @onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
 @onready var indicator: EnemyIndicator = $EnemyIndicator
+@onready var player_detection: Area2D = $PlayerDetection
+@onready var player_detection_collider: CollisionShape2D = $PlayerDetection/PlayerDetectionCollider
+
+@onready var enemy_movement: EnemyMovement = $EnemyMovement
+@onready var enemy_attack_area: EnemyAttackArea = $EnemyAttackArea
 
 @onready var fx_burn: AnimatedSprite2D = $Sprite2D/FXBurn
 @onready var fx_weaken: AnimatedSprite2D = $Sprite2D/FXWeaken
@@ -34,8 +40,10 @@ enum Size {SMALL, MEDIUM, LARGE}
 @onready var fx_slow: AnimatedSprite2D = $Sprite2D/FXSlow
 
 # Pathing 
+var path: Path2D
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
 var prev_global_position: Vector2 # Used for flipping sprite
+var pathfinder = PathFinder
 
 var min_distance: float = 2
 
@@ -59,6 +67,7 @@ var positive_modifier: float = 2.0
 var can_attack: bool = true
 var is_alive: bool = true
 var is_taking_damage = false
+var is_attacking = false
 
 var base: Base
 
@@ -72,7 +81,13 @@ var is_stunned: bool = false
 
 var drop_chance: float # data.drop_chance_base + drop_chance_bonus passed by bullet
 
-@onready var knockback_tween: Tween
+# PlayerDetection and movement
+var move_func: Callable
+var player: PlayerCharacter
+var path_exit_position: Vector2
+var return_point: Vector2
+var return_point_progress_ratio: float
+var is_off_path: bool
 
 # Signals
 signal died # Pass ref to the enemy object
@@ -102,6 +117,27 @@ func _ready():
 
 	set_pos_offset()
 
+	# Configure EnemyMovement
+	enemy_movement.animation_requested.connect(on_animation_requested)
+	#enemy_movement.animation_queue_requested.connect(on_animation_queue_requested)
+	enemy_movement.sprite_flip_requested.connect(on_sprite_flip_requested)
+	enemy_movement.global_position_change_requested.connect(on_global_position_change_requested)
+	enemy_movement.damage_base_requested.connect(on_damage_base_requested)
+	enemy_movement.death_requested.connect(on_death_requested)
+	enemy_movement.attach_to_path_requested.connect(on_attach_to_path_requested)
+	#enemy_movement.enemy_attack_requested.connect(on_enemy_attack_requested)
+
+	# Configure EnemyAttackArea
+	enemy_attack_area.attack_requested.connect(on_attack_requested)
+	enemy_attack_area.animation_requested.connect(on_animation_requested)
+
+	# Configure PlayerDetection
+	player_detection.player_detected.connect(on_player_detected)
+	player_detection.path_exit_position_updated.connect(on_path_exit_position_updated)
+	player_detection.player_escaped.connect(on_player_escaped)
+	player_detection.move_func_change_requested.connect(on_move_func_change_requested)
+
+
 	# Configure DebuffManager
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
 	debuff_manager.knockback_multiplier = data.knockback_multiplier
@@ -119,35 +155,15 @@ func _ready():
 		hex_area.initialize()
 		# indicator.can_show_hex_range = true
 
+	move_func = Callable(enemy_movement, "move_along_path")
+
 func _physics_process(delta):
 	if is_alive:
-		move(delta)
-		debuff_manager.enemy_progress = path_follow.progress
+		if not is_attacking:
+			move_func.call(delta, speed, slow_percent, is_alive, is_frozen, is_stunned, is_taking_damage,
+			global_position, path_exit_position, return_point, player, path_follow, path, is_attacking)
 
-func move(delta) -> void:
-	if is_alive:
-		if not is_frozen and not is_stunned:
-			if not is_taking_damage:
-				ap.play("walk")
-
-			if path_follow.rotation_degrees >= 91: # Flip when moving right
-				sprite.flip_h = true
-			else: 
-				sprite.flip_h = false
-				
-			if path_follow.progress_ratio < .99:
-				path_follow.progress += (speed - ((speed * (slow_percent/100)))) * delta
-			else:
-				base.take_damage(damage)
-				die()
-		else:
-			ap.play("idle")
-
-func apply_drop_chance_bonus(_drop_chance_bonus: float) -> void:
-	drop_chance = data.drop_chance_base + _drop_chance_bonus
-	
-func reset_drop_chance() -> void:
-	drop_chance = data.drop_chance_base
+			debuff_manager.enemy_progress = path_follow.progress
 
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
@@ -206,9 +222,26 @@ func die() -> void:
 	indicator.can_show_hex_range = false
 	await get_tree().create_timer(.1).timeout
 
+func apply_drop_chance_bonus(_drop_chance_bonus: float) -> void:
+	drop_chance = data.drop_chance_base + _drop_chance_bonus
+	
+func reset_drop_chance() -> void:
+	drop_chance = data.drop_chance_base
+
 func on_animation_finished(anim_name):
 	if anim_name == "hit":
 		is_taking_damage = false
+
+	if anim_name == "wind_up":
+		attack_move_forward()
+		ap.play("attack")
+	
+	if anim_name == "attack":
+		ap.play("follow_through")
+	
+	if anim_name == "follow_through":
+		attack_move_back()
+		enemy_attack_area.check_continue_attacking()
 
 	if anim_name == "die":
 		sprite.z_index = -sprite.z_index
@@ -216,6 +249,70 @@ func on_animation_finished(anim_name):
 
 	if anim_name == "corpse":
 		queue_free()
+
+# Child component signal requests
+func on_animation_requested(anim_name: String) -> void:
+	ap.play(anim_name)
+
+func on_animation_queue_requested(anim_name: String) -> void:
+	ap.queue(anim_name)
+
+func on_sprite_flip_requested(flip: bool) -> void:
+	sprite.flip_h = flip
+
+func on_global_position_change_requested(change: Vector2) -> void:
+	global_position += change
+
+func on_move_func_change_requested(func_name: String) -> void:
+	move_func = Callable(enemy_movement, func_name)
+
+func on_attach_to_path_requested() -> void:
+	is_off_path = false
+	path_follow.progress_ratio = return_point_progress_ratio
+	move_func = Callable(enemy_movement, "move_along_path")
+
+func on_attack_requested(value: bool) -> void:
+	is_attacking = value
+
+func on_damage_base_requested() -> void:
+	base.take_damage(damage)
+
+func on_death_requested() -> void:
+	die()
+
+func on_player_detected(_player: PlayerCharacter) -> void:
+	player = _player
+	player.grid_position_changed.connect(on_player_grid_position_changed)
+	# enemy_movement.update_path_to_player(player.global_position)
+	enemy_movement.update_path_to_player(global_position, player.global_position, pathfinder)
+	#enemy_movement.nav_agent.target_position = player.global_position
+
+func on_player_grid_position_changed() -> void:
+	# enemy_movement.update_path_to_player(player.global_position)
+	enemy_movement.update_path_to_player(global_position, player.global_position, pathfinder)
+
+func on_path_exit_position_updated(_path_exit_position) -> void:
+	path_exit_position = _path_exit_position
+
+func on_player_escaped() -> void:
+	return_point = path.get_return_point(global_position, path_exit_position)
+	return_point_progress_ratio = path.get_return_point_progress_ratio(return_point)
+	player.grid_position_changed.disconnect(on_player_grid_position_changed)
+
+	# DEV ONLY 
+	enemy_movement.pathfinder_debug_line.clear_points()
+
+func attack_move_forward() -> void:
+	# TODO: remove hardcodes
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", (global_position + enemy_movement.direction * 5), .05)
+	# global_position += enemy_movement.direction * 5
+
+func attack_move_back() -> void:
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", (global_position - enemy_movement.direction * 5), .05)
+	# global_position += enemy_movement.direction * 5
+	# global_position -= enemy_movement.direction * 5
 
 # Debuffs
 func on_add_new_debuff(_debuff: Debuff) -> void:
@@ -303,7 +400,7 @@ func on_debuff_remove_knockback() -> void:
 
 func set_pos_offset() -> void:
 	match data.size:
-		Enemy.Size.MEDIUM: data.pos_offset = Vector2(8,8)
+		Enemy.Size.SMALL: data.pos_offset = Vector2(8,8)
 		Enemy.Size.LARGE: data.pos_offset = Vector2(8,8)
 
 # Boons

@@ -26,6 +26,13 @@ var prev_aim_input: Vector2
 var dashing: bool = false
 var dash_velocity: float = 400.0
 
+var prev_grid_position
+
+
+## Emitted when the grid point the player position converts to changes.
+## Specifically when `WorldGrid.world_to_grid(player.global_position)` != `player prev_grid_pos`
+signal grid_position_changed
+
 func _ready():
 	player_input.spell_input_pressed.connect(on_spell_input_pressed)
 	player_input.dash_input_pressed.connect(on_dash_input_pressed)
@@ -46,6 +53,11 @@ func _physics_process(delta): # This can go in a state eventually
 		player_animation.update_animation(delta)
 	
 	move_and_slide()
+
+	var grid_pos: Vector2 = WorldGrid.world_to_grid(global_position)
+	if  grid_pos != prev_grid_position:
+		grid_position_changed.emit()
+		prev_grid_position = grid_pos
 
 func update_player_aim(delta) -> void:
 	if aim_input:

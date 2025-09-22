@@ -242,7 +242,7 @@ func on_mouse_exited_wave_button():
 
 # Info panel functions
 func show_tower_info_panel(_tower: Tower, _gold: int) -> void:
-	if _tower.global_position.x > ((WorldGrid.width * Constants.CELL_SIZE) / 2):
+	if _tower.global_position.x > ((WorldGrid.dimensions.x * Constants.CELL_SIZE) / 2):
 		left_tower_info_panel.update_stats(_tower, _gold)
 		left_tower_info_panel.show()
 	else:

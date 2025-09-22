@@ -7,17 +7,17 @@ extends Node2D
 var active_enemies: Array[Enemy]
 var enemy_index: int
 var can_spawn_enemy: bool
-
 var spawn_timers: Array[Timer] = []
-
 var boss_wave_active: bool = false
-
 var path_spawns: Array = []
 var path_enemy_indexes: Array[int] = []
 
+var pathfinder: PathFinder # Set in main
+
 var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
-	Enemy.Size.MEDIUM: preload("res://scenes/enemies/Enemy.tscn"),
+	Enemy.Size.SMALL: preload("res://scenes/enemies/Enemy.tscn"),
 	Enemy.Size.LARGE: preload("res://scenes/enemies/LargeEnemy.tscn"),
+	Enemy.Size.FLYING_SMALL: preload("res://scenes/enemies/FlyingEnemy.tscn")
 }
 
 # Signals
@@ -26,6 +26,9 @@ signal enemy_spawned_with_ref
 signal enemy_died
 signal enemy_died_with_global_pos
 signal boss_enemy_damage_recieved
+
+# TODO: DEV ONLY
+var player_character: PlayerCharacter
 
 func _ready():
 	z_index = Constants.z_index_map["enemy_spawner"]
@@ -59,9 +62,6 @@ func start_wave() -> void:
 
 	for i in range(spawn_timers.size()):
 		on_spawn_timer_timeout(i)
-
-	# on_spawn_timer_timeout(0) #TODO: this should be able to start with any path!
-
 
 ## Called when a wave is completed or failed.
 func reset() -> void:
@@ -107,13 +107,18 @@ func on_spawn_timer_timeout(path_index: int) -> void:
 func spawn_enemy(_spawn: Spawn) -> void:
 	# Configure new enemy
 	var _enemy_data: EnemyData = _spawn.enemy_data
-	var new_enemy: Enemy = enemy_scenes[_enemy_data.size].instantiate()
+	var new_enemy = enemy_scenes[_enemy_data.size].instantiate()
 	new_enemy.data = _enemy_data
 	new_enemy.died.connect(on_enemy_died)
 	add_child(new_enemy)
 	active_enemies.append(new_enemy)
+	
+	if new_enemy is FlyingEnemy:
+			new_enemy.player = player_character
+	else:
+		configure_enemy_pathing(new_enemy, _spawn)
 
-	configure_enemy_pathing(new_enemy, _spawn)
+	
 
 	if boss_wave_active: 
 		new_enemy.is_boss = true
@@ -129,9 +134,13 @@ func configure_enemy_pathing(enemy: Enemy, _spawn: Spawn) -> void:
 	var new_path_follow: PathFollow2D = PathFollow2D.new()
 	new_path_follow.rotates = true
 
+	enemy.pathfinder = pathfinder
+
 	# Add to the correct path (does not account for runtime errors. If a spawn has a path_index > 0,
 	# a corresponding Path2D node MUST be added to accomodate)
-	LevelManager.active_level.enemy_paths[_spawn.path_index].add_child(new_path_follow)
+	var target_path: Path2D = LevelManager.active_level.enemy_paths[_spawn.path_index]
+	target_path.add_child(new_path_follow)
+	enemy.path = target_path
 
 	var new_remote_transform: RemoteTransform2D = RemoteTransform2D.new()
 	new_remote_transform.update_rotation = false

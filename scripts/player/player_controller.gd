@@ -131,7 +131,7 @@ func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 	# Do not allow placement during combat, do not allow NONE type turrets to spawn
 	if placement_enabled and selected_tower_element != Constants.Element.NONE and tower_to_place:
 		var grid_pos: Vector2 = WorldGrid.world_to_grid(world_pos)
-		if grid_pos in WorldGrid.data and WorldGrid.data[grid_pos]:
+		if grid_pos in WorldGrid.data and WorldGrid.data[grid_pos] == WorldGrid.TileType.UNOCCUPIED:
 			# Spawn and configure new tower
 			var new_tower: Tower = tower_to_place # tower_to_place BECOMES new_tower, same tower ref
 			tower_to_place = null # Disable movement in _process()
@@ -146,7 +146,7 @@ func place_tower(element: Constants.Element, world_pos: Vector2) -> bool:
 
 			# Update data
 			active_towers.append(new_tower)
-			WorldGrid.data[grid_pos] = false
+			WorldGrid.data[grid_pos] = WorldGrid.TileType.OCCUPIED
 			gold -= Constants.TOWER_PRICES[element]
 			gold_spent += Constants.TOWER_PRICES[element]
 
@@ -272,7 +272,7 @@ func on_wave_failed() -> void:
 			active_towers[i].revert()
 			active_towers[i].revert_to_checkpoint()
 		else:
-			WorldGrid.data[WorldGrid.world_to_grid(active_towers[i].position)] = true
+			WorldGrid.data[WorldGrid.world_to_grid(active_towers[i].position)] = WorldGrid.TileType.UNOCCUPIED
 			active_towers[i].queue_free()
 			active_towers.remove_at(i)
 

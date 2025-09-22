@@ -2,32 +2,35 @@ extends Node
 
 @export var debug: bool = false
 
-var height: int = 14
-var width: int = 25
+enum TileType {OCCUPIED, UNOCCUPIED, PATH}
 
-## Should always be indexed with Grid Coordinates
-var data: Dictionary[Vector2, bool] # true = can be placed here, false cannot
+var dimensions: Vector2i 
+
+## Should always be indexed with Grid Coordinate
+var data: Dictionary[Vector2, TileType] # true = unoccupied
 var data_valid_points: Array[Vector2]
 
 # Dev only
 var tile_inidicator: PackedScene = preload("res://scenes/placeholders/TileIndicator.tscn")
 var active_tilemap: TileMapLayer
 var valid_atlas_coords: Array[Vector2i] = [Vector2i(2,0)] # Green tiles in atl_level_mask
+var traversable_coords: Array[Vector2i] = [Vector2i(1,0)] # Any tiles that can be traversed, and are NOT green tiles
 
 ## Intended to be called manually by `LevelManager`.
 func configure_level(active_level: LevelEnvironment) -> void:
-	generate_grid()
+	generate_grid(active_level.level_mask_layer)
 	configure_tilemap(active_level.level_mask_layer)
 
-func generate_grid() -> void:
-	# Reset values
+func generate_grid(tilemap: TileMapLayer) -> void:
+	# Reset values between loading level
 	data = {}
+	dimensions = tilemap.get_used_rect().size
 
-	for y in range(height):
-		for x in range(width):
+	for y in range(dimensions.y):
+		for x in range(dimensions.x):
 			var grid_pos = Vector2(x,y)
 			var world_pos = WorldGrid.grid_to_world(grid_pos)
-			data[grid_pos] = true
+			data[grid_pos] = TileType.UNOCCUPIED
 
 			if debug:
 				spawn_placeholder(world_pos)
@@ -38,10 +41,16 @@ func configure_tilemap(tilemap: TileMapLayer) -> void:
 	for tile_coords: Vector2i in active_tilemap.get_used_cells():
 		var atlas_coords: Vector2i = active_tilemap.get_cell_atlas_coords(tile_coords) 
 		if atlas_coords in valid_atlas_coords:
-			data[Vector2(tile_coords)] = true
+			data[Vector2(tile_coords)] = TileType.UNOCCUPIED
 			data_valid_points.append(Vector2(tile_coords))
+			#spawn_placeholder(grid_to_world(tile_coords))
+
+		elif atlas_coords in traversable_coords:
+			data[Vector2(tile_coords)] = TileType.PATH
+			#spawn_placeholder(grid_to_world(tile_coords))
+
 		else:
-			data[Vector2(tile_coords)] = false 
+			data[Vector2(tile_coords)] = TileType.OCCUPIED
 
 func spawn_placeholder(pos: Vector2) -> void:
 	var p: Sprite2D

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://vb1cipw2nthp"]
+[gd_scene load_steps=12 format=3 uid="uid://vb1cipw2nthp"]
 
 [ext_resource type="Script" uid="uid://c6gn0gwhvt2he" path="res://scripts/main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dmftkyu1m0r7n" path="res://scenes/ui/RoundInfo.tscn" id="3_0bbpv"]
 [ext_resource type="Script" uid="uid://ckfb2xehi2wqu" path="res://scripts/player/player_camera.gd" id="3_c01mt"]
 [ext_resource type="PackedScene" uid="uid://btulqisr6vlgj" path="res://scenes/player/PlayerController.tscn" id="4_rarhs"]
+[ext_resource type="Script" uid="uid://dblgx1xqkckwv" path="res://scripts/pathfinding/pathfinder.gd" id="4_wp0k4"]
 [ext_resource type="Script" uid="uid://gu8su5txi8b8" path="res://scripts/coin_drops/coin_drop_manager.gd" id="5_c01mt"]
 [ext_resource type="PackedScene" uid="uid://cyqs2ueeu4k80" path="res://scenes/ui/PauseMenu.tscn" id="5_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://cywxbhd0t5saw" path="res://scenes/ui/BestiaryMenu.tscn" id="6_q8u5g"]
@@ -22,9 +23,14 @@ unique_name_in_owner = true
 script = ExtResource("5_c01mt")
 metadata/_custom_type_script = "uid://gu8su5txi8b8"
 
+[node name="PathFinder" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_wp0k4")
+metadata/_custom_type_script = "uid://dblgx1xqkckwv"
+
 [node name="PlayerCharacter" parent="." instance=ExtResource("10_lhr70")]
 unique_name_in_owner = true
-position = Vector2(208, 120)
+position = Vector2(376, 152)
 
 [node name="PlayerCamera" type="Camera2D" parent="PlayerCharacter"]
 unique_name_in_owner = true

@@ -18,6 +18,9 @@ extends Control
 var main_scene: PackedScene = load("res://scenes/Main.tscn")
 var world_map: PackedScene = preload("res://scenes/level/world_map/WorldMap.tscn")
 
+var select_index: int = 0
+var select_options: Array[Control] = []
+
 func _ready() -> void:
 	# Connect to signals
 	play_button.pressed.connect(_on_play_button_pressed)
@@ -32,13 +35,35 @@ func _ready() -> void:
 
 	# Configure Highlighting
 	play.mouse_entered.connect(highlight_ui_element.bind(play))
-	play.mouse_exited.connect(un_highlight_ui_element.bind(play))	
+	play.mouse_exited.connect(un_highlight_ui_element.bind(play))
+	play.focus_entered.connect(highlight_ui_element.bind(play))
+	play.focus_exited.connect(un_highlight_ui_element.bind(play))		
+
+
 	settings.mouse_entered.connect(highlight_ui_element.bind(settings))
 	settings.mouse_exited.connect(un_highlight_ui_element.bind(settings))	
 	credits.mouse_entered.connect(highlight_ui_element.bind(credits))
 	credits.mouse_exited.connect(un_highlight_ui_element.bind(credits))
 	exit.mouse_entered.connect(highlight_ui_element.bind(exit))
 	exit.mouse_exited.connect(un_highlight_ui_element.bind(exit))
+
+	# Configure controller highlighting
+	play_button.focus_entered.connect(highlight_ui_element.bind(play))
+	play_button.focus_exited.connect(un_highlight_ui_element.bind(play))	
+
+	settings_button.focus_entered.connect(highlight_ui_element.bind(settings))
+	settings_button.focus_exited.connect(un_highlight_ui_element.bind(settings))	
+	
+	credits_button.focus_entered.connect(highlight_ui_element.bind(credits))
+	credits_button.focus_exited.connect(un_highlight_ui_element.bind(credits))	
+
+	exit_button.focus_entered.connect(highlight_ui_element.bind(exit))
+	exit_button.focus_exited.connect(un_highlight_ui_element.bind(exit))	
+
+	# select_options = [play_button]
+	# select_options[0].grab_focus()
+	play_button.grab_focus()
+
 
 func _on_play_button_pressed() -> void:
 	SceneTransition.change_scene(world_map)
@@ -47,6 +72,7 @@ func _on_play_button_pressed() -> void:
 func on_settings_button_pressed() -> void:
 	title_menu.hide()
 	settings_menu.show()
+	settings_menu.back_button.grab_focus()
 
 func on_settings_menu_back_button_pressed() -> void:
 	title_menu.show()

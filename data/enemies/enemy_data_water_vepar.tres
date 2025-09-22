@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("3_slqhw")
-size = 2
+size = 1
 element = 2
 strong_against_element = 3
 weak_against_element = 1
@@ -16,6 +16,7 @@ speed = 20.0
 damage = 1
 drop_chance_base = 1.0
 atlas = ExtResource("1_wd1l5")
+show_light = false
 explosion_sfx = ExtResource("2_1km5w")
 hex_data_list = Array[ExtResource("3_1km5w")]([])
 knockback_multiplier = 1.5

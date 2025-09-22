@@ -505,6 +505,7 @@ sprite_frames = SubResource("SpriteFrames_enoa7")
 autoplay = "default"
 
 [node name="4Cloud" type="AnimatedSprite2D" parent="Clouds"]
+visible = false
 position = Vector2(184, 170)
 sprite_frames = SubResource("SpriteFrames_jg0wg")
 autoplay = "default"
