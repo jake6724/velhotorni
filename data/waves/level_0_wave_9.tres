@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=5 format=3 uid="uid://ix4t66svifsm"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_qeuqi"]
+[ext_resource type="Resource" uid="uid://cbcg8g4owjgrc" path="res://data/spawn/spawn_wind_ghoul_1.tres" id="2_3inao"]
+[ext_resource type="Resource" uid="uid://yk771ttwfw6a" path="res://data/spawn/spawn_water_ghoul_1.tres" id="3_fc364"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="4_py3u8"]
+
+[resource]
+script = ExtResource("4_py3u8")
+data = Array[ExtResource("1_qeuqi")]([ExtResource("2_3inao"), ExtResource("2_3inao"), ExtResource("2_3inao"), ExtResource("2_3inao"), ExtResource("2_3inao"), ExtResource("2_3inao"), ExtResource("2_3inao"), ExtResource("2_3inao"), ExtResource("2_3inao"), ExtResource("3_fc364"), ExtResource("3_fc364"), ExtResource("3_fc364"), ExtResource("3_fc364"), ExtResource("3_fc364"), ExtResource("3_fc364"), ExtResource("3_fc364"), ExtResource("3_fc364"), ExtResource("3_fc364")])
+reward = 57.0
+token_reward = 0
+metadata/_custom_type_script = "uid://cskry1sw3vqba"
