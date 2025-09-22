@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("2_qg4ll")
-size = 1
+size = 0
 element = 1
 strong_against_element = 2
 weak_against_element = 0

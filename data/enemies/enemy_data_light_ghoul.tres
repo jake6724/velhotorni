@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("3_kdnea")
-size = 1
+size = 0
 element = 4
 strong_against_element = 5
 weak_against_element = 3

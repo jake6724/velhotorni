@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("3_vkuye")
-size = 1
+size = 0
 element = 2
 strong_against_element = 3
 weak_against_element = 1

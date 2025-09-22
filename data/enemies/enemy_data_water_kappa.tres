@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("1_uph3w")
-size = 2
+size = 1
 element = 2
 strong_against_element = 3
 weak_against_element = 1

@@ -1,7 +1,7 @@
 class_name Enemy
 extends Area2D
 
-enum Size {SMALL, MEDIUM, LARGE}
+enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE}
 
 @export var data: EnemyData
 
@@ -328,7 +328,7 @@ func on_debuff_remove_knockback() -> void:
 
 func set_pos_offset() -> void:
 	match data.size:
-		Enemy.Size.MEDIUM: data.pos_offset = Vector2(8,8)
+		Enemy.Size.SMALL: data.pos_offset = Vector2(8,8)
 		Enemy.Size.LARGE: data.pos_offset = Vector2(8,8)
 
 # Boons

@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("1_ohl2i")
-size = 2
+size = 1
 element = 1
 strong_against_element = 2
 weak_against_element = 0
