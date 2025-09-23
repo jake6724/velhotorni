@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_hlh1d"]
 [ext_resource type="Resource" uid="uid://wkv5k7o08hjx" path="res://data/spawn/spawn_earth_mushroom_half.tres" id="2_4ghlr"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_7yavm"]
-[ext_resource type="Resource" path="res://data/spawn/spawn_water_merman_half.tres" id="3_4j1sa"]
+[ext_resource type="Resource" uid="uid://de3fn3wpmquev" path="res://data/spawn/spawn_water_merman_half.tres" id="3_4j1sa"]
 [ext_resource type="Resource" uid="uid://chodepxdlomyc" path="res://data/spawn/spawn_water_ghoul_half.tres" id="4_4j1sa"]
 
 [resource]
