@@ -1043,12 +1043,23 @@ sources/0 = SubResource("TileSetAtlasSource_3frq3")
 texture = ExtResource("9_s0k01")
 0:0/0 = 0
 0:0/0/modulate = Color(1, 1, 1, 0.196078)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
 1:0/0/modulate = Color(1, 1, 1, 0.196078)
+1:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
 2:0/0/modulate = Color(1, 1, 1, 0.196078)
+2:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_6ufsd"]
+physics_layer_0/collision_layer = 8192
+physics_layer_0/collision_mask = 0
+physics_layer_1/collision_layer = 4096
+physics_layer_1/collision_mask = 0
+physics_layer_2/collision_layer = 32768
+physics_layer_2/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_bivsl")
 
 [sub_resource type="Curve2D" id="Curve2D_per2q"]
