@@ -69,8 +69,10 @@ func on_dash_input_pressed() -> void:
 		
 		if move_input:	
 			velocity = move_input.normalized() * dash_velocity
+		elif player_aim.aim_input:
+			velocity = player_aim.aim_input.round().normalized() * dash_velocity
 		else:
-			velocity = player_aim.aim_input.normalized() * dash_velocity
+			velocity = Vector2(1,0) * dash_velocity
 
 func on_staff_animation_finished() -> void:
 	staff_sprite.play("idle")
