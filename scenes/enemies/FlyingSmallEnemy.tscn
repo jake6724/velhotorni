@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c50xuc0oaexbj"]
+
+[ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_iviga"]
+
+[node name="FlyingSmallEnemy" type="Area2D"]
+script = ExtResource("1_iviga")
+metadata/_custom_type_script = "uid://dn6bxxa2tg45m"

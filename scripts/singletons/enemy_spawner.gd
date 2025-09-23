@@ -16,7 +16,7 @@ var path_spawns: Array = []
 var path_enemy_indexes: Array[int] = []
 
 var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
-	Enemy.Size.MEDIUM: preload("res://scenes/enemies/Enemy.tscn"),
+	Enemy.Size.SMALL: preload("res://scenes/enemies/SmallEnemy.tscn"),
 	Enemy.Size.LARGE: preload("res://scenes/enemies/LargeEnemy.tscn"),
 }
 

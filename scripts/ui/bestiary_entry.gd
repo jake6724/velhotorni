@@ -18,7 +18,7 @@ func _ready():
 	mouse_filter = Control.MOUSE_FILTER_PASS
 
 	if texture_normal is AtlasTexture:
-		if data.size == Enemy.Size.MEDIUM:
+		if data.size == Enemy.Size.SMALL:
 			texture_normal.region = Rect2(0, 0, 16, 16)
 		elif data.size == Enemy.Size.LARGE:
 			texture_normal.region = Rect2(0, 0, 32, 32)
