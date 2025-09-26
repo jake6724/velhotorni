@@ -5,6 +5,7 @@
 extends Node2D
 
 var active_enemies: Array[Enemy]
+var active_path_enemies: Array[Enemy]
 var enemy_index: int
 var can_spawn_enemy: bool
 
@@ -15,9 +16,14 @@ var boss_wave_active: bool = false
 var path_spawns: Array = []
 var path_enemy_indexes: Array[int] = []
 
+var player: PlayerCharacter # Set by main
+
 var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
 	Enemy.Size.SMALL: preload("res://scenes/enemies/SmallEnemy.tscn"),
 	Enemy.Size.LARGE: preload("res://scenes/enemies/LargeEnemy.tscn"),
+	Enemy.Size.FLYING_SMALL: preload("res://scenes/enemies/FlyingSmallEnemy.tscn"),
+	Enemy.Size.FLYING_LARGE: preload("res://scenes/enemies/FlyingLargeEnemy.tscn"),
+	Enemy.Size.RANGED_SMALL: preload("res://scenes/enemies/RangedSmallEnemy.tscn")
 }
 
 # Signals
@@ -38,11 +44,12 @@ func _ready():
 	WaveManager.final_wave_started.connect(on_final_wave_started)
 
 func _physics_process(_delta): # TODO: It would be great to not call this on tick
-	sort_enemies_z_index_by_progress()
+	sort_path_enemies_z_index_by_progress()
 
 ## Called by LevelManager.
 func configure_level(active_level: LevelEnvironment):
 	active_enemies = []
+	active_path_enemies = []
 	enemy_index = 0
 	can_spawn_enemy = false
 	create_spawn_timers(active_level)
@@ -60,19 +67,18 @@ func start_wave() -> void:
 	for i in range(spawn_timers.size()):
 		on_spawn_timer_timeout(i)
 
-	# on_spawn_timer_timeout(0) #TODO: this should be able to start with any path!
-
-
 ## Called when a wave is completed or failed.
 func reset() -> void:
 	remove_all_enemies()
 	active_enemies = []
+	active_path_enemies = []
 	can_spawn_enemy = false
 	stop_all_spawn_timers()
 	reset_indexes()
 
 func on_wave_complete() -> void:
 	active_enemies = []
+	active_path_enemies = []
 	can_spawn_enemy = false
 	stop_all_spawn_timers()
 	sort_enemies_by_path()
@@ -113,7 +119,16 @@ func spawn_enemy(_spawn: Spawn) -> void:
 	add_child(new_enemy)
 	active_enemies.append(new_enemy)
 
-	configure_enemy_pathing(new_enemy, _spawn)
+	if new_enemy is FlyingEnemy:
+		new_enemy.player = player
+		new_enemy.global_position = (LevelManager.active_level.enemy_paths[_spawn.path_index].curve.get_point_position(0))
+		print("SPAWN POS: ", new_enemy.spawn_pos)
+	else:
+		active_path_enemies.append(new_enemy)
+		configure_enemy_pathing(new_enemy, _spawn)
+
+	if new_enemy is EnemyRanged:
+		new_enemy.configure_ranged_enemy()
 
 	if boss_wave_active: 
 		new_enemy.is_boss = true
@@ -148,12 +163,12 @@ func remove_all_enemies() -> void:
 		if child is Enemy:
 			child.queue_free()
 
-func sort_enemies_z_index_by_progress() -> void:
-	var offset: int = active_enemies.size()
-	active_enemies.sort_custom(compare_by_progress_ratio)
-	for enemy: Enemy in active_enemies:
-		enemy.sprite.z_index = offset
-		offset -= 1
+func sort_path_enemies_z_index_by_progress() -> void:
+	var offset: int = active_path_enemies.size()
+	active_path_enemies.sort_custom(compare_by_progress_ratio)
+	for enemy: Enemy in active_path_enemies:
+			enemy.sprite.z_index = offset
+			offset -= 1
 
 func compare_by_progress_ratio(enemy_a: Enemy, enemy_b: Enemy) -> bool:
 	return enemy_a.path_follow.progress_ratio > enemy_b.path_follow.progress_ratio

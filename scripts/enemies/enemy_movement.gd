@@ -1,3 +1,6 @@
+## NOT IN USE
+
+
 class_name EnemyMovement
 extends Node2D
 
@@ -16,8 +19,7 @@ _player: PlayerCharacter, _path_follow: PathFollow2D) -> void:
 	is_taking_damage, _enemy_global_position, _player, _path_follow)
 
 func move_along_path(delta: float, speed: float, slow_percent: float, is_alive: bool, is_frozen: bool,
-is_stunned: bool, is_taking_damage: bool, _enemy_global_position: Vector2,
-_player: PlayerCharacter, _path_follow: PathFollow2D) -> void:
+is_stunned: bool, is_taking_damage: bool, _enemy_global_position: Vector2, _path_follow: PathFollow2D) -> void:
 
 	if is_alive:
 		if not is_frozen and not is_stunned:

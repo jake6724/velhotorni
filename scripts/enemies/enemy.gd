@@ -1,7 +1,7 @@
 class_name Enemy
 extends Area2D
 
-enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE}
+enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE}
 
 @export var data: EnemyData
 
@@ -38,10 +38,7 @@ enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE}
 # Pathing 
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
 var prev_global_position: Vector2 # Used for flipping sprite
-
 var min_distance: float = 2
-
-var player: PlayerCharacter
 
 # Enemy Stats from Enemy Data Resource
 var element: Constants.Element
@@ -60,7 +57,6 @@ var damage: int
 var negative_modifier: float = .5
 var positive_modifier: float = 2.0
 
-var can_attack: bool = true
 var is_alive: bool = true
 var is_taking_damage = false
 
@@ -127,10 +123,7 @@ func _ready():
 
 func _physics_process(delta):
 	if is_alive:
-		enemy_movement.move(delta, speed, slow_percent, is_alive, is_frozen, is_stunned, is_taking_damage,
-		global_position, player, path_follow)
-		
-		debuff_manager.enemy_progress = path_follow.progress
+		move(delta)
 
 func move(delta) -> void:
 	if is_alive:
@@ -138,10 +131,7 @@ func move(delta) -> void:
 			if not is_taking_damage:
 				ap.play("walk")
 
-			if path_follow.rotation_degrees >= 91: # Flip when moving right
-				sprite.flip_h = true
-			else: 
-				sprite.flip_h = false
+			sprite.flip_h = path_follow.rotation_degrees >= 91
 				
 			if path_follow.progress_ratio < .99:
 				path_follow.progress += (speed - ((speed * (slow_percent/100)))) * delta
@@ -150,6 +140,8 @@ func move(delta) -> void:
 				die()
 		else:
 			ap.play("idle")
+
+	debuff_manager.enemy_progress = path_follow.progress
 
 func apply_drop_chance_bonus(_drop_chance_bonus: float) -> void:
 	drop_chance = data.drop_chance_base + _drop_chance_bonus
