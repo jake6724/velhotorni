@@ -1,7 +1,7 @@
 class_name EnemyBullet
 extends Sprite2D
 
-@onready var detect_player_area: Area2D = $DetectPlayerArea
+@onready var collision_area: Area2D = $CollisionArea
 @onready var ap: AnimationPlayer = $AnimationPlayer
 
 var active: bool = true
@@ -14,20 +14,19 @@ var max_distance: float
 var follow_on_hit: bool
 
 func _ready():
-	detect_player_area.body_entered.connect(on_player_detected)
+	collision_area.body_entered.connect(on_body_entered)
 	ap.animation_finished.connect(on_animation_finished)
 
-func initialize(_player_pos: Vector2, _spawn_pos: Vector2, _damage: float, _speed: float, _max_distance: float, _follow_on_hit: bool, _z_index: int, atlas: CompressedTexture2D) -> void:
-	player_pos = _player_pos
+func initialize(_direction: Vector2, _spawn_pos: Vector2, _damage: float, _speed: float, _max_distance: float, _follow_on_hit: bool, _z_index: int, atlas: CompressedTexture2D) -> void:
 	damage = _damage
 	speed = _speed
 	max_distance = _max_distance
 	follow_on_hit = _follow_on_hit
 	spawn_pos = _spawn_pos
-	global_position = _spawn_pos + Vector2(8,8)
+	global_position = _spawn_pos
 	self.texture = atlas
 	z_index = _z_index
-	direction = global_position.direction_to(player_pos)
+	direction = _direction
 	ap.play("move")
 
 func _physics_process(delta) -> void:
@@ -40,12 +39,13 @@ func move(delta) -> void:
 			active = false
 			ap.play("hit")
 
-func on_player_detected(player: PlayerCharacter) -> void:
+func on_body_entered(intruder) -> void:
 	active = false
-
-	# player.take_damage
-
 	ap.play("hit")
+
+	if intruder is PlayerCharacter:
+		# player.take_damage
+		pass
 
 func on_animation_finished(anim_name: String) -> void:
 	if anim_name == "hit":

@@ -21,9 +21,9 @@ func move(delta) -> void:
 			if not is_taking_damage:
 				ap.play("walk")
 		
-			var direction = global_position.direction_to(player.global_position).round()
+			var direction = global_position.direction_to(player.global_position)
 			sprite.flip_h = direction.x < 0
-			global_position += direction * 50 * delta
+			global_position += direction.round().normalized() * data.speed * delta
 			global_position += get_push_vector() * .5
 	else:
 			ap.play("idle")

@@ -167,8 +167,8 @@ func sort_path_enemies_z_index_by_progress() -> void:
 	var offset: int = active_path_enemies.size()
 	active_path_enemies.sort_custom(compare_by_progress_ratio)
 	for enemy: Enemy in active_path_enemies:
-			enemy.sprite.z_index = offset
-			offset -= 1
+		enemy.sprite.z_index = offset
+		offset -= 1
 
 func compare_by_progress_ratio(enemy_a: Enemy, enemy_b: Enemy) -> bool:
 	return enemy_a.path_follow.progress_ratio > enemy_b.path_follow.progress_ratio

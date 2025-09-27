@@ -1,27 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://de00xma0uqr06"]
-
-[ext_resource type="Texture2D" uid="uid://mefdddf0j5ji" path="res://assets/art/atlases/enemy/atl_enemy_wind_imp.png" id="1_526n6"]
-[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_ymv77"]
-[ext_resource type="Resource" uid="uid://ducpbw7muatjp" path="res://data/boons/boon_data_cleanse_wind_small.tres" id="2_526n6"]
-[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="2_qg4ll"]
+[gd_resource type="Resource" format=3 uid="uid://de00xma0uqr06"]
 
 [resource]
-script = ExtResource("2_qg4ll")
-size = 0
-element = 1
-strong_against_element = 2
-weak_against_element = 0
-health = 150.0
-speed = 20.0
-damage = 2
-drop_chance_base = 2.0
-atlas = ExtResource("1_526n6")
-show_light = false
-boon_data = ExtResource("2_526n6")
-hex_data_list = Array[ExtResource("1_ymv77")]([])
-knockback_multiplier = 1.5
-enemy_name = "Wind Imp"
-enemy_description = "Removes existing negative effects from nearby enemies every 1 second
-
-Minion of Barbatos"
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"
