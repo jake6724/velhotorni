@@ -4,7 +4,7 @@ class_name EnemyDataRanged
 @export_category("Ranged Enemy Attack Data")
 @export var attack_cooldown: float = 1.0
 @export var burst_cooldown: float = 0.0
-@export var burst_max: int = 1
+@export var burst_amount: int = 1
 
 @export_category("Bullet Pattern Data")
 @export var total_bullets: int

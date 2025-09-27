@@ -9,12 +9,12 @@
 [resource]
 script = ExtResource("2_04hem")
 attack_cooldown = 2.0
-burst_cooldown = 0.0
-burst_max = 1
-total_bullets = 24
-angle_increment = 30.0
+burst_cooldown = 0.1
+burst_amount = 10
+total_bullets = 1
+angle_increment = 0.0
 bullet_damage = 1.0
-bullet_speed = 50.0
+bullet_speed = 150.0
 bullet_max_distance = 150.0
 bullet_follow_on_hit = false
 bullet_atlas = ExtResource("2_laito")

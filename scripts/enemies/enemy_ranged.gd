@@ -21,32 +21,27 @@ func configure_ranged_enemy() -> void:
 	attack_area.body_entered.connect(on_body_entered)
 
 func on_body_entered(player: PlayerCharacter) -> void:
-	if is_alive and can_attack:
-		print("BODY ENTERED ATTACK!")
-		attack_player(player.global_position)
-
-func on_attack_timer_timeout() -> void:
-	print("TIMEOUT")
-	can_attack = true
-	check_player_in_range()
+	attack_player(player.global_position)
 
 func check_player_in_range() -> void:
 	var bodies = attack_area.get_overlapping_bodies()
 	if bodies.size() and bodies[0] is PlayerCharacter:
 		attack_player(bodies[0].global_position)
 
+func on_attack_timer_timeout() -> void:
+	can_attack = true
+	check_player_in_range()
+
 func attack_player(player_pos: Vector2) -> void:
-	print("ATTACKING")
-	spawn_all_bullets(player_pos)
-	can_attack = false
-	burst_count += 1
-	if burst_count >= data.burst_max:
-		print("START ATTACK COOLDOWN")
-		burst_count = 0
-		attack_timer.start(data.attack_cooldown)
-	else:
-		print("START BURST COOLDOWN")
-		attack_timer.start(data.burst_cooldown)
+	if is_alive and can_attack:
+		spawn_all_bullets(player_pos)
+		can_attack = false
+		burst_count += 1
+		if burst_count >= data.burst_amount:
+			burst_count = 0
+			attack_timer.start(data.attack_cooldown)
+		else:
+			attack_timer.start(data.burst_cooldown)
 
 func spawn_all_bullets(player_pos: Vector2) -> void:
 	var angle_sign: float = 1
