@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://csd26pl561qn6"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_4v8xy"]
-[ext_resource type="Resource" uid="uid://dwxsxponwmrw4" path="res://data/enemies/enemy_data_fire_gargoyle.tres" id="1_puoa3"]
+[ext_resource type="Resource" uid="uid://blc42pd832aht" path="res://data/enemies/enemy_data_fire_gargoyle.tres" id="1_puoa3"]
 
 [resource]
 script = ExtResource("1_4v8xy")

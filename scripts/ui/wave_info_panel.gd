@@ -41,7 +41,7 @@ func get_all_wave_preview_data(active_level: LevelEnvironment):
 			Constants.Element.LIGHT: ((light_count / total_count) * 100),
 			Constants.Element.DARK: ((dark_count / total_count) * 100),
 		}
-		print(wave_results)
+		# print(wave_results)
 		wave_previews.append(wave_results)
 
 func set_preview_labels(wave_index: int) -> void:

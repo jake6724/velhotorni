@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://daypgtvog0225" path="res://data/spawn/spawn_fire_ghoul_half.tres" id="3_ywsak"]
 [ext_resource type="Resource" uid="uid://cg5xvyry355co" path="res://data/spawn/spawn_light_ghoul_half.tres" id="4_ra3gs"]
 [ext_resource type="Resource" uid="uid://chodepxdlomyc" path="res://data/spawn/spawn_water_ghoul_half.tres" id="5_nm8ga"]
-[ext_resource type="Resource" uid="uid://dug76dln0di3v" path="res://data/spawn/spawn_earth_ghoul_half.tres" id="6_t2jis"]
+[ext_resource type="Resource" uid="uid://cgyc4ymcc7ln2" path="res://data/spawn/spawn_earth_ghoul_half.tres" id="6_t2jis"]
 [ext_resource type="Resource" uid="uid://p436lng5xl1f" path="res://data/spawn/spawn_wind_ghoul_half.tres" id="7_ok1bq"]
 
 [resource]

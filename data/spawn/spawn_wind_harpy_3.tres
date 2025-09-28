@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://c0yxcd2s073tx"]
 
-[ext_resource type="Resource" uid="uid://lswqi13lanov" path="res://data/enemies/enemy_data_wind_harpy.tres" id="1_obr2h"]
+[ext_resource type="Resource" uid="uid://bp1oi8pi675fq" path="res://data/enemies/enemy_data_wind_harpy.tres" id="1_obr2h"]
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_2yesf"]
 
 [resource]

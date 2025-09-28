@@ -49,7 +49,7 @@ func get_all_wave_preview_data(active_level: LevelEnvironment):
 
 		wave_previews.append(wave_results)
 	
-	print(total_health_values)
+	# print(total_health_values)
 
 func set_preview_labels(wave_index: int) -> void:
 	var data: Dictionary = get_wave_preview_data(wave_index)

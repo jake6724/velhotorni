@@ -15,6 +15,7 @@ var follow_on_hit: bool
 
 func _ready():
 	collision_area.body_entered.connect(on_body_entered)
+	collision_area.area_entered.connect(on_area_entered)
 	ap.animation_finished.connect(on_animation_finished)
 
 func initialize(_direction: Vector2, _spawn_pos: Vector2, _damage: float, _speed: float, _max_distance: float, _follow_on_hit: bool, _z_index: int, atlas: CompressedTexture2D) -> void:
@@ -39,13 +40,16 @@ func move(delta) -> void:
 			active = false
 			ap.play("hit")
 
-func on_body_entered(intruder) -> void:
+## Used to collide with terrain obstacles
+func on_body_entered(_intruder) -> void:
 	active = false
 	ap.play("hit")
 
-	if intruder is PlayerCharacter:
-		# player.take_damage
-		pass
+## Used to collide with and damage player 
+func on_area_entered(player_hurtbox: PlayerHurtbox) -> void:
+	active = false
+	ap.play("hit")
+	player_hurtbox.take_damage(damage, global_position)
 
 func on_animation_finished(anim_name: String) -> void:
 	if anim_name == "hit":

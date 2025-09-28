@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://cmds30uxri0o0"]
 
-[ext_resource type="Script" uid="uid://dgtkvrcm0reiv" path="res://scripts/enemies/data/enemy_data.gd" id="1_wqfdg"]
+[ext_resource type="Script" path="res://scripts/enemies/data/enemy_data.gd" id="1_wqfdg"]
 [ext_resource type="Texture2D" uid="uid://bsm8bg8lr2ga5" path="res://assets/art/atlases/enemy/atl_enemy_dark_armor.png" id="1_xegma"]
 [ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="2_sv3rr"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="3_0ya6c"]

@@ -33,7 +33,8 @@ func on_collect_area_entered(intruder) -> void:
 		
 		SFXPlayer.play_sfx("coin_collect")
 		coin_collected.emit()
-		if coin.is_reward: reward_collected.emit()
+		if coin.is_reward:
+			reward_collected.emit()
 		coin.queue_free()
 		
 func on_magnet_area_entered(intruder) -> void:

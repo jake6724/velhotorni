@@ -7,7 +7,8 @@
 script = ExtResource("1_j800h")
 damage = 3.0
 speed = 300.0
-pierce = 4
-max_distance = 200.0
+pierce = 2
+max_distance = 75.0
+spread = 3.0
 atlas = ExtResource("1_bqm4h")
 metadata/_custom_type_script = "uid://r20hlvy6xofu"

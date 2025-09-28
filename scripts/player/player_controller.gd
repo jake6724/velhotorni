@@ -207,7 +207,7 @@ func on_start_wave() -> void:
 
 		SFXPlayer.play_sfx("go")
 
-		print("Gold spent: ", gold_spent)
+		# print("Gold spent: ", gold_spent)
 	else:
 		SFXPlayer.play_sfx("click_2")
 

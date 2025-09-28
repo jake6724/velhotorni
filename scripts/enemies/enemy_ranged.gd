@@ -9,9 +9,6 @@ var burst_count: int = 0
 var can_attack: bool = true
 var enemy_bullet_scene: PackedScene = preload("res://scenes/bullets/enemy_bullets/EnemyBullet.tscn")
 
-# func _process(delta):
-# 	print(can_attack)
-
 func configure_ranged_enemy() -> void:
 	attack_timer.autostart = false
 	attack_timer.one_shot = true
@@ -37,7 +34,7 @@ func attack_player(player_pos: Vector2) -> void:
 		spawn_all_bullets(player_pos)
 		can_attack = false
 		burst_count += 1
-		if burst_count >= data.burst_amount:
+		if burst_count >= data.num_bursts:
 			burst_count = 0
 			attack_timer.start(data.attack_cooldown)
 		else:
@@ -52,7 +49,7 @@ func spawn_all_bullets(player_pos: Vector2) -> void:
 	# Spawn the first bullet which always travels directly at the player
 	spawn_enemy_bullet(base_direction, spawn_pos)
 
-	for i in range(data.total_bullets - 1):
+	for i in range(data.num_bullets_per_burst - 1):
 		var angle_modifier: float = angle_increment * angle_sign
 		var direction = base_direction.rotated(deg_to_rad(angle_modifier))
 		spawn_enemy_bullet(direction, spawn_pos)

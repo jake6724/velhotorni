@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://iba0xrksfxlb" path="res://assets/art/sprites/tower/spr_tower_fire.png" id="1_ch6tc"]
 [ext_resource type="Texture2D" uid="uid://b4g8en84fxspy" path="res://assets/placeholders/test_range.png" id="1_cv4nt"]
-[ext_resource type="Script" path="res://scripts/towers/placement_indicator.gd" id="1_oepik"]
+[ext_resource type="Script" uid="uid://lruvn4rf6vfo" path="res://scripts/towers/placement_indicator.gd" id="1_oepik"]
 
 [node name="PlacementIndicator" type="Node2D"]
 script = ExtResource("1_oepik")

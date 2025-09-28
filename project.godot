@@ -172,6 +172,7 @@ dash={
 2d_physics/layer_14="TerrainObstacle"
 2d_physics/layer_15="PlayerCharacter"
 2d_physics/layer_16="TerrainPit"
+2d_physics/layer_18="PlayerHurtbox"
 
 [rendering]
 

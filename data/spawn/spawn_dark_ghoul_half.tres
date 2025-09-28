@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://dchwryr6e5jhv"]
 
-[ext_resource type="Resource" path="res://data/enemies/enemy_data_dark_krasue.tres" id="1_nahc6"]
+[ext_resource type="Resource" uid="uid://dcgsh3oncfpfm" path="res://data/enemies/enemy_data_dark_krasue.tres" id="1_nahc6"]
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_ghswo"]
 
 [resource]

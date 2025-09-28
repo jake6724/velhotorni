@@ -92,8 +92,11 @@ func reset_indexes() -> void:
 ## Triggered when an `Enemy` child dies and emits their `died` signal.
 func on_enemy_died(enemy: Enemy) -> void:
 	var index = active_enemies.find(enemy)
+	var index_2 = active_path_enemies.find(enemy)
 	if index != -1:
 		active_enemies.remove_at(index)
+		if index_2 != -1:
+			active_path_enemies.remove_at(index)
 	enemy_died.emit()
 	enemy_died_with_global_pos.emit(enemy.global_position)
 
@@ -122,7 +125,6 @@ func spawn_enemy(_spawn: Spawn) -> void:
 	if new_enemy is FlyingEnemy:
 		new_enemy.player = player
 		new_enemy.global_position = (LevelManager.active_level.enemy_paths[_spawn.path_index].curve.get_point_position(0))
-		print("SPAWN POS: ", new_enemy.spawn_pos)
 	else:
 		active_path_enemies.append(new_enemy)
 		configure_enemy_pathing(new_enemy, _spawn)
@@ -165,10 +167,12 @@ func remove_all_enemies() -> void:
 
 func sort_path_enemies_z_index_by_progress() -> void:
 	var offset: int = active_path_enemies.size()
-	active_path_enemies.sort_custom(compare_by_progress_ratio)
-	for enemy: Enemy in active_path_enemies:
-		enemy.sprite.z_index = offset
-		offset -= 1
+	if active_path_enemies.size():
+		active_path_enemies.sort_custom(compare_by_progress_ratio)
+		for enemy: Enemy in active_path_enemies:
+			if enemy: # Fix for a common error that has been difficult to root cause: Invalid access to property or key 'sprite' on a base object of type 'previously freed'.
+				enemy.sprite.z_index = offset
+				offset -= 1
 
 func compare_by_progress_ratio(enemy_a: Enemy, enemy_b: Enemy) -> bool:
 	return enemy_a.path_follow.progress_ratio > enemy_b.path_follow.progress_ratio

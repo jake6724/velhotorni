@@ -19,6 +19,7 @@ var wave_failures: int = 0
 
 func _ready():
 	SceneTransition.scene_transition_complete.connect(set_can_pause.bind(true))
+	
 	# Configure with data from LevelManager
 	LevelManager.configure_level(self)
 	active_level = LevelManager.active_level
@@ -44,7 +45,7 @@ func _ready():
 
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
-	player_controller.coin_collector.reward_collected.connect(coin_drop_manager.decrement_reward_remaining)
+	player_character.coin_collector.reward_collected.connect(coin_drop_manager.decrement_reward_remaining)
 
 	# Configure Camera
 	active_level.base.damaged.connect(camera.apply_shake)
