@@ -7,11 +7,11 @@
 
 [resource]
 script = ExtResource("1_kxwn6")
-aoe_radius = 8.0
+aoe_radius = 22.0
 explosion_atlas = ExtResource("2_4vto4")
 element = 0
-damage = 20.0
-speed = 200.0
+damage = 45.0
+speed = 600.0
 num_bullets = 1
 cooldown = 0.5
 angle_seperation = 0.0

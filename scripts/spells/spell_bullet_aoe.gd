@@ -35,10 +35,13 @@ func check_max_distance_reached() -> void:
 		explode()
 
 func explode() -> void:
-	active = false
-	texture = data.explosion_atlas
-	aoe_collider.set_deferred("disabled", false)
-	ap.play("aoe_hit")
+	if active:
+		active = false
+		texture = data.explosion_atlas
+		scale *= 1.5 # TODO: Temp scale up explosion size
+		aoe_collider.set_deferred("disabled", false)
+		ap.play("aoe_hit")
 
 func on_aoe_area_entered(enemy: Enemy) -> void:
+	print("enemy in AOE")
 	deal_damage(enemy)

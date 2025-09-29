@@ -4,14 +4,14 @@
 [ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="2_04hem"]
 [ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_dd65k"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_id4st"]
-[ext_resource type="Texture2D" uid="uid://bpv0yurhjyu6o" path="res://assets/art/atlases/bullet/atl_bullet_fire.png" id="2_laito"]
+[ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="2_laito"]
 
 [resource]
 script = ExtResource("2_04hem")
 attack_cooldown = 1.0
 burst_cooldown = 0.0
-burst_amount = 1
-total_bullets = 1
+num_bursts = 1
+num_bullets_per_burst = 0
 angle_increment = 0.0
 bullet_damage = 1.0
 bullet_speed = 150.0

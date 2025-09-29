@@ -44,15 +44,17 @@ func spawn_spell(player_aim_direction: Vector2) -> void:
 	spell_func.call(player_aim_direction)
 
 func switch_spell(_switch_direction: int) -> void:
-	if curr_spell_index + _switch_direction < 0: # Go to last spell
-		curr_spell_index = (selected_spells.size() - 1) 
-	elif curr_spell_index + _switch_direction > (selected_spells.size() - 1): # Go to first spell
-		curr_spell_index = 0 
-	else:
-		curr_spell_index += _switch_direction
 
-	curr_spell_data = selected_spells[curr_spell_index]
+	var new_index = curr_spell_index + _switch_direction 
+
+	if new_index < 0: # Roll-over to last spell
+		new_index = (selected_spells.size() - 1) 
+	elif new_index > (selected_spells.size() - 1): # Go to first spell
+		new_index = 0 
+	
+	curr_spell_index = new_index
 	print(curr_spell_index)
+	curr_spell_data = selected_spells[curr_spell_index]
 
 ## Spawn all bullets defined in the SpellDataBullet resource
 func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
