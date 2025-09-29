@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var player_spell_spawner: PlayerSpellSpawner = $SpellSpawner
 @onready var player_stats: PlayerCharacterStats = $PlayerCharacterStats
 @onready var player_hurtbox: Area2D = $PlayerHurtbox
-@onready var player_camera: Camera2D = %PlayerCamera
+@onready var player_camera: PlayerCamera = %PlayerCamera
 
 # # State Machines
 # @onready var player_movement_state_machine: PlayerStateMachineMovement = %PlayerMovementStateMachine
@@ -43,6 +43,9 @@ func _ready():
 	player_hurtbox.damage_recieved.connect(on_damage_recieved)
 	player_hurtbox.hit.connect(on_hit)
 
+	# # Configure PlayerCamera
+	# player_aim.aim_input_updated.connect(player_camera.on_aim_input_updated)
+
 func _physics_process(delta): # This can go in a state eventually
 	aim_input = player_input.get_aim_input()
 	update_player_aim(delta)
@@ -76,11 +79,13 @@ func lock_move_input() -> void:
 
 func on_spell_input_pressed() -> void: # Use a func ref for this
 	player_spell_spawner.spawn_spell(player_aim.aim_input)
+	player_camera.apply_shake(.1)
 
 func on_dash_input_pressed() -> void:
 	if not dashing:
 		dashing = true
 		ap.play("dash")
+		player_camera.apply_shake(.8)
 		player_hurtbox.collider.set_deferred("disabled", true)
 		
 		if move_input:	
@@ -110,5 +115,5 @@ func on_hit(_direction) -> void:
 		hit = true
 		velocity = _direction * player_stats.knockback_multiplier
 
-		player_camera.apply_shake()
+		player_camera.apply_shake(1)
 		TimeManager.apply_hitstop()

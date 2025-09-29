@@ -3,7 +3,6 @@ extends Node2D
 
 @onready var player: PlayerCharacter = get_owner()
 
-
 const RETICLE_MAX_DISTANCE: float = 65
 
 ## The total duration of the tween_property call used to update the reticle's position, in seconds
@@ -16,7 +15,12 @@ const RETICLE_RESET_POSITION_DURATION: float = 3
 ## Higher values will make the reticle move faster
 @export var reset_speed_modifier: float = .65
 
-var aim_input: Vector2 # Manully set by PlayerCharacter
+signal aim_input_updated
+
+var aim_input: Vector2: # Manully set by PlayerCharacter
+	set(value):
+		aim_input = value
+		aim_input_updated.emit(aim_input)
 
 var resetting_reticle: bool = false
 

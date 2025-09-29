@@ -773,9 +773,11 @@ debug_color = Color(0.993404, 0, 0.2381, 0.42)
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-208, -120)
+position = Vector2(-3.8147e-06, 3.05176e-05)
 scale = Vector2(1.18113, 0.710342)
-anchor_mode = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
 script = ExtResource("13_bnayp")
 power = 5.0
 decay = 20.0
+metadata/_custom_type_script = "uid://ckfb2xehi2wqu"

@@ -18,6 +18,7 @@ unique_name_in_owner = true
 
 [node name="CoinDropManager" type="Node2D" parent="."]
 unique_name_in_owner = true
+rotation = -0.0217937
 script = ExtResource("5_c01mt")
 metadata/_custom_type_script = "uid://gu8su5txi8b8"
 
