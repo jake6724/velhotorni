@@ -96,7 +96,7 @@ func on_enemy_died(enemy: Enemy) -> void:
 	if index != -1:
 		active_enemies.remove_at(index)
 		if index_2 != -1:
-			active_path_enemies.remove_at(index)
+			active_path_enemies.remove_at(index_2)
 	enemy_died.emit()
 	enemy_died_with_global_pos.emit(enemy.global_position)
 

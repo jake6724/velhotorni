@@ -8,6 +8,10 @@ extends CharacterBody2D
 @onready var player_spell_spawner: PlayerSpellSpawner = $SpellSpawner
 @onready var player_stats: PlayerCharacterStats = $PlayerCharacterStats
 @onready var player_hurtbox: Area2D = $PlayerHurtbox
+@onready var player_camera: Camera2D = %PlayerCamera
+
+# # State Machines
+# @onready var player_movement_state_machine: PlayerStateMachineMovement = %PlayerMovementStateMachine
 
 @onready var ap: AnimationPlayer = $AnimationPlayer
 
@@ -23,6 +27,9 @@ var move_input: Vector2
 var aim_input: Vector2
 var prev_aim_input: Vector2
 
+var dashing: bool = false
+var dash_velocity: float = 400.0
+
 var hit: bool = false
 
 func _ready():
@@ -34,14 +41,14 @@ func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 
 	player_hurtbox.damage_recieved.connect(on_damage_recieved)
-	player_hurtbox.knockback_direction_calculated.connect(on_knockback_direction_calculated)
+	player_hurtbox.hit.connect(on_hit)
 
 func _physics_process(delta): # This can go in a state eventually
 	aim_input = player_input.get_aim_input()
 	update_player_aim(delta)
 
 	if not hit:
-		if not player_stats.dashing:	
+		if not dashing:	
 			move_input = player_input.get_movement_input()
 			if move_input:
 				lock_move_input()
@@ -71,16 +78,17 @@ func on_spell_input_pressed() -> void: # Use a func ref for this
 	player_spell_spawner.spawn_spell(player_aim.aim_input)
 
 func on_dash_input_pressed() -> void:
-	if not player_stats.dashing:
-		player_stats.dashing = true
+	if not dashing:
+		dashing = true
 		ap.play("dash")
+		player_hurtbox.collider.set_deferred("disabled", true)
 		
 		if move_input:	
-			velocity = move_input.normalized() * player_stats.dash_velocity
+			velocity = move_input.normalized() * dash_velocity
 		elif player_aim.aim_input:
-			velocity = player_aim.aim_input.round().normalized() * player_stats.dash_velocity
+			velocity = player_aim.aim_input.round().normalized() * dash_velocity
 		else:
-			velocity = Vector2(1,0) * player_stats.dash_velocity
+			velocity = Vector2(1,0) * dash_velocity
 
 func on_staff_animation_finished() -> void:
 	staff_sprite.play("idle")
@@ -90,14 +98,17 @@ func on_spell_cast() -> void:
 
 func on_animation_finished(anim_name) -> void:
 	if anim_name == "dash":
-		player_stats.dashing = false
+		dashing = false
+		player_hurtbox.collider.set_deferred("disabled", false)
 
 func on_damage_recieved(_damage) -> void:
 	player_stats.health -= _damage
 
-func on_knockback_direction_calculated(_direction) -> void:
+func on_hit(_direction) -> void:
 	if not hit:
 		player_hurtbox.collider.set_deferred("disabled", true)
 		hit = true
 		velocity = _direction * player_stats.knockback_multiplier
 
+		player_camera.apply_shake()
+		TimeManager.apply_hitstop()

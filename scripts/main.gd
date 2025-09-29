@@ -7,7 +7,6 @@ extends Node2D
 @onready var player_controller: PlayerController = %PlayerController
 @onready var player_character: PlayerCharacter = %PlayerCharacter
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
-@onready var camera: Camera2D = %PlayerCamera
 @onready var fps_label: Label = %FPSLabel
 @onready var level_complete_panel: LevelCompletePanel = %LevelCompletePanel
 
@@ -46,9 +45,6 @@ func _ready():
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
 	player_character.coin_collector.reward_collected.connect(coin_drop_manager.decrement_reward_remaining)
-
-	# Configure Camera
-	active_level.base.damaged.connect(camera.apply_shake)
 
 	# Configure TowerGlobalData
 	TowerGlobalData.reset()

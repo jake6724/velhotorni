@@ -51,11 +51,9 @@ func rotate_staff() -> void:
 		else:
 			player.staff_sprite.z_index = player.character_sprite.z_index + 1
 
-		# # Set staff render order based on move direction
-		# if player.move_direction.y < .5:
-		# 	player.staff_sprite.z_index = player.character_sprite.z_index - 1
-		# elif player.move_direction.y > -.5:
-		# 	player.staff_sprite.z_index = player.character_sprite.z_index + 1
+	# Render staff behind player if moving up in all cases
+	if player.velocity.y < 0:
+		player.staff_sprite.z_index = player.character_sprite.z_index - 1
 
 func flip_sprite() -> void:
 	if aim_input:

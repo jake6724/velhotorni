@@ -57,10 +57,10 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 		var new_spell: Spell = spell_bullet.instantiate()
 		add_child(new_spell)
 		new_spell.global_position = spell_spawn_point.global_position
-		new_spell.z_index = player.z_index + 2 # TODO: Map this to staff likely
+		new_spell.z_index = player.z_index + 2
 		var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
 		new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)))
-		spell_cast.emit() # TODO: pass the type later maybe? 
+		spell_cast.emit()
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
