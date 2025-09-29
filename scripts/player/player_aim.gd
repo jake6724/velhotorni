@@ -15,13 +15,7 @@ const RETICLE_RESET_POSITION_DURATION: float = 3
 ## Higher values will make the reticle move faster
 @export var reset_speed_modifier: float = .65
 
-signal aim_input_updated
-
-var aim_input: Vector2: # Manully set by PlayerCharacter
-	set(value):
-		aim_input = value
-		aim_input_updated.emit(aim_input)
-
+var aim_input: Vector2 # Manually set by PlayerCharacter
 var resetting_reticle: bool = false
 
 func update_aim():

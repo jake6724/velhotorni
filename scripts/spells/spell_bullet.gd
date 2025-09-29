@@ -6,8 +6,6 @@ extends Spell
 
 var data: SpellDataBullet
 
-const SPEED: float = 300
-
 var move_direction: Vector2
 var active: bool = true
 var pierce_count: int = 0
@@ -18,6 +16,7 @@ func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 	area.area_entered.connect(on_area_entered)
 	area.body_entered.connect(on_body_entered)
+	ap.play("move")
 
 func initialize(_data: SpellDataBullet, cast_direction: Vector2) -> void:
 	data = _data
@@ -27,11 +26,11 @@ func initialize(_data: SpellDataBullet, cast_direction: Vector2) -> void:
 	else:
 		move_direction = Vector2(1, 0) # Need to be the direction player is facing? 
 
-	ap.play("move")
+	texture = data.atlas
 
 func move(delta) -> void:
 	if active:
-		global_position += move_direction * SPEED * delta
+		global_position += move_direction * data.speed * delta
 
 	check_max_distance_reached()
 
@@ -41,7 +40,7 @@ func _physics_process(delta):
 ## Hit enemy
 func on_area_entered(enemy: Enemy) -> void:
 	if active:
-		enemy.take_damage(10, Constants.Element.FIRE)
+		deal_damage(enemy)
 		pierce_count += 1
 
 	if pierce_count >= data.pierce:
@@ -58,6 +57,9 @@ func on_animation_finished(anim_name) -> void:
 		queue_free()
 
 func check_max_distance_reached() -> void:
-	if abs(global_position.distance_to(original_position)) > data.max_distance:
+	if active and abs(global_position.distance_to(original_position)) > data.max_distance:
 		active = false
 		ap.play("hit")
+
+func deal_damage(enemy: Enemy) -> void:
+	enemy.take_damage(data.damage, data.element)

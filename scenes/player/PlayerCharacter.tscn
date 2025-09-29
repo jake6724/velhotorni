@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=57 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://cchrqludhwhnh" path="res://scripts/player/player_stats.gd" id="11_slbhc"]
 [ext_resource type="Script" uid="uid://6kagsif3xfkf" path="res://scripts/player/player_hurtbox.gd" id="12_gsbha"]
 [ext_resource type="Script" uid="uid://ckfb2xehi2wqu" path="res://scripts/player/player_camera.gd" id="13_bnayp"]
+[ext_resource type="Script" uid="uid://ctk0c5nv8o7mf" path="res://scripts/player/player_audio.gd" id="14_kkcsf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_laqyv"]
 atlas = ExtResource("3_j4yks")
@@ -718,7 +719,7 @@ autoplay = "idle"
 offset = Vector2(4, 0)
 
 [node name="SpellSpawnPoint" type="Node2D" parent="StaffSprite"]
-position = Vector2(16, 0)
+position = Vector2(13, 0)
 
 [node name="SpellSpawner" type="Node" parent="." node_paths=PackedStringArray("spell_spawn_point")]
 script = ExtResource("6_g7j5r")
@@ -781,3 +782,8 @@ script = ExtResource("13_bnayp")
 power = 5.0
 decay = 20.0
 metadata/_custom_type_script = "uid://ckfb2xehi2wqu"
+
+[node name="PlayerAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("14_kkcsf")
+metadata/_custom_type_script = "uid://ctk0c5nv8o7mf"

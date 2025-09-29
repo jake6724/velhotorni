@@ -35,10 +35,3 @@ func _process(delta):
 
 func get_random_offset() -> Vector2:
 	return Vector2(rng.randf_range(-curr_power, curr_power), rng.randf_range(-curr_power, curr_power))
-
-# func on_aim_input_updated(aim_input) -> void:
-# 	print("TEST")
-# 	var tween = get_tree().create_tween()
-# 	tween.tween_property(self, "global_position", aim_input * aim_follow_multiplier, .1)
-
-# func follow_aim() -> void:

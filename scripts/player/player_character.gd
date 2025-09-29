@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var player_stats: PlayerCharacterStats = $PlayerCharacterStats
 @onready var player_hurtbox: Area2D = $PlayerHurtbox
 @onready var player_camera: PlayerCamera = %PlayerCamera
+@onready var player_audio: PlayerAudio = %PlayerAudio
 
 # # State Machines
 # @onready var player_movement_state_machine: PlayerStateMachineMovement = %PlayerMovementStateMachine
@@ -35,6 +36,7 @@ var hit: bool = false
 func _ready():
 	player_input.spell_input_pressed.connect(on_spell_input_pressed)
 	player_input.dash_input_pressed.connect(on_dash_input_pressed)
+	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
 
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
 	staff_sprite.animation_finished.connect(on_staff_animation_finished)
@@ -42,9 +44,6 @@ func _ready():
 
 	player_hurtbox.damage_recieved.connect(on_damage_recieved)
 	player_hurtbox.hit.connect(on_hit)
-
-	# # Configure PlayerCamera
-	# player_aim.aim_input_updated.connect(player_camera.on_aim_input_updated)
 
 func _physics_process(delta): # This can go in a state eventually
 	aim_input = player_input.get_aim_input()
@@ -57,6 +56,7 @@ func _physics_process(delta): # This can go in a state eventually
 				lock_move_input()
 			velocity = move_input.normalized() * player_stats.speed
 			player_animation.update_animation(delta)
+
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, delta*300)
 		if velocity == Vector2.ZERO:
@@ -79,8 +79,7 @@ func lock_move_input() -> void:
 
 func on_spell_input_pressed() -> void: # Use a func ref for this
 	player_spell_spawner.spawn_spell(player_aim.aim_input)
-	player_camera.apply_shake(.1)
-
+	
 func on_dash_input_pressed() -> void:
 	if not dashing:
 		dashing = true
@@ -94,6 +93,9 @@ func on_dash_input_pressed() -> void:
 			velocity = player_aim.aim_input.round().normalized() * dash_velocity
 		else:
 			velocity = Vector2(1,0) * dash_velocity
+
+func on_switch_selection_pressed(_switch_direction) -> void:
+	player_spell_spawner.switch_spell(_switch_direction)
 
 func on_staff_animation_finished() -> void:
 	staff_sprite.play("idle")

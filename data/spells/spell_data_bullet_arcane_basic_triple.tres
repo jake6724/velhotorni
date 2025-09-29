@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="SpellDataBullet" load_steps=4 format=3 uid="uid://b50w7syjdvdrf"]
+
+[ext_resource type="Texture2D" uid="uid://bru0vasbogas4" path="res://assets/art/atlases/bullet/atl_bullet_arcane.png" id="1_xb1lc"]
+[ext_resource type="Script" uid="uid://r20hlvy6xofu" path="res://scripts/spells/data/spell_data_bullet.gd" id="2_74xtx"]
+[ext_resource type="AudioStream" uid="uid://bohv8s7q5qk05" path="res://assets/audio/sfx/player/spells/player_basic_arcane.ogg" id="3_fwiyq"]
+
+[resource]
+script = ExtResource("2_74xtx")
+damage = 10.0
+speed = 300.0
+num_bullets = 3
+cooldown = 0.2
+angle_seperation = 15.0
+pierce = 1
+max_distance = 60.0
+spread = 1.0
+atlas = ExtResource("1_xb1lc")
+sfx = ExtResource("3_fwiyq")
+metadata/_custom_type_script = "uid://r20hlvy6xofu"

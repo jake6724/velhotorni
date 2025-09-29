@@ -26,7 +26,6 @@ var sfxs: Dictionary[String, AudioStreamOggVorbis] = {
 	"water_click": preload("res://assets/audio/sfx/Water_Click.ogg"),
 	"base_explosion": preload("res://assets/audio/sfx/Tower_Explosion.ogg"),
 	"victory": preload("res://assets/audio/sfx/Victory_8bit.ogg"),
-
 	"coin_collect": preload("res://assets/audio/sfx/coins/coin_collect.ogg")
 }
 

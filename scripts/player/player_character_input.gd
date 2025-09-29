@@ -6,6 +6,7 @@ var aim_input: Vector2
 
 signal spell_input_pressed
 signal dash_input_pressed
+signal switch_selection_pressed
 
 ## Returns raw input data, not normalized
 func get_movement_input() -> Vector2:
@@ -24,3 +25,9 @@ func _process(_delta):
 func _input(_event):
 	if Input.is_action_just_pressed("dash"):
 		dash_input_pressed.emit()
+
+	if Input.is_action_just_pressed("switch_selection_right"):
+		switch_selection_pressed.emit(1)
+
+	if Input.is_action_just_pressed("switch_selection_left"):
+		switch_selection_pressed.emit(-1)
