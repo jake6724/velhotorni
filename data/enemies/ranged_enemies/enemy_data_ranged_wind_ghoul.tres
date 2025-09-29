@@ -2,19 +2,19 @@
 
 [ext_resource type="Texture2D" uid="uid://c8noara2guef1" path="res://assets/art/atlases/enemy/atl_enemy_wind_ghoul.png" id="1_1lh46"]
 [ext_resource type="Texture2D" uid="uid://c44ayfq1wslwa" path="res://assets/art/atlases/bullet/atl_bullet_wind.png" id="1_rb5lu"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_y1mr3"]
+[ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="2_rb5lu"]
 [ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="3_joan4"]
-[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="4_joan4"]
-[ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="5_im2ag"]
 
 [resource]
-script = ExtResource("5_im2ag")
+script = ExtResource("2_rb5lu")
 attack_cooldown = 3.0
 burst_cooldown = 0.0
 num_bursts = 1
 num_bullets_per_burst = 5
 angle_increment = 15.0
 bullet_damage = 0.0
-bullet_speed = 150.0
+bullet_speed = 100.0
 bullet_max_distance = 150.0
 bullet_follow_on_hit = false
 bullet_atlas = ExtResource("1_rb5lu")
@@ -29,7 +29,7 @@ drop_chance_base = 1.0
 atlas = ExtResource("1_1lh46")
 show_light = false
 explosion_sfx = ExtResource("3_joan4")
-hex_data_list = Array[ExtResource("4_joan4")]([])
+hex_data_list = Array[ExtResource("1_y1mr3")]([])
 knockback_multiplier = 1.5
 enemy_name = ""
 enemy_description = ""

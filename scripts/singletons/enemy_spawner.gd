@@ -167,7 +167,7 @@ func remove_all_enemies() -> void:
 
 func sort_path_enemies_z_index_by_progress() -> void:
 	var offset: int = active_path_enemies.size()
-	if active_path_enemies.size():
+	if active_path_enemies.size() > 1:
 		active_path_enemies.sort_custom(compare_by_progress_ratio)
 		for enemy: Enemy in active_path_enemies:
 			if enemy: # Fix for a common error that has been difficult to root cause: Invalid access to property or key 'sprite' on a base object of type 'previously freed'.

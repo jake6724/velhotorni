@@ -57,6 +57,7 @@ func spawn_all_bullets(player_pos: Vector2) -> void:
 		if i % 2 == 1:
 			angle_increment += data.angle_increment
 		angle_sign = -angle_sign
+		# angle_increment += data.angle_increment
 
 func spawn_enemy_bullet(direction: Vector2, spawn_pos) -> void:
 	var new_enemy_bullet: EnemyBullet = enemy_bullet_scene.instantiate()

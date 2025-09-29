@@ -683,7 +683,7 @@ states/dash/position = Vector2(517, 9.51851)
 states/hit/node = SubResource("AnimationNodeAnimation_gsbha")
 states/hit/position = Vector2(709.703, 159.593)
 transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_ljh2g"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_g7j5r"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_v81jw"), "Walk", "dash", SubResource("AnimationNodeStateMachineTransition_slbhc"), "dash", "Walk", SubResource("AnimationNodeStateMachineTransition_gsbha"), "Idle", "dash", SubResource("AnimationNodeStateMachineTransition_bnayp"), "dash", "Idle", SubResource("AnimationNodeStateMachineTransition_kkcsf"), "Walk", "hit", SubResource("AnimationNodeStateMachineTransition_adj0b"), "Idle", "hit", SubResource("AnimationNodeStateMachineTransition_akj2q"), "hit", "Walk", SubResource("AnimationNodeStateMachineTransition_kuao7"), "hit", "Idle", SubResource("AnimationNodeStateMachineTransition_7q84o")]
-graph_offset = Vector2(73, -24)
+graph_offset = Vector2(158, -69)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ljh2g"]
 radius = 4.0
