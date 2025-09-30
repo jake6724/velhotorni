@@ -143,8 +143,8 @@ script = ExtResource("1_2nkaa")
 metadata/_custom_type_script = "uid://d1riu480srtfg"
 
 [node name="CollisionArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 139264
+collision_layer = 524288
+collision_mask = 1187840
 
 [node name="Collider" type="CollisionShape2D" parent="CollisionArea"]
 shape = SubResource("CircleShape2D_qe4hi")

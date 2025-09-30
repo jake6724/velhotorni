@@ -1128,6 +1128,7 @@ initial_gold = 75
 waves = Array[ExtResource("2_3ew8m")]([SubResource("Resource_yalw7"), SubResource("Resource_3ew8m"), SubResource("Resource_u6qoj")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+visible = false
 z_index = -1
 texture_filter = 1
 scale = Vector2(1, 0.99903)
@@ -1143,6 +1144,7 @@ tile_set = SubResource("TileSet_6ufsd")
 position = Vector2(488, 96)
 
 [node name="WeatherScroll" type="Sprite2D" parent="."]
+visible = false
 z_index = -1
 texture_filter = 1
 texture_repeat = 2
@@ -1162,6 +1164,7 @@ curve = SubResource("Curve2D_k1xcf")
 curve = SubResource("Curve2D_3frq3")
 
 [node name="HeatHaze" type="CPUParticles2D" parent="."]
+visible = false
 z_index = 3
 material = SubResource("ShaderMaterial_ssuxm")
 position = Vector2(273.625, 176.625)
@@ -1175,3 +1178,5 @@ spread = 180.0
 gravity = Vector2(0, -200)
 scale_amount_min = 0.5
 scale_amount_curve = SubResource("Curve_ivb0d")
+
+[node name="Node2D" type="Node2D" parent="."]

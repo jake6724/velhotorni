@@ -38,7 +38,7 @@ func explode() -> void:
 	if active:
 		active = false
 		texture = data.explosion_atlas
-		scale *= 1.5 # TODO: Temp scale up explosion size
+		scale *= 1.3 # TODO: Temp scale up explosion size
 		aoe_collider.set_deferred("disabled", false)
 		ap.play("aoe_hit")
 

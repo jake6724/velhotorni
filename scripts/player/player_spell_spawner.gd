@@ -9,27 +9,32 @@ var spell_func: Callable = Callable(parent_spawn_bullet_spell)
 var can_attack: bool = true
 var attack_timer: Timer = Timer.new()
 
-var spell_scenes: Dictionary[Spell.Type, PackedScene] = {
-	Spell.Type.BULLET: preload("res://scenes/Spells/SpellBullet.tscn"), 
-	Spell.Type.BULLET_AOE: preload("res://scenes/Spells/SpellBulletAOE.tscn"),
+var spell_scenes: Dictionary[SpellData.Type, PackedScene] = {
+	SpellData.Type.BULLET: preload("res://scenes/Spells/SpellBullet.tscn"), 
+	SpellData.Type.BULLET_AOE: preload("res://scenes/Spells/SpellBulletAOE.tscn"),
+	SpellData.Type.MELEE: preload("res://scenes/Spells/SpellMelee.tscn")
 }
 
 var spell_data: Dictionary[String, SpellData] ={
 	"BasicArcane": preload("res://data/spells/spell_data_bullet_arcane_basic.tres"),
 	"BasicArcaneTriple": preload("res://data/spells/spell_data_bullet_arcane_basic_triple.tres"),
 	"BasicArcaneLongshot": preload("res://data/spells/spell_data_bullet_arcane_basic_longshot.tres"),
-	"FireFireball": preload("res://data/spells/fire/spell_data_bullet_aoe_fireball.tres")
+	"FireFireball": preload("res://data/spells/fire/spell_data_bullet_aoe_fireball.tres"),
+	"WaterIceSword": preload("res://data/spells/water/spell_data_melee_water_ice_sword.tres"),
 }
 
 var curr_spell_data: SpellData
 var curr_spell_index: int = 0
 
 # All spells that are available in the current level
-var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["BasicArcaneTriple"], spell_data["BasicArcaneLongshot"], spell_data["FireFireball"]]
+# var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["BasicArcaneTriple"], spell_data["BasicArcaneLongshot"], spell_data["FireFireball"]]
+var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["WaterIceSword"]]
+
 
 var spread_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 signal spell_cast
+signal staff_switched
 
 func _ready():
 	attack_timer.autostart = false
@@ -38,23 +43,38 @@ func _ready():
 	add_child(attack_timer)
 
 	curr_spell_data = selected_spells[curr_spell_index]
+	spell_func = get_spell_func(curr_spell_data.type)
 
 ## Wrapper for the `spell_func` Callable. Used as an easy interface for other scripts to call.
 func spawn_spell(player_aim_direction: Vector2) -> void:
 	spell_func.call(player_aim_direction)
 
 func switch_spell(_switch_direction: int) -> void:
-
+	# Get next available spell data, based on switch iput 
 	var new_index = curr_spell_index + _switch_direction 
-
-	if new_index < 0: # Roll-over to last spell
+	if new_index < 0:
 		new_index = (selected_spells.size() - 1) 
-	elif new_index > (selected_spells.size() - 1): # Go to first spell
+	elif new_index > (selected_spells.size() - 1):
 		new_index = 0 
 	
 	curr_spell_index = new_index
-	print(curr_spell_index)
 	curr_spell_data = selected_spells[curr_spell_index]
+
+	# Update spell_func()
+	spell_func = get_spell_func(curr_spell_data.type)
+
+	# Update staff
+	staff_switched.emit(curr_spell_data.staff_type)
+
+func get_spell_func(_spell_type: SpellData.Type) -> Callable:
+	match _spell_type:
+		SpellData.Type.BULLET: return parent_spawn_bullet_spell
+		SpellData.Type.BULLET_AOE: return parent_spawn_bullet_spell
+		SpellData.Type.MELEE: return spawn_melee_spell
+		_: 
+			push_error("Unknown spell data type")
+			return parent_spawn_bullet_spell
+
 
 ## Spawn all bullets defined in the SpellDataBullet resource
 func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
@@ -94,9 +114,28 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 		new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)))
 		spell_cast.emit()
 
-# func apply_spell_kick(kick_amount: float) -> void:
-# 	print("applying kick")
-# 	player.velocity += -player.aim_input * kick_amount
+func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
+	if can_attack:
+		can_attack = false
+
+		var new_spell_data: SpellDataMelee = curr_spell_data
+		var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
+
+		var new_spell: Spell = new_spell_scene.instantiate()
+		new_spell.initialize(new_spell_data, spell_spawn_point)
+		new_spell.global_position = spell_spawn_point.global_position
+		new_spell.rotation = _player_aim_direction.angle()
+		new_spell.z_index = player.z_index + 2
+		add_child(new_spell)
+		spell_cast.emit()
+	
+		attack_timer.start(new_spell_data.cooldown)
+		player.player_camera.apply_shake(.3)
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
+	
+
+# func apply_spell_kick(kick_amount: float) -> void:
+# 	print("applying kick")
+# 	player.velocity += -player.aim_input * kick_amount

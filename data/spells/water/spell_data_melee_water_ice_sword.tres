@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SpellDataMelee" load_steps=3 format=3 uid="uid://bcov2rckhliwp"]
+
+[ext_resource type="Texture2D" uid="uid://doed56qoyb4ta" path="res://assets/art/sprites/spr_fx_slash.png" id="1_e4yop"]
+[ext_resource type="Script" uid="uid://dcu7dihypm0k3" path="res://scripts/spells/data/spell_data_melee.gd" id="1_xb82k"]
+
+[resource]
+script = ExtResource("1_xb82k")
+element = 2
+damage = 45.0
+cooldown = 0.75
+atlas = ExtResource("1_e4yop")
+type = 2
+staff_type = 1

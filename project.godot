@@ -184,6 +184,8 @@ switch_selection_right={
 2d_physics/layer_16="TerrainPit"
 2d_physics/layer_18="PlayerHurtbox"
 2d_physics/layer_19="FlyingEnemy"
+2d_physics/layer_20="EnemyBullet"
+2d_physics/layer_21="MeleeSpell"
 
 [rendering]
 
