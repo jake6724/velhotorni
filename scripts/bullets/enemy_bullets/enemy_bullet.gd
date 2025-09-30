@@ -46,10 +46,11 @@ func on_body_entered(_intruder) -> void:
 	ap.play("hit")
 
 ## Used to collide with and damage player 
-func on_area_entered(player_hurtbox: PlayerHurtbox) -> void:
+func on_area_entered(intruder: Area2D) -> void:
 	active = false
 	ap.play("hit")
-	player_hurtbox.take_damage(damage, global_position)
+	if intruder is PlayerHurtbox:
+		intruder.take_damage(damage, global_position)
 
 func on_animation_finished(anim_name: String) -> void:
 	if anim_name == "hit":

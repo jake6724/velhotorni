@@ -4,8 +4,6 @@ extends Spell
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var area: Area2D = $Area2D
 
-var data: SpellDataBullet
-
 var move_direction: Vector2
 var active: bool = true
 var pierce_count: int = 0

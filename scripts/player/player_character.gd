@@ -15,13 +15,13 @@ extends CharacterBody2D
 # @onready var player_movement_state_machine: PlayerStateMachineMovement = %PlayerMovementStateMachine
 
 @onready var ap: AnimationPlayer = $AnimationPlayer
+@onready var staff_ap: AnimationPlayer = $StaffAnimationPlayer
 
 @onready var spell_spawn_point: Node2D = $StaffSprite/SpellSpawnPoint
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
-@onready var staff_sprite: AnimatedSprite2D = $StaffSprite
+@onready var staff_sprite: Sprite2D = $StaffSprite
 @onready var reticle_sprite: AnimatedSprite2D = $ReticleSprite
-
 @onready var coin_collector: CoinCollector = $CoinCollector
 
 var move_input: Vector2
@@ -39,7 +39,9 @@ func _ready():
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
 
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
-	staff_sprite.animation_finished.connect(on_staff_animation_finished)
+	player_spell_spawner.staff_switched.connect(on_staff_switched)
+
+	staff_ap.animation_finished.connect(on_staff_animation_finished)
 	ap.animation_finished.connect(on_animation_finished)
 
 	player_hurtbox.damage_recieved.connect(on_damage_recieved)
@@ -97,11 +99,25 @@ func on_dash_input_pressed() -> void:
 func on_switch_selection_pressed(_switch_direction) -> void:
 	player_spell_spawner.switch_spell(_switch_direction)
 
-func on_staff_animation_finished() -> void:
-	staff_sprite.play("idle")
+func on_staff_animation_finished(_anim_name) -> void:
+	staff_ap.play("idle")
 	
 func on_spell_cast() -> void: 
-	staff_sprite.play("fire")
+	staff_ap.play("fire")
+
+func on_staff_switched(_spell_type: SpellData.Type) -> void:
+	match _spell_type:
+		SpellData.StaffType.ARCANE: 
+			staff_sprite.texture.region = Rect2(0,0,217,15)
+			staff_sprite.rotation_degrees = 0
+			staff_sprite.offset += Vector2(4, 0)
+
+		SpellData.StaffType.WATER_SWORD: 
+			staff_sprite.texture.region = Rect2(0,15,217,15)
+			# staff_sprite.rotation_degrees = -90
+			# staff_sprite.offset = Vector2(8, .5)
+
+	staff_ap.play("idle")
 
 func on_animation_finished(anim_name) -> void:
 	if anim_name == "dash":

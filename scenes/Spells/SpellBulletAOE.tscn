@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://1rdl0eiscf7d"]
+[gd_scene load_steps=9 format=3 uid="uid://1rdl0eiscf7d"]
 
-[ext_resource type="Texture2D" uid="uid://cn4jh65ii5hu7" path="res://assets/art/sprites/spr_fx_explosion_big.png" id="1_p5rjy"]
 [ext_resource type="Script" uid="uid://iy0t84qkqr0q" path="res://scripts/spells/spell_bullet_aoe.gd" id="1_yq231"]
 
 [sub_resource type="Animation" id="Animation_p5rjy"]
@@ -182,7 +181,6 @@ radius = 2.0
 radius = 20.0
 
 [node name="SpellBulletAoe" type="Sprite2D"]
-texture = ExtResource("1_p5rjy")
 hframes = 4
 vframes = 5
 script = ExtResource("1_yq231")
