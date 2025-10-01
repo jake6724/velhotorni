@@ -125,6 +125,7 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 
 func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 	if can_attack:
+		print(_player_aim_direction)
 		print("Spawn melee spell")
 		can_attack = false
 
@@ -133,7 +134,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 		var new_spell: Spell = new_spell_scene.instantiate()
 
 		new_spell.initialize(new_spell_data, player)
-		new_spell.global_position = player.global_position #* (_player_aim_direction * 5)
+		new_spell.global_position = player.global_position + (_player_aim_direction * 16)
 		new_spell.rotation = _player_aim_direction.angle()
 
 		new_spell.z_index = player.z_index + 2
