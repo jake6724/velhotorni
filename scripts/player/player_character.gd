@@ -74,7 +74,6 @@ func update_player_aim(delta) -> void:
 			player_aim.aim_input = aim_input						
 	else:
 		player_aim.reset_reticle_position(delta)
-
 	player_aim.update_aim()
 
 ## Rounds move_input to whole numbers. Makes player move in only 8 directions. Creates a deadzone from 0 to .5, since all values below .5 round down to 0

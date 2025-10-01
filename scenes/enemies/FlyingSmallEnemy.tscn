@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://c50xuc0oaexbj"]
+[gd_scene load_steps=124 format=3 uid="uid://c50xuc0oaexbj"]
 
 [ext_resource type="Script" uid="uid://bsna5j67twb5p" path="res://scripts/enemies/flying_enemy.gd" id="1_dbysp"]
 [ext_resource type="Texture2D" uid="uid://mefdddf0j5ji" path="res://assets/art/atlases/enemy/atl_enemy_wind_imp.png" id="2_dbysp"]
@@ -899,9 +899,6 @@ resource_local_to_scene = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_s7n0w"]
 radius = 32.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dbysp"]
-radius = 8.0
-
 [node name="FlyingSmallEnemy" type="Area2D"]
 collision_layer = 262144
 collision_mask = 262144
@@ -1068,12 +1065,3 @@ script = ExtResource("13_ks2os")
 [node name="EnemyMovement" type="Node2D" parent="."]
 script = ExtResource("14_ryuyi")
 metadata/_custom_type_script = "uid://di3c54ykd28fx"
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-collision_layer = 16
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(8, 8)
-shape = SubResource("CircleShape2D_dbysp")
-debug_color = Color(0.926583, 3.7927e-05, 0.671854, 0.42)

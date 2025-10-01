@@ -49,10 +49,10 @@ func _ready():
 
 ## Wrapper for the `spell_func` Callable. Used as an easy interface for other scripts to call.
 func spawn_spell(player_aim_direction: Vector2) -> void:
-	spell_func.call(player_aim_direction)
+	spell_func.call(player_aim_direction.normalized())
 
 func switch_spell(_switch_direction: int) -> void:
-	# Get next available spell data, based on switch iput 
+	# Get next available spell data, based on switch input 
 	var new_index = curr_spell_index + _switch_direction 
 	if new_index < 0:
 		new_index = (selected_spells.size() - 1) 
