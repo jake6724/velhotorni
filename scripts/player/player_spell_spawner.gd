@@ -133,7 +133,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 		var new_spell: Spell = new_spell_scene.instantiate()
 
 		new_spell.initialize(new_spell_data, player)
-		new_spell.global_position = player.global_position * (_player_aim_direction * 5)
+		new_spell.global_position = player.global_position #* (_player_aim_direction * 5)
 		new_spell.rotation = _player_aim_direction.angle()
 
 		new_spell.z_index = player.z_index + 2
@@ -142,12 +142,12 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 		melee_spell_cast.emit()
 		attack_timer.start(new_spell_data.cooldown)
 
-		#player.player_camera.apply_shake(.3)
+		player.player_camera.apply_shake(.3)
+		player.jump_forward()
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
 	
-
 # func apply_spell_kick(kick_amount: float) -> void:
 # 	print("applying kick")
 # 	player.velocity += -player.aim_input * kick_amount

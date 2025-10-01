@@ -137,3 +137,6 @@ func on_hit(_direction) -> void:
 
 		player_camera.apply_shake(1)
 		TimeManager.apply_hitstop()
+
+func jump_forward() -> void:
+	pass

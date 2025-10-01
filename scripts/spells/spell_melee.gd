@@ -15,9 +15,10 @@ func _ready():
 func initialize(_data: SpellDataMelee, _spell_spawn_point: Node2D) -> void:
 	data = _data
 	spell_spawn_point = _spell_spawn_point
-
-func _physics_process(_delta):
 	global_position = spell_spawn_point.global_position
+
+# func _physics_process(_delta):
+	# global_position = spell_spawn_point.global_position
 
 func on_enemy_hit(enemy: Enemy) -> void:
 	deal_damage(enemy)
