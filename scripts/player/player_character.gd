@@ -47,6 +47,8 @@ func _ready():
 	player_hurtbox.damage_recieved.connect(on_damage_recieved)
 	player_hurtbox.hit.connect(on_hit)
 
+	player_spell_spawner.melee_spell_cast.connect(player_aim.swing_staff)
+
 func _physics_process(delta): # This can go in a state eventually
 	aim_input = player_input.get_aim_input()
 	update_player_aim(delta)
@@ -109,13 +111,13 @@ func on_staff_switched(_spell_type: SpellData.Type) -> void:
 	match _spell_type:
 		SpellData.StaffType.ARCANE: 
 			staff_sprite.texture.region = Rect2(0,0,217,15)
-			staff_sprite.rotation_degrees = 0
-			staff_sprite.offset += Vector2(4, 0)
+			player_aim.staff_rotation_offset_degrees = 0
+			staff_sprite.offset = Vector2(4, -1)
 
 		SpellData.StaffType.WATER_SWORD: 
 			staff_sprite.texture.region = Rect2(0,15,217,15)
-			# staff_sprite.rotation_degrees = -90
-			# staff_sprite.offset = Vector2(8, .5)
+			player_aim.staff_rotation_offset_degrees = -120
+			staff_sprite.offset = Vector2(8, .5)
 
 	staff_ap.play("idle")
 

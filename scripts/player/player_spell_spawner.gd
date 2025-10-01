@@ -25,9 +25,10 @@ var spell_data: Dictionary[String, SpellData] ={
 
 var curr_spell_data: SpellData
 var curr_spell_index: int = 0
+var curr_spell_is_melee: bool = false
 
 # All spells that are available in the current level
-# var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["BasicArcaneTriple"], spell_data["BasicArcaneLongshot"], spell_data["FireFireball"]]
+#var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["BasicArcaneTriple"], spell_data["BasicArcaneLongshot"], spell_data["FireFireball"]]
 var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["WaterIceSword"]]
 
 
@@ -35,6 +36,7 @@ var spread_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 signal spell_cast
 signal staff_switched
+signal melee_spell_cast
 
 func _ready():
 	attack_timer.autostart = false
@@ -68,11 +70,18 @@ func switch_spell(_switch_direction: int) -> void:
 
 func get_spell_func(_spell_type: SpellData.Type) -> Callable:
 	match _spell_type:
-		SpellData.Type.BULLET: return parent_spawn_bullet_spell
-		SpellData.Type.BULLET_AOE: return parent_spawn_bullet_spell
-		SpellData.Type.MELEE: return spawn_melee_spell
+		SpellData.Type.BULLET: 
+			curr_spell_is_melee = false
+			return parent_spawn_bullet_spell
+		SpellData.Type.BULLET_AOE: 
+			curr_spell_is_melee = false
+			return parent_spawn_bullet_spell
+		SpellData.Type.MELEE: 
+			curr_spell_is_melee = true
+			return spawn_melee_spell
 		_: 
-			push_error("Unknown spell data type")
+			push_error("Unknown spell type")
+			curr_spell_is_melee = false
 			return parent_spawn_bullet_spell
 
 
@@ -116,21 +125,24 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 
 func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 	if can_attack:
+		print("Spawn melee spell")
 		can_attack = false
 
 		var new_spell_data: SpellDataMelee = curr_spell_data
 		var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
-
 		var new_spell: Spell = new_spell_scene.instantiate()
-		new_spell.initialize(new_spell_data, spell_spawn_point)
-		new_spell.global_position = spell_spawn_point.global_position
+
+		new_spell.initialize(new_spell_data, player)
+		new_spell.global_position = player.global_position * (_player_aim_direction * 5)
 		new_spell.rotation = _player_aim_direction.angle()
+
 		new_spell.z_index = player.z_index + 2
 		add_child(new_spell)
 		spell_cast.emit()
-	
+		melee_spell_cast.emit()
 		attack_timer.start(new_spell_data.cooldown)
-		player.player_camera.apply_shake(.3)
+
+		#player.player_camera.apply_shake(.3)
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true

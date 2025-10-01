@@ -15,4 +15,3 @@ void fragment() {
 		COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - disp);
 	}
 }
-

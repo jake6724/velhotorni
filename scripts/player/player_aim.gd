@@ -11,12 +11,20 @@ const RETICLE_MIN_MAGNITUDE: float = .3
 const RETICLE_RESET_TIMER_DELAY: float = .25
 const RETICLE_RESET_POSITION_DURATION: float = 3
 
+const SWING_DEGREE_INCREMENT: float = 180.0
+const SWING_DURATION: float = .01
+
 ## Controls how quickly the reticles moves back toward the player when no input is given
 ## Higher values will make the reticle move faster
 @export var reset_speed_modifier: float = .65
 
 var aim_input: Vector2 # Manually set by PlayerCharacter
 var resetting_reticle: bool = false
+
+var staff_rotation_offset_degrees: float = 0.0
+var is_swinging: bool = false
+
+var test_sign: float = 1.0
 
 func update_aim():
 	update_reticle()
@@ -39,9 +47,13 @@ func reset_reticle_position(delta) -> void:
 	aim_input -= aim_input.normalized() * delta * reset_speed_modifier
 	
 func rotate_staff() -> void:
-	if aim_input:
+	if aim_input and not is_swinging:
 		# Rotate staff to point at aim direction
-		player.staff_sprite.rotation = aim_input.angle()
+
+		# Melee version
+		player.staff_sprite.rotation = aim_input.angle() + deg_to_rad(staff_rotation_offset_degrees) * test_sign
+
+		#player.staff_sprite.rotation = aim_input.angle() + deg_to_rad(staff_rotation_offset_degrees) # TODO: Could specify in rads to start
 
 		# Set staff render order based on aim direction and horizontal axis
 		if aim_input.normalized().y < 0:
@@ -52,6 +64,12 @@ func rotate_staff() -> void:
 	# Render staff behind player if moving up in all cases
 	if player.velocity.y < 0:
 		player.staff_sprite.z_index = player.character_sprite.z_index - 1
+
+func swing_staff() -> void: # TODO: Maybe this should go in another component like animtions
+	test_sign = -test_sign
+	var tween: Tween = get_tree().create_tween()
+	var target = player.staff_sprite.rotation_degrees + SWING_DEGREE_INCREMENT
+	tween.tween_property(player.staff_sprite, "rotation_degrees", target, .01)
 
 func flip_sprite() -> void:
 	if aim_input:
