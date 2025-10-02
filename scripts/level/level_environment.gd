@@ -9,8 +9,8 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 @onready var level_mask_layer: TileMapLayer = $LevelMaskLayer
 @onready var base: Base = $Base
 @onready var weather_scroll = $WeatherScroll
-
 @onready var path_parent: Node = $PathParent
+@onready var player_spawn_point = %PlayerSpawnPoint
 
 # Export vars
 @export var level_name: String

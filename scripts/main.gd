@@ -9,6 +9,7 @@ extends Node2D
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
 @onready var fps_label: Label = %FPSLabel
 @onready var level_complete_panel: LevelCompletePanel = %LevelCompletePanel
+var player_spawn_point: Node2D
 
 var active_level: LevelEnvironment
 var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # passed to PauseMenu
@@ -35,12 +36,15 @@ func _ready():
 
 	# Connect to WaveManager
 	WaveManager.wave_failed.connect(on_wave_failed)
-
 	# Configure PlayerController
 	player_controller.setup()
 	player_controller.bestiary_pressed.connect(pause_game_with_bestiary)
 	coin_drop_manager.reward_completed.connect(player_controller.on_reward_complete)
 	player_controller.coin_collector = player_character.coin_collector
+
+	player_spawn_point = active_level.player_spawn_point
+	player_character.spawn_point = player_spawn_point.global_position
+	player_character.global_position = player_character.spawn_point
 
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
@@ -58,6 +62,7 @@ func _ready():
 	bestiary_menu.parent_scene = self
 	bestiary_menu.add_entries()
 	EnemySpawner.enemy_spawned_with_ref.connect(bestiary_menu.on_enemy_spawned)
+
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change

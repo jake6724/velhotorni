@@ -25,6 +25,13 @@ extends CharacterBody2D
 @onready var reticle_sprite: AnimatedSprite2D = $ReticleSprite
 @onready var coin_collector: CoinCollector = $CoinCollector
 
+var staff_texture: CompressedTexture2D = preload("res://assets/art/atlases/atl_player_mage_staff.png")
+
+var alive: bool = true
+var respawn_time: float = 1.0
+var respawn_timer: Timer = Timer.new()
+var spawn_point: Vector2 = Vector2.ZERO # Set manually by main
+
 var move_input: Vector2
 var aim_input: Vector2
 var prev_aim_input: Vector2
@@ -34,6 +41,7 @@ var dash_velocity: float = 400.0
 
 var falling: bool = false
 
+var can_fire: bool = true
 var hit: bool = false
 
 var DIRECTIONS = [
@@ -65,26 +73,32 @@ func _ready():
 	player_hurtbox.hit.connect(on_hit)
 	player_hurtbox.pit_entered.connect(on_pit_entered)
 
+	respawn_timer.autostart = false
+	respawn_timer.one_shot = true
+	respawn_timer.timeout.connect(respawn)
+	add_child(respawn_timer)
+
 	player_spell_spawner.melee_spell_cast.connect(player_aim.swing_staff)
 
 func _physics_process(delta): # This can go in a state eventually
-	aim_input = player_input.get_aim_input()
-	update_player_aim(delta)
-	if not hit:
-		if not dashing:	
-			move_input = player_input.get_movement_input()
-			if move_input:
-				move_input = get_closest_cardinal_direction_normalized(move_input)
-			velocity = move_input.normalized() * player_stats.speed
-			player_animation.update_animation(delta)
+	if alive:
+		aim_input = player_input.get_aim_input()
+		update_player_aim(delta)
+		if not hit:
+			if not dashing:	
+				move_input = player_input.get_movement_input()
+				if move_input:
+					move_input = get_closest_cardinal_direction_normalized(move_input)
+				velocity = move_input.normalized() * player_stats.speed
+				player_animation.update_animation(delta)
 
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, delta*300)
-		if velocity == Vector2.ZERO:
-			hit = false
-			player_hurtbox.collider.set_deferred("disabled", false)
-	
-	move_and_slide()
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, delta*300)
+			if velocity == Vector2.ZERO:
+				hit = false
+				player_hurtbox.collider.set_deferred("disabled", false)
+		
+		move_and_slide()
 
 func update_player_aim(delta) -> void:
 	if aim_input:
@@ -94,7 +108,8 @@ func update_player_aim(delta) -> void:
 	player_aim.update_aim()
 
 func on_spell_input_pressed() -> void: # Use a func ref for this
-	player_spell_spawner.spawn_spell(player_aim.aim_input)
+	if alive and can_fire:
+		player_spell_spawner.spawn_spell(player_aim.aim_input)
 	
 func on_dash_input_pressed() -> void:
 	if not dashing:
@@ -121,6 +136,13 @@ func on_switch_selection_pressed(_switch_direction) -> void:
 	player_spell_spawner.switch_spell(_switch_direction)
 
 func on_staff_switched(_spell_type: SpellData.Type) -> void:
+	# The switch animation modifies the atlas and texture, then resets the values. It must 
+	# complete before a normal staff animation plays
+	can_fire = false
+	staff_ap.play("switch")
+	await staff_ap.animation_finished
+	can_fire = true
+
 	match _spell_type:
 		SpellData.StaffType.ARCANE: 
 			staff_sprite.texture.region = Rect2(0,0,217,15)
@@ -132,18 +154,19 @@ func on_staff_switched(_spell_type: SpellData.Type) -> void:
 			staff_sprite.texture.region = Rect2(0,15,217,15)
 			player_aim.staff_rotation_offset_degrees = -120
 			staff_sprite.offset = Vector2(8, .5)
-	staff_ap.play("idle")
 
 func on_animation_finished(anim_name) -> void:
-	print(anim_name)
 	if anim_name == "dash":
 		dashing = false
 		player_hurtbox.collider.set_deferred("disabled", false)
 
 	if anim_name == "fall":
 		falling = false
-		print("test")
 		character_sprite.hide()
+		respawn_timer.start(respawn_time)
+
+	if anim_name == "switch":
+		can_fire = true
 
 func on_damage_recieved(_damage) -> void:
 	player_stats.health -= _damage
@@ -172,6 +195,15 @@ func get_closest_cardinal_direction_normalized(input_vector) -> Vector2:
 	return best_direction
 
 func on_pit_entered() -> void:
+	global_position += move_input.normalized() * 10 # Move the character to be fully over the pit
 	reticle_sprite.hide()
 	staff_sprite.hide()
 	falling = true
+	alive = false
+
+func respawn() -> void:
+	reticle_sprite.show()
+	staff_sprite.show()
+	character_sprite.show()
+	global_position = spawn_point
+	alive = true
