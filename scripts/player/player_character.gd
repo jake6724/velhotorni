@@ -34,6 +34,17 @@ var dash_velocity: float = 400.0
 
 var hit: bool = false
 
+var DIRECTIONS = [
+	Vector2(0, -1),  			  # Up
+	Vector2(1, -1).normalized(),  # Up Right
+	Vector2(1, 0),    			  # Right
+	Vector2(1, 1).normalized(),   # Down Right
+	Vector2(0, 1),    			  # Down
+	Vector2(-1, 1).normalized(),  # Down Left
+	Vector2(-1, 0),   			  # Left
+	Vector2(-1, -1).normalized()  # Up Left
+]
+
 func _ready():
 	player_input.spell_input_pressed.connect(on_spell_input_pressed)
 	player_input.dash_input_pressed.connect(on_dash_input_pressed)
@@ -57,7 +68,7 @@ func _physics_process(delta): # This can go in a state eventually
 		if not dashing:	
 			move_input = player_input.get_movement_input()
 			if move_input:
-				lock_move_input()
+				move_input = get_closest_cardinal_direction_normalized(move_input)
 			velocity = move_input.normalized() * player_stats.speed
 			player_animation.update_animation(delta)
 
@@ -76,10 +87,6 @@ func update_player_aim(delta) -> void:
 		player_aim.reset_reticle_position(delta)
 	player_aim.update_aim()
 
-## Rounds move_input to whole numbers. Makes player move in only 8 directions. Creates a deadzone from 0 to .5, since all values below .5 round down to 0
-func lock_move_input() -> void:
-	move_input = move_input.round()
-
 func on_spell_input_pressed() -> void: # Use a func ref for this
 	player_spell_spawner.spawn_spell(player_aim.aim_input)
 	
@@ -93,7 +100,7 @@ func on_dash_input_pressed() -> void:
 		if move_input:	
 			velocity = move_input.normalized() * dash_velocity
 		elif player_aim.aim_input:
-			velocity = player_aim.aim_input.round().normalized() * dash_velocity
+			velocity = get_closest_cardinal_direction_normalized(player_aim.aim_input) * dash_velocity
 		else:
 			velocity = Vector2(1,0) * dash_velocity
 
@@ -113,8 +120,8 @@ func on_staff_switched(_spell_type: SpellData.Type) -> void:
 		SpellData.StaffType.ARCANE: 
 			staff_sprite.texture.region = Rect2(0,0,217,15)
 			player_aim.staff_rotation_offset_degrees = 0
-			staff_sprite.position = Vector2(0, 5)
-			staff_sprite.offset = Vector2(4, 0.5)
+			staff_sprite.position = Vector2(0, 5) 
+			staff_sprite.offset = Vector2(4, 0.5) # TODO: Broke.
 
 		SpellData.StaffType.WATER_SWORD: 
 			staff_sprite.texture.region = Rect2(0,15,217,15)
@@ -141,3 +148,14 @@ func on_hit(_direction) -> void:
 
 func jump_forward() -> void:
 	pass
+
+func get_closest_cardinal_direction_normalized(input_vector) -> Vector2:
+	var best_direction = DIRECTIONS[0]
+	var best_dot_product = -INF
+
+	for dir in DIRECTIONS:
+		var dot = input_vector.dot(dir)
+		if dot > best_dot_product:
+			best_dot_product = dot
+			best_direction = dir
+	return best_direction

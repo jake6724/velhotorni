@@ -64,8 +64,6 @@ func switch_spell(_switch_direction: int) -> void:
 	curr_spell_index = new_index
 	curr_spell_data = selected_spells[curr_spell_index]
 
-	print(curr_spell_index)
-
 	# Update spell_func()
 	spell_func = get_spell_func(curr_spell_data.type)
 
@@ -145,7 +143,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 		melee_spell_cast.emit()
 		attack_timer.start(new_spell_data.cooldown)
 
-		player.player_camera.apply_shake(.3)
+		player.player_camera.apply_shake(.4)
 		player.jump_forward()
 
 func on_attack_timer_timeout() -> void:
