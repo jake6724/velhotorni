@@ -32,6 +32,8 @@ var prev_aim_input: Vector2
 var dashing: bool = false
 var dash_velocity: float = 400.0
 
+var falling: bool = false
+
 var hit: bool = false
 
 var DIRECTIONS = [
@@ -56,8 +58,12 @@ func _ready():
 	staff_ap.animation_finished.connect(on_staff_animation_finished)
 	ap.animation_finished.connect(on_animation_finished)
 
+	# Connect to AnimationTree
+	player_animation.animation_tree.animation_finished.connect(on_animation_finished)
+
 	player_hurtbox.damage_recieved.connect(on_damage_recieved)
 	player_hurtbox.hit.connect(on_hit)
+	player_hurtbox.pit_entered.connect(on_pit_entered)
 
 	player_spell_spawner.melee_spell_cast.connect(player_aim.swing_staff)
 
@@ -93,7 +99,6 @@ func on_spell_input_pressed() -> void: # Use a func ref for this
 func on_dash_input_pressed() -> void:
 	if not dashing:
 		dashing = true
-		ap.play("dash")
 		player_camera.apply_shake(1)
 		player_hurtbox.collider.set_deferred("disabled", true)
 		
@@ -130,9 +135,15 @@ func on_staff_switched(_spell_type: SpellData.Type) -> void:
 	staff_ap.play("idle")
 
 func on_animation_finished(anim_name) -> void:
+	print(anim_name)
 	if anim_name == "dash":
 		dashing = false
 		player_hurtbox.collider.set_deferred("disabled", false)
+
+	if anim_name == "fall":
+		falling = false
+		print("test")
+		character_sprite.hide()
 
 func on_damage_recieved(_damage) -> void:
 	player_stats.health -= _damage
@@ -159,3 +170,8 @@ func get_closest_cardinal_direction_normalized(input_vector) -> Vector2:
 			best_dot_product = dot
 			best_direction = dir
 	return best_direction
+
+func on_pit_entered() -> void:
+	reticle_sprite.hide()
+	staff_sprite.hide()
+	falling = true

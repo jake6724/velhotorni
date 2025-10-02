@@ -31,10 +31,10 @@ func _ready():
 		if child is Path2D:
 			enemy_paths.append(child)
 
-## Set the `z_index` of each tile based on its `z_index_map_key` custom data value. This value is painted onto
-## the tile in the editor.
-func set_tilemap_z_indexes() -> void:
-	for tile_index: Vector2i in tilemap.get_used_cells():
-		var tile_data: TileData = tilemap.get_cell_tile_data(tile_index)
-		if tile_data:
-			tile_data.z_index = Constants.z_index_map[tile_data.get_custom_data("z_index_map_key")]
+# ## Set the `z_index` of each tile based on its `z_index_map_key` custom data value. This value is painted onto
+# ## the tile in the editor.
+# func set_tilemap_z_indexes() -> void:
+# 	for tile_index: Vector2i in tilemap.get_used_cells():
+# 		var tile_data: TileData = tilemap.get_cell_tile_data(tile_index)
+# 		if tile_data:
+# 			tile_data.z_index = Constants.z_index_map[tile_data.get_custom_data("z_index_map_key")]
