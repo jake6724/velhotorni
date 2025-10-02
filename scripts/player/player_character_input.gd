@@ -22,12 +22,12 @@ func _process(_delta):
 	if Input.is_action_pressed("cast_spell"): # Check every frame since it can be held. _input will only detect the first call
 		spell_input_pressed.emit()
 
-func _input(_event):
+func _input(event):
 	if Input.is_action_just_pressed("dash"):
 		dash_input_pressed.emit()
 
-	if Input.is_action_just_pressed("switch_selection_right"):
+	if event.is_action("switch_selection_right") and event.is_pressed() and not event.is_echo():
 		switch_selection_pressed.emit(1)
 
-	if Input.is_action_just_pressed("switch_selection_left"):
+	if event.is_action("switch_selection_left") and event.is_pressed() and not event.is_echo():
 		switch_selection_pressed.emit(-1)

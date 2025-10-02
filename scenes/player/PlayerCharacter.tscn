@@ -32,7 +32,7 @@ animations = [{
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kkcsf"]
 atlas = ExtResource("3_v81jw")
-region = Rect2(0, 0, 217, 31)
+region = Rect2(0, 0, 217, 15)
 
 [sub_resource type="Animation" id="Animation_akj2q"]
 length = 0.001
@@ -774,19 +774,18 @@ z_index = -2
 sprite_frames = SubResource("SpriteFrames_wp8q1")
 
 [node name="StaffSprite" type="Sprite2D" parent="."]
-position = Vector2(-2, 3)
+position = Vector2(0, 5)
 texture = SubResource("AtlasTexture_kkcsf")
-offset = Vector2(4, 0)
+offset = Vector2(4, 0.5)
 hframes = 8
 region_enabled = true
 region_rect = Rect2(0, 0, 217, 16)
 
-[node name="SpellSpawnPoint" type="Node2D" parent="StaffSprite"]
-position = Vector2(13, 0)
+[node name="SpellSpawnPoint" type="Node2D" parent="."]
 
 [node name="SpellSpawner" type="Node" parent="." node_paths=PackedStringArray("spell_spawn_point")]
 script = ExtResource("6_g7j5r")
-spell_spawn_point = NodePath("../StaffSprite/SpellSpawnPoint")
+spell_spawn_point = NodePath("../SpellSpawnPoint")
 
 [node name="PlayerCharacterInput" type="Node" parent="."]
 script = ExtResource("3_fhwjy")
@@ -824,6 +823,7 @@ script = ExtResource("9_laqyv")
 metadata/_custom_type_script = "uid://b5keun6k5cxfo"
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_ljh2g")
 
@@ -832,6 +832,7 @@ visible = false
 position = Vector2(-6, -7)
 
 [node name="PlayerHurtbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 131072
 collision_mask = 0
 script = ExtResource("12_gsbha")

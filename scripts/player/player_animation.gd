@@ -8,6 +8,9 @@ extends Node2D
 
 var last_facing_direction: Vector2 = Vector2(0, -1)
 
+const SWING_DEGREE_INCREMENT: float = 180.0
+const SWING_DURATION: float = .01
+
 func _ready():
 	animation_tree.active = true
 

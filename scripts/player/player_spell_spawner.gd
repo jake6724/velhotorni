@@ -62,6 +62,8 @@ func switch_spell(_switch_direction: int) -> void:
 	curr_spell_index = new_index
 	curr_spell_data = selected_spells[curr_spell_index]
 
+	print(curr_spell_index)
+
 	# Update spell_func()
 	spell_func = get_spell_func(curr_spell_data.type)
 
@@ -125,8 +127,6 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 
 func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 	if can_attack:
-		print(_player_aim_direction)
-		print("Spawn melee spell")
 		can_attack = false
 
 		var new_spell_data: SpellDataMelee = curr_spell_data

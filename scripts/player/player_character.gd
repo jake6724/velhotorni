@@ -17,7 +17,8 @@ extends CharacterBody2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var staff_ap: AnimationPlayer = $StaffAnimationPlayer
 
-@onready var spell_spawn_point: Node2D = $StaffSprite/SpellSpawnPoint
+# @onready var spell_spawn_point: Node2D = $StaffSprite/SpellSpawnPoint
+@onready var spell_spawn_point: Node2D = $SpellSpawnPoint
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var staff_sprite: Sprite2D = $StaffSprite
@@ -52,7 +53,6 @@ func _ready():
 func _physics_process(delta): # This can go in a state eventually
 	aim_input = player_input.get_aim_input()
 	update_player_aim(delta)
-
 	if not hit:
 		if not dashing:	
 			move_input = player_input.get_movement_input()
@@ -87,7 +87,7 @@ func on_dash_input_pressed() -> void:
 	if not dashing:
 		dashing = true
 		ap.play("dash")
-		player_camera.apply_shake(.8)
+		player_camera.apply_shake(1)
 		player_hurtbox.collider.set_deferred("disabled", true)
 		
 		if move_input:	
@@ -97,27 +97,29 @@ func on_dash_input_pressed() -> void:
 		else:
 			velocity = Vector2(1,0) * dash_velocity
 
-func on_switch_selection_pressed(_switch_direction) -> void:
-	player_spell_spawner.switch_spell(_switch_direction)
-
 func on_staff_animation_finished(_anim_name) -> void:
 	staff_ap.play("idle")
 	
 func on_spell_cast() -> void: 
 	staff_ap.play("fire")
 
+## `PlayerSpellSpawner` determines the next spell type based on player input in `PlayerSpellSpawner.switch_spell()`
+## and then returns this data via a signal connected to `PlayerCharacter.on_staff_switched()`
+func on_switch_selection_pressed(_switch_direction) -> void:
+	player_spell_spawner.switch_spell(_switch_direction)
+
 func on_staff_switched(_spell_type: SpellData.Type) -> void:
 	match _spell_type:
 		SpellData.StaffType.ARCANE: 
 			staff_sprite.texture.region = Rect2(0,0,217,15)
 			player_aim.staff_rotation_offset_degrees = 0
-			staff_sprite.offset = Vector2(4, -1)
+			staff_sprite.position = Vector2(0, 5)
+			staff_sprite.offset = Vector2(4, 0.5)
 
 		SpellData.StaffType.WATER_SWORD: 
 			staff_sprite.texture.region = Rect2(0,15,217,15)
 			player_aim.staff_rotation_offset_degrees = -120
 			staff_sprite.offset = Vector2(8, .5)
-
 	staff_ap.play("idle")
 
 func on_animation_finished(anim_name) -> void:
