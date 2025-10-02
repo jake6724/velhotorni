@@ -2,7 +2,9 @@ class_name PlayerSpellSpawner
 extends Node
 
 @onready var player: PlayerCharacter = get_owner()
+@export var selected_spells: Array[SpellData]
 @export var spell_spawn_point: Node2D
+
 
 var spell_func: Callable = Callable(parent_spawn_bullet_spell)
 
@@ -29,7 +31,7 @@ var curr_spell_is_melee: bool = false
 
 # All spells that are available in the current level
 #var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["BasicArcaneTriple"], spell_data["BasicArcaneLongshot"], spell_data["FireFireball"]]
-var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["WaterIceSword"]]
+# var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["WaterIceSword"]]
 
 
 var spread_rng: RandomNumberGenerator = RandomNumberGenerator.new()
