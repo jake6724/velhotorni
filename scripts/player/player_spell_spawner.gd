@@ -3,7 +3,7 @@ extends Node
 
 @onready var player: PlayerCharacter = get_owner()
 @export var selected_spells: Array[SpellData]
-@export var spell_spawn_point: Node2D
+var spell_spawn_point: Node2D # Set by PlayerCharacter
 
 
 var spell_func: Callable = Callable(parent_spawn_bullet_spell)
@@ -51,7 +51,9 @@ func _ready():
 
 ## Wrapper for the `spell_func` Callable. Used as an easy interface for other scripts to call.
 func spawn_spell(player_aim_direction: Vector2) -> void:
-	spell_func.call(player_aim_direction.normalized())
+	if can_attack:
+		spell_func.call(player_aim_direction.normalized())
+		can_attack = false
 
 func switch_spell(_switch_direction: int) -> void:
 	# Get next available spell data, based on switch input 
@@ -86,65 +88,59 @@ func get_spell_func(_spell_type: SpellData.Type) -> Callable:
 			curr_spell_is_melee = false
 			return parent_spawn_bullet_spell
 
-
 ## Spawn all bullets defined in the SpellDataBullet resource
 func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
-	if can_attack:
-		can_attack = false
-		var new_spell_data: SpellDataBullet = curr_spell_data
-		var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
+	var new_spell_data: SpellDataBullet = curr_spell_data
+	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
 
-		var angle_seperation: float = 0
-		var angle_sign: float = 1.0
+	var angle_seperation: float = 0
+	var angle_sign: float = 1.0
 
-		# Spawn initial center bullet
+	# Spawn initial center bullet
+	spawn_bullet_spell(player_aim_direction, new_spell_data, new_spell_scene, angle_seperation, angle_sign)
+	angle_seperation += new_spell_data.angle_seperation
+
+	# Stuff that is done 1 time for all bullets in this burst group
+	player.player_audio.play_audio_stream(new_spell_data.sfx)
+	attack_timer.start(new_spell_data.cooldown)
+	player.player_camera.apply_shake(.1)
+
+	# apply_spell_kick(100)
+
+	for i in range(new_spell_data.num_bullets - 1):
 		spawn_bullet_spell(player_aim_direction, new_spell_data, new_spell_scene, angle_seperation, angle_sign)
-		angle_seperation += new_spell_data.angle_seperation
 
-		# Stuff that is done 1 time for all bullets in this burst group
-		player.player_audio.play_audio_stream(new_spell_data.sfx)
-		attack_timer.start(new_spell_data.cooldown)
-		player.player_camera.apply_shake(.1)
-
-		# apply_spell_kick(100)
-
-		for i in range(new_spell_data.num_bullets - 1):
-			spawn_bullet_spell(player_aim_direction, new_spell_data, new_spell_scene, angle_seperation, angle_sign)
-
-			if i % 2 == 1:
-				angle_seperation += new_spell_data.angle_seperation
-			angle_sign = -angle_sign
+		if i % 2 == 1:
+			angle_seperation += new_spell_data.angle_seperation
+		angle_sign = -angle_sign
 
 ## Spawn a single spell bullet
 func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellDataBullet, new_spell_scene: PackedScene, angle_seperation: float, angle_sign: float) -> void:
-		var new_spell: Spell = new_spell_scene.instantiate()
-		new_spell.global_position = spell_spawn_point.global_position
-		new_spell.z_index = player.z_index + 2
-		var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
-		add_child(new_spell)
-		new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)))
-		spell_cast.emit()
+	var new_spell: Spell = new_spell_scene.instantiate()
+	new_spell.global_position = spell_spawn_point.global_position
+	new_spell.z_index = player.z_index + 2
+	var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
+	add_child(new_spell)
+	new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)))
+	spell_cast.emit()
 
 func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
-	if can_attack:
-		can_attack = false
+	var new_spell_data: SpellDataMelee = curr_spell_data
+	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
+	var new_spell: Spell = new_spell_scene.instantiate()
 
-		var new_spell_data: SpellDataMelee = curr_spell_data
-		var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
-		var new_spell: Spell = new_spell_scene.instantiate()
+	new_spell.initialize(new_spell_data, player)
+	new_spell.global_position = player.global_position + (_player_aim_direction * 16)
+	new_spell.rotation = _player_aim_direction.angle()
 
-		new_spell.initialize(new_spell_data, player)
-		new_spell.global_position = player.global_position + (_player_aim_direction * 16)
-		new_spell.rotation = _player_aim_direction.angle()
+	new_spell.z_index = player.z_index + 2
+	add_child(new_spell)
+	spell_cast.emit()
+	melee_spell_cast.emit()
+	attack_timer.start(new_spell_data.cooldown)
 
-		new_spell.z_index = player.z_index + 2
-		add_child(new_spell)
-		spell_cast.emit()
-		melee_spell_cast.emit()
-		attack_timer.start(new_spell_data.cooldown)
-
-		player.player_camera.apply_shake(.4)
-		player.jump_forward()
+	player.player_camera.apply_shake(.4)
+	player.jump_forward()
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true

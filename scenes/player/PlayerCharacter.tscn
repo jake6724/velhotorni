@@ -1,8 +1,7 @@
-[gd_scene load_steps=67 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=68 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
-[ext_resource type="Script" uid="uid://bojseigi0nki8" path="res://scripts/player/player_character_input.gd" id="3_fhwjy"]
 [ext_resource type="Texture2D" uid="uid://cwbuy2wmoursk" path="res://assets/art/atlases/atl_player_reticle.png" id="3_j4yks"]
 [ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="3_v81jw"]
 [ext_resource type="Script" uid="uid://bl26or2ea2a3y" path="res://scripts/player/player_animation.gd" id="4_6nsgb"]
@@ -12,12 +11,14 @@
 [ext_resource type="Script" uid="uid://jvulch3v1pbm" path="res://scripts/player/player_spell_spawner.gd" id="6_g7j5r"]
 [ext_resource type="Resource" uid="uid://lb41jg2fqrdd" path="res://data/spells/spell_data_bullet_arcane_basic.tres" id="7_akj2q"]
 [ext_resource type="Resource" uid="uid://bcov2rckhliwp" path="res://data/spells/water/spell_data_melee_water_ice_sword.tres" id="8_kuao7"]
-[ext_resource type="Resource" uid="uid://b50w7syjdvdrf" path="res://data/spells/spell_data_bullet_arcane_basic_triple.tres" id="9_7q84o"]
 [ext_resource type="Script" uid="uid://b5keun6k5cxfo" path="res://scripts/player/player_aim.gd" id="9_laqyv"]
 [ext_resource type="Script" uid="uid://bmfid24mjnj0v" path="res://scripts/player/player_movement.gd" id="10_hkntq"]
 [ext_resource type="PackedScene" uid="uid://bno5o5pbi8s3e" path="res://scenes/player/CoinCollector.tscn" id="10_wp8q1"]
+[ext_resource type="Script" uid="uid://by6ywjtg3nxyl" path="res://scripts/player/player_input.gd" id="11_hkntq"]
 [ext_resource type="Script" uid="uid://cchrqludhwhnh" path="res://scripts/player/player_stats.gd" id="11_slbhc"]
+[ext_resource type="Resource" uid="uid://0ape3v2kdph1" path="res://data/spells/fire/spell_data_bullet_aoe_fireball.tres" id="12_6qouk"]
 [ext_resource type="Script" uid="uid://6kagsif3xfkf" path="res://scripts/player/player_hurtbox.gd" id="12_gsbha"]
+[ext_resource type="Script" uid="uid://c67nlh7a52smp" path="res://scripts/player/player_build.gd" id="13_6qouk"]
 [ext_resource type="Script" uid="uid://ckfb2xehi2wqu" path="res://scripts/player/player_camera.gd" id="13_bnayp"]
 [ext_resource type="Script" uid="uid://ctk0c5nv8o7mf" path="res://scripts/player/player_audio.gd" id="14_kkcsf"]
 [ext_resource type="Texture2D" uid="uid://kkqxipsicds5" path="res://assets/art/sprites/spr_fx_dust.png" id="20_88aji"]
@@ -36,322 +37,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="Animation" id="Animation_akj2q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StaffSprite:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StaffSprite:vframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("StaffSprite:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_v81jw")]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("StaffSprite:region_enabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("StaffSprite:frame_coords")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("StaffSprite:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = false
-tracks/6/path = NodePath("StaffSprite:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_adj0b"]
-resource_name = "fire"
-length = 0.2
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StaffSprite:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StaffSprite:vframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("StaffSprite:frame_coords")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("StaffSprite:region_enabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/path = NodePath("StaffSprite:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_kkcsf"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StaffSprite:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StaffSprite:vframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("StaffSprite:frame_coords")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("StaffSprite:region_enabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/path = NodePath("StaffSprite:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_88aji"]
-atlas = ExtResource("3_v81jw")
-
-[sub_resource type="Animation" id="Animation_0x1p2"]
-resource_name = "switch"
-length = 0.2
-step = 0.0667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StaffSprite:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3, 7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StaffSprite:vframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("StaffSprite:region_enabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("StaffSprite:texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("4_7q84o"), SubResource("AtlasTexture_88aji")]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("StaffSprite:texture:atlas")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_v81jw")]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("StaffSprite:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.0667, 0.1334),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("StaffSprite:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_adj0b"]
-_data = {
-&"RESET": SubResource("Animation_akj2q"),
-&"fire": SubResource("Animation_adj0b"),
-&"idle": SubResource("Animation_kkcsf"),
-&"switch": SubResource("Animation_0x1p2")
-}
 
 [sub_resource type="Animation" id="Animation_ljh2g"]
 resource_name = "RESET"
@@ -899,6 +584,322 @@ _data = {
 &"walk_up": SubResource("Animation_g7j5r")
 }
 
+[sub_resource type="Animation" id="Animation_akj2q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaffSprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaffSprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StaffSprite:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_v81jw")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StaffSprite:region_enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StaffSprite:frame_coords")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StaffSprite:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = false
+tracks/6/path = NodePath("StaffSprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_adj0b"]
+resource_name = "fire"
+length = 0.2
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaffSprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaffSprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StaffSprite:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StaffSprite:region_enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("StaffSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_kkcsf"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaffSprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaffSprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StaffSprite:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StaffSprite:region_enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("StaffSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88aji"]
+atlas = ExtResource("3_v81jw")
+
+[sub_resource type="Animation" id="Animation_0x1p2"]
+resource_name = "switch"
+length = 0.2
+step = 0.0667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaffSprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaffSprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StaffSprite:region_enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StaffSprite:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("4_7q84o"), SubResource("AtlasTexture_88aji")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StaffSprite:texture:atlas")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_v81jw")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StaffSprite:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0667, 0.1334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StaffSprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_adj0b"]
+_data = {
+&"RESET": SubResource("Animation_akj2q"),
+&"fire": SubResource("Animation_adj0b"),
+&"idle": SubResource("Animation_kkcsf"),
+&"switch": SubResource("Animation_0x1p2")
+}
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wp8q1"]
 animation = &"dash"
 
@@ -1000,13 +1001,13 @@ states/Walk/position = Vector2(340.013, 28.4568)
 transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_ljh2g"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_g7j5r"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_v81jw"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_slbhc"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_gsbha"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_bnayp"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_kkcsf"), "Walk", "Hit", SubResource("AnimationNodeStateMachineTransition_adj0b"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_akj2q"), "Hit", "Walk", SubResource("AnimationNodeStateMachineTransition_kuao7"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_7q84o"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_0x1p2"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_88aji"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_hkntq")]
 graph_offset = Vector2(21, -76)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ljh2g"]
-radius = 4.0
-height = 14.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bnayp"]
 radius = 6.0
 height = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ljh2g"]
+radius = 4.0
+height = 14.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_88aji"]
 particle_flag_disable_z = true
@@ -1039,35 +1040,16 @@ hframes = 8
 region_enabled = true
 region_rect = Rect2(0, 0, 217, 16)
 
-[node name="SpellSpawnPoint" type="Node2D" parent="."]
-
-[node name="SpellSpawner" type="Node" parent="." node_paths=PackedStringArray("spell_spawn_point")]
-script = ExtResource("6_g7j5r")
-selected_spells = Array[ExtResource("6_adj0b")]([ExtResource("7_akj2q"), ExtResource("8_kuao7"), ExtResource("9_7q84o")])
-spell_spawn_point = NodePath("../SpellSpawnPoint")
-
-[node name="PlayerMovement" type="Node" parent="."]
-script = ExtResource("10_hkntq")
-metadata/_custom_type_script = "uid://bmfid24mjnj0v"
-
-[node name="PlayerCharacterInput" type="Node" parent="."]
-script = ExtResource("3_fhwjy")
-metadata/_custom_type_script = "uid://bojseigi0nki8"
-
-[node name="PlayerCharacterStats" type="Node" parent="."]
-script = ExtResource("11_slbhc")
-metadata/_custom_type_script = "uid://cchrqludhwhnh"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g7j5r")
+}
 
 [node name="StaffAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_adj0b")
 }
 autoplay = "idle"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_g7j5r")
-}
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 active = false
@@ -1077,6 +1059,30 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0)
 
+[node name="PlayerInput" type="Node" parent="."]
+script = ExtResource("11_hkntq")
+metadata/_custom_type_script = "uid://by6ywjtg3nxyl"
+
+[node name="PlayerSpellSpawner" type="Node" parent="."]
+script = ExtResource("6_g7j5r")
+selected_spells = Array[ExtResource("6_adj0b")]([ExtResource("7_akj2q"), ExtResource("8_kuao7"), ExtResource("12_6qouk")])
+metadata/_custom_type_script = "uid://jvulch3v1pbm"
+
+[node name="PlayerMovement" type="Node" parent="."]
+script = ExtResource("10_hkntq")
+metadata/_custom_type_script = "uid://bmfid24mjnj0v"
+
+[node name="PlayerCharacterStats" type="Node" parent="."]
+script = ExtResource("11_slbhc")
+metadata/_custom_type_script = "uid://cchrqludhwhnh"
+
+[node name="PlayerBuild" type="Node" parent="."]
+script = ExtResource("13_6qouk")
+metadata/_custom_type_script = "uid://c67nlh7a52smp"
+
+[node name="SpellSpawnPoint" type="Node2D" parent="."]
+unique_name_in_owner = true
+
 [node name="PlayerAnimation" type="Node2D" parent="." node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("4_6nsgb")
 animation_tree = NodePath("../AnimationTree")
@@ -1085,11 +1091,6 @@ metadata/_custom_type_script = "uid://bl26or2ea2a3y"
 [node name="PlayerAim" type="Node2D" parent="."]
 script = ExtResource("9_laqyv")
 metadata/_custom_type_script = "uid://b5keun6k5cxfo"
-
-[node name="TerrainCollider" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 1)
-shape = SubResource("CapsuleShape2D_ljh2g")
 
 [node name="CoinCollector" parent="." instance=ExtResource("10_wp8q1")]
 visible = false
@@ -1103,6 +1104,11 @@ script = ExtResource("12_gsbha")
 [node name="PlayerHurtboxCollider" type="CollisionShape2D" parent="PlayerHurtbox"]
 shape = SubResource("CapsuleShape2D_bnayp")
 debug_color = Color(0.993404, 0, 0.2381, 0.42)
+
+[node name="TerrainCollider" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_ljh2g")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 unique_name_in_owner = true

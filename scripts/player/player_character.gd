@@ -7,26 +7,21 @@ extends CharacterBody2D
 @onready var player_movement: PlayerMovement = $PlayerMovement
 @onready var player_aim: PlayerAim = $PlayerAim
 @onready var player_animation: PlayerAnimation = $PlayerAnimation
-@onready var player_input: PlayerCharacterInput = $PlayerCharacterInput
-@onready var player_spell_spawner: PlayerSpellSpawner = $SpellSpawner
+@onready var player_input: PlayerInput = $PlayerInput
+@onready var player_spell_spawner: PlayerSpellSpawner = $PlayerSpellSpawner
 @onready var player_stats: PlayerCharacterStats = $PlayerCharacterStats
 @onready var player_hurtbox: Area2D = $PlayerHurtbox
 @onready var player_camera: PlayerCamera = %PlayerCamera
 @onready var player_audio: PlayerAudio = %PlayerAudio
 @onready var player_particles: GPUParticles2D = %PlayerParticles
-
-# # State Machines
-# @onready var player_movement_state_machine: PlayerStateMachineMovement = %PlayerMovementStateMachine
-
-@onready var ap: AnimationPlayer = $AnimationPlayer
-@onready var staff_ap: AnimationPlayer = $StaffAnimationPlayer
-
-# @onready var spell_spawn_point: Node2D = $StaffSprite/SpellSpawnPoint
-@onready var spell_spawn_point: Node2D = $SpellSpawnPoint
+@onready var player_build: PlayerBuild = $PlayerBuild
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
+@onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var staff_sprite: Sprite2D = $StaffSprite
+@onready var staff_ap: AnimationPlayer = $StaffAnimationPlayer
 @onready var reticle_sprite: AnimatedSprite2D = $ReticleSprite
+@onready var spell_spawn_point: Node2D = %SpellSpawnPoint
 @onready var coin_collector: CoinCollector = $CoinCollector
 
 var staff_texture: CompressedTexture2D = preload("res://assets/art/atlases/atl_player_mage_staff.png")
@@ -49,11 +44,19 @@ var hit: bool = false
 
 var hitstun_recovery_multiplier: float = 300 # Influences how quickly the player stops sliding when hitstun and recovers back to normal mode
 
+
+## DEV 
+var building: bool = false
+var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
+var new_tower: Tower
+
 func _ready():
 	player_input.spell_input_pressed.connect(on_spell_input_pressed)
 	player_input.dash_input_pressed.connect(on_dash_input_pressed)
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
+	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
 
+	player_spell_spawner.spell_spawn_point = spell_spawn_point
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
 	player_spell_spawner.staff_switched.connect(on_staff_switched)
 
@@ -90,12 +93,23 @@ func _physics_process(delta): # This can go in a state eventually
 			if velocity == Vector2.ZERO:
 				hit = false
 				player_hurtbox.collider.set_deferred("disabled", false)
-		
+
+		# Primary Action
+		if player_input.primary_action_pressed:
+			on_spell_input_pressed()
+
+		if building:
+			player_build.update_preview_tower_position(global_position, player_aim.aim_input)
+
 		move_and_slide()
 
 func on_spell_input_pressed() -> void: # Use a func ref for this
 	if alive and can_fire:
-		player_spell_spawner.spawn_spell(player_aim.aim_input)
+		if building:
+			player_build.place_tower()
+			player_input.primary_action_pressed = false
+		else:
+			player_spell_spawner.spawn_spell(player_aim.aim_input)
 	
 func on_dash_input_pressed() -> void:
 	if not dashing:
@@ -142,6 +156,17 @@ func on_staff_switched(_spell_type: SpellData.Type) -> void:
 			staff_sprite.texture.region = Rect2(0,15,217,15)
 			player_aim.staff_rotation_offset_degrees = -120
 			staff_sprite.offset = Vector2(8, .5)
+
+func on_switch_player_mode_pressed() -> void:
+	building = not building
+
+	if building:
+		staff_sprite.hide()
+		player_build.create_preview_tower(Constants.Element.FIRE)
+	else:
+		staff_sprite.show()
+		if player_build.preview_tower:
+			player_build.preview_tower.queue_free()
 
 func on_animation_finished(anim_name) -> void:
 	if anim_name == "dash":
