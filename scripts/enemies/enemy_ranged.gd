@@ -15,10 +15,10 @@ func configure_ranged_enemy() -> void:
 	attack_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	add_child(attack_timer)
-	attack_area.body_entered.connect(on_body_entered)
+	attack_area.area_entered.connect(on_area_entered)
 
-func on_body_entered(player: PlayerCharacter) -> void:
-	attack_player(player.global_position)
+func on_area_entered(player_hurtbox: PlayerHurtbox) -> void:
+	attack_player(player_hurtbox.global_position)
 
 func check_player_in_range() -> void:
 	var bodies = attack_area.get_overlapping_bodies()

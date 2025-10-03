@@ -9,6 +9,7 @@ extends Spell
 func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 	hitbox.area_entered.connect(on_enemy_hit)
+	z_index = Constants.z_index_map["melee_spell"]
 
 func initialize(_data: SpellDataMelee, _spell_spawn_point: Node2D) -> void:
 	data = _data

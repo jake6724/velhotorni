@@ -1,7 +1,10 @@
 class_name PlayerCharacter
 extends CharacterBody2D
 
+@export var data: PlayerData
+
 # Components
+@onready var player_movement: PlayerMovement = $PlayerMovement
 @onready var player_aim: PlayerAim = $PlayerAim
 @onready var player_animation: PlayerAnimation = $PlayerAnimation
 @onready var player_input: PlayerCharacterInput = $PlayerCharacterInput
@@ -10,6 +13,7 @@ extends CharacterBody2D
 @onready var player_hurtbox: Area2D = $PlayerHurtbox
 @onready var player_camera: PlayerCamera = %PlayerCamera
 @onready var player_audio: PlayerAudio = %PlayerAudio
+@onready var player_particles: GPUParticles2D = %PlayerParticles
 
 # # State Machines
 # @onready var player_movement_state_machine: PlayerStateMachineMovement = %PlayerMovementStateMachine
@@ -32,7 +36,6 @@ var respawn_time: float = 1.0
 var respawn_timer: Timer = Timer.new()
 var spawn_point: Vector2 = Vector2.ZERO # Set manually by main
 
-var move_input: Vector2
 var aim_input: Vector2
 var prev_aim_input: Vector2
 
@@ -44,16 +47,7 @@ var falling: bool = false
 var can_fire: bool = true
 var hit: bool = false
 
-var DIRECTIONS = [
-	Vector2(0, -1),  			  # Up
-	Vector2(1, -1).normalized(),  # Up Right
-	Vector2(1, 0),    			  # Right
-	Vector2(1, 1).normalized(),   # Down Right
-	Vector2(0, 1),    			  # Down
-	Vector2(-1, 1).normalized(),  # Down Left
-	Vector2(-1, 0),   			  # Left
-	Vector2(-1, -1).normalized()  # Up Left
-]
+var hitstun_recovery_multiplier: float = 300 # Influences how quickly the player stops sliding when hitstun and recovers back to normal mode
 
 func _ready():
 	player_input.spell_input_pressed.connect(on_spell_input_pressed)
@@ -80,32 +74,24 @@ func _ready():
 
 	player_spell_spawner.melee_spell_cast.connect(player_aim.swing_staff)
 
+	z_index = Constants.z_index_map["player_character"]
+
 func _physics_process(delta): # This can go in a state eventually
 	if alive:
-		aim_input = player_input.get_aim_input()
-		update_player_aim(delta)
+		player_aim.update_aim(delta, player_input.get_aim_input())
 		if not hit:
 			if not dashing:	
-				move_input = player_input.get_movement_input()
-				if move_input:
-					move_input = get_closest_cardinal_direction_normalized(move_input)
-				velocity = move_input.normalized() * player_stats.speed
+				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.speed)
 				player_animation.update_animation(delta)
 
 		else:
-			velocity = velocity.move_toward(Vector2.ZERO, delta*300)
+			velocity = player_movement.get_hitstun_velocity(delta, velocity, hitstun_recovery_multiplier)
+			# Check if hitstun complete
 			if velocity == Vector2.ZERO:
 				hit = false
 				player_hurtbox.collider.set_deferred("disabled", false)
 		
 		move_and_slide()
-
-func update_player_aim(delta) -> void:
-	if aim_input:
-			player_aim.aim_input = aim_input						
-	else:
-		player_aim.reset_reticle_position(delta)
-	player_aim.update_aim()
 
 func on_spell_input_pressed() -> void: # Use a func ref for this
 	if alive and can_fire:
@@ -117,15 +103,17 @@ func on_dash_input_pressed() -> void:
 		player_camera.apply_shake(1)
 		player_hurtbox.collider.set_deferred("disabled", true)
 		
-		if move_input:	
-			velocity = move_input.normalized() * dash_velocity
+		if player_input.move_input:	
+			velocity = Constants.get_closest_cardinal_direction_normalized(player_input.move_input) * dash_velocity
 		elif player_aim.aim_input:
-			velocity = get_closest_cardinal_direction_normalized(player_aim.aim_input) * dash_velocity
+			velocity = Constants.get_closest_cardinal_direction_normalized(player_aim.aim_input) * dash_velocity
 		else:
 			velocity = Vector2(1,0) * dash_velocity
 
 func on_staff_animation_finished(_anim_name) -> void:
-	staff_ap.play("idle")
+	if _anim_name == "switch":
+		staff_sprite.show()
+		staff_ap.play("idle")
 	
 func on_spell_cast() -> void: 
 	staff_ap.play("fire")
@@ -164,14 +152,12 @@ func on_animation_finished(anim_name) -> void:
 		falling = false
 		character_sprite.hide()
 		respawn_timer.start(respawn_time)
-
-	if anim_name == "switch":
-		can_fire = true
-
+		
 func on_damage_recieved(_damage) -> void:
 	player_stats.health -= _damage
 
 func on_hit(_direction) -> void:
+	_direction = Constants.get_closest_cardinal_direction_normalized(_direction)
 	if not hit:
 		player_hurtbox.collider.set_deferred("disabled", true)
 		hit = true
@@ -183,19 +169,8 @@ func on_hit(_direction) -> void:
 func jump_forward() -> void:
 	pass
 
-func get_closest_cardinal_direction_normalized(input_vector) -> Vector2:
-	var best_direction = DIRECTIONS[0]
-	var best_dot_product = -INF
-
-	for dir in DIRECTIONS:
-		var dot = input_vector.dot(dir)
-		if dot > best_dot_product:
-			best_dot_product = dot
-			best_direction = dir
-	return best_direction
-
 func on_pit_entered() -> void:
-	global_position += move_input.normalized() * 10 # Move the character to be fully over the pit
+	global_position += player_input.move_input.normalized() * 10 # Move the character to be fully over the pit
 	reticle_sprite.hide()
 	staff_sprite.hide()
 	falling = true

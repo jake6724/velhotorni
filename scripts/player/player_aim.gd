@@ -28,17 +28,16 @@ var is_swinging: bool = false
 
 var staff_rotation_sign: float = 1.0
 
-func update_aim():
+func update_aim(delta, new_aim_input):
+	if new_aim_input:
+		aim_input = new_aim_input
+	else:
+		reset_reticle_position(delta)
+
 	update_spell_spawn_point()
 	update_reticle()
 	flip_sprite()
 	rotate_staff()
-
-# TODO: 
-"""
-When in melee mode, base the reticle position off the center of the player instead of the exact position of the spell
-spawner. Maybe have multiple funcs and func ref for the update_reticle func
-"""
 
 func update_spell_spawn_point() -> void:
 	if aim_input:
@@ -64,10 +63,7 @@ func reset_reticle_position(delta) -> void:
 func rotate_staff() -> void:
 	if aim_input and not is_swinging:
 		# Rotate staff to point at aim direction
-		# Melee version
 		player.staff_sprite.rotation = aim_input.angle() + deg_to_rad(staff_rotation_offset_degrees) * staff_rotation_sign
-
-		#player.staff_sprite.rotation = aim_input.angle() + deg_to_rad(staff_rotation_offset_degrees) # TODO: Could specify in rads to start
 
 		# Set staff render order based on aim direction and horizontal axis
 		if aim_input.normalized().y < 0:
@@ -89,9 +85,3 @@ func flip_sprite() -> void:
 	if aim_input:
 		var flip = aim_input.x <= -0.001
 		player.character_sprite.flip_h = flip
-
-# func _process(delta):
-# 	queue_redraw()
-
-# func _draw():
-# 	draw_circle(to_local(player.spell_spawn_point.global_position), 5, Color.RED, true)

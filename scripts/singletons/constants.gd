@@ -5,7 +5,16 @@ enum Element {
 	LAVA, PLASMA, STORM, LIGHTNING, ICE, FLOOD, MUD, CRYSTAL, SPIRIT, SUN, CURSE, VOID,
 	ARCANE}
 
-const FAST_FORWARD_SPEED: float = 10
+var DIRECTIONS = [
+	Vector2(0, -1),  			  # Up
+	Vector2(1, -1).normalized(),  # Up Right
+	Vector2(1, 0),    			  # Right
+	Vector2(1, 1).normalized(),   # Down Right
+	Vector2(0, 1),    			  # Down
+	Vector2(-1, 1).normalized(),  # Down Left
+	Vector2(-1, 0),   			  # Left
+	Vector2(-1, -1).normalized()  # Up Left
+]
 
 const CELL_SIZE: int = 16
 
@@ -114,13 +123,27 @@ func get_evolve_element_2(_element: Element) -> Element:
 
 var z_index_map: Dictionary[String, int] = {
 	"bg": -4096,
-	"weather_scroll": -4095,
+	"melee_spell": -4094,
+	"terrain_obstacle": -2000, # Not actually used, but this is the value painted on the tileset. used so sword always goes behind these
+	"weather_scroll": -1999,
 	"base": -1001,
 	"coin": -1000,
 	"pulse_bullet": -999,
 	"tower": -998,
 	"enemy_spawner": 1,
+	"player_character": 2,
 	"tower_menu": 1000,
 	"tower_upgrade_menu": 1001,
 	"top": 4096
 }
+
+func get_closest_cardinal_direction_normalized(input_vector) -> Vector2:
+	var best_direction = DIRECTIONS[0]
+	var best_dot_product = -INF
+
+	for dir in DIRECTIONS:
+		var dot = input_vector.dot(dir)
+		if dot > best_dot_product:
+			best_dot_product = dot
+			best_direction = dir
+	return best_direction

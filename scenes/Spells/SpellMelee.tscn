@@ -98,6 +98,7 @@ radius = 4.0
 height = 32.0
 
 [node name="SpellMelee" type="Sprite2D"]
+z_as_relative = false
 texture = ExtResource("1_1xu0m")
 hframes = 4
 script = ExtResource("1_dybf8")

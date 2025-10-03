@@ -15,6 +15,7 @@ var boss_wave_active: bool = false
 
 var path_spawns: Array = []
 var path_enemy_indexes: Array[int] = []
+var flying_spawn_points: Array[Vector2] = []
 
 var player: PlayerCharacter # Set by main
 
@@ -59,6 +60,8 @@ func configure_level(active_level: LevelEnvironment):
 		path_enemy_indexes.append(0)
 
 	sort_enemies_by_path()
+
+	flying_spawn_points = active_level.flying_spawn_points
 
 ## Intended to be triggered directly by `player_controller`.
 func start_wave() -> void:
@@ -124,7 +127,7 @@ func spawn_enemy(_spawn: Spawn) -> void:
 
 	if new_enemy is FlyingEnemy:
 		new_enemy.player = player
-		new_enemy.global_position = (LevelManager.active_level.enemy_paths[_spawn.path_index].curve.get_point_position(0))
+		new_enemy.global_position = flying_spawn_points[_spawn.flying_spawn_index]
 	else:
 		active_path_enemies.append(new_enemy)
 		configure_enemy_pathing(new_enemy, _spawn)

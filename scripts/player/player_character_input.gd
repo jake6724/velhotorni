@@ -1,7 +1,7 @@
 class_name PlayerCharacterInput
 extends Node
 
-var movement_input: Vector2
+var move_input: Vector2
 var aim_input: Vector2
 
 signal spell_input_pressed
@@ -9,9 +9,9 @@ signal dash_input_pressed
 signal switch_selection_pressed
 
 ## Returns raw input data, not normalized
-func get_movement_input() -> Vector2:
-	movement_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	return movement_input
+func get_move_input() -> Vector2:
+	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	return move_input
 
 ## Returns raw input data, not normalized
 func get_aim_input() -> Vector2: 
