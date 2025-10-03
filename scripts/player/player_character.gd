@@ -51,8 +51,8 @@ var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var new_tower: Tower
 
 func _ready():
-	player_input.spell_input_pressed.connect(on_spell_input_pressed)
-	player_input.dash_input_pressed.connect(on_dash_input_pressed)
+	# player_input.spell_input_pressed.connect(on_spell_input_pressed)
+	player_input.secondary_action_pressed.connect(on_dash_input_pressed)
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
 	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
 

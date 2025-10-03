@@ -196,7 +196,7 @@ func on_tower_clicked(tower: Tower) -> void:
 
 func on_start_wave() -> void:
 	# Disable wave start if actively placing a tower, or no towers placed
-	if not tower_to_place and active_towers.size() > 0:
+	# if not tower_to_place and active_towers.size() > 0:
 		tower_menu.display_wave_info()
 		tower_menu.hide_placement_phase()
 		placement_enabled = false
@@ -208,8 +208,8 @@ func on_start_wave() -> void:
 		SFXPlayer.play_sfx("go")
 
 		# print("Gold spent: ", gold_spent)
-	else:
-		SFXPlayer.play_sfx("click_2")
+	# else:
+	# 	SFXPlayer.play_sfx("click_2")
 
 ## Connected by Main. Called when CoinDropManager emits `reward_complete`
 func on_reward_complete() -> void:
