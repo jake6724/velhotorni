@@ -44,14 +44,12 @@ var hit: bool = false
 
 var hitstun_recovery_multiplier: float = 300 # Influences how quickly the player stops sliding when hitstun and recovers back to normal mode
 
-
-## DEV 
 var building: bool = false
-var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
-var new_tower: Tower
+var primary_action_func: Callable = Callable(cast_spell)
+var switch_action_func: Callable = Callable(switch_spell)
 
 func _ready():
-	# player_input.spell_input_pressed.connect(on_spell_input_pressed)
+	# player_input.spell_input_pressed.connect(on_primary_action_pressed)
 	player_input.secondary_action_pressed.connect(on_dash_input_pressed)
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
 	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
@@ -81,13 +79,15 @@ func _ready():
 
 func _physics_process(delta): # This can go in a state eventually
 	if alive:
+		# Update Aim
 		player_aim.update_aim(delta, player_input.get_aim_input())
 		if not hit:
 			if not dashing:	
+				# Update Movement
 				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.speed)
 				player_animation.update_animation(delta)
 
-		else:
+		else: # Hit stun recovery
 			velocity = player_movement.get_hitstun_velocity(delta, velocity, hitstun_recovery_multiplier)
 			# Check if hitstun complete
 			if velocity == Vector2.ZERO:
@@ -96,21 +96,27 @@ func _physics_process(delta): # This can go in a state eventually
 
 		# Primary Action
 		if player_input.primary_action_pressed:
-			on_spell_input_pressed()
+			on_primary_action_pressed()
 
 		if building:
 			player_build.update_preview_tower_position(global_position, player_aim.aim_input)
 
 		move_and_slide()
 
-func on_spell_input_pressed() -> void: # Use a func ref for this
+func on_primary_action_pressed() -> void:
 	if alive and can_fire:
-		if building:
-			player_build.place_tower()
-			player_input.primary_action_pressed = false
-		else:
-			player_spell_spawner.spawn_spell(player_aim.aim_input)
-	
+		primary_action_func.call()
+
+func cast_spell() -> void:
+	player_spell_spawner.spawn_spell(player_aim.aim_input)
+
+func place_tower() -> void:
+	player_build.place_tower()
+	player_input.primary_action_pressed = false
+
+func on_spell_cast() -> void: 
+	staff_ap.play("fire")
+
 func on_dash_input_pressed() -> void:
 	if not dashing:
 		dashing = true
@@ -124,19 +130,16 @@ func on_dash_input_pressed() -> void:
 		else:
 			velocity = Vector2(1,0) * dash_velocity
 
-func on_staff_animation_finished(_anim_name) -> void:
-	if _anim_name == "switch":
-		staff_sprite.show()
-		staff_ap.play("idle")
-	
-func on_spell_cast() -> void: 
-	staff_ap.play("fire")
+func on_switch_selection_pressed(_switch_direction) -> void:
+	switch_action_func.call(_switch_direction)
 
 ## `PlayerSpellSpawner` determines the next spell type based on player input in `PlayerSpellSpawner.switch_spell()`
 ## and then returns this data via a signal connected to `PlayerCharacter.on_staff_switched()`
-func on_switch_selection_pressed(_switch_direction) -> void:
+func switch_spell(_switch_direction: int) -> void:
 	player_spell_spawner.switch_spell(_switch_direction)
 
+## Update the region of the staff atlas, changing the staff graphic. Plays the switch animation and temporarily hides
+## the staff sprite. Prevents firing spells while switching.
 func on_staff_switched(_spell_type: SpellData.Type) -> void:
 	# The switch animation modifies the atlas and texture, then resets the values. It must 
 	# complete before a normal staff animation plays
@@ -157,15 +160,24 @@ func on_staff_switched(_spell_type: SpellData.Type) -> void:
 			player_aim.staff_rotation_offset_degrees = -120
 			staff_sprite.offset = Vector2(8, .5)
 
+func switch_tower(_switch_direction: int) -> void:
+	player_build.tower_index += _switch_direction
+	player_build.preview_tower.queue_free()
+	player_build.create_preview_tower()
+
+## Switch between combat and building modes
 func on_switch_player_mode_pressed() -> void:
 	building = not building
-
 	if building:
+		primary_action_func = place_tower
+		switch_action_func = switch_tower
 		staff_sprite.hide()
-		player_build.create_preview_tower(Constants.Element.FIRE)
+		player_build.create_preview_tower()
 	else:
 		staff_sprite.show()
-		if player_build.preview_tower:
+		primary_action_func = cast_spell
+		switch_action_func = switch_spell
+		if player_build.preview_tower:	# Remove preview tower
 			player_build.preview_tower.queue_free()
 
 func on_animation_finished(anim_name) -> void:
@@ -177,7 +189,11 @@ func on_animation_finished(anim_name) -> void:
 		falling = false
 		character_sprite.hide()
 		respawn_timer.start(respawn_time)
-		
+
+func on_staff_animation_finished(_anim_name) -> void:
+	if _anim_name == "switch":
+		staff_ap.play("idle")
+
 func on_damage_recieved(_damage) -> void:
 	player_stats.health -= _damage
 
@@ -207,3 +223,7 @@ func respawn() -> void:
 	character_sprite.show()
 	global_position = spawn_point
 	alive = true
+
+func show_staff_sprite_custom(): 
+	if alive and not building:
+		staff_sprite.show()

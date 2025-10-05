@@ -7,10 +7,10 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var swap_sprite: Sprite2D = $SwapSprite
 @onready var cross_sprite: Sprite2D = $CrossSprite
-@onready var area: Area2D = $Area2D
+@onready var attack_area: Area2D = $AttackArea
+@onready var attack_collider: CollisionShape2D = $AttackArea/AttackCollider
 @onready var transform_area: Area2D = %TransformArea
 @onready var transform_collider: CollisionShape2D = %TransformCollider
-@onready var collider: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var range_indicator = $RangeIndicator
 @onready var transform_hint_sprite: Sprite2D = %TransformHintSprite
@@ -158,8 +158,8 @@ signal tower_unhovered
 
 func _ready():
 	# Configure Area2D
-	area.area_entered.connect(on_area_entered)
-	area.area_exited.connect(on_area_exited)
+	attack_area.area_entered.connect(on_attack_area_entered)
+	attack_area.area_exited.connect(on_attack_area_exited)
 
 	# Configure Transforming
 	transform_area.input_event.connect(on_transform_area_pressed)
@@ -397,13 +397,13 @@ func on_enemy_died(enemy: Enemy) -> void:
 	if enemy == active_target: 
 		active_target = null
 		
-func on_area_entered(intruder: Area2D) -> void:
+func on_attack_area_entered(intruder: Area2D) -> void:
 	if intruder is Enemy and not intruder is FlyingEnemy:
 		in_range_targets.append(intruder)
 		if not intruder.died.is_connected(on_enemy_died):
 			intruder.died.connect(on_enemy_died)
 
-func on_area_exited(intruder) -> void:
+func on_attack_area_exited(intruder) -> void:
 	if intruder is Enemy:
 		if intruder == active_target:
 			active_target = null
@@ -470,7 +470,7 @@ func refresh_buff_collider() -> void:
 
 func update_colliders() -> void:
 	buff_collider.shape.radius = curr_range
-	collider.shape.radius =  curr_range
+	attack_collider.shape.radius =  curr_range
 	queue_redraw()
 
 ## Returns a deep, custom copy of a `TowerData` resource
