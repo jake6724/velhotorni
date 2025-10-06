@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=69 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
@@ -23,6 +23,10 @@
 [ext_resource type="Script" uid="uid://ctk0c5nv8o7mf" path="res://scripts/player/player_audio.gd" id="14_kkcsf"]
 [ext_resource type="Texture2D" uid="uid://kkqxipsicds5" path="res://assets/art/sprites/spr_fx_dust.png" id="20_88aji"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qouk"]
+atlas = ExtResource("3_j4yks")
+region = Rect2(32, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_laqyv"]
 atlas = ExtResource("3_j4yks")
 region = Rect2(0, 0, 16, 16)
@@ -31,10 +35,18 @@ region = Rect2(0, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_6qouk")
+}],
+"loop": true,
+"name": &"build",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_laqyv")
 }],
 "loop": true,
-"name": &"default",
+"name": &"combat",
 "speed": 5.0
 }]
 
@@ -1035,6 +1047,9 @@ frame = 18
 [node name="ReticleSprite" type="AnimatedSprite2D" parent="."]
 z_index = -2
 sprite_frames = SubResource("SpriteFrames_wp8q1")
+animation = &"combat"
+autoplay = "combat"
+frame_progress = 0.491356
 
 [node name="StaffSprite" type="Sprite2D" parent="."]
 position = Vector2(0, 5)
@@ -1110,7 +1125,6 @@ shape = SubResource("CapsuleShape2D_bnayp")
 debug_color = Color(0.993404, 0, 0.2381, 0.42)
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_ljh2g")
 

@@ -24,7 +24,8 @@ var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
 	Enemy.Size.LARGE: preload("res://scenes/enemies/LargeEnemy.tscn"),
 	Enemy.Size.FLYING_SMALL: preload("res://scenes/enemies/FlyingSmallEnemy.tscn"),
 	Enemy.Size.FLYING_LARGE: preload("res://scenes/enemies/FlyingLargeEnemy.tscn"),
-	Enemy.Size.RANGED_SMALL: preload("res://scenes/enemies/RangedSmallEnemy.tscn")
+	Enemy.Size.RANGED_SMALL: preload("res://scenes/enemies/RangedSmallEnemy.tscn"),
+	Enemy.Size.REPEATER_SMALL: preload("res://scenes/enemies/EnemyRangedSmallRepeater.tscn"),
 }
 
 # Signals
@@ -132,7 +133,7 @@ func spawn_enemy(_spawn: Spawn) -> void:
 		active_path_enemies.append(new_enemy)
 		configure_enemy_pathing(new_enemy, _spawn)
 
-	if new_enemy is EnemyRanged:
+	if new_enemy is EnemyRanged or EnemyDataRangedRepeater:
 		new_enemy.configure_ranged_enemy()
 
 	if boss_wave_active: 

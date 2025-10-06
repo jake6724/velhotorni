@@ -257,7 +257,7 @@ libraries = {
 
 [node name="PrimaryArea" type="Area2D" parent="."]
 collision_layer = 512
-collision_mask = 16
+collision_mask = 8208
 
 [node name="PrimaryCollider" type="CollisionShape2D" parent="PrimaryArea"]
 scale = Vector2(0.6, 0.6)

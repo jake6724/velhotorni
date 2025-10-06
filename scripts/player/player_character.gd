@@ -168,17 +168,19 @@ func switch_tower(_switch_direction: int) -> void:
 ## Switch between combat and building modes
 func on_switch_player_mode_pressed() -> void:
 	building = not building
-	if building:
+	if building:							# Switch to build mode
 		primary_action_func = place_tower
 		switch_action_func = switch_tower
 		staff_sprite.hide()
 		player_build.create_preview_tower()
-	else:
+	else:								    # Switch to combat mode 
 		staff_sprite.show()
 		primary_action_func = cast_spell
 		switch_action_func = switch_spell
 		if player_build.preview_tower:	# Remove preview tower
 			player_build.preview_tower.queue_free()
+
+	player_aim.switch_mode(building)
 
 func on_animation_finished(anim_name) -> void:
 	if anim_name == "dash":

@@ -1,11 +1,14 @@
-[gd_scene load_steps=32 format=4 uid="uid://up6hhofmi3ak"]
+[gd_scene load_steps=39 format=4 uid="uid://up6hhofmi3ak"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_ssuxm"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_3ew8m"]
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="4_k1xcf"]
 [ext_resource type="Resource" uid="uid://bf4lqtkiomyex" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_fire_ghoul_1.tres" id="4_ssuxm"]
 [ext_resource type="Resource" uid="uid://csabylla83qj0" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_wind_ghoul_1.tres" id="5_3ew8m"]
+[ext_resource type="Resource" uid="uid://b0i4vc76oun8b" path="res://data/enemies/ranged_enemies/repeaters/enemy_data_ranged_repeater_fire_ghoul.tres" id="5_pc8ms"]
+[ext_resource type="Resource" uid="uid://q67w312o5ebj" path="res://data/enemies/ranged_enemies/enemy_data_ranged_fire_ghoul.tres" id="5_s0k01"]
 [ext_resource type="Resource" uid="uid://cxaxxqst73uhc" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_0.tres" id="6_0f80l"]
+[ext_resource type="Resource" uid="uid://dunabpqrm82ma" path="res://data/enemies/ranged_enemies/enemy_data_ranged_wind_ghoul.tres" id="6_clfgj"]
 [ext_resource type="Resource" uid="uid://bwkq2oxotnbg2" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_1.tres" id="7_pc8ms"]
 [ext_resource type="Texture2D" uid="uid://cm5ugpqpl32g4" path="res://assets/art/sprites/environment/spr_environment_animation_atlas.png" id="8_ivb0d"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="8_pc8ms"]
@@ -17,6 +20,34 @@
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="12_pfbjf"]
 [ext_resource type="Shader" uid="uid://pvf7vah26qjs" path="res://assets/art/heat_haze.gdshader" id="12_ssuxm"]
 [ext_resource type="Texture2D" uid="uid://bg5wqpo6k5mck" path="res://assets/art/sprites/spr_fx_heatmask.png" id="13_3ew8m"]
+
+[sub_resource type="Resource" id="Resource_h5wmt"]
+script = ExtResource("4_k1xcf")
+enemy_data = ExtResource("5_pc8ms")
+delay = 1.0
+path_index = 0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"
+
+[sub_resource type="Resource" id="Resource_pfbjf"]
+script = ExtResource("4_k1xcf")
+enemy_data = ExtResource("5_s0k01")
+delay = 1.0
+path_index = 0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"
+
+[sub_resource type="Resource" id="Resource_t6r5w"]
+script = ExtResource("4_k1xcf")
+enemy_data = ExtResource("6_clfgj")
+delay = 1.0
+path_index = 0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"
+
+[sub_resource type="Resource" id="Resource_s0k01"]
+script = ExtResource("2_3ew8m")
+data = Array[ExtResource("4_k1xcf")]([SubResource("Resource_h5wmt"), SubResource("Resource_pfbjf"), SubResource("Resource_t6r5w")])
+reward = 1.0
+token_reward = 0
+metadata/_custom_type_script = "uid://cskry1sw3vqba"
 
 [sub_resource type="Resource" id="Resource_yalw7"]
 script = ExtResource("2_3ew8m")
@@ -1583,7 +1614,7 @@ script = ExtResource("1_ssuxm")
 level_name = "Level 2"
 region = 2
 initial_gold = 75
-waves = Array[ExtResource("2_3ew8m")]([SubResource("Resource_yalw7"), SubResource("Resource_v2c5h"), SubResource("Resource_u6qoj")])
+waves = Array[ExtResource("2_3ew8m")]([SubResource("Resource_s0k01"), SubResource("Resource_yalw7"), SubResource("Resource_v2c5h"), SubResource("Resource_u6qoj")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
