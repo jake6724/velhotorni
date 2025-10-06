@@ -1,7 +1,8 @@
-[gd_scene load_steps=39 format=4 uid="uid://up6hhofmi3ak"]
+[gd_scene load_steps=40 format=4 uid="uid://up6hhofmi3ak"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_ssuxm"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_3ew8m"]
+[ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/wave_one_fire.tres" id="3_clfgj"]
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="4_k1xcf"]
 [ext_resource type="Resource" uid="uid://bf4lqtkiomyex" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_fire_ghoul_1.tres" id="4_ssuxm"]
 [ext_resource type="Resource" uid="uid://csabylla83qj0" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_wind_ghoul_1.tres" id="5_3ew8m"]
@@ -1614,7 +1615,7 @@ script = ExtResource("1_ssuxm")
 level_name = "Level 2"
 region = 2
 initial_gold = 75
-waves = Array[ExtResource("2_3ew8m")]([SubResource("Resource_s0k01"), SubResource("Resource_yalw7"), SubResource("Resource_v2c5h"), SubResource("Resource_u6qoj")])
+waves = Array[ExtResource("2_3ew8m")]([ExtResource("3_clfgj"), SubResource("Resource_s0k01"), SubResource("Resource_yalw7"), SubResource("Resource_v2c5h"), SubResource("Resource_u6qoj")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

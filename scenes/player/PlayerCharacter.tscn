@@ -1049,7 +1049,7 @@ z_index = -2
 sprite_frames = SubResource("SpriteFrames_wp8q1")
 animation = &"combat"
 autoplay = "combat"
-frame_progress = 0.491356
+frame_progress = 0.479543
 
 [node name="StaffSprite" type="Sprite2D" parent="."]
 position = Vector2(0, 5)
@@ -1117,7 +1117,7 @@ position = Vector2(-6, -7)
 
 [node name="PlayerHurtbox" type="Area2D" parent="."]
 collision_layer = 131072
-collision_mask = 294912
+collision_mask = 294928
 script = ExtResource("12_gsbha")
 
 [node name="PlayerHurtboxCollider" type="CollisionShape2D" parent="PlayerHurtbox"]

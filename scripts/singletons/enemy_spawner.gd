@@ -133,7 +133,7 @@ func spawn_enemy(_spawn: Spawn) -> void:
 		active_path_enemies.append(new_enemy)
 		configure_enemy_pathing(new_enemy, _spawn)
 
-	if new_enemy is EnemyRanged or EnemyDataRangedRepeater:
+	if new_enemy is EnemyRanged or new_enemy is EnemyRangedRepeater:
 		new_enemy.configure_ranged_enemy()
 
 	if boss_wave_active: 

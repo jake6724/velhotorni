@@ -43,6 +43,8 @@ var can_fire: bool = true
 var hit: bool = false
 
 var hitstun_recovery_multiplier: float = 300 # Influences how quickly the player stops sliding when hitstun and recovers back to normal mode
+var hurtbox_iframe_duration: float = 1.0
+var hurtbox_reset_timer: Timer = Timer.new()
 
 var building: bool = false
 var primary_action_func: Callable = Callable(cast_spell)
@@ -73,6 +75,11 @@ func _ready():
 	respawn_timer.timeout.connect(respawn)
 	add_child(respawn_timer)
 
+	hurtbox_reset_timer.autostart = false
+	hurtbox_reset_timer.one_shot = true
+	hurtbox_reset_timer.timeout.connect(on_hurtbox_reset_timer_timeout)
+	add_child(hurtbox_reset_timer)
+
 	player_spell_spawner.melee_spell_cast.connect(player_aim.swing_staff)
 
 	z_index = Constants.z_index_map["player_character"]
@@ -92,7 +99,7 @@ func _physics_process(delta): # This can go in a state eventually
 			# Check if hitstun complete
 			if velocity == Vector2.ZERO:
 				hit = false
-				player_hurtbox.collider.set_deferred("disabled", false)
+				# Hurtbox is re-enable on hurtbox_reset_timer.timeout()
 
 		# Primary Action
 		if player_input.primary_action_pressed:
@@ -206,6 +213,8 @@ func on_hit(_direction) -> void:
 		hit = true
 		velocity = _direction * player_stats.knockback_multiplier
 
+		hurtbox_reset_timer.start(hurtbox_iframe_duration)
+
 		player_camera.apply_shake(1)
 		TimeManager.apply_hitstop()
 
@@ -225,6 +234,9 @@ func respawn() -> void:
 	character_sprite.show()
 	global_position = spawn_point
 	alive = true
+
+func on_hurtbox_reset_timer_timeout() -> void:
+	player_hurtbox.collider.set_deferred("disabled", false)
 
 func show_staff_sprite_custom(): 
 	if alive and not building:

@@ -149,7 +149,6 @@ var prev_enemy_progress: float
 var cur_enemy_progress: float
 var progress_diff: float
 
-
 var attack_timer: Timer = Timer.new()
 
 signal tower_clicked

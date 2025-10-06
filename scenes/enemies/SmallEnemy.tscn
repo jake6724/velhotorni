@@ -15,8 +15,9 @@
 [ext_resource type="Script" uid="uid://bm2jek1l03frj" path="res://scripts/enemies/enemy_indicator.gd" id="11_nh2d4"]
 [ext_resource type="Script" uid="uid://di3c54ykd28fx" path="res://scripts/enemies/enemy_movement.gd" id="14_refft"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7iym1"]
-radius = 8.06226
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7k44a"]
+radius = 6.0
+height = 14.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tw3xv"]
 atlas = ExtResource("3_0apxy")
@@ -906,10 +907,9 @@ script = ExtResource("1_7cewq")
 metadata/_custom_type_script = "uid://dn6bxxa2tg45m"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-z_index = 1
+z_index = 2
 position = Vector2(8, 8)
-shape = SubResource("CircleShape2D_7iym1")
+shape = SubResource("CapsuleShape2D_7k44a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
