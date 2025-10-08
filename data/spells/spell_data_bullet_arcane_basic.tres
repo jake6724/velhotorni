@@ -6,7 +6,6 @@
 
 [resource]
 script = ExtResource("1_j800h")
-damage = 3.0
 speed = 300.0
 num_bullets = 1
 cooldown = 0.1
@@ -16,4 +15,11 @@ max_distance = 75.0
 spread = 3.0
 atlas = ExtResource("1_bqm4h")
 sfx = ExtResource("3_vuv85")
+type = 0
+staff_type = 0
+element = 19
+damage = 3.0
+mana_cost = 1.0
+active_icon_region = Rect2(0, 0, 32, 31)
+inactive_icon_region = Rect2(0, 0, 16, 16)
 metadata/_custom_type_script = "uid://r20hlvy6xofu"

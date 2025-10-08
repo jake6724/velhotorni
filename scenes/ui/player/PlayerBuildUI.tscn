@@ -1,0 +1,372 @@
+[gd_scene load_steps=14 format=3 uid="uid://sw4orj43x0r1"]
+
+[ext_resource type="Script" uid="uid://df6axhjoo372t" path="res://scripts/ui/player/player_build_ui.gd" id="1_4whgm"]
+[ext_resource type="Texture2D" uid="uid://dwgwikxycntfw" path="res://assets/art/sprites/ui/spr_ui_tower_background.png" id="1_tgjx2"]
+[ext_resource type="Texture2D" uid="uid://b2ltpw54x0dyi" path="res://assets/art/sprites/ui/spr_ui_bumper_left.png" id="2_m61gg"]
+[ext_resource type="Texture2D" uid="uid://b2s6e02upgc0n" path="res://assets/art/sprites/ui/spr_ui_bumper_right.png" id="3_dnc61"]
+[ext_resource type="Texture2D" uid="uid://ducm8wc7gd0vx" path="res://assets/art/sprites/ui/spr_ui_tower_fire.png" id="4_e8jwa"]
+[ext_resource type="Texture2D" uid="uid://d3uwhutrtqgwi" path="res://assets/art/sprites/ui/spr_ui_coin_small.png" id="5_4whgm"]
+[ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="6_27m2f"]
+[ext_resource type="Texture2D" uid="uid://3i7x1gl8lq01" path="res://assets/art/sprites/ui/spr_ui_tower_wind_bird.png" id="7_vi7rs"]
+[ext_resource type="Texture2D" uid="uid://dfi1sbq52o3jw" path="res://assets/art/sprites/ui/spr_ui_tower_water_fish.png" id="8_mr62x"]
+[ext_resource type="Texture2D" uid="uid://rvf7vwl6ny54" path="res://assets/art/sprites/ui/spr_ui_tower_earth.png" id="9_mnvwy"]
+[ext_resource type="Texture2D" uid="uid://3dti3chb4cnf" path="res://assets/art/sprites/ui/spr_ui_tower_light.png" id="10_jni78"]
+[ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="11_6qvig"]
+[ext_resource type="PackedScene" uid="uid://du0wke3a8n1k8" path="res://scenes/ui/TowerInfoPanel.tscn" id="13_5fpji"]
+
+[node name="PlayerBuildUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4whgm")
+metadata/_custom_type_script = "uid://df6axhjoo372t"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -16.0
+offset_right = 128.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_tgjx2")
+stretch_mode = 2
+
+[node name="SwitchIconLeft" type="TextureRect" parent="TextureRect"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 32.0
+offset_bottom = 16.0
+texture = ExtResource("2_m61gg")
+stretch_mode = 2
+
+[node name="SwitchIconRight" type="TextureRect" parent="TextureRect"]
+layout_mode = 0
+offset_left = 224.0
+offset_right = 240.0
+offset_bottom = 16.0
+texture = ExtResource("3_dnc61")
+stretch_mode = 2
+
+[node name="TowerButtons" type="HBoxContainer" parent="TextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -23.0
+offset_right = 96.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="FireVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = -3
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/FireVbox"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 0
+
+[node name="FireButton" type="TextureButton" parent="TextureRect/TowerButtons/FireVbox"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+texture_normal = ExtResource("4_e8jwa")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/FireVbox/FireButton"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = -7.00002
+offset_right = 29.0
+offset_bottom = 2.99998
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/FireVbox/FireButton/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(7, 9)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("5_4whgm")
+
+[node name="FirePriceLabel" type="Label" parent="TextureRect/TowerButtons/FireVbox/FireButton/HBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("6_27m2f")
+theme_override_font_sizes/font_size = 8
+text = "00"
+vertical_alignment = 1
+
+[node name="WindVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = -3
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/WindVbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="WindButton" type="TextureButton" parent="TextureRect/TowerButtons/WindVbox"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("7_vi7rs")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/WindVbox/WindButton"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = -7.0
+offset_right = 32.0
+offset_bottom = 3.0
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/WindVbox/WindButton/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(7, 9)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_4whgm")
+
+[node name="WindPriceLabel" type="Label" parent="TextureRect/TowerButtons/WindVbox/WindButton/HBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("6_27m2f")
+theme_override_font_sizes/font_size = 8
+text = "00"
+
+[node name="WaterVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = -3
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/WaterVbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="WaterButton" type="TextureButton" parent="TextureRect/TowerButtons/WaterVbox"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("8_mr62x")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/WaterVbox/WaterButton"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = -7.00002
+offset_right = 32.0
+offset_bottom = 2.99998
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/WaterVbox/WaterButton/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(7, 9)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_4whgm")
+
+[node name="WaterPriceLabel" type="Label" parent="TextureRect/TowerButtons/WaterVbox/WaterButton/HBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("6_27m2f")
+theme_override_font_sizes/font_size = 8
+text = "00"
+
+[node name="EarthVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = -3
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/EarthVbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="EarthButton" type="TextureButton" parent="TextureRect/TowerButtons/EarthVbox"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("9_mnvwy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/EarthVbox/EarthButton"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = -7.0
+offset_right = 32.0
+offset_bottom = 3.0
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/EarthVbox/EarthButton/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(7, 9)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_4whgm")
+
+[node name="EarthPriceLabel" type="Label" parent="TextureRect/TowerButtons/EarthVbox/EarthButton/HBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("6_27m2f")
+theme_override_font_sizes/font_size = 8
+text = "00"
+
+[node name="LightVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = -3
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/LightVbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="LightButton" type="TextureButton" parent="TextureRect/TowerButtons/LightVbox"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("10_jni78")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/LightVbox/LightButton"]
+layout_mode = 2
+offset_left = 4.99997
+offset_top = -7.00002
+offset_right = 32.0
+offset_bottom = 2.99998
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/LightVbox/LightButton/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(7, 9)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_4whgm")
+
+[node name="LightPriceLabel" type="Label" parent="TextureRect/TowerButtons/LightVbox/LightButton/HBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("6_27m2f")
+theme_override_font_sizes/font_size = 8
+text = "00"
+
+[node name="DarkVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = -3
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/DarkVbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="DarkButton" type="TextureButton" parent="TextureRect/TowerButtons/DarkVbox"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("11_6qvig")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/DarkVbox/DarkButton"]
+layout_mode = 2
+offset_left = 4.99997
+offset_top = -7.0
+offset_right = 32.0
+offset_bottom = 3.0
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/DarkVbox/DarkButton/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(7, 9)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_4whgm")
+
+[node name="DarkPriceLabel" type="Label" parent="TextureRect/TowerButtons/DarkVbox/DarkButton/HBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0941176, 0.0941176, 0.25098, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("6_27m2f")
+theme_override_font_sizes/font_size = 8
+text = "00"
+
+[node name="TowerInfoPanel" parent="." instance=ExtResource("13_5fpji")]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -88.0
+offset_right = 0.0
+grow_horizontal = 0

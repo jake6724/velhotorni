@@ -1,134 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsnxdycnstbxx"]
+[gd_scene load_steps=10 format=3 uid="uid://dvpd16vc411d2"]
 
-[ext_resource type="Texture2D" uid="uid://bru0vasbogas4" path="res://assets/art/atlases/bullet/atl_bullet_arcane.png" id="1_ursk0"]
-[ext_resource type="Script" uid="uid://nea0jnsnjkk3" path="res://scripts/spells/spell_bullet.gd" id="2_xhrp4"]
+[ext_resource type="Texture2D" uid="uid://bru0vasbogas4" path="res://assets/art/atlases/bullet/atl_bullet_arcane.png" id="1_dhh3i"]
+[ext_resource type="Script" uid="uid://do2ywclk1g3r2" path="res://scripts/spells/spell_bullet_charged.gd" id="1_rirs4"]
 
-[sub_resource type="Animation" id="Animation_ursk0"]
+[sub_resource type="Animation" id="Animation_80js5"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:vframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame_coords")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xhrp4"]
-resource_name = "hit"
-length = 0.2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:vframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame_coords")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
-}
-
-[sub_resource type="Animation" id="Animation_a3r6q"]
-resource_name = "move"
-length = 0.3
-loop_mode = 1
-step = 0.075
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:vframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame_coords")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.15, 0.225),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_6fm6w"]
-resource_name = "spawn"
-length = 0.001
-step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -166,33 +42,117 @@ tracks/2/keys = {
 "values": [Vector2i(0, 4)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ursk0"]
-_data = {
-&"RESET": SubResource("Animation_ursk0"),
-&"hit": SubResource("Animation_xhrp4"),
-&"move": SubResource("Animation_a3r6q"),
-&"spawn": SubResource("Animation_6fm6w")
+[sub_resource type="Animation" id="Animation_hhjnt"]
+resource_name = "move"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 6)]
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xhrp4"]
+[sub_resource type="Animation" id="Animation_dhh3i"]
+resource_name = "move_level_1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_k2wc2"]
+resource_name = "move_level_2"
+
+[sub_resource type="Animation" id="Animation_rirs4"]
+resource_name = "spawn"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dhh3i"]
+_data = {
+&"RESET": SubResource("Animation_80js5"),
+&"move": SubResource("Animation_hhjnt"),
+&"move_level_1": SubResource("Animation_dhh3i"),
+&"move_level_2": SubResource("Animation_k2wc2"),
+&"spawn": SubResource("Animation_rirs4")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rirs4"]
 radius = 2.0
 
-[node name="SpellBullet" type="Sprite2D"]
-texture = ExtResource("1_ursk0")
+[node name="SpellBulletCharged" type="Sprite2D"]
+texture = ExtResource("1_dhh3i")
 hframes = 4
 vframes = 7
-script = ExtResource("2_xhrp4")
-metadata/_custom_type_script = "uid://nea0jnsnjkk3"
+frame = 16
+script = ExtResource("1_rirs4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_ursk0")
+&"": SubResource("AnimationLibrary_dhh3i")
 }
-autoplay = "spawn"
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 512
-collision_mask = 270352
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_xhrp4")
+shape = SubResource("CircleShape2D_rirs4")

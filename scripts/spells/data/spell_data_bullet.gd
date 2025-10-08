@@ -3,8 +3,6 @@ extends SpellData
 
 # TODO: Add options for burst mode config
 
-@export var element: Constants.Element
-@export var damage: float
 @export var speed: float
 
 ## The number of bullets per shot

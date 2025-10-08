@@ -1,7 +1,7 @@
-class_name PlayerCharacterStats
-extends Node
+class_name PlayerCharacterStats # TODO: Change this to PlayerStats
+extends Node 
 
-var health: float = 6.0:
+var health: float = 8.0:
 	set(value):
 		health = value
 		health_updated.emit(health)

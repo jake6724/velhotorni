@@ -5,9 +5,12 @@
 
 [resource]
 script = ExtResource("1_xb82k")
-element = 2
-damage = 45.0
 cooldown = 0.75
 atlas = ExtResource("1_e4yop")
 type = 2
 staff_type = 1
+element = 2
+damage = 45.0
+mana_cost = 2.0
+active_icon_region = Rect2(64, 0, 32, 31)
+inactive_icon_region = Rect2(32, 0, 16, 16)

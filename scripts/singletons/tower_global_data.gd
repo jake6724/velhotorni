@@ -1,5 +1,14 @@
 extends Node
 
+var tower_prices: Dictionary[Constants.Element, int] = {
+	Constants.Element.FIRE:  10,
+	Constants.Element.WIND:  20,
+	Constants.Element.WATER: 30,
+	Constants.Element.EARTH: 40,
+	Constants.Element.LIGHT: 50,
+	Constants.Element.DARK:  60,
+}
+
 # True = tower evolution is unused
 var tower_evolution_status: Dictionary[Constants.Element, bool] = {
 	Constants.Element.FIRE:  true, # Not used, set here to make reset simpler

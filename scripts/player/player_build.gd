@@ -1,6 +1,8 @@
 class_name PlayerBuild
 extends Node
 
+var player_build_ui: PlayerBuildUI # Set by PlayerCharacter
+
 const TOWER_PLACEMENT_RANGE = 16
 
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
@@ -18,6 +20,8 @@ var tower_index: int = 0:
 			tower_index = 5
 		elif tower_index > 5:
 			tower_index = 0
+
+		player_build_ui.tower_index = tower_index
 
 ## Creates a new instance of `tower_scene`, fully initialized. Modulated to be transparent.
 ## This is an active and ready tower that just needs to be placed.

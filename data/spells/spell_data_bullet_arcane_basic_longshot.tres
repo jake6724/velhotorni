@@ -6,7 +6,6 @@
 
 [resource]
 script = ExtResource("2_42ena")
-damage = 8.0
 speed = 800.0
 num_bullets = 1
 cooldown = 0.7
@@ -16,4 +15,8 @@ max_distance = 300.0
 spread = 0.0
 atlas = ExtResource("1_dpwp6")
 sfx = ExtResource("3_k5n5j")
+type = 0
+staff_type = 0
+element = 19
+damage = 8.0
 metadata/_custom_type_script = "uid://r20hlvy6xofu"

@@ -5,6 +5,7 @@ var move_input: Vector2
 var aim_input: Vector2
 
 var primary_action_pressed
+var primary_action_charge: float
 
 signal secondary_action_pressed
 signal switch_selection_pressed
@@ -20,9 +21,10 @@ func get_aim_input() -> Vector2:
 	aim_input = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
 	return aim_input
 
-# func _process(_delta):
-# 	if Input.is_action_pressed("cast_spell"): # Check every frame since it can be held. _input will only detect the first call
-# 		spell_input_pressed.emit()
+func _process(_delta):
+	if primary_action_pressed:
+		primary_action_charge += _delta
+	# print(primary_action_charge)
 
 func _input(event):
 	check_primary_action_input(event)
@@ -42,8 +44,7 @@ func _input(event):
 func check_primary_action_input(event) -> void:
 	if Input.is_action_just_pressed("primary_action"):
 		primary_action_pressed = true
-	# if event.is_action_pressed("primary_action") and not event.is_echo():
-	# 	primary_action_pressed = true
 
-	if event.is_action_released("primary_action") and not event.is_echo():
+	if event.is_action_released("primary_action"):
 		primary_action_pressed = false
+		primary_action_charge = 0

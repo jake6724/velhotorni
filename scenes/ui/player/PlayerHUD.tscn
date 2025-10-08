@@ -1,0 +1,209 @@
+[gd_scene load_steps=13 format=3 uid="uid://d218nr004vv6w"]
+
+[ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_ivdol"]
+[ext_resource type="Script" uid="uid://cngopxpmylq3o" path="res://scripts/ui/player/player_hud.gd" id="1_l3s77"]
+[ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="2_rq211"]
+[ext_resource type="Texture2D" uid="uid://sj71otvhlwsj" path="res://assets/art/sprites/ui/spr_ui_spell_ammo.png" id="3_0741g"]
+[ext_resource type="Texture2D" uid="uid://b1giqh0joaalh" path="res://assets/art/sprites/ui/spr_ui_spell_ammo_progress.png" id="4_bhg3x"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="5_fd7yi"]
+[ext_resource type="Texture2D" uid="uid://coitoxlmdhayv" path="res://assets/art/sprites/ui/spr_ui_gem_counter.png" id="6_knakh"]
+[ext_resource type="Texture2D" uid="uid://bfgmcle80412a" path="res://assets/art/sprites/ui/spr_ui_player_health_icon.png" id="7_844kx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rq211"]
+atlas = ExtResource("1_ivdol")
+region = Rect2(32, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0741g"]
+atlas = ExtResource("2_rq211")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhg3x"]
+atlas = ExtResource("2_rq211")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd7yi"]
+atlas = ExtResource("2_rq211")
+region = Rect2(16, 0, 16, 16)
+
+[node name="PlayerHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_l3s77")
+metadata/_custom_type_script = "uid://cngopxpmylq3o"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 80.0
+offset_bottom = 50.0
+theme_override_constants/separation = 0
+
+[node name="Weapons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="ActiveSpellIcon" type="TextureRect" parent="VBoxContainer/Weapons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_rq211")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Weapons"]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Weapons/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 1
+
+[node name="InactiveSpells" type="HBoxContainer" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 0
+
+[node name="InactiveSpell1Icon" type="TextureRect" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_0741g")
+
+[node name="InactiveSpell1Mana" type="TextureProgressBar" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells/InactiveSpell1Icon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = 3.0
+offset_right = 7.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+texture_under = ExtResource("3_0741g")
+texture_progress = ExtResource("4_bhg3x")
+
+[node name="InactiveSpell2Icon" type="TextureRect" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_bhg3x")
+
+[node name="InactiveSpell2Mana" type="TextureProgressBar" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells/InactiveSpell2Icon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = 3.0
+offset_right = 7.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.04797)
+value = 100.0
+texture_under = ExtResource("3_0741g")
+texture_progress = ExtResource("4_bhg3x")
+
+[node name="InactiveSpell3Icon" type="TextureRect" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_fd7yi")
+
+[node name="InactiveSpell3Mana" type="TextureProgressBar" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells/InactiveSpell3Icon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = 3.0
+offset_right = 7.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+texture_under = ExtResource("3_0741g")
+texture_progress = ExtResource("4_bhg3x")
+
+[node name="ActiveSpellManaLabel" type="Label" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 9)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("5_fd7yi")
+theme_override_font_sizes/font_size = 8
+text = "256"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/ActiveSpellManaLabel"]
+z_index = -2
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+offset_top = 1.0
+offset_right = 26.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+color = Color(0.0941176, 0.0941176, 0.25098, 1)
+
+[node name="Stats" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TowerManaIcon" type="TextureRect" parent="VBoxContainer/Stats"]
+custom_minimum_size = Vector2(42, 10)
+layout_mode = 2
+texture = ExtResource("6_knakh")
+stretch_mode = 2
+
+[node name="TowerManaLabel" type="Label" parent="VBoxContainer/Stats/TowerManaIcon"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 8)
+layout_mode = 2
+offset_left = 4.0
+offset_right = 41.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("5_fd7yi")
+theme_override_font_sizes/font_size = 8
+text = "0200"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HealthIcon" type="TextureRect" parent="VBoxContainer/Stats"]
+layout_mode = 2
+texture = ExtResource("7_844kx")
+stretch_mode = 2
+
+[node name="HealthLabel" type="Label" parent="VBoxContainer/Stats/HealthIcon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.5
+offset_top = -5.0
+offset_right = -22.5
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_fd7yi")
+theme_override_font_sizes/font_size = 8
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Stats/HealthIcon"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 40.0
+offset_bottom = 40.0

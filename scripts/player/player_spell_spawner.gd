@@ -2,9 +2,7 @@ class_name PlayerSpellSpawner
 extends Node
 
 @onready var player: PlayerCharacter = get_owner()
-@export var selected_spells: Array[SpellData]
 var spell_spawn_point: Node2D # Set by PlayerCharacter
-
 
 var spell_func: Callable = Callable(parent_spawn_bullet_spell)
 
@@ -14,31 +12,17 @@ var attack_timer: Timer = Timer.new()
 var spell_scenes: Dictionary[SpellData.Type, PackedScene] = {
 	SpellData.Type.BULLET: preload("res://scenes/Spells/SpellBullet.tscn"), 
 	SpellData.Type.BULLET_AOE: preload("res://scenes/Spells/SpellBulletAOE.tscn"),
-	SpellData.Type.MELEE: preload("res://scenes/Spells/SpellMelee.tscn")
-}
-
-var spell_data: Dictionary[String, SpellData] ={
-	"BasicArcane": preload("res://data/spells/spell_data_bullet_arcane_basic.tres"),
-	"BasicArcaneTriple": preload("res://data/spells/spell_data_bullet_arcane_basic_triple.tres"),
-	"BasicArcaneLongshot": preload("res://data/spells/spell_data_bullet_arcane_basic_longshot.tres"),
-	"FireFireball": preload("res://data/spells/fire/spell_data_bullet_aoe_fireball.tres"),
-	"WaterIceSword": preload("res://data/spells/water/spell_data_melee_water_ice_sword.tres"),
+	SpellData.Type.MELEE: preload("res://scenes/Spells/SpellMelee.tscn"),
+	SpellData.Type.BULLET_CHARGED: preload("res://scenes/Spells/SpellBulletCharged.tscn")
 }
 
 var curr_spell_data: SpellData
-var curr_spell_index: int = 0
 var curr_spell_is_melee: bool = false
-
-# All spells that are available in the current level
-#var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["BasicArcaneTriple"], spell_data["BasicArcaneLongshot"], spell_data["FireFireball"]]
-# var selected_spells: Array[SpellData] = [spell_data["BasicArcane"], spell_data["WaterIceSword"]]
-
-
 var spread_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 signal spell_cast
 signal staff_switched
-signal melee_spell_cast
+signal melee_spell_cast # Just used to call the swing sword function; not for mana data
 
 func _ready():
 	attack_timer.autostart = false
@@ -46,31 +30,23 @@ func _ready():
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	add_child(attack_timer)
 
-	curr_spell_data = selected_spells[curr_spell_index]
+func initialize(_spell_data: SpellData) -> void:
+	curr_spell_data = _spell_data
 	spell_func = get_spell_func(curr_spell_data.type)
 
 ## Wrapper for the `spell_func` Callable. Used as an easy interface for other scripts to call.
 func spawn_spell(player_aim_direction: Vector2) -> void:
 	if can_attack:
-		spell_func.call(player_aim_direction.normalized())
-		can_attack = false
+		if check_can_afford(curr_spell_data):
+			spell_func.call(player_aim_direction.normalized())
+			can_attack = false
 
-func switch_spell(_switch_direction: int) -> void:
-	# Get next available spell data, based on switch input 
-	var new_index = curr_spell_index + _switch_direction 
-	if new_index < 0:
-		new_index = (selected_spells.size() - 1) 
-	elif new_index > (selected_spells.size() - 1):
-		new_index = 0 
-	
-	curr_spell_index = new_index
-	curr_spell_data = selected_spells[curr_spell_index]
-
+func on_switch_spell(new_spell_data: SpellData) -> void:
+	curr_spell_data = new_spell_data
 	# Update spell_func()
 	spell_func = get_spell_func(curr_spell_data.type)
-
 	# Update staff
-	staff_switched.emit(curr_spell_data.staff_type)
+	staff_switched.emit(curr_spell_data.staff_type) # this could move to player_spells.gd
 
 func get_spell_func(_spell_type: SpellData.Type) -> Callable:
 	match _spell_type:
@@ -80,6 +56,9 @@ func get_spell_func(_spell_type: SpellData.Type) -> Callable:
 		SpellData.Type.BULLET_AOE: 
 			curr_spell_is_melee = false
 			return parent_spawn_bullet_spell
+		SpellData.Type.BULLET_CHARGED:
+			curr_spell_is_melee = false
+			return spawn_bullet_spell_charged
 		SpellData.Type.MELEE: 
 			curr_spell_is_melee = true
 			return spawn_melee_spell
@@ -114,6 +93,16 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
 			angle_seperation += new_spell_data.angle_seperation
 		angle_sign = -angle_sign
 
+func spawn_bullet_spell_charged(_player_aim_direction: Vector2) -> void:
+	var charge_value = min(100, player.player_input.primary_action_charge)
+	var new_spell_data: SpellDataBullet = curr_spell_data.duplicate()
+	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
+
+	new_spell_data.speed = new_spell_data.speed * charge_value
+	print("new_spell_data.speed: ", new_spell_data.speed)
+
+	spawn_bullet_spell(_player_aim_direction, new_spell_data, new_spell_scene, 0, 1)
+
 ## Spawn a single spell bullet
 func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellDataBullet, new_spell_scene: PackedScene, angle_seperation: float, angle_sign: float) -> void:
 	var new_spell: Spell = new_spell_scene.instantiate()
@@ -122,7 +111,7 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 	var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
 	add_child(new_spell)
 	new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)))
-	spell_cast.emit()
+	spell_cast.emit(new_spell_data.element, new_spell_data.mana_cost)
 
 func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 	var new_spell_data: SpellDataMelee = curr_spell_data
@@ -135,7 +124,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 
 	new_spell.z_index = player.z_index + 2
 	add_child(new_spell)
-	spell_cast.emit()
+	spell_cast.emit(new_spell_data.element, new_spell_data.mana_cost)
 	melee_spell_cast.emit()
 	attack_timer.start(new_spell_data.cooldown)
 
@@ -145,6 +134,12 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 func on_attack_timer_timeout() -> void:
 	can_attack = true
 	
+func check_can_afford(new_spell_data: SpellData) -> bool:
+	if new_spell_data.mana_cost <= player.player_mana.get_element_mana(new_spell_data.element):
+		return true
+	else:
+		return false
+
 # func apply_spell_kick(kick_amount: float) -> void:
 # 	print("applying kick")
 # 	player.velocity += -player.aim_input * kick_amount

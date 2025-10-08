@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var player_aim: PlayerAim = $PlayerAim
 @onready var player_animation: PlayerAnimation = $PlayerAnimation
 @onready var player_input: PlayerInput = $PlayerInput
+@onready var player_spells: PlayerSpells = $PlayerSpells
 @onready var player_spell_spawner: PlayerSpellSpawner = $PlayerSpellSpawner
 @onready var player_stats: PlayerCharacterStats = $PlayerCharacterStats
 @onready var player_hurtbox: Area2D = $PlayerHurtbox
@@ -15,20 +16,26 @@ extends CharacterBody2D
 @onready var player_audio: PlayerAudio = %PlayerAudio
 @onready var player_particles: GPUParticles2D = %PlayerParticles
 @onready var player_build: PlayerBuild = $PlayerBuild
+@onready var player_hud: PlayerHUD = %PlayerHUD
+@onready var player_mana: PlayerMana = %PlayerMana
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var staff_sprite: Sprite2D = $StaffSprite
 @onready var staff_ap: AnimationPlayer = $StaffAnimationPlayer
 @onready var reticle_sprite: AnimatedSprite2D = $ReticleSprite
+@onready var reticle_charge: TextureProgressBar = $ReticleSprite/ReticleCharge
 @onready var spell_spawn_point: Node2D = %SpellSpawnPoint
 @onready var coin_collector: CoinCollector = $CoinCollector
+
+@onready var player_build_ui: PlayerBuildUI = %PlayerBuildUI
 
 var staff_texture: CompressedTexture2D = preload("res://assets/art/atlases/atl_player_mage_staff.png")
 
 var alive: bool = true
 var respawn_time: float = 1.0
 var respawn_timer: Timer = Timer.new()
+var respawn_iframe_duration: float = 3.0
 var spawn_point: Vector2 = Vector2.ZERO # Set manually by main
 
 var aim_input: Vector2
@@ -56,6 +63,9 @@ func _ready():
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
 	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
 
+	# Configure PlayerSpellSpawner
+	player_spell_spawner.initialize(player_spells.active_spell)
+	player_spells.active_spell_switched.connect(player_spell_spawner.on_switch_spell)
 	player_spell_spawner.spell_spawn_point = spell_spawn_point
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
 	player_spell_spawner.staff_switched.connect(on_staff_switched)
@@ -66,9 +76,17 @@ func _ready():
 	# Connect to AnimationTree
 	player_animation.animation_tree.animation_finished.connect(on_animation_finished)
 
+	# Configure PlayerHurtbox
 	player_hurtbox.damage_recieved.connect(on_damage_recieved)
 	player_hurtbox.hit.connect(on_hit)
 	player_hurtbox.pit_entered.connect(on_pit_entered)
+	
+	# Configure PlayerHUD
+	player_hud.initialize(player_spells.spells.array, player_mana, player_stats)
+	player_stats.health_updated.connect(player_hud.on_health_updated)
+
+	# Configure PlayerBuild
+	player_build.player_build_ui = player_build_ui
 
 	respawn_timer.autostart = false
 	respawn_timer.one_shot = true
@@ -83,6 +101,15 @@ func _ready():
 	player_spell_spawner.melee_spell_cast.connect(player_aim.swing_staff)
 
 	z_index = Constants.z_index_map["player_character"]
+
+# DEV ONLY
+# func _process(delta):
+# 	if player_input.primary_action_charge:
+# 		reticle_charge.show()
+# 		var value = min(100, player_input.primary_action_charge * 100)
+# 		reticle_charge.value = value
+# 	else:
+# 		reticle_charge.hide()
 
 func _physics_process(delta): # This can go in a state eventually
 	if alive:
@@ -121,7 +148,9 @@ func place_tower() -> void:
 	player_build.place_tower()
 	player_input.primary_action_pressed = false
 
-func on_spell_cast() -> void: 
+func on_spell_cast(_element: Constants.Element, _mana_cost) -> void:
+	player_mana.decrement_element_mana(_element, _mana_cost)
+	player_hud.update_mana(player_spells.spells.array, player_mana)
 	staff_ap.play("fire")
 
 func on_dash_input_pressed() -> void:
@@ -143,7 +172,8 @@ func on_switch_selection_pressed(_switch_direction) -> void:
 ## `PlayerSpellSpawner` determines the next spell type based on player input in `PlayerSpellSpawner.switch_spell()`
 ## and then returns this data via a signal connected to `PlayerCharacter.on_staff_switched()`
 func switch_spell(_switch_direction: int) -> void:
-	player_spell_spawner.switch_spell(_switch_direction)
+	player_spells.switch_spells(_switch_direction)
+	player_hud.update_spells(player_spells.spells.array, player_mana)
 
 ## Update the region of the staff atlas, changing the staff graphic. Plays the switch animation and temporarily hides
 ## the staff sprite. Prevents firing spells while switching.
@@ -162,6 +192,12 @@ func on_staff_switched(_spell_type: SpellData.Type) -> void:
 			staff_sprite.position = Vector2(0, 5) 
 			staff_sprite.offset = Vector2(4, 0.5) # TODO: Broke.
 
+		SpellData.StaffType.FIRE_STAFF:
+			staff_sprite.texture.region = Rect2(0,45,217,15)
+			player_aim.staff_rotation_offset_degrees = 0
+			staff_sprite.position = Vector2(0, 5) 
+			staff_sprite.offset = Vector2(4, 0.5) # TODO: Broke.
+
 		SpellData.StaffType.WATER_SWORD: 
 			staff_sprite.texture.region = Rect2(0,15,217,15)
 			player_aim.staff_rotation_offset_degrees = -120
@@ -176,16 +212,19 @@ func switch_tower(_switch_direction: int) -> void:
 func on_switch_player_mode_pressed() -> void:
 	building = not building
 	if building:							# Switch to build mode
-		primary_action_func = place_tower
+		primary_action_func = place_tower 
 		switch_action_func = switch_tower
 		staff_sprite.hide()
 		player_build.create_preview_tower()
+		player_build_ui.show()
+		player_build_ui.raise_current()
 	else:								    # Switch to combat mode 
 		staff_sprite.show()
 		primary_action_func = cast_spell
 		switch_action_func = switch_spell
 		if player_build.preview_tower:	# Remove preview tower
 			player_build.preview_tower.queue_free()
+		player_build_ui.hide()
 
 	player_aim.switch_mode(building)
 
@@ -218,6 +257,8 @@ func on_hit(_direction) -> void:
 		player_camera.apply_shake(1)
 		TimeManager.apply_hitstop()
 
+		player_stats.health -= 1
+
 func jump_forward() -> void:
 	pass
 
@@ -234,6 +275,8 @@ func respawn() -> void:
 	character_sprite.show()
 	global_position = spawn_point
 	alive = true
+	player_hurtbox.collider.set_deferred("disabled", true)
+	hurtbox_reset_timer.start(respawn_iframe_duration)
 
 func on_hurtbox_reset_timer_timeout() -> void:
 	player_hurtbox.collider.set_deferred("disabled", false)
