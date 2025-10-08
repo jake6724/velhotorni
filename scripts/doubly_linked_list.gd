@@ -36,12 +36,12 @@ func insert(_value: Variant) -> void:
 		tail = new_node
 	update_array()
 
-func switch_left() -> void:
+func switch_right() -> void:
 	# Make list circular
 	tail.next = head
 	head.prev = tail
 
-	# Rotate 1 keft
+	# Rotate 1 right
 	head = head.next
 	tail = tail.next
 
@@ -50,12 +50,12 @@ func switch_left() -> void:
 	head.prev = null
 	update_array()
 
-func switch_right() -> void:
+func switch_left() -> void:
 	# Make list circular
 	tail.next = head
 	head.prev = tail
 
-	# Rotate 1 right
+	# Rotate 1 left
 	head = head.prev
 	tail = tail.prev
 
