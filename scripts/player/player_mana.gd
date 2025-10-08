@@ -26,7 +26,6 @@ var tower_mana: float = 0:
 		tower_mana = value
 		tower_mana_updated.emit(tower_mana)
 
-signal element_mana_updated
 signal tower_mana_updated
 
 func get_element_mana(_element: Constants.Element) -> float:
@@ -37,8 +36,6 @@ func get_element_mana_max(_element: Constants.Element) -> float:
 
 func decrement_element_mana(_element, _value) -> void:
 	element_mana[_element] -= _value
-	# element_mana_updated.emit(_element, element_mana[_element])
 
 func increment_element_mana(_element, _value) -> void:
 	element_mana[_element] += _value
-	# element_mana_updated.emit(_element, element_mana[_element])

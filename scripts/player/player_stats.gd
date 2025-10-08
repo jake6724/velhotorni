@@ -4,6 +4,8 @@ extends Node
 var health: float = 8.0:
 	set(value):
 		health = value
+		if health < 1:
+			health = 0
 		health_updated.emit(health)
 
 var mana: float = 100.0:

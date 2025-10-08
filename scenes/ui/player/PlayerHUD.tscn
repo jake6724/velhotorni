@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d218nr004vv6w"]
+[gd_scene load_steps=15 format=3 uid="uid://d218nr004vv6w"]
 
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_ivdol"]
 [ext_resource type="Script" uid="uid://cngopxpmylq3o" path="res://scripts/ui/player/player_hud.gd" id="1_l3s77"]
@@ -8,6 +8,8 @@
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="5_fd7yi"]
 [ext_resource type="Texture2D" uid="uid://coitoxlmdhayv" path="res://assets/art/sprites/ui/spr_ui_gem_counter.png" id="6_knakh"]
 [ext_resource type="Texture2D" uid="uid://bfgmcle80412a" path="res://assets/art/sprites/ui/spr_ui_player_health_icon.png" id="7_844kx"]
+[ext_resource type="Texture2D" uid="uid://gknitvbgo0h0" path="res://assets/art/sprites/ui/spr_ui_player_health_bar_bg.png" id="9_gbyaf"]
+[ext_resource type="Texture2D" uid="uid://ctu4ujve6dvck" path="res://assets/art/sprites/ui/spr_ui_player_health_bar.png" id="10_tmo30"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rq211"]
 atlas = ExtResource("1_ivdol")
@@ -202,8 +204,12 @@ text = "8"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Stats/HealthIcon"]
+[node name="HealthBar" type="TextureProgressBar" parent="VBoxContainer/Stats/HealthIcon"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 1.0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 17.0
+offset_right = 42.0
+offset_bottom = 8.0
+max_value = 8.0
+texture_under = ExtResource("9_gbyaf")
+texture_progress = ExtResource("10_tmo30")
