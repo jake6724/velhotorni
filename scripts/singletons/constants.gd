@@ -16,6 +16,13 @@ var DIRECTIONS = [
 	Vector2(-1, -1).normalized()  # Up Left
 ]
 
+var DIRECTIONS_4 = [
+	Vector2(0, -1),  			  # Up
+	Vector2(1, 0),    			  # Right
+	Vector2(0, 1),    			  # Down
+	Vector2(-1, 0),   			  # Left
+]
+
 const CELL_SIZE: int = 16
 
 # const ui_color_base: String = "#adb5bd"
@@ -142,6 +149,17 @@ func get_closest_cardinal_direction_normalized(input_vector) -> Vector2:
 	var best_dot_product = -INF
 
 	for dir in DIRECTIONS:
+		var dot = input_vector.dot(dir)
+		if dot > best_dot_product:
+			best_dot_product = dot
+			best_direction = dir
+	return best_direction
+
+func get_closest_cardinal_4_direction_normalized(input_vector) -> Vector2:
+	var best_direction = DIRECTIONS_4[0]
+	var best_dot_product = -INF
+
+	for dir in DIRECTIONS_4:
 		var dot = input_vector.dot(dir)
 		if dot > best_dot_product:
 			best_dot_product = dot

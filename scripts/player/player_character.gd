@@ -27,6 +27,7 @@ extends CharacterBody2D
 @onready var reticle_charge: TextureProgressBar = $ReticleSprite/ReticleCharge
 @onready var spell_spawn_point: Node2D = %SpellSpawnPoint
 @onready var coin_collector: CoinCollector = $CoinCollector
+@onready var build_grid_sprite = $PlayerBuild/BuildGridSprite
 
 @onready var player_build_ui: PlayerBuildUI = %PlayerBuildUI
 
@@ -87,6 +88,7 @@ func _ready():
 
 	# Configure PlayerBuild
 	player_build.player_build_ui = player_build_ui
+	player_build.build_grid_sprite = build_grid_sprite
 
 	respawn_timer.autostart = false
 	respawn_timer.one_shot = true
@@ -218,6 +220,7 @@ func on_switch_player_mode_pressed() -> void:
 		player_build.create_preview_tower()
 		player_build_ui.show()
 		player_build_ui.raise_current()
+		build_grid_sprite.show()
 	else:								    # Switch to combat mode 
 		staff_sprite.show()
 		primary_action_func = cast_spell
@@ -225,6 +228,7 @@ func on_switch_player_mode_pressed() -> void:
 		if player_build.preview_tower:	# Remove preview tower
 			player_build.preview_tower.queue_free()
 		player_build_ui.hide()
+		build_grid_sprite.hide()
 
 	player_aim.switch_mode(building)
 
