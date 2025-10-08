@@ -89,6 +89,9 @@ func rotate_staff() -> void:
 	if player.velocity.y < 0:
 		player.staff_sprite.z_index = player.character_sprite.z_index - 1
 
+	if not player.can_fire:
+		player.staff_sprite.z_index = player.character_sprite.z_index + 1
+		
 func swing_staff() -> void:
 	staff_rotation_sign = -staff_rotation_sign
 	var tween: Tween = get_tree().create_tween()

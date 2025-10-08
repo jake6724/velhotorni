@@ -242,6 +242,9 @@ func on_staff_animation_finished(_anim_name) -> void:
 	if _anim_name == "switch":
 		staff_ap.play("idle")
 
+	if _anim_name == "fire":
+		staff_ap.play("idle")
+
 func on_damage_recieved(_damage) -> void:
 	player_stats.health -= _damage
 
