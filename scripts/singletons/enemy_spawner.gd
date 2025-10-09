@@ -25,8 +25,9 @@ var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
 	Enemy.Size.FLYING_SMALL: preload("res://scenes/enemies/FlyingSmallEnemy.tscn"),
 	Enemy.Size.FLYING_LARGE: preload("res://scenes/enemies/FlyingLargeEnemy.tscn"),
 	Enemy.Size.RANGED_SMALL: preload("res://scenes/enemies/RangedSmallEnemy.tscn"),
-	Enemy.Size.REPEATER_SMALL: preload("res://scenes/enemies/EnemyRangedSmallRepeater.tscn"),
 	Enemy.Size.RANGED_LARGE: preload("res://scenes/enemies/EnemyRangedLarge.tscn"),
+	Enemy.Size.REPEATER_SMALL: preload("res://scenes/enemies/EnemyRangedSmallRepeater.tscn"),
+	Enemy.Size.REPEATER_LARGE: preload("res://scenes/enemies/EnemyRangedRepeaterLarge.tscn"),
 }
 
 # Signals
