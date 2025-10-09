@@ -24,6 +24,7 @@ class_name EnemyDataRangedRepeater
 @export var angle_increment: float
 ## Increment between bursts within the same attack
 @export var burst_angle_increment: float = 0.0
+@export var burst_bullet_speed_increment: float = 0.0
 
 @export_category("Ranged Enemy Bullet Data")
 ## How fast the bullet travels. Higher values could cause issues with missign target.
