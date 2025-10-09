@@ -135,14 +135,15 @@ value = 100.0
 texture_under = ExtResource("3_0741g")
 texture_progress = ExtResource("4_bhg3x")
 
-[node name="ActiveSpellManaLabel" type="Label" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer"]
+[node name="ActiveSpellManaLabel" type="RichTextLabel" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 9)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
+theme_override_fonts/normal_font = ExtResource("5_fd7yi")
+theme_override_font_sizes/normal_font_size = 8
 text = "256"
+scroll_active = false
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -151,7 +152,7 @@ z_index = -2
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 offset_top = 1.0
-offset_right = 26.0
+offset_right = 31.0
 offset_bottom = 9.0
 size_flags_horizontal = 0
 color = Color(0.0941176, 0.0941176, 0.25098, 1)
@@ -166,16 +167,18 @@ layout_mode = 2
 texture = ExtResource("6_knakh")
 stretch_mode = 2
 
-[node name="TowerManaLabel" type="Label" parent="VBoxContainer/Stats/TowerManaIcon"]
+[node name="TowerManaLabel" type="RichTextLabel" parent="VBoxContainer/Stats/TowerManaIcon"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 8)
 layout_mode = 2
 offset_left = 4.0
 offset_right = 41.0
 offset_bottom = 10.0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
+theme_override_fonts/normal_font = ExtResource("5_fd7yi")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
 text = "0200"
+scroll_active = false
 horizontal_alignment = 2
 vertical_alignment = 1
 

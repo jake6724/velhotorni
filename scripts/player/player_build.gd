@@ -51,9 +51,10 @@ func update_preview_tower_position(player_global_position: Vector2, aim_input: V
 	else:
 		target = preview_tower.global_position + Vector2(8,8)
 		# build_grid_sprite.global_position = preview_tower.global_position + Vector2(8,8)
-	
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(build_grid_sprite, "global_position", target, .1)
+
+	build_grid_sprite.global_position = target
+	# var tween: Tween = get_tree().create_tween()
+	# tween.tween_property(build_grid_sprite, "global_position", target, .1)
 
 ## Check if placement is valid and place `preview_tower`. Update `WorldGrid` and `preview_tower` accordingly.
 func place_tower() -> void:	
