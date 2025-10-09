@@ -62,7 +62,7 @@ region = Rect2(144, 0, 16, 16)
 atlas = ExtResource("3_iemgq")
 region = Rect2(160, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_iemgq"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_w3j3f"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -147,7 +147,7 @@ region = Rect2(144, 16, 16, 16)
 atlas = ExtResource("3_iemgq")
 region = Rect2(160, 16, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_xf3uk"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_iemgq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -232,7 +232,7 @@ region = Rect2(144, 64, 16, 16)
 atlas = ExtResource("3_iemgq")
 region = Rect2(160, 64, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_trm26"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_xf3uk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -317,7 +317,7 @@ region = Rect2(144, 48, 16, 16)
 atlas = ExtResource("3_iemgq")
 region = Rect2(160, 48, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_jnq33"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_trm26"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -402,7 +402,7 @@ region = Rect2(144, 32, 16, 16)
 atlas = ExtResource("3_iemgq")
 region = Rect2(160, 32, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_xraqi"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_jnq33"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -495,7 +495,7 @@ region = Rect2(64, 192, 16, 16)
 atlas = ExtResource("3_iemgq")
 region = Rect2(80, 192, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_vcmew"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_xraqi"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -580,7 +580,7 @@ region = Rect2(64, 176, 16, 16)
 atlas = ExtResource("3_iemgq")
 region = Rect2(80, 176, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_gs8jh"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_vcmew"]
 animations = [{
 "frames": [{
 "duration": 0.5,
@@ -661,7 +661,7 @@ region = Rect2(144, 112, 16, 16)
 atlas = ExtResource("3_iemgq")
 region = Rect2(160, 112, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_nau1c"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_gs8jh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -714,7 +714,7 @@ region = Rect2(128, 176, 16, 16)
 atlas = ExtResource("3_iemgq")
 region = Rect2(144, 176, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_f5om4"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_nau1c"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -733,31 +733,151 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_hpe7p"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
 [sub_resource type="Animation" id="Animation_7cewq"]
 resource_name = "corpse"
 length = 2.0
 step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 3)]
+}
 
 [sub_resource type="Animation" id="Animation_8axbs"]
 resource_name = "die"
 length = 0.3
 step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(2, 1), Vector2i(3, 1), Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
+}
 
 [sub_resource type="Animation" id="Animation_k7o7a"]
 resource_name = "hit"
 length = 0.05
 step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_vtlqb"]
 resource_name = "idle"
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
 [sub_resource type="Animation" id="Animation_jsdvy"]
 resource_name = "walk"
 length = 0.5
 loop_mode = 1
 step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hpe7p"]
 _data = {
@@ -802,35 +922,35 @@ vframes = 4
 visible = false
 z_index = 1000
 position = Vector2(8, -8)
-sprite_frames = SubResource("SpriteFrames_iemgq")
+sprite_frames = SubResource("SpriteFrames_w3j3f")
 animation = &"burn"
 
 [node name="FXHeal" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
 position = Vector2(8, -8)
-sprite_frames = SubResource("SpriteFrames_xf3uk")
+sprite_frames = SubResource("SpriteFrames_iemgq")
 animation = &"heal"
 
 [node name="FXWeaken" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
 position = Vector2(8, 8)
-sprite_frames = SubResource("SpriteFrames_trm26")
+sprite_frames = SubResource("SpriteFrames_xf3uk")
 animation = &"weaken"
 
 [node name="FXSpeed" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
 position = Vector2(8, -8)
-sprite_frames = SubResource("SpriteFrames_jnq33")
+sprite_frames = SubResource("SpriteFrames_trm26")
 animation = &"speed"
 
 [node name="FXStun" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
 position = Vector2(8, -8)
-sprite_frames = SubResource("SpriteFrames_xraqi")
+sprite_frames = SubResource("SpriteFrames_jnq33")
 animation = &"stun"
 
 [node name="FXPrevent" type="AnimatedSprite2D" parent="Sprite2D"]
@@ -838,27 +958,32 @@ visible = false
 modulate = Color(1, 1, 1, 0.74902)
 z_index = 2
 position = Vector2(8, 8)
-sprite_frames = SubResource("SpriteFrames_vcmew")
+sprite_frames = SubResource("SpriteFrames_xraqi")
 animation = &"end_prevent"
 
 [node name="FXFreeze" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 position = Vector2(8, 0)
-sprite_frames = SubResource("SpriteFrames_gs8jh")
+sprite_frames = SubResource("SpriteFrames_vcmew")
 animation = &"end_freeze"
 
 [node name="FXCleanse" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 position = Vector2(8, 0)
-sprite_frames = SubResource("SpriteFrames_nau1c")
+sprite_frames = SubResource("SpriteFrames_gs8jh")
 animation = &"cleanse"
 
 [node name="FXSlow" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1
 position = Vector2(8, -8)
-sprite_frames = SubResource("SpriteFrames_f5om4")
+sprite_frames = SubResource("SpriteFrames_nau1c")
 animation = &"slow"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hpe7p")
+}
 
 [node name="Light" type="Sprite2D" parent="."]
 visible = false
@@ -866,11 +991,6 @@ position = Vector2(8, 7.96659)
 scale = Vector2(1, 0.995824)
 texture = ExtResource("4_xf3uk")
 hframes = 3
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_hpe7p")
-}
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
