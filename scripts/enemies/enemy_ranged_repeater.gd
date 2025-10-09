@@ -6,6 +6,7 @@ var attack_timer: Timer = Timer.new()
 var enemy_bullet_scene: PackedScene = preload("res://scenes/bullets/enemy_bullets/EnemyBullet.tscn")
 var burst_count: int = 0
 var start_angle: float
+var bullet_speed: float
 
 func configure_ranged_enemy() -> void:
 	attack_timer.autostart = false
@@ -24,9 +25,11 @@ func on_attack_timer_timeout() -> void:
 			attack_timer.start(data.attack_cooldown)
 			burst_count = 0
 			start_angle = data.start_angle
+			bullet_speed = data.bullet_speed
 		else:
 			attack_timer.start(data.burst_cooldown)
 			start_angle += data.burst_angle_increment
+			bullet_speed += data.burst_bullet_speed_increment
 
 func spawn_all_bullets() -> void:
 	var curr_angle: float = start_angle
@@ -35,11 +38,10 @@ func spawn_all_bullets() -> void:
 	for i in range(data.num_bullets_per_burst):
 		var direction = Vector2.from_angle(deg_to_rad(curr_angle))
 		spawn_enemy_bullet(direction, spawn_pos)
-
 		curr_angle += data.angle_increment
 
 func spawn_enemy_bullet(direction: Vector2, spawn_pos) -> void:
 	var new_enemy_bullet: EnemyBullet = enemy_bullet_scene.instantiate()
 	enemy_bullet_parent.call_deferred("add_child", new_enemy_bullet)
-	new_enemy_bullet.call_deferred("initialize", direction, spawn_pos, data.bullet_speed, data.bullet_max_distance,
+	new_enemy_bullet.call_deferred("initialize", direction, spawn_pos, bullet_speed, data.bullet_max_distance,
 	z_index + 1, data.bullet_atlas)
