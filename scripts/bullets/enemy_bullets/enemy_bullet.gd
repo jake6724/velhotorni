@@ -18,11 +18,10 @@ func _ready():
 	collision_area.area_entered.connect(on_area_entered)
 	ap.animation_finished.connect(on_animation_finished)
 
-func initialize(_direction: Vector2, _spawn_pos: Vector2, _damage: float, _speed: float, _max_distance: float, _follow_on_hit: bool, _z_index: int, atlas: CompressedTexture2D) -> void:
-	damage = _damage
+func initialize(_direction: Vector2, _spawn_pos: Vector2, _speed: float, _max_distance: float, _z_index: int, atlas: CompressedTexture2D) -> void:
+	# damage = _damage
 	speed = _speed
 	max_distance = _max_distance
-	follow_on_hit = _follow_on_hit
 	spawn_pos = _spawn_pos
 	global_position = _spawn_pos
 	self.texture = atlas
@@ -50,7 +49,7 @@ func on_area_entered(intruder: Area2D) -> void:
 	active = false
 	ap.play("hit")
 	if intruder is PlayerHurtbox:
-		intruder.take_damage(damage, global_position)
+		intruder.take_damage(1, global_position)
 
 func on_animation_finished(anim_name: String) -> void:
 	if anim_name == "hit":
