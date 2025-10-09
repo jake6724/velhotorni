@@ -45,9 +45,9 @@ func spawn_all_bullets(player_pos: Vector2) -> void:
 	var angle_increment: float = data.angle_increment
 	var spawn_pos: Vector2 = global_position + Vector2(8,8)
 	var base_direction: Vector2 = spawn_pos.direction_to(player_pos)
-	
-	# Spawn the first bullet which always travels directly at the player
-	spawn_enemy_bullet(base_direction, spawn_pos)
+	if data.spawn_center_bullet:
+		# Spawn the first bullet which always travels directly at the player
+		spawn_enemy_bullet(base_direction, spawn_pos)
 
 	for i in range(data.num_bullets_per_burst - 1):
 		var angle_modifier: float = angle_increment * angle_sign

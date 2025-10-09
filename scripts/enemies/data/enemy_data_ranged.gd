@@ -22,6 +22,7 @@ class_name EnemyDataRanged
 ## The next bullet will be fired at the same angle, but inverted (angle = -angle). This will make the pattern always start at the 
 ## towards the player, and then build out symmetrically from that point.
 @export var angle_increment: float
+@export var spawn_center_bullet: bool = true
 
 @export_category("Ranged Enemy Bullet Data")
 ## How fast the bullet travels. Higher values could cause issues with missign target.
