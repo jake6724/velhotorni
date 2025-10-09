@@ -1,7 +1,7 @@
 class_name PlayerMana
 extends Node
 
-var element_mana: Dictionary[Constants.Element, float] = {
+@export var element_mana: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE: 99,
 	Constants.Element.WIND: 0,
 	Constants.Element.WATER: 57,
@@ -11,7 +11,7 @@ var element_mana: Dictionary[Constants.Element, float] = {
 	Constants.Element.ARCANE: 500,
 }
 
-var element_mana_maxes: Dictionary[Constants.Element, float] = {
+@export var element_mana_maxes: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE: 100,
 	Constants.Element.WIND: 100,
 	Constants.Element.WATER: 100,

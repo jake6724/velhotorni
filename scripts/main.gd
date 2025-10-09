@@ -7,6 +7,7 @@ extends Node2D
 @onready var player_controller: PlayerController = %PlayerController
 @onready var player_character: PlayerCharacter = %PlayerCharacter
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
+@onready var mana_drop_manager: ManaDropManager = %ManaDropManager
 @onready var fps_label: Label = %FPSLabel
 @onready var level_complete_panel: LevelCompletePanel = %LevelCompletePanel
 var player_spawn_point: Node2D
@@ -36,6 +37,7 @@ func _ready():
 
 	# Connect to WaveManager
 	WaveManager.wave_failed.connect(on_wave_failed)
+
 	# Configure PlayerController
 	player_controller.setup()
 	player_controller.bestiary_pressed.connect(pause_game_with_bestiary)
@@ -49,6 +51,9 @@ func _ready():
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
 	player_character.coin_collector.reward_collected.connect(coin_drop_manager.decrement_reward_remaining)
+
+	# Configure ManaDropManager
+	EnemySpawner.enemy_died_with_global_pos_drop_chance.connect(mana_drop_manager.on_enemy_died)
 
 	# Configure TowerGlobalData
 	TowerGlobalData.reset()

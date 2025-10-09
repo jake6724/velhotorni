@@ -5,7 +5,6 @@ extends Node2D
 @onready var magnet_area: Area2D = $MagnetArea
 
 var magnetized_coins: Array[CoinDrop] = []
-const MAGNET_SPEED: float = 400
 
 signal coin_collected
 signal reward_collected
@@ -22,7 +21,7 @@ func _physics_process(delta):
 	for coin: CoinDrop in magnetized_coins:
 		if coin:
 			var direction = coin.global_position.direction_to(global_position)
-			coin.global_position += direction * MAGNET_SPEED * delta
+			coin.global_position += direction * Constants.MAGNET_SPEED * delta
 
 func on_collect_area_entered(intruder) -> void:
 	var coin: CoinDrop = intruder as CoinDrop

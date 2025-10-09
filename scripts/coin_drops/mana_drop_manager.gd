@@ -1,0 +1,34 @@
+class_name ManaDropManager
+extends Node
+
+var mana_drop_scene: PackedScene = preload("res://scenes/player/ManaDrop.tscn")
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+const JITTER: float = 7
+const MANA_DROP_MOVE_SPEED: float = 150
+
+func _physics_process(delta):
+	for child: ManaDrop in get_children():
+		if not child.destination_reached:
+			child.global_position += child.global_position.direction_to(child.destination) * MANA_DROP_MOVE_SPEED * delta
+			if abs(child.global_position - child.destination) < Vector2(1,1):
+				child.destination_reached = true
+
+func on_enemy_died(_enemy_death_global_pos: Vector2, _drop_chance: float) -> void:
+	var roll: float = rng.randf()
+	if roll <= _drop_chance:
+		spawn_mana_drop(_enemy_death_global_pos)
+		_drop_chance -= 1.0
+		if _drop_chance > 0.0:
+			on_enemy_died(_enemy_death_global_pos, _drop_chance)
+
+func spawn_mana_drop(_spawn_pos: Vector2) -> void:
+	var new_mana_drop: ManaDrop = mana_drop_scene.instantiate()
+	new_mana_drop.global_position = _spawn_pos
+	call_deferred("add_child",new_mana_drop)
+	new_mana_drop.destination = calc_destination(_spawn_pos)
+
+func calc_destination(_global_pos) -> Vector2:
+	var jx: float = rng.randf_range(-JITTER, JITTER)
+	var jy: float = rng.randf_range(-JITTER, JITTER)
+	var jitter_offset: Vector2 = Vector2(jx, jy)
+	return _global_pos + jitter_offset

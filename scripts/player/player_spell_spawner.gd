@@ -93,6 +93,8 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
 			angle_seperation += new_spell_data.angle_seperation
 		angle_sign = -angle_sign
 
+	spell_cast.emit(new_spell_data.element, new_spell_data.mana_cost)
+
 func spawn_bullet_spell_charged(_player_aim_direction: Vector2) -> void:
 	var charge_value = min(100, player.player_input.primary_action_charge)
 	var new_spell_data: SpellDataBullet = curr_spell_data.duplicate()
@@ -111,7 +113,6 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 	var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
 	add_child(new_spell)
 	new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)))
-	spell_cast.emit(new_spell_data.element, new_spell_data.mana_cost)
 
 func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 	var new_spell_data: SpellDataMelee = curr_spell_data

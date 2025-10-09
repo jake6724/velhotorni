@@ -93,7 +93,6 @@ func calc_reward_destination(_global_pos) -> Vector2:
 	var jitter_offset: Vector2 = Vector2(jx, jy)
 	return _global_pos + jitter_offset
 
-
 func on_wave_complete(global_pos: Vector2, reward: int) -> void:
 	spawn_reward(global_pos, reward)
 

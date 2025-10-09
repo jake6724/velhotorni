@@ -33,6 +33,7 @@ signal enemy_spawned
 signal enemy_spawned_with_ref
 signal enemy_died
 signal enemy_died_with_global_pos
+signal enemy_died_with_global_pos_drop_chance
 signal boss_enemy_damage_recieved
 
 func _ready():
@@ -103,6 +104,7 @@ func on_enemy_died(enemy: Enemy) -> void:
 			active_path_enemies.remove_at(index_2)
 	enemy_died.emit()
 	enemy_died_with_global_pos.emit(enemy.global_position)
+	enemy_died_with_global_pos_drop_chance.emit(enemy.global_position, enemy.data.element_mana_drop_chance)
 
 func on_spawn_timer_timeout(path_index: int) -> void:
 	if path_index < path_spawns.size() and path_spawns[path_index].size() > 0:

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1aafksk0q8f3"]
+
+[ext_resource type="Script" uid="uid://c22h4xyj05yt1" path="res://scripts/coin_drops/mana_drop_collector.gd" id="1_5ltbx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ltbx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_agnb5"]
+radius = 42.0
+
+[node name="ManaDropCollector" type="Node2D"]
+script = ExtResource("1_5ltbx")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollectCollider" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_5ltbx")
+debug_color = Color(0.367465, 0.616011, 0, 0.42)
+
+[node name="MagnetArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2048
+
+[node name="MagnetCollider" type="CollisionShape2D" parent="MagnetArea"]
+shape = SubResource("CircleShape2D_agnb5")
+debug_color = Color(0.643216, 0.928675, 1, 0.42)

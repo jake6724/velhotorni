@@ -183,6 +183,7 @@ switch_player_mode={
 2d_physics/layer_9="Base"
 2d_physics/layer_10="Bullet"
 2d_physics/layer_11="CoinDrop"
+2d_physics/layer_12="ManaDrop"
 2d_physics/layer_13="Terrain"
 2d_physics/layer_14="TerrainObstacle"
 2d_physics/layer_15="PlayerCharacter"

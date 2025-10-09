@@ -28,9 +28,8 @@ func _process(_delta):
 
 func _input(event):
 	check_primary_action_input(event)
-
-	if event.is_action_pressed("secondary_action"):
-		secondary_action_pressed.emit() # TODO: Change this to secondary_action_pressed
+	if Input.is_action_just_pressed("secondary_action"):
+		secondary_action_pressed.emit()
 
 	if event.is_action("switch_selection_right") and event.is_pressed() and not event.is_echo():
 		switch_selection_pressed.emit(1)

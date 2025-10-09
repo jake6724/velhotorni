@@ -59,7 +59,7 @@ var primary_action_func: Callable = Callable(cast_spell)
 var switch_action_func: Callable = Callable(switch_spell)
 
 func _ready():
-	# player_input.spell_input_pressed.connect(on_primary_action_pressed)
+	# Connect to PlayerInput
 	player_input.secondary_action_pressed.connect(on_dash_input_pressed)
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
 	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
@@ -71,6 +71,7 @@ func _ready():
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
 	player_spell_spawner.staff_switched.connect(on_staff_switched)
 
+	# Configure AnimationPlayers
 	staff_ap.animation_finished.connect(on_staff_animation_finished)
 	ap.animation_finished.connect(on_animation_finished)
 
@@ -90,18 +91,18 @@ func _ready():
 	player_build.player_build_ui = player_build_ui
 	player_build.build_grid_sprite = build_grid_sprite
 
+	# Configure Timers
 	respawn_timer.autostart = false
 	respawn_timer.one_shot = true
 	respawn_timer.timeout.connect(respawn)
 	add_child(respawn_timer)
-
 	hurtbox_reset_timer.autostart = false
 	hurtbox_reset_timer.one_shot = true
 	hurtbox_reset_timer.timeout.connect(on_hurtbox_reset_timer_timeout)
 	add_child(hurtbox_reset_timer)
 
+	# Misc
 	player_spell_spawner.melee_spell_cast.connect(player_aim.swing_staff)
-
 	z_index = Constants.z_index_map["player_character"]
 
 # DEV ONLY

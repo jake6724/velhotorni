@@ -8,7 +8,8 @@ extends Resource
 @export var health: float
 @export var speed: float
 @export var damage: int = 1
-@export var drop_chance_base: float = 1.0
+@export var tower_mana_drop_chance_base: float = 1.0
+@export var element_mana_drop_chance: float = 1.0
 @export var atlas: Texture
 @export var show_light: bool = false
 @export var explosion_sfx: AudioStreamOggVorbis
