@@ -1,7 +1,7 @@
 class_name PlayerBuild
 extends Node
 
-@export var grid_follow_tower: bool = false
+@export var grid_follow_tower: bool = true
 
 var player_build_ui: PlayerBuildUI # Set by PlayerCharacter
 var build_grid_sprite: Sprite2D # Set by PlayerCharacter
@@ -44,10 +44,16 @@ func update_preview_tower_position(player_global_position: Vector2, aim_input: V
 	preview_tower_grid_position = WorldGrid.world_to_grid(player_global_position + (aim_input * TOWER_PLACEMENT_RANGE))
 	preview_tower.global_position = WorldGrid.grid_to_world(preview_tower_grid_position)
 
+	var target: Vector2
 	if not grid_follow_tower:
-		build_grid_sprite.global_position = WorldGrid.grid_to_world(WorldGrid.world_to_grid(player_global_position)) + Vector2(8,8)
+		target = WorldGrid.grid_to_world(WorldGrid.world_to_grid(player_global_position)) + Vector2(8,8)
+		# build_grid_sprite.global_position = WorldGrid.grid_to_world(WorldGrid.world_to_grid(player_global_position)) + Vector2(8,8)
 	else:
-		build_grid_sprite.global_position = preview_tower.global_position + Vector2(8,8)
+		target = preview_tower.global_position + Vector2(8,8)
+		# build_grid_sprite.global_position = preview_tower.global_position + Vector2(8,8)
+	
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(build_grid_sprite, "global_position", target, .1)
 
 ## Check if placement is valid and place `preview_tower`. Update `WorldGrid` and `preview_tower` accordingly.
 func place_tower() -> void:	
