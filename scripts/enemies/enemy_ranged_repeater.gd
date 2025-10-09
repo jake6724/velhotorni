@@ -16,6 +16,7 @@ func configure_ranged_enemy() -> void:
 	add_child(attack_timer)
 	attack_timer.start(data.initial_delay)
 	start_angle = data.start_angle
+	bullet_speed = data.bullet_speed
 
 func on_attack_timer_timeout() -> void:
 	if is_alive:
