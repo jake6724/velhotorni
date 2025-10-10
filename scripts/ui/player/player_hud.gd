@@ -31,7 +31,6 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 
 func update_spells(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
 	active_spell_icon.texture.region = spell_data_list[0].active_icon_region
-	print((player_mana.get_element_mana(spell_data_list[0].element)), " / ", player_mana.element_mana_maxes[spell_data_list[0].element] , " * 100 = ", (player_mana.get_element_mana(spell_data_list[0].element) / player_mana.element_mana_maxes[spell_data_list[0].element]) * 100)
 	active_spell_mana.value = (player_mana.get_element_mana(spell_data_list[0].element) / player_mana.element_mana_maxes[spell_data_list[0].element]) * 100
 	var active_spell_mana_text: String = str(int(player_mana.get_element_mana(spell_data_list[0].element)))
 	var zero_pad: String = get_zero_padding(MAX_ACTIVE_SPELL_MANA_DIGITS - len(active_spell_mana_text))

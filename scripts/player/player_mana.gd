@@ -2,23 +2,23 @@ class_name PlayerMana
 extends Node
 
 @export var element_mana: Dictionary[Constants.Element, float] = {
-	Constants.Element.FIRE: 100,
-	Constants.Element.WIND: 100,
-	Constants.Element.WATER: 100,
-	Constants.Element.EARTH: 100,
-	Constants.Element.LIGHT: 100,
-	Constants.Element.DARK: 100,
-	Constants.Element.ARCANE: 500,
+	Constants.Element.FIRE: 0,
+	Constants.Element.WIND: 0,
+	Constants.Element.WATER: 0,
+	Constants.Element.EARTH: 0,
+	Constants.Element.LIGHT: 0,
+	Constants.Element.DARK: 0,
+	Constants.Element.ARCANE: 0,
 }
 
 @export var element_mana_maxes: Dictionary[Constants.Element, float] = {
-	Constants.Element.FIRE: 500,
-	Constants.Element.WIND: 500,
-	Constants.Element.WATER: 500,
-	Constants.Element.EARTH: 500,
-	Constants.Element.LIGHT: 500,
-	Constants.Element.DARK: 500,
-	Constants.Element.ARCANE: 500,
+	Constants.Element.FIRE: 0,
+	Constants.Element.WIND: 0,
+	Constants.Element.WATER: 0,
+	Constants.Element.EARTH: 0,
+	Constants.Element.LIGHT: 0,
+	Constants.Element.DARK: 0,
+	Constants.Element.ARCANE: 0,
 }
 
 var tower_mana: float = 0:

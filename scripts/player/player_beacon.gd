@@ -1,0 +1,2 @@
+class_name PlayerBeacon
+extends Area2D

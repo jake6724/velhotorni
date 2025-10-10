@@ -188,6 +188,7 @@ switch_player_mode={
 2d_physics/layer_14="TerrainObstacle"
 2d_physics/layer_15="PlayerCharacter"
 2d_physics/layer_16="TerrainPit"
+2d_physics/layer_17="PlayerBeacon"
 2d_physics/layer_18="PlayerHurtbox"
 2d_physics/layer_19="FlyingEnemy"
 2d_physics/layer_20="EnemyBullet"

@@ -8,15 +8,15 @@
 
 [resource]
 script = ExtResource("2_04hem")
-attack_cooldown = 1.0
+attack_cooldown = 0.2
+attack_range = 72.0
 burst_cooldown = 0.0
 num_bursts = 1
 num_bullets_per_burst = 0
 angle_increment = 0.0
-bullet_damage = 1.0
+spawn_center_bullet = true
 bullet_speed = 150.0
 bullet_max_distance = 150.0
-bullet_follow_on_hit = false
 bullet_atlas = ExtResource("2_laito")
 size = 4
 element = 0
@@ -25,7 +25,8 @@ weak_against_element = 0
 health = 100.0
 speed = 30.0
 damage = 1
-drop_chance_base = 1.0
+tower_mana_drop_chance_base = 1.0
+element_mana_drop_chance = 1.0
 atlas = ExtResource("1_id4st")
 show_light = false
 explosion_sfx = ExtResource("2_dd65k")
