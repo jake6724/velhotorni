@@ -16,6 +16,8 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 @onready var flying_spawn_points: Array[Vector2] = []
 
 @onready var player_spawn_point = %PlayerSpawnPoint
+@onready var tower_mana_breakables_parent: Node = %TowerManaBreakablesParent
+var tower_mana_breakables: Array[Breakable] = []
 
 # Export vars
 @export var level_name: String
@@ -26,6 +28,7 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 @export var waves: Array[Wave]
 
 var stars: int = 1 # Tracks the highest number of stars earned for this level
+
 
 func _ready():
 	""" *** Z INDEXES ARE NOW PAINTED IN THE TILESET ITSELF *** """
@@ -41,6 +44,11 @@ func _ready():
 		if child is Node2D:
 			flying_spawn_points.append(child.global_position)
 
+	configure_tower_mana_breakables()
+
+func configure_tower_mana_breakables() -> void:
+	for child: Breakable in tower_mana_breakables_parent.get_children():
+		tower_mana_breakables.append(child)
 
 # # Set the `z_index` of each tile based on its `z_index_map_key` custom data value. This value is painted onto
 # # the tile in the editor.

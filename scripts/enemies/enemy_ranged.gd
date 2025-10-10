@@ -2,6 +2,7 @@ class_name EnemyRanged
 extends Enemy
 
 @onready var attack_area: Area2D = $AttackArea
+@onready var attack_collider: CollisionShape2D = %AttackCollider
 @onready var enemy_bullet_parent: Node = $EnemyBulletParent
 
 var attack_timer: Timer = Timer.new()
@@ -16,35 +17,30 @@ func configure_ranged_enemy() -> void:
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	add_child(attack_timer)
 	attack_area.area_entered.connect(on_area_entered)
+	attack_collider.shape.radius = data.attack_range
 
-func on_area_entered(player_hurtbox: PlayerBeacon) -> void:
+func on_area_entered(player_beacon: PlayerBeacon) -> void:
 	if can_attack:
-		attack_player(player_hurtbox.global_position)
+		attack_player(player_beacon.global_position)
 
 func on_attack_timer_timeout() -> void:
-	print("Attack timer timeout")
 	can_attack = true
 	check_player_in_range()
 
 func check_player_in_range() -> void:
-	print("Checking range")
-	var bodies = attack_area.get_overlapping_areas()
-	if bodies.size() and bodies[0] is PlayerBeacon:
-		print("range check found something")
-		attack_player(bodies[0].global_position)
+	var areas = attack_area.get_overlapping_areas()
+	if areas.size() and areas[0] is PlayerBeacon:
+		attack_player(areas[0].global_position)
 
 func attack_player(player_pos: Vector2) -> void:
 	if is_alive and can_attack:
-		print("Attack player")
 		spawn_all_bullets(player_pos)
 		can_attack = false
 		burst_count += 1
 		if burst_count >= data.num_bursts:
 			burst_count = 0
-			print("Starting attack cooldown: ", data.attack_cooldown)
 			attack_timer.start(data.attack_cooldown)
 		else:
-			print("Starting burst cooldown")
 			attack_timer.start(data.burst_cooldown)
 
 func spawn_all_bullets(player_pos: Vector2) -> void:

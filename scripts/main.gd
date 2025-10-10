@@ -70,6 +70,9 @@ func _ready():
 	bestiary_menu.add_entries()
 	EnemySpawner.enemy_spawned_with_ref.connect(bestiary_menu.on_enemy_spawned)
 
+	# Configure TowerManaBreakables
+	for breakable: Breakable in active_level.tower_mana_breakables:
+		breakable.coin_dropped.connect(coin_drop_manager.spawn_coin_drop)
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
