@@ -167,3 +167,21 @@ func get_closest_cardinal_4_direction_normalized(input_vector) -> Vector2:
 			best_dot_product = dot
 			best_direction = dir
 	return best_direction
+
+var weighted_random_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+## `spawn_chance_array` must be a doubly-nested array. 
+## Each sub-array must contain a value to return, and the chance of getting it.
+func get_weighted_random(spawn_chance_array) -> Variant:
+	var total = 0
+	for i in range(len(spawn_chance_array)):
+		total += spawn_chance_array[i][1]
+
+	var r = weighted_random_rng.randf() * total
+
+	for i in range(0, len(spawn_chance_array)):
+		var selection = spawn_chance_array[i]
+		if r < selection[1]:
+			return selection[0]
+		r -= selection[1]
+	return # Only here to allow for typed return signature. Should never return here

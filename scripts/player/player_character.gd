@@ -27,6 +27,7 @@ extends CharacterBody2D
 @onready var reticle_charge: TextureProgressBar = $ReticleSprite/ReticleCharge
 @onready var spell_spawn_point: Node2D = %SpellSpawnPoint
 @onready var coin_collector: CoinCollector = $CoinCollector
+@onready var mana_drop_collector: ManaDropCollector = %ManaDropCollector
 @onready var build_grid_sprite = $PlayerBuild/BuildGridSprite
 
 @onready var player_build_ui: PlayerBuildUI = %PlayerBuildUI
@@ -90,6 +91,9 @@ func _ready():
 	# Configure PlayerBuild
 	player_build.player_build_ui = player_build_ui
 	player_build.build_grid_sprite = build_grid_sprite
+
+	# Connect to ManaDropCollector
+	mana_drop_collector.mana_drop_collected.connect(on_element_mana_collected)
 
 	# Configure Timers
 	respawn_timer.autostart = false
@@ -292,3 +296,7 @@ func on_hurtbox_reset_timer_timeout() -> void:
 func show_staff_sprite_custom(): 
 	if alive and not building:
 		staff_sprite.show()
+
+func on_element_mana_collected(_element: Constants.Element) -> void:
+	player_mana.increment_element_mana(_element)
+	player_hud.update_mana(player_spells.spells.array, player_mana)

@@ -37,5 +37,5 @@ func get_element_mana_max(_element: Constants.Element) -> float:
 func decrement_element_mana(_element, _value) -> void:
 	element_mana[_element] -= _value
 
-func increment_element_mana(_element, _value) -> void:
-	element_mana[_element] += _value
+func increment_element_mana(_element) -> void:
+	element_mana[_element] += 1

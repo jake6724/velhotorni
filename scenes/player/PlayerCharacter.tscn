@@ -1179,6 +1179,7 @@ visible = false
 position = Vector2(-6, -7)
 
 [node name="ManaDropCollector" parent="." instance=ExtResource("25_vy23r")]
+unique_name_in_owner = true
 visible = false
 
 [node name="PlayerHurtbox" type="Area2D" parent="."]

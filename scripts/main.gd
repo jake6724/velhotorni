@@ -44,6 +44,7 @@ func _ready():
 	coin_drop_manager.reward_completed.connect(player_controller.on_reward_complete)
 	player_controller.coin_collector = player_character.coin_collector
 
+	# Configure PlayerCharacter
 	player_spawn_point = active_level.player_spawn_point
 	player_character.spawn_point = player_spawn_point.global_position
 	player_character.global_position = player_character.spawn_point
@@ -54,6 +55,7 @@ func _ready():
 
 	# Configure ManaDropManager
 	EnemySpawner.enemy_died_with_global_pos_drop_chance.connect(mana_drop_manager.on_enemy_died)
+	mana_drop_manager.initialize(player_character.player_spells)
 
 	# Configure TowerGlobalData
 	TowerGlobalData.reset()

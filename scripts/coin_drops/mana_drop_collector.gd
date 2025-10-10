@@ -25,13 +25,18 @@ func on_collect_area_entered(mana_drop: ManaDrop) -> void:
 		magnetized_drops.remove_at(index)
 	
 	SFXPlayer.play_sfx("coin_collect")
-	mana_drop_collected.emit()
-	# if coin.is_reward:
-	# 	mana_drop_collected.emit()
+	mana_drop_collected.emit(mana_drop.element)
+	# match mana_drop.element:
+	# 	Constants.Element.FIRE: print("Fire")
+	# 	Constants.Element.WIND: print("Wind")
+	# 	Constants.Element.WATER: print("Water")
+	# 	Constants.Element.EARTH: print("Earth")
+	# 	Constants.Element.LIGHT: print("Light")
+	# 	Constants.Element.DARK: print("Dark")
+	# 	Constants.Element.ARCANE: print("Arcane")
 	mana_drop.queue_free()
 
 func on_magnet_area_entered(mana_drop: ManaDrop) -> void:
-	print(mana_drop)
 	mana_drop.destination_reached = true
 	magnetized_drops.append(mana_drop)
 

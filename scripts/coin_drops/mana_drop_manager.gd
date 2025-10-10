@@ -3,8 +3,29 @@ extends Node
 
 var mana_drop_scene: PackedScene = preload("res://scenes/player/ManaDrop.tscn")
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+# var element_chances: Array[Array] = [
+# 	[Constants.Element.FIRE, 25.0],
+# 	[Constants.Element.WIND, 25.0],
+# 	[Constants.Element.WATER, 25.0],
+# 	[Constants.Element.EARTH, 25.0],
+# 	[Constants.Element.LIGHT, 25.0],
+# 	[Constants.Element.DARK, 25.0],
+# ]
+
+# var element_chances: Dictionary[Constants.Element, float] = {
+# 	Constants.Element.FIRE: 25.0,
+
+# }
+
+var selected_spell_mana_chances: Array[Array] = []
+
 const JITTER: float = 7
 const MANA_DROP_MOVE_SPEED: float = 150
+
+func initialize(player_spells: PlayerSpells) -> void:
+	for spell: SpellData in player_spells.spells.array:
+		selected_spell_mana_chances.append([spell.element, 25.0])
+	#print(selected_spell_mana_chances)
 
 func _physics_process(delta):
 	for child: ManaDrop in get_children():
@@ -26,6 +47,8 @@ func spawn_mana_drop(_spawn_pos: Vector2) -> void:
 	new_mana_drop.global_position = _spawn_pos
 	call_deferred("add_child",new_mana_drop)
 	new_mana_drop.destination = calc_destination(_spawn_pos)
+
+	new_mana_drop.element = Constants.get_weighted_random(selected_spell_mana_chances)
 
 func calc_destination(_global_pos) -> Vector2:
 	var jx: float = rng.randf_range(-JITTER, JITTER)
