@@ -102,3 +102,4 @@ func flip_sprite() -> void:
 	if aim_input:
 		var flip = aim_input.x <= -0.001
 		player.character_sprite.flip_h = flip
+		player.staff_sprite.flip_v = flip
