@@ -17,6 +17,7 @@ const SPELL_SPAWN_POINT_DISTANCE: float = 12.0
 ## Higher values will make the reticle move faster
 @export var reset_speed_modifier: float = .65
 
+
 var aim_input: Vector2 # Manually set by PlayerCharacter
 
 var update_reticle_func: Callable = Callable(update_reticle_combat)

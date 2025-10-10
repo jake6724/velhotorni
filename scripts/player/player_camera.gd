@@ -12,7 +12,7 @@ var shake_offset: Vector2 = Vector2.ZERO
 var aim_follow_offset: Vector2 = Vector2.ZERO
 var aim_follow_multiplier: float = 40.0
 var aim_follow_speed: float = .3
-var prev_aim_input: Vector2
+var prev_aim_input: Vector2 = Vector2(INF, INF)
 
 func apply_shake(power_scale: float) -> void:
 	var new_power: float = power * power_scale
@@ -20,10 +20,10 @@ func apply_shake(power_scale: float) -> void:
 		curr_power = new_power
 
 func _process(delta):
-	if owner.aim_input != prev_aim_input:
+	if owner.player_aim.aim_input != prev_aim_input:
 		var tween = get_tree().create_tween()
-		tween.tween_property(self, "aim_follow_offset", (owner.aim_input * aim_follow_multiplier), aim_follow_speed)
-		prev_aim_input = owner.aim_input
+		tween.tween_property(self, "aim_follow_offset", (owner.player_aim.aim_input * aim_follow_multiplier), aim_follow_speed)
+		prev_aim_input = owner.player_aim.aim_input
 
 	if curr_power > .1:
 		curr_power = snappedf(lerpf(curr_power, 0, decay * delta), 0.01)
