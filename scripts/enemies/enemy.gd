@@ -144,10 +144,10 @@ func move(delta) -> void:
 	debuff_manager.enemy_progress = path_follow.progress
 
 func apply_drop_chance_bonus(_drop_chance_bonus: float) -> void:
-	drop_chance = data.drop_chance_base + _drop_chance_bonus
+	drop_chance = data.tower_mana_drop_chance_base + _drop_chance_bonus
 	
 func reset_drop_chance() -> void:
-	drop_chance = data.drop_chance_base
+	drop_chance = data.tower_mana_drop_chance_base
 
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.

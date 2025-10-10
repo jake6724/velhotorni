@@ -49,6 +49,22 @@ unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_rq211")
 
+[node name="ActiveSpellMana" type="TextureProgressBar" parent="VBoxContainer/Weapons/ActiveSpellIcon"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 28.0
+offset_bottom = 28.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 1
+stretch_margin_right = 1
+stretch_margin_bottom = 1
+texture_under = ExtResource("3_0741g")
+texture_progress = ExtResource("4_bhg3x")
+
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Weapons"]
 layout_mode = 2
 theme_override_constants/margin_top = 2

@@ -2,6 +2,7 @@ class_name PlayerHUD
 extends Control
 
 @onready var active_spell_icon: TextureRect = %ActiveSpellIcon
+@onready var active_spell_mana: TextureProgressBar = %ActiveSpellMana
 @onready var active_spell_mana_label: RichTextLabel = %ActiveSpellManaLabel
 @onready var tower_mana_label: RichTextLabel = %TowerManaLabel
 @onready var health_label: Label = %HealthLabel
@@ -30,6 +31,8 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 
 func update_spells(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
 	active_spell_icon.texture.region = spell_data_list[0].active_icon_region
+	print((player_mana.get_element_mana(spell_data_list[0].element)), " / ", player_mana.element_mana_maxes[spell_data_list[0].element] , " * 100 = ", (player_mana.get_element_mana(spell_data_list[0].element) / player_mana.element_mana_maxes[spell_data_list[0].element]) * 100)
+	active_spell_mana.value = (player_mana.get_element_mana(spell_data_list[0].element) / player_mana.element_mana_maxes[spell_data_list[0].element]) * 100
 	var active_spell_mana_text: String = str(int(player_mana.get_element_mana(spell_data_list[0].element)))
 	var zero_pad: String = get_zero_padding(MAX_ACTIVE_SPELL_MANA_DIGITS - len(active_spell_mana_text))
 	active_spell_mana_label.text = bbc_string % PADDING_COLOR + zero_pad + "[/color]" + active_spell_mana_text
@@ -45,6 +48,7 @@ func update_spells(spell_data_list: Array[SpellData], player_mana: PlayerMana) -
 
 func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
 	var active_spell_mana_text: String = str(int(player_mana.get_element_mana(spell_data_list[0].element)))
+	active_spell_mana.value = (player_mana.get_element_mana(spell_data_list[0].element) / player_mana.get_element_mana_max(spell_data_list[0].element)) * 100
 	var zero_pad: String = get_zero_padding(MAX_ACTIVE_SPELL_MANA_DIGITS - len(active_spell_mana_text))
 	active_spell_mana_label.text = bbc_string % PADDING_COLOR + zero_pad + "[/color]" + active_spell_mana_text
 
