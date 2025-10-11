@@ -48,6 +48,7 @@ func _ready():
 	player_spawn_point = active_level.player_spawn_point
 	player_character.spawn_point = player_spawn_point.global_position
 	player_character.global_position = player_character.spawn_point
+	player_character.on_tower_mana_collected(active_level.initial_gold)
 
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
