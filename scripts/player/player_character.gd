@@ -327,7 +327,7 @@ func update_hurtbox_collider(_value) -> void:
 	player_hurtbox.collider.set_deferred("disabled", _value)
 
 func on_special_charge_sprite_update_requested(_charges: int) -> void:
-	special_charges_sprite.texture.region = Rect2(0, (3 - _charges) * 4, 16, 4)
+	special_charges_sprite.texture.region = Rect2(0, (3 - _charges) * 6, 24, 6)
 
 	if _charges == player_special.charge_max:
 		special_charges_hide_timer.start(1)
