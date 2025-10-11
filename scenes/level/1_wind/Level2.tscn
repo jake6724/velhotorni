@@ -34,7 +34,7 @@ metadata/_custom_type_script = "uid://drj0bkkfpdi50"
 [sub_resource type="Resource" id="Resource_4gvay"]
 script = ExtResource("2_3ew8m")
 data = Array[ExtResource("4_k1xcf")]([SubResource("Resource_vgefi")])
-reward = 0.0
+reward = 1.0
 token_reward = 0
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
 

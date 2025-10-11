@@ -14,7 +14,8 @@ func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 	area.area_entered.connect(on_area_entered)
 	area.body_entered.connect(on_body_entered)
-	ap.play("move")
+	# ap.play("move")
+	ap.queue("move")
 
 func initialize(_data: SpellDataBullet, cast_direction: Vector2) -> void:
 	data = _data

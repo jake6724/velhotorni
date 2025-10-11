@@ -7,7 +7,7 @@ extends Node2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 var broken: bool = false
 var timer: Timer = Timer.new()
-var shimmer_delay: float = 4.0
+var shimmer_delay: float = 3.0
 var drop_chance: float = 10.0
 
 signal coin_dropped
@@ -16,7 +16,6 @@ func _ready():
 	# Randomly modify shimmer_delay
 	var shimmer_delay_modifier: float = Constants.weighted_random_rng.randf_range(0, 1)
 	shimmer_delay += shimmer_delay_modifier
-	print(shimmer_delay)
 
 	break_area.area_entered.connect(on_area_entered)
 	ap.play("idle")

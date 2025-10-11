@@ -1,6 +1,7 @@
 class_name PlayerMana
 extends Node
 
+@export var mana_per_drop: float = 10.0
 @export var element_mana: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE: 0,
 	Constants.Element.WIND: 0,
@@ -38,4 +39,4 @@ func decrement_element_mana(_element, _value) -> void:
 	element_mana[_element] -= _value
 
 func increment_element_mana(_element) -> void:
-	element_mana[_element] += 10
+	element_mana[_element] += mana_per_drop
