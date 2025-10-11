@@ -26,6 +26,8 @@ var tower_index: int = 0:
 
 		player_build_ui.tower_index = tower_index
 
+signal tower_mana_spent
+
 ## Creates a new instance of `tower_scene`, fully initialized. Modulated to be transparent.
 ## This is an active and ready tower that just needs to be placed.
 func create_preview_tower():
@@ -57,16 +59,21 @@ func update_preview_tower_position(player_global_position: Vector2, aim_input: V
 	# tween.tween_property(build_grid_sprite, "global_position", target, .1)
 
 ## Check if placement is valid and place `preview_tower`. Update `WorldGrid` and `preview_tower` accordingly.
-func place_tower() -> void:	
-	# Check if placement position is valid
-	var tower_grid_position: Vector2 = WorldGrid.world_to_grid(preview_tower.global_position)
+func place_tower(_tower_mana: float) -> void:	
+	# Check can afford
+	var cost: int = TowerGlobalData.tower_prices[preview_tower.data.element]
+	if _tower_mana >= cost:
 
-	if tower_grid_position in WorldGrid.data and WorldGrid.data[tower_grid_position]:
-		preview_tower.modulate.a = 1
-		preview_tower.can_show_range = false
-		preview_tower.attack_collider.set_deferred("disabled", false)
-		# Update WorldGrid
-		WorldGrid.data[tower_grid_position] = false
+		# Check if placement position is valid
+		var tower_grid_position: Vector2 = WorldGrid.world_to_grid(preview_tower.global_position)
+		if tower_grid_position in WorldGrid.data and WorldGrid.data[tower_grid_position]:
+			preview_tower.modulate.a = 1
+			preview_tower.can_show_range = false
+			preview_tower.attack_collider.set_deferred("disabled", false)
+			# Update WorldGrid
+			WorldGrid.data[tower_grid_position] = false
 
-		# Get a new preview tower
-		create_preview_tower() # TODO: This needs to be the currently selected type
+			# Get a new preview tower
+			create_preview_tower() # TODO: This needs to be the currently selected type
+
+			tower_mana_spent.emit(cost)

@@ -102,9 +102,13 @@ func _ready():
 	# Configure PlayerBuild
 	player_build.player_build_ui = player_build_ui
 	player_build.build_grid_sprite = build_grid_sprite
+	player_build.tower_mana_spent.connect(on_tower_mana_spent)
 
 	# Connect to ManaDropCollector
 	mana_drop_collector.mana_drop_collected.connect(on_element_mana_collected)
+
+	# Connect to CoinCollector (Tower Mana)
+	coin_collector.coin_collected.connect(on_tower_mana_collected)
 
 	# Configure Timers
 	respawn_timer.autostart = false
@@ -163,7 +167,7 @@ func cast_spell() -> void:
 	player_spell_spawner.spawn_spell(player_aim.aim_input)
 
 func place_tower() -> void:
-	player_build.place_tower()
+	player_build.place_tower(player_mana.tower_mana)
 	player_input.primary_action_pressed = false
 
 func on_spell_cast(_element: Constants.Element, _mana_cost) -> void:
@@ -211,6 +215,11 @@ func on_staff_switched(_spell_type: SpellData.Type) -> void:
 			staff_sprite.texture.region = Rect2(0,15,217,15)
 			player_aim.staff_rotation_offset_degrees = -120
 			staff_sprite.offset = Vector2(8, .5)
+
+		SpellData.StaffType.TRIPLE_STAFF: 
+			staff_sprite.texture.region = Rect2(0,60,217,15)
+			player_aim.staff_rotation_offset_degrees = -0
+			staff_sprite.offset = Vector2(4, 0.5)
 
 func switch_tower(_switch_direction: int) -> void:
 	player_build.tower_index += _switch_direction
@@ -302,6 +311,14 @@ func show_staff_sprite_custom():
 func on_element_mana_collected(_element: Constants.Element) -> void:
 	player_mana.increment_element_mana(_element)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
+
+func on_tower_mana_collected() -> void:
+	player_mana.tower_mana += 1
+	player_hud.update_tower_mana(player_mana)
+
+func on_tower_mana_spent(_value) -> void:
+	player_mana.tower_mana -= _value
+	player_hud.update_tower_mana(player_mana)
 
 func on_velocity_update_requested(new_velocity: Vector2) -> void:
 	velocity = new_velocity

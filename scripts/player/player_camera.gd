@@ -4,6 +4,7 @@ extends Camera2D
 @export var power: float
 @export var decay: float 
 
+@onready var player: PlayerCharacter = get_owner()
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var curr_power: float
@@ -20,10 +21,14 @@ func apply_shake(power_scale: float) -> void:
 		curr_power = new_power
 
 func _process(delta):
-	if owner.player_aim.aim_input != prev_aim_input:
+	if not player.building:
+		if player.player_aim.aim_input != prev_aim_input:
+			var tween = get_tree().create_tween()
+			tween.tween_property(self, "aim_follow_offset", (player.player_aim.aim_input * aim_follow_multiplier), aim_follow_speed)
+			prev_aim_input = player.player_aim.aim_input
+	else:
 		var tween = get_tree().create_tween()
-		tween.tween_property(self, "aim_follow_offset", (owner.player_aim.aim_input * aim_follow_multiplier), aim_follow_speed)
-		prev_aim_input = owner.player_aim.aim_input
+		tween.tween_property(self, "aim_follow_offset", Vector2(0,0), aim_follow_speed)
 
 	if curr_power > .1:
 		curr_power = snappedf(lerpf(curr_power, 0, decay * delta), 0.01)
