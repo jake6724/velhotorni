@@ -18,6 +18,7 @@ extends CharacterBody2D
 @onready var player_build: PlayerBuild = $PlayerBuild
 @onready var player_hud: PlayerHUD = %PlayerHUD
 @onready var player_mana: PlayerMana = %PlayerMana
+@onready var player_special: PlayerSpecial = %PlayerSpecial
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer
@@ -29,6 +30,8 @@ extends CharacterBody2D
 @onready var coin_collector: CoinCollector = $CoinCollector
 @onready var mana_drop_collector: ManaDropCollector = %ManaDropCollector
 @onready var build_grid_sprite = $PlayerBuild/BuildGridSprite
+@onready var special_charges_sprite: Sprite2D = %SpecialChargesSprite
+@onready var special_charges_hide_timer: Timer = Timer.new()
 
 @onready var player_build_ui: PlayerBuildUI = %PlayerBuildUI
 
@@ -42,9 +45,6 @@ var spawn_point: Vector2 = Vector2.ZERO # Set manually by main
 
 var aim_input: Vector2
 var prev_aim_input: Vector2
-
-var dashing: bool = false
-var dash_velocity: float = 400.0
 
 var falling: bool = false
 
@@ -71,6 +71,17 @@ func _ready():
 	player_spell_spawner.spell_spawn_point = spell_spawn_point
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
 	player_spell_spawner.staff_switched.connect(on_staff_switched)
+
+	# Configure PlayerSpecial
+	player_special.velocity_update_requested.connect(on_velocity_update_requested)
+	player_special.camera_shake_requested.connect(player_camera.apply_shake)
+	player_special.hurtbox_update_requested.connect(update_hurtbox_collider)
+	player_special.special_charge_sprite_update_requested.connect(on_special_charge_sprite_update_requested)
+	player_special.special_animation_requested.connect(on_animation_requested)
+	special_charges_hide_timer.autostart = false
+	special_charges_hide_timer.one_shot = true
+	special_charges_hide_timer.timeout.connect(on_special_charges_hide_timer_timeout)
+	add_child(special_charges_hide_timer)
 
 	# Configure AnimationPlayers
 	staff_ap.animation_finished.connect(on_staff_animation_finished)
@@ -118,12 +129,12 @@ func _ready():
 # 	else:
 # 		reticle_charge.hide()
 
-func _physics_process(delta): # This can go in a state eventually
+func _physics_process(delta): # This can go in a state eventuallyd
 	if alive:
 		# Update Aim
 		player_aim.update_aim(delta, player_input.get_aim_input())
 		if not hit:
-			if not dashing:	
+			if not player_special.active:
 				# Update Movement
 				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.speed)
 				player_animation.update_animation(delta)
@@ -161,17 +172,8 @@ func on_spell_cast(_element: Constants.Element, _mana_cost) -> void:
 	staff_ap.play("fire")
 
 func on_dash_input_pressed() -> void:
-	if not dashing:
-		dashing = true
-		player_camera.apply_shake(1)
-		player_hurtbox.collider.set_deferred("disabled", true)
-		
-		if player_input.move_input:	
-			velocity = Constants.get_closest_cardinal_direction_normalized(player_input.move_input) * dash_velocity
-		elif player_aim.aim_input:
-			velocity = Constants.get_closest_cardinal_direction_normalized(player_aim.aim_input) * dash_velocity
-		else:
-			velocity = Vector2(1,0) * dash_velocity
+	if not player_special.active:
+		player_special.special(player_input.move_input, player_aim.aim_input)
 
 func on_switch_selection_pressed(_switch_direction) -> void:
 	switch_action_func.call(_switch_direction)
@@ -239,8 +241,8 @@ func on_switch_player_mode_pressed() -> void:
 
 func on_animation_finished(anim_name) -> void:
 	if anim_name == "dash":
-		dashing = false
-		player_hurtbox.collider.set_deferred("disabled", false)
+		player_special.active = false
+		update_hurtbox_collider(false)
 
 	if anim_name == "fall":
 		falling = false
@@ -300,3 +302,24 @@ func show_staff_sprite_custom():
 func on_element_mana_collected(_element: Constants.Element) -> void:
 	player_mana.increment_element_mana(_element)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
+
+func on_velocity_update_requested(new_velocity: Vector2) -> void:
+	velocity = new_velocity
+
+func update_hurtbox_collider(_value) -> void:
+	player_hurtbox.collider.set_deferred("disabled", _value)
+
+func on_special_charge_sprite_update_requested(_charges: int) -> void:
+	special_charges_sprite.texture.region = Rect2(0, (3 - _charges) * 4, 16, 4)
+
+	if _charges == player_special.charge_max:
+		special_charges_hide_timer.start(1)
+	else:
+		special_charges_hide_timer.stop()
+		special_charges_sprite.show()
+
+func on_special_charges_hide_timer_timeout() -> void:
+	special_charges_sprite.hide()
+
+func on_animation_requested(_anim_name: String) -> void:
+	ap.play(_anim_name)

@@ -4,7 +4,7 @@ extends Node2D
 enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 
 # # Child References
-@onready var tilemap: TileMapLayer = $TileMapLayer
+# @onready var tilemap: TileMapLayer = $TileMapLayer
 @onready var level_mask_layer: TileMapLayer = $LevelMaskLayer
 @onready var base: Base = $Base
 @onready var weather_scroll = $WeatherScroll

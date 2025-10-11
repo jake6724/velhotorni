@@ -134,13 +134,13 @@ var z_index_map: Dictionary[String, int] = {
 	"bg": -4096,
 	"melee_spell": -4094,
 	"terrain_obstacle": -2000, # Not actually used, but this is the value painted on the tileset. used so sword always goes behind these
-	"weather_scroll": -1999,
 	"base": -1001,
 	"coin": -1000,
 	"pulse_bullet": -999,
 	"tower": -998,
 	"enemy_spawner": 1,
 	"player_character": 2,
+	"weather_scroll": 2000,
 	"tower_menu": 1000,
 	"tower_upgrade_menu": 1001,
 	"top": 4096
