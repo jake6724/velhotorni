@@ -129,26 +129,28 @@ func hide_placement_phase() -> void:
 	fast_forward.show()
 
 func show_placement_phase() -> void:
-	tower_buttons.show()
+	# tower_buttons.show()
 	wave_button.show()
-	wave_preview_panel.show()
-	eye_button.show()
+	# wave_preview_panel.show()
+	# eye_button.show()
 
-	cycle_indicator.hide()
+	# cycle_indicator.hide()
 	fast_forward.hide()
-	boss_info.hide()
+	# boss_info.hide()
 
 func hide_shop() -> void:
-	tower_buttons.hide()
-	wave_button.hide()
+	pass  # don't need this anymore
+	# tower_buttons.hide()
+	# wave_button.hide()
 
 func show_shop() -> void:
-	tower_buttons.show()
-	wave_button.show()
+	pass # don't need this anymore
+	# tower_buttons.show()
+	# wave_button.show()
 
 func show_level_number() -> void:
 	level_number.text = LevelManager.active_level.level_name
-	level_number.show()
+	# level_number.show()
 	# Start timer which will automatically hide level number after timeout
 	level_number_timer.start(level_number_duration)
 
@@ -254,8 +256,9 @@ func hide_tower_info_panels() -> void:
 	right_tower_info_panel.hide()
 
 func show_tower_info_panel_shop(_tower_data: TowerData) -> void:
-	left_tower_info_panel.update_stats_shop(_tower_data)
-	left_tower_info_panel.show()
+	pass # 
+	# left_tower_info_panel.update_stats_shop(_tower_data)
+	# left_tower_info_panel.show()
 
 func hide_tower_info_panel_shop() -> void:
 	left_tower_info_panel.hide()

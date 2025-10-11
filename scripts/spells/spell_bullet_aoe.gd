@@ -43,5 +43,4 @@ func explode() -> void:
 		ap.play("aoe_hit")
 
 func on_aoe_area_entered(enemy: Enemy) -> void:
-	print("enemy in AOE")
 	deal_damage(enemy)
