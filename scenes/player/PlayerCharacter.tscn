@@ -1176,6 +1176,11 @@ metadata/_custom_type_script = "uid://cmfd0jyw7me5n"
 unique_name_in_owner = true
 script = ExtResource("20_fyjgo")
 
+[node name="PlayerNumberPopup" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("28_a033j")
+metadata/_custom_type_script = "uid://c75pt0b6io16g"
+
 [node name="PlayerBuild" type="Node" parent="."]
 script = ExtResource("13_6qouk")
 metadata/_custom_type_script = "uid://c67nlh7a52smp"
@@ -1203,12 +1208,6 @@ position = Vector2(-6, -7)
 [node name="ManaDropCollector" parent="." instance=ExtResource("25_vy23r")]
 unique_name_in_owner = true
 visible = false
-
-[node name="PlayerNumberPopup" type="Node2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, -14)
-script = ExtResource("28_a033j")
-metadata/_custom_type_script = "uid://c75pt0b6io16g"
 
 [node name="PlayerHurtbox" type="Area2D" parent="."]
 visible = false

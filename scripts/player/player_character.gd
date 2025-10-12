@@ -316,7 +316,7 @@ func on_element_mana_collected(_element: Constants.Element) -> void:
 func on_tower_mana_collected(_value: int = 1) -> void:
 	player_mana.tower_mana += _value
 	player_hud.update_tower_mana(player_mana)
-	player_number_popup.display_number(_value, player_number_popup.global_position)
+	player_number_popup.display_number(_value, "SUMMON MANA", global_position + Vector2(0,-6))
 
 func on_tower_mana_spent(_value) -> void:
 	player_mana.tower_mana -= _value
