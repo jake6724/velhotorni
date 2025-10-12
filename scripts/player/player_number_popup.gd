@@ -8,7 +8,7 @@ const color_black: String = "#000000"
 var outline_size: int = 2
 
 var up_distance: float = 16
-var up_time: float = .25
+var up_time: float = .5
 
 func display_number(value: int, desc: String, pos: Vector2):
 	var number: Label = Label.new()
@@ -31,7 +31,7 @@ func display_number(value: int, desc: String, pos: Vector2):
 	var tween = get_tree().create_tween()
 	# tween.set_parallel(true) ? 
 	tween.tween_property(number, "position:y", number.position.y - up_distance, up_time).set_ease(Tween.EASE_OUT)
-	tween.tween_property(number, "position:y", number.position.y, .5).set_ease(Tween.EASE_IN)
+	# tween.tween_property(number, "position:y", number.position.y, .5).set_ease(Tween.EASE_IN)
 	tween.tween_property(number, "scale", Vector2.ZERO, .25).set_ease(Tween.EASE_IN)
 
 	await tween.finished
