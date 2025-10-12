@@ -33,7 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://d218nr004vv6w" path="res://scenes/ui/player/PlayerHUD.tscn" id="25_ydu3x"]
 [ext_resource type="PackedScene" uid="uid://sw4orj43x0r1" path="res://scenes/ui/player/PlayerBuildUI.tscn" id="26_djlof"]
 [ext_resource type="Script" uid="uid://c352umdhm3bhc" path="res://scripts/player/player_beacon.gd" id="27_h3nqo"]
-[ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/player_number_popup.gd" id="28_a033j"]
+[ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="28_a033j"]
 [ext_resource type="Texture2D" uid="uid://38nei1ihsuqv" path="res://assets/art/sprites/ui/spr_ui_special_charge.png" id="31_ip3vl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qouk"]

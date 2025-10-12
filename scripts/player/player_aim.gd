@@ -1,6 +1,8 @@
 class_name PlayerAim
 extends Node2D
 
+# TODO: Havign a tween on process might be bad!
+
 @onready var player: PlayerCharacter = get_owner()
 
 ## The furthest distance the reticle can travel from the center of the PlayerCharacter

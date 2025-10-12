@@ -22,6 +22,7 @@ enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE,
 @onready var hex_area: HexArea = $HexArea
 @onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
 @onready var indicator: EnemyIndicator = $EnemyIndicator
+@onready var number_popup: NumberPopup = %NumberPopup
 
 @onready var enemy_movement: EnemyMovement = $EnemyMovement
 
@@ -177,6 +178,8 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 
 		# Apply Weaken modifier
 		damage_recieved = damage_recieved + (damage_recieved * (weaken_percent/100))
+
+		number_popup.display_damage_number(damage_recieved, global_position)
 
 		health = max(0, health - damage_recieved)
 

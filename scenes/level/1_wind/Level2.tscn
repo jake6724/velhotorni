@@ -1636,7 +1636,7 @@ script = ExtResource("1_ssuxm")
 level_name = "Level 2"
 region = 2
 initial_gold = 75
-waves = Array[ExtResource("2_3ew8m")]([SubResource("Resource_4gvay"), ExtResource("3_clfgj"), SubResource("Resource_s0k01"), SubResource("Resource_yalw7"), SubResource("Resource_v2c5h"), SubResource("Resource_u6qoj")])
+waves = Array[ExtResource("2_3ew8m")]([ExtResource("3_clfgj"), SubResource("Resource_4gvay"), SubResource("Resource_s0k01"), SubResource("Resource_yalw7"), SubResource("Resource_v2c5h"), SubResource("Resource_u6qoj")])
 
 [node name="AnimationLayer" type="TileMapLayer" parent="."]
 z_index = -1

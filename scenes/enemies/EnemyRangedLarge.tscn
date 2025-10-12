@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://de461rdesl57b"]
+[gd_scene load_steps=126 format=3 uid="uid://de461rdesl57b"]
 
 [ext_resource type="Script" uid="uid://bj0h1eevyweax" path="res://scripts/enemies/enemy_ranged.gd" id="1_bjuyy"]
 [ext_resource type="Texture2D" uid="uid://b55stadqnynpd" path="res://assets/art/atlases/enemy/atl_enemy_wind_harpy.png" id="2_uh888"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://b73facmk5sjrx" path="res://scripts/hexes/hex_area.gd" id="12_ps8m0"]
 [ext_resource type="Script" uid="uid://bm2jek1l03frj" path="res://scripts/enemies/enemy_indicator.gd" id="13_dj4bl"]
 [ext_resource type="Script" uid="uid://di3c54ykd28fx" path="res://scripts/enemies/enemy_movement.gd" id="14_txghh"]
+[ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="15_tw3kj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ponyy"]
 radius = 10.0499
@@ -1080,3 +1081,8 @@ shape = SubResource("CircleShape2D_vn5nk")
 debug_color = Color(0.986412, 0.114018, 3.85046e-07, 0.42)
 
 [node name="EnemyBulletParent" type="Node" parent="."]
+
+[node name="NumberPopup" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("15_tw3kj")
+metadata/_custom_type_script = "uid://c75pt0b6io16g"

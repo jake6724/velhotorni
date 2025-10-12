@@ -19,7 +19,7 @@ extends CharacterBody2D
 @onready var player_hud: PlayerHUD = %PlayerHUD
 @onready var player_mana: PlayerMana = %PlayerMana
 @onready var player_special: PlayerSpecial = %PlayerSpecial
-@onready var player_number_popup: PlayerNumberPopup = %PlayerNumberPopup
+@onready var player_number_popup: NumberPopup = %PlayerNumberPopup
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer
@@ -312,11 +312,11 @@ func show_staff_sprite_custom():
 func on_element_mana_collected(_element: Constants.Element) -> void:
 	player_mana.increment_element_mana(_element)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
+	player_number_popup.display_mana_number(player_mana.mana_per_drop, global_position + Vector2(0,-6), _element)
 
 func on_tower_mana_collected(_value: int = 1) -> void:
 	player_mana.tower_mana += _value
 	player_hud.update_tower_mana(player_mana)
-	player_number_popup.display_number(_value, "SUMMON MANA", global_position + Vector2(0,-6))
 
 func on_tower_mana_spent(_value) -> void:
 	player_mana.tower_mana -= _value
