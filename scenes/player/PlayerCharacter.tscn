@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=84 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://btu23m1c7slb3" path="res://assets/art/sprites/ui/spr_ui_placementgrid.png" id="7_vycf0"]
 [ext_resource type="Resource" uid="uid://bcov2rckhliwp" path="res://data/spells/water/spell_data_melee_water_ice_sword.tres" id="8_kuao7"]
 [ext_resource type="Script" uid="uid://b5keun6k5cxfo" path="res://scripts/player/player_aim.gd" id="9_laqyv"]
-[ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="10_hkntq"]
+[ext_resource type="Script" uid="uid://bmfid24mjnj0v" path="res://scripts/player/player_movement.gd" id="10_hkntq"]
 [ext_resource type="PackedScene" uid="uid://bno5o5pbi8s3e" path="res://scenes/player/CoinCollector.tscn" id="10_wp8q1"]
 [ext_resource type="Script" uid="uid://b23tgyr1eik40" path="res://scripts/player/player_spells.gd" id="10_wrkuw"]
 [ext_resource type="Script" uid="uid://by6ywjtg3nxyl" path="res://scripts/player/player_input.gd" id="11_hkntq"]
@@ -24,15 +24,16 @@
 [ext_resource type="Script" uid="uid://6kagsif3xfkf" path="res://scripts/player/player_hurtbox.gd" id="12_gsbha"]
 [ext_resource type="Script" uid="uid://c67nlh7a52smp" path="res://scripts/player/player_build.gd" id="13_6qouk"]
 [ext_resource type="Script" uid="uid://ckfb2xehi2wqu" path="res://scripts/player/player_camera.gd" id="13_bnayp"]
-[ext_resource type="Script" path="res://scripts/player/player_audio.gd" id="14_kkcsf"]
+[ext_resource type="Script" uid="uid://ctk0c5nv8o7mf" path="res://scripts/player/player_audio.gd" id="14_kkcsf"]
 [ext_resource type="Resource" uid="uid://b50w7syjdvdrf" path="res://data/spells/spell_data_bullet_arcane_basic_triple.tres" id="15_mxcls"]
 [ext_resource type="Script" uid="uid://cmfd0jyw7me5n" path="res://scripts/player/player_mana.gd" id="17_07k56"]
 [ext_resource type="Texture2D" uid="uid://kkqxipsicds5" path="res://assets/art/sprites/spr_fx_dust.png" id="20_88aji"]
 [ext_resource type="Script" uid="uid://dcfta3oxiix4o" path="res://scripts/player/player_special.gd" id="20_fyjgo"]
-[ext_resource type="PackedScene" path="res://scenes/player/ManaDropCollector.tscn" id="25_vy23r"]
+[ext_resource type="PackedScene" uid="uid://b1aafksk0q8f3" path="res://scenes/player/ManaDropCollector.tscn" id="25_vy23r"]
 [ext_resource type="PackedScene" uid="uid://d218nr004vv6w" path="res://scenes/ui/player/PlayerHUD.tscn" id="25_ydu3x"]
 [ext_resource type="PackedScene" uid="uid://sw4orj43x0r1" path="res://scenes/ui/player/PlayerBuildUI.tscn" id="26_djlof"]
 [ext_resource type="Script" uid="uid://c352umdhm3bhc" path="res://scripts/player/player_beacon.gd" id="27_h3nqo"]
+[ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/player_number_popup.gd" id="28_a033j"]
 [ext_resource type="Texture2D" uid="uid://38nei1ihsuqv" path="res://assets/art/sprites/ui/spr_ui_special_charge.png" id="31_ip3vl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qouk"]
@@ -1202,6 +1203,12 @@ position = Vector2(-6, -7)
 [node name="ManaDropCollector" parent="." instance=ExtResource("25_vy23r")]
 unique_name_in_owner = true
 visible = false
+
+[node name="PlayerNumberPopup" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -14)
+script = ExtResource("28_a033j")
+metadata/_custom_type_script = "uid://c75pt0b6io16g"
 
 [node name="PlayerHurtbox" type="Area2D" parent="."]
 visible = false
