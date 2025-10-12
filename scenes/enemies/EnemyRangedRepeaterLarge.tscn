@@ -901,6 +901,8 @@ resource_local_to_scene = true
 radius = 32.0
 
 [node name="EnemyRangedRepeaterLarge" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
 script = ExtResource("1_j0tmd")
 metadata/_custom_type_script = "uid://tsohq50bjs6y"
 
@@ -1001,8 +1003,9 @@ texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_top = -4.0
+offset_top = -13.0
 offset_right = 16.0
+offset_bottom = -9.0
 grow_horizontal = 2
 value = 100.0
 texture_under = ExtResource("5_trm26")
