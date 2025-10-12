@@ -143,6 +143,7 @@ var z_index_map: Dictionary[String, int] = {
 	"weather_scroll": 2000,
 	"tower_menu": 1000,
 	"tower_upgrade_menu": 1001,
+	"popup": 2000,
 	"top": 4096
 }
 

@@ -22,6 +22,7 @@ enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE,
 @onready var hex_area: HexArea = $HexArea
 @onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
 @onready var indicator: EnemyIndicator = $EnemyIndicator
+@onready var number_popup: NumberPopup = %NumberPopup
 
 @onready var enemy_movement: EnemyMovement = $EnemyMovement
 
@@ -54,7 +55,7 @@ var health: float:
 		health_bar.value = (health / max_health) * 100
 
 var damage: int
-var negative_modifier: float = .5
+var negative_modifier: float = .75
 var positive_modifier: float = 2.0
 
 var is_alive: bool = true
@@ -156,23 +157,29 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 		is_taking_damage = true
 		ap.play("hit")
 
-		# Hit by resisted element
-		if tower_element == element or tower_element == strong_against_element:
-			weak.hide()
-			shield.show()
-			damage_recieved *= negative_modifier
+		# # Hit by resisted element
+		# if tower_element == element or tower_element == strong_against_element:
+		# 	weak.hide()
+		# 	shield.show()
+		# 	damage_recieved *= negative_modifier
 
-		# Hit by weak-to element
-		elif tower_element == weak_against_element:
-			weak.show()
-			shield.hide()
-			damage_recieved *= positive_modifier
+		# # Hit by weak-to element
+		# elif tower_element == weak_against_element:
+		# 	weak.show()
+		# 	shield.hide()
+		# 	damage_recieved *= positive_modifier
+
+		# Hit by same element
+		if tower_element == data.element:
+			damage_recieved *= negative_modifier
 
 		if not health_bar.is_visible():
 			health_bar.show()
 
 		# Apply Weaken modifier
 		damage_recieved = damage_recieved + (damage_recieved * (weaken_percent/100))
+
+		number_popup.display_damage_number(damage_recieved, global_position)
 
 		health = max(0, health - damage_recieved)
 

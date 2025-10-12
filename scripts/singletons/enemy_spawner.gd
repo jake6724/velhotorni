@@ -20,13 +20,13 @@ var flying_spawn_points: Array[Vector2] = []
 var player: PlayerCharacter # Set by main
 
 var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
-	Enemy.Size.SMALL: preload("res://scenes/enemies/SmallEnemy.tscn"),
-	Enemy.Size.LARGE: preload("res://scenes/enemies/LargeEnemy.tscn"),
-	Enemy.Size.FLYING_SMALL: preload("res://scenes/enemies/FlyingSmallEnemy.tscn"),
-	Enemy.Size.FLYING_LARGE: preload("res://scenes/enemies/FlyingLargeEnemy.tscn"),
-	Enemy.Size.RANGED_SMALL: preload("res://scenes/enemies/RangedSmallEnemy.tscn"),
+	Enemy.Size.SMALL: preload("res://scenes/enemies/EnemySmall.tscn"),
+	Enemy.Size.LARGE: preload("res://scenes/enemies/EnemyLarge.tscn"),
+	Enemy.Size.FLYING_SMALL: preload("res://scenes/enemies/EnemyFlyingSmall.tscn"),
+	Enemy.Size.FLYING_LARGE: preload("res://scenes/enemies/EnemyFlyingLarge.tscn"),
+	Enemy.Size.RANGED_SMALL: preload("res://scenes/enemies/EnemyRangedSmall.tscn"),
 	Enemy.Size.RANGED_LARGE: preload("res://scenes/enemies/EnemyRangedLarge.tscn"),
-	Enemy.Size.REPEATER_SMALL: preload("res://scenes/enemies/EnemyRangedSmallRepeater.tscn"),
+	Enemy.Size.REPEATER_SMALL: preload("res://scenes/enemies/EnemyRangedRepeaterSmall.tscn"),
 	Enemy.Size.REPEATER_LARGE: preload("res://scenes/enemies/EnemyRangedRepeaterLarge.tscn"),
 }
 
