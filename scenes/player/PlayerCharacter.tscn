@@ -437,6 +437,24 @@ tracks/3/keys = {
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_a033j"]
+resource_name = "levitate"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(8, 3), Vector2i(9, 3), Vector2i(10, 3), Vector2i(11, 3)]
+}
+
 [sub_resource type="Animation" id="Animation_fhwjy"]
 resource_name = "walk"
 length = 0.75
@@ -597,24 +615,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_a033j"]
-resource_name = "levitate"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterSprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(8, 3), Vector2i(9, 3), Vector2i(10, 3), Vector2i(11, 3)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g7j5r"]
@@ -1278,7 +1278,6 @@ lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_88aji")
 
 [node name="PlayerUI" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PlayerBuildUI" parent="PlayerUI" instance=ExtResource("26_djlof")]
 unique_name_in_owner = true
