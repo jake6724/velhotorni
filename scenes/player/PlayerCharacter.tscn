@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=85 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
@@ -599,6 +599,24 @@ tracks/3/keys = {
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_a033j"]
+resource_name = "levitate"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(8, 3), Vector2i(9, 3), Vector2i(10, 3), Vector2i(11, 3)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g7j5r"]
 _data = {
 &"RESET": SubResource("Animation_ljh2g"),
@@ -608,6 +626,7 @@ _data = {
 &"fall": SubResource("Animation_7q84o"),
 &"hit": SubResource("Animation_gsbha"),
 &"idle": SubResource("Animation_6nsgb"),
+&"levitate": SubResource("Animation_a033j"),
 &"walk": SubResource("Animation_fhwjy"),
 &"walk_down": SubResource("Animation_v81jw"),
 &"walk_up": SubResource("Animation_g7j5r")
@@ -1032,7 +1051,7 @@ states/Idle/position = Vector2(340.556, 165.667)
 states/Walk/node = ExtResource("4_ljh2g")
 states/Walk/position = Vector2(340.013, 28.4568)
 transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_ljh2g"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_g7j5r"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_v81jw"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_slbhc"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_gsbha"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_bnayp"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_kkcsf"), "Walk", "Hit", SubResource("AnimationNodeStateMachineTransition_adj0b"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_akj2q"), "Hit", "Walk", SubResource("AnimationNodeStateMachineTransition_kuao7"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_7q84o"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_0x1p2"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_88aji"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_hkntq")]
-graph_offset = Vector2(21, -76)
+graph_offset = Vector2(77, -104)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bnayp"]
 radius = 6.0
@@ -1066,6 +1085,7 @@ vframes = 12
 frame = 18
 
 [node name="ReticleSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 z_index = 4096
 sprite_frames = SubResource("SpriteFrames_wp8q1")
 animation = &"combat"
@@ -1258,6 +1278,7 @@ lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_88aji")
 
 [node name="PlayerUI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="PlayerBuildUI" parent="PlayerUI" instance=ExtResource("26_djlof")]
 unique_name_in_owner = true

@@ -141,7 +141,7 @@ func _physics_process(delta): # This can go in a state eventuallyd
 		if not hit:
 			if not player_special.active:
 				# Update Movement
-				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.speed)
+				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.active_speed)
 				player_animation.update_animation(delta)
 
 		else: # Hit stun recovery
@@ -238,14 +238,16 @@ func on_switch_player_mode_pressed() -> void:
 		player_build_ui.show()
 		player_build_ui.raise_current()
 		build_grid_sprite.show()
+		player_stats.active_speed = player_stats.build_speed
 	else:								    # Switch to combat mode 
 		staff_sprite.show()
 		primary_action_func = cast_spell
 		switch_action_func = switch_spell
-		if player_build.preview_tower:	# Remove preview tower
+		if player_build.preview_tower:		# Remove preview tower
 			player_build.preview_tower.queue_free()
 		player_build_ui.hide()
 		build_grid_sprite.hide()
+		player_stats.active_speed = player_stats.combat_speed
 
 	player_aim.switch_mode(building)
 

@@ -13,7 +13,9 @@ var mana: float = 100.0:
 		mana = value
 		mana_updated.emit(mana)
 
-var speed: float = 100.0
+var combat_speed: float = 100.0
+var build_speed: float = 50.0
+var active_speed: float = combat_speed
 var knockback_multiplier: float = 70.0
 
 signal health_updated
