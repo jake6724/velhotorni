@@ -252,9 +252,9 @@ func on_switch_player_mode_pressed() -> void:
 	player_aim.switch_mode(building)
 
 func on_animation_finished(anim_name) -> void:
-	if anim_name == "dash":
-		player_special.active = false
-		update_hurtbox_collider(false)
+	# if anim_name == "dash":
+	# 	player_special.active = false
+	# 	update_hurtbox_collider(false)
 
 	if anim_name == "fall":
 		falling = false

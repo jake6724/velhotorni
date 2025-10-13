@@ -1190,9 +1190,9 @@ advance_mode = 2
 advance_expression = "!player_special.active"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rol34"]
+priority = 0
 switch_mode = 2
 advance_mode = 2
-advance_expression = "!player_special.active"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1s53w"]
 switch_mode = 2
@@ -1218,7 +1218,7 @@ states/Walk/position = Vector2(199.08, -199.826)
 states/end_dash/node = SubResource("AnimationNodeAnimation_dm1k7")
 states/end_dash/position = Vector2(633.152, -177.217)
 transitions = ["Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_g7j5r"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_v81jw"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_slbhc"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_bnayp"), "Walk", "Hit", SubResource("AnimationNodeStateMachineTransition_adj0b"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_akj2q"), "Hit", "Walk", SubResource("AnimationNodeStateMachineTransition_kuao7"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_7q84o"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_0x1p2"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_88aji"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_hkntq"), "Idle", "Levitate", SubResource("AnimationNodeStateMachineTransition_dm1k7"), "Walk", "Levitate", SubResource("AnimationNodeStateMachineTransition_ahw3v"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a033j"), "Levitate", "Hit", SubResource("AnimationNodeStateMachineTransition_vka04"), "Hit", "Levitate", SubResource("AnimationNodeStateMachineTransition_yirxs"), "Levitate", "Fall", SubResource("AnimationNodeStateMachineTransition_gg8xu"), "Levitate", "Idle", SubResource("AnimationNodeStateMachineTransition_rwb4p"), "Dash", "end_dash", SubResource("AnimationNodeStateMachineTransition_wsgx3"), "end_dash", "Idle", SubResource("AnimationNodeStateMachineTransition_rol34"), "end_dash", "Walk", SubResource("AnimationNodeStateMachineTransition_1s53w")]
-graph_offset = Vector2(57, -284)
+graph_offset = Vector2(-63, -301)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bnayp"]
 radius = 6.0

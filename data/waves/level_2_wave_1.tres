@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dcfbh2qtj2uy7" path="res://data/spawn/spawn_wind_ghoul_3.tres" id="2_sxsj3"]
 [ext_resource type="Resource" uid="uid://ind50oi64g1j" path="res://data/spawn/path_2_spawns/spawn_path_2_wind_ghoul_3.tres" id="3_uwr06"]
 [ext_resource type="Resource" uid="uid://bq0ou24k2tfwy" path="res://data/spawn/path_2_spawns/spawn_path_2_wind_ghoul_1.tres" id="4_o3hrp"]
-[ext_resource type="Resource" path="res://data/spawn/spawn_path_1_ranged/spawn_ranged_wind_flatwoods_1.tres" id="4_sxsj3"]
+[ext_resource type="Resource" uid="uid://b7rvci4vb72wl" path="res://data/spawn/spawn_path_1_ranged/spawn_ranged_wind_flatwoods_1.tres" id="4_sxsj3"]
 [ext_resource type="Resource" uid="uid://cbcg8g4owjgrc" path="res://data/spawn/spawn_wind_ghoul_1.tres" id="5_qjkks"]
 [ext_resource type="Resource" uid="uid://88wopr8wpwsi" path="res://data/spawn/path_2_spawns/spawn_path_2_wind_harpy_1.tres" id="7_uwr06"]
 

@@ -2,9 +2,12 @@ class_name PlayerSpecial
 extends Node
 
 var active: bool = false
+@onready var player: PlayerCharacter = get_owner()
 
 # Go into data file eventually
-var dash_velocity: float = 400.0
+@export var dash_velocity: float = 250.0
+@export var dash_duration: float = .1
+
 var charge_max: int = 3
 var charges: int = 3
 var charge_cooldown_duration: float = 1
@@ -33,15 +36,31 @@ func special(_move_input: Vector2, _aim_input: Vector2) -> void:
 		special_cooldown_timer.start(charge_cooldown_duration) # wrong probably
 
 func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
-	if _move_input:	
-		velocity_update_requested.emit(Constants.get_closest_cardinal_direction_normalized(_move_input) * dash_velocity)
-	elif _aim_input:
-		velocity_update_requested.emit(Constants.get_closest_cardinal_direction_normalized(_aim_input) * dash_velocity)
-	else:
-		velocity_update_requested.emit(Vector2(1,0) * dash_velocity)
-
 	camera_shake_requested.emit(1)
 	hurtbox_update_requested.emit(true)
+	var direction: Vector2
+	if _move_input:
+		direction = Constants.get_closest_cardinal_direction_normalized(_move_input)
+	elif _aim_input:
+		direction = Constants.get_closest_cardinal_direction_normalized(_aim_input)
+	else:
+		direction = Vector2(1,0)
+		
+	# var boost_velocity: Vector2 = player.velocity + (Vector2(dash_velocity*.25, dash_velocity*.25) * direction)
+	player.velocity = player.velocity + (Vector2(200, 200) * direction)
+	var target: Vector2 = player.velocity + (Vector2(dash_velocity, dash_velocity) * direction)
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(player, "velocity", target, dash_duration)
+
+	await tween.finished
+	active = false
+
+	# if _move_input:	
+	# 	velocity_update_requested.emit(Constants.get_closest_cardinal_direction_normalized(_move_input) * dash_velocity)
+	# elif _aim_input:
+	# 	velocity_update_requested.emit(Constants.get_closest_cardinal_direction_normalized(_aim_input) * dash_velocity)
+	# else:
+	# 	velocity_update_requested.emit(Vector2(1,0) * dash_velocity)
 
 func on_special_cooldown_timeout() -> void:
 	charges += 1

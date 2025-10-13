@@ -7,4 +7,5 @@
 script = ExtResource("2_438ky")
 enemy_data = ExtResource("1_v27xb")
 delay = 2.0
+path_index = 0
 metadata/_custom_type_script = "uid://drj0bkkfpdi50"
