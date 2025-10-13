@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://88wopr8wpwsi"]
 
-[ext_resource type="Resource" uid="uid://bp1oi8pi675fq" path="res://data/enemies/enemy_data_wind_harpy.tres" id="1_dv74d"]
+[ext_resource type="Resource" uid="uid://bvdnin0dnn1yr" path="res://data/enemies/ranged_enemies/enemy_data_ranged_wind_harpy.tres" id="1_e60ld"]
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_kc3b7"]
 
 [resource]
 script = ExtResource("2_kc3b7")
-enemy_data = ExtResource("1_dv74d")
+enemy_data = ExtResource("1_e60ld")
 delay = 1.0
-path_index = 1
+path_index = 2
 metadata/_custom_type_script = "uid://drj0bkkfpdi50"
