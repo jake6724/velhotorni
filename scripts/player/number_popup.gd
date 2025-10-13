@@ -1,5 +1,6 @@
 class_name NumberPopup
 extends Node
+# https://www.youtube.com/watch?v=F0DQLSiLkjg
 
 var font: FontFile = preload("res://assets/fonts/Early-GameBoy-Jake-Edit.ttf")
 const COLOR_WHITE: String = "#FFFFFF"

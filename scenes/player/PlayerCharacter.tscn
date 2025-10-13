@@ -1051,7 +1051,7 @@ states/Idle/position = Vector2(340.556, 165.667)
 states/Walk/node = ExtResource("4_ljh2g")
 states/Walk/position = Vector2(340.013, 28.4568)
 transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_ljh2g"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_g7j5r"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_v81jw"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_slbhc"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_gsbha"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_bnayp"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_kkcsf"), "Walk", "Hit", SubResource("AnimationNodeStateMachineTransition_adj0b"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_akj2q"), "Hit", "Walk", SubResource("AnimationNodeStateMachineTransition_kuao7"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_7q84o"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_0x1p2"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_88aji"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_hkntq")]
-graph_offset = Vector2(77, -104)
+graph_offset = Vector2(-62, -34)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bnayp"]
 radius = 6.0

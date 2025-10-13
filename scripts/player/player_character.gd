@@ -284,6 +284,7 @@ func on_hit(_direction) -> void:
 		TimeManager.apply_hitstop()
 
 		player_stats.health -= 1
+		hit_blink()
 
 func jump_forward() -> void:
 	pass
@@ -303,6 +304,15 @@ func respawn() -> void:
 	alive = true
 	player_hurtbox.collider.set_deferred("disabled", true)
 	hurtbox_reset_timer.start(respawn_iframe_duration)
+
+func hit_blink() -> void:
+	var loops: int = 10
+	var blink_time: float = (hurtbox_iframe_duration / loops) / 2
+	var blink_tween: Tween = get_tree().create_tween().set_loops(loops)
+	blink_tween.tween_property(self, "modulate:a", 0.0, .01)
+	blink_tween.tween_interval(blink_time)
+	blink_tween.tween_property(self, "modulate:a", 1.0, .01)
+	blink_tween.tween_interval(blink_time)
 
 func on_hurtbox_reset_timer_timeout() -> void:
 	player_hurtbox.collider.set_deferred("disabled", false)
