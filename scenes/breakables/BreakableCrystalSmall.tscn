@@ -339,6 +339,7 @@ metadata/_custom_type_script = "uid://d3pvkwk22h1o0"
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_i8v1e")
 centered = false
+offset = Vector2(0, -2)
 hframes = 4
 vframes = 3
 
@@ -347,7 +348,7 @@ collision_layer = 8388608
 collision_mask = 1049088
 
 [node name="BreakCollider" type="CollisionShape2D" parent="BreakArea"]
-position = Vector2(8, 9)
+position = Vector2(8.5, 7)
 shape = SubResource("CapsuleShape2D_i8v1e")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
