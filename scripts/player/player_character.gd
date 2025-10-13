@@ -134,7 +134,7 @@ func _ready():
 # 	else:
 # 		reticle_charge.hide()
 
-func _physics_process(delta): # This can go in a state eventuallyd
+func _physics_process(delta): # This can go in a state eventually
 	if alive:
 		# Update Aim
 		player_aim.update_aim(delta, player_input.get_aim_input())
@@ -229,7 +229,7 @@ func switch_tower(_switch_direction: int) -> void:
 
 ## Switch between combat and building modes
 func on_switch_player_mode_pressed() -> void:
-	building = not building
+	building = !building
 	if building:							# Switch to build mode
 		primary_action_func = place_tower 
 		switch_action_func = switch_tower
