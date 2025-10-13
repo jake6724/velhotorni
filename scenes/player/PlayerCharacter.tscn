@@ -1085,7 +1085,6 @@ vframes = 12
 frame = 18
 
 [node name="ReticleSprite" type="AnimatedSprite2D" parent="."]
-visible = false
 z_index = 4096
 sprite_frames = SubResource("SpriteFrames_wp8q1")
 animation = &"combat"
