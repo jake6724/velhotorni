@@ -40,7 +40,6 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	else:
 		velocity_update_requested.emit(Vector2(1,0) * dash_velocity)
 
-	special_animation_requested.emit("dash")
 	camera_shake_requested.emit(1)
 	hurtbox_update_requested.emit(true)
 
