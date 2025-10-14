@@ -8,7 +8,7 @@ extends Node2D
 var broken: bool = false
 var timer: Timer = Timer.new()
 var shimmer_delay: float = 3.0
-var drop_chance: float = 5.0
+var drop_chance: float = 3.0
 
 signal coin_dropped
 
