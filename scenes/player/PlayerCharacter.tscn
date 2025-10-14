@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=116 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://btu23m1c7slb3" path="res://assets/art/sprites/ui/spr_ui_placementgrid.png" id="7_vycf0"]
 [ext_resource type="Resource" uid="uid://bcov2rckhliwp" path="res://data/spells/water/spell_data_melee_water_ice_sword.tres" id="8_kuao7"]
 [ext_resource type="Script" uid="uid://b5keun6k5cxfo" path="res://scripts/player/player_aim.gd" id="9_laqyv"]
-[ext_resource type="Script" uid="uid://bmfid24mjnj0v" path="res://scripts/player/player_movement.gd" id="10_hkntq"]
+[ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="10_hkntq"]
 [ext_resource type="PackedScene" uid="uid://bno5o5pbi8s3e" path="res://scenes/player/CoinCollector.tscn" id="10_wp8q1"]
 [ext_resource type="Script" uid="uid://b23tgyr1eik40" path="res://scripts/player/player_spells.gd" id="10_wrkuw"]
 [ext_resource type="Script" uid="uid://by6ywjtg3nxyl" path="res://scripts/player/player_input.gd" id="11_hkntq"]
@@ -24,12 +24,12 @@
 [ext_resource type="Script" uid="uid://6kagsif3xfkf" path="res://scripts/player/player_hurtbox.gd" id="12_gsbha"]
 [ext_resource type="Script" uid="uid://c67nlh7a52smp" path="res://scripts/player/player_build.gd" id="13_6qouk"]
 [ext_resource type="Script" uid="uid://ckfb2xehi2wqu" path="res://scripts/player/player_camera.gd" id="13_bnayp"]
-[ext_resource type="Script" uid="uid://ctk0c5nv8o7mf" path="res://scripts/player/player_audio.gd" id="14_kkcsf"]
+[ext_resource type="Script" path="res://scripts/player/player_audio.gd" id="14_kkcsf"]
 [ext_resource type="Resource" uid="uid://b50w7syjdvdrf" path="res://data/spells/spell_data_bullet_arcane_basic_triple.tres" id="15_mxcls"]
 [ext_resource type="Script" uid="uid://cmfd0jyw7me5n" path="res://scripts/player/player_mana.gd" id="17_07k56"]
 [ext_resource type="Texture2D" uid="uid://kkqxipsicds5" path="res://assets/art/sprites/spr_fx_dust.png" id="20_88aji"]
 [ext_resource type="Script" uid="uid://dcfta3oxiix4o" path="res://scripts/player/player_special.gd" id="20_fyjgo"]
-[ext_resource type="PackedScene" uid="uid://b1aafksk0q8f3" path="res://scenes/player/ManaDropCollector.tscn" id="25_vy23r"]
+[ext_resource type="PackedScene" path="res://scenes/player/ManaDropCollector.tscn" id="25_vy23r"]
 [ext_resource type="PackedScene" uid="uid://d218nr004vv6w" path="res://scenes/ui/player/PlayerHUD.tscn" id="25_ydu3x"]
 [ext_resource type="PackedScene" uid="uid://sw4orj43x0r1" path="res://scenes/ui/player/PlayerBuildUI.tscn" id="26_djlof"]
 [ext_resource type="Script" uid="uid://c352umdhm3bhc" path="res://scripts/player/player_beacon.gd" id="27_h3nqo"]
@@ -670,6 +670,40 @@ tracks/3/keys = {
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_hnid3"]
+resource_name = "levitate_in"
+length = 0.2
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(6, 3), Vector2i(7, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_t4l3f"]
+resource_name = "levitate_out"
+length = 0.2
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(7, 3), Vector2i(6, 3)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g7j5r"]
 _data = {
 &"RESET": SubResource("Animation_ljh2g"),
@@ -681,6 +715,8 @@ _data = {
 &"hit": SubResource("Animation_gsbha"),
 &"idle": SubResource("Animation_6nsgb"),
 &"levitate": SubResource("Animation_a033j"),
+&"levitate_in": SubResource("Animation_hnid3"),
+&"levitate_out": SubResource("Animation_t4l3f"),
 &"walk": SubResource("Animation_fhwjy"),
 &"walk_down": SubResource("Animation_v81jw"),
 &"walk_up": SubResource("Animation_g7j5r")
@@ -1114,6 +1150,12 @@ graph_offset = Vector2(49, -124)
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dm1k7"]
 animation = &"end_dash"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rwb4p"]
+animation = &"levitate_in"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wsgx3"]
+animation = &"levitate_out"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g7j5r"]
 advance_mode = 2
 advance_expression = "!velocity"
@@ -1158,14 +1200,6 @@ advance_expression = "!falling"
 advance_mode = 2
 advance_expression = "falling"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dm1k7"]
-advance_mode = 2
-advance_expression = "building"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ahw3v"]
-advance_mode = 2
-advance_expression = "building"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a033j"]
 advance_mode = 2
 
@@ -1176,14 +1210,6 @@ advance_expression = "hit"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yirxs"]
 advance_mode = 2
 advance_expression = "!hit && building"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gg8xu"]
-advance_mode = 2
-advance_expression = "falling"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rwb4p"]
-advance_mode = 2
-advance_expression = "!building"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wsgx3"]
 advance_mode = 2
@@ -1199,6 +1225,30 @@ switch_mode = 2
 advance_mode = 2
 advance_expression = "!player_special.active"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ahw3v"]
+advance_mode = 2
+advance_expression = "building"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2u747"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ogmjs"]
+advance_mode = 2
+advance_expression = "falling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1itxc"]
+advance_mode = 2
+advance_expression = "building"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yr6n8"]
+advance_mode = 2
+advance_expression = "!building"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_deoin"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_laqyv"]
 states/Dash/node = SubResource("AnimationNodeAnimation_wp8q1")
 states/Dash/position = Vector2(509, -285.634)
@@ -1209,16 +1259,20 @@ states/Hit/position = Vector2(765.036, 206.4)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_v81jw")
 states/Idle/position = Vector2(192.461, 213.667)
 states/Levitate/node = SubResource("AnimationNodeAnimation_5mqjb")
-states/Levitate/position = Vector2(764.8, -48.1481)
+states/Levitate/position = Vector2(765.036, -47.3333)
 states/Movement/node = SubResource("AnimationNodeStateMachine_ykwnp")
 states/Movement/position = Vector2(249.28, 425.667)
 states/Start/position = Vector2(-205.333, 309.333)
 states/Walk/node = ExtResource("4_ljh2g")
-states/Walk/position = Vector2(199.08, -199.826)
+states/Walk/position = Vector2(201.08, -201.826)
 states/end_dash/node = SubResource("AnimationNodeAnimation_dm1k7")
 states/end_dash/position = Vector2(633.152, -177.217)
-transitions = ["Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_g7j5r"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_v81jw"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_slbhc"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_bnayp"), "Walk", "Hit", SubResource("AnimationNodeStateMachineTransition_adj0b"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_akj2q"), "Hit", "Walk", SubResource("AnimationNodeStateMachineTransition_kuao7"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_7q84o"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_0x1p2"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_88aji"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_hkntq"), "Idle", "Levitate", SubResource("AnimationNodeStateMachineTransition_dm1k7"), "Walk", "Levitate", SubResource("AnimationNodeStateMachineTransition_ahw3v"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a033j"), "Levitate", "Hit", SubResource("AnimationNodeStateMachineTransition_vka04"), "Hit", "Levitate", SubResource("AnimationNodeStateMachineTransition_yirxs"), "Levitate", "Fall", SubResource("AnimationNodeStateMachineTransition_gg8xu"), "Levitate", "Idle", SubResource("AnimationNodeStateMachineTransition_rwb4p"), "Dash", "end_dash", SubResource("AnimationNodeStateMachineTransition_wsgx3"), "end_dash", "Idle", SubResource("AnimationNodeStateMachineTransition_rol34"), "end_dash", "Walk", SubResource("AnimationNodeStateMachineTransition_1s53w")]
-graph_offset = Vector2(-63, -301)
+states/levitate_in/node = SubResource("AnimationNodeAnimation_rwb4p")
+states/levitate_in/position = Vector2(581, 5)
+states/levitate_out/node = SubResource("AnimationNodeAnimation_wsgx3")
+states/levitate_out/position = Vector2(581, 128)
+transitions = ["Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_g7j5r"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_v81jw"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_slbhc"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_bnayp"), "Walk", "Hit", SubResource("AnimationNodeStateMachineTransition_adj0b"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_akj2q"), "Hit", "Walk", SubResource("AnimationNodeStateMachineTransition_kuao7"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_7q84o"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_0x1p2"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_88aji"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_hkntq"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a033j"), "Levitate", "Hit", SubResource("AnimationNodeStateMachineTransition_vka04"), "Hit", "Levitate", SubResource("AnimationNodeStateMachineTransition_yirxs"), "Dash", "end_dash", SubResource("AnimationNodeStateMachineTransition_wsgx3"), "end_dash", "Idle", SubResource("AnimationNodeStateMachineTransition_rol34"), "end_dash", "Walk", SubResource("AnimationNodeStateMachineTransition_1s53w"), "Walk", "levitate_in", SubResource("AnimationNodeStateMachineTransition_ahw3v"), "levitate_in", "Levitate", SubResource("AnimationNodeStateMachineTransition_2u747"), "Levitate", "Fall", SubResource("AnimationNodeStateMachineTransition_ogmjs"), "Idle", "levitate_in", SubResource("AnimationNodeStateMachineTransition_1itxc"), "Levitate", "levitate_out", SubResource("AnimationNodeStateMachineTransition_yr6n8"), "levitate_out", "Idle", SubResource("AnimationNodeStateMachineTransition_deoin")]
+graph_offset = Vector2(-140, -286)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bnayp"]
 radius = 6.0
