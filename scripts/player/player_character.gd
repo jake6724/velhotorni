@@ -303,7 +303,8 @@ func respawn() -> void:
 	global_position = spawn_point
 	alive = true
 	player_hurtbox.collider.set_deferred("disabled", true)
-	hurtbox_reset_timer.start(respawn_iframe_duration)
+	hurtbox_reset_timer.start(hurtbox_iframe_duration)
+	hit_blink()
 
 func hit_blink() -> void:
 	var loops: int = 10
@@ -321,10 +322,10 @@ func show_staff_sprite_custom():
 	if alive and not building:
 		staff_sprite.show()
 
-func on_element_mana_collected(_element: Constants.Element) -> void:
-	player_mana.increment_element_mana(_element)
+func on_element_mana_collected(_element: Constants.Element, _amount_modifier) -> void:
+	player_mana.increment_element_mana(_element, _amount_modifier)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
-	player_number_popup.display_mana_number(player_mana.mana_per_drop, global_position + Vector2(0,-6), _element)
+	player_number_popup.display_mana_number(player_mana.element_drop_amount_base[_element] * _amount_modifier, global_position + Vector2(0,-6), _element)
 
 func on_tower_mana_collected(_value: int = 1) -> void:
 	player_mana.tower_mana += _value

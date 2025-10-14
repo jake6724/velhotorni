@@ -1,7 +1,7 @@
 class_name PlayerMana
 extends Node
 
-@export var mana_per_drop: float = 10.0
+# DO NOT MODIFY DIRECTLY - EDIT IN THE INSPECTOR
 @export var element_mana: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE: 0,
 	Constants.Element.WIND: 0,
@@ -12,6 +12,7 @@ extends Node
 	Constants.Element.ARCANE: 0,
 }
 
+# DO NOT MODIFY DIRECTLY - EDIT IN THE INSPECTOR
 @export var element_mana_maxes: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE: 0,
 	Constants.Element.WIND: 0,
@@ -20,6 +21,16 @@ extends Node
 	Constants.Element.LIGHT: 0,
 	Constants.Element.DARK: 0,
 	Constants.Element.ARCANE: 0,
+}
+
+@export var element_drop_amount_base: Dictionary[Constants.Element, float] = {
+	Constants.Element.FIRE: 20,
+	Constants.Element.WIND: 20,
+	Constants.Element.WATER: 20,
+	Constants.Element.EARTH: 20,
+	Constants.Element.LIGHT: 20,
+	Constants.Element.DARK: 20,
+	Constants.Element.ARCANE: 40,
 }
 
 var tower_mana: float = 0:
@@ -38,5 +49,5 @@ func get_element_mana_max(_element: Constants.Element) -> float:
 func decrement_element_mana(_element, _value) -> void:
 	element_mana[_element] -= _value
 
-func increment_element_mana(_element) -> void:
-	element_mana[_element] += mana_per_drop
+func increment_element_mana(_element, _drop_amount_modifier) -> void:
+	element_mana[_element] += (element_drop_amount_base[_element] * _drop_amount_modifier)

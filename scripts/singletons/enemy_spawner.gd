@@ -13,7 +13,7 @@ var spawn_timers: Array[Timer] = []
 
 var boss_wave_active: bool = false
 
-var path_spawns: Array = []
+var path_spawns: Array[Array] = [] # Contains sub-arrays, with each containing all of the spawns for 1 path
 var path_portals: Array = [] 
 var path_enemy_indexes: Array[int] = []
 var flying_spawn_points: Array[Vector2] = []
@@ -71,12 +71,7 @@ func configure_level(active_level: LevelEnvironment):
 ## Intended to be triggered directly by `player_controller`.
 func start_wave() -> void:
 	can_spawn_enemy = true
-	for spawn: Spawn in LevelManager.active_level.waves[WaveManager.wave_index].data:
-		if not LevelManager.active_level.enemy_portals[spawn.path_index].open:
-			LevelManager.active_level.enemy_portals[spawn.path_index].start()
-
-	await get_tree().create_timer(.5).timeout
-
+	open_portals()
 	for i in range(spawn_timers.size()):
 		on_spawn_timer_timeout(i)
 
@@ -112,7 +107,7 @@ func on_enemy_died(enemy: Enemy) -> void:
 			active_path_enemies.remove_at(index_2)
 	enemy_died.emit()
 	enemy_died_with_global_pos.emit(enemy.global_position)
-	enemy_died_with_global_pos_drop_chance.emit(enemy.global_position, enemy.data.element_mana_drop_chance)
+	enemy_died_with_global_pos_drop_chance.emit(enemy.global_position, enemy.data.element_mana_drop_chance, enemy.data.element_mana_drop_amount_multiplier)
 
 func on_spawn_timer_timeout(path_index: int) -> void:
 	if path_index < path_spawns.size() and path_spawns[path_index].size() > 0:
@@ -126,6 +121,10 @@ func on_spawn_timer_timeout(path_index: int) -> void:
 				# Start the correct timer based on enemy path_index
 				# the active level's enemy_paths Array should be parallel with spawn_timers
 				spawn_timers[spawn_data.path_index].start(spawn_data.delay)
+
+				if path_enemy_indexes[path_index] >= path_spawns[path_index].size():
+					spawn_timers[spawn_data.path_index].stop()
+					LevelManager.active_level.enemy_portals[path_index].close()
 
 func spawn_enemy(_spawn: Spawn) -> void:
 	# Configure new enemy
@@ -218,3 +217,11 @@ func sort_enemies_by_path() -> void:
 	if WaveManager.active_wave:
 		for spawn: Spawn in WaveManager.active_wave.data:
 			path_spawns[spawn.path_index].append(spawn)
+
+func open_portals() -> void:
+	for spawn: Spawn in LevelManager.active_level.waves[WaveManager.wave_index].data:
+		var curr_portal: EnemyPortal = LevelManager.active_level.enemy_portals[spawn.path_index]
+		if not curr_portal.open:
+			curr_portal.start()
+
+	await get_tree().create_timer(.5).timeout # Give time for animations to play before enemies start spawning

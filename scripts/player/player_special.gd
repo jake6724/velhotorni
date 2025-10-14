@@ -54,6 +54,7 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 
 	await tween.finished
 	active = false
+	hurtbox_update_requested.emit(false)
 
 	# if _move_input:	
 	# 	velocity_update_requested.emit(Constants.get_closest_cardinal_direction_normalized(_move_input) * dash_velocity)

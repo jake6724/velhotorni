@@ -34,21 +34,22 @@ func _physics_process(delta):
 			if abs(child.global_position - child.destination) < Vector2(1,1):
 				child.destination_reached = true
 
-func on_enemy_died(_enemy_death_global_pos: Vector2, _drop_chance: float) -> void:
+func on_enemy_died(_enemy_death_global_pos: Vector2, _drop_chance: float, _drop_amount_modifier) -> void:
 	var roll: float = rng.randf()
 	if roll <= _drop_chance:
-		spawn_mana_drop(_enemy_death_global_pos)
+		spawn_mana_drop(_enemy_death_global_pos, _drop_amount_modifier)
 		_drop_chance -= 1.0
 		if _drop_chance > 0.0:
-			on_enemy_died(_enemy_death_global_pos, _drop_chance)
+			on_enemy_died(_enemy_death_global_pos, _drop_chance, _drop_amount_modifier)
 
-func spawn_mana_drop(_spawn_pos: Vector2) -> void:
+func spawn_mana_drop(_spawn_pos: Vector2, _drop_amount_modifier: float) -> void:
 	var new_mana_drop: ManaDrop = mana_drop_scene.instantiate()
 	new_mana_drop.global_position = _spawn_pos
 	call_deferred("add_child",new_mana_drop)
 	new_mana_drop.destination = calc_destination(_spawn_pos)
 
 	new_mana_drop.element = Constants.get_weighted_random(selected_spell_mana_chances)
+	new_mana_drop.amount_modifier = _drop_amount_modifier
 
 func calc_destination(_global_pos) -> Vector2:
 	var jx: float = rng.randf_range(-JITTER, JITTER)

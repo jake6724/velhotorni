@@ -8,3 +8,8 @@ func start() -> void:
 	play("open")
 	open = true
 
+func close() -> void:
+	play("close")
+	await animation_finished
+	hide()
+	open = false
