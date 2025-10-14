@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bwrw0vxyrshx2"]
+[gd_scene load_steps=24 format=3 uid="uid://bwrw0vxyrshx2"]
 
 [ext_resource type="Texture2D" uid="uid://dl603o65t8c0k" path="res://assets/art/sprites/environment/spr_environment_portal.png" id="1_d8bwg"]
 [ext_resource type="Script" uid="uid://f3xblpitrfk8" path="res://scripts/level/enemy_portal.gd" id="2_vjbmj"]
@@ -26,6 +26,14 @@ region = Rect2(48, 144, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4qgu"]
 atlas = ExtResource("1_d8bwg")
 region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdk2h"]
+atlas = ExtResource("1_d8bwg")
+region = Rect2(96, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wksd7"]
+atlas = ExtResource("1_d8bwg")
+region = Rect2(144, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_242x7"]
 atlas = ExtResource("1_d8bwg")
@@ -100,10 +108,16 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x4qgu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdk2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wksd7")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 1.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
