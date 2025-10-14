@@ -91,6 +91,7 @@ func on_wave_complete() -> void:
 	can_spawn_enemy = false
 	stop_all_spawn_timers()
 	sort_enemies_by_path()
+	preview_portals() 
 	reset_indexes()
 
 func reset_indexes() -> void:
@@ -226,7 +227,6 @@ func open_portals() -> void:
 			curr_portal.start()
 
 	await get_tree().create_timer(1).timeout # Give time for animations to play before enemies start spawning
-
 
 ## Must be called after sort_enemies_by_path
 func preview_portals() -> void:
