@@ -13,3 +13,7 @@ func close() -> void:
 	await animation_finished
 	hide()
 	open = false
+
+func preview() -> void:
+	show()
+	play("star")

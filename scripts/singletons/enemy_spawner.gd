@@ -65,6 +65,7 @@ func configure_level(active_level: LevelEnvironment):
 		path_enemy_indexes.append(0)
 
 	sort_enemies_by_path()
+	preview_portals()
 
 	flying_spawn_points = active_level.flying_spawn_points
 
@@ -224,4 +225,11 @@ func open_portals() -> void:
 		if not curr_portal.open:
 			curr_portal.start()
 
-	await get_tree().create_timer(.5).timeout # Give time for animations to play before enemies start spawning
+	await get_tree().create_timer(1).timeout # Give time for animations to play before enemies start spawning
+
+
+## Must be called after sort_enemies_by_path
+func preview_portals() -> void:
+	for path_spawn_array in path_spawns:
+		if path_spawn_array.size() > 0:
+			LevelManager.active_level.enemy_portals[path_spawn_array[0].path_index].preview()
