@@ -1,12 +1,12 @@
 extends Node
 
 var tower_prices: Dictionary[Constants.Element, int] = {
-	Constants.Element.FIRE:  10,
-	Constants.Element.WIND:  20,
-	Constants.Element.WATER: 30,
-	Constants.Element.EARTH: 40,
-	Constants.Element.LIGHT: 50,
-	Constants.Element.DARK:  60,
+	Constants.Element.FIRE:  50,
+	Constants.Element.WIND:  55,
+	Constants.Element.WATER: 60,
+	Constants.Element.EARTH: 65,
+	Constants.Element.LIGHT: 70,
+	Constants.Element.DARK:  75,
 }
 
 # True = tower evolution is unused
