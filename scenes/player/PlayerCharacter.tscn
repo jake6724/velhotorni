@@ -291,7 +291,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_vka04"]
 resource_name = "end_dash"
-length = 0.5
+length = 0.3
 step = 0.1667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -336,7 +336,7 @@ tracks/3/path = NodePath("CharacterSprite:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1667, 0.3334),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
@@ -1223,7 +1223,6 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1s53w"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "!player_special.active"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ahw3v"]
 advance_mode = 2
@@ -1272,7 +1271,7 @@ states/levitate_in/position = Vector2(581, 5)
 states/levitate_out/node = SubResource("AnimationNodeAnimation_wsgx3")
 states/levitate_out/position = Vector2(581, 128)
 transitions = ["Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_g7j5r"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_v81jw"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_slbhc"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_bnayp"), "Walk", "Hit", SubResource("AnimationNodeStateMachineTransition_adj0b"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_akj2q"), "Hit", "Walk", SubResource("AnimationNodeStateMachineTransition_kuao7"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_7q84o"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_0x1p2"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_88aji"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_hkntq"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a033j"), "Levitate", "Hit", SubResource("AnimationNodeStateMachineTransition_vka04"), "Hit", "Levitate", SubResource("AnimationNodeStateMachineTransition_yirxs"), "Dash", "end_dash", SubResource("AnimationNodeStateMachineTransition_wsgx3"), "end_dash", "Idle", SubResource("AnimationNodeStateMachineTransition_rol34"), "end_dash", "Walk", SubResource("AnimationNodeStateMachineTransition_1s53w"), "Walk", "levitate_in", SubResource("AnimationNodeStateMachineTransition_ahw3v"), "levitate_in", "Levitate", SubResource("AnimationNodeStateMachineTransition_2u747"), "Levitate", "Fall", SubResource("AnimationNodeStateMachineTransition_ogmjs"), "Idle", "levitate_in", SubResource("AnimationNodeStateMachineTransition_1itxc"), "Levitate", "levitate_out", SubResource("AnimationNodeStateMachineTransition_yr6n8"), "levitate_out", "Idle", SubResource("AnimationNodeStateMachineTransition_deoin")]
-graph_offset = Vector2(-140, -286)
+graph_offset = Vector2(-198, -338)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bnayp"]
 radius = 6.0
