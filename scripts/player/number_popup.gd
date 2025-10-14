@@ -30,7 +30,7 @@ var element_text: Dictionary[Constants.Element, String] = {
 }
 
 func display_mana_number(value: int, pos: Vector2, element: Constants.Element = Constants.Element.NONE):
-	if value:
+	if value > 1:
 		var number: Label = Label.new()
 		number.global_position = pos
 		number.z_index = Constants.z_index_map["popup"]

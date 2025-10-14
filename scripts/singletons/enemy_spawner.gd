@@ -14,6 +14,7 @@ var spawn_timers: Array[Timer] = []
 var boss_wave_active: bool = false
 
 var path_spawns: Array = []
+var path_portals: Array = [] 
 var path_enemy_indexes: Array[int] = []
 var flying_spawn_points: Array[Vector2] = []
 
@@ -70,6 +71,11 @@ func configure_level(active_level: LevelEnvironment):
 ## Intended to be triggered directly by `player_controller`.
 func start_wave() -> void:
 	can_spawn_enemy = true
+	for spawn: Spawn in LevelManager.active_level.waves[WaveManager.wave_index].data:
+		if not LevelManager.active_level.enemy_portals[spawn.path_index].open:
+			LevelManager.active_level.enemy_portals[spawn.path_index].start()
+
+	await get_tree().create_timer(.5).timeout
 
 	for i in range(spawn_timers.size()):
 		on_spawn_timer_timeout(i)

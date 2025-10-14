@@ -11,6 +11,8 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 
 @onready var path_parent: Node = $PathParent
 @onready var enemy_paths: Array[Path2D] = []
+@onready var portal_parent: Node = $PortalParent
+@onready var enemy_portals: Array[AnimatedSprite2D] = []
 
 @onready var flying_spawn_parent: Node = $FlyingSpawnParent
 @onready var flying_spawn_points: Array[Vector2] = []
@@ -39,6 +41,10 @@ func _ready():
 	for child in path_parent.get_children():
 		if child is Path2D:
 			enemy_paths.append(child)
+
+	for child in portal_parent.get_children():
+		if child is EnemyPortal:
+			enemy_portals.append(child)
 
 	for child in flying_spawn_parent.get_children():
 		if child is Node2D:
