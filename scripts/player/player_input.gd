@@ -31,9 +31,7 @@ func get_aim_input() -> Vector2:
 func _process(_delta):
 	if primary_action_pressed:
 		primary_action_charge += _delta
-
-	# print(is_latest_input_controller)
-
+		
 func _input(event):
 	check_primary_action_input(event)
 	if Input.is_action_just_pressed("secondary_action"):
@@ -59,8 +57,6 @@ func check_primary_action_input(event) -> void:
 		primary_action_charge = 0
 
 func set_latest_input_type(event) -> void:
-	# print(event.as_text())
-	# print(abs(move_input))
 	if event is InputEventKey or event is InputEventMouseButton or event is InputEventMouseMotion:
 		is_latest_input_controller = false
 		# print("Mouse/Keyboard")
