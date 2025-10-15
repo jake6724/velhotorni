@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SpellDataBullet" load_steps=4 format=3 uid="uid://b50w7syjdvdrf"]
 
-[ext_resource type="Texture2D" uid="uid://bru0vasbogas4" path="res://assets/art/atlases/bullet/atl_bullet_arcane.png" id="1_xb1lc"]
+[ext_resource type="Texture2D" uid="uid://d2mou1f50yysy" path="res://assets/art/atlases/bullet/atl_bullet_arcane_note.png" id="1_xb1lc"]
 [ext_resource type="Script" uid="uid://r20hlvy6xofu" path="res://scripts/spells/data/spell_data_bullet.gd" id="2_74xtx"]
 [ext_resource type="AudioStream" uid="uid://bohv8s7q5qk05" path="res://assets/audio/sfx/player/spells/player_basic_arcane.ogg" id="3_fwiyq"]
 
@@ -22,4 +22,5 @@ damage = 6.0
 mana_cost = 3.0
 active_icon_region = Rect2(32, 0, 32, 31)
 inactive_icon_region = Rect2(0, 16, 16, 16)
+camera_shake = 0.1
 metadata/_custom_type_script = "uid://r20hlvy6xofu"

@@ -22,4 +22,5 @@ damage = 5.0
 mana_cost = 1.0
 active_icon_region = Rect2(0, 0, 32, 31)
 inactive_icon_region = Rect2(0, 0, 16, 16)
+camera_shake = 0.1
 metadata/_custom_type_script = "uid://r20hlvy6xofu"
