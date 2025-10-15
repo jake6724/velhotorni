@@ -21,6 +21,7 @@ var selected_spell_mana_chances: Array[Array] = []
 
 const JITTER: float = 7
 const MANA_DROP_MOVE_SPEED: float = 150
+const DESTINATION_THRESHOLD: Vector2 = Vector2(5,5)
 
 func initialize(player_spells: PlayerSpells) -> void:
 	for spell: SpellData in player_spells.spells.array:
@@ -31,7 +32,7 @@ func _physics_process(delta):
 	for child: ManaDrop in get_children():
 		if not child.destination_reached:
 			child.global_position += child.global_position.direction_to(child.destination) * MANA_DROP_MOVE_SPEED * delta
-			if abs(child.global_position - child.destination) < Vector2(1,1):
+			if abs(child.global_position - child.destination) < DESTINATION_THRESHOLD:
 				child.destination_reached = true
 
 func on_enemy_died(_enemy_death_global_pos: Vector2, _drop_chance: float, _drop_amount_modifier) -> void:

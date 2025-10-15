@@ -6,6 +6,8 @@ var open: bool = false
 func start() -> void:
 	show()
 	play("open")
+	await animation_finished
+	play("idle")
 	open = true
 
 func close() -> void:

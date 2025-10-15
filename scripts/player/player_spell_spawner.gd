@@ -82,7 +82,7 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
 	# Stuff that is done 1 time for all bullets in this burst group
 	player.player_audio.play_audio_stream(new_spell_data.sfx)
 	attack_timer.start(new_spell_data.cooldown)
-	player.player_camera.apply_shake(.1)
+	player.player_camera.apply_shake(new_spell_data.camera_shake)
 
 	# apply_spell_kick(100)
 

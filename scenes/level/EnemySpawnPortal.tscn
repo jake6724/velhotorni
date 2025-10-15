@@ -168,6 +168,7 @@ animations = [{
 
 [node name="EnemySpawnPortal" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_0i3mj")
-animation = &"star"
+animation = &"idle"
 autoplay = "open"
+frame_progress = 0.078229
 script = ExtResource("2_vjbmj")
