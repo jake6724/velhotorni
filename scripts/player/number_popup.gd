@@ -99,7 +99,7 @@ func display_damage_number(value: int, pos: Vector2) -> void:
 
 func display_mana_empty(pos: Vector2) -> void:
 	var number: Label = Label.new()
-	number.global_position = pos + pos_offset
+	number.global_position = pos + pos_offset + Vector2(0, -10)
 	number.z_index = Constants.z_index_map["popup"]
 	number.text = str(NO_MANA_TEXT)
 
