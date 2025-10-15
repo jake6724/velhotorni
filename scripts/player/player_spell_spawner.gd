@@ -23,6 +23,7 @@ var spread_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 signal spell_cast
 signal staff_switched
 signal melee_spell_cast # Just used to call the swing sword function; not for mana data
+signal check_can_afford_failed
 
 func _ready():
 	attack_timer.autostart = false
@@ -37,9 +38,12 @@ func initialize(_spell_data: SpellData) -> void:
 ## Wrapper for the `spell_func` Callable. Used as an easy interface for other scripts to call.
 func spawn_spell(player_aim_direction: Vector2) -> void:
 	if can_attack:
+		can_attack = false
 		if check_can_afford(curr_spell_data):
 			spell_func.call(player_aim_direction.normalized())
-			can_attack = false
+		else:
+			check_can_afford_failed.emit()
+			attack_timer.start(curr_spell_data.cooldown)
 
 func on_switch_spell(new_spell_data: SpellData) -> void:
 	curr_spell_data = new_spell_data

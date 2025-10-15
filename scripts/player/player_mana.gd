@@ -1,6 +1,8 @@
 class_name PlayerMana
 extends Node
 
+const MANA_LOW_THRESHOLD: float = .2 # multiplied by the max value to get a specific percentage
+
 # DO NOT MODIFY DIRECTLY - EDIT IN THE INSPECTOR
 @export var element_mana: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE: 0,
@@ -33,6 +35,16 @@ extends Node
 	Constants.Element.ARCANE: 40,
 }
 
+var element_mana_low: Dictionary[Constants.Element, bool] = {
+	Constants.Element.FIRE: false,
+	Constants.Element.WIND: false,
+	Constants.Element.WATER: false,
+	Constants.Element.EARTH: false,
+	Constants.Element.LIGHT: false,
+	Constants.Element.DARK: false,
+	Constants.Element.ARCANE: false,
+}
+
 var tower_mana: float = 0:
 	set(value):
 		tower_mana = value
@@ -48,6 +60,14 @@ func get_element_mana_max(_element: Constants.Element) -> float:
 
 func decrement_element_mana(_element, _value) -> void:
 	element_mana[_element] -= _value
+	check_mana_low(_element)
 
 func increment_element_mana(_element, _drop_amount_modifier) -> void:
 	element_mana[_element] += (element_drop_amount_base[_element] * _drop_amount_modifier)
+	check_mana_low(_element)
+
+func check_mana_low(_element) -> void:
+	if element_mana[_element] <= (element_mana_maxes[_element] * MANA_LOW_THRESHOLD):
+		element_mana_low[_element] = true
+	else:
+		element_mana_low[_element] = false

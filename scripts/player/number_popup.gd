@@ -5,6 +5,7 @@ extends Node
 var font: FontFile = preload("res://assets/fonts/Early-GameBoy-Jake-Edit.ttf")
 const COLOR_WHITE: String = "#FFFFFF"
 const COLOR_BLACK: String = "#000000"
+const NO_MANA_TEXT: String = "EMPTY"
 const pos_offset: Vector2 = Vector2(0, -3)
 
 var outline_size: int = 0
@@ -96,8 +97,32 @@ func display_damage_number(value: int, pos: Vector2) -> void:
 	await tween.finished
 	number.queue_free()
 
-func display_low_mana_warning() -> void:
-	pass
+func display_mana_empty(pos: Vector2) -> void:
+	var number: Label = Label.new()
+	number.global_position = pos + pos_offset
+	number.z_index = Constants.z_index_map["popup"]
+	number.text = str(NO_MANA_TEXT)
+
+	number.label_settings = LabelSettings.new()
+	number.label_settings.font_color = COLOR_WHITE
+	number.label_settings.font_size = 8
+	number.label_settings.font = font
+	number.label_settings.outline_color = COLOR_WHITE
+	number.label_settings.outline_size = outline_size
+	number.label_settings.shadow_offset = shadow_offset
+	number.label_settings.shadow_size = shadow_size
+	number.label_settings.shadow_color = COLOR_BLACK
+
+	call_deferred("add_child", number)
+	await number.resized
+
+	number.pivot_offset = Vector2(number.size / 2)
+	number.position.x -= number.size.x / 2
+
+	var tween = get_tree().create_tween()
+	tween.tween_property(number, "position:y", number.position.y - up_distance, .75)
+	await tween.finished
+	number.queue_free()
 
 func get_jitter() -> float:
 	return rng.randf_range(-jitter_range, jitter_range)

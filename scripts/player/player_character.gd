@@ -60,7 +60,7 @@ var building: bool = false
 var primary_action_func: Callable = Callable(cast_spell)
 var switch_action_func: Callable = Callable(switch_spell)
 var switch_delay_timer: Timer = Timer.new()
-var switch_delay: float = .35
+var switch_delay: float = .25
 var can_switch_mode: bool = true
 
 func _ready():
@@ -75,6 +75,7 @@ func _ready():
 	player_spell_spawner.spell_spawn_point = spell_spawn_point
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
 	player_spell_spawner.staff_switched.connect(on_staff_switched)
+	player_spell_spawner.check_can_afford_failed.connect(on_spell_cast_failed)
 
 	# Configure PlayerSpecial
 	player_special.velocity_update_requested.connect(on_velocity_update_requested)
@@ -183,6 +184,10 @@ func on_spell_cast(_element: Constants.Element, _mana_cost) -> void:
 	player_hud.update_mana(player_spells.spells.array, player_mana)
 	staff_ap.play("fire")
 
+func on_spell_cast_failed() -> void:
+	player_number_popup.display_mana_empty(global_position)
+	player_hud.blink_no_mana_label()
+
 func on_dash_input_pressed() -> void:
 	if not player_special.active:
 		player_special.special(player_input.move_input, player_aim.aim_input)
@@ -194,7 +199,8 @@ func on_switch_selection_pressed(_switch_direction) -> void:
 ## and then returns this data via a signal connected to `PlayerCharacter.on_staff_switched()`
 func switch_spell(_switch_direction: int) -> void:
 	player_spells.switch_spells(_switch_direction)
-	player_hud.update_spells(player_spells.spells.array, player_mana)
+	player_hud.update_spells(player_spells.spells.array)
+	player_hud.update_mana(player_spells.spells.array, player_mana)
 
 ## Update the region of the staff atlas, changing the staff graphic. Plays the switch animation and temporarily hides
 ## the staff sprite. Prevents firing spells while switching.

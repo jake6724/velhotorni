@@ -14,6 +14,7 @@ extends Control
 @onready var inactive_spell_2_mana: TextureProgressBar = %InactiveSpell2Mana
 @onready var inactive_spell_3_icon: TextureRect = %InactiveSpell3Icon
 @onready var inactive_spell_3_mana: TextureProgressBar = %InactiveSpell3Mana
+@onready var no_mana_label: Label = %NoManaLabel
 
 @onready var combat_mode_margin_container: MarginContainer = %CombatModeMarginContainer
 @onready var combat_mode_icon: TextureRect = %CombatModeIcon
@@ -23,38 +24,34 @@ extends Control
 const MAX_TOWER_MANA_DIGITS: int = 4
 const MAX_ACTIVE_SPELL_MANA_DIGITS: int = 3
 const PADDING_COLOR: String = "#adb5bd"
+const LOW_MANA_COLOR: String = "#d63100"
 var bbc_string: String = "[color=%s]"
+var bbc_color_mana_text: String = "[color=%s]"
+
+var blinking_no_mana: bool = false
 
 func _ready():
 	active_spell_mana_label.bbcode_enabled = true
 	tower_mana_label.bbcode_enabled = true
+	no_mana_label.hide()
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats) -> void:
-	update_spells(spell_data_list, player_mana)
+	update_spells(spell_data_list)
 	update_tower_mana(player_mana)
 	on_health_updated(player_stats.health)
 
-func update_spells(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
+func update_spells(spell_data_list: Array[SpellData]) -> void:
 	active_spell_icon.texture.region = spell_data_list[0].active_icon_region
-	active_spell_mana.value = (player_mana.get_element_mana(spell_data_list[0].element) / player_mana.element_mana_maxes[spell_data_list[0].element]) * 100
-	var active_spell_mana_text: String = str(int(player_mana.get_element_mana(spell_data_list[0].element)))
-	var zero_pad: String = get_zero_padding(MAX_ACTIVE_SPELL_MANA_DIGITS - len(active_spell_mana_text))
-	active_spell_mana_label.text = bbc_string % PADDING_COLOR + zero_pad + "[/color]" + active_spell_mana_text
-
 	inactive_spell_1_icon.texture.region = spell_data_list[1].inactive_icon_region
-	inactive_spell_1_mana.value = (player_mana.get_element_mana(spell_data_list[1].element) / player_mana.get_element_mana_max(spell_data_list[1].element)) * 100
-
 	inactive_spell_2_icon.texture.region = spell_data_list[2].inactive_icon_region
-	inactive_spell_2_mana.value = (player_mana.get_element_mana(spell_data_list[2].element) / player_mana.get_element_mana_max(spell_data_list[2].element)) * 100
-
 	inactive_spell_3_icon.texture.region = spell_data_list[3].inactive_icon_region
-	inactive_spell_3_mana.value = (player_mana.get_element_mana(spell_data_list[3].element) / player_mana.get_element_mana_max(spell_data_list[3].element)) * 100
 
 func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
 	var active_spell_mana_text: String = str(int(player_mana.get_element_mana(spell_data_list[0].element)))
 	active_spell_mana.value = (player_mana.get_element_mana(spell_data_list[0].element) / player_mana.get_element_mana_max(spell_data_list[0].element)) * 100
 	var zero_pad: String = get_zero_padding(MAX_ACTIVE_SPELL_MANA_DIGITS - len(active_spell_mana_text))
-	active_spell_mana_label.text = bbc_string % PADDING_COLOR + zero_pad + "[/color]" + active_spell_mana_text
+	var mana_text_color: String = "ffffff" if not player_mana.element_mana_low[spell_data_list[0].element] else LOW_MANA_COLOR
+	active_spell_mana_label.text = bbc_string % PADDING_COLOR + zero_pad + "[/color]" + bbc_color_mana_text % mana_text_color + active_spell_mana_text + "[/color]"
 
 	inactive_spell_1_mana.value = (player_mana.get_element_mana(spell_data_list[1].element) / player_mana.get_element_mana_max(spell_data_list[1].element)) * 100
 	inactive_spell_2_mana.value = (player_mana.get_element_mana(spell_data_list[2].element) / player_mana.get_element_mana_max(spell_data_list[2].element)) * 100
@@ -76,13 +73,28 @@ func get_zero_padding(count: int):
 		res += zero
 	return res
 
+func blink_no_mana_label() -> void:
+	if not blinking_no_mana:
+		blinking_no_mana = true
+		no_mana_label.show()
+		var blink_tween = get_tree().create_tween()
+		blink_tween.set_loops(3)
+		blink_tween.tween_property(no_mana_label, "modulate:a", 0.0, .01)
+		blink_tween.tween_interval(.075)
+		blink_tween.tween_property(no_mana_label, "modulate:a", 1.0, .01)
+		blink_tween.tween_interval(.075)
+		await blink_tween.finished
+		no_mana_label.hide()
+		blinking_no_mana = false
+
 func animate_switch_mode(_building: bool) -> void:
 	var combat_tween: Tween = get_tree().create_tween()
 	var build_tween: Tween = get_tree().create_tween()
-	if _building: # Move build to the front
+
+	if _building: 																		   # Move build to the front
 		build_mode_margin_container.add_theme_constant_override("margin_left", 0)
 		build_mode_margin_container.add_theme_constant_override("margin_top", 0)
-		var build_target_pos_1: Vector2 = Vector2(12, -3)
+		var build_target_pos_1: Vector2 = Vector2(12, -5)
 		build_tween.tween_property(build_mode_icon, "position", build_target_pos_1, .2)
 		build_mode_icon.z_index += 1
 
@@ -92,10 +104,7 @@ func animate_switch_mode(_building: bool) -> void:
 		var build_target_pos_2: Vector2 = Vector2(0, -2)
 		build_tween.tween_property(build_mode_icon, "position", build_target_pos_2, .2)
 
-
-	else:		  # Move combat to the front
-		# build_mode_margin_container.add_theme_constant_override("margin_left", 0)
-		# build_mode_margin_container.add_theme_constant_override("margin_top", 0)
+	else:		  																			# Move combat to the front
 		var combat_target_pos_1: Vector2 = Vector2(12, -3)
 		combat_tween.tween_property(combat_mode_icon, "position", combat_target_pos_1, .2)
 		build_mode_icon.z_index -= 1

@@ -10,7 +10,7 @@ var active: bool = false
 
 var charge_max: int = 3
 var charges: int = 3
-var charge_cooldown_duration: float = 1
+var charge_cooldown_duration: float = 2
 
 signal velocity_update_requested
 signal camera_shake_requested
@@ -33,7 +33,7 @@ func special(_move_input: Vector2, _aim_input: Vector2) -> void:
 		charges -= 1
 		special_func.call(_move_input, _aim_input)
 		special_charge_sprite_update_requested.emit(charges)
-		special_cooldown_timer.start(charge_cooldown_duration) # wrong probably
+		special_cooldown_timer.start(charge_cooldown_duration)
 
 func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	camera_shake_requested.emit(1)
@@ -54,19 +54,9 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 
 	await tween.finished
 	active = false
+	await get_tree().create_timer(.5).timeout
 	hurtbox_update_requested.emit(false)
 
-	# if _move_input:	
-	# 	velocity_update_requested.emit(Constants.get_closest_cardinal_direction_normalized(_move_input) * dash_velocity)
-	# elif _aim_input:
-	# 	velocity_update_requested.emit(Constants.get_closest_cardinal_direction_normalized(_aim_input) * dash_velocity)
-	# else:
-	# 	velocity_update_requested.emit(Vector2(1,0) * dash_velocity)
-
 func on_special_cooldown_timeout() -> void:
-	charges += 1
+	charges = charge_max
 	special_charge_sprite_update_requested.emit(charges)
-	if charges < charge_max:
-		special_cooldown_timer.start(charge_cooldown_duration)
-	else:
-		special_cooldown_timer.stop()
