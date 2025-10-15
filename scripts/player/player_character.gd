@@ -59,6 +59,9 @@ var hurtbox_reset_timer: Timer = Timer.new()
 var building: bool = false
 var primary_action_func: Callable = Callable(cast_spell)
 var switch_action_func: Callable = Callable(switch_spell)
+var switch_delay_timer: Timer = Timer.new()
+var switch_delay: float = .35
+var can_switch_mode: bool = true
 
 func _ready():
 	# Connect to PlayerInput
@@ -120,6 +123,10 @@ func _ready():
 	hurtbox_reset_timer.one_shot = true
 	hurtbox_reset_timer.timeout.connect(on_hurtbox_reset_timer_timeout)
 	add_child(hurtbox_reset_timer)
+	switch_delay_timer.autostart = false
+	switch_delay_timer.one_shot = true
+	switch_delay_timer.timeout.connect(on_switch_delay_timer_timeout)
+	add_child(switch_delay_timer)
 
 	# Misc
 	player_spell_spawner.melee_spell_cast.connect(player_aim.swing_staff)
@@ -229,27 +236,31 @@ func switch_tower(_switch_direction: int) -> void:
 
 ## Switch between combat and building modes
 func on_switch_player_mode_pressed() -> void:
-	building = !building
-	if building:							# Switch to build mode
-		primary_action_func = place_tower 
-		switch_action_func = switch_tower
-		staff_sprite.hide()
-		player_build.create_preview_tower()
-		player_build_ui.show()
-		player_build_ui.raise_current()
-		build_grid_sprite.show()
-		player_stats.active_speed = player_stats.build_speed
-	else:								    # Switch to combat mode 
-		staff_sprite.show()
-		primary_action_func = cast_spell
-		switch_action_func = switch_spell
-		if player_build.preview_tower:		# Remove preview tower
-			player_build.preview_tower.queue_free()
-		player_build_ui.hide()
-		build_grid_sprite.hide()
-		player_stats.active_speed = player_stats.combat_speed
+	if can_switch_mode:
+		can_switch_mode = false
+		building = !building
+		if building:							# Switch to build mode
+			primary_action_func = place_tower 
+			switch_action_func = switch_tower
+			staff_sprite.hide()
+			player_build.create_preview_tower()
+			player_build_ui.show()
+			player_build_ui.raise_current()
+			build_grid_sprite.show()
+			player_stats.active_speed = player_stats.build_speed
+		else:								    # Switch to combat mode 
+			staff_sprite.show()
+			primary_action_func = cast_spell
+			switch_action_func = switch_spell
+			if player_build.preview_tower:		# Remove preview tower
+				player_build.preview_tower.queue_free()
+			player_build_ui.hide()
+			build_grid_sprite.hide()
+			player_stats.active_speed = player_stats.combat_speed
 
-	player_aim.switch_mode(building)
+		player_hud.animate_switch_mode(building)
+		player_aim.switch_mode(building)
+		switch_delay_timer.start(switch_delay)
 
 func on_animation_finished(anim_name) -> void:
 	# if anim_name == "dash":
@@ -355,3 +366,6 @@ func on_special_charges_hide_timer_timeout() -> void:
 
 func on_animation_requested(_anim_name: String) -> void:
 	ap.play(_anim_name)
+
+func on_switch_delay_timer_timeout() -> void:
+	can_switch_mode = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d218nr004vv6w"]
+[gd_scene load_steps=21 format=3 uid="uid://d218nr004vv6w"]
 
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_ivdol"]
 [ext_resource type="Script" uid="uid://cngopxpmylq3o" path="res://scripts/ui/player/player_hud.gd" id="1_l3s77"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bfgmcle80412a" path="res://assets/art/sprites/ui/spr_ui_player_health_icon.png" id="7_844kx"]
 [ext_resource type="Texture2D" uid="uid://gknitvbgo0h0" path="res://assets/art/sprites/ui/spr_ui_player_health_bar_bg.png" id="9_gbyaf"]
 [ext_resource type="Texture2D" uid="uid://ctu4ujve6dvck" path="res://assets/art/sprites/ui/spr_ui_player_health_bar.png" id="10_tmo30"]
+[ext_resource type="Texture2D" uid="uid://b420uwxrem6np" path="res://assets/art/sprites/ui/spr_ui_modeswitch.png" id="11_2twuf"]
+[ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="12_nrxgm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rq211"]
 atlas = ExtResource("1_ivdol")
@@ -27,6 +29,20 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("2_rq211")
 region = Rect2(16, 0, 16, 16)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2twuf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5koxd"]
+atlas = ExtResource("11_2twuf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84rr0"]
+atlas = ExtResource("11_2twuf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44ko1"]
+atlas = ExtResource("12_nrxgm")
+region = Rect2(51, 3, 10, 10)
+
 [node name="PlayerHUD" type="Control"]
 layout_mode = 3
 anchors_preset = 0
@@ -38,7 +54,7 @@ layout_mode = 0
 offset_left = 1.0
 offset_right = 80.0
 offset_bottom = 50.0
-theme_override_constants/separation = 0
+theme_override_constants/separation = -1
 
 [node name="Weapons" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -233,3 +249,49 @@ max_value = 8.0
 value = 8.0
 texture_under = ExtResource("9_gbyaf")
 texture_progress = ExtResource("10_tmo30")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_2twuf")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = -14
+
+[node name="CombatModeMarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CombatModeIcon" type="TextureRect" parent="VBoxContainer/VBoxContainer2/CombatModeMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+texture = SubResource("AtlasTexture_5koxd")
+stretch_mode = 2
+
+[node name="BuildModeMarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_left = 2
+
+[node name="BuildModeIcon" type="TextureRect" parent="VBoxContainer/VBoxContainer2/BuildModeMarginContainer"]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 2
+size_flags_horizontal = 0
+texture = SubResource("AtlasTexture_84rr0")
+stretch_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 7
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer2/MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_44ko1")
+stretch_mode = 2

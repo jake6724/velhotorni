@@ -15,6 +15,11 @@ extends Control
 @onready var inactive_spell_3_icon: TextureRect = %InactiveSpell3Icon
 @onready var inactive_spell_3_mana: TextureProgressBar = %InactiveSpell3Mana
 
+@onready var combat_mode_margin_container: MarginContainer = %CombatModeMarginContainer
+@onready var combat_mode_icon: TextureRect = %CombatModeIcon
+@onready var build_mode_margin_container: MarginContainer = %BuildModeMarginContainer
+@onready var build_mode_icon: TextureRect = %BuildModeIcon
+
 const MAX_TOWER_MANA_DIGITS: int = 4
 const MAX_ACTIVE_SPELL_MANA_DIGITS: int = 3
 const PADDING_COLOR: String = "#adb5bd"
@@ -70,3 +75,33 @@ func get_zero_padding(count: int):
 	for i in range(count):
 		res += zero
 	return res
+
+func animate_switch_mode(_building: bool) -> void:
+	var combat_tween: Tween = get_tree().create_tween()
+	var build_tween: Tween = get_tree().create_tween()
+	if _building: # Move build to the front
+		build_mode_margin_container.add_theme_constant_override("margin_left", 0)
+		build_mode_margin_container.add_theme_constant_override("margin_top", 0)
+		var build_target_pos_1: Vector2 = Vector2(12, -3)
+		build_tween.tween_property(build_mode_icon, "position", build_target_pos_1, .2)
+		build_mode_icon.z_index += 1
+
+		var combat_target_pos_1: Vector2 = Vector2(2, 2)
+		combat_tween.tween_property(combat_mode_icon, "position", combat_target_pos_1, .2)
+
+		var build_target_pos_2: Vector2 = Vector2(0, -2)
+		build_tween.tween_property(build_mode_icon, "position", build_target_pos_2, .2)
+
+
+	else:		  # Move combat to the front
+		# build_mode_margin_container.add_theme_constant_override("margin_left", 0)
+		# build_mode_margin_container.add_theme_constant_override("margin_top", 0)
+		var combat_target_pos_1: Vector2 = Vector2(12, -3)
+		combat_tween.tween_property(combat_mode_icon, "position", combat_target_pos_1, .2)
+		build_mode_icon.z_index -= 1
+
+		var build_target_pos_1: Vector2 = Vector2(2, 0)
+		build_tween.tween_property(build_mode_icon, "position", build_target_pos_1, .2)
+
+		var combat_target_pos_2: Vector2 = Vector2(0, 0)
+		combat_tween.tween_property(combat_mode_icon, "position", combat_target_pos_2, .2)

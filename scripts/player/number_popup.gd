@@ -16,7 +16,7 @@ var up_distance: float = 64
 var up_time: float = 1
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-var jitter_range: float = 5
+var jitter_range: float = 8
 
 var element_text: Dictionary[Constants.Element, String] = {
 	Constants.Element.FIRE: "FIRE MANA",
@@ -95,6 +95,9 @@ func display_damage_number(value: int, pos: Vector2) -> void:
 	tween.tween_interval(.1)
 	await tween.finished
 	number.queue_free()
+
+func display_low_mana_warning() -> void:
+	pass
 
 func get_jitter() -> float:
 	return rng.randf_range(-jitter_range, jitter_range)
