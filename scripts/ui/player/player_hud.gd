@@ -35,7 +35,7 @@ func _ready():
 	tower_mana_label.bbcode_enabled = true
 	no_mana_label.show()
 
-	no_mana_label.add_theme_constant_override("outline_size", 4)
+	no_mana_label.add_theme_constant_override("outline_size", 0)
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats) -> void:
 	update_spells(spell_data_list)
