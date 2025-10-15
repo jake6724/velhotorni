@@ -56,6 +56,10 @@ mouse_cursor/custom_image="uid://d0ggh0ipjxkie"
 
 enabled=PackedStringArray("res://addons/tabby_explorer/plugin.cfg")
 
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
+
 [input]
 
 left_click={

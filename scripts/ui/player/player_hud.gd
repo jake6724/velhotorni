@@ -33,7 +33,9 @@ var blinking_no_mana: bool = false
 func _ready():
 	active_spell_mana_label.bbcode_enabled = true
 	tower_mana_label.bbcode_enabled = true
-	no_mana_label.hide()
+	no_mana_label.show()
+
+	no_mana_label.add_theme_constant_override("outline_size", 4)
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats) -> void:
 	update_spells(spell_data_list)
@@ -51,7 +53,15 @@ func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> 
 	var active_spell_mana_text: String = str(int(player_mana.get_element_mana(spell_data_list[0].element)))
 	active_spell_mana.value = (player_mana.get_element_mana(spell_data_list[0].element) / player_mana.get_element_mana_max(spell_data_list[0].element)) * 100
 	var zero_pad: String = get_zero_padding(MAX_ACTIVE_SPELL_MANA_DIGITS - len(active_spell_mana_text))
-	var mana_text_color: String = "ffffff" if not player_mana.element_mana_low[spell_data_list[0].element] else LOW_MANA_COLOR
+	
+	var mana_text_color: String
+	if player_mana.element_mana_low[spell_data_list[0].element]:
+		no_mana_label.show()
+		mana_text_color = LOW_MANA_COLOR
+	else:
+		mana_text_color = "ffffff"
+		no_mana_label.hide()
+
 	active_spell_mana_label.text = bbc_string % PADDING_COLOR + zero_pad + "[/color]" + bbc_color_mana_text % mana_text_color + active_spell_mana_text + "[/color]"
 
 	inactive_spell_1_mana.value = (player_mana.get_element_mana(spell_data_list[1].element) / player_mana.get_element_mana_max(spell_data_list[1].element)) * 100
@@ -77,15 +87,13 @@ func get_zero_padding(count: int):
 func blink_no_mana_label() -> void:
 	if not blinking_no_mana:
 		blinking_no_mana = true
-		no_mana_label.show()
 		var blink_tween = get_tree().create_tween()
 		blink_tween.set_loops(3)
 		blink_tween.tween_property(no_mana_label, "modulate:a", 0.0, .01)
-		blink_tween.tween_interval(.075)
+		blink_tween.tween_interval(.1)
 		blink_tween.tween_property(no_mana_label, "modulate:a", 1.0, .01)
-		blink_tween.tween_interval(.075)
+		blink_tween.tween_interval(.1)
 		await blink_tween.finished
-		no_mana_label.hide()
 		blinking_no_mana = false
 
 func animate_switch_mode(_building: bool) -> void:
