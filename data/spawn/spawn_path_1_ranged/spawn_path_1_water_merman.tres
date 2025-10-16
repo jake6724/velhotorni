@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://bitpf4j6arf0m"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_6dllm"]
+[ext_resource type="Resource" uid="uid://crnp62dcjsgvp" path="res://data/enemies/ranged_enemies/enemy_data_ranged_water_merman.tres" id="1_xh7wp"]
+
+[resource]
+script = ExtResource("1_6dllm")
+enemy_data = ExtResource("1_xh7wp")
+delay = 1.0
+path_index = 0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

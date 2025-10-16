@@ -17,6 +17,7 @@ speed = 40.0
 damage = 2
 tower_mana_drop_chance_base = 1.0
 element_mana_drop_chance = 1.0
+element_mana_drop_amount_multiplier = 1.0
 atlas = ExtResource("1_ie048")
 show_light = false
 explosion_sfx = ExtResource("3_pn31d")

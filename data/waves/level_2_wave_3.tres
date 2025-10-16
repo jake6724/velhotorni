@@ -1,12 +1,16 @@
-[gd_resource type="Resource" script_class="Wave" load_steps=4 format=3 uid="uid://rk1luext2n4v"]
+[gd_resource type="Resource" script_class="Wave" load_steps=8 format=3 uid="uid://rk1luext2n4v"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_iykoo"]
-[ext_resource type="Resource" uid="uid://ccsvnn47vtltj" path="res://data/spawn_path_1_wind_barbatos.tres" id="2_iykoo"]
+[ext_resource type="Resource" uid="uid://bitpf4j6arf0m" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_water_merman.tres" id="2_iykoo"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="3_uh44n"]
+[ext_resource type="Resource" uid="uid://fhwurvcdissg" path="res://data/spawn/spawn_fire_ghoul_1.tres" id="3_wv6qo"]
+[ext_resource type="Resource" uid="uid://88wopr8wpwsi" path="res://data/spawn/path_2_spawns/spawn_path_2_wind_harpy_1.tres" id="4_1lp51"]
+[ext_resource type="Resource" uid="uid://bq0ou24k2tfwy" path="res://data/spawn/path_2_spawns/spawn_path_2_wind_ghoul_1.tres" id="5_rbi20"]
+[ext_resource type="Resource" uid="uid://4xqwaeqd3alw" path="res://data/spawn/spawn_path_2_wind_flatwoods_1.tres" id="6_0euf0"]
 
 [resource]
 script = ExtResource("3_uh44n")
-data = Array[ExtResource("1_iykoo")]([ExtResource("2_iykoo")])
+data = Array[ExtResource("1_iykoo")]([ExtResource("2_iykoo"), ExtResource("3_wv6qo"), ExtResource("3_wv6qo"), ExtResource("3_wv6qo"), ExtResource("3_wv6qo"), ExtResource("3_wv6qo"), ExtResource("3_wv6qo"), ExtResource("3_wv6qo"), ExtResource("3_wv6qo"), ExtResource("2_iykoo"), ExtResource("4_1lp51"), ExtResource("5_rbi20"), ExtResource("5_rbi20"), ExtResource("5_rbi20"), ExtResource("5_rbi20"), ExtResource("6_0euf0"), ExtResource("5_rbi20"), ExtResource("5_rbi20"), ExtResource("5_rbi20"), ExtResource("4_1lp51")])
 reward = 1.0
 token_reward = 0
 metadata/_custom_type_script = "uid://cskry1sw3vqba"

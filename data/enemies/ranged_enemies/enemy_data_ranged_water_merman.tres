@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=5 format=3 uid="uid://crnp62dcjsgvp"]
+
+[ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_2tu7q"]
+[ext_resource type="Texture2D" uid="uid://db1t1ah5kjgjj" path="res://assets/art/atlases/enemy/atl_enemy_water_vepar.png" id="1_5u6c3"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_5u6c3"]
+[ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="3_j2nmx"]
+
+[resource]
+script = ExtResource("3_j2nmx")
+attack_cooldown = 2.0
+attack_range = 112.0
+burst_cooldown = 0.25
+num_bursts = 3
+num_bullets_per_burst = 3
+angle_increment = 22.0
+spawn_center_bullet = true
+bullet_speed = 100.0
+bullet_max_distance = 112.0
+bullet_atlas = ExtResource("1_2tu7q")
+size = 5
+element = 2
+strong_against_element = 3
+weak_against_element = 1
+health = 300.0
+speed = 20.0
+damage = 2
+tower_mana_drop_chance_base = 3.0
+element_mana_drop_chance = 1.0
+element_mana_drop_amount_multiplier = 3.0
+atlas = ExtResource("1_5u6c3")
+show_light = false
+hex_data_list = Array[ExtResource("2_5u6c3")]([])
+knockback_multiplier = 1.5
+enemy_name = ""
+enemy_description = ""
+metadata/_custom_type_script = "uid://dtesebxklnsr8"
