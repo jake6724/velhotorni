@@ -33,6 +33,8 @@ extends CharacterBody2D
 @onready var build_grid_sprite = $PlayerBuild/BuildGridSprite
 @onready var special_charges_sprite: Sprite2D = %SpecialChargesSprite
 @onready var special_charges_hide_timer: Timer = Timer.new()
+@onready var tower_detect_area: Area2D = %TowerDetectArea
+@onready var tower_detect_collider: CollisionShape2D = %TowerDetectCollider
 
 @onready var player_build_ui: PlayerBuildUI = %PlayerBuildUI
 
@@ -62,6 +64,8 @@ var switch_action_func: Callable = Callable(switch_spell)
 var switch_delay_timer: Timer = Timer.new()
 var switch_delay: float = .25
 var can_switch_mode: bool = true
+
+signal player_respawned
 
 func _ready():
 	# Connect to PlayerInput
@@ -105,8 +109,7 @@ func _ready():
 	player_stats.health_updated.connect(player_hud.on_health_updated)
 
 	# Configure PlayerBuild
-	player_build.player_build_ui = player_build_ui
-	player_build.build_grid_sprite = build_grid_sprite
+	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area)
 	player_build.tower_mana_spent.connect(on_tower_mana_spent)
 
 	# Connect to ManaDropCollector
@@ -165,6 +168,7 @@ func _physics_process(delta): # This can go in a state eventually
 
 		if building:
 			player_build.update_preview_tower_position(global_position, player_aim.aim_input)
+			player_build.update_tower_detect_area_position()
 
 		move_and_slide()
 
@@ -241,7 +245,7 @@ func switch_tower(_switch_direction: int) -> void:
 	player_build.create_preview_tower()
 
 ## Switch between combat and building modes
-func on_switch_player_mode_pressed() -> void:
+func on_switch_player_mode_pressed() -> void: # TODO: Clean up, make functions
 	if can_switch_mode:
 		can_switch_mode = false
 		building = !building
@@ -254,6 +258,7 @@ func on_switch_player_mode_pressed() -> void:
 			player_build_ui.raise_current()
 			build_grid_sprite.show()
 			player_stats.active_speed = player_stats.build_speed
+			tower_detect_collider.set_deferred("disabled", false)
 		else:								    # Switch to combat mode 
 			staff_sprite.show()
 			primary_action_func = cast_spell
@@ -263,6 +268,7 @@ func on_switch_player_mode_pressed() -> void:
 			player_build_ui.hide()
 			build_grid_sprite.hide()
 			player_stats.active_speed = player_stats.combat_speed
+			tower_detect_collider.set_deferred("disabled", true)
 
 		player_hud.animate_switch_mode(building)
 		player_aim.switch_mode(building)
@@ -277,6 +283,9 @@ func on_animation_finished(anim_name) -> void:
 		falling = false
 		character_sprite.hide()
 		respawn_timer.start(respawn_time)
+		
+	if anim_name == "die":
+		respawn_timer.start(respawn_time)
 
 func on_staff_animation_finished(_anim_name) -> void:
 	if _anim_name == "switch":
@@ -286,21 +295,28 @@ func on_staff_animation_finished(_anim_name) -> void:
 		staff_ap.play("idle")
 
 func on_damage_recieved(_damage) -> void:
-	player_stats.health -= _damage
+	player_stats.health -= 1
+	if player_stats.health < 0:
+		die()
 
+## Does not update health
 func on_hit(_direction) -> void:
 	_direction = Constants.get_closest_cardinal_direction_normalized(_direction)
 	if not hit:
-		player_hurtbox.collider.set_deferred("disabled", true)
 		hit = true
+		player_stats.health -= 1
+		if player_stats.health <= 0:
+			modulate.a = 1
+			die()
+			return
+			
 		velocity = _direction * player_stats.knockback_multiplier
-
+		update_hurtbox_collider(false)
+		velocity = _direction * player_stats.knockback_multiplier
 		hurtbox_reset_timer.start(hurtbox_iframe_duration)
 
 		player_camera.apply_shake(1)
 		TimeManager.apply_hitstop()
-
-		player_stats.health -= 1
 		hit_blink()
 
 func jump_forward() -> void:
@@ -313,14 +329,21 @@ func on_pit_entered() -> void:
 	falling = true
 	alive = false
 
+func die() -> void:
+	reticle_sprite.hide()
+	staff_sprite.hide()
+	alive = false
+
 func respawn() -> void:
 	reticle_sprite.show()
 	staff_sprite.show()
 	character_sprite.show()
 	global_position = spawn_point
 	alive = true
+	player_stats.health = player_stats.max_health
 	player_hurtbox.collider.set_deferred("disabled", true)
 	hurtbox_reset_timer.start(hurtbox_iframe_duration)
+	player_respawned.emit()	
 	hit_blink()
 
 func hit_blink() -> void:

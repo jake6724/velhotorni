@@ -12,7 +12,7 @@ func _ready():
 	area_entered.connect(on_area_entered)
 
 func take_damage(damage: float, bullet_pos: Vector2) -> void:
-	damage_recieved.emit(damage)
+	# damage_recieved.emit(damage)
 	hit.emit(calc_knockback_direction(bullet_pos))
 
 func calc_knockback_direction(bullet_pos: Vector2) -> Vector2:
@@ -24,5 +24,4 @@ func on_body_entered(_intruder) -> void:
 	pit_entered.emit()
 
 func on_area_entered(_intruder) -> void:
-	damage_recieved.emit(_intruder.damage)
 	take_damage(_intruder.damage, _intruder.global_position)

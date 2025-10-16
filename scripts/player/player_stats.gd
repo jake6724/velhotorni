@@ -1,6 +1,8 @@
 class_name PlayerCharacterStats # TODO: Change this to PlayerStats
 extends Node 
 
+var max_health = 8.0
+
 var health: float = 8.0:
 	set(value):
 		health = value

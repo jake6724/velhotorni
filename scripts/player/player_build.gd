@@ -1,10 +1,13 @@
 class_name PlayerBuild
-extends Node
+extends Node2D
 
-@export var grid_follow_tower: bool = true
+@export var grid_follow_tower: bool = true # Debugging, should go awawy
+
+var tower_parent: Node = Node.new()
 
 var player_build_ui: PlayerBuildUI # Set by PlayerCharacter
 var build_grid_sprite: Sprite2D # Set by PlayerCharacter
+var tower_detect_area: Area2D # Set by PlayerCharacter
 
 const TOWER_PLACEMENT_RANGE = 16
 
@@ -28,14 +31,25 @@ var tower_index: int = 0:
 
 signal tower_mana_spent
 
+func _ready():
+	add_child(tower_parent)
+
+func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _tower_detect_area: Area2D) -> void:
+	player_build_ui = _player_build_ui
+	build_grid_sprite = _build_grid_sprite
+	tower_detect_area = _tower_detect_area
+	tower_detect_area.area_entered.connect(on_tower_detect_area_entered)
+	tower_detect_area.area_exited.connect(on_tower_detect_area_exited)
+
 ## Creates a new instance of `tower_scene`, fully initialized. Modulated to be transparent.
 ## This is an active and ready tower that just needs to be placed.
 func create_preview_tower():
 	# Reset previous selection
 	preview_tower = tower_scene.instantiate()
-	add_child(preview_tower)
+	tower_parent.add_child(preview_tower)
 	preview_tower.initialize(tower_element_options[tower_index])
 	preview_tower.attack_collider.set_deferred("disabled", true)
+	preview_tower.transform_collider.set_deferred("disabled", true)
 	preview_tower.modulate.a = .75
 	preview_tower.can_show_range = true
 
@@ -49,14 +63,14 @@ func update_preview_tower_position(player_global_position: Vector2, aim_input: V
 	var target: Vector2
 	if not grid_follow_tower:
 		target = WorldGrid.grid_to_world(WorldGrid.world_to_grid(player_global_position)) + Vector2(8,8)
-		# build_grid_sprite.global_position = WorldGrid.grid_to_world(WorldGrid.world_to_grid(player_global_position)) + Vector2(8,8)
 	else:
 		target = preview_tower.global_position + Vector2(8,8)
-		# build_grid_sprite.global_position = preview_tower.global_position + Vector2(8,8)
 
 	build_grid_sprite.global_position = target
-	# var tween: Tween = get_tree().create_tween()
-	# tween.tween_property(build_grid_sprite, "global_position", target, .1)
+
+func update_tower_detect_area_position() -> void:
+	tower_detect_area.global_position = build_grid_sprite.global_position
+	player_build_ui.tower_upgrade_ui.position = tower_detect_area.global_position
 
 ## Check if placement is valid and place `preview_tower`. Update `WorldGrid` and `preview_tower` accordingly.
 func place_tower(_tower_mana: float) -> void:	
@@ -70,10 +84,21 @@ func place_tower(_tower_mana: float) -> void:
 			preview_tower.modulate.a = 1
 			preview_tower.can_show_range = false
 			preview_tower.attack_collider.set_deferred("disabled", false)
+			preview_tower.transform_collider.set_deferred("disabled", false)
 			# Update WorldGrid
 			WorldGrid.data[tower_grid_position] = false
 
 			# Get a new preview tower
-			create_preview_tower() # TODO: This needs to be the currently selected type
+			create_preview_tower()
 
 			tower_mana_spent.emit(cost)
+
+func on_tower_detect_area_entered(intruder: Area2D) -> void:
+	print(intruder.owner.level)
+	preview_tower.hide()
+	player_build_ui.tower_upgrade_ui.show()
+
+func on_tower_detect_area_exited(_intruder: Area2D) -> void:
+	print("Test")
+	preview_tower.show()
+	# player_build_ui.tower_upgrade_ui.hide()

@@ -1,6 +1,8 @@
 class_name PlayerBuildUI
 extends Control
 
+@onready var tower_upgrade_ui: HBoxContainer = %TowerUpgradeUI
+
 var tower_index: int = 0:
 	set(value):
 		lower_button(tower_buttons[tower_index])
