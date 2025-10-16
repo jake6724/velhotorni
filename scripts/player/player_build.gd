@@ -94,11 +94,13 @@ func place_tower(_tower_mana: float) -> void:
 			tower_mana_spent.emit(cost)
 
 func on_tower_detect_area_entered(intruder: Area2D) -> void:
-	print(intruder.owner.level)
-	preview_tower.hide()
-	player_build_ui.tower_upgrade_ui.show()
+	pass
+	# print(intruder.owner.level)
+	# preview_tower.hide()
+	# player_build_ui.tower_upgrade_ui.show()
 
 func on_tower_detect_area_exited(_intruder: Area2D) -> void:
-	print("Test")
-	preview_tower.show()
-	# player_build_ui.tower_upgrade_ui.hide()
+	pass
+	# print("Test")
+	# preview_tower.show()
+	# # player_build_ui.tower_upgrade_ui.hide()
