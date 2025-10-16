@@ -20,12 +20,6 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yalw7"]
 texture = ExtResource("8_ivb0d")
-0:0/animation_columns = 4
-0:0/animation_frame_0/duration = 0.1
-0:0/animation_frame_1/duration = 0.1
-0:0/animation_frame_2/duration = 0.1
-0:0/animation_frame_3/duration = 0.1
-0:0/0 = 0
 0:1/animation_columns = 4
 0:1/animation_frame_0/duration = 0.1
 0:1/animation_frame_1/duration = 0.1
@@ -47,21 +41,33 @@ texture = ExtResource("8_ivb0d")
 0:3/animation_frame_0/duration = 1.0
 0:3/animation_frame_1/duration = 1.0
 0:3/0 = 0
+0:3/0/z_index = -4096
 2:3/animation_frame_0/duration = 1.0
 2:3/animation_frame_1/duration = 1.0
 2:3/0 = 0
+2:3/0/z_index = -4096
 0:4/animation_frame_0/duration = 1.0
 0:4/animation_frame_1/duration = 1.0
 0:4/0 = 0
+0:4/0/z_index = -4096
 2:4/animation_frame_0/duration = 1.0
 2:4/animation_frame_1/duration = 1.0
 2:4/0 = 0
+2:4/0/z_index = -4096
 0:5/animation_frame_0/duration = 1.0
 0:5/animation_frame_1/duration = 1.0
 0:5/0 = 0
+0:5/0/z_index = -4096
 2:5/animation_frame_0/duration = 1.0
 2:5/animation_frame_1/duration = 1.0
 2:5/0 = 0
+2:5/0/z_index = -4096
+0:0/animation_columns = 4
+0:0/animation_frame_0/duration = 0.1
+0:0/animation_frame_1/duration = 0.1
+0:0/animation_frame_2/duration = 0.1
+0:0/animation_frame_3/duration = 0.1
+0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_814dd"]
 sources/0 = SubResource("TileSetAtlasSource_yalw7")
