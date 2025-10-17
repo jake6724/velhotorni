@@ -11,6 +11,7 @@ func _ready():
 	# Connect to Bus
 	bus_index = AudioServer.get_bus_index("sfx")
 	max_polyphony = 64
+	bus = "sfx"
 
 func play_audio_stream(_stream: AudioStreamOggVorbis) -> void:
 	stream = _stream
