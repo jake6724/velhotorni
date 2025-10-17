@@ -68,7 +68,7 @@ var _preview_leveled_damage: float
 var _preview_leveled_range: float
 var _preview_leveled_speed: float
 
-const MAX_LEVEL_PRICE: int = 75
+const MAX_LEVEL_PRICE: int = 125
 const LEVEL_COST_INCREMENT: int = 25
 var level: int = 0
 var damage_level: int = 0:
@@ -115,7 +115,7 @@ var checkpoint_level: int
 var is_evolved: bool = false
 var is_evolve_checkpointed: bool = false
 
-var level_upgrade_price: int = 25
+var level_upgrade_price: int = 75
 var checkpoint_level_upgrade_price: int
 
 const DAMAGE_MODIFIER: float = 0.5
