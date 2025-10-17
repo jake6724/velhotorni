@@ -35,6 +35,7 @@ extends CharacterBody2D
 @onready var special_charges_hide_timer: Timer = Timer.new()
 @onready var tower_detect_area: Area2D = %TowerDetectArea
 @onready var tower_detect_collider: CollisionShape2D = %TowerDetectCollider
+@onready var longpress: Control = %Longpress
 
 @onready var player_build_ui: PlayerBuildUI = %PlayerBuildUI
 
@@ -135,6 +136,8 @@ func _ready():
 	# Misc
 	player_spell_spawner.melee_spell_cast.connect(player_aim.swing_staff)
 	z_index = Constants.z_index_map["player_character"]
+	reticle_sprite.z_index = Constants.z_index_map["reticle"]
+	longpress.z_index = Constants.z_index_map["top"]
 
 # DEV ONLY
 # func _process(delta):

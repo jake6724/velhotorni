@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=108 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
@@ -35,6 +35,7 @@
 [ext_resource type="Script" uid="uid://c352umdhm3bhc" path="res://scripts/player/player_beacon.gd" id="27_h3nqo"]
 [ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="28_a033j"]
 [ext_resource type="Texture2D" uid="uid://38nei1ihsuqv" path="res://assets/art/sprites/ui/spr_ui_special_charge.png" id="31_ip3vl"]
+[ext_resource type="Texture2D" uid="uid://dhx5yrbtwdm7n" path="res://assets/art/sprites/ui/spr_ui_circle_longpress.png" id="36_vka04"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qouk"]
 atlas = ExtResource("3_j4yks")
@@ -1249,7 +1250,7 @@ vframes = 12
 frame = 18
 
 [node name="ReticleSprite" type="AnimatedSprite2D" parent="."]
-z_index = 4096
+z_as_relative = false
 sprite_frames = SubResource("SpriteFrames_wp8q1")
 animation = &"combat"
 autoplay = "combat"
@@ -1435,3 +1436,18 @@ collision_layer = 0
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_a033j")
 disabled = true
+
+[node name="Longpress" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LongpressProgress" type="TextureProgressBar" parent="Longpress"]
+layout_mode = 0
+offset_top = -19.0
+offset_right = 16.0
+offset_bottom = -3.0
+fill_mode = 4
+texture_progress = ExtResource("36_vka04")

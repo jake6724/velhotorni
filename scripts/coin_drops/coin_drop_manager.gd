@@ -30,7 +30,7 @@ func spawn_coin_drop(_global_pos, drop_chance) -> void:
 		var closest_valid: Vector2 = WorldGrid.get_closest_valid_point(_global_pos)
 		coin.destination = calc_destination(closest_valid)
 		coin.destination.clamp(Vector2(0,0), Vector2(400,224))
-		print("Origin point: ", _global_pos, " Coin Destination: ", coin.destination, "Diff: ", coin.global_position.distance_to(coin.destination))
+		#print("Origin point: ", _global_pos, " Coin Destination: ", coin.destination, "Diff: ", coin.global_position.distance_to(coin.destination))
 		coin.destination_direction = coin.global_position.direction_to(coin.destination)
 
 		drop_chance -= 1.0
@@ -65,7 +65,7 @@ func _physics_process(delta):
 		if coin: 
 			if not coin.destination_reached:
 				coin.global_position += coin.destination_direction * coin.speed * delta
-				print(coin.global_position.distance_to(coin.destination))
+				#print(coin.global_position.distance_to(coin.destination))
 				if coin.global_position.distance_to(coin.destination) <= 1 or coin.global_position.distance_to(coin.destination) > 15:
 					coin.destination_reached = true
 

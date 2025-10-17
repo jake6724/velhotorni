@@ -20,6 +20,8 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var buff_area: BuffArea = %BuffArea
 @onready var hex_manager: HexManager = $HexManager
 @onready var tower_audio: TowerAudio = $TowerAudio
+@onready var upgrade_display: Control = %UpgradeDisplay
+@onready var upgrade_price_label: Label = %UpgradePriceLabel
 
 # Internal data
 var active_target: Enemy
@@ -169,6 +171,9 @@ func _ready():
 	attack_timer.autostart = false
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	add_child(attack_timer)
+
+	upgrade_display.z_index = Constants.z_index_map["top"]
+	upgrade_price_label.z_index = Constants.z_index_map["top"]
 
 	z_index = Constants.z_index_map["tower"]
 
@@ -511,6 +516,13 @@ func revert_to_base_evolution() -> void:
 	transform_data = get_tower_data_copy(Constants.tower_data[Constants.get_next_element(base_data.element)])
 	data = base_data
 	reset_tower()
+
+func show_upgrade_info() -> void:
+	upgrade_display.show()
+	upgrade_price_label.text = str(int(level_upgrade_price))
+
+func hide_upgrade_info() -> void:
+	upgrade_display.hide()
 
 # Hexes
 func on_add_new_hex(hex: Hex):
