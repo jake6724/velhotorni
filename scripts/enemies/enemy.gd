@@ -94,8 +94,8 @@ func _ready():
 	base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
-
 	light.visible = data.show_light
+	drop_chance = data.tower_mana_drop_chance_base
 
 	set_pos_offset()
 
