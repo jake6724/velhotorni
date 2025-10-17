@@ -30,6 +30,7 @@ func spawn_coin_drop(_global_pos, drop_chance) -> void:
 		var closest_valid: Vector2 = WorldGrid.get_closest_valid_point(_global_pos)
 		coin.destination = calc_destination(closest_valid)
 		coin.destination.clamp(Vector2(0,0), Vector2(400,224))
+		print("Origin point: ", _global_pos, " Coin Destination: ", coin.destination, "Diff: ", coin.global_position.distance_to(coin.destination))
 		coin.destination_direction = coin.global_position.direction_to(coin.destination)
 
 		drop_chance -= 1.0
@@ -61,25 +62,12 @@ func decrement_reward_remaining() -> void:
 func _physics_process(delta):
 	for child in get_children():
 		var coin: CoinDrop = child as CoinDrop
-		if coin: # TODO: clean up all these if statements ? 
-			# coin.countdown -= delta
-			if coin.countdown > 0:
-				if not coin.destination_reached:
-					coin.global_position += coin.destination_direction * coin.speed * delta
-					if abs(coin.global_position - coin.destination) < Vector2(1,1) or abs(coin.global_position - coin.destination) > Vector2(25,25):
-						coin.destination_reached = true
-
-				# if coin.countdown < coin.blink_start:
-				# 	if coin.blink_checkpoint == 0.0:
-				# 		coin.blink_checkpoint = coin.countdown
-
-					# if coin.countdown <= (coin.blink_checkpoint - coin.blink_rate):
-					# 	coin.visible = not coin.visible
-					# 	coin.blink_checkpoint = coin.countdown
-					# 	coin.blink_rate = coin.blink_rate - (coin.blink_rate * coin.blink_rate_multiplier)
-			else:
-				if coin.is_reward: decrement_reward_remaining()
-				coin.queue_free()
+		if coin: 
+			if not coin.destination_reached:
+				coin.global_position += coin.destination_direction * coin.speed * delta
+				print(coin.global_position.distance_to(coin.destination))
+				if coin.global_position.distance_to(coin.destination) <= 1 or coin.global_position.distance_to(coin.destination) > 15:
+					coin.destination_reached = true
 
 func calc_destination(_global_pos) -> Vector2:
 	var jx: float = rng.randf_range(-JITTER, JITTER)
@@ -101,10 +89,3 @@ func on_wave_failed() -> void:
 		var coin: CoinDrop = child as CoinDrop
 		if coin:
 			coin.queue_free()
-
-
-# float towards mouse. Else to `if not coin.destination_reached:`
-# else:
-	# 	direction_to_mouse = coin.global_position.direction_to(get_global_mouse_position())
-	# 	coin.global_position += direction_to_mouse * coin.float_speed * delta
-	# 	coin.float_speed += 1
