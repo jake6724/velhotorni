@@ -43,9 +43,6 @@ var element_mana_low: Dictionary[Constants.Element, bool] = {
 	Constants.Element.ARCANE: false,
 }
 
-func _ready():
-	print(element_mana.values())
-
 var tower_mana: float = 0:
 	set(value):
 		tower_mana = value

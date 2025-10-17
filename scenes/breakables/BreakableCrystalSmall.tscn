@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://inrss5007qxm"]
+[gd_scene load_steps=12 format=3 uid="uid://inrss5007qxm"]
 
 [ext_resource type="Texture2D" uid="uid://djcmn0b52scwv" path="res://assets/art/sprites/environment/spr_environment_manacrystal.png" id="1_i8v1e"]
 [ext_resource type="Script" uid="uid://d3pvkwk22h1o0" path="res://scripts/breakables/breakable.gd" id="1_nu4tx"]
@@ -332,6 +332,10 @@ _data = {
 &"spawn": SubResource("Animation_sf3xk")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nu4tx"]
+radius = 6.0
+height = 18.0
+
 [node name="BreakableCrystalSmall" type="Node2D"]
 script = ExtResource("1_nu4tx")
 metadata/_custom_type_script = "uid://d3pvkwk22h1o0"
@@ -348,10 +352,20 @@ collision_layer = 8388608
 collision_mask = 1049088
 
 [node name="BreakCollider" type="CollisionShape2D" parent="BreakArea"]
-position = Vector2(8.5, 7)
+position = Vector2(8, 7)
 shape = SubResource("CapsuleShape2D_i8v1e")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_sf3xk")
 }
+
+[node name="BreakableHitbox" type="StaticBody2D" parent="."]
+collision_layer = 16777216
+collision_mask = 0
+
+[node name="BreakableHitboxCollider" type="CollisionShape2D" parent="BreakableHitbox"]
+unique_name_in_owner = true
+position = Vector2(8, 7)
+shape = SubResource("CapsuleShape2D_nu4tx")
+debug_color = Color(0.772634, 0, 0.127799, 0.42)

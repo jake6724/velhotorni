@@ -5,6 +5,7 @@ extends Node2D
 @onready var break_collider: CollisionShape2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
+@onready var breakable_hitbox_collider: CollisionShape2D = %BreakableHitboxCollider
 var broken: bool = false
 var timer: Timer = Timer.new()
 var shimmer_delay: float = 3.0
@@ -33,6 +34,8 @@ func on_area_entered(_intruder) -> void:
 		ap.play("hit")
 		ap.queue("corpse")
 		coin_dropped.emit(global_position, drop_chance)
+		breakable_hitbox_collider.set_deferred("disabled", true)
+
 
 func on_timer_timeout() -> void:
 	ap.play("shimmer")

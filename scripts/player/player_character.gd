@@ -68,7 +68,6 @@ var can_switch_mode: bool = true
 signal player_respawned
 
 func _ready():
-	print("Test")
 	# Connect to PlayerInput
 	player_input.secondary_action_pressed.connect(on_dash_input_pressed)
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
