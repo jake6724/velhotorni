@@ -68,6 +68,7 @@ var can_switch_mode: bool = true
 signal player_respawned
 
 func _ready():
+	print("Test")
 	# Connect to PlayerInput
 	player_input.secondary_action_pressed.connect(on_dash_input_pressed)
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
@@ -249,6 +250,11 @@ func on_switch_player_mode_pressed() -> void: # TODO: Clean up, make functions
 	if can_switch_mode:
 		can_switch_mode = false
 		building = !building
+
+		player_hud.animate_switch_mode(building)
+		player_aim.switch_mode(building)
+		switch_delay_timer.start(switch_delay)
+
 		if building:							# Switch to build mode
 			primary_action_func = place_tower 
 			switch_action_func = switch_tower
@@ -259,6 +265,10 @@ func on_switch_player_mode_pressed() -> void: # TODO: Clean up, make functions
 			build_grid_sprite.show()
 			player_stats.active_speed = player_stats.build_speed
 			tower_detect_collider.set_deferred("disabled", false)
+			reticle_sprite.hide()
+			await get_tree().create_timer(.1).timeout
+			reticle_sprite.play("build")
+			reticle_sprite.show()
 		else:								    # Switch to combat mode 
 			staff_sprite.show()
 			primary_action_func = cast_spell
@@ -269,10 +279,10 @@ func on_switch_player_mode_pressed() -> void: # TODO: Clean up, make functions
 			build_grid_sprite.hide()
 			player_stats.active_speed = player_stats.combat_speed
 			tower_detect_collider.set_deferred("disabled", true)
-
-		player_hud.animate_switch_mode(building)
-		player_aim.switch_mode(building)
-		switch_delay_timer.start(switch_delay)
+			reticle_sprite.hide()
+			await get_tree().create_timer(.05).timeout
+			reticle_sprite.play("combat")
+			reticle_sprite.show()
 
 func on_animation_finished(anim_name) -> void:
 	# if anim_name == "dash":

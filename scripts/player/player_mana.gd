@@ -3,29 +3,27 @@ extends Node
 
 const MANA_LOW_THRESHOLD: float = .2 # multiplied by the max value to get a specific percentage
 
-# DO NOT MODIFY DIRECTLY - EDIT IN THE INSPECTOR
-@export var element_mana: Dictionary[Constants.Element, float] = {
-	Constants.Element.FIRE: 0,
-	Constants.Element.WIND: 0,
-	Constants.Element.WATER: 0,
-	Constants.Element.EARTH: 0,
-	Constants.Element.LIGHT: 0,
-	Constants.Element.DARK: 0,
-	Constants.Element.ARCANE: 0,
+var element_mana: Dictionary[Constants.Element, float] = {
+	Constants.Element.FIRE: 100,
+	Constants.Element.WIND: 100,
+	Constants.Element.WATER: 100,
+	Constants.Element.EARTH: 100,
+	Constants.Element.LIGHT: 100,
+	Constants.Element.DARK: 100,
+	Constants.Element.ARCANE: 200,
 }
 
-# DO NOT MODIFY DIRECTLY - EDIT IN THE INSPECTOR
-@export var element_mana_maxes: Dictionary[Constants.Element, float] = {
-	Constants.Element.FIRE: 0,
-	Constants.Element.WIND: 0,
-	Constants.Element.WATER: 0,
-	Constants.Element.EARTH: 0,
-	Constants.Element.LIGHT: 0,
-	Constants.Element.DARK: 0,
-	Constants.Element.ARCANE: 0,
+var element_mana_maxes: Dictionary[Constants.Element, float] = {
+	Constants.Element.FIRE: 100,
+	Constants.Element.WIND: 100,
+	Constants.Element.WATER: 100,
+	Constants.Element.EARTH: 100,
+	Constants.Element.LIGHT: 100,
+	Constants.Element.DARK: 100,
+	Constants.Element.ARCANE: 200,
 }
 
-@export var element_drop_amount_base: Dictionary[Constants.Element, float] = {
+var element_drop_amount_base: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE: 20,
 	Constants.Element.WIND: 20,
 	Constants.Element.WATER: 20,
@@ -44,6 +42,9 @@ var element_mana_low: Dictionary[Constants.Element, bool] = {
 	Constants.Element.DARK: false,
 	Constants.Element.ARCANE: false,
 }
+
+func _ready():
+	print(element_mana.values())
 
 var tower_mana: float = 0:
 	set(value):

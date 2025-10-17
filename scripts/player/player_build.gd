@@ -70,7 +70,6 @@ func update_preview_tower_position(player_global_position: Vector2, aim_input: V
 
 func update_tower_detect_area_position() -> void:
 	tower_detect_area.global_position = build_grid_sprite.global_position
-	player_build_ui.tower_upgrade_ui.position = tower_detect_area.global_position
 
 ## Check if placement is valid and place `preview_tower`. Update `WorldGrid` and `preview_tower` accordingly.
 func place_tower(_tower_mana: float) -> void:	

@@ -1253,7 +1253,6 @@ z_index = 4096
 sprite_frames = SubResource("SpriteFrames_wp8q1")
 animation = &"combat"
 autoplay = "combat"
-frame_progress = 0.479543
 
 [node name="ReticleCharge" type="TextureProgressBar" parent="ReticleSprite"]
 visible = false
@@ -1334,24 +1333,6 @@ metadata/_custom_type_script = "uid://cchrqludhwhnh"
 [node name="PlayerMana" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("17_07k56")
-element_mana = Dictionary[int, float]({
-0: 100.0,
-1: 100.0,
-2: 100.0,
-3: 100.0,
-4: 100.0,
-5: 100.0,
-19: 200.0
-})
-element_mana_maxes = Dictionary[int, float]({
-0: 100.0,
-1: 100.0,
-2: 100.0,
-3: 100.0,
-4: 100.0,
-5: 100.0,
-19: 200.0
-})
 metadata/_custom_type_script = "uid://cmfd0jyw7me5n"
 
 [node name="PlayerSpecial" type="Node" parent="."]

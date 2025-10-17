@@ -71,11 +71,9 @@ func switch_mode(_building: bool) -> void:
 	if _building:
 		update_reticle_func = update_reticle_build
 		reset_reticle_position_func = reset_reticle_disabled
-		player.reticle_sprite.play("build")
 	else:
 		update_reticle_func = update_reticle_combat
 		reset_reticle_position_func = reset_reticle_position
-		player.reticle_sprite.play("combat")
 		
 func rotate_staff() -> void:
 	if aim_input:
