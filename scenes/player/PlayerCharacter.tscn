@@ -1437,17 +1437,11 @@ unique_name_in_owner = true
 shape = SubResource("CircleShape2D_a033j")
 disabled = true
 
-[node name="Longpress" type="Control" parent="."]
+[node name="UpgradeActionChargeCircle" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="LongpressProgress" type="TextureProgressBar" parent="Longpress"]
-layout_mode = 0
-offset_top = -19.0
-offset_right = 16.0
-offset_bottom = -3.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 fill_mode = 4
 texture_progress = ExtResource("36_vka04")

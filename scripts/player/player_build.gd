@@ -5,9 +5,12 @@ extends Node2D
 
 var tower_parent: Node = Node.new()
 
+var active_towers: Array[Tower] = []
+
 var player_build_ui: PlayerBuildUI # Set by PlayerCharacter
 var build_grid_sprite: Sprite2D # Set by PlayerCharacter
 var tower_detect_area: Area2D # Set by PlayerCharacter
+var tower_to_upgrade: Tower
 
 const TOWER_PLACEMENT_RANGE = 16
 
@@ -40,6 +43,24 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	tower_detect_area = _tower_detect_area
 	tower_detect_area.area_entered.connect(on_tower_detect_area_entered)
 	tower_detect_area.area_exited.connect(on_tower_detect_area_exited)
+
+func show_active_tower_ranges(_value: bool) -> void:
+	for tower: Tower in active_towers:
+		tower.can_show_range = _value
+
+func run(_delta, player_input: PlayerInput, player_mana: PlayerMana, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
+	if player_input.upgrade_action_charge and tower_to_upgrade:
+		if check_can_ugprade(player_mana.tower_mana):
+			upgrade_action_charge_cirlce.show()
+			upgrade_action_charge_cirlce.value = player_input.upgrade_action_charge * 100
+			print(player_input.upgrade_action_charge)
+			if player_input.upgrade_action_charge >= 1:
+				upgrade_tower()
+				player_input.upgrade_action_charge = 0
+				player_input.upgrade_action_pressed = false
+	else:
+		upgrade_action_charge_cirlce.hide()
+		upgrade_action_charge_cirlce.value = 0
 
 ## Creates a new instance of `tower_scene`, fully initialized. Modulated to be transparent.
 ## This is an active and ready tower that just needs to be placed.
@@ -86,23 +107,39 @@ func place_tower(_tower_mana: float) -> void:
 			preview_tower.transform_collider.set_deferred("disabled", false)
 			# Update WorldGrid
 			WorldGrid.data[tower_grid_position] = false
+			preview_tower.can_show_range = true
+			active_towers.append(preview_tower)
 
 			# Get a new preview tower
 			create_preview_tower()
 
 			tower_mana_spent.emit(cost)
 
+func check_can_ugprade(_tower_mana) -> bool:
+	if tower_to_upgrade:
+		var cost: int = tower_to_upgrade.level_upgrade_price
+		if _tower_mana >= cost:
+			return true
+	return false
+
+func upgrade_tower() -> void:
+	if tower_to_upgrade:
+		tower_mana_spent.emit(tower_to_upgrade.level_upgrade_price)
+		tower_to_upgrade.upgrade()
+
+
 func on_tower_detect_area_entered(intruder: Area2D) -> void:
 	if preview_tower:
 		preview_tower.hide()
 
-	var tower_to_upgrade: Tower = intruder.owner
+	tower_to_upgrade = intruder.owner
 	tower_to_upgrade.show_upgrade_info()	
 
 func on_tower_detect_area_exited(intruder: Area2D) -> void:
 	if preview_tower:
 		preview_tower.show()
 		
-	var tower_to_upgrade: Tower = intruder.owner
+	# var tower_to_upgrade: Tower = intruder.owner
 	if tower_to_upgrade:
 		tower_to_upgrade.hide_upgrade_info()
+		tower_to_upgrade = null

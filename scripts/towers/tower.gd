@@ -22,6 +22,7 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var tower_audio: TowerAudio = $TowerAudio
 @onready var upgrade_display: Control = %UpgradeDisplay
 @onready var upgrade_price_label: Label = %UpgradePriceLabel
+@onready var upgrade_icon: TextureRect = %UpgradeIcon
 
 # Internal data
 var active_target: Enemy
@@ -390,8 +391,9 @@ func update_audio() -> void:
 	tower_audio.initialize()
 
 func increment_level() -> void:
-	level += 1
-	level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
+	pass
+	# level += 1
+	# level_upgrade_price = min(level_upgrade_price + LEVEL_COST_INCREMENT, MAX_LEVEL_PRICE)
 
 func on_enemy_died(enemy: Enemy) -> void:
 	var index = in_range_targets.find(enemy)
@@ -483,8 +485,10 @@ func get_tower_data_copy(_input_data: TowerData) -> TowerData:
 
 	# duplicate(true) on a custom-resource will NOT deep-copy arrays or dicts; do that manually here
 	new_data.buff_data_list = []
+	print(_input_data.buff_data_list)
 	for buff_data: BuffData in _input_data.buff_data_list:
-		new_data.buff_data_list.append(buff_data.duplicate(true))
+		if buff_data:
+			new_data.buff_data_list.append(buff_data.duplicate(true))
 	return new_data
 
 func set_checkpoint_levels() -> void:
@@ -546,3 +550,11 @@ func on_remove_active_hex(hex: Hex):
 			_hex_range_multiplier += hex.data.modified_value
 		_: pass
 	update_current_combat_data()
+
+func upgrade() -> void:
+	damage_level += 1
+	speed_level += 1
+	range_level += 1
+	special_level += 1
+	level += 1
+	upgrade_icon.texture.region = Rect2((8 * level), 0, 8, 10)

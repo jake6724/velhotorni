@@ -35,7 +35,7 @@ extends CharacterBody2D
 @onready var special_charges_hide_timer: Timer = Timer.new()
 @onready var tower_detect_area: Area2D = %TowerDetectArea
 @onready var tower_detect_collider: CollisionShape2D = %TowerDetectCollider
-@onready var longpress: Control = %Longpress
+@onready var upgrade_action_charge_cirlce: TextureProgressBar = %UpgradeActionChargeCircle
 
 @onready var player_build_ui: PlayerBuildUI = %PlayerBuildUI
 
@@ -137,16 +137,7 @@ func _ready():
 	player_spell_spawner.melee_spell_cast.connect(player_aim.swing_staff)
 	z_index = Constants.z_index_map["player_character"]
 	reticle_sprite.z_index = Constants.z_index_map["reticle"]
-	longpress.z_index = Constants.z_index_map["top"]
-
-# DEV ONLY
-# func _process(delta):
-# 	if player_input.primary_action_charge:
-# 		reticle_charge.show()
-# 		var value = min(100, player_input.primary_action_charge * 100)
-# 		reticle_charge.value = value
-# 	else:
-# 		reticle_charge.hide()
+	upgrade_action_charge_cirlce.z_index = Constants.z_index_map["top"]
 
 func _physics_process(delta): # This can go in a state eventually
 	if alive:
@@ -172,6 +163,7 @@ func _physics_process(delta): # This can go in a state eventually
 		if building:
 			player_build.update_preview_tower_position(global_position, player_aim.aim_input)
 			player_build.update_tower_detect_area_position()
+			player_build.run(delta, player_input, player_mana, upgrade_action_charge_cirlce)
 
 		move_and_slide()
 
@@ -264,6 +256,7 @@ func on_switch_player_mode_pressed() -> void: # TODO: Clean up, make functions
 			player_build.create_preview_tower()
 			player_build_ui.show()
 			player_build_ui.raise_current()
+			player_build.show_active_tower_ranges(true)
 			build_grid_sprite.show()
 			player_stats.active_speed = player_stats.build_speed
 			tower_detect_collider.set_deferred("disabled", false)
@@ -279,6 +272,7 @@ func on_switch_player_mode_pressed() -> void: # TODO: Clean up, make functions
 				player_build.preview_tower.queue_free()
 			player_build_ui.hide()
 			build_grid_sprite.hide()
+			player_build.show_active_tower_ranges(false)
 			player_stats.active_speed = player_stats.combat_speed
 			tower_detect_collider.set_deferred("disabled", true)
 			reticle_sprite.hide()

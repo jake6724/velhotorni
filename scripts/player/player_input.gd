@@ -4,8 +4,12 @@ extends Node
 var move_input: Vector2
 var aim_input: Vector2
 
-var primary_action_pressed
+var primary_action_pressed: bool
 var primary_action_charge: float
+
+var upgrade_action_pressed: bool
+var upgrade_action_charge: float 
+const UPGRADE_CHARGE_MULTIPLIER: float = 1.0
 
 var is_latest_input_controller: bool = true
 
@@ -19,6 +23,8 @@ func get_move_input() -> Vector2:
 	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	return move_input
 	
+	
+
 	# else:
 	# 	move_input = Vector2(Input.get_axis("move_left_key", "move_right_key"), Input.get_axis("move_up_key", "move_down_key"))
 	# 	return move_input
@@ -28,12 +34,16 @@ func get_aim_input() -> Vector2:
 	aim_input = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
 	return aim_input
 
-func _process(_delta):
+func _process(delta):
 	if primary_action_pressed:
-		primary_action_charge += _delta
+		primary_action_charge += delta
+
+	if upgrade_action_pressed:
+		upgrade_action_charge += delta * UPGRADE_CHARGE_MULTIPLIER
 		
 func _input(event):
 	check_primary_action_input(event)
+	check_upgrade_action_input(event)
 	if Input.is_action_just_pressed("secondary_action"):
 		secondary_action_pressed.emit()
 
@@ -46,7 +56,7 @@ func _input(event):
 	if event.is_action("switch_player_mode") and event.is_pressed() and not event.is_echo():
 		switch_player_mode_pressed.emit()
 
-	set_latest_input_type(event)
+	# set_latest_input_type(event)
 
 func check_primary_action_input(event) -> void:
 	if Input.is_action_just_pressed("primary_action"):
@@ -56,19 +66,27 @@ func check_primary_action_input(event) -> void:
 		primary_action_pressed = false
 		primary_action_charge = 0
 
-func set_latest_input_type(event) -> void:
-	if event is InputEventKey or event is InputEventMouseButton or event is InputEventMouseMotion:
-		is_latest_input_controller = false
-		# print("Mouse/Keyboard")
+func check_upgrade_action_input(event) -> void:
+	if Input.is_action_just_pressed("upgrade_action"):
+		upgrade_action_pressed = true
 
-	elif event is InputEventJoypadButton:
-		is_latest_input_controller = true
-		# print("Controller Button")
+	if event.is_action_released("upgrade_action"):
+		upgrade_action_pressed = false
+		upgrade_action_charge = 0
+
+# func set_latest_input_type(event) -> void:
+# 	if event is InputEventKey or event is InputEventMouseButton or event is InputEventMouseMotion:
+# 		is_latest_input_controller = false
+# 		# print("Mouse/Keyboard")
+
+# 	elif event is InputEventJoypadButton:
+# 		is_latest_input_controller = true
+# 		# print("Controller Button")
 	
-	elif event is InputEventJoypadMotion and abs(move_input) > Vector2(.2,.2):
-		is_latest_input_controller = true
-		# print("Left Joystick")
+# 	elif event is InputEventJoypadMotion and abs(move_input) > Vector2(.2,.2):
+# 		is_latest_input_controller = true
+# 		# print("Left Joystick")
 
-	elif event is InputEventJoypadMotion and abs(aim_input) > Vector2(.2,.2):
-		is_latest_input_controller = true
-		# print("Right Joystick")
+# 	elif event is InputEventJoypadMotion and abs(aim_input) > Vector2(.2,.2):
+# 		is_latest_input_controller = true
+# 		# print("Right Joystick")

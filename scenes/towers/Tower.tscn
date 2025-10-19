@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bpg5vj2118tkk"]
+[gd_scene load_steps=26 format=3 uid="uid://bpg5vj2118tkk"]
 
 [ext_resource type="Script" uid="uid://1v42jjyvr5ed" path="res://scripts/towers/tower.gd" id="1_cqx8d"]
 [ext_resource type="Texture2D" uid="uid://b58tie4p0ydsh" path="res://assets/art/atlases/tower/atl_tower_water.png" id="3_gc8gn"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://d3uwhutrtqgwi" path="res://assets/art/sprites/ui/spr_ui_coin_small.png" id="14_8dhd2"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="15_3p7h3"]
 [ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="16_3p7h3"]
+[ext_resource type="Texture2D" uid="uid://qr44ws5evlmm" path="res://assets/art/sprites/ui/atl_ui_lvlup_compact.png" id="17_wl0l1"]
 
 [sub_resource type="Animation" id="Animation_bfb4r"]
 length = 0.001
@@ -68,6 +69,11 @@ resource_local_to_scene = true
 [sub_resource type="AtlasTexture" id="AtlasTexture_wl0l1"]
 atlas = ExtResource("16_3p7h3")
 region = Rect2(35, 3, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkeu4"]
+resource_local_to_scene = true
+atlas = ExtResource("17_wl0l1")
+region = Rect2(0, 0, 8, 10)
 
 [node name="Tower" type="Node2D"]
 z_index = 2
@@ -215,7 +221,7 @@ theme_override_fonts/font = ExtResource("15_3p7h3")
 theme_override_font_sizes/font_size = 8
 text = "250"
 
-[node name="TextureRect" type="TextureRect" parent="UpgradeDisplay"]
+[node name="ButtonHint" type="TextureRect" parent="UpgradeDisplay"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -229,4 +235,13 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_wl0l1")
+stretch_mode = 2
+
+[node name="UpgradeIcon" type="TextureRect" parent="UpgradeDisplay"]
+unique_name_in_owner = true
+offset_left = 10.0
+offset_top = -5.0
+offset_right = 18.0
+offset_bottom = 5.0
+texture = SubResource("AtlasTexture_tkeu4")
 stretch_mode = 2
