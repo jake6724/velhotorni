@@ -17,7 +17,7 @@ extends PanelContainer
 
 var ui_text: TowerInfoPanelUIText = TowerInfoPanelUIText.new()
 
-func update_stats(_tower: Tower, _gold: int) -> void:
+func update_stats(_tower: Tower, _gold: int=0) -> void:
 	if _tower:
 		name_label.text = _tower.data.tower_name
 		damage_label.text = str(snappedf(_tower.curr_damage, .01))
@@ -29,7 +29,7 @@ func update_stats(_tower: Tower, _gold: int) -> void:
 		update_buff_stats(_tower)
 		update_description(_tower)
 		update_lvl_icons(_tower)
-		update_can_lvl_icon(_tower, _gold)
+		# update_can_lvl_icon(_tower, _gold)
 
 func update_debuff_stats(_tower: Tower) -> void:
 	if _tower:

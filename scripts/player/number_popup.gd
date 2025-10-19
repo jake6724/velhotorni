@@ -119,6 +119,14 @@ func display_mana_empty(pos: Vector2) -> void:
 	number.pivot_offset = Vector2(number.size / 2)
 	number.position.x -= number.size.x / 2
 
+	# Blink
+	var blink_tween = get_tree().create_tween()
+	blink_tween.set_loops(5)
+	blink_tween.tween_property(number, "modulate:a", 0.0, .01)
+	blink_tween.tween_interval(.125)
+	blink_tween.tween_property(number, "modulate:a", 1.0, .01)
+	blink_tween.tween_interval(.125)
+
 	var tween = get_tree().create_tween()
 	tween.tween_property(number, "position:y", number.position.y - up_distance, .75)
 	await tween.finished

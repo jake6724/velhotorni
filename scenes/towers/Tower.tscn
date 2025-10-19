@@ -66,14 +66,14 @@ radius = 10.4403
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmp23"]
 resource_local_to_scene = true
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wl0l1"]
-atlas = ExtResource("16_3p7h3")
-region = Rect2(35, 3, 10, 10)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_tkeu4"]
 resource_local_to_scene = true
 atlas = ExtResource("17_wl0l1")
 region = Rect2(0, 0, 8, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl0l1"]
+atlas = ExtResource("16_3p7h3")
+region = Rect2(35, 3, 10, 10)
 
 [node name="Tower" type="Node2D"]
 z_index = 2
@@ -178,9 +178,17 @@ metadata/_custom_type_script = "uid://cfmjvdcmboi5k"
 script = ExtResource("13_ub3td")
 metadata/_custom_type_script = "uid://croyb1uheb13t"
 
+[node name="UpgradeIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+offset_left = -1.0
+offset_top = 7.0
+offset_right = 7.0
+offset_bottom = 17.0
+texture = SubResource("AtlasTexture_tkeu4")
+stretch_mode = 2
+
 [node name="UpgradeDisplay" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -203,7 +211,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 1
 
-[node name="CoinIcon" type="TextureRect" parent="UpgradeDisplay/Hbox"]
+[node name="UpgradeCoinIcon" type="TextureRect" parent="UpgradeDisplay/Hbox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -220,8 +229,10 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("15_3p7h3")
 theme_override_font_sizes/font_size = 8
 text = "250"
+horizontal_alignment = 1
 
-[node name="ButtonHint" type="TextureRect" parent="UpgradeDisplay"]
+[node name="UpgradeButtonHint" type="TextureRect" parent="UpgradeDisplay"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -235,13 +246,4 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_wl0l1")
-stretch_mode = 2
-
-[node name="UpgradeIcon" type="TextureRect" parent="UpgradeDisplay"]
-unique_name_in_owner = true
-offset_left = 10.0
-offset_top = -5.0
-offset_right = 18.0
-offset_bottom = 5.0
-texture = SubResource("AtlasTexture_tkeu4")
 stretch_mode = 2

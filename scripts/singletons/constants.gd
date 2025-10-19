@@ -27,6 +27,8 @@ const CELL_SIZE: int = 16
 
 const MAGNET_SPEED: float = 400
 
+const TOWER_MAX_LEVEL: int = 3
+
 # const ui_color_base: String = "#adb5bd"
 const ui_color_select: String = "#98a8f8"
 const color_green: String = "#10a500"

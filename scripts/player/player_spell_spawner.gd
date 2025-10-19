@@ -105,7 +105,6 @@ func spawn_bullet_spell_charged(_player_aim_direction: Vector2) -> void:
 	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
 
 	new_spell_data.speed = new_spell_data.speed * charge_value
-	print("new_spell_data.speed: ", new_spell_data.speed)
 
 	spawn_bullet_spell(_player_aim_direction, new_spell_data, new_spell_scene, 0, 1)
 

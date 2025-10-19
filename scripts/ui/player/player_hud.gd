@@ -58,6 +58,10 @@ func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> 
 	if player_mana.element_mana_low[spell_data_list[0].element]:
 		no_mana_label.show()
 		mana_text_color = LOW_MANA_COLOR
+		if player_mana.element_mana[spell_data_list[0].element] == 0:
+			no_mana_label.text = "EMPTY"
+		else:
+			no_mana_label.text = "LOW MANA"
 	else:
 		mana_text_color = "ffffff"
 		no_mana_label.hide()

@@ -186,6 +186,7 @@ func on_spell_cast(_element: Constants.Element, _mana_cost) -> void:
 func on_spell_cast_failed() -> void:
 	player_number_popup.display_mana_empty(global_position)
 	player_hud.blink_no_mana_label()
+	player_input.primary_action_pressed = false
 
 func on_dash_input_pressed() -> void:
 	if not player_special.active:
@@ -253,10 +254,9 @@ func on_switch_player_mode_pressed() -> void: # TODO: Clean up, make functions
 			primary_action_func = place_tower 
 			switch_action_func = switch_tower
 			staff_sprite.hide()
-			player_build.create_preview_tower()
 			player_build_ui.show()
 			player_build_ui.raise_current()
-			player_build.show_active_tower_ranges(true)
+			player_build.create_preview_tower()
 			build_grid_sprite.show()
 			player_stats.active_speed = player_stats.build_speed
 			tower_detect_collider.set_deferred("disabled", false)
@@ -272,7 +272,6 @@ func on_switch_player_mode_pressed() -> void: # TODO: Clean up, make functions
 				player_build.preview_tower.queue_free()
 			player_build_ui.hide()
 			build_grid_sprite.hide()
-			player_build.show_active_tower_ranges(false)
 			player_stats.active_speed = player_stats.combat_speed
 			tower_detect_collider.set_deferred("disabled", true)
 			reticle_sprite.hide()
@@ -380,6 +379,7 @@ func on_tower_mana_collected(_value: int = 1) -> void:
 func on_tower_mana_spent(_value) -> void:
 	player_mana.tower_mana -= _value
 	player_hud.update_tower_mana(player_mana)
+	player_build_ui.update(player_mana)
 
 func on_velocity_update_requested(new_velocity: Vector2) -> void:
 	velocity = new_velocity

@@ -75,18 +75,18 @@ var level_number_duration: float = 2.0
 
 var opened: bool = true
 
-func _input(_event):
-	if Input.is_action_just_pressed("x"):
-		if opened:
-			var tween: Tween = get_tree().create_tween()
-			await tween.tween_property(tower_buttons, "theme_override_constants/separation", -32, .25).finished
-			tower_buttons.hide()
-			opened = not opened
-		else:
-			tower_buttons.show()
-			var tween: Tween = get_tree().create_tween()
-			tween.tween_property(tower_buttons, "theme_override_constants/separation", 0, .25)
-			opened = not opened
+# func _input(_event):
+# 	if Input.is_action_just_pressed("x"):
+# 		if opened:
+# 			var tween: Tween = get_tree().create_tween()
+# 			await tween.tween_property(tower_buttons, "theme_override_constants/separation", -32, .25).finished
+# 			tower_buttons.hide()
+# 			opened = not opened
+# 		else:
+# 			tower_buttons.show()
+# 			var tween: Tween = get_tree().create_tween()
+# 			tween.tween_property(tower_buttons, "theme_override_constants/separation", 0, .25)
+# 			opened = not opened
 
 func _ready():
 	# Configure tower buttons
@@ -193,6 +193,11 @@ func set_tower_button_sprites(_gold: float):
 
 func update_progress():
 	progress.text = str(LevelManager.level_index-1) + "-" + str(WaveManager.wave_index+1)
+
+## TODO: DEV TEMP THIS SHOULD NOT STAY HERE
+func _input(_event):
+	if Input.is_action_just_pressed("start_wave_action"):
+		start_wave.emit()
 
 func on_wave_button_pressed() -> void:
 	start_wave.emit()

@@ -20,9 +20,12 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var buff_area: BuffArea = %BuffArea
 @onready var hex_manager: HexManager = $HexManager
 @onready var tower_audio: TowerAudio = $TowerAudio
+
 @onready var upgrade_display: Control = %UpgradeDisplay
 @onready var upgrade_price_label: Label = %UpgradePriceLabel
 @onready var upgrade_icon: TextureRect = %UpgradeIcon
+@onready var upgrade_coin_icon: TextureRect = %UpgradeCoinIcon
+@onready var upgrade_button_hint: TextureRect = %UpgradeButtonHint
 
 # Internal data
 var active_target: Enemy
@@ -71,6 +74,7 @@ var _preview_leveled_speed: float
 
 const MAX_LEVEL_PRICE: int = 125
 const LEVEL_COST_INCREMENT: int = 25
+var level_upgrade_price: int = 75
 var level: int = 0
 var damage_level: int = 0:
 	set(value):
@@ -116,7 +120,6 @@ var checkpoint_level: int
 var is_evolved: bool = false
 var is_evolve_checkpointed: bool = false
 
-var level_upgrade_price: int = 75
 var checkpoint_level_upgrade_price: int
 
 const DAMAGE_MODIFIER: float = 0.5
@@ -172,6 +175,9 @@ func _ready():
 	attack_timer.autostart = false
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	add_child(attack_timer)
+
+	# Configure UpgradePriceLabel
+	upgrade_price_label.text = str(int(level_upgrade_price))
 
 	upgrade_display.z_index = Constants.z_index_map["top"]
 	upgrade_price_label.z_index = Constants.z_index_map["top"]
@@ -482,10 +488,8 @@ func update_colliders() -> void:
 ## Returns a deep, custom copy of a `TowerData` resource
 func get_tower_data_copy(_input_data: TowerData) -> TowerData:
 	var new_data: TowerData = _input_data.duplicate(true)
-
 	# duplicate(true) on a custom-resource will NOT deep-copy arrays or dicts; do that manually here
 	new_data.buff_data_list = []
-	print(_input_data.buff_data_list)
 	for buff_data: BuffData in _input_data.buff_data_list:
 		if buff_data:
 			new_data.buff_data_list.append(buff_data.duplicate(true))
@@ -523,7 +527,7 @@ func revert_to_base_evolution() -> void:
 
 func show_upgrade_info() -> void:
 	upgrade_display.show()
-	upgrade_price_label.text = str(int(level_upgrade_price))
+	# upgrade_price_label.text = str(int(level_upgrade_price))
 
 func hide_upgrade_info() -> void:
 	upgrade_display.hide()
@@ -557,4 +561,11 @@ func upgrade() -> void:
 	range_level += 1
 	special_level += 1
 	level += 1
+	level_upgrade_price += LEVEL_COST_INCREMENT
 	upgrade_icon.texture.region = Rect2((8 * level), 0, 8, 10)
+	if level >= Constants.TOWER_MAX_LEVEL:
+		upgrade_price_label.text = " MAX"
+		upgrade_coin_icon.hide()
+		upgrade_button_hint.hide()
+	else:
+		upgrade_price_label.text = str(int(level_upgrade_price))
