@@ -354,11 +354,13 @@ collision_mask = 1049088
 [node name="BreakCollider" type="CollisionShape2D" parent="BreakArea"]
 position = Vector2(8, 7)
 shape = SubResource("CapsuleShape2D_i8v1e")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_sf3xk")
 }
+autoplay = "corpse"
 
 [node name="BreakableHitbox" type="StaticBody2D" parent="."]
 collision_layer = 16777216
@@ -368,4 +370,5 @@ collision_mask = 0
 unique_name_in_owner = true
 position = Vector2(8, 7)
 shape = SubResource("CapsuleShape2D_nu4tx")
+disabled = true
 debug_color = Color(0.772634, 0, 0.127799, 0.42)

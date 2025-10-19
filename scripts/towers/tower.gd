@@ -525,10 +525,6 @@ func revert_to_base_evolution() -> void:
 	data = base_data
 	reset_tower()
 
-func show_upgrade_info() -> void:
-	upgrade_display.show()
-	# upgrade_price_label.text = str(int(level_upgrade_price))
-
 func hide_upgrade_info() -> void:
 	upgrade_display.hide()
 
@@ -569,3 +565,6 @@ func upgrade() -> void:
 		upgrade_button_hint.hide()
 	else:
 		upgrade_price_label.text = str(int(level_upgrade_price))
+
+func show_upgrade_info() -> void:
+	upgrade_display.show()

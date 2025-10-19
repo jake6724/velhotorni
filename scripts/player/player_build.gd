@@ -136,7 +136,7 @@ func upgrade_tower() -> void:
 func on_tower_detect_area_entered(intruder: Area2D) -> void:
 	if preview_tower:
 		preview_tower.hide()
-
+	
 	tower_to_upgrade = intruder.owner
 	tower_to_upgrade.show_upgrade_info()	
 	tower_to_upgrade.can_show_range = true
