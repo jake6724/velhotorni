@@ -375,6 +375,7 @@ func on_element_mana_collected(_element: Constants.Element, _amount_modifier) ->
 func on_tower_mana_collected(_value: int = 1) -> void:
 	player_mana.tower_mana += _value
 	player_hud.update_tower_mana(player_mana)
+	player_build_ui.update(player_mana)
 
 func on_tower_mana_spent(_value) -> void:
 	player_mana.tower_mana -= _value
