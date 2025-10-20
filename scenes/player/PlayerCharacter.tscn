@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=109 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bpllj5ap3pp45" path="res://scripts/spells/data/spell_data.gd" id="6_adj0b"]
 [ext_resource type="Script" uid="uid://jvulch3v1pbm" path="res://scripts/player/player_spell_spawner.gd" id="6_g7j5r"]
 [ext_resource type="Resource" uid="uid://lb41jg2fqrdd" path="res://data/spells/spell_data_bullet_arcane_basic.tres" id="7_akj2q"]
+[ext_resource type="Script" uid="uid://dhctbtmi6vl0o" path="res://scripts/player/player_staff_sprite.gd" id="7_hnid3"]
 [ext_resource type="Texture2D" uid="uid://btu23m1c7slb3" path="res://assets/art/sprites/ui/spr_ui_placementgrid.png" id="7_vycf0"]
 [ext_resource type="Resource" uid="uid://bcov2rckhliwp" path="res://data/spells/water/spell_data_melee_water_ice_sword.tres" id="8_kuao7"]
 [ext_resource type="Script" uid="uid://b5keun6k5cxfo" path="res://scripts/player/player_aim.gd" id="9_laqyv"]
@@ -1285,6 +1286,8 @@ offset = Vector2(4, 0.5)
 hframes = 8
 region_enabled = true
 region_rect = Rect2(0, 0, 217, 16)
+script = ExtResource("7_hnid3")
+metadata/_custom_type_script = "uid://bra87ouayo77j"
 
 [node name="SpecialChargesSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -1399,6 +1402,7 @@ shape = SubResource("CapsuleShape2D_ljh2g")
 unique_name_in_owner = true
 position = Vector2(-3.8147e-06, 3.05176e-05)
 scale = Vector2(1.18113, 0.710342)
+zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 script = ExtResource("13_bnayp")

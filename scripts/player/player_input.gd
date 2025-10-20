@@ -13,7 +13,7 @@ const UPGRADE_CHARGE_MULTIPLIER: float = 1.0
 
 var is_latest_input_controller: bool = true
 
-signal secondary_action_pressed
+signal special_action_pressed
 signal switch_selection_pressed
 signal switch_player_mode_pressed
 
@@ -45,7 +45,7 @@ func _input(event):
 	check_primary_action_input(event)
 	check_upgrade_action_input(event)
 	if Input.is_action_just_pressed("secondary_action"):
-		secondary_action_pressed.emit()
+		special_action_pressed.emit()
 
 	if event.is_action("switch_selection_right") and event.is_pressed() and not event.is_echo():
 		switch_selection_pressed.emit(1)

@@ -23,7 +23,7 @@ extends CharacterBody2D
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer
-@onready var staff_sprite: Sprite2D = $StaffSprite
+@onready var staff_sprite: StaffSprite = $StaffSprite
 @onready var staff_ap: AnimationPlayer = $StaffAnimationPlayer
 @onready var reticle_sprite: AnimatedSprite2D = $ReticleSprite
 @onready var reticle_charge: TextureProgressBar = $ReticleSprite/ReticleCharge
@@ -70,7 +70,7 @@ signal player_respawned
 
 func _ready():
 	# Connect to PlayerInput
-	player_input.secondary_action_pressed.connect(on_dash_input_pressed)
+	player_input.special_action_pressed.connect(on_special_input_pressed)
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
 	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
 
@@ -120,14 +120,17 @@ func _ready():
 	coin_collector.coin_collected.connect(on_tower_mana_collected)
 
 	# Configure Timers
+	# Respawn Timer
 	respawn_timer.autostart = false
 	respawn_timer.one_shot = true
 	respawn_timer.timeout.connect(respawn)
 	add_child(respawn_timer)
+	# Hurtbox Reset Timer
 	hurtbox_reset_timer.autostart = false
 	hurtbox_reset_timer.one_shot = true
 	hurtbox_reset_timer.timeout.connect(on_hurtbox_reset_timer_timeout)
 	add_child(hurtbox_reset_timer)
+	# Switch Delay Timer
 	switch_delay_timer.autostart = false
 	switch_delay_timer.one_shot = true
 	switch_delay_timer.timeout.connect(on_switch_delay_timer_timeout)
@@ -188,7 +191,7 @@ func on_spell_cast_failed() -> void:
 	player_hud.blink_no_mana_label()
 	player_input.primary_action_pressed = false
 
-func on_dash_input_pressed() -> void:
+func on_special_input_pressed() -> void:
 	if not player_special.active:
 		player_special.special(player_input.move_input, player_aim.aim_input)
 
@@ -211,29 +214,7 @@ func on_staff_switched(_spell_type: SpellData.Type) -> void:
 	staff_ap.play("switch")
 	await staff_ap.animation_finished
 	can_fire = true
-
-	match _spell_type:
-		SpellData.StaffType.ARCANE: 
-			staff_sprite.texture.region = Rect2(0,0,217,15)
-			player_aim.staff_rotation_offset_degrees = 0
-			staff_sprite.position = Vector2(0, 5) 
-			staff_sprite.offset = Vector2(4, 0.5) # TODO: Broke.
-
-		SpellData.StaffType.FIRE_STAFF:
-			staff_sprite.texture.region = Rect2(0,45,217,15)
-			player_aim.staff_rotation_offset_degrees = 0
-			staff_sprite.position = Vector2(0, 5) 
-			staff_sprite.offset = Vector2(4, 0.5) # TODO: Broke.
-
-		SpellData.StaffType.WATER_SWORD: 
-			staff_sprite.texture.region = Rect2(0,15,217,15)
-			player_aim.staff_rotation_offset_degrees = -120
-			staff_sprite.offset = Vector2(8, .5)
-
-		SpellData.StaffType.TRIPLE_STAFF: 
-			staff_sprite.texture.region = Rect2(0,60,217,15)
-			player_aim.staff_rotation_offset_degrees = -0
-			staff_sprite.offset = Vector2(4, 0.5)
+	player_aim.staff_rotation_offset_degrees = staff_sprite.switch_staff_texture(_spell_type)
 
 func switch_tower(_switch_direction: int) -> void:
 	player_build.tower_index += _switch_direction
@@ -250,40 +231,40 @@ func on_switch_player_mode_pressed() -> void: # TODO: Clean up, make functions
 		player_aim.switch_mode(building)
 		switch_delay_timer.start(switch_delay)
 
-		if building:							# Switch to build mode
-			primary_action_func = place_tower 
-			switch_action_func = switch_tower
-			staff_sprite.hide()
-			player_build_ui.show()
-			player_build_ui.raise_current()
-			player_build.create_preview_tower()
-			build_grid_sprite.show()
-			player_stats.active_speed = player_stats.build_speed
-			tower_detect_collider.set_deferred("disabled", false)
-			reticle_sprite.hide()
-			await get_tree().create_timer(.1).timeout
-			reticle_sprite.play("build")
-			reticle_sprite.show()
-		else:								    # Switch to combat mode 
-			staff_sprite.show()
-			primary_action_func = cast_spell
-			switch_action_func = switch_spell
-			if player_build.preview_tower:		# Remove preview tower
-				player_build.preview_tower.queue_free()
-			player_build_ui.hide()
-			build_grid_sprite.hide()
-			player_stats.active_speed = player_stats.combat_speed
-			tower_detect_collider.set_deferred("disabled", true)
-			reticle_sprite.hide()
-			await get_tree().create_timer(.05).timeout
-			reticle_sprite.play("combat")
-			reticle_sprite.show()
+		if building: switch_to_build_mode()
+		else: switch_to_combat_mode()
+
+func switch_to_build_mode() -> void:
+	primary_action_func = place_tower 
+	switch_action_func = switch_tower
+	staff_sprite.hide()
+	player_build_ui.show()
+	player_build_ui.raise_current()
+	player_build.create_preview_tower()
+	build_grid_sprite.show()
+	player_stats.active_speed = player_stats.build_speed
+	tower_detect_collider.set_deferred("disabled", false)
+	reticle_sprite.hide()
+	await get_tree().create_timer(.1).timeout
+	reticle_sprite.play("build")
+	reticle_sprite.show()
+
+func switch_to_combat_mode() -> void:
+	staff_sprite.show()
+	primary_action_func = cast_spell
+	switch_action_func = switch_spell
+	if player_build.preview_tower:		# Remove preview tower
+		player_build.preview_tower.queue_free()
+	player_build_ui.hide()
+	build_grid_sprite.hide()
+	player_stats.active_speed = player_stats.combat_speed
+	tower_detect_collider.set_deferred("disabled", true)
+	reticle_sprite.hide()
+	await get_tree().create_timer(.05).timeout
+	reticle_sprite.play("combat")
+	reticle_sprite.show()
 
 func on_animation_finished(anim_name) -> void:
-	# if anim_name == "dash":
-	# 	player_special.active = false
-	# 	update_hurtbox_collider(false)
-
 	if anim_name == "fall":
 		falling = false
 		character_sprite.hide()
@@ -323,9 +304,6 @@ func on_hit(_direction) -> void:
 		player_camera.apply_shake(1)
 		TimeManager.apply_hitstop()
 		hit_blink()
-
-func jump_forward() -> void:
-	pass
 
 func on_pit_entered() -> void:
 	global_position += player_input.move_input.normalized() * 10 # Move the character to be fully over the pit
@@ -405,3 +383,6 @@ func on_animation_requested(_anim_name: String) -> void:
 
 func on_switch_delay_timer_timeout() -> void:
 	can_switch_mode = true
+
+func jump_forward() -> void:
+	pass
