@@ -19,7 +19,7 @@ extends CharacterBody2D
 @onready var player_hud: PlayerHUD = %PlayerHUD
 @onready var player_mana: PlayerMana = %PlayerMana
 @onready var player_special: PlayerSpecial = %PlayerSpecial
-@onready var player_number_popup: NumberPopup = %PlayerNumberPopup
+@onready var player_number_popup: PlayerNumberPopup = %PlayerNumberPopup
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer
@@ -188,6 +188,7 @@ func on_spell_cast(_element: Constants.Element, _mana_cost) -> void:
 
 func on_spell_cast_failed() -> void:
 	player_number_popup.display_mana_empty(global_position)
+
 	player_hud.blink_no_mana_label()
 	player_input.primary_action_pressed = false
 
@@ -349,7 +350,8 @@ func on_element_mana_collected(_element: Constants.Element, _amount_modifier) ->
 	player_mana.increment_element_mana(_element, _amount_modifier)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
 	player_number_popup.display_mana_number(player_mana.element_drop_amount_base[_element] * _amount_modifier, global_position + Vector2(0,-6), _element)
-
+	player_number_popup.increase_up_distance()
+	
 func on_tower_mana_collected(_value: int = 1) -> void:
 	player_mana.tower_mana += _value
 	player_hud.update_tower_mana(player_mana)

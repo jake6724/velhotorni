@@ -12,7 +12,6 @@ var outline_size: int = 0
 var shadow_offset: Vector2 = Vector2(1,1)
 var shadow_size: int = 1
 
-
 var up_distance: float = 64
 var up_time: float = 1
 

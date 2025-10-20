@@ -30,11 +30,11 @@
 [ext_resource type="Script" uid="uid://cmfd0jyw7me5n" path="res://scripts/player/player_mana.gd" id="17_07k56"]
 [ext_resource type="Texture2D" uid="uid://kkqxipsicds5" path="res://assets/art/sprites/spr_fx_dust.png" id="20_88aji"]
 [ext_resource type="Script" uid="uid://dcfta3oxiix4o" path="res://scripts/player/player_special.gd" id="20_fyjgo"]
+[ext_resource type="Script" uid="uid://bbqhea2s5008x" path="res://scripts/player/player_number_popup.gd" id="23_hnid3"]
 [ext_resource type="PackedScene" uid="uid://b1aafksk0q8f3" path="res://scenes/player/ManaDropCollector.tscn" id="25_vy23r"]
 [ext_resource type="PackedScene" uid="uid://d218nr004vv6w" path="res://scenes/ui/player/PlayerHUD.tscn" id="25_ydu3x"]
 [ext_resource type="PackedScene" uid="uid://sw4orj43x0r1" path="res://scenes/ui/player/PlayerBuildUI.tscn" id="26_djlof"]
 [ext_resource type="Script" uid="uid://c352umdhm3bhc" path="res://scripts/player/player_beacon.gd" id="27_h3nqo"]
-[ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="28_a033j"]
 [ext_resource type="Texture2D" uid="uid://38nei1ihsuqv" path="res://assets/art/sprites/ui/spr_ui_special_charge.png" id="31_ip3vl"]
 [ext_resource type="Texture2D" uid="uid://dhx5yrbtwdm7n" path="res://assets/art/sprites/ui/spr_ui_circle_longpress.png" id="36_vka04"]
 
@@ -1345,7 +1345,7 @@ script = ExtResource("20_fyjgo")
 
 [node name="PlayerNumberPopup" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("28_a033j")
+script = ExtResource("23_hnid3")
 
 [node name="PlayerBuild" type="Node2D" parent="."]
 script = ExtResource("13_6qouk")
