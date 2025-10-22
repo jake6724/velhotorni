@@ -44,5 +44,5 @@ func spawn_all_bullets() -> void:
 func spawn_enemy_bullet(direction: Vector2, spawn_pos) -> void:
 	var new_enemy_bullet: EnemyBullet = enemy_bullet_scene.instantiate()
 	enemy_bullet_parent.call_deferred("add_child", new_enemy_bullet)
-	new_enemy_bullet.call_deferred("initialize", direction, spawn_pos, bullet_speed, data.bullet_max_distance,
+	new_enemy_bullet.call_deferred("initialize", direction, spawn_pos, data.bullet_damage, bullet_speed, data.bullet_max_distance,
 	z_index + 1, data.bullet_atlas)

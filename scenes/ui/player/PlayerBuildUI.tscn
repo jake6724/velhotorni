@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://sw4orj43x0r1"]
+[gd_scene load_steps=17 format=3 uid="uid://sw4orj43x0r1"]
 
 [ext_resource type="Script" uid="uid://df6axhjoo372t" path="res://scripts/ui/player/player_build_ui.gd" id="1_4whgm"]
 [ext_resource type="Texture2D" uid="uid://dwgwikxycntfw" path="res://assets/art/sprites/ui/spr_ui_tower_background.png" id="1_tgjx2"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://3dti3chb4cnf" path="res://assets/art/sprites/ui/spr_ui_tower_light.png" id="10_jni78"]
 [ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="11_6qvig"]
 [ext_resource type="PackedScene" uid="uid://du0wke3a8n1k8" path="res://scenes/ui/TowerInfoPanel.tscn" id="13_5fpji"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="15_lrbli"]
+[ext_resource type="Texture2D" uid="uid://c44luhsbbspnf" path="res://assets/placeholders/slash.png" id="16_83w5e"]
 
 [node name="PlayerBuildUI" type="Control"]
 layout_mode = 3
@@ -384,3 +386,36 @@ offset_top = 3.0
 offset_right = -3.0
 offset_bottom = 91.0
 grow_horizontal = 0
+
+[node name="TowerLimit" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="TowerCountLabel" type="Label" parent="TowerLimit"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_lrbli")
+theme_override_font_sizes/font_size = 8
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="TowerLimit"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("16_83w5e")
+stretch_mode = 2
+
+[node name="TowerMaxLabel" type="Label" parent="TowerLimit"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_lrbli")
+theme_override_font_sizes/font_size = 8
+text = "10"

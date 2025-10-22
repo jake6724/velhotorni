@@ -18,8 +18,8 @@ func _ready():
 	collision_area.area_entered.connect(on_area_entered)
 	ap.animation_finished.connect(on_animation_finished)
 
-func initialize(_direction: Vector2, _spawn_pos: Vector2, _speed: float, _max_distance: float, _z_index: int, atlas: CompressedTexture2D) -> void:
-	# damage = _damage
+func initialize(_direction: Vector2, _spawn_pos: Vector2, _damage: int, _speed: float, _max_distance: float, _z_index: int, atlas: CompressedTexture2D) -> void:
+	damage = _damage
 	speed = _speed
 	max_distance = _max_distance
 	spawn_pos = _spawn_pos

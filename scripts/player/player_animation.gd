@@ -20,8 +20,8 @@ func update_animation(_delta):
 	if !idle:
 		last_facing_direction = player.velocity.normalized()
 
-	animation_tree.set("parameters/Walk/blend_position", last_facing_direction)
-	animation_tree.set("parameters/Idle/blend_position", last_facing_direction)
+	animation_tree.set("parameters/walk/blend_position", last_facing_direction)
+	animation_tree.set("parameters/idle/blend_position", last_facing_direction)
 
 # # Show current animation tree node
 # func _process(_delta):

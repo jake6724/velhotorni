@@ -2,10 +2,8 @@ class_name PlayerNumberPopup
 extends NumberPopup
 
 var up_distance_timer: Timer = Timer.new()
-
 var up_distance_increment: int = 12
 var up_distance_reset_delay: float = 1.0
-
 
 func _ready():
 	up_distance_timer.autostart = false

@@ -25,6 +25,8 @@ class_name EnemyDataRanged
 @export var spawn_center_bullet: bool = true
 
 @export_category("Ranged Enemy Bullet Data")
+## This value is how much the bullet does to a TOWER. The player will always take 1 damage
+@export var bullet_damage: int = 1
 ## How fast the bullet travels. Higher values could cause issues with missign target.
 @export var bullet_speed: float
 ## Max distance the bullet can travel before hit animation is triggered and bullet queue_free()

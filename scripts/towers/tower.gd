@@ -20,6 +20,10 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var buff_area: BuffArea = %BuffArea
 @onready var hex_manager: HexManager = $HexManager
 @onready var tower_audio: TowerAudio = $TowerAudio
+@onready var hurtbox: TowerHurtbox = %Hurtbox
+@onready var hurtbox_collider: CollisionShape2D = %HurtboxCollider
+@onready var healthbar: TextureProgressBar = %HealthBar
+@onready var number_popup: NumberPopup = %NumberPopup
 
 @onready var upgrade_display: Control = %UpgradeDisplay
 @onready var upgrade_price_label: Label = %UpgradePriceLabel
@@ -49,6 +53,11 @@ var buff_range_transparency: float = .9
 var color_buff_range_indicator: String = "#94ffbd"
 
 # Combat Data
+var max_health: float = 200
+var health: float = max_health:
+	set(value):
+		health = value
+		healthbar.value = (health / max_health) * 100
 var curr_damage: float
 var curr_speed: float
 var curr_range: float
@@ -160,6 +169,7 @@ var attack_timer: Timer = Timer.new()
 signal tower_clicked
 signal tower_hovered
 signal tower_unhovered
+signal died
 
 func _ready():
 	# Configure Area2D
@@ -175,6 +185,9 @@ func _ready():
 	attack_timer.autostart = false
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	add_child(attack_timer)
+
+	# Configure Hurtbox
+	hurtbox.hit.connect(on_hit)
 
 	# Configure UpgradePriceLabel
 	upgrade_price_label.text = str(int(level_upgrade_price))
@@ -568,3 +581,13 @@ func upgrade() -> void:
 
 func show_upgrade_info() -> void:
 	upgrade_display.show()
+
+func on_hit(_damage_amount: int) -> void:
+	health -= _damage_amount
+	number_popup.display_damage_number(_damage_amount, global_position)
+	if health <= 0:
+		die()
+
+func die() -> void:
+	died.emit(self)
+	queue_free()

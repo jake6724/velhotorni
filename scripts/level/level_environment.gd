@@ -28,9 +28,9 @@ var tower_mana_breakables: Array[Breakable] = []
 @export var initial_gold: int
 @export var initial_token: int
 @export var waves: Array[Wave]
+@export var max_towers: int = 10
 
 var stars: int = 1 # Tracks the highest number of stars earned for this level
-
 
 func _ready():
 	""" *** Z INDEXES ARE NOW PAINTED IN THE TILESET ITSELF *** """

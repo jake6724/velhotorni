@@ -2,6 +2,8 @@ class_name PlayerBuildUI
 extends Control
 
 @onready var tower_info_panel = %TowerInfoPanel
+@onready var tower_count_label: Label = %TowerCountLabel
+@onready var tower_max_label: Label = %TowerMaxLabel
 
 var tower_index: int = 0:
 	set(value):
@@ -71,3 +73,10 @@ func update_tower_button_icons(player_mana: PlayerMana) -> void:
 			button.texture_normal = ui_tower_sprites[button.element]
 		else:
 			button.texture_normal = locked_ui_tower_sprites[button.element]
+
+## Update tower_count_label with the provided value. 
+func update_tower_count_label(_value: int) -> void:
+	tower_count_label.text = str(_value)
+
+func update_tower_max_label(_value: int) -> void:
+	tower_max_label.text = str(_value)

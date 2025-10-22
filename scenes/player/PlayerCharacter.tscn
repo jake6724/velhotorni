@@ -1214,7 +1214,7 @@ states/levitate_out/position = Vector2(522.333, 142.667)
 states/walk/node = ExtResource("4_ljh2g")
 states/walk/position = Vector2(201.08, -201.826)
 transitions = ["walk", "idle", SubResource("AnimationNodeStateMachineTransition_g7j5r"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_v81jw"), "walk", "dash", SubResource("AnimationNodeStateMachineTransition_slbhc"), "idle", "dash", SubResource("AnimationNodeStateMachineTransition_bnayp"), "walk", "hit", SubResource("AnimationNodeStateMachineTransition_adj0b"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_akj2q"), "hit", "walk", SubResource("AnimationNodeStateMachineTransition_kuao7"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_7q84o"), "walk", "fall", SubResource("AnimationNodeStateMachineTransition_0x1p2"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_88aji"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_hkntq"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_a033j"), "levitate", "hit", SubResource("AnimationNodeStateMachineTransition_vka04"), "hit", "levitate", SubResource("AnimationNodeStateMachineTransition_yirxs"), "dash", "end_dash", SubResource("AnimationNodeStateMachineTransition_wsgx3"), "end_dash", "idle", SubResource("AnimationNodeStateMachineTransition_rol34"), "end_dash", "walk", SubResource("AnimationNodeStateMachineTransition_1s53w"), "walk", "levitate_in", SubResource("AnimationNodeStateMachineTransition_ahw3v"), "levitate_in", "levitate", SubResource("AnimationNodeStateMachineTransition_2u747"), "levitate", "fall", SubResource("AnimationNodeStateMachineTransition_ogmjs"), "idle", "levitate_in", SubResource("AnimationNodeStateMachineTransition_1itxc"), "levitate", "levitate_out", SubResource("AnimationNodeStateMachineTransition_yr6n8"), "levitate_out", "idle", SubResource("AnimationNodeStateMachineTransition_deoin"), "hit", "die", SubResource("AnimationNodeStateMachineTransition_hnid3"), "die", "dead", SubResource("AnimationNodeStateMachineTransition_t4l3f"), "dead", "idle", SubResource("AnimationNodeStateMachineTransition_cshdu")]
-graph_offset = Vector2(11, -44)
+graph_offset = Vector2(-167, -383)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bnayp"]
 radius = 5.0
@@ -1312,7 +1312,7 @@ tree_root = SubResource("AnimationNodeStateMachine_laqyv")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 0)
-parameters/walk/blend_position = Vector2(-0.00154799, -0.00878739)
+parameters/walk/blend_position = Vector2(-0.00173914, -0.00780034)
 
 [node name="PlayerInput" type="Node" parent="."]
 script = ExtResource("11_hkntq")

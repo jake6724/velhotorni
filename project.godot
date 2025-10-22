@@ -205,6 +205,7 @@ start_wave_action={
 2d_physics/layer_1="TowerTransform"
 2d_physics/layer_2="TowerEnemyDetection"
 2d_physics/layer_3="TowerBuffArea"
+2d_physics/layer_4="TowerHurtbox"
 2d_physics/layer_5="Enemy"
 2d_physics/layer_6="EnemyBoonArea"
 2d_physics/layer_7="EnemyReceiveBoonArea"

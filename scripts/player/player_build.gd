@@ -1,11 +1,15 @@
 class_name PlayerBuild
 extends Node2D
 
-@export var grid_follow_tower: bool = true # Debugging, should go awawy
+@export var grid_follow_tower: bool = true # Debugging, should go away
 
 var tower_parent: Node = Node.new()
 
 var active_towers: Array[Tower] = []
+var max_towers: int: # Set manually by Main from active_level
+	set(value):
+		max_towers = value
+		player_build_ui.update_tower_max_label(value)
 
 var player_build_ui: PlayerBuildUI # Set by PlayerCharacter
 var build_grid_sprite: Sprite2D # Set by PlayerCharacter
@@ -44,9 +48,16 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	tower_detect_area.area_entered.connect(on_tower_detect_area_entered)
 	tower_detect_area.area_exited.connect(on_tower_detect_area_exited)
 
+	player_build_ui.update_tower_count_label(0)
+	player_build_ui.update_tower_max_label(max_towers)
+
 func show_active_tower_ranges(_value: bool) -> void:
 	for tower: Tower in active_towers:
 		tower.can_show_range = _value
+
+func show_active_tower_healths(_value: bool) -> void:
+	for tower: Tower in active_towers:
+		tower.healthbar.visible = _value
 
 func run(_delta, player_input: PlayerInput, player_mana: PlayerMana, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
 	if player_input.upgrade_action_charge and tower_to_upgrade:
@@ -74,6 +85,8 @@ func create_preview_tower():
 	preview_tower.modulate.a = .75
 	preview_tower.can_show_range = true	
 
+	preview_tower.died.connect(on_tower_died)
+
 	if not tower_to_upgrade:
 		player_build_ui.update_tower_info_panel(preview_tower)
 		preview_tower.show()
@@ -100,26 +113,33 @@ func update_tower_detect_area_position() -> void:
 
 ## Check if placement is valid and place `preview_tower`. Update `WorldGrid` and `preview_tower` accordingly.
 func place_tower(_tower_mana: float) -> void:	
-	# Check can afford
-	var cost: int = TowerGlobalData.tower_prices[preview_tower.data.element]
-	if _tower_mana >= cost:
+	# Check tower count
+	if active_towers.size() < max_towers:
 
-		# Check if placement position is valid
-		var tower_grid_position: Vector2 = WorldGrid.world_to_grid(preview_tower.global_position)
-		if tower_grid_position in WorldGrid.data and WorldGrid.data[tower_grid_position]:
-			preview_tower.modulate.a = 1
-			preview_tower.can_show_range = false
-			preview_tower.attack_collider.set_deferred("disabled", false)
-			preview_tower.transform_collider.set_deferred("disabled", false)
-			preview_tower.buff_collider.set_deferred("disabled", false)
-			# Update WorldGrid
-			WorldGrid.data[tower_grid_position] = false
-			active_towers.append(preview_tower)
+		# Check can afford
+		var cost: int = TowerGlobalData.tower_prices[preview_tower.data.element]
+		if _tower_mana >= cost:
 
-			# Get a new preview tower
-			create_preview_tower()
+			# Check if placement position is valid
+			var tower_grid_position: Vector2 = WorldGrid.world_to_grid(preview_tower.global_position)
+			if tower_grid_position in WorldGrid.data and WorldGrid.data[tower_grid_position]:
+				preview_tower.modulate.a = 1
+				preview_tower.can_show_range = false
+				preview_tower.attack_collider.set_deferred("disabled", false)
+				preview_tower.transform_collider.set_deferred("disabled", false)
+				preview_tower.buff_collider.set_deferred("disabled", false)
+				preview_tower.healthbar.visible = true
 
-			tower_mana_spent.emit(cost)
+				# Update WorldGrid
+				WorldGrid.data[tower_grid_position] = false
+
+				# Update internal data and BuildUI
+				active_towers.append(preview_tower)
+				player_build_ui.update_tower_count_label(active_towers.size())
+				tower_mana_spent.emit(cost)
+
+				# Get a new preview tower
+				create_preview_tower()
 
 func check_can_ugprade(_tower_mana) -> bool:
 	if tower_to_upgrade:
@@ -154,3 +174,8 @@ func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 
 	if preview_tower:
 		player_build_ui.update_tower_info_panel(preview_tower)
+
+func on_tower_died(tower: Tower) -> void:
+	var index: int = active_towers.find(tower)
+	if index != -1:
+		active_towers.remove_at(index)

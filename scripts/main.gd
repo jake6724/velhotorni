@@ -50,6 +50,7 @@ func _ready():
 	player_character.global_position = player_character.spawn_point
 	player_character.on_tower_mana_collected(active_level.initial_gold)
 	player_character.player_respawned.connect(active_level.base.take_damage.bind(1))
+	player_character.player_build.max_towers = active_level.max_towers
 
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
