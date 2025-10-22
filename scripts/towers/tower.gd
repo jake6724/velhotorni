@@ -24,6 +24,7 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var hurtbox_collider: CollisionShape2D = %HurtboxCollider
 @onready var healthbar: TextureProgressBar = %HealthBar
 @onready var number_popup: NumberPopup = %NumberPopup
+@onready var tower_obstacle_collider: CollisionShape2D = %TowerObstacleCollider
 
 @onready var upgrade_display: Control = %UpgradeDisplay
 @onready var upgrade_price_label: Label = %UpgradePriceLabel
@@ -583,6 +584,7 @@ func show_upgrade_info() -> void:
 	upgrade_display.show()
 
 func on_hit(_damage_amount: int) -> void:
+	healthbar.show()
 	health -= _damage_amount
 	number_popup.display_damage_number(_damage_amount, global_position)
 	if health <= 0:

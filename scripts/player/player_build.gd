@@ -81,6 +81,7 @@ func create_preview_tower():
 	preview_tower.initialize(tower_element_options[tower_index])
 	preview_tower.attack_collider.set_deferred("disabled", true)
 	preview_tower.transform_collider.set_deferred("disabled", true)
+	preview_tower.tower_obstacle_collider.set_deferred("disabled", true)
 	preview_tower.buff_collider.set_deferred("disabled", true)
 	preview_tower.modulate.a = .75
 	preview_tower.can_show_range = true	
@@ -128,6 +129,7 @@ func place_tower(_tower_mana: float) -> void:
 				preview_tower.attack_collider.set_deferred("disabled", false)
 				preview_tower.transform_collider.set_deferred("disabled", false)
 				preview_tower.buff_collider.set_deferred("disabled", false)
+				preview_tower.tower_obstacle_collider.set_deferred("disabled", false)
 				preview_tower.healthbar.visible = true
 
 				# Update WorldGrid

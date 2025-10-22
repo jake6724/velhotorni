@@ -17,6 +17,7 @@ start_angle = 45.0
 angle_increment = 90.0
 burst_angle_increment = 45.0
 burst_bullet_speed_increment = -30.0
+bullet_damage = 1
 bullet_speed = 75.0
 bullet_max_distance = 128.0
 bullet_atlas = ExtResource("1_b5tbu")

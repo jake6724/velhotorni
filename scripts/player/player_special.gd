@@ -38,6 +38,7 @@ func special(_move_input: Vector2, _aim_input: Vector2) -> void:
 func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	camera_shake_requested.emit(1)
 	hurtbox_update_requested.emit(true)
+	player.set_collision_mask_value(28, false)
 	var direction: Vector2
 	if _move_input:
 		direction = Constants.get_closest_cardinal_direction_normalized(_move_input)
@@ -56,6 +57,7 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	active = false
 	await get_tree().create_timer(.5).timeout
 	hurtbox_update_requested.emit(false)
+	player.set_collision_mask_value(28, true)
 
 func on_special_cooldown_timeout() -> void:
 	charges = charge_max

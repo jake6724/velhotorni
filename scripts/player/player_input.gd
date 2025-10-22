@@ -17,6 +17,12 @@ signal special_action_pressed
 signal switch_selection_pressed
 signal switch_player_mode_pressed
 
+func _ready():
+	var connected_joypads = Input.get_connected_joypads()
+	for device_id in connected_joypads:
+		var joy_name = Input.get_joy_name(device_id)
+		print("Joypad ", device_id, " name: ", joy_name)
+
 ## Returns raw input data, not normalized
 func get_move_input() -> Vector2:
 	# if is_latest_input_controller:
