@@ -1072,7 +1072,7 @@ metadata/_custom_type_script = "uid://di3c54ykd28fx"
 
 [node name="AttackArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 65536
+collision_mask = 65544
 
 [node name="AttackCollider" type="CollisionShape2D" parent="AttackArea"]
 unique_name_in_owner = true

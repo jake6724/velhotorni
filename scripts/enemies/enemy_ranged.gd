@@ -19,22 +19,29 @@ func configure_ranged_enemy() -> void:
 	attack_area.area_entered.connect(on_area_entered)
 	attack_collider.shape.radius = data.attack_range
 
-func on_area_entered(player_beacon: PlayerBeacon) -> void:
+func on_area_entered(intruder: Area2D) -> void:
 	if can_attack:
-		attack_player(player_beacon.global_position)
+		attack_target(intruder.global_position)
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
-	check_player_in_range()
+	check_for_target()
 
-func check_player_in_range() -> void:
+func check_for_target() -> void:
 	var areas = attack_area.get_overlapping_areas()
-	if areas.size() and areas[0] is PlayerBeacon:
-		attack_player(areas[0].global_position)
+	if areas.size():
+		# Check if the player is in range (always the highest target priority)
+		for area: Area2D in areas:
+			if area is PlayerBeacon:
+				attack_target(area.global_position)
+				return
+		
+		if areas[0]: # If player not in range, attack the first found target
+			attack_target(areas[0].global_position)
 
-func attack_player(player_pos: Vector2) -> void:
+func attack_target(target_pos: Vector2) -> void:
 	if is_alive and can_attack:
-		spawn_all_bullets(player_pos)
+		spawn_all_bullets(target_pos)
 		can_attack = false
 		burst_count += 1
 		if burst_count >= data.num_bursts:
@@ -43,11 +50,11 @@ func attack_player(player_pos: Vector2) -> void:
 		else:
 			attack_timer.start(data.burst_cooldown)
 
-func spawn_all_bullets(player_pos: Vector2) -> void:
+func spawn_all_bullets(target_pos: Vector2) -> void:
 	var angle_sign: float = 1
 	var angle_increment: float = data.angle_increment
 	var spawn_pos: Vector2 = global_position + Vector2(8,8)
-	var base_direction: Vector2 = spawn_pos.direction_to(player_pos)
+	var base_direction: Vector2 = spawn_pos.direction_to(target_pos)
 	if data.spawn_center_bullet:
 		# Spawn the first bullet which always travels directly at the player
 		spawn_enemy_bullet(base_direction, spawn_pos)

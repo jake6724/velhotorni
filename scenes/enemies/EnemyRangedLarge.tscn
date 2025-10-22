@@ -905,7 +905,7 @@ radius = 72.0
 
 [node name="EnemyRangedLarge" type="Area2D"]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_bjuyy")
 metadata/_custom_type_script = "uid://bj0h1eevyweax"
 
@@ -1076,7 +1076,7 @@ metadata/_custom_type_script = "uid://di3c54ykd28fx"
 [node name="AttackArea" type="Area2D" parent="."]
 position = Vector2(-7, -18)
 collision_layer = 0
-collision_mask = 65536
+collision_mask = 65544
 
 [node name="AttackCollider" type="CollisionShape2D" parent="AttackArea"]
 unique_name_in_owner = true

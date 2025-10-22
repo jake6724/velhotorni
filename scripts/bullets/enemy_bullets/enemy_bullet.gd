@@ -51,6 +51,9 @@ func on_area_entered(intruder: Area2D) -> void:
 	if intruder is PlayerHurtbox:
 		intruder.take_damage(1, global_position)
 
+	if intruder is TowerHurtbox:
+		intruder.take_damage(damage)
+
 func on_animation_finished(anim_name: String) -> void:
 	if anim_name == "hit":
 		queue_free()

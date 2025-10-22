@@ -1287,7 +1287,6 @@ hframes = 8
 region_enabled = true
 region_rect = Rect2(0, 0, 217, 16)
 script = ExtResource("7_hnid3")
-metadata/_custom_type_script = "uid://bra87ouayo77j"
 
 [node name="SpecialChargesSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
