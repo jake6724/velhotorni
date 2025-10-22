@@ -108,6 +108,7 @@ func _ready():
 	# Configure PlayerHUD
 	player_hud.initialize(player_spells.spells.array, player_mana, player_stats)
 	player_stats.health_updated.connect(player_hud.on_health_updated)
+	WaveManager.wave_completed.connect(player_hud.blink_wave_complete)
 
 	# Configure PlayerBuild
 	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area)

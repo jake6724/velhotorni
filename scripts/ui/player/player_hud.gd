@@ -21,6 +21,8 @@ extends Control
 @onready var build_mode_margin_container: MarginContainer = %BuildModeMarginContainer
 @onready var build_mode_icon: TextureRect = %BuildModeIcon
 
+@onready var wave_complete_label: Label = %WaveCompleteLabel
+
 const MAX_TOWER_MANA_DIGITS: int = 4
 const MAX_ACTIVE_SPELL_MANA_DIGITS: int = 3
 const PADDING_COLOR: String = "#adb5bd"
@@ -127,3 +129,17 @@ func animate_switch_mode(_building: bool) -> void:
 
 		var combat_target_pos_2: Vector2 = Vector2(0, 0)
 		combat_tween.tween_property(combat_mode_icon, "position", combat_target_pos_2, .2)
+
+func blink_wave_complete() -> void:
+	wave_complete_label.show()
+	blink_ui_element(wave_complete_label, 5, .4, .4, true)
+
+func blink_ui_element(_ui_element: Control, _blink_amount: int=3, hide_duration: float=0.1, show_duration:float=0.1, hide_on_finished: bool=true) -> void:
+	var blink_tween: Tween = get_tree().create_tween()
+	blink_tween.set_loops(_blink_amount)
+	blink_tween.tween_property(_ui_element, "modulate:a", 0.0, .01)
+	blink_tween.tween_interval(hide_duration)
+	blink_tween.tween_property(_ui_element, "modulate:a", 1.0, .01)
+	blink_tween.tween_interval(show_duration)
+	await blink_tween.finished
+	if hide_on_finished: _ui_element.hide()
