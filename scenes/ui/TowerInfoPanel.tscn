@@ -60,7 +60,7 @@ theme_override_constants/separation = -1
 [node name="NameLabel" type="Label" parent="VBoxContainer/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 2
 theme_override_fonts/font = ExtResource("2_ak4j3")
 theme_override_font_sizes/font_size = 8
 text = "Fire"

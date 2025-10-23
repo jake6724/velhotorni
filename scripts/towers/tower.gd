@@ -54,7 +54,7 @@ var buff_range_transparency: float = .9
 var color_buff_range_indicator: String = "#94ffbd"
 
 # Combat Data
-var max_health: float = 200
+var max_health: float = 30
 var health: float = max_health:
 	set(value):
 		health = value
@@ -193,6 +193,9 @@ func _ready():
 	# Configure UpgradePriceLabel
 	upgrade_price_label.text = str(int(level_upgrade_price))
 
+	# Configure AnimationPlayer
+	ap.animation_finished.connect(on_animation_finished)
+
 	upgrade_display.z_index = Constants.z_index_map["top"]
 	upgrade_price_label.z_index = Constants.z_index_map["top"]
 
@@ -293,6 +296,13 @@ func reset_tower() -> void:
 	refresh_buff_collider()
 	update_textures()
 	update_audio()
+
+func on_animation_finished(_anim_name) -> void:
+	if _anim_name == "summon":
+		ap.play("idle")
+
+	if _anim_name == "hit":
+		ap.play("idle")
 
 func update_current_combat_data() -> void:
 	_leveled_damage = data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))  
@@ -585,6 +595,7 @@ func show_upgrade_info() -> void:
 
 func on_hit(_damage_amount: int) -> void:
 	healthbar.show()
+	ap.play("hit")
 	health -= _damage_amount
 	number_popup.display_damage_number(_damage_amount, global_position)
 	if health <= 0:
@@ -592,4 +603,6 @@ func on_hit(_damage_amount: int) -> void:
 
 func die() -> void:
 	died.emit(self)
+	ap.play("die")
+	await ap.animation_finished
 	queue_free()

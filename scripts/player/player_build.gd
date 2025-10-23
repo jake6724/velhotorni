@@ -83,6 +83,7 @@ func create_preview_tower():
 	preview_tower.transform_collider.set_deferred("disabled", true)
 	preview_tower.tower_obstacle_collider.set_deferred("disabled", true)
 	preview_tower.buff_collider.set_deferred("disabled", true)
+	preview_tower.hurtbox_collider.set_deferred("disabled", true)
 	preview_tower.modulate.a = .75
 	preview_tower.can_show_range = true	
 
@@ -130,7 +131,9 @@ func place_tower(_tower_mana: float) -> void:
 				preview_tower.transform_collider.set_deferred("disabled", false)
 				preview_tower.buff_collider.set_deferred("disabled", false)
 				preview_tower.tower_obstacle_collider.set_deferred("disabled", false)
-				preview_tower.healthbar.visible = true
+				preview_tower.hurtbox_collider.set_deferred("disabled", false)
+				preview_tower.healthbar.visible = true	
+				preview_tower.ap.play("summon")
 
 				# Update WorldGrid
 				WorldGrid.data[tower_grid_position] = false
@@ -178,6 +181,10 @@ func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 		player_build_ui.update_tower_info_panel(preview_tower)
 
 func on_tower_died(tower: Tower) -> void:
+	if preview_tower == tower:
+		preview_tower = null
 	var index: int = active_towers.find(tower)
 	if index != -1:
 		active_towers.remove_at(index)
+
+	player_build_ui.update_tower_count_label(active_towers.size())
