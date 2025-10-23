@@ -54,7 +54,7 @@ var buff_range_transparency: float = .9
 var color_buff_range_indicator: String = "#94ffbd"
 
 # Combat Data
-var max_health: float = 30
+var max_health: float = 200
 var health: float = max_health:
 	set(value):
 		health = value

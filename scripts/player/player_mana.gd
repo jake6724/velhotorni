@@ -14,13 +14,13 @@ var element_mana: Dictionary[Constants.Element, float] = {
 }
 
 var element_mana_maxes: Dictionary[Constants.Element, float] = {
-	Constants.Element.FIRE: 100,
-	Constants.Element.WIND: 100,
-	Constants.Element.WATER: 100,
-	Constants.Element.EARTH: 100,
-	Constants.Element.LIGHT: 100,
-	Constants.Element.DARK: 100,
-	Constants.Element.ARCANE: 200,
+	Constants.Element.FIRE: 200,
+	Constants.Element.WIND: 200,
+	Constants.Element.WATER: 200,
+	Constants.Element.EARTH: 200,
+	Constants.Element.LIGHT: 200,
+	Constants.Element.DARK: 200,
+	Constants.Element.ARCANE: 400,
 }
 
 var element_drop_amount_base: Dictionary[Constants.Element, float] = {
@@ -61,7 +61,9 @@ func decrement_element_mana(_element, _value) -> void:
 	check_mana_low(_element)
 
 func increment_element_mana(_element, _drop_amount_modifier) -> void:
-	element_mana[_element] += (element_drop_amount_base[_element] * _drop_amount_modifier)
+
+	element_mana[_element] = min(element_mana[_element] + (element_drop_amount_base[_element] * _drop_amount_modifier), element_mana_maxes[_element] )
+	# element_mana[_element] += (element_drop_amount_base[_element] * _drop_amount_modifier)
 	check_mana_low(_element)
 
 func check_mana_low(_element) -> void:
