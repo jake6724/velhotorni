@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=6 format=3 uid="uid://3j4u544ha5xs"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://3j4u544ha5xs"]
 
 [ext_resource type="Texture2D" uid="uid://relfue1rk6le" path="res://assets/art/atlases/enemy/atl_enemy_wind_flatwoods.png" id="1_26mko"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="1_ohl2i"]
 [ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="2_7i6qe"]
 [ext_resource type="Resource" uid="uid://iblkaej3e3hs" path="res://data/boons/boon_data_heal_wind_flatwoods.tres" id="2_vy2ro"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="4_vth83"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="5_vth83"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihdaj"]
+atlas = ExtResource("5_vth83")
+region = Rect2(48, 16, 16, 16)
 
 [resource]
 script = ExtResource("1_ohl2i")
@@ -17,7 +22,9 @@ speed = 30.0
 damage = 2
 tower_mana_drop_chance_base = 1.0
 element_mana_drop_chance = 1.0
+element_mana_drop_amount_multiplier = 1.0
 atlas = ExtResource("1_26mko")
+icon = SubResource("AtlasTexture_ihdaj")
 show_light = false
 explosion_sfx = ExtResource("2_7i6qe")
 boon_data = ExtResource("2_vy2ro")

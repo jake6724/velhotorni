@@ -12,6 +12,7 @@ extends Resource
 @export var element_mana_drop_chance: float = 1.0
 @export var element_mana_drop_amount_multiplier: float = 1.0
 @export var atlas: Texture
+@export var icon: AtlasTexture = AtlasTexture.new()
 @export var show_light: bool = false
 @export var explosion_sfx: AudioStreamOggVorbis
 var pos_offset: Vector2

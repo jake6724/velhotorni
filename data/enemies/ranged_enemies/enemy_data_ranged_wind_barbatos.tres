@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=6 format=3 uid="uid://u64j13003gnp"]
+[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=8 format=3 uid="uid://u64j13003gnp"]
 
 [ext_resource type="Texture2D" uid="uid://2u7wcxsgphq0" path="res://assets/art/atlases/enemy/atl_enemy_wind_barbatos.png" id="1_6v4xo"]
 [ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_jx34f"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_ui7ey"]
 [ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="3_6v4xo"]
 [ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="3_cm3nc"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="5_cm3nc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqwpi"]
+atlas = ExtResource("5_cm3nc")
+region = Rect2(64, 16, 16, 16)
 
 [resource]
 script = ExtResource("3_6v4xo")
@@ -15,6 +20,7 @@ num_bursts = 1
 num_bullets_per_burst = 0
 angle_increment = 0.0
 spawn_center_bullet = true
+bullet_damage = 1
 bullet_speed = 100.0
 bullet_max_distance = 100.0
 bullet_atlas = ExtResource("1_jx34f")
@@ -27,7 +33,9 @@ speed = 30.0
 damage = 5
 tower_mana_drop_chance_base = 5.0
 element_mana_drop_chance = 5.0
+element_mana_drop_amount_multiplier = 1.0
 atlas = ExtResource("1_6v4xo")
+icon = SubResource("AtlasTexture_sqwpi")
 show_light = false
 explosion_sfx = ExtResource("3_cm3nc")
 hex_data_list = Array[ExtResource("2_ui7ey")]([])

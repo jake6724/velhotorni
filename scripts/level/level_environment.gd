@@ -21,6 +21,8 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 @onready var tower_mana_breakables_parent: Node = %TowerManaBreakablesParent
 var tower_mana_breakables: Array[Breakable] = []
 
+@onready var wave_info_panel_parent: Node = %WaveInfoPanelParent
+
 # Export vars
 @export var level_name: String
 @export var region: Region
@@ -51,10 +53,34 @@ func _ready():
 			flying_spawn_points.append(child.global_position)
 
 	configure_tower_mana_breakables()
+	configure_wave_info_panels()
+
+	WaveManager.wave_completed.connect(populate_wave_info_panels)
+	WaveManager.wave_started.connect(hide_wave_info_panels)
 
 func configure_tower_mana_breakables() -> void:
 	for child: Breakable in tower_mana_breakables_parent.get_children():
 		tower_mana_breakables.append(child)
+
+func configure_wave_info_panels() -> void:
+	for child in wave_info_panel_parent.get_children():
+		var wave_info: WaveInfoPanel = child as WaveInfoPanel
+		if wave_info:
+			wave_info.get_path_enemy_info(self)
+
+	populate_wave_info_panels()
+
+func populate_wave_info_panels() -> void:
+	for child in wave_info_panel_parent.get_children():
+		var wave_info: WaveInfoPanel = child as WaveInfoPanel
+		if wave_info:
+			wave_info.populate_unit_wave_info(WaveManager.wave_index)
+
+func hide_wave_info_panels() -> void:
+	for child in wave_info_panel_parent.get_children():
+		var wave_info: WaveInfoPanel = child as WaveInfoPanel
+		if wave_info:
+			wave_info.hide()
 
 # # Set the `z_index` of each tile based on its `z_index_map_key` custom data value. This value is painted onto
 # # the tile in the editor.
