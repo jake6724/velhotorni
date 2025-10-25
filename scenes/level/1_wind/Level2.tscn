@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://bupwctvog5l6d"]
+[gd_scene load_steps=39 format=4 uid="uid://bupwctvog5l6d"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_ssuxm"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_3ew8m"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://bg5wqpo6k5mck" path="res://assets/art/sprites/spr_fx_heatmask.png" id="13_3ew8m"]
 [ext_resource type="Resource" uid="uid://c3rp8syd0ohty" path="res://data/waves/level_2_wave_7.tres" id="13_t6r5w"]
 [ext_resource type="Texture2D" uid="uid://biakr4djd85dt" path="res://assets/art/sprites/environment/spr_environment_build.png" id="17_v2c5h"]
+[ext_resource type="PackedScene" uid="uid://dtbjym5jhrudw" path="res://scenes/ui/WaveInfo.tscn" id="22_v2c5h"]
 [ext_resource type="PackedScene" uid="uid://inrss5007qxm" path="res://scenes/breakables/BreakableCrystalSmall.tscn" id="23_pfbjf"]
 
 [sub_resource type="Resource" id="Resource_pfbjf"]
@@ -1762,3 +1763,26 @@ position = Vector2(240, 352)
 
 [node name="BreakableCrystalSmall7" parent="TowerManaBreakablesParent" instance=ExtResource("23_pfbjf")]
 position = Vector2(256, 256)
+
+[node name="WaveInfoPanelParent" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="PanelContainer" parent="WaveInfoPanelParent" instance=ExtResource("22_v2c5h")]
+offset_left = -28.0
+offset_top = 111.0
+offset_right = 12.0
+offset_bottom = 151.0
+
+[node name="PanelContainer2" parent="WaveInfoPanelParent" instance=ExtResource("22_v2c5h")]
+offset_left = 112.0
+offset_top = 373.0
+offset_right = 152.0
+offset_bottom = 413.0
+path = 1
+
+[node name="PanelContainer3" parent="WaveInfoPanelParent" instance=ExtResource("22_v2c5h")]
+offset_left = 352.0
+offset_top = 384.0
+offset_right = 392.0
+offset_bottom = 424.0
+path = 2

@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=6 format=3 uid="uid://cj6fcpqvwxqql"]
+[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=8 format=3 uid="uid://cj6fcpqvwxqql"]
 
 [ext_resource type="Texture2D" uid="uid://bqkij8as3c75w" path="res://assets/art/atlases/enemy/atl_enemy_fire_ukobach.png" id="1_cruf6"]
 [ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="2_pj47p"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="3_gsxho"]
 [ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="3_pj47p"]
 [ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="4_chgd0"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="5_gsxho"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chgd0"]
+atlas = ExtResource("5_gsxho")
+region = Rect2(80, 0, 16, 16)
 
 [resource]
 script = ExtResource("4_chgd0")
@@ -30,6 +35,7 @@ tower_mana_drop_chance_base = 10.0
 element_mana_drop_chance = 1.0
 element_mana_drop_amount_multiplier = 2.5
 atlas = ExtResource("1_cruf6")
+icon = SubResource("AtlasTexture_chgd0")
 show_light = false
 explosion_sfx = ExtResource("3_pj47p")
 hex_data_list = Array[ExtResource("3_gsxho")]([])
