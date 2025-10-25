@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=6 format=3 uid="uid://v0rhg2s0tdar"]
+
+[ext_resource type="Texture2D" uid="uid://bjjmtj0drpu3i" path="res://assets/art/atlases/enemy/atl_enemy_water_kappa.png" id="1_pg5il"]
+[ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_tuydb"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_pg5il"]
+[ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="3_0d3mo"]
+[ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="3_nq7n2"]
+
+[resource]
+script = ExtResource("3_nq7n2")
+attack_cooldown = 0.75
+attack_range = 112.0
+burst_cooldown = 0.0
+num_bursts = 1
+num_bullets_per_burst = 3
+angle_increment = 5.0
+spawn_center_bullet = false
+bullet_damage = 1
+bullet_speed = 60.0
+bullet_max_distance = 112.0
+bullet_atlas = ExtResource("1_tuydb")
+size = 4
+element = 2
+strong_against_element = 3
+weak_against_element = 1
+health = 200.0
+speed = 20.0
+damage = 2
+tower_mana_drop_chance_base = 5.0
+element_mana_drop_chance = 1.0
+element_mana_drop_amount_multiplier = 1.5
+atlas = ExtResource("1_pg5il")
+show_light = false
+explosion_sfx = ExtResource("3_0d3mo")
+hex_data_list = Array[ExtResource("2_pg5il")]([])
+knockback_multiplier = 1.5
+enemy_name = ""
+enemy_description = ""
+metadata/_custom_type_script = "uid://dtesebxklnsr8"
