@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://bupwctvog5l6d"]
+[gd_scene load_steps=44 format=4 uid="uid://bupwctvog5l6d"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_ssuxm"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_3ew8m"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="3_s0k01"]
 [ext_resource type="Resource" uid="uid://rk1luext2n4v" path="res://data/waves/level_2_wave_3.tres" id="3_tkc6j"]
 [ext_resource type="Resource" uid="uid://cdq12y1qhljia" path="res://data/waves/level_2_wave_4.tres" id="3_v2c5h"]
+[ext_resource type="Resource" uid="uid://c8e1j62t8jvnq" path="res://data/waves/level_2_wave_8.tres" id="3_vgefi"]
 [ext_resource type="Resource" uid="uid://b0ywdwxj1lr4r" path="res://data/waves/level_2_wave_1.tres" id="3_yalw7"]
 [ext_resource type="Resource" uid="uid://dh303w7a1gndu" path="res://data/waves/level_2_wave_2.tres" id="4_814dd"]
 [ext_resource type="Resource" uid="uid://oi85m43dik4l" path="res://data/enemies/flying_enemies/enemy_data_flying_wind_imp.tres" id="4_clfgj"]
@@ -1625,7 +1626,7 @@ script = ExtResource("1_ssuxm")
 level_name = "Level 2"
 region = 2
 initial_gold = 125
-waves = Array[ExtResource("2_3ew8m")]([ExtResource("3_v2c5h"), ExtResource("12_h5wmt"), ExtResource("13_t6r5w"), ExtResource("3_pfbjf"), ExtResource("3_yalw7"), ExtResource("4_814dd"), ExtResource("3_tkc6j"), SubResource("Resource_h5wmt"), ExtResource("3_clfgj")])
+waves = Array[ExtResource("2_3ew8m")]([ExtResource("3_yalw7"), ExtResource("4_814dd"), ExtResource("3_tkc6j"), ExtResource("3_v2c5h"), ExtResource("3_pfbjf"), ExtResource("12_h5wmt"), ExtResource("13_t6r5w"), ExtResource("3_vgefi"), SubResource("Resource_h5wmt"), ExtResource("3_clfgj")])
 
 [node name="AnimationLayer" type="TileMapLayer" parent="."]
 z_index = -1
