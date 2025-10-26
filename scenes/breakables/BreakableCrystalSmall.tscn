@@ -4,8 +4,7 @@
 [ext_resource type="Script" uid="uid://d3pvkwk22h1o0" path="res://scripts/breakables/breakable.gd" id="1_nu4tx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8v1e"]
-radius = 11.0
-height = 22.0
+height = 20.0
 
 [sub_resource type="Animation" id="Animation_na6kg"]
 length = 0.001

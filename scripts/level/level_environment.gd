@@ -57,10 +57,15 @@ func _ready():
 
 	WaveManager.wave_completed.connect(populate_wave_info_panels)
 	WaveManager.wave_started.connect(hide_wave_info_panels)
+	WaveManager.wave_started.connect(on_wave_started_start_breakables)
 
 func configure_tower_mana_breakables() -> void:
 	for child: Breakable in tower_mana_breakables_parent.get_children():
 		tower_mana_breakables.append(child)
+
+func on_wave_started_start_breakables() -> void:
+	for breakable: Breakable in tower_mana_breakables:
+		breakable.start_grow()
 
 func configure_wave_info_panels() -> void:
 	for child in wave_info_panel_parent.get_children():

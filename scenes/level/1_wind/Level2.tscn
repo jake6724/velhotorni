@@ -1622,7 +1622,7 @@ level_name = "Level 2"
 region = 2
 initial_gold = 125
 initial_token = 1250
-waves = Array[ExtResource("2_3ew8m")]([ExtResource("3_yalw7"), ExtResource("4_814dd"), ExtResource("3_tkc6j"), SubResource("Resource_h5wmt"), ExtResource("3_clfgj")])
+waves = Array[ExtResource("2_3ew8m")]([ExtResource("4_814dd"), ExtResource("3_yalw7"), ExtResource("3_tkc6j"), SubResource("Resource_h5wmt"), ExtResource("3_clfgj")])
 
 [node name="AnimationLayer" type="TileMapLayer" parent="."]
 z_index = -1

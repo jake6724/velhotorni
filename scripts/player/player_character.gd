@@ -158,7 +158,6 @@ func _physics_process(delta): # This can go in a state eventually
 			# Check if hitstun complete
 			if velocity == Vector2.ZERO:
 				hit = false
-				# Hurtbox is re-enable on hurtbox_reset_timer.timeout()
 
 		# Primary Action
 		if player_input.primary_action_pressed:
@@ -322,9 +321,9 @@ func die() -> void:
 	alive = false
 
 func respawn() -> void:
-	reticle_sprite.show()
-	staff_sprite.show()
 	character_sprite.show()
+	reticle_sprite.show()
+	if not building: staff_sprite.show()
 	global_position = spawn_point
 	alive = true
 	player_stats.health = player_stats.max_health

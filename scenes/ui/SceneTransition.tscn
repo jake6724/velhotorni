@@ -46,7 +46,7 @@ layer = 128
 script = ExtResource("1_igxph")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.137, 1)
+scale = Vector2(1.45455, 1.28571)
 texture = ExtResource("2_kq3v3")
 offset = Vector2(176, 112)
 hframes = 10
