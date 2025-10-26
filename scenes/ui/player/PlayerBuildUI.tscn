@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://sw4orj43x0r1"]
+[gd_scene load_steps=25 format=3 uid="uid://sw4orj43x0r1"]
 
 [ext_resource type="Script" uid="uid://df6axhjoo372t" path="res://scripts/ui/player/player_build_ui.gd" id="1_4whgm"]
 [ext_resource type="Texture2D" uid="uid://dwgwikxycntfw" path="res://assets/art/sprites/ui/spr_ui_tower_background.png" id="1_tgjx2"]
@@ -16,6 +16,32 @@
 [ext_resource type="PackedScene" uid="uid://du0wke3a8n1k8" path="res://scenes/ui/TowerInfoPanel.tscn" id="13_5fpji"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="15_lrbli"]
 [ext_resource type="Texture2D" uid="uid://ccr3sul54t663" path="res://assets/placeholders/slash_with_shadow.png" id="16_83w5e"]
+[ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="17_fvxoh"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_83w5e"]
+load_path = "res://.godot/imported/atl_ui_toweractions.png-9e2bce0bb060b9c77eaad37ae4c8d44b.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvxoh"]
+atlas = SubResource("CompressedTexture2D_83w5e")
+region = Rect2(17, 1, 14, 14)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rpy2v"]
+load_path = "res://.godot/imported/atl_ui_toweractions.png-9e2bce0bb060b9c77eaad37ae4c8d44b.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4rhg"]
+atlas = SubResource("CompressedTexture2D_rpy2v")
+region = Rect2(1, 1, 14, 14)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mdw5a"]
+load_path = "res://.godot/imported/atl_ui_toweractions.png-9e2bce0bb060b9c77eaad37ae4c8d44b.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wydd7"]
+atlas = SubResource("CompressedTexture2D_mdw5a")
+region = Rect2(33, 1, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpy2v"]
+atlas = ExtResource("17_fvxoh")
+region = Rect2(19, 3, 10, 10)
 
 [node name="PlayerBuildUI" type="Control"]
 layout_mode = 3
@@ -427,3 +453,59 @@ theme_override_constants/shadow_outline_size = -1
 theme_override_fonts/font = ExtResource("15_lrbli")
 theme_override_font_sizes/font_size = 8
 text = "10"
+
+[node name="PlayerHUDBuffer" type="Control" parent="."]
+custom_minimum_size = Vector2(120, 71)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TowerActions" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 77.0
+offset_right = 22.0
+offset_bottom = 96.0
+theme_override_constants/separation = -14
+
+[node name="HealIcon" type="TextureRect" parent="TowerActions"]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_fvxoh")
+stretch_mode = 2
+
+[node name="UpgradeIcon" type="TextureRect" parent="TowerActions"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_l4rhg")
+stretch_mode = 2
+
+[node name="SellIcon" type="TextureRect" parent="TowerActions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_wydd7")
+stretch_mode = 2
+
+[node name="ButtonHintMarginContainer" type="MarginContainer" parent="TowerActions"]
+unique_name_in_owner = true
+z_index = 4
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+
+[node name="ButtonHintIcon" type="TextureRect" parent="TowerActions/ButtonHintMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_rpy2v")
+stretch_mode = 2

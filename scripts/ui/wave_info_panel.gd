@@ -23,7 +23,7 @@ func get_path_enemy_info(active_level: LevelEnvironment) -> void:
 					wave_previews[i][spawn.enemy_data] = 1
 				
 func populate_unit_wave_info(wave_index: int) -> void:
-	if wave_previews[wave_index].keys():
+	if wave_previews and wave_previews[wave_index] and wave_previews[wave_index].keys():
 		# Remove existing children to make way for new wave
 		for child in grid_container.get_children():
 			child.queue_free()

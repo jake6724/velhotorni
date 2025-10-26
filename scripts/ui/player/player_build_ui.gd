@@ -5,10 +5,15 @@ extends Control
 @onready var tower_count_label: Label = %TowerCountLabel
 @onready var tower_max_label: Label = %TowerMaxLabel
 
+@onready var heal_icon: TextureRect = %HealIcon
+@onready var upgrade_icon: TextureRect = %UpgradeIcon
+@onready var sell_icon: TextureRect = %SellIcon
+
+var tower_action_icons: Array[TextureRect] = []
+
 var tower_index: int = 0:
 	set(value):
 		lower_button(tower_buttons[tower_index])
-		tower_index = value
 		raise_button(tower_buttons[tower_index])
 
 var tower_buttons: Array[TowerButton] = []
@@ -36,11 +41,19 @@ const BASE_POSITION: Vector2 = Vector2(0,-3)
 const RAISE_POSITION: Vector2 = Vector2(0, -8)
 const RAISE_DURATION: float = .1
 
+func _input(event):
+	if Input.is_action_just_pressed("x"):
+		animate_switch_tower_action()
+
 func _ready():
 	tower_buttons = [%FireButton, %WindButton, %WaterButton, $%EarthButton, %LightButton, %DarkButton]
 	tower_button_price_labels = [%FirePriceLabel, %WindPriceLabel, %WaterPriceLabel, %EarthPriceLabel, %LightPriceLabel, %DarkPriceLabel]
 	set_tower_button_prices()
 	raise_button(tower_buttons[tower_index])
+
+	tower_action_icons = [heal_icon, upgrade_icon, sell_icon]
+
+	position_tower_action_icons()
 
 func update(player_mana: PlayerMana) -> void:
 	update_tower_button_icons(player_mana)
@@ -80,3 +93,33 @@ func update_tower_count_label(_value: int) -> void:
 
 func update_tower_max_label(_value: int) -> void:
 	tower_max_label.text = str(_value)
+
+func animate_switch_tower_action() -> void:
+	# Move top to back
+	var heal_tween: Tween = get_tree().create_tween()
+	heal_tween.tween_property(tower_action_icons[0], "position", Vector2(0,-5), .15)
+	await heal_tween.finished
+	tower_action_icons[0].z_index = 0
+	var heal_tween_2: Tween = get_tree().create_tween()
+	heal_tween_2.tween_property(tower_action_icons[0], "position", Vector2(4,4), .1)
+
+	# Move middle to front
+	var upgrade_tween: Tween = get_tree().create_tween()
+	upgrade_tween.tween_property(tower_action_icons[1], "position", Vector2(0, -2), .1)
+	tower_action_icons[1].z_index = 2
+
+	await get_tree().create_timer(.1).timeout
+	
+	# Move back to middle
+	var sell_tween: Tween = get_tree().create_tween()
+	sell_tween.tween_property(tower_action_icons[2], "position", Vector2(2, -2), .1)
+	tower_action_icons[2].z_index = 1
+
+	tower_action_icons.append(tower_action_icons[0])
+	tower_action_icons.remove_at(0)
+	print(tower_action_icons)
+
+func position_tower_action_icons() -> void:
+	tower_action_icons[0].position += Vector2(-2,-2)
+	tower_action_icons[1].position += Vector2(0,0)
+	tower_action_icons[2].position += Vector2(2,2)

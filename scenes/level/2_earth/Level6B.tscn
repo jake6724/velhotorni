@@ -1,10 +1,8 @@
-[gd_scene load_steps=17 format=4 uid="uid://borv2pevjmbv2"]
+[gd_scene load_steps=15 format=4 uid="uid://borv2pevjmbv2"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_d6ith"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_5dhki"]
 [ext_resource type="Resource" uid="uid://b3hsddkqewgoi" path="res://data/waves/level_6B_wave_1.tres" id="3_o1nor"]
-[ext_resource type="Resource" uid="uid://dtaaehytx5tsb" path="res://data/waves/level_6B_wave_2.tres" id="4_7h15g"]
-[ext_resource type="Resource" uid="uid://b3rbjmksh1et7" path="res://data/waves/level_6B_wave_3.tres" id="5_21gse"]
 [ext_resource type="TileSet" uid="uid://j75y7lhtdyw6" path="res://scenes/level/LevelMaskTileset.tres" id="7_eda0o"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="8_ocgxf"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_1tfla"]
@@ -1066,7 +1064,7 @@ script = ExtResource("1_d6ith")
 level_name = "Level 6B"
 region = 3
 initial_gold = 150
-waves = Array[ExtResource("2_5dhki")]([ExtResource("3_o1nor"), ExtResource("4_7h15g"), ExtResource("5_21gse")])
+waves = Array[ExtResource("2_5dhki")]([ExtResource("3_o1nor")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
