@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://fhwurvcdissg" path="res://data/spawn/spawn_fire_ghoul_1.tres" id="3_wv6qo"]
 [ext_resource type="Resource" uid="uid://88wopr8wpwsi" path="res://data/spawn/path_2_spawns/spawn_path_2_wind_harpy_1.tres" id="4_1lp51"]
 [ext_resource type="Resource" uid="uid://bq0ou24k2tfwy" path="res://data/spawn/path_2_spawns/spawn_path_2_wind_ghoul_1.tres" id="5_rbi20"]
-[ext_resource type="Resource" uid="uid://4xqwaeqd3alw" path="res://data/spawn/spawn_path_2_wind_flatwoods_1.tres" id="6_0euf0"]
+[ext_resource type="Resource" uid="uid://4xqwaeqd3alw" path="res://data/spawn/path_2_spawns/spawn_path_2_wind_flatwoods_1.tres" id="6_0euf0"]
 
 [resource]
 script = ExtResource("3_uh44n")

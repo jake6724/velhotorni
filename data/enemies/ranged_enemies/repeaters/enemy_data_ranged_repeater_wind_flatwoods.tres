@@ -14,7 +14,7 @@ region = Rect2(48, 16, 16, 16)
 [resource]
 script = ExtResource("3_sst40")
 attack_cooldown = 1.0
-burst_cooldown = 0.05
+burst_cooldown = 0.1
 num_bursts = 2
 initial_delay = 3.0
 num_bullets_per_burst = 4
@@ -35,7 +35,7 @@ speed = 20.0
 damage = 2
 tower_mana_drop_chance_base = 5.0
 element_mana_drop_chance = 1.0
-element_mana_drop_amount_multiplier = 2.0
+element_mana_drop_amount_multiplier = 1.5
 atlas = ExtResource("1_sst40")
 icon = SubResource("AtlasTexture_ab1n5")
 show_light = false

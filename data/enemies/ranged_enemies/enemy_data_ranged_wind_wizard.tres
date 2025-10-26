@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=5 format=3 uid="uid://dtsxss2wos66k"]
+
+[ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_geqlr"]
+[ext_resource type="Texture2D" uid="uid://couihrwp6f87" path="res://assets/art/atlases/enemy/atl_enemy_wind_wizard.png" id="1_gmv7n"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_gmv7n"]
+[ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="3_mo727"]
+
+[resource]
+script = ExtResource("3_mo727")
+attack_cooldown = 0.6
+attack_range = 120.0
+burst_cooldown = 0.15
+num_bursts = 3
+num_bullets_per_burst = 1
+angle_increment = 0.0
+spawn_center_bullet = true
+bullet_damage = 1
+bullet_speed = 110.0
+bullet_max_distance = 120.0
+bullet_atlas = ExtResource("1_geqlr")
+size = 5
+element = 1
+strong_against_element = 2
+weak_against_element = 0
+health = 200.0
+speed = 20.0
+damage = 2
+tower_mana_drop_chance_base = 5.0
+element_mana_drop_chance = 1.0
+element_mana_drop_amount_multiplier = 2.0
+atlas = ExtResource("1_gmv7n")
+show_light = false
+hex_data_list = Array[ExtResource("2_gmv7n")]([])
+knockback_multiplier = 1.5
+enemy_name = ""
+enemy_description = ""
+metadata/_custom_type_script = "uid://dtesebxklnsr8"

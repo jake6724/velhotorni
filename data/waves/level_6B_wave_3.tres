@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Wave" load_steps=6 format=3 uid="uid://b3rbjmksh1et7"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_1m7n0"]
-[ext_resource type="Resource" uid="uid://4xqwaeqd3alw" path="res://data/spawn/spawn_path_2_wind_flatwoods_1.tres" id="2_1m7n0"]
+[ext_resource type="Resource" uid="uid://4xqwaeqd3alw" path="res://data/spawn/path_2_spawns/spawn_path_2_wind_flatwoods_1.tres" id="2_1m7n0"]
 [ext_resource type="Resource" uid="uid://dghapeue4033h" path="res://data/spawn/path_2_spawns/spawn_path_2_wind_small_3.tres" id="2_xqf0h"]
 [ext_resource type="Resource" uid="uid://bwb1t2slfgsoo" path="res://data/spawn/spawn_earth_mudman_1.tres" id="3_xqf0h"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="4_dg8bg"]
