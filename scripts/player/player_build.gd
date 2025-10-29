@@ -103,7 +103,8 @@ func create_preview_tower():
 	preview_tower.hurtbox_collider.set_deferred("disabled", true)
 	preview_tower.sprite.modulate.a = .75
 	preview_tower.can_show_range = true	
-	preview_tower.upgrade_button_hint.set_hint_icon("joypad_button_0")
+	if not hovered_tower:
+		preview_tower.upgrade_button_hint.set_hint_icon("joypad_button_0")
 	preview_tower.upgrade_price_label.text = str(TowerGlobalData.tower_prices[preview_tower.data.element])
 	preview_tower.died.connect(on_tower_died)
 
