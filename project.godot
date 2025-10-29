@@ -55,6 +55,10 @@ mouse_cursor/custom_image="uid://d0ggh0ipjxkie"
 
 enabled=PackedStringArray("res://addons/tabby_explorer/plugin.cfg")
 
+[gui]
+
+theme/custom_font="uid://cu0ib6xd161v2"
+
 [input]
 
 left_click={
@@ -197,6 +201,16 @@ upgrade_action={
 start_wave_action={
 "deadzone": 0.2,
 "events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+switch_tower_action={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":1,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+ui_interact={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
 

@@ -30,7 +30,8 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var upgrade_price_label: Label = %UpgradePriceLabel
 @onready var upgrade_icon: TextureRect = %UpgradeIcon
 @onready var upgrade_coin_icon: TextureRect = %UpgradeCoinIcon
-@onready var upgrade_button_hint: TextureRect = %UpgradeButtonHint
+@onready var upgrade_button_hint: ControllerButtonHint = %UpgradeButtonHint
+@onready var plus_icon: TextureRect = %PlusIcon
 
 # Internal data
 var active_target: Enemy
@@ -59,6 +60,8 @@ var health: float = max_health:
 	set(value):
 		health = value
 		healthbar.value = (health / max_health) * 100
+var can_heal = false # Starts at full health so can't heal
+
 var curr_damage: float
 var curr_speed: float
 var curr_range: float
@@ -86,6 +89,7 @@ const MAX_LEVEL_PRICE: int = 125
 const LEVEL_COST_INCREMENT: int = 25
 var level_upgrade_price: int = 75
 var level: int = 0
+var sell_price: int # Set in initialize
 var damage_level: int = 0:
 	set(value):
 		damage_level = value
@@ -229,6 +233,8 @@ func initialize(element: Constants.Element):
 	# Hex manager
 	hex_manager.new_hex_added.connect(on_add_new_hex)
 	hex_manager.active_hex_removed.connect(on_remove_active_hex)
+
+	sell_price = int(TowerGlobalData.tower_prices[data.element] / 2)
 
 	attack_timer.start(curr_speed)
 	ap.play("idle")
@@ -581,6 +587,7 @@ func upgrade() -> void:
 	range_level += 1
 	special_level += 1
 	level += 1
+	sell_price += int(level_upgrade_price / 2)
 	level_upgrade_price += LEVEL_COST_INCREMENT
 	upgrade_icon.texture.region = Rect2((8 * level), 0, 8, 10)
 	if level >= Constants.TOWER_MAX_LEVEL:
@@ -589,8 +596,13 @@ func upgrade() -> void:
 		upgrade_button_hint.hide()
 	else:
 		upgrade_price_label.text = str(int(level_upgrade_price))
+	ap.play("summon")
 
-func show_upgrade_info() -> void:
+func show_action_cost_info(cost) -> void:
+	# if cost < 0:
+	# 	cost = -cost
+	cost = abs(cost) # Always show cost as positive, even if refunding for sell
+	upgrade_price_label.text = str(cost)
 	upgrade_display.show()
 
 func on_hit(_damage_amount: int) -> void:
@@ -600,6 +612,12 @@ func on_hit(_damage_amount: int) -> void:
 	number_popup.display_damage_number(_damage_amount, global_position)
 	if health <= 0:
 		die()
+	can_heal = true
+
+func heal(_value: int) -> void:
+	health = min(health + _value, max_health)
+	if health >= max_health:
+		can_heal = false
 
 func die() -> void:
 	died.emit(self)

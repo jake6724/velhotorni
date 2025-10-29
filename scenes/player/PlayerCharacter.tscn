@@ -1352,6 +1352,7 @@ metadata/_custom_type_script = "uid://c67nlh7a52smp"
 
 [node name="BuildGridSprite" type="Sprite2D" parent="PlayerBuild"]
 visible = false
+z_index = -2
 texture = ExtResource("7_vycf0")
 
 [node name="SpellSpawnPoint" type="Node2D" parent="."]

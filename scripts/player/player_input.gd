@@ -9,13 +9,17 @@ var primary_action_charge: float
 
 var upgrade_action_pressed: bool
 var upgrade_action_charge: float 
-const UPGRADE_CHARGE_MULTIPLIER: float = 1.0
+var tower_action_press_multiplier_normal: float = 1.0
+var tower_action_press_multiplier_fast: float = 4.0
+var tower_action_press_multiplier: float = tower_action_press_multiplier_fast
 
 var is_latest_input_controller: bool = true
 
 signal special_action_pressed
 signal switch_selection_pressed
 signal switch_player_mode_pressed
+signal switch_tower_action_pressed
+signal ui_interact_pressed
 
 func _ready():
 	var connected_joypads = Input.get_connected_joypads()
@@ -25,15 +29,8 @@ func _ready():
 
 ## Returns raw input data, not normalized
 func get_move_input() -> Vector2:
-	# if is_latest_input_controller:
 	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	return move_input
-	
-	
-
-	# else:
-	# 	move_input = Vector2(Input.get_axis("move_left_key", "move_right_key"), Input.get_axis("move_up_key", "move_down_key"))
-	# 	return move_input
 
 ## Returns raw input data, not normalized
 func get_aim_input() -> Vector2: 
@@ -45,7 +42,7 @@ func _process(delta):
 		primary_action_charge += delta
 
 	if upgrade_action_pressed:
-		upgrade_action_charge += delta * UPGRADE_CHARGE_MULTIPLIER
+		upgrade_action_charge += delta * tower_action_press_multiplier
 		
 func _input(event):
 	check_primary_action_input(event)
@@ -62,6 +59,12 @@ func _input(event):
 	if event.is_action("switch_player_mode") and event.is_pressed() and not event.is_echo():
 		switch_player_mode_pressed.emit()
 
+	if event.is_action("switch_tower_action") and event.is_pressed() and not event.is_echo():
+		switch_tower_action_pressed.emit()
+		
+	if event.is_action("ui_interact") and event.is_pressed() and not event.is_echo():
+		ui_interact_pressed.emit()
+		
 	# set_latest_input_type(event)
 
 func check_primary_action_input(event) -> void:

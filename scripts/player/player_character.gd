@@ -73,6 +73,8 @@ func _ready():
 	player_input.special_action_pressed.connect(on_special_input_pressed)
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
 	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
+	player_input.switch_tower_action_pressed.connect(player_build.switch_tower_action.bind(player_input))
+	player_input.ui_interact_pressed.connect(on_ui_interact_pressed)
 
 	# Configure PlayerSpellSpawner
 	player_spell_spawner.initialize(player_spells.active_spell)
@@ -111,8 +113,10 @@ func _ready():
 	WaveManager.wave_completed.connect(player_hud.blink_wave_complete)
 
 	# Configure PlayerBuild
-	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area)
+	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area, player_mana)
 	player_build.tower_mana_spent.connect(on_tower_mana_spent)
+	player_build.reset_tower_action.connect(on_reset_tower_action)
+	player_mana.tower_mana_updated.connect(player_build.on_tower_mana_updated)
 
 	# Connect to ManaDropCollector
 	mana_drop_collector.mana_drop_collected.connect(on_element_mana_collected)
@@ -166,19 +170,23 @@ func _physics_process(delta): # This can go in a state eventually
 		if building:
 			player_build.update_preview_tower_position(global_position, player_aim.aim_input)
 			player_build.update_tower_detect_area_position()
-			player_build.run(delta, player_input, player_mana, upgrade_action_charge_cirlce)
+			player_build.run(delta, player_input, upgrade_action_charge_cirlce)
 
 		move_and_slide()
 
 func on_primary_action_pressed() -> void:
 	if alive and can_fire:
 		primary_action_func.call()
+		
+func on_ui_interact_pressed() -> void:
+	if alive and building:
+		place_tower()
 
 func cast_spell() -> void:
 	player_spell_spawner.spawn_spell(player_aim.aim_input)
 
 func place_tower() -> void:
-	player_build.place_tower(player_mana.tower_mana)
+	player_build.place_tower()
 	player_input.primary_action_pressed = false
 
 func on_spell_cast(_element: Constants.Element, _mana_cost) -> void:
@@ -242,7 +250,7 @@ func switch_to_build_mode() -> void:
 	player_build_ui.show()
 	player_build_ui.raise_current()
 	player_build.create_preview_tower()
-	player_build.show_active_tower_healths(true)
+	# player_build.show_active_tower_healths(true)
 	build_grid_sprite.show()
 	player_stats.active_speed = player_stats.build_speed
 	tower_detect_collider.set_deferred("disabled", false)
@@ -257,7 +265,7 @@ func switch_to_combat_mode() -> void:
 	switch_action_func = switch_spell
 	if player_build.preview_tower:		# Remove preview tower
 		player_build.preview_tower.queue_free()
-	player_build.show_active_tower_healths(false)
+	# player_build.show_active_tower_healths(false)
 	player_build_ui.hide()
 	build_grid_sprite.hide()
 	player_stats.active_speed = player_stats.combat_speed
@@ -390,3 +398,8 @@ func on_switch_delay_timer_timeout() -> void:
 
 func jump_forward() -> void:
 	pass
+
+func on_reset_tower_action(_disable_press: bool) -> void:
+	player_input.upgrade_action_charge = 0
+	if _disable_press:
+		player_input.upgrade_action_pressed = false

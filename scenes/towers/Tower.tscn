@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bpg5vj2118tkk"]
+[gd_scene load_steps=37 format=3 uid="uid://bpg5vj2118tkk"]
 
 [ext_resource type="Script" uid="uid://1v42jjyvr5ed" path="res://scripts/towers/tower.gd" id="1_cqx8d"]
 [ext_resource type="Texture2D" uid="uid://5nl3odlo5q6d" path="res://assets/art/atlases/tower/atl_tower_wind.png" id="3_3xpr4"]
@@ -16,8 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://d3uwhutrtqgwi" path="res://assets/art/sprites/ui/spr_ui_coin_small.png" id="14_8dhd2"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="15_3p7h3"]
 [ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="16_3p7h3"]
+[ext_resource type="Texture2D" uid="uid://djswlwxy5xp5g" path="res://assets/art/sprites/ui/plus.png" id="16_m780d"]
 [ext_resource type="Texture2D" uid="uid://qr44ws5evlmm" path="res://assets/art/sprites/ui/atl_ui_lvlup_compact.png" id="17_wl0l1"]
 [ext_resource type="Script" uid="uid://dryk4xnlrt6ig" path="res://scripts/towers/tower_hurtbox.gd" id="18_tkeu4"]
+[ext_resource type="Script" uid="uid://bshhqh6p6rwlx" path="res://scripts/ui/controller_button_hint.gd" id="19_3d6kj"]
 [ext_resource type="Texture2D" uid="uid://bs1li1amcuwmf" path="res://assets/art/sprites/ui/spr_ui_health_bg.png" id="19_4s542"]
 [ext_resource type="Texture2D" uid="uid://rwec3xnhkxkf" path="res://assets/art/sprites/ui/spr_ui_health_bar.png" id="20_3xpr4"]
 [ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="21_3xpr4"]
@@ -256,8 +258,9 @@ region = Rect2(35, 3, 10, 10)
 [sub_resource type="CircleShape2D" id="CircleShape2D_wl0l1"]
 radius = 5.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3xpr4"]
-radius = 5.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3d6kj"]
+radius = 6.0
+height = 16.0
 
 [node name="Tower" type="Node2D"]
 z_index = 2
@@ -375,13 +378,13 @@ stretch_mode = 2
 
 [node name="UpgradeDisplay" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Hbox" type="HBoxContainer" parent="UpgradeDisplay"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -404,6 +407,15 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("14_8dhd2")
+stretch_mode = 2
+
+[node name="PlusIcon" type="TextureRect" parent="UpgradeDisplay/Hbox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("16_m780d")
 stretch_mode = 2
 
 [node name="UpgradePriceLabel" type="Label" parent="UpgradeDisplay/Hbox"]
@@ -434,6 +446,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_wl0l1")
 stretch_mode = 2
+script = ExtResource("19_3d6kj")
+metadata/_custom_type_script = "uid://bshhqh6p6rwlx"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -470,11 +484,10 @@ script = ExtResource("21_3xpr4")
 metadata/_custom_type_script = "uid://c75pt0b6io16g"
 
 [node name="TowerObstacleBody" type="StaticBody2D" parent="."]
-visible = false
 position = Vector2(8, 8)
 collision_layer = 134217728
 collision_mask = 0
 
 [node name="TowerObstacleCollider" type="CollisionShape2D" parent="TowerObstacleBody"]
 unique_name_in_owner = true
-shape = SubResource("CircleShape2D_3xpr4")
+shape = SubResource("CapsuleShape2D_3d6kj")
