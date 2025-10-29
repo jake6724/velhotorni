@@ -1,6 +1,9 @@
 class_name TowerActionHint
 extends TextureRect
 
+func _ready():
+	z_index = Constants.z_index_map["top"]
+
 func display_tower_action_hint(tower_action: PlayerBuild.TowerAction) -> void:
 	match tower_action:
 		PlayerBuild.TowerAction.HEAL: display_heal()
