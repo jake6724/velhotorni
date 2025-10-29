@@ -74,16 +74,17 @@ func show_active_tower_healths(_value: bool) -> void:
 
 func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
 	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action(hovered_tower):
-		upgrade_action_charge_cirlce.show()
-		upgrade_action_charge_cirlce.value = player_input.upgrade_action_charge * 100
-		tower_action_hint_requested.emit(true)
-		if player_input.upgrade_action_charge >= 1:
-			get_tower_action_callable(tower_action).call()
-			configure_hovered_tower_for_action(hovered_tower)
-			match tower_action:
-				TowerAction.HEAL: reset_tower_action.emit(false)
-				TowerAction.UPGRADE: reset_tower_action.emit(true)
-				TowerAction.SELL: reset_tower_action.emit(true)
+		if check_can_afford_action(hovered_tower):
+			upgrade_action_charge_cirlce.show()
+			upgrade_action_charge_cirlce.value = player_input.upgrade_action_charge * 100
+			tower_action_hint_requested.emit(true)
+			if player_input.upgrade_action_charge >= 1:
+				get_tower_action_callable(tower_action).call()
+				configure_hovered_tower_for_action(hovered_tower)
+				match tower_action:
+					TowerAction.HEAL: reset_tower_action.emit(false)
+					TowerAction.UPGRADE: reset_tower_action.emit(true)
+					TowerAction.SELL: reset_tower_action.emit(true)
 	else:
 		upgrade_action_charge_cirlce.hide()
 		upgrade_action_charge_cirlce.value = 0
@@ -247,6 +248,7 @@ func get_action_cost(_hovered_tower) -> int:
 			TowerAction.HEAL: cost = TOWER_MANA_COST_PER_HEAL
 			TowerAction.UPGRADE: cost = _hovered_tower.level_upgrade_price
 			TowerAction.SELL: cost = -_hovered_tower.sell_price
+		print(cost)
 		return cost
 	else:
 		return -1
