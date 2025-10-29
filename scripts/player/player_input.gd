@@ -10,7 +10,7 @@ var primary_action_charge: float
 var upgrade_action_pressed: bool
 var upgrade_action_charge: float 
 var tower_action_press_multiplier_normal: float = 1.0
-var tower_action_press_multiplier_fast: float = 4.0
+var tower_action_press_multiplier_fast: float = 6.0
 var tower_action_press_multiplier: float = tower_action_press_multiplier_fast
 
 var is_latest_input_controller: bool = true
@@ -42,6 +42,7 @@ func _process(delta):
 		primary_action_charge += delta
 
 	if upgrade_action_pressed:
+		print(tower_action_press_multiplier)
 		upgrade_action_charge += delta * tower_action_press_multiplier
 		
 func _input(event):

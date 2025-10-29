@@ -1,6 +1,8 @@
 class_name PlayerBuild
 extends Node2D
 
+enum TowerAction {HEAL, UPGRADE, SELL}
+
 @export var grid_follow_tower: bool = true # Debugging, should go away
 
 var tower_parent: Node = Node.new()
@@ -20,6 +22,7 @@ var hovered_tower: Tower
 
 const TOWER_PLACEMENT_RANGE: int = 16
 const TOWER_MANA_COST_PER_HEAL: int = 1
+const TOWER_HEAL_AMOUNT: int = 10
 
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var preview_tower: Tower
@@ -39,15 +42,16 @@ var tower_index: int = 0:
 
 		player_build_ui.tower_index = tower_index
 
-var tower_action: Callable = heal_tower
-var tower_action_options: Array[Callable] = [] #TODO: better if this was a linked list
+var tower_action: TowerAction = TowerAction.HEAL
+var tower_action_options: Array[TowerAction] = [TowerAction.HEAL, TowerAction.UPGRADE, TowerAction.SELL]
 
 signal tower_mana_spent
 signal reset_tower_action
+signal tower_action_changed
+signal tower_action_hint_requested
 
 func _ready():
 	add_child(tower_parent)
-	tower_action_options = [heal_tower, upgrade_tower, sell_tower]
 
 func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _tower_detect_area: Area2D, player_mana: PlayerMana) -> void:
 	player_build_ui = _player_build_ui
@@ -58,6 +62,7 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	player_build_ui.update_tower_count_label(0)
 	player_build_ui.update_tower_max_label(max_towers)
 	_tower_mana = player_mana.tower_mana
+	tower_action_changed.emit(tower_action)
 
 func show_active_tower_ranges(_value: bool) -> void:
 	for tower: Tower in active_towers:
@@ -68,19 +73,21 @@ func show_active_tower_healths(_value: bool) -> void:
 		tower.healthbar.visible = _value
 
 func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
-	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action():
+	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action(hovered_tower):
 		upgrade_action_charge_cirlce.show()
 		upgrade_action_charge_cirlce.value = player_input.upgrade_action_charge * 100
+		tower_action_hint_requested.emit(true)
 		if player_input.upgrade_action_charge >= 1:
-			tower_action.call()
+			get_tower_action_callable(tower_action).call()
 			configure_hovered_tower_for_action(hovered_tower)
 			match tower_action:
-				heal_tower: reset_tower_action.emit(false)
-				upgrade_tower: reset_tower_action.emit(true)
-				sell_tower: reset_tower_action.emit(true)
+				TowerAction.HEAL: reset_tower_action.emit(false)
+				TowerAction.UPGRADE: reset_tower_action.emit(true)
+				TowerAction.SELL: reset_tower_action.emit(true)
 	else:
 		upgrade_action_charge_cirlce.hide()
 		upgrade_action_charge_cirlce.value = 0
+		tower_action_hint_requested.emit(false)
 
 ## Creates a new instance of `tower_scene`, fully initialized. Modulated to be transparent.
 ## This is an active and ready tower that just needs to be placed.
@@ -167,15 +174,17 @@ func switch_tower_action(player_input: PlayerInput) -> void:
 	configure_hovered_tower_for_action(hovered_tower)
 
 	# Set tower_action_press_multiplier
-	if tower_action == heal_tower:
+	if tower_action == TowerAction.HEAL:
 		player_input.tower_action_press_multiplier = player_input.tower_action_press_multiplier_fast
 	else:
 		player_input.tower_action_press_multiplier = player_input.tower_action_press_multiplier_normal
 
+	tower_action_changed.emit(tower_action)
+
 func heal_tower() -> void:
 	if hovered_tower and hovered_tower.can_heal:
 		tower_mana_spent.emit(TOWER_MANA_COST_PER_HEAL)
-		hovered_tower.heal(10)
+		hovered_tower.heal(TOWER_HEAL_AMOUNT)
 
 func upgrade_tower() -> void:
 	if hovered_tower:
@@ -192,56 +201,61 @@ func sell_tower() -> void:
 		tower_mana_spent.emit(-hovered_tower.sell_price)
 		hovered_tower.die()
 
-func check_can_perform_action() -> bool:
-	var cost: int = get_action_cost()
-	if hovered_tower.level < Constants.TOWER_MAX_LEVEL and _tower_mana >= cost:
-		# Check tower can be healed if relevant
-		if tower_action == heal_tower:
-			if hovered_tower.can_heal:
-				return true
-			else:
-				return false
-
-		if tower_action == upgrade_tower:
-			if hovered_tower.level >= Constants.TOWER_MAX_LEVEL:
-				return false
-			else:
-				return true
-
-		return true
-	return false
-
-func get_action_cost() -> int: 
-	if hovered_tower:
-		var cost: int = 0
-		match tower_action:
-			heal_tower: cost = TOWER_MANA_COST_PER_HEAL
-			upgrade_tower: cost = hovered_tower.level_upgrade_price
-			sell_tower: cost = -hovered_tower.sell_price
-		return cost
-	else:
-		return -1
-
 func configure_hovered_tower_for_action(_hovered_tower) -> void:
 	if _hovered_tower:
-		_hovered_tower.show_action_cost_info(get_action_cost())
+		_hovered_tower.show_action_cost_info(get_action_cost(_hovered_tower))
 
-		if check_can_perform_action():
-			print("can perform")
-			_hovered_tower.upgrade_button_hint.show()
-			_hovered_tower.upgrade_coin_icon.show()
+		if check_can_perform_action(_hovered_tower):
+			if check_can_afford_action(_hovered_tower):
+				_hovered_tower.upgrade_button_hint.show()
+				_hovered_tower.upgrade_coin_icon.show()
+			else:
+				_hovered_tower.upgrade_button_hint.hide()
 		else:
-			print("can NOT perform")
 			_hovered_tower.upgrade_button_hint.hide()
 			_hovered_tower.upgrade_coin_icon.hide()
 			_hovered_tower.upgrade_price_label.text = " MAX"
+
+func check_can_perform_action(_hovered_tower) -> bool:
+	match tower_action:
+		TowerAction.HEAL:
+			if _hovered_tower.can_heal:
+				return true
+			else:
+				return false
+		TowerAction.UPGRADE:
+			if _hovered_tower.level < Constants.TOWER_MAX_LEVEL:
+				return true
+		TowerAction.SELL: 
+			return true
+
+	push_error("Unknown tower action: ", tower_action)
+	return false
+
+func check_can_afford_action(_hovered_tower) -> bool: 
+	var cost: int = get_action_cost(_hovered_tower)
+	if _tower_mana >= cost:
+		return true
+	else:
+		return false
+
+func get_action_cost(_hovered_tower) -> int: 
+	if _hovered_tower:
+		var cost: int = 0
+		match tower_action:
+			TowerAction.HEAL: cost = TOWER_MANA_COST_PER_HEAL
+			TowerAction.UPGRADE: cost = _hovered_tower.level_upgrade_price
+			TowerAction.SELL: cost = -_hovered_tower.sell_price
+		return cost
+	else:
+		return -1
 
 func on_tower_detect_area_entered(intruder: Area2D) -> void:
 	if preview_tower:
 		preview_tower.hide()
 	
 	hovered_tower = intruder.owner
-	hovered_tower.show_action_cost_info(get_action_cost())	
+	hovered_tower.show_action_cost_info(get_action_cost(hovered_tower))	
 	hovered_tower.can_show_range = true
 	player_build_ui.update_tower_info_panel(hovered_tower)
 	hovered_tower.upgrade_button_hint.set_hint_icon("joypad_button_2")
@@ -273,3 +287,14 @@ func on_tower_died(tower: Tower) -> void:
 
 func on_tower_mana_updated(_value) -> void:
 	_tower_mana = _value
+
+func get_tower_action_callable(_tower_action: TowerAction) -> Callable:
+	match _tower_action:
+		TowerAction.HEAL: return heal_tower
+		TowerAction.UPGRADE: return upgrade_tower
+		TowerAction.SELL: return sell_tower
+	push_error("Passed TowerAction '", _tower_action, "' unknown")
+	return null_func
+	
+func null_func() -> void:
+	print("Null func")

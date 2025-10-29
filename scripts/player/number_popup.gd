@@ -131,5 +131,43 @@ func display_mana_empty(pos: Vector2) -> void:
 	await tween.finished
 	number.queue_free()
 
+func display_tower_heal(pos: Vector2, value: int, max_value: int) -> void:
+	var number: Label = Label.new()
+	number.global_position = pos + pos_offset
+	number.z_index = Constants.z_index_map["popup"]
+	number.text = str(value,"/",max_value)
+
+	number.label_settings = LabelSettings.new()
+	number.label_settings.font_color = Constants.color_green
+	number.label_settings.font_size = 8
+	number.label_settings.font = font
+	number.label_settings.outline_color = COLOR_WHITE
+	number.label_settings.outline_size = outline_size
+	number.label_settings.shadow_offset = shadow_offset
+	number.label_settings.shadow_size = shadow_size
+	number.label_settings.shadow_color = COLOR_BLACK
+
+	call_deferred("add_child", number)
+	await number.resized
+
+	number.pivot_offset = Vector2(number.size / 2)
+	number.position.x -= number.size.x / 2
+
+	var tween = get_tree().create_tween()
+	tween.tween_property(number, "position:y", number.position.y - up_distance, up_time).set_ease(Tween.EASE_OUT)
+	tween.tween_interval(.1)
+	await tween.finished
+
+	# # Blink
+	# var blink_tween = get_tree().create_tween()
+	# blink_tween.set_loops(5)
+	# blink_tween.tween_property(number, "modulate:a", 0.0, .01)
+	# blink_tween.tween_interval(.125)
+	# blink_tween.tween_property(number, "modulate:a", 1.0, .01)
+	# blink_tween.tween_interval(.125)
+
+	# await blink_tween.finished
+	number.queue_free()
+
 func get_jitter() -> float:
 	return rng.randf_range(-jitter_range, jitter_range)

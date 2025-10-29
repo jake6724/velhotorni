@@ -616,6 +616,7 @@ func on_hit(_damage_amount: int) -> void:
 
 func heal(_value: int) -> void:
 	health = min(health + _value, max_health)
+	number_popup.display_tower_heal(global_position, health, max_health)
 	if health >= max_health:
 		can_heal = false
 

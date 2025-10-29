@@ -36,6 +36,7 @@ extends CharacterBody2D
 @onready var tower_detect_area: Area2D = %TowerDetectArea
 @onready var tower_detect_collider: CollisionShape2D = %TowerDetectCollider
 @onready var upgrade_action_charge_cirlce: TextureProgressBar = %UpgradeActionChargeCircle
+@onready var tower_action_hint: TowerActionHint = %TowerActionHint
 
 @onready var player_build_ui: PlayerBuildUI = %PlayerBuildUI
 
@@ -116,7 +117,9 @@ func _ready():
 	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area, player_mana)
 	player_build.tower_mana_spent.connect(on_tower_mana_spent)
 	player_build.reset_tower_action.connect(on_reset_tower_action)
+	player_build.tower_action_hint_requested.connect(on_tower_action_hint_requested)
 	player_mana.tower_mana_updated.connect(player_build.on_tower_mana_updated)
+	player_build.tower_action_changed.connect(tower_action_hint.display_tower_action_hint)
 
 	# Connect to ManaDropCollector
 	mana_drop_collector.mana_drop_collected.connect(on_element_mana_collected)
@@ -250,7 +253,6 @@ func switch_to_build_mode() -> void:
 	player_build_ui.show()
 	player_build_ui.raise_current()
 	player_build.create_preview_tower()
-	# player_build.show_active_tower_healths(true)
 	build_grid_sprite.show()
 	player_stats.active_speed = player_stats.build_speed
 	tower_detect_collider.set_deferred("disabled", false)
@@ -265,7 +267,6 @@ func switch_to_combat_mode() -> void:
 	switch_action_func = switch_spell
 	if player_build.preview_tower:		# Remove preview tower
 		player_build.preview_tower.queue_free()
-	# player_build.show_active_tower_healths(false)
 	player_build_ui.hide()
 	build_grid_sprite.hide()
 	player_stats.active_speed = player_stats.combat_speed
@@ -403,3 +404,6 @@ func on_reset_tower_action(_disable_press: bool) -> void:
 	player_input.upgrade_action_charge = 0
 	if _disable_press:
 		player_input.upgrade_action_pressed = false
+
+func on_tower_action_hint_requested(_value: bool) -> void:
+	tower_action_hint.visible = _value

@@ -71,6 +71,14 @@ visible = false
 layout_mode = 2
 texture = ExtResource("4_v4fcr")
 
+[node name="Label" type="Label" parent="VBoxContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 2
