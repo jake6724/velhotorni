@@ -117,7 +117,6 @@ func animate_switch_tower_action() -> void:
 
 	tower_action_icons.append(tower_action_icons[0])
 	tower_action_icons.remove_at(0)
-	print(tower_action_icons)
 
 func position_tower_action_icons() -> void:
 	tower_action_icons[0].position += Vector2(-2,-2)

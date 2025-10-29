@@ -77,7 +77,6 @@ func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: Textur
 		if check_can_afford_action(hovered_tower):
 			upgrade_action_charge_cirlce.show()
 			upgrade_action_charge_cirlce.value = player_input.upgrade_action_charge * 100
-			tower_action_hint_requested.emit(true)
 			if player_input.upgrade_action_charge >= 1:
 				get_tower_action_callable(tower_action).call()
 				configure_hovered_tower_for_action(hovered_tower)
@@ -88,7 +87,7 @@ func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: Textur
 	else:
 		upgrade_action_charge_cirlce.hide()
 		upgrade_action_charge_cirlce.value = 0
-		tower_action_hint_requested.emit(false)
+
 
 ## Creates a new instance of `tower_scene`, fully initialized. Modulated to be transparent.
 ## This is an active and ready tower that just needs to be placed.
@@ -213,6 +212,7 @@ func configure_hovered_tower_for_action(_hovered_tower) -> void:
 				_hovered_tower.upgrade_coin_icon.show()
 			else:
 				_hovered_tower.upgrade_button_hint.hide()
+				_hovered_tower.upgrade_coin_icon.show()
 		else:
 			_hovered_tower.upgrade_button_hint.hide()
 			_hovered_tower.upgrade_coin_icon.hide()
@@ -248,7 +248,6 @@ func get_action_cost(_hovered_tower) -> int:
 			TowerAction.HEAL: cost = TOWER_MANA_COST_PER_HEAL
 			TowerAction.UPGRADE: cost = _hovered_tower.level_upgrade_price
 			TowerAction.SELL: cost = -_hovered_tower.sell_price
-		print(cost)
 		return cost
 	else:
 		return -1
@@ -263,6 +262,7 @@ func on_tower_detect_area_entered(intruder: Area2D) -> void:
 	player_build_ui.update_tower_info_panel(hovered_tower)
 	hovered_tower.upgrade_button_hint.set_hint_icon("joypad_button_2")
 	configure_hovered_tower_for_action(hovered_tower)
+	tower_action_hint_requested.emit(true)
 
 func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 	reset_tower_action.emit(false)
@@ -278,6 +278,8 @@ func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 	if preview_tower:
 		preview_tower.upgrade_button_hint.set_hint_icon("joypad_button_0")
 		player_build_ui.update_tower_info_panel(preview_tower)
+	
+	tower_action_hint_requested.emit(false)
 
 func on_tower_died(tower: Tower) -> void:
 	if preview_tower == tower:

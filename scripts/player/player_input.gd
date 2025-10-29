@@ -42,7 +42,6 @@ func _process(delta):
 		primary_action_charge += delta
 
 	if upgrade_action_pressed:
-		print(tower_action_press_multiplier)
 		upgrade_action_charge += delta * tower_action_press_multiplier
 		
 func _input(event):
