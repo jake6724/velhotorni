@@ -11,7 +11,7 @@ extends CharacterBody2D
 @onready var player_spells: PlayerSpells = $PlayerSpells
 @onready var player_spell_spawner: PlayerSpellSpawner = $PlayerSpellSpawner
 @onready var player_stats: PlayerCharacterStats = $PlayerCharacterStats
-@onready var player_hurtbox: Area2D = $PlayerHurtbox
+@onready var player_hurtbox: Area2D = %PlayerHurtbox
 @onready var player_camera: PlayerCamera = %PlayerCamera
 @onready var player_audio: PlayerAudio = %PlayerAudio
 @onready var player_particles: GPUParticles2D = %PlayerParticles
@@ -20,6 +20,7 @@ extends CharacterBody2D
 @onready var player_mana: PlayerMana = %PlayerMana
 @onready var player_special: PlayerSpecial = %PlayerSpecial
 @onready var player_number_popup: PlayerNumberPopup = %PlayerNumberPopup
+@onready var player_perk_manager: PlayerPerkManager = %PlayerPerkManager
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer
@@ -57,7 +58,7 @@ var can_fire: bool = true
 var hit: bool = false
 
 var hitstun_recovery_multiplier: float = 300 # Influences how quickly the player stops sliding when hitstun and recovers back to normal mode
-var hurtbox_iframe_duration: float = 1.0
+var hurtbox_iframe_duration: float = 1.5
 var hurtbox_reset_timer: Timer = Timer.new()
 
 var building: bool = false
@@ -157,7 +158,7 @@ func _physics_process(delta): # This can go in a state eventually
 		if not hit:
 			if not player_special.active:
 				# Update Movement
-				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.active_speed)
+				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.move_speed)
 				player_animation.update_animation(delta)
 
 		else: # Hit stun recovery
@@ -254,7 +255,7 @@ func switch_to_build_mode() -> void:
 	player_build_ui.raise_current()
 	player_build.create_preview_tower()
 	build_grid_sprite.show()
-	player_stats.active_speed = player_stats.build_speed
+	# player_stats.active_speed = player_stats.build_speed
 	tower_detect_collider.set_deferred("disabled", false)
 	reticle_sprite.hide()
 	await get_tree().create_timer(.1).timeout
@@ -269,7 +270,7 @@ func switch_to_combat_mode() -> void:
 		player_build.preview_tower.queue_free()
 	player_build_ui.hide()
 	build_grid_sprite.hide()
-	player_stats.active_speed = player_stats.combat_speed
+	# player_stats.active_speed = player_stats.combat_speed
 	tower_detect_collider.set_deferred("disabled", true)
 	reticle_sprite.hide()
 	await get_tree().create_timer(.05).timeout
@@ -309,7 +310,7 @@ func on_hit(_direction) -> void:
 			return
 			
 		velocity = _direction * player_stats.knockback_multiplier
-		update_hurtbox_collider(false)
+		update_hurtbox_collider(true)
 		velocity = _direction * player_stats.knockback_multiplier
 		hurtbox_reset_timer.start(hurtbox_iframe_duration)
 
@@ -336,7 +337,7 @@ func respawn() -> void:
 	global_position = spawn_point
 	alive = true
 	player_stats.health = player_stats.max_health
-	player_hurtbox.collider.set_deferred("disabled", true)
+	update_hurtbox_collider(false)
 	hurtbox_reset_timer.start(hurtbox_iframe_duration)
 	player_respawned.emit()	
 	hit_blink()
@@ -351,7 +352,7 @@ func hit_blink() -> void:
 	blink_tween.tween_interval(blink_time)
 
 func on_hurtbox_reset_timer_timeout() -> void:
-	player_hurtbox.collider.set_deferred("disabled", false)
+	update_hurtbox_collider(false)
 
 func show_staff_sprite_custom(): 
 	if alive and not building:

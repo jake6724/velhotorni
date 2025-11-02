@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=113 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://dhx5yrbtwdm7n" path="res://assets/art/sprites/ui/spr_ui_circle_longpress.png" id="36_vka04"]
 [ext_resource type="Texture2D" uid="uid://cqn6fyjhd4r4x" path="res://assets/art/sprites/ui/atl_ui_toweractions_small.png" id="38_t4l3f"]
 [ext_resource type="Script" uid="uid://b7p3mdiusjhxc" path="res://scripts/player/tower_action_hint.gd" id="39_cshdu"]
+[ext_resource type="Script" uid="uid://br1s314vcnsdg" path="res://scripts/player/player_perk_manager.gd" id="40_ykwnp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qouk"]
 atlas = ExtResource("3_j4yks")
@@ -1352,6 +1353,11 @@ script = ExtResource("20_fyjgo")
 unique_name_in_owner = true
 script = ExtResource("23_hnid3")
 
+[node name="PlayerPerkManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("40_ykwnp")
+metadata/_custom_type_script = "uid://br1s314vcnsdg"
+
 [node name="PlayerBuild" type="Node2D" parent="."]
 script = ExtResource("13_6qouk")
 metadata/_custom_type_script = "uid://c67nlh7a52smp"
@@ -1382,7 +1388,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="PlayerHurtbox" type="Area2D" parent="."]
-visible = false
+unique_name_in_owner = true
 collision_layer = 131072
 collision_mask = 294928
 script = ExtResource("12_gsbha")
@@ -1401,6 +1407,7 @@ script = ExtResource("27_h3nqo")
 shape = SubResource("CapsuleShape2D_vy23r")
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_ljh2g")
 
@@ -1440,6 +1447,7 @@ unique_name_in_owner = true
 
 [node name="TowerDetectArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 0
 
 [node name="TowerDetectCollider" type="CollisionShape2D" parent="TowerDetectArea"]

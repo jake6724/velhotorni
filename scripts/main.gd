@@ -10,6 +10,7 @@ extends Node2D
 @onready var mana_drop_manager: ManaDropManager = %ManaDropManager
 @onready var fps_label: Label = %FPSLabel
 @onready var level_complete_panel: LevelCompletePanel = %LevelCompletePanel
+@onready var perk_manager: PerkManager = %PerkManager
 var player_spawn_point: Node2D
 
 var active_level: LevelEnvironment
@@ -76,6 +77,9 @@ func _ready():
 	# Configure TowerManaBreakables
 	for breakable: Breakable in active_level.tower_mana_breakables:
 		breakable.coin_dropped.connect(coin_drop_manager.spawn_coin_drop)
+
+	# Configure PerkManager
+	perk_manager.player_perk_manager = player_character.player_perk_manager
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
