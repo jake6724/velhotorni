@@ -46,6 +46,7 @@ gdscript/warnings/narrowing_conversion=0
 
 window/size/viewport_width=512
 window/size/viewport_height=288
+window/size/initial_position_type=2
 window/size/window_width_override=1440
 window/size/window_height_override=810
 window/stretch/mode="canvas_items"
@@ -57,6 +58,7 @@ enabled=PackedStringArray("res://addons/tabby_explorer/plugin.cfg")
 
 [gui]
 
+theme/custom="uid://bgn3hnlwq7u0o"
 theme/custom_font="uid://cu0ib6xd161v2"
 
 [input]

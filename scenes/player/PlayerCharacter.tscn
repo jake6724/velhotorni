@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=116 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_fhwjy"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dhctbtmi6vl0o" path="res://scripts/player/player_staff_sprite.gd" id="7_hnid3"]
 [ext_resource type="Texture2D" uid="uid://btu23m1c7slb3" path="res://assets/art/sprites/ui/spr_ui_placementgrid.png" id="7_vycf0"]
 [ext_resource type="Resource" uid="uid://bcov2rckhliwp" path="res://data/spells/water/spell_data_melee_water_ice_sword.tres" id="8_kuao7"]
+[ext_resource type="Texture2D" uid="uid://blqioud0kn28e" path="res://assets/art/atlases/bullet/atl_bullet_arcane_charge_muzzle.png" id="8_yirxs"]
 [ext_resource type="Script" uid="uid://b5keun6k5cxfo" path="res://scripts/player/player_aim.gd" id="9_laqyv"]
 [ext_resource type="Script" uid="uid://bmfid24mjnj0v" path="res://scripts/player/player_movement.gd" id="10_hkntq"]
 [ext_resource type="PackedScene" uid="uid://bno5o5pbi8s3e" path="res://scenes/player/CoinCollector.tscn" id="10_wp8q1"]
@@ -66,6 +67,24 @@ animations = [{
 "loop": true,
 "name": &"combat",
 "speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gg8xu"]
+atlas = ExtResource("8_yirxs")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ykwnp"]
+animations = [{
+"frames": [{
+"duration": 0.01,
+"texture": SubResource("AtlasTexture_gg8xu")
+}, {
+"duration": 0.01,
+"texture": null
+}],
+"loop": false,
+"name": &"flash",
+"speed": 0.5
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fyjgo"]
@@ -1294,6 +1313,13 @@ hframes = 8
 region_enabled = true
 region_rect = Rect2(0, 0, 217, 16)
 script = ExtResource("7_hnid3")
+
+[node name="MuzzleFlash" type="AnimatedSprite2D" parent="StaffSprite"]
+visible = false
+z_index = 5
+position = Vector2(14, -4)
+sprite_frames = SubResource("SpriteFrames_ykwnp")
+animation = &"flash"
 
 [node name="SpecialChargesSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

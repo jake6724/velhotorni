@@ -1,6 +1,11 @@
 class_name StaffSprite
 extends Sprite2D
 
+@onready var muzzle_flash: AnimatedSprite2D = $MuzzleFlash
+
+func _ready():
+	print(muzzle_flash)
+
 ## Update the region of the staff atlas, changing the staff graphic. Return the corresponding value for
 ## player_aim.staff_rotation_offset_degrees
 func switch_staff_texture(_spell_type: SpellData.Type) -> int:
@@ -28,3 +33,7 @@ func switch_staff_texture(_spell_type: SpellData.Type) -> int:
 			return 0
 			
 		_: return 0
+
+func display_muzzle_flash() -> void:
+	print("test")
+	muzzle_flash.play("flash")

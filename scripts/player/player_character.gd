@@ -197,7 +197,8 @@ func on_spell_cast(_element: Constants.Element, _mana_cost) -> void:
 	player_mana.decrement_element_mana(_element, _mana_cost)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
 	staff_ap.play("fire")
-
+	# staff_sprite.display_muzzle_flash()
+	
 func on_spell_cast_failed() -> void:
 	player_number_popup.display_mana_empty(global_position)
 

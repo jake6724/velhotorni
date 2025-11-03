@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwvwwlqpm2ccq"]
+
+[ext_resource type="Texture2D" uid="uid://ux5cl4xi3sfi" path="res://assets/art/sprites/ui/spr_ui_box6.png" id="1_riojv"]
+[ext_resource type="Script" uid="uid://csocx7w7oryov" path="res://scripts/ui/perks/perk_card.gd" id="2_cr6u4"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="3_c0yc6"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="4_3nta1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nta1"]
+atlas = ExtResource("3_c0yc6")
+region = Rect2(0, 1, 48, 46)
+
+[node name="PerkCard" type="Control"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -72.0
+offset_right = 60.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("2_cr6u4")
+metadata/_custom_type_script = "uid://csocx7w7oryov"
+
+[node name="PerkIconControl" type="Control" parent="."]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_left = 59.0
+offset_top = 7.0
+offset_right = 59.0
+offset_bottom = 7.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="CardBackground" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 144.0
+texture = ExtResource("1_riojv")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="PerkIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 36.0
+offset_top = -32.0
+offset_right = 84.0
+offset_bottom = 14.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_3nta1")
+stretch_mode = 2
+
+[node name="Content" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 111.0
+offset_bottom = 137.0
+
+[node name="Label" type="Label" parent="Content"]
+layout_mode = 2
+offset_top = 9.0
+offset_right = 104.0
+offset_bottom = 19.0
+theme_override_fonts/font = ExtResource("4_3nta1")
+theme_override_font_sizes/font_size = 8
+text = "touch of death"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Content"]
+custom_minimum_size = Vector2(104, 49)
+layout_mode = 2
+offset_left = 1.0
+offset_top = 33.0
+offset_right = 105.0
+offset_bottom = 82.0
+text = "After taking damage, deal damage in a large radius"
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="Content"]
+layout_mode = 2
+offset_top = 75.0
+offset_right = 104.0
+offset_bottom = 85.0

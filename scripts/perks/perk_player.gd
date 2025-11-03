@@ -19,6 +19,6 @@ func modify_player_stat(stat_to_modify: PerkDataPlayer.PlayerStat, value: float)
 
 func set_rarity_value() -> void:
 	match data.rarity:
-		PerkData.Rarity.Common: pass
-		PerkData.Rarity.Rare: data.base_value *= 2
-		PerkData.Rarity.Epic: data.base_value *= 4
+		PerkData.Rarity.One: pass
+		PerkData.Rarity.Two: data.base_value *= 2
+		PerkData.Rarity.Three: data.base_value *= 4

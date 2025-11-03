@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bsnxdycnstbxx"]
 
-[ext_resource type="Texture2D" uid="uid://bru0vasbogas4" path="res://assets/art/atlases/bullet/atl_bullet_arcane.png" id="1_ursk0"]
+[ext_resource type="Texture2D" uid="uid://bru0vasbogas4" path="res://assets/art/atlases/bullet/atl_bullet_arcane.png" id="1_6fm6w"]
 [ext_resource type="Script" uid="uid://nea0jnsnjkk3" path="res://scripts/spells/spell_bullet.gd" id="2_xhrp4"]
 
 [sub_resource type="Animation" id="Animation_ursk0"]
@@ -27,7 +27,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [3]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -39,7 +39,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 0)]
+"values": [Vector2i(0, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_xhrp4"]
@@ -49,10 +49,34 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
+tracks/0/path = NodePath(".:hframes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -86,7 +110,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [3]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -103,7 +127,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_6fm6w"]
 resource_name = "spawn"
-length = 0.01
+length = 0.001
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -127,7 +151,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [3]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -139,7 +163,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 4)]
+"values": [Vector2i(0, 2)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ursk0"]
@@ -154,9 +178,10 @@ _data = {
 radius = 2.0
 
 [node name="SpellBullet" type="Sprite2D"]
-texture = ExtResource("1_ursk0")
+texture = ExtResource("1_6fm6w")
 hframes = 4
-vframes = 7
+vframes = 3
+frame = 8
 script = ExtResource("2_xhrp4")
 metadata/_custom_type_script = "uid://nea0jnsnjkk3"
 

@@ -14,8 +14,6 @@ func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 	area.area_entered.connect(on_area_entered)
 	area.body_entered.connect(on_body_entered)
-	# ap.play("move")
-	ap.queue("move")
 
 func initialize(_data: SpellDataBullet, cast_direction: Vector2) -> void:
 	data = _data
@@ -54,6 +52,9 @@ func on_body_entered(_intruder) -> void:
 func on_animation_finished(anim_name) -> void:
 	if anim_name == "hit":
 		queue_free()
+
+	if anim_name == "spawn":
+		ap.play("move")
 
 func check_max_distance_reached() -> void:
 	if active and abs(global_position.distance_to(original_position)) > data.max_distance:

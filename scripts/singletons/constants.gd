@@ -188,4 +188,6 @@ func get_weighted_random(spawn_chance_array) -> Variant:
 		if r < selection[1]:
 			return selection[0]
 		r -= selection[1]
+
+	push_error("get_weighted_random reached final return, which should not be possible")
 	return # Only here to allow for typed return signature. Should never return here
