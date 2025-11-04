@@ -1,7 +1,7 @@
 class_name ManaDrop
 extends Area2D
 
-var element: Constants.Element
+var spell_data: SpellData
 var amount_modifier: float
 var destination_reached: bool = false
 var destination: Vector2

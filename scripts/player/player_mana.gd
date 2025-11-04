@@ -1,47 +1,12 @@
 class_name PlayerMana
 extends Node
 
-const MANA_LOW_THRESHOLD: float = .2 # multiplied by the max value to get a specific percentage
+const SPELL_MANA_LOW_THRESHOLD: float = .2 # multiplied by the max value to get a percentage
 
-var element_mana: Dictionary[Constants.Element, float] = {
-	Constants.Element.FIRE: 100,
-	Constants.Element.WIND: 100,
-	Constants.Element.WATER: 100,
-	Constants.Element.EARTH: 100,
-	Constants.Element.LIGHT: 100,
-	Constants.Element.DARK: 100,
-	Constants.Element.ARCANE: 200,
-}
-
-var element_mana_maxes: Dictionary[Constants.Element, float] = {
-	Constants.Element.FIRE: 200,
-	Constants.Element.WIND: 200,
-	Constants.Element.WATER: 200,
-	Constants.Element.EARTH: 200,
-	Constants.Element.LIGHT: 200,
-	Constants.Element.DARK: 200,
-	Constants.Element.ARCANE: 400,
-}
-
-var element_drop_amount_base: Dictionary[Constants.Element, float] = {
-	Constants.Element.FIRE: 20,
-	Constants.Element.WIND: 20,
-	Constants.Element.WATER: 20,
-	Constants.Element.EARTH: 20,
-	Constants.Element.LIGHT: 20,
-	Constants.Element.DARK: 20,
-	Constants.Element.ARCANE: 40,
-}
-
-var element_mana_low: Dictionary[Constants.Element, bool] = {
-	Constants.Element.FIRE: false,
-	Constants.Element.WIND: false,
-	Constants.Element.WATER: false,
-	Constants.Element.EARTH: false,
-	Constants.Element.LIGHT: false,
-	Constants.Element.DARK: false,
-	Constants.Element.ARCANE: false,
-}
+var spell_mana: Dictionary[SpellData, float] = {}
+var spell_mana_base_drop_amount: Dictionary[SpellData, float] = {}
+var spell_mana_maxes: Dictionary[SpellData, float] = {}
+var spell_mana_low: Dictionary[SpellData, bool] = {}
 
 var tower_mana: float = 0:
 	set(value):
@@ -50,24 +15,27 @@ var tower_mana: float = 0:
 
 signal tower_mana_updated
 
-func get_element_mana(_element: Constants.Element) -> float:
-	return element_mana[_element]
+func increment_spell_mana(spell_data, _drop_amount_modifier) -> int:
+	var prev_spell_mana_amount: int = spell_mana[spell_data]
+	var new_spell_mana_amount: int = min(spell_mana[spell_data] + (spell_data.base_spell_mana_per_drop * _drop_amount_modifier), spell_mana_maxes[spell_data])
+	spell_mana[spell_data] = new_spell_mana_amount
+	check_spell_mana_low(spell_data)
+	return (new_spell_mana_amount - prev_spell_mana_amount)
 
-func get_element_mana_max(_element: Constants.Element) -> float:
-	return element_mana_maxes[_element]
+func decrement_spell_mana(spell_data) -> void:
+	spell_mana[spell_data] -= 1
+	check_spell_mana_low(spell_data)
 
-func decrement_element_mana(_element, _value) -> void:
-	element_mana[_element] -= _value
-	check_mana_low(_element)
-
-func increment_element_mana(_element, _drop_amount_modifier) -> void:
-
-	element_mana[_element] = min(element_mana[_element] + (element_drop_amount_base[_element] * _drop_amount_modifier), element_mana_maxes[_element] )
-	# element_mana[_element] += (element_drop_amount_base[_element] * _drop_amount_modifier)
-	check_mana_low(_element)
-
-func check_mana_low(_element) -> void:
-	if element_mana[_element] <= (element_mana_maxes[_element] * MANA_LOW_THRESHOLD):
-		element_mana_low[_element] = true
+func check_spell_mana_low(spell_data) -> void:
+	if spell_mana[spell_data] <= (spell_mana_maxes[spell_data] * SPELL_MANA_LOW_THRESHOLD):
+		spell_mana_low[spell_data] = true
 	else:
-		element_mana_low[_element] = false
+		spell_mana_low[spell_data] = false
+
+## Configure `spell_data` with PlayerCharacter's active weapons, and initialize values. Called manually by `PlayerCharacter`. 
+func populate_spell_mana(selected_spells: Array[SpellData]) -> void:
+	for spell_data: SpellData in selected_spells:
+		spell_mana[spell_data] = spell_data.initial_mana_amount
+		spell_mana_base_drop_amount[spell_data] = spell_data.base_spell_mana_per_drop
+		spell_mana_maxes[spell_data] = spell_data.max_mana_amount
+		spell_mana_low[spell_data] = false

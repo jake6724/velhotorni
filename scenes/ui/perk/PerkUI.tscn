@@ -13,27 +13,6 @@ load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c
 atlas = SubResource("CompressedTexture2D_q4ku2")
 region = Rect2(7, 6, 34, 74)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mk1p4"]
-load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_trnrl"]
-atlas = SubResource("CompressedTexture2D_mk1p4")
-region = Rect2(54, 7, 36, 73)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ebruu"]
-load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mk1p4"]
-atlas = SubResource("CompressedTexture2D_ebruu")
-region = Rect2(102, 7, 36, 73)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_trnrl"]
-load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8q562"]
-atlas = SubResource("CompressedTexture2D_trnrl")
-region = Rect2(151, 7, 34, 73)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2mlt"]
 atlas = ExtResource("5_8q562")
 region = Rect2(0, 0, 32, 32)
@@ -69,6 +48,27 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mk1p4"]
+load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trnrl"]
+atlas = SubResource("CompressedTexture2D_mk1p4")
+region = Rect2(54, 7, 36, 73)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ebruu"]
+load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mk1p4"]
+atlas = SubResource("CompressedTexture2D_ebruu")
+region = Rect2(102, 7, 36, 73)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_trnrl"]
+load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q562"]
+atlas = SubResource("CompressedTexture2D_trnrl")
+region = Rect2(151, 7, 34, 73)
 
 [node name="PerkUI" type="Control"]
 layout_mode = 3
@@ -117,69 +117,74 @@ offset_right = 40.0
 offset_bottom = 141.0
 
 [node name="Candle1" type="TextureRect" parent="Candles"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 16.0
-offset_top = 214.0
+offset_top = 219.0
 offset_right = 56.0
-offset_bottom = 288.0
+offset_bottom = 293.0
 texture = SubResource("AtlasTexture_ebruu")
 stretch_mode = 3
 
+[node name="Flame1" type="AnimatedSprite2D" parent="Candles/Candle1"]
+position = Vector2(18, -12)
+sprite_frames = SubResource("SpriteFrames_04n6p")
+autoplay = "default"
+frame_progress = 0.75775
+
 [node name="Candle2" type="TextureRect" parent="Candles"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 72.0
-offset_top = 232.0
+offset_top = 237.0
 offset_right = 112.0
-offset_bottom = 306.0
+offset_bottom = 311.0
 texture = SubResource("AtlasTexture_trnrl")
 stretch_mode = 3
 
+[node name="Flame2" type="AnimatedSprite2D" parent="Candles/Candle2"]
+position = Vector2(19, -12)
+sprite_frames = SubResource("SpriteFrames_04n6p")
+autoplay = "default"
+frame_progress = 0.49701
+
 [node name="Candle3" type="TextureRect" parent="Candles"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 400.0
-offset_top = 232.0
+offset_top = 237.0
 offset_right = 440.0
-offset_bottom = 306.0
+offset_bottom = 311.0
 texture = SubResource("AtlasTexture_mk1p4")
 stretch_mode = 3
 
+[node name="Flame3" type="AnimatedSprite2D" parent="Candles/Candle3"]
+position = Vector2(19, -12)
+sprite_frames = SubResource("SpriteFrames_04n6p")
+autoplay = "default"
+frame_progress = 0.49701
+
 [node name="Candle4" type="TextureRect" parent="Candles"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 456.0
-offset_top = 214.0
+offset_top = 219.0
 offset_right = 496.0
-offset_bottom = 288.0
+offset_bottom = 293.0
 texture = SubResource("AtlasTexture_8q562")
 stretch_mode = 3
 
+[node name="Flame4" type="AnimatedSprite2D" parent="Candles/Candle4"]
+position = Vector2(19, -12)
+sprite_frames = SubResource("SpriteFrames_04n6p")
+autoplay = "default"
+frame_progress = 0.31012
+
 [node name="Flames" type="Control" parent="Candles"]
 anchors_preset = 0
+offset_top = -78.0
 offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Flame1" type="AnimatedSprite2D" parent="Candles/Flames"]
-position = Vector2(34, 203)
-sprite_frames = SubResource("SpriteFrames_04n6p")
-autoplay = "default"
-frame_progress = 0.285113
-
-[node name="Flame2" type="AnimatedSprite2D" parent="Candles/Flames"]
-position = Vector2(91, 220)
-sprite_frames = SubResource("SpriteFrames_04n6p")
-autoplay = "default"
-frame_progress = 0.49701
-
-[node name="Flame3" type="AnimatedSprite2D" parent="Candles/Flames"]
-position = Vector2(419, 220)
-sprite_frames = SubResource("SpriteFrames_04n6p")
-autoplay = "default"
-frame_progress = 0.49701
-
-[node name="Flame4" type="AnimatedSprite2D" parent="Candles/Flames"]
-position = Vector2(476, 204)
-sprite_frames = SubResource("SpriteFrames_04n6p")
-autoplay = "default"
-frame_progress = 0.837486
+offset_bottom = -38.0
 
 [node name="PerkCards" type="Control" parent="."]
 anchors_preset = 0

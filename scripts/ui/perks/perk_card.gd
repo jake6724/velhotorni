@@ -30,23 +30,23 @@ func expand() -> void:
 	bounce_content()
 
 func bounce_perk_icon() -> void:
-	await bounce_element(perk_icon)
+	await bounce_element(perk_icon, 16)
 	perk_icon.texture.region = Rect2(192,1,48,46)
 
 func bounce_content() -> void:
-	bounce_element(content)
+	bounce_element(content, 4)
 
-func bounce_element(ui_element: Control) -> void:
+func bounce_element(ui_element: Control, bounce_height: int) -> void:
 	var target: Vector2
 
 	var bounce_up_tween: Tween = get_tree().create_tween() 
-	target = ui_element.position - Vector2(0,4)
+	target = ui_element.position - Vector2(0,bounce_height)
 	bounce_up_tween.tween_property(ui_element, "position", target, bounce_speed)
 
 	await bounce_up_tween.finished
 
 	var bounce_down_tween: Tween = get_tree().create_tween()
-	target = ui_element.position + Vector2(0,4)
+	target = ui_element.position + Vector2(0,bounce_height)
 	bounce_down_tween.tween_property(ui_element, "position", target, bounce_speed)
 
 	bounce_complete.emit()

@@ -109,6 +109,9 @@ func _ready():
 	player_hurtbox.hit.connect(on_hit)
 	player_hurtbox.pit_entered.connect(on_pit_entered)
 	
+	# Configure PlayerMana
+	player_mana.populate_spell_mana(player_spells.selected_spells)
+
 	# Configure PlayerHUD
 	player_hud.initialize(player_spells.spells.array, player_mana, player_stats)
 	player_stats.health_updated.connect(player_hud.on_health_updated)
@@ -123,7 +126,7 @@ func _ready():
 	player_build.tower_action_changed.connect(tower_action_hint.display_tower_action_hint)
 
 	# Connect to ManaDropCollector
-	mana_drop_collector.mana_drop_collected.connect(on_element_mana_collected)
+	mana_drop_collector.mana_drop_collected.connect(on_spell_mana_collected)
 
 	# Connect to CoinCollector (Tower Mana)
 	coin_collector.coin_collected.connect(on_tower_mana_collected)
@@ -193,8 +196,8 @@ func place_tower() -> void:
 	player_build.place_tower()
 	player_input.primary_action_pressed = false
 
-func on_spell_cast(_element: Constants.Element, _mana_cost) -> void:
-	player_mana.decrement_element_mana(_element, _mana_cost)
+func on_spell_cast(spell_data) -> void:
+	player_mana.decrement_spell_mana(spell_data)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
 	staff_ap.play("fire")
 	# staff_sprite.display_muzzle_flash()
@@ -359,10 +362,10 @@ func show_staff_sprite_custom():
 	if alive and not building:
 		staff_sprite.show()
 
-func on_element_mana_collected(_element: Constants.Element, _amount_modifier) -> void:
-	player_mana.increment_element_mana(_element, _amount_modifier)
+func on_spell_mana_collected(spell_data: SpellData, _amount_modifier: float) -> void:
+	var spell_mana_collected: int = player_mana.increment_spell_mana(spell_data, _amount_modifier)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
-	player_number_popup.display_mana_number(player_mana.element_drop_amount_base[_element] * _amount_modifier, global_position + Vector2(0,-6), _element)
+	player_number_popup.display_mana_number(spell_mana_collected, global_position + Vector2(0,-6), spell_data)
 	player_number_popup.increase_up_distance()
 	
 func on_tower_mana_collected(_value: int = 1) -> void:

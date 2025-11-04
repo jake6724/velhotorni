@@ -29,50 +29,15 @@ var element_text: Dictionary[Constants.Element, String] = {
 	Constants.Element.NONE: "",
 }
 
-func display_mana_number(value: int, pos: Vector2, element: Constants.Element = Constants.Element.NONE):
-	if value > 1:
-		var number: Label = Label.new()
-		number.global_position = pos
-		number.z_index = Constants.z_index_map["popup"]
-		number.text = str("+", str(value), " ", element_text[element])
-		number.label_settings = LabelSettings.new()
-
-		number.label_settings.font_color = COLOR_WHITE
-		number.label_settings.font_size = 8
-		number.label_settings.font = font
-		number.label_settings.outline_color = COLOR_WHITE
-		number.label_settings.outline_size = outline_size
-		number.label_settings.shadow_offset = shadow_offset
-		number.label_settings.shadow_size = shadow_size
-		number.label_settings.shadow_color = COLOR_BLACK
-
-		call_deferred("add_child", number)
-		await number.resized
-
-		number.pivot_offset = Vector2(number.size / 2)
-		number.position.x -= number.size.x / 2
-
-		var tween = get_tree().create_tween()
-		tween.tween_property(number, "position:y", number.position.y - up_distance, up_time).set_ease(Tween.EASE_OUT)
-		tween.tween_interval(.1)
-		await tween.finished
-
-		# Blink
-		var blink_tween = get_tree().create_tween()
-		blink_tween.set_loops(5)
-		blink_tween.tween_property(number, "modulate:a", 0.0, .01)
-		blink_tween.tween_interval(.075)
-		blink_tween.tween_property(number, "modulate:a", 1.0, .01)
-		blink_tween.tween_interval(.075)
-
-		await blink_tween.finished
-		number.queue_free()
-
-func display_damage_number(value: int, pos: Vector2) -> void:
+func display_mana_number(value: int, pos: Vector2, spell_data: SpellData):
 	var number: Label = Label.new()
-	number.global_position = pos + pos_offset
+	number.global_position = pos
 	number.z_index = Constants.z_index_map["popup"]
-	number.text = str(value)
+
+	if value > 1:
+		number.text = str(spell_data.popup_name, " +", str(value))
+	else:
+		number.text = str(spell_data.popup_name, " FULL")
 
 	number.label_settings = LabelSettings.new()
 	number.label_settings.font_color = COLOR_WHITE
@@ -87,14 +52,54 @@ func display_damage_number(value: int, pos: Vector2) -> void:
 	call_deferred("add_child", number)
 	await number.resized
 
-	number.pivot_offset.x = (number.size.x / 2)
-	number.position.x += ((number.size.x / 2) + get_jitter())
+	number.pivot_offset = Vector2(number.size / 2)
+	number.position.x -= number.size.x / 2
 
 	var tween = get_tree().create_tween()
-	tween.tween_property(number, "position:y", number.position.y - 8, .5).set_ease(Tween.EASE_OUT)
+	tween.tween_property(number, "position:y", number.position.y - up_distance, up_time).set_ease(Tween.EASE_OUT)
 	tween.tween_interval(.1)
 	await tween.finished
+
+	# Blink
+	var blink_tween = get_tree().create_tween()
+	blink_tween.set_loops(5)
+	blink_tween.tween_property(number, "modulate:a", 0.0, .01)
+	blink_tween.tween_interval(.075)
+	blink_tween.tween_property(number, "modulate:a", 1.0, .01)
+	blink_tween.tween_interval(.075)
+
+	await blink_tween.finished
 	number.queue_free()
+
+
+func display_damage_number(value: int, pos: Vector2) -> void:
+	if value > 1:
+		var number: Label = Label.new()
+		number.global_position = pos + pos_offset
+		number.z_index = Constants.z_index_map["popup"]
+		number.text = str(value)
+
+		number.label_settings = LabelSettings.new()
+		number.label_settings.font_color = COLOR_WHITE
+		number.label_settings.font_size = 8
+		number.label_settings.font = font
+		number.label_settings.outline_color = COLOR_WHITE
+		number.label_settings.outline_size = outline_size
+		number.label_settings.shadow_offset = shadow_offset
+		number.label_settings.shadow_size = shadow_size
+		number.label_settings.shadow_color = COLOR_BLACK
+
+		call_deferred("add_child", number)
+		await number.resized
+
+		number.pivot_offset.x = (number.size.x / 2)
+		number.position.x += ((number.size.x / 2) + get_jitter())
+
+		var tween = get_tree().create_tween()
+		tween.tween_property(number, "position:y", number.position.y - 8, .5).set_ease(Tween.EASE_OUT)
+		tween.tween_interval(.1)
+		await tween.finished
+		number.queue_free()
 
 func display_mana_empty(pos: Vector2) -> void:
 	var number: Label = Label.new()

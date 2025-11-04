@@ -97,7 +97,7 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
 			angle_seperation += new_spell_data.angle_seperation
 		angle_sign = -angle_sign
 
-	spell_cast.emit(new_spell_data.element, new_spell_data.mana_cost)
+	spell_cast.emit(new_spell_data)
 
 func spawn_bullet_spell_charged(_player_aim_direction: Vector2) -> void:
 	var charge_value = min(100, player.player_input.primary_action_charge)
@@ -128,7 +128,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 
 	new_spell.z_index = player.z_index + 2
 	add_child(new_spell)
-	spell_cast.emit(new_spell_data.element, new_spell_data.mana_cost)
+	spell_cast.emit(new_spell_data)
 	melee_spell_cast.emit()
 	attack_timer.start(new_spell_data.cooldown)
 
@@ -139,7 +139,7 @@ func on_attack_timer_timeout() -> void:
 	can_attack = true
 	
 func check_can_afford(new_spell_data: SpellData) -> bool:
-	if new_spell_data.mana_cost <= player.player_mana.get_element_mana(new_spell_data.element):
+	if new_spell_data.mana_cost <= player.player_mana.spell_mana[new_spell_data]:
 		return true
 	else:
 		return false

@@ -25,7 +25,7 @@ func on_collect_area_entered(mana_drop: ManaDrop) -> void:
 		magnetized_drops.remove_at(index)
 	
 	SFXPlayer.play_sfx("coin_collect")
-	mana_drop_collected.emit(mana_drop.element, mana_drop.amount_modifier)
+	mana_drop_collected.emit(mana_drop.spell_data, mana_drop.amount_modifier)
 	# match mana_drop.element:
 	# 	Constants.Element.FIRE: print("Fire")
 	# 	Constants.Element.WIND: print("Wind")
