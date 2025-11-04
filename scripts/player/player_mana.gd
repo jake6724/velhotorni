@@ -36,6 +36,8 @@ func check_spell_mana_low(spell_data) -> void:
 func populate_spell_mana(selected_spells: Array[SpellData]) -> void:
 	for spell_data: SpellData in selected_spells:
 		spell_mana[spell_data] = spell_data.initial_mana_amount
+		print("Initial mana: ", spell_data.initial_mana_amount)
 		spell_mana_base_drop_amount[spell_data] = spell_data.base_spell_mana_per_drop
 		spell_mana_maxes[spell_data] = spell_data.max_mana_amount
+		print("Max mana: ", spell_data.max_mana_amount)
 		spell_mana_low[spell_data] = false
