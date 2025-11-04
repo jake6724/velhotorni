@@ -123,6 +123,7 @@ func _ready():
 	enemy_movement.death_requested.connect(on_death_requested)
 
 func _physics_process(delta):
+	#print(fx_burn.visible)
 	if is_alive:
 		move(delta)
 
@@ -181,7 +182,8 @@ func die() -> void:
 	death_position.emit(global_position)
 	coin_dropped.emit(global_position, drop_chance)
 
-	collider.set_deferred("disabled", true) # Collisions can't be changed until pp idle time
+	collider.set_deferred("disabled", true) 
+	debuff_manager.remove_all_debuffs()
 
 	# Hide graphics
 	health_bar.hide()
@@ -210,7 +212,8 @@ func on_animation_finished(anim_name):
 		ap.play("corpse")
 
 	if anim_name == "corpse":
-		queue_free()
+		set_physics_process(false)
+		# queue_free()
 
 # Child component signal requests
 func on_animation_requested(anim_name: String) -> void:
@@ -227,7 +230,6 @@ func on_damage_base_requested() -> void:
 
 func on_death_requested() -> void:
 	die()
-
 
 # Debuffs
 func on_add_new_debuff(_debuff: Debuff) -> void:
@@ -249,9 +251,10 @@ func on_add_new_debuff(_debuff: Debuff) -> void:
 			_: pass
 
 func on_debuff_apply_slow(_slow_percent: float) -> void:
-	slow_percent = _slow_percent
-	fx_slow.show()
-	fx_slow.play("slow")
+	if is_alive:
+		slow_percent = _slow_percent
+		fx_slow.show()
+		fx_slow.play("slow")
 
 func on_debuff_remove_slow() -> void:
 	slow_percent = 0.0
@@ -259,9 +262,10 @@ func on_debuff_remove_slow() -> void:
 	fx_slow.stop()
 
 func on_debuff_apply_freeze() -> void:
-	is_frozen = true
-	fx_freeze.show()
-	fx_freeze.play("start_freeze")
+	if is_alive:
+		is_frozen = true
+		fx_freeze.show()
+		fx_freeze.play("start_freeze")
 
 func on_debuff_remove_freeze() -> void:
 	is_frozen = false
@@ -272,9 +276,10 @@ func on_debuff_remove_freeze() -> void:
 	fx_freeze.hide()
 
 func on_debuff_apply_stun() -> void:
-	is_stunned = true
-	fx_stun.show()
-	fx_stun.play("stun")
+	if is_alive:
+		is_stunned = true
+		fx_stun.show()
+		fx_stun.play("stun")
 
 func on_debuff_remove_stun() -> void:
 	is_stunned = false
@@ -284,10 +289,11 @@ func on_debuff_remove_stun() -> void:
 	fx_stun.stop()
 
 func on_debuff_apply_burn(_value, _element) -> void:
-	reset_drop_chance()
-	take_damage(_value, _element)
-	fx_burn.show()
-	fx_burn.play("burn")
+	if is_alive:
+		reset_drop_chance()
+		take_damage(_value, _element)
+		fx_burn.show()
+		fx_burn.play("burn")
 
 func on_debuff_remove_burn(_debuff: Debuff) -> void:
 	_debuff.debuff_apply_burn.disconnect(on_debuff_apply_burn)
@@ -295,10 +301,14 @@ func on_debuff_remove_burn(_debuff: Debuff) -> void:
 	fx_burn.hide()
 	fx_burn.stop()
 
+	print(fx_burn.visible)
+	_debuff.queue_free()
+
 func on_debuff_apply_weaken(_value) -> void:
-	weaken_percent = _value
-	fx_weaken.show()
-	fx_weaken.play("weaken")
+	if is_alive:
+		weaken_percent = _value
+		fx_weaken.show()
+		fx_weaken.play("weaken")
 
 func on_debuff_remove_weaken() -> void:
 	weaken_percent = 0.0
@@ -306,9 +316,10 @@ func on_debuff_remove_weaken() -> void:
 	fx_weaken.stop()
 
 func on_debuff_apply_knockback(_value, _total_duration) -> void:
-	knockback_tween = create_tween()
-	var progress_target: float = max(0, path_follow.progress - _value)
-	knockback_tween.tween_property(path_follow, "progress", progress_target, _total_duration)
+	if is_alive:
+		knockback_tween = create_tween()
+		var progress_target: float = max(0, path_follow.progress - _value)
+		knockback_tween.tween_property(path_follow, "progress", progress_target, _total_duration)
 
 func on_debuff_remove_knockback() -> void:
 	knockback_tween.stop()

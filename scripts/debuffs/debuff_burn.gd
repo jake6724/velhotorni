@@ -22,5 +22,6 @@ func on_repeat_timer_timeout() -> void:
 
 func on_total_timer_timeout() -> void:
 	can_burn = false
+	repeat_timer.stop()
 	debuff_remove_burn.emit(self)
-	queue_free()
+	# queue_free()

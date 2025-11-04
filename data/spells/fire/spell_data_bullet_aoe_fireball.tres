@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellDataBulletAOE" load_steps=6 format=3 uid="uid://0ape3v2kdph1"]
 
-[ext_resource type="Texture2D" uid="uid://tljifq6x70yq" path="res://assets/art/atlases/bullet/atl_spell_bullet_fire.png" id="1_4vto4"]
 [ext_resource type="Script" uid="uid://ckis74h51j2x4" path="res://scripts/spells/data/spell_data_bullet_aoe.gd" id="1_kxwn6"]
+[ext_resource type="Texture2D" uid="uid://3ub64jxwenmh" path="res://assets/art/atlases/bullet/atl_spell_bullet_fireball.png" id="1_tcqn3"]
 [ext_resource type="Texture2D" uid="uid://cn4jh65ii5hu7" path="res://assets/art/sprites/spr_fx_explosion_big.png" id="2_4vto4"]
 [ext_resource type="Resource" uid="uid://ddoy0mrmvm6u2" path="res://data/debuffs/debuff_data_burn_fire.tres" id="2_tcqn3"]
 [ext_resource type="AudioStream" uid="uid://cj7e86n5s2vln" path="res://assets/audio/sfx/Fire_Shot.ogg" id="3_hjvbd"]
@@ -17,7 +17,7 @@ angle_seperation = 0.0
 pierce = 1
 max_distance = 100.0
 spread = 1.0
-atlas = ExtResource("1_4vto4")
+atlas = ExtResource("1_tcqn3")
 sfx = ExtResource("3_hjvbd")
 type = 1
 staff_type = 2
