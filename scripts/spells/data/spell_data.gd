@@ -9,6 +9,8 @@ enum StaffType {ARCANE, WATER_SWORD, FIRE_STAFF, TRIPLE_STAFF}
 
 @export var element: Constants.Element
 @export var damage: float
+@export var debuff_data: DebuffData
+
 ## How many base individual charges for this weapon per spell mana drop pickup
 @export var base_spell_mana_per_drop: int = 10
 @export var initial_mana_amount: int = 100

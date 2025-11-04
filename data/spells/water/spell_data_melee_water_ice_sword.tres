@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="SpellDataMelee" load_steps=3 format=3 uid="uid://bcov2rckhliwp"]
+[gd_resource type="Resource" script_class="SpellDataMelee" load_steps=4 format=3 uid="uid://bcov2rckhliwp"]
 
 [ext_resource type="Texture2D" uid="uid://doed56qoyb4ta" path="res://assets/art/sprites/spr_fx_slash.png" id="1_e4yop"]
 [ext_resource type="Script" uid="uid://dcu7dihypm0k3" path="res://scripts/spells/data/spell_data_melee.gd" id="1_xb82k"]
+[ext_resource type="Resource" uid="uid://wu5nsovo6hnf" path="res://data/debuffs/debuff_data_slow_water.tres" id="2_0i1w0"]
 
 [resource]
 script = ExtResource("1_xb82k")
@@ -11,6 +12,7 @@ type = 2
 staff_type = 1
 element = 2
 damage = 70.0
+debuff_data = ExtResource("2_0i1w0")
 base_spell_mana_per_drop = 10
 initial_mana_amount = 100
 max_mana_amount = 100

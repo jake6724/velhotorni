@@ -60,6 +60,3 @@ func check_max_distance_reached() -> void:
 	if active and abs(global_position.distance_to(original_position)) > data.max_distance:
 		active = false
 		ap.play("hit")
-
-func deal_damage(enemy: Enemy) -> void:
-	enemy.take_damage(data.damage, data.element)
