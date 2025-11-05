@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=2 format=3 uid="uid://dx8n8x26vacq1"]
+
+[ext_resource type="Script" uid="uid://tx0ls1d4gwxv" path="res://scripts/perks/data/park_data_player.gd" id="1_jbk4s"]
+
+[resource]
+script = ExtResource("1_jbk4s")
+trigger = 0
+action = 0
+stat = 7
+duration = -1.0
+required_spell_damage = inf
+base_value = 1.0
+legendary = false
+perk_desc = ""
+metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

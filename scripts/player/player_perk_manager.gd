@@ -40,10 +40,13 @@ func on_modify_stat_requested(stat_to_modify: PerkDataPlayer.PlayerStat, value: 
 		PerkDataPlayer.PlayerStat.REFLECT_CHANCE:
 			modified_value = value
 			player.player_stats.chance_to_reflect += value
+		PerkDataPlayer.PlayerStat.SPECIAL_MAX_CHARGE:
+			modified_value = value
+			player.player_special.charge_max += value
 		PerkDataPlayer.PlayerStat.IFRAME_DURATION:
 			modified_value = player.player_stats.hurtbox_iframe_duration * value
 			player.player_stats.hurtbox_iframe_duration *= value
-			
+
 		PerkDataPlayer.PlayerStat.NONE: push_error("PlayerPerkManager.on_modify_stat_requested() called with stat_to_modify = NONE")
 	return modified_value
 

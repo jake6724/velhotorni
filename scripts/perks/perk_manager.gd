@@ -4,6 +4,7 @@ extends Node
 var player_perk_manager: PlayerPerkManager # Set manually by Main
 var player_mana_drop_collector: ManaDropCollector # Set manually by Main
 var player_hurtbox: PlayerHurtbox # Set manually by Main
+var player_spell_spawner: PlayerSpellSpawner
 
 var all_basic_perk_data: Array[PerkData] = [
 
@@ -66,6 +67,7 @@ func configure_perk_trigger(new_perk: Perk) -> void:
 		PerkData.Trigger.OnWaveComplete: WaveManager.wave_completed.connect(new_perk.perk_action)
 		PerkData.Trigger.OnSpellManaPickup: player_mana_drop_collector.mana_drop_collected.connect(new_perk.perk_action)
 		PerkData.Trigger.OnPlayerDamage: player_hurtbox.hit.connect(new_perk.perk_action)
+		PerkData.Trigger.OnPlayerSpellDamageDealt: player_spell_spawner.spell_damage_dealt.connect(new_perk.accumulate_spell_damage)
 
 ## Choose a valid rarity from `rarity_pool`. Automatically calls update_rarity_data() to keep `rarity_pool` valid.
 func get_rarity() -> PerkData.Rarity:

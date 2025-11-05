@@ -153,7 +153,8 @@ func reset_drop_chance() -> void:
 
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
-func take_damage(damage_recieved: float, tower_element: Constants.Element):
+## Returns the amount of damage actually received (after calculating resistances and other modifiers)
+func take_damage(damage_recieved: float, tower_element: Constants.Element) -> float:
 	if is_alive:
 		is_taking_damage = true
 		ap.play("hit")
@@ -170,10 +171,17 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element):
 
 		number_popup.display_damage_number(damage_recieved, global_position)
 
+
+		var damage_applied: float = min(health, damage_recieved)
+
 		health = max(0, health - damage_recieved)
 
 		if is_boss: enemy_damage_recieved.emit(damage_recieved)
 		if health <= 0: die()
+
+		return damage_applied
+	else:
+		return 0
 
 func die() -> void:
 	is_alive = false

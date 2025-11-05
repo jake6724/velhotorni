@@ -1,11 +1,19 @@
-[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=2 format=3 uid="uid://brclnsfuam8fs"]
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=4 format=3 uid="uid://brclnsfuam8fs"]
 
-[ext_resource type="Script" uid="uid://tx0ls1d4gwxv" path="res://scripts/perks/data/park_data_player.gd" id="1_fixm1"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_ckreg"]
+[ext_resource type="Script" uid="uid://tx0ls1d4gwxv" path="res://scripts/perks/data/park_data_player.gd" id="2_cmijv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfpml"]
+atlas = ExtResource("1_ckreg")
+region = Rect2(0, 289, 48, 46)
 
 [resource]
-script = ExtResource("1_fixm1")
+script = ExtResource("2_cmijv")
 trigger = 1
 action = 0
 stat = 1
+duration = -1.0
 base_value = 3.0
+legendary = false
+perk_icon = SubResource("AtlasTexture_gfpml")
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

@@ -24,6 +24,7 @@ signal spell_cast
 signal staff_switched
 signal melee_spell_cast # Just used to call the swing sword function; not for mana data
 signal check_can_afford_failed
+signal spell_damage_dealt
 
 func _ready():
 	attack_timer.autostart = false
@@ -116,6 +117,7 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 	var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
 	add_child(new_spell)
 	new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)))
+	new_spell.damage_dealt.connect(on_spell_damage_dealt)
 
 func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 	var new_spell_data: SpellDataMelee = curr_spell_data
@@ -147,3 +149,6 @@ func check_can_afford(new_spell_data: SpellData) -> bool:
 # func apply_spell_kick(kick_amount: float) -> void:
 # 	print("applying kick")
 # 	player.velocity += -player.aim_input * kick_amount
+
+func on_spell_damage_dealt(damage_amount: float) -> void:
+	spell_damage_dealt.emit(damage_amount)
