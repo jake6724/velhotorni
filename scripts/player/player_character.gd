@@ -57,8 +57,6 @@ var falling: bool = false
 var can_fire: bool = true
 var hit: bool = false
 
-var hitstun_recovery_multiplier: float = 300 # Influences how quickly the player stops sliding when hitstun and recovers back to normal mode
-var hurtbox_iframe_duration: float = 1.5
 var hurtbox_reset_timer: Timer = Timer.new()
 
 var building: bool = false
@@ -125,7 +123,7 @@ func _ready():
 	player_mana.tower_mana_updated.connect(player_build.on_tower_mana_updated)
 	player_build.tower_action_changed.connect(tower_action_hint.display_tower_action_hint)
 
-	# Connect to ManaDropCollector
+	# Connect to ManaDropCollector (SpellMana)
 	mana_drop_collector.mana_drop_collected.connect(on_spell_mana_collected)
 
 	# Connect to CoinCollector (Tower Mana)
@@ -165,7 +163,7 @@ func _physics_process(delta): # This can go in a state eventually
 				player_animation.update_animation(delta)
 
 		else: # Hit stun recovery
-			velocity = player_movement.get_hitstun_velocity(delta, velocity, hitstun_recovery_multiplier)
+			velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
 			# Check if hitstun complete
 			if velocity == Vector2.ZERO:
 				hit = false
@@ -316,7 +314,7 @@ func on_hit(_direction) -> void:
 		velocity = _direction * player_stats.knockback_multiplier
 		update_hurtbox_collider(true)
 		velocity = _direction * player_stats.knockback_multiplier
-		hurtbox_reset_timer.start(hurtbox_iframe_duration)
+		hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 
 		player_camera.apply_shake(1)
 		TimeManager.apply_hitstop()
@@ -342,13 +340,13 @@ func respawn() -> void:
 	alive = true
 	player_stats.health = player_stats.max_health
 	update_hurtbox_collider(false)
-	hurtbox_reset_timer.start(hurtbox_iframe_duration)
+	hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 	player_respawned.emit()	
 	hit_blink()
 
 func hit_blink() -> void:
 	var loops: int = 10
-	var blink_time: float = (hurtbox_iframe_duration / loops) / 2
+	var blink_time: float = (player_stats.hurtbox_iframe_duration / loops) / 2
 	var blink_tween: Tween = get_tree().create_tween().set_loops(loops)
 	blink_tween.tween_property(self, "modulate:a", 0.0, .01)
 	blink_tween.tween_interval(blink_time)

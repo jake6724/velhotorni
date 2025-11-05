@@ -80,6 +80,7 @@ func _ready():
 
 	# Configure PerkManager
 	perk_manager.player_perk_manager = player_character.player_perk_manager
+	perk_manager.player_mana_drop_collector = player_character.mana_drop_collector
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change

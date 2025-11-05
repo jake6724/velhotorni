@@ -2,28 +2,16 @@ class_name PerkManager
 extends Node
 
 var player_perk_manager: PlayerPerkManager # Set manually by Main
-
-var test_perk_data_player: PerkDataPlayer = preload("res://data/perks/player/perk_data_player_move_speed.tres")
+var player_mana_drop_collector: ManaDropCollector # Set manually by Main
+var player_hurtbox: PlayerHurtbox # Set manually by Main
 
 var all_basic_perk_data: Array[PerkData] = [
-	test_perk_data_player
+
 ]
 
 ## Perks that can be used this level. Does not include unusable elemental perks
 ## Populated at runtime **
 var valid_basic_perk_data: Array[PerkData] = [
-	preload("res://data/perks/1.tres"),
-	preload("res://data/perks/2.tres"),
-	preload("res://data/perks/3.tres"),
-	preload("res://data/perks/4.tres"),
-	preload("res://data/perks/5.tres"),
-	preload("res://data/perks/6.tres"),
-	preload("res://data/perks/7.tres"),
-	preload("res://data/perks/8.tres"),
-	preload("res://data/perks/9.tres"),
-	preload("res://data/perks/10.tres"),
-	preload("res://data/perks/11.tres"),
-	preload("res://data/perks/12.tres"),
 ]
 
 var rarity_counts: Dictionary[PerkData.Rarity, int] = {
@@ -69,8 +57,15 @@ func create_perk(perk_data: PerkData) -> void:
 
 	new_perk.data = perk_data_copy
 
-	if new_perk.data.trigger == PerkData.Trigger.OneShot:
-		new_perk.perk_action()
+	configure_perk_trigger(new_perk)
+
+func configure_perk_trigger(new_perk: Perk) -> void:
+	# Trigger one shots perks, connect remaining to proper signals
+	match new_perk.data.trigger:
+		PerkData.Trigger.OneShot: new_perk.perk_action()
+		PerkData.Trigger.OnWaveComplete: WaveManager.wave_completed.connect(new_perk.perk_action)
+		PerkData.Trigger.OnSpellManaPickup: player_mana_drop_collector.mana_drop_collected.connect(new_perk.perk_action)
+		PerkData.Trigger.OnPlayerDamage: player_hurtbox.hit.connect(new_perk.perk_action)
 
 ## Choose a valid rarity from `rarity_pool`. Automatically calls update_rarity_data() to keep `rarity_pool` valid.
 func get_rarity() -> PerkData.Rarity:

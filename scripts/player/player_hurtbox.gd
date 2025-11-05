@@ -3,7 +3,6 @@ extends Area2D
 
 @onready var collider: CollisionShape2D = $PlayerHurtboxCollider
 
-signal damage_recieved
 signal hit
 signal pit_entered
 
@@ -11,8 +10,7 @@ func _ready():
 	body_entered.connect(on_body_entered)
 	area_entered.connect(on_area_entered)
 
-func take_damage(damage: float, bullet_pos: Vector2) -> void:
-	# damage_recieved.emit(damage)
+func take_damage(_damage: float, bullet_pos: Vector2) -> void:
 	hit.emit(calc_knockback_direction(bullet_pos))
 
 func calc_knockback_direction(bullet_pos: Vector2) -> Vector2:

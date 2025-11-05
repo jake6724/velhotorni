@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="PerkData" load_steps=2 format=3 uid="uid://dwvs28mihh8xr"]
-
-[ext_resource type="Script" uid="uid://vo8qx2uo2i1k" path="res://scripts/perks/data/perk_data.gd" id="1_onu8j"]
-
-[resource]
-script = ExtResource("1_onu8j")
-base_value = 0.0
-metadata/_custom_type_script = "uid://vo8qx2uo2i1k"

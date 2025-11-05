@@ -22,3 +22,7 @@ var mana: float = 100.0:
 # var build_speed: float = 100.0
 var move_speed: float = 100.0
 var knockback_multiplier: float = 70.0
+var chance_to_reflect: float = 0.0
+
+var hitstun_recovery_multiplier: float = 300 # Influences how quickly the player stops sliding when hitstun and recovers back to normal mode
+var hurtbox_iframe_duration: float = 1.5
