@@ -103,7 +103,6 @@ func _ready():
 	player_animation.animation_tree.animation_finished.connect(on_animation_finished)
 
 	# Configure PlayerHurtbox
-	player_hurtbox.damage_recieved.connect(on_damage_recieved)
 	player_hurtbox.hit.connect(on_hit)
 	player_hurtbox.pit_entered.connect(on_pit_entered)
 	
