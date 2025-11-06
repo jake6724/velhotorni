@@ -41,12 +41,7 @@ var active_perks: Dictionary[PerkData, PerkData.Rarity]
 const PERK_HAND_SIZE: int = 3
 
 var test_perk_data: Array[PerkData] = [
-	preload("res://data/perks/tower/basic/perk_data_tower_fire_upgrade_cost.tres"), 
-	preload("res://data/perks/tower/basic/perk_data_tower_wind_upgrade_cost.tres"),
-	preload("res://data/perks/tower/basic/perk_data_tower_water_upgrade_cost.tres"),
-	preload("res://data/perks/tower/basic/perk_data_tower_earth_upgrade_cost.tres"),
-	preload("res://data/perks/tower/basic/perk_data_tower_light_upgrade_cost.tres"),
-	preload("res://data/perks/tower/basic/perk_data_tower_dark_upgrade_cost.tres"),
+	preload("res://data/perks/player/legendary/perk_data_player_lgd_move_speed_on_dmg.tres"), 
 ]
 
 func _input(_event):

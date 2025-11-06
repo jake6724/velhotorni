@@ -20,7 +20,10 @@ var mana: float = 100.0:
 
 # var combat_speed: float = 100.0
 # var build_speed: float = 100.0
-var move_speed: float = 100.0
+
+var base_move_speed: float = 100.0
+
+var move_speed: float = base_move_speed
 var knockback_multiplier: float = 70.0
 var chance_to_reflect: float = 0.0
 

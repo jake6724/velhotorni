@@ -37,8 +37,8 @@ func on_modify_stat_requested(stat_to_modify: PerkDataPlayer.PlayerStat, value: 
 			modified_value = value
 			player.player_stats.max_health += value
 		PerkDataPlayer.PlayerStat.MOVE_SPEED: 
-			modified_value = (player.player_stats.move_speed * value)
-			player.player_stats.move_speed += (player.player_stats.move_speed * value)
+			modified_value = (player.player_stats.base_move_speed * value)
+			player.player_stats.move_speed += (player.player_stats.base_move_speed * value)
 		PerkDataPlayer.PlayerStat.SPECIAL_COOLDOWN: 
 			modified_value = (player.player_special.charge_cooldown_duration * value)
 			player.player_special.charge_cooldown_duration += (player.player_special.charge_cooldown_duration * value)
