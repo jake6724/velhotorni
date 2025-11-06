@@ -1,6 +1,27 @@
 extends Node
 
-var tower_prices: Dictionary[Constants.Element, int] = {
+var tower_data: Dictionary[Constants.Element, TowerData] = {
+	Constants.Element.FIRE: load("res://data/towers/tower_data_fire.tres"),
+	Constants.Element.WIND: load("res://data/towers/tower_data_wind.tres"),
+	Constants.Element.WATER: load("res://data/towers/tower_data_water.tres"),
+	Constants.Element.EARTH: load("res://data/towers/tower_data_earth.tres"),
+	Constants.Element.LIGHT: load("res://data/towers/tower_data_light.tres"),
+	Constants.Element.DARK: load("res://data/towers/tower_data_dark.tres"),
+	Constants.Element.LAVA: load("res://data/towers/tower_data_fire_lava.tres"),
+	Constants.Element.PLASMA: load("res://data/towers/tower_data_fire_plasma.tres"),
+	Constants.Element.STORM: load("res://data/towers/tower_data_wind_storm.tres"),
+	Constants.Element.LIGHTNING: load("res://data/towers/tower_data_wind_lightning.tres"),
+	Constants.Element.ICE: load("res://data/towers/tower_data_water_ice.tres"),
+	Constants.Element.FLOOD: load("res://data/towers/tower_data_water_flood.tres"),
+	Constants.Element.MUD: load("res://data/towers/tower_data_earth_mud.tres"),
+	Constants.Element.CRYSTAL: load("res://data/towers/tower_data_earth_crystal.tres"),
+	Constants.Element.SPIRIT: load("res://data/towers/tower_data_light_spirit.tres"),
+	Constants.Element.SUN: load("res://data/towers/tower_data_light_sun.tres"),
+	Constants.Element.CURSE: load("res://data/towers/tower_data_dark_curse.tres"),
+	Constants.Element.VOID: load("res://data/towers/tower_data_dark_void.tres"),
+}
+
+var tower_prices_base: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE:  50,
 	Constants.Element.WIND:  55,
 	Constants.Element.WATER: 60,
@@ -8,6 +29,122 @@ var tower_prices: Dictionary[Constants.Element, int] = {
 	Constants.Element.LIGHT: 70,
 	Constants.Element.DARK:  75,
 }
+
+var tower_prices: Dictionary[Constants.Element, int] = {
+	Constants.Element.FIRE:  tower_prices_base[Constants.Element.FIRE],
+	Constants.Element.WIND:  tower_prices_base[Constants.Element.WIND],
+	Constants.Element.WATER: tower_prices_base[Constants.Element.WATER],
+	Constants.Element.EARTH: tower_prices_base[Constants.Element.EARTH],
+	Constants.Element.LIGHT: tower_prices_base[Constants.Element.LIGHT],
+	Constants.Element.DARK:  tower_prices_base[Constants.Element.DARK],
+}
+
+var tower_upgrade_price_modifier: Dictionary[Constants.Element, float] = {
+	Constants.Element.FIRE:  1.0,
+	Constants.Element.WIND:  1.0,
+	Constants.Element.WATER: 1.0,
+	Constants.Element.EARTH: 1.0,
+	Constants.Element.LIGHT: 1.0,
+	Constants.Element.DARK:  1.0,
+}
+
+var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
+ 	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind.png"),
+	Constants.Element.WATER: preload("res://assets/art/sprites/ui/spr_ui_tower_water_fish.png"),
+	Constants.Element.EARTH: preload("res://assets/art/sprites/ui/spr_ui_tower_earth.png"),
+	Constants.Element.LIGHT: preload("res://assets/art/sprites/ui/spr_ui_tower_light.png"),
+	Constants.Element.DARK: preload("res://assets/art/sprites/ui/spr_ui_tower_dark.png"),
+}
+
+var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
+	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind_locked.png"),
+	Constants.Element.WATER: preload("res://assets/art/sprites/ui/spr_ui_tower_water_fish_locked.png"),
+	Constants.Element.EARTH: preload("res://assets/art/sprites/ui/spr_ui_tower_earth_locked.png"),
+	Constants.Element.LIGHT: preload("res://assets/art/sprites/ui/spr_ui_tower_light_locked.png"),
+	Constants.Element.DARK: preload("res://assets/art/sprites/ui/spr_ui_tower_dark_locked.png"),
+}
+
+var debuff_perk_modifier: Dictionary[Debuff.Type, float] = {
+	Debuff.Type.BURN: 1.0,
+	Debuff.Type.STUN: 1.0,
+	Debuff.Type.SLOW: 1.0,
+	Debuff.Type.FREEZE: 1.0,
+	Debuff.Type.WEAKEN: 1.0,
+	Debuff.Type.KNOCKBACK: 1.0,
+}
+
+var buff_perk_modifier: Dictionary[Buff.Type, float] = {
+	Buff.Type.RANGE: 1.0,
+	Buff.Type.SPEED: 1.0,
+	Buff.Type.DAMAGE: 1.0,
+}
+
+var tower_max: int: # Set manually by Main from active_level
+	set(value):
+		tower_max = value
+		tower_max_updated.emit(tower_max) 
+
+signal tower_max_updated
+signal tower_debuff_perk_modifier_data_updated
+signal tower_buff_perk_modifier_data_updated
+signal tower_prices_updated
+signal tower_upgrade_price_modifier_updated
+
+func _ready():
+	WaveManager.wave_completed.connect(TowerGlobalData.checkpoint)
+	WaveManager.wave_failed.connect(TowerGlobalData.revert_to_checkpoint)
+
+func reset() -> void:
+	for _element in Constants.Element.values():
+		tower_evolution_status[_element] = true
+
+	for _element in Constants.Element.values():
+		checkpointed_tower_evolution_status[_element] = true
+
+func checkpoint() -> void:
+	copy_dict_data(tower_evolution_status, checkpointed_tower_evolution_status)
+
+func revert_to_checkpoint() -> void:
+	copy_dict_data(checkpointed_tower_evolution_status, tower_evolution_status)
+
+func copy_dict_data(source: Dictionary, copy_to: Dictionary) -> void:
+	for item in source:
+		copy_to[item] = source[item]
+
+func on_modify_stat_requested(perk_data: PerkDataTower) -> void:
+	match perk_data.stat:
+		PerkDataTower.TowerStat.PLACEMENT_COST: 
+			tower_prices[perk_data.element] -= roundf(tower_prices_base[perk_data.element] * perk_data.value) # TODO: round here?
+			tower_prices_updated.emit()
+		PerkDataTower.TowerStat.UPGRADE_COST:
+			tower_upgrade_price_modifier[perk_data.element] -= perk_data.value
+			tower_upgrade_price_modifier_updated.emit()
+		PerkDataTower.TowerStat.DEBUFF_MODIFIER: 
+			debuff_perk_modifier[perk_data.debuff] += perk_data.value
+			tower_debuff_perk_modifier_data_updated.emit()
+		PerkDataTower.TowerStat.BUFF_MODIFIER:
+			buff_perk_modifier[perk_data.buff] += perk_data.value
+			tower_buff_perk_modifier_data_updated.emit()
+		PerkDataTower.TowerStat.TOWER_CAP: 
+			tower_max += perk_data.value
+		PerkDataTower.TowerStat.NONE: push_error("TowerPerkManager.on_modify_stat_requested() called with stat_to_modify = NONE")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # True = tower evolution is unused
 var tower_evolution_status: Dictionary[Constants.Element, bool] = {
@@ -51,24 +188,3 @@ var checkpointed_tower_evolution_status: Dictionary[Constants.Element, bool] = {
 	Constants.Element.CURSE: true,
 	Constants.Element.VOID: true,
 }
-
-func _ready():
-	WaveManager.wave_completed.connect(TowerGlobalData.checkpoint)
-	WaveManager.wave_failed.connect(TowerGlobalData.revert_to_checkpoint)
-
-func reset() -> void:
-	for _element in Constants.Element.values():
-		tower_evolution_status[_element] = true
-
-	for _element in Constants.Element.values():
-		checkpointed_tower_evolution_status[_element] = true
-
-func checkpoint() -> void:
-	copy_dict_data(tower_evolution_status, checkpointed_tower_evolution_status)
-
-func revert_to_checkpoint() -> void:
-	copy_dict_data(checkpointed_tower_evolution_status, tower_evolution_status)
-
-func copy_dict_data(source: Dictionary, copy_to: Dictionary) -> void:
-	for item in source:
-		copy_to[item] = source[item]

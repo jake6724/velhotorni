@@ -310,7 +310,7 @@ func set_tower_checkpoints() -> void:
 
 func on_mouse_entered_button(_element) -> void:
 	if _element != Constants.Element.NONE:
-		tower_menu.show_tower_info_panel_shop(Constants.tower_data[_element])
+		tower_menu.show_tower_info_panel_shop(TowerGlobalData.tower_data[_element])
 	click_enabled = false
 
 func on_mouse_exited_button() -> void:

@@ -16,4 +16,3 @@ func deal_damage(enemy: Enemy) -> void:
 		enemy.debuff_manager.add_debuff(data.debuff_data)
 
 	damage_dealt.emit(damage_applied)
-

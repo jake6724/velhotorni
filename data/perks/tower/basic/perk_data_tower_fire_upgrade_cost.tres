@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=4 format=3 uid="uid://h0c3d4o5moqy"]
+
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="1_jmv3x"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_mgac1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsq20"]
+atlas = ExtResource("1_mgac1")
+region = Rect2(48, 1, 48, 46)
+
+[resource]
+script = ExtResource("1_jmv3x")
+trigger = 0
+action = 0
+stat = 3
+element = 0
+debuff = 6
+buff = 3
+base_value = -0.1
+legendary = false
+perk_icon = SubResource("AtlasTexture_gsq20")
+perk_desc = ""
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

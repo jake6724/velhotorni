@@ -55,8 +55,8 @@ func _ready():
 	option_2.mouse_exited.connect(un_highlight_ui_element.bind(option_2))
 
 func update_stats(_tower: Tower, _token: int) -> void:
-	var option_1_data: TowerData = Constants.tower_data[Constants.get_evolve_element_1(_tower.data.element)]
-	var option_2_data: TowerData = Constants.tower_data[Constants.get_evolve_element_2(_tower.data.element)]
+	var option_1_data: TowerData = TowerGlobalData.tower_data[Constants.get_evolve_element_1(_tower.data.element)]
+	var option_2_data: TowerData = TowerGlobalData.tower_data[Constants.get_evolve_element_2(_tower.data.element)]
 
 	option_1_label.text = option_1_data.tower_name
 	option_2_label.text = option_2_data.tower_name

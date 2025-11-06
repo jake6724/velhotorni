@@ -1,6 +1,8 @@
 class_name PlayerPerkManager
 extends Node
 
+## TODO: If I could get everything in playerstats i could just pass a ref to that...? 
+
 """
 This node directly manages and makes changes to PlayerCharacter and its child nodes based on signals emitted from
 PerkPlayer objects. 

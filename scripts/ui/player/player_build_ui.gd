@@ -24,24 +24,6 @@ var tower_index: int = 0:
 var tower_buttons: Array[TowerButton] = []
 var tower_button_price_labels: Array[Label] = []
 
-var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
- 	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
-	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind.png"),
-	Constants.Element.WATER: preload("res://assets/art/sprites/ui/spr_ui_tower_water_fish.png"),
-	Constants.Element.EARTH: preload("res://assets/art/sprites/ui/spr_ui_tower_earth.png"),
-	Constants.Element.LIGHT: preload("res://assets/art/sprites/ui/spr_ui_tower_light.png"),
-	Constants.Element.DARK: preload("res://assets/art/sprites/ui/spr_ui_tower_dark.png"),
-}
-
-var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
-	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
-	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind_locked.png"),
-	Constants.Element.WATER: preload("res://assets/art/sprites/ui/spr_ui_tower_water_fish_locked.png"),
-	Constants.Element.EARTH: preload("res://assets/art/sprites/ui/spr_ui_tower_earth_locked.png"),
-	Constants.Element.LIGHT: preload("res://assets/art/sprites/ui/spr_ui_tower_light_locked.png"),
-	Constants.Element.DARK: preload("res://assets/art/sprites/ui/spr_ui_tower_dark_locked.png"),
-}
-
 const BASE_POSITION: Vector2 = Vector2(0,-3)
 const RAISE_POSITION: Vector2 = Vector2(0, -8)
 const RAISE_DURATION: float = .1
@@ -54,6 +36,8 @@ func _ready():
 
 	tower_action_icons = [heal_icon, upgrade_icon, sell_icon]
 	tower_action_button_hint_icon.z_index = Constants.z_index_map["tower_menu"]
+
+	TowerGlobalData.tower_prices_updated.connect(set_tower_button_prices)
 
 func update(player_mana: PlayerMana) -> void:
 	update_tower_button_icons(player_mana)
@@ -83,9 +67,9 @@ func update_tower_info_panel(tower: Tower) -> void:
 func update_tower_button_icons(player_mana: PlayerMana) -> void:
 	for button: TowerButton in tower_buttons:
 		if player_mana.tower_mana >= TowerGlobalData.tower_prices[button.element]:
-			button.texture_normal = ui_tower_sprites[button.element]
+			button.texture_normal = TowerGlobalData.ui_tower_sprites[button.element]
 		else:
-			button.texture_normal = locked_ui_tower_sprites[button.element]
+			button.texture_normal = TowerGlobalData.locked_ui_tower_sprites[button.element]
 
 ## Update tower_count_label with the provided value. 
 func update_tower_count_label(_value: int) -> void:

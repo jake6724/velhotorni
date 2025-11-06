@@ -39,6 +39,10 @@ func _ready():
 	# Connect to WaveManager
 	WaveManager.wave_failed.connect(on_wave_failed)
 
+	# Configure TowerGlobalData
+	TowerGlobalData.reset()
+	TowerGlobalData.tower_max = active_level.max_towers
+
 	# Configure PlayerController
 	player_controller.setup()
 	player_controller.bestiary_pressed.connect(pause_game_with_bestiary)
@@ -51,7 +55,6 @@ func _ready():
 	player_character.global_position = player_character.spawn_point
 	player_character.on_tower_mana_collected(active_level.initial_gold)
 	player_character.player_respawned.connect(active_level.base.take_damage.bind(1))
-	player_character.player_build.max_towers = active_level.max_towers
 
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
@@ -60,9 +63,6 @@ func _ready():
 	# Configure ManaDropManager
 	EnemySpawner.enemy_died_with_global_pos_drop_chance.connect(mana_drop_manager.on_enemy_died)
 	mana_drop_manager.initialize(player_character.player_spells)
-
-	# Configure TowerGlobalData
-	TowerGlobalData.reset()
 
 	# Configure PauseMenu
 	pause_menu.parent_scene = self
@@ -83,6 +83,7 @@ func _ready():
 	perk_manager.player_mana_drop_collector = player_character.mana_drop_collector
 	perk_manager.player_hurtbox = player_character.player_hurtbox
 	perk_manager.player_spell_spawner = player_character.player_spell_spawner
+	perk_manager.base_perk_manager = active_level.base.base_perk_manager
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change

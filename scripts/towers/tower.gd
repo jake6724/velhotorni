@@ -86,7 +86,8 @@ var _preview_leveled_speed: float
 
 const MAX_LEVEL_PRICE: int = 125
 const LEVEL_COST_INCREMENT: int = 25
-var level_upgrade_price: int = 75
+var level_upgrade_price_base: int = 75
+var level_upgrade_price: int
 var level: int = 0
 var sell_price: int # Set in initialize
 var damage_level: int = 0:
@@ -193,9 +194,6 @@ func _ready():
 	# Configure Hurtbox
 	hurtbox.hit.connect(on_hit)
 
-	# Configure UpgradePriceLabel
-	upgrade_price_label.text = str(int(level_upgrade_price))
-
 	# Configure AnimationPlayer
 	ap.animation_finished.connect(on_animation_finished)
 
@@ -206,8 +204,8 @@ func _ready():
 
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
-	base_data = get_tower_data_copy(Constants.tower_data[element])
-	transform_data = get_tower_data_copy(Constants.tower_data[Constants.get_next_element(element)])
+	base_data = get_tower_data_copy(TowerGlobalData.tower_data[element])
+	transform_data = get_tower_data_copy(TowerGlobalData.tower_data[Constants.get_next_element(element)])
 	data = base_data
 
 	update_current_combat_data()
@@ -233,6 +231,9 @@ func initialize(element: Constants.Element):
 	hex_manager.new_hex_added.connect(on_add_new_hex)
 	hex_manager.active_hex_removed.connect(on_remove_active_hex)
 
+	# Configure prices and price UI
+	level_upgrade_price = level_upgrade_price_base * TowerGlobalData.tower_upgrade_price_modifier[data.element]
+	upgrade_price_label.text = str(int(level_upgrade_price))
 	sell_price = int(TowerGlobalData.tower_prices[data.element] / 2)
 
 	attack_timer.start(curr_speed)
@@ -283,8 +284,8 @@ func revert() -> void:
 
 func evolve(selected_element: Constants.Element) -> void:
 	is_evolved = true
-	base_data = get_tower_data_copy(Constants.tower_data[selected_element])
-	transform_data = get_tower_data_copy(Constants.tower_data[Constants.get_next_element(selected_element)])
+	base_data = get_tower_data_copy(TowerGlobalData.tower_data[selected_element])
+	transform_data = get_tower_data_copy(TowerGlobalData.tower_data[Constants.get_next_element(selected_element)])
 	data = base_data
 	reset_tower()
 
@@ -332,34 +333,34 @@ func update_debuff_data() -> void:
 	if data.debuff_data:
 		match data.debuff_data.type:
 			Debuff.Type.BURN:
-				data.debuff_data.modified_value = data.debuff_data.value + ((data.debuff_data.value * BURN_DAMAGE_MODIFIER) * special_level)
+				data.debuff_data.modified_value = (data.debuff_data.value + (data.debuff_data.value * BURN_DAMAGE_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
 			Debuff.Type.KNOCKBACK: 
-				data.debuff_data.modified_value = data.debuff_data.value + ((data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * special_level)
+				data.debuff_data.modified_value = (data.debuff_data.value + (data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
 			Debuff.Type.SLOW:
-				data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * special_level)
+				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
 			Debuff.Type.FREEZE:
-				data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * special_level)
+				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
 			Debuff.Type.STUN:
-				data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * special_level)
+				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
 			Debuff.Type.WEAKEN:
-				data.debuff_data.modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * special_level)
+				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
 		update_preview_debuff_data()
 
 func update_preview_debuff_data() -> void:
 	if data.debuff_data:
 		match data.debuff_data.type:
 			Debuff.Type.BURN: 
-				data.debuff_data.preview_modified_value = data.debuff_data.value + ((data.debuff_data.value * BURN_DAMAGE_MODIFIER) * (special_level + 1))
+				data.debuff_data.preview_modified_value = (data.debuff_data.value + (data.debuff_data.value * BURN_DAMAGE_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
 			Debuff.Type.KNOCKBACK: 
-				data.debuff_data.preview_modified_value = data.debuff_data.value + ((data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * (special_level + 1))
+				data.debuff_data.preview_modified_value = (data.debuff_data.value + (data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
 			Debuff.Type.SLOW:
-				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * (special_level + 1))
+				data.debuff_data.preview_modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
 			Debuff.Type.FREEZE:
-				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * (special_level + 1))
+				data.debuff_data.preview_modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
 			Debuff.Type.STUN:
-				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * (special_level + 1))
+				data.debuff_data.preview_modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
 			Debuff.Type.WEAKEN:
-				data.debuff_data.preview_modified_total_duration = data.debuff_data.total_duration + ((data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * (special_level + 1))
+				data.debuff_data.preview_modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
 
 func update_buff_data() -> void:
 	# Connect to BuffArea
@@ -369,17 +370,17 @@ func update_buff_data() -> void:
 		buff_area.uninitialize()
 
 	for buff_data: BuffData in data.buff_data_list:
-		buff_data.leveled_value = buff_data.value
+		buff_data.leveled_value = buff_data.value		
 
 	if data.buff_data_list and data.buff_data_list[0]:
 		match data.buff_data_list[0].type:
 			Buff.Type.RANGE:
-				data.buff_data_list[0].leveled_value = data.buff_data_list[0].value + ((data.buff_data_list[0].value * RANGE_BUFF_LEVEL_MODIFIER) * special_level)
+				data.buff_data_list[0].leveled_value = (data.buff_data_list[0].value + ((data.buff_data_list[0].value * RANGE_BUFF_LEVEL_MODIFIER) * TowerGlobalData.buff_perk_modifier[data.buff_data_list[0].type]) * special_level)
 			Buff.Type.DAMAGE:
-				data.buff_data_list[0].leveled_value = data.buff_data_list[0].value + ((data.buff_data_list[0].value * DAMAGE_BUFF_LEVEL_MODIFIER) * special_level)
+				data.buff_data_list[0].leveled_value = (data.buff_data_list[0].value + ((data.buff_data_list[0].value * DAMAGE_BUFF_LEVEL_MODIFIER) * TowerGlobalData.buff_perk_modifier[data.buff_data_list[0].type]) * special_level)
 			Buff.Type.SPEED:
-				data.buff_data_list[0].leveled_value = data.buff_data_list[0].value + ((data.buff_data_list[0].value * SPEED_BUFF_LEVEL_MODIFIER) * special_level)
-		
+				data.buff_data_list[0].leveled_value = (data.buff_data_list[0].value + ((data.buff_data_list[0].value * SPEED_BUFF_LEVEL_MODIFIER) * TowerGlobalData.buff_perk_modifier[data.buff_data_list[0].type]) * special_level)
+
 		buff_area.buff_data_list = data.buff_data_list.duplicate(true)
 		update_preview_buff_data()
 
@@ -549,8 +550,8 @@ func revert_to_checkpoint() -> void:
 
 func revert_to_base_evolution() -> void:
 	TowerGlobalData.tower_evolution_status[data.element] = true
-	base_data = get_tower_data_copy(Constants.tower_data[data.base_element])
-	transform_data = get_tower_data_copy(Constants.tower_data[Constants.get_next_element(base_data.element)])
+	base_data = get_tower_data_copy(TowerGlobalData.tower_data[data.base_element])
+	transform_data = get_tower_data_copy(TowerGlobalData.tower_data[Constants.get_next_element(base_data.element)])
 	data = base_data
 	reset_tower()
 

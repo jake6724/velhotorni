@@ -5,14 +5,9 @@ enum TowerAction {HEAL, UPGRADE, SELL}
 
 @export var grid_follow_tower: bool = true # Debugging, should go away
 
-var tower_parent: Node = Node.new()
+var tower_parent: Node = Node.new() # Towers are spawned under this Node so that their position will not affected by this class since it is a Node2D
 
 var active_towers: Array[Tower] = []
-var max_towers: int: # Set manually by Main from active_level
-	set(value):
-		max_towers = value
-		player_build_ui.update_tower_max_label(value)
-
 var _tower_mana: int # Connected to player_mana's tower_mana_updated signal. This is player_build's local copy
 
 var player_build_ui: PlayerBuildUI # Set by PlayerCharacter
@@ -60,9 +55,11 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	tower_detect_area.area_entered.connect(on_tower_detect_area_entered)
 	tower_detect_area.area_exited.connect(on_tower_detect_area_exited)
 	player_build_ui.update_tower_count_label(0)
-	player_build_ui.update_tower_max_label(max_towers)
+	player_build_ui.update_tower_max_label(TowerGlobalData.tower_max)
 	_tower_mana = player_mana.tower_mana
 	tower_action_changed.emit(tower_action)
+	TowerGlobalData.tower_max_updated.connect(on_tower_max_updated)
+	TowerGlobalData.tower_debuff_perk_modifier_data_updated.connect(on_tower_perk_debuff_modifier_data_updated)
 
 func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
 	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action(hovered_tower):
@@ -244,7 +241,7 @@ func get_action_cost(_hovered_tower) -> int:
 
 func get_tower_placement_info() -> Array:
 	# Check tower count
-	if active_towers.size() < max_towers:
+	if active_towers.size() < TowerGlobalData.tower_max:
 		# Check can afford
 		var cost: int = TowerGlobalData.tower_prices[preview_tower.data.element]
 		if _tower_mana >= cost:
@@ -314,3 +311,21 @@ func show_active_tower_ranges(_value: bool) -> void:
 func show_active_tower_healths(_value: bool) -> void:
 	for tower: Tower in active_towers:
 		tower.healthbar.visible = _value
+
+func on_tower_max_updated(tower_max: int) -> void:
+	player_build_ui.update_tower_max_label(tower_max)
+
+func on_tower_perk_debuff_modifier_data_updated() -> void:
+	for tower: Tower in active_towers:
+		tower.update_debuff_data()
+
+func on_tower_buff_perk_modifier_data_updated() -> void:
+	for tower: Tower in active_towers:
+		tower.update_buff_data()
+		# TODO: Make sure sell price is modified
+
+func on_tower_upgrade_price_modifier_updated() -> void:
+	for tower: Tower in active_towers:
+		# # TODO: This could be a tower function
+		tower.level_upgrade_price = roundf(tower.level_upgrade_price * TowerGlobalData.tower_upgrade_price_modifier[tower.data.element])
+		tower.upgrade_price_label.text = str(int(tower.level_upgrade_price))

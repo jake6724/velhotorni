@@ -1,10 +1,13 @@
 class_name PerkManager
 extends Node
 
-var player_perk_manager: PlayerPerkManager # Set manually by Main
-var player_mana_drop_collector: ManaDropCollector # Set manually by Main
-var player_hurtbox: PlayerHurtbox # Set manually by Main
+# External references required for connecting perk triggers
+# All references manually set by Main
+var player_perk_manager: PlayerPerkManager
+var player_mana_drop_collector: ManaDropCollector
+var player_hurtbox: PlayerHurtbox
 var player_spell_spawner: PlayerSpellSpawner
+var base_perk_manager: BasePerkManager
 
 var all_basic_perk_data: Array[PerkData] = [
 
@@ -52,9 +55,16 @@ func create_perk(perk_data: PerkData) -> void:
 	var perk_data_copy: PerkData = perk_data.duplicate()
 	var new_perk: Perk
 
+	# Connect perk signal to the appropriate perk manager observer
 	if perk_data is PerkDataPlayer:
 		new_perk = PerkPlayer.new()
 		new_perk.modify_stat_requested.connect(player_perk_manager.on_modify_stat_requested)
+	elif perk_data is PerkDataBase:
+		new_perk = PerkBase.new()
+		new_perk.modify_stat_requested.connect(base_perk_manager.on_modify_stat_requested)
+	elif perk_data is PerkDataTower:
+		new_perk = PerkTower.new()
+		new_perk.modify_stat_requested.connect(TowerGlobalData.on_modify_stat_requested)
 
 	new_perk.data = perk_data_copy
 
@@ -62,6 +72,7 @@ func create_perk(perk_data: PerkData) -> void:
 
 func configure_perk_trigger(new_perk: Perk) -> void:
 	# Trigger one shots perks, connect remaining to proper signals
+	# Triggers are independent of the PerkData type, all Perks can use the same triggers
 	match new_perk.data.trigger:
 		PerkData.Trigger.OneShot: new_perk.perk_action()
 		PerkData.Trigger.OnWaveComplete: WaveManager.wave_completed.connect(new_perk.perk_action)

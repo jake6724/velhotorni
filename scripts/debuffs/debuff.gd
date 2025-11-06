@@ -1,7 +1,7 @@
 class_name Debuff
 extends Node
 
-enum Type {SLOW, STUN, FREEZE, BURN, WEAKEN, KNOCKBACK,}
+enum Type {SLOW, STUN, FREEZE, BURN, WEAKEN, KNOCKBACK, NONE}
 enum Priority {LOWEST, LOW, MEDIUM, HIGH, HIGHEST}
 
 var data: DebuffData

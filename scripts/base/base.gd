@@ -4,6 +4,7 @@ extends Node2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: Label = %HealthLabel
 @onready var light: TextureRect = %Light
+@onready var base_perk_manager: BasePerkManager = %BasePerkManager
 
 var health: int:
 	set(value):

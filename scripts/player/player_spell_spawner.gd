@@ -89,15 +89,13 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
 	attack_timer.start(new_spell_data.cooldown)
 	player.player_camera.apply_shake(new_spell_data.camera_shake)
 
-	# apply_spell_kick(100)
-
 	for i in range(new_spell_data.num_bullets - 1):
 		spawn_bullet_spell(player_aim_direction, new_spell_data, new_spell_scene, angle_seperation, angle_sign)
 
 		if i % 2 == 1:
 			angle_seperation += new_spell_data.angle_seperation
 		angle_sign = -angle_sign
-
+		
 	spell_cast.emit(new_spell_data)
 
 func spawn_bullet_spell_charged(_player_aim_direction: Vector2) -> void:
