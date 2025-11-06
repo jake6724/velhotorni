@@ -6,11 +6,13 @@
 
 [resource]
 script = ExtResource("1_6wkfo")
-trigger = 0
-action = 0
+trigger = 2
+action = 1
 stat = 3
-duration = -1.0
+duration = 2.0
+required_spell_damage = inf
 base_value = 0.5
 legendary = true
 perk_icon = SubResource("AtlasTexture_6wkfo")
+perk_desc = ""
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

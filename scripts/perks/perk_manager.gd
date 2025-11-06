@@ -8,6 +8,7 @@ var player_mana_drop_collector: ManaDropCollector
 var player_hurtbox: PlayerHurtbox
 var player_spell_spawner: PlayerSpellSpawner
 var base_perk_manager: BasePerkManager
+var player_spell_perk_manager: PlayerSpellPerkManager
 
 var all_basic_perk_data: Array[PerkData] = [
 
@@ -39,19 +40,29 @@ var active_perks: Dictionary[PerkData, PerkData.Rarity]
 
 const PERK_HAND_SIZE: int = 3
 
+var test_perk_data: Array[PerkData] = [
+	preload("res://data/perks/tower/basic/perk_data_tower_fire_upgrade_cost.tres"), 
+	preload("res://data/perks/tower/basic/perk_data_tower_wind_upgrade_cost.tres"),
+	preload("res://data/perks/tower/basic/perk_data_tower_water_upgrade_cost.tres"),
+	preload("res://data/perks/tower/basic/perk_data_tower_earth_upgrade_cost.tres"),
+	preload("res://data/perks/tower/basic/perk_data_tower_light_upgrade_cost.tres"),
+	preload("res://data/perks/tower/basic/perk_data_tower_dark_upgrade_cost.tres"),
+]
+
 func _input(_event):
 	if Input.is_action_just_pressed("x"):
-		# print(get_rarity())
-		# print(rarity_pool)
-		# create_perk(test_perk_data_player)
-
-		get_basic_perk_hand(get_rarity())
+		print("X Pressed")
+		for perk_data: PerkData in test_perk_data:
+			create_perk(perk_data)
 
 func _ready():
 	fill_rarity_pool()
 	print(rarity_pool)
 
 func create_perk(perk_data: PerkData) -> void:
+	print("Calling create_perk()")
+	# TODO: Rarity needs to be used here somehow
+
 	var perk_data_copy: PerkData = perk_data.duplicate()
 	var new_perk: Perk
 
@@ -59,25 +70,34 @@ func create_perk(perk_data: PerkData) -> void:
 	if perk_data is PerkDataPlayer:
 		new_perk = PerkPlayer.new()
 		new_perk.modify_stat_requested.connect(player_perk_manager.on_modify_stat_requested)
+		new_perk.timed_modify_stat_requested.connect(player_perk_manager.on_timed_modify_stat_requested)
+
 	elif perk_data is PerkDataBase:
 		new_perk = PerkBase.new()
 		new_perk.modify_stat_requested.connect(base_perk_manager.on_modify_stat_requested)
+
 	elif perk_data is PerkDataTower:
 		new_perk = PerkTower.new()
 		new_perk.modify_stat_requested.connect(TowerGlobalData.on_modify_stat_requested)
 
+	elif perk_data is PerkDataSpell:
+		new_perk = PerkSpell.new()
+		new_perk.modify_stat_requested.connect(player_spell_perk_manager.on_modify_stat_requested)
+
 	new_perk.data = perk_data_copy
 
 	configure_perk_trigger(new_perk)
+	active_perks[perk_data] = new_perk.data.rarity
 
 func configure_perk_trigger(new_perk: Perk) -> void:
+	print("Calling configure_perk_trigger()")
 	# Trigger one shots perks, connect remaining to proper signals
 	# Triggers are independent of the PerkData type, all Perks can use the same triggers
 	match new_perk.data.trigger:
 		PerkData.Trigger.OneShot: new_perk.perk_action()
 		PerkData.Trigger.OnWaveComplete: WaveManager.wave_completed.connect(new_perk.perk_action)
-		PerkData.Trigger.OnSpellManaPickup: player_mana_drop_collector.mana_drop_collected.connect(new_perk.perk_action)
-		PerkData.Trigger.OnPlayerDamage: player_hurtbox.hit.connect(new_perk.perk_action)
+		PerkData.Trigger.OnSpellManaPickup: player_mana_drop_collector.mana_drop_collected_no_data.connect(new_perk.perk_action)
+		PerkData.Trigger.OnPlayerDamage: player_hurtbox.hit_no_data.connect(new_perk.perk_action)
 		PerkData.Trigger.OnPlayerSpellDamageDealt: player_spell_spawner.spell_damage_dealt.connect(new_perk.accumulate_spell_damage)
 
 ## Choose a valid rarity from `rarity_pool`. Automatically calls update_rarity_data() to keep `rarity_pool` valid.

@@ -5,6 +5,7 @@ const SPELL_MANA_LOW_THRESHOLD: float = .2 # multiplied by the max value to get 
 
 var spell_mana: Dictionary[SpellData, float] = {}
 var spell_mana_base_drop_amount: Dictionary[SpellData, float] = {}
+var spell_mana_max_base: Dictionary[SpellData, float] = {}
 var spell_mana_maxes: Dictionary[SpellData, float] = {}
 var spell_mana_low: Dictionary[SpellData, bool] = {}
 
@@ -38,6 +39,10 @@ func populate_spell_mana(selected_spells: Array[SpellData]) -> void:
 		spell_mana[spell_data] = spell_data.initial_mana_amount
 		print("Initial mana: ", spell_data.initial_mana_amount)
 		spell_mana_base_drop_amount[spell_data] = spell_data.base_spell_mana_per_drop
-		spell_mana_maxes[spell_data] = spell_data.max_mana_amount
+		spell_mana_max_base[spell_data] = spell_data.max_mana_amount
 		print("Max mana: ", spell_data.max_mana_amount)
 		spell_mana_low[spell_data] = false
+
+		# Copy base maxes over to the active mana max dict
+		for key in spell_mana_max_base.keys():
+			spell_mana_maxes[key] = spell_mana_max_base[key]

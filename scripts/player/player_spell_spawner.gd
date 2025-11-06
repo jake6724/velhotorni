@@ -128,6 +128,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 
 	new_spell.z_index = player.z_index + 2
 	add_child(new_spell)
+	new_spell.damage_dealt.connect(on_spell_damage_dealt)
 	spell_cast.emit(new_spell_data)
 	melee_spell_cast.emit()
 	attack_timer.start(new_spell_data.cooldown)

@@ -4,6 +4,7 @@ extends Area2D
 @onready var collider: CollisionShape2D = $PlayerHurtboxCollider
 
 signal hit
+signal hit_no_data
 signal pit_entered
 
 func _ready():
@@ -12,6 +13,7 @@ func _ready():
 
 func take_damage(_damage: float, bullet_pos: Vector2) -> void:
 	hit.emit(calc_knockback_direction(bullet_pos))
+	hit_no_data.emit()
 
 func calc_knockback_direction(bullet_pos: Vector2) -> Vector2:
 	# global_position can be used since this is a Node2D which will stay in the same location as PlayerCharacter root node

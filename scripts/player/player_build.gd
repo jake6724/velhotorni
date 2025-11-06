@@ -60,6 +60,8 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	tower_action_changed.emit(tower_action)
 	TowerGlobalData.tower_max_updated.connect(on_tower_max_updated)
 	TowerGlobalData.tower_debuff_perk_modifier_data_updated.connect(on_tower_perk_debuff_modifier_data_updated)
+	TowerGlobalData.tower_buff_perk_modifier_data_updated.connect(on_tower_perk_buff_modifier_data_updated)
+	TowerGlobalData.tower_upgrade_price_modifier_updated.connect(on_tower_upgrade_price_modifier_updated)
 
 func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
 	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action(hovered_tower):
@@ -122,6 +124,7 @@ func update_preview_tower_position(player_global_position: Vector2, aim_input: V
 		target = WorldGrid.grid_to_world(WorldGrid.world_to_grid(player_global_position)) + Vector2(8,8)
 	else:
 		target = preview_tower.global_position + Vector2(8,8)
+		
 	build_grid_sprite.global_position = target
 
 func update_tower_detect_area_position() -> void:
@@ -319,13 +322,11 @@ func on_tower_perk_debuff_modifier_data_updated() -> void:
 	for tower: Tower in active_towers:
 		tower.update_debuff_data()
 
-func on_tower_buff_perk_modifier_data_updated() -> void:
+func on_tower_perk_buff_modifier_data_updated() -> void:
 	for tower: Tower in active_towers:
 		tower.update_buff_data()
 		# TODO: Make sure sell price is modified
 
 func on_tower_upgrade_price_modifier_updated() -> void:
 	for tower: Tower in active_towers:
-		# # TODO: This could be a tower function
-		tower.level_upgrade_price = roundf(tower.level_upgrade_price * TowerGlobalData.tower_upgrade_price_modifier[tower.data.element])
-		tower.upgrade_price_label.text = str(int(tower.level_upgrade_price))
+		tower.update_upgrade_info()

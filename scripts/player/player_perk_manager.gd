@@ -8,6 +8,7 @@ This node directly manages and makes changes to PlayerCharacter and its child no
 PerkPlayer objects. 
 """
 
+
 @onready var player: PlayerCharacter = get_owner()
 
 var timed_modify_stat_stack_max: Dictionary[PerkDataPlayer.PlayerStat, int] = {
@@ -29,7 +30,9 @@ func on_modify_stat_requested(stat_to_modify: PerkDataPlayer.PlayerStat, value: 
 	match stat_to_modify:
 		PerkDataPlayer.PlayerStat.HEALTH: 
 			modified_value = value
-			player.player_statsa.health += value
+			player.player_stats.health += value
+			print("player.player_stats.health", player.player_stats.health)
+			player.player_hud.on_health_updated(player.player_stats.health)
 		PerkDataPlayer.PlayerStat.MAX_HEALTH: 
 			modified_value = value
 			player.player_stats.max_health += value
@@ -38,7 +41,7 @@ func on_modify_stat_requested(stat_to_modify: PerkDataPlayer.PlayerStat, value: 
 			player.player_stats.move_speed += (player.player_stats.move_speed * value)
 		PerkDataPlayer.PlayerStat.SPECIAL_COOLDOWN: 
 			modified_value = (player.player_special.charge_cooldown_duration * value)
-			player.player_special.charge_cooldown_duration -= (player.player_special.charge_cooldown_duration * value)
+			player.player_special.charge_cooldown_duration += (player.player_special.charge_cooldown_duration * value)
 		PerkDataPlayer.PlayerStat.REFLECT_CHANCE:
 			modified_value = value
 			player.player_stats.chance_to_reflect += value
@@ -53,12 +56,16 @@ func on_modify_stat_requested(stat_to_modify: PerkDataPlayer.PlayerStat, value: 
 	return modified_value
 
 func on_timed_modify_stat_requested(stat_to_modify: PerkDataPlayer.PlayerStat, value: float, duration: float) -> void:
+	print("PlayerPerk manager heard timed_modify_stat_requested")
 	if timed_modify_stat_stack_count[stat_to_modify] < timed_modify_stat_stack_max[stat_to_modify]:
 
 		var modified_value: float = on_modify_stat_requested(stat_to_modify, value)
 
 		var timer: Timer = Timer.new()
+		timer.one_shot = true
+		timer.autostart = false
 		timer.timeout.connect(on_timed_modify_stat_expired.bind(stat_to_modify, modified_value))
+		add_child(timer)
 		timer.start(duration)
 
 		timed_modify_stat_stack_count[stat_to_modify] += 1

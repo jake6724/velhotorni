@@ -7,6 +7,7 @@ extends Node2D
 var magnetized_drops: Array[ManaDrop] = []
 
 signal mana_drop_collected
+signal mana_drop_collected_no_data
 
 func _ready():
 	magnet_area.area_entered.connect(on_magnet_area_entered)
@@ -26,6 +27,7 @@ func on_collect_area_entered(mana_drop: ManaDrop) -> void:
 	
 	SFXPlayer.play_sfx("coin_collect")
 	mana_drop_collected.emit(mana_drop.spell_data, mana_drop.amount_modifier)
+	mana_drop_collected_no_data.emit()
 	# match mana_drop.element:
 	# 	Constants.Element.FIRE: print("Fire")
 	# 	Constants.Element.WIND: print("Wind")

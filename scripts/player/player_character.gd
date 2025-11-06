@@ -21,6 +21,7 @@ extends CharacterBody2D
 @onready var player_special: PlayerSpecial = %PlayerSpecial
 @onready var player_number_popup: PlayerNumberPopup = %PlayerNumberPopup
 @onready var player_perk_manager: PlayerPerkManager = %PlayerPerkManager
+@onready var player_spell_perk_manager: PlayerSpellPerkManager = %PlayerSpellPerkManager
 
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer

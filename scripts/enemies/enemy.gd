@@ -330,7 +330,8 @@ func on_debuff_apply_knockback(_value, _total_duration) -> void:
 		knockback_tween.tween_property(path_follow, "progress", progress_target, _total_duration)
 
 func on_debuff_remove_knockback() -> void:
-	knockback_tween.stop()
+	if knockback_tween:
+		knockback_tween.stop()
 
 func set_pos_offset() -> void:
 	match data.size:

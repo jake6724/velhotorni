@@ -4,10 +4,12 @@
 
 [resource]
 script = ExtResource("1_r3i8v")
-trigger = 0
+trigger = 3
 action = 1
 stat = 3
 duration = 3.0
-base_value = 5.0
+required_spell_damage = inf
+base_value = 0.05
 legendary = false
+perk_desc = ""
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

@@ -84,6 +84,7 @@ func _ready():
 	perk_manager.player_hurtbox = player_character.player_hurtbox
 	perk_manager.player_spell_spawner = player_character.player_spell_spawner
 	perk_manager.base_perk_manager = active_level.base.base_perk_manager
+	perk_manager.player_spell_perk_manager = player_character.player_spell_perk_manager
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change

@@ -8,8 +8,9 @@ extends Node2D
 
 var health: int:
 	set(value):
-		health = value
+		health = min(max_health, value)
 		health_bar.text = str(health)
+	
 var health_checkpoint: int
 var max_health: int = 10
 

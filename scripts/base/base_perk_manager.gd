@@ -6,7 +6,6 @@ This node directly manages and makes changes to Base and its child nodes based o
 PerkBase objects. 
 """
 
-
 @onready var base: Base = get_owner()
 
 func on_modify_stat_requested(stat_to_modify: PerkDataBase.BaseStat, value: float) -> float:
@@ -15,6 +14,7 @@ func on_modify_stat_requested(stat_to_modify: PerkDataBase.BaseStat, value: floa
 		PerkDataBase.BaseStat.HEALTH:
 			modified_value = value
 			base.health += value
+			
 		PerkDataBase.BaseStat.MAX_HEALTH:
 			modified_value = value
 			base.max_health += value

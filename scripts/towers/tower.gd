@@ -588,15 +588,18 @@ func upgrade() -> void:
 	special_level += 1
 	level += 1
 	sell_price += int(level_upgrade_price / 2)
-	level_upgrade_price += LEVEL_COST_INCREMENT
 	upgrade_icon.texture.region = Rect2((8 * level), 0, 8, 10)
+	update_upgrade_info()
+	ap.play("summon")
+
+func update_upgrade_info() -> void:
+	level_upgrade_price = int((level_upgrade_price_base + LEVEL_COST_INCREMENT) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
 	if level >= Constants.TOWER_MAX_LEVEL:
 		upgrade_price_label.text = " MAX"
 		upgrade_coin_icon.hide()
 		upgrade_button_hint.hide()
 	else:
 		upgrade_price_label.text = str(int(level_upgrade_price))
-	ap.play("summon")
 
 func show_action_cost_info(cost) -> void:
 	# if cost < 0:

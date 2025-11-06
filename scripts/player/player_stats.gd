@@ -8,7 +8,7 @@ var max_health = 8.0
 
 var health: float = 8.0:
 	set(value):
-		health = value
+		health = min(value, max_health)
 		if health < 1:
 			health = 0
 		health_updated.emit(health)

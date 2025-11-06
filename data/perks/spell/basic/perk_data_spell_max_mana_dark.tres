@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=4 format=3 uid="uid://cjnxjuunaus7u"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_vp04m"]
+[ext_resource type="Script" uid="uid://euw34l8tc2dw" path="res://scripts/perks/data/perk_data_spell.gd" id="2_ace8w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldapf"]
+atlas = ExtResource("1_vp04m")
+region = Rect2(192, 193, 48, 46)
+
+[resource]
+script = ExtResource("2_ace8w")
+trigger = 0
+action = 0
+stat = 1
+element = 5
+base_value = 0.2
+legendary = false
+perk_icon = SubResource("AtlasTexture_ldapf")
+perk_desc = ""
+metadata/_custom_type_script = "uid://euw34l8tc2dw"

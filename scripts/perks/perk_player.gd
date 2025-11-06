@@ -8,13 +8,15 @@ var spell_damage_accumulated: float = 0
 
 func perk_action() -> void: 
 	match data.action: # could use a func_ref instead
-		PerkDataPlayer.PlayerPerkAction.PlayerStat: modify_player_stat(data.stat, data.base_value)
-		PerkDataPlayer.PlayerPerkAction.TimedPlayerStat: timed_modify_player_stat(data.stat, data.base_value, data.duration)
+		PerkDataPlayer.PlayerPerkAction.MODIFY_PLAYER_STAT: 
+			modify_player_stat(data.stat, data.base_value)
+		PerkDataPlayer.PlayerPerkAction.MODIFY_TIMED_PLAYER_STAT: timed_modify_player_stat(data.stat, data.base_value, data.duration)
 
 func modify_player_stat(stat_to_modify: PerkDataPlayer.PlayerStat, value: float) -> void:
 	modify_stat_requested.emit(stat_to_modify, value)
 
 func timed_modify_player_stat(stat_to_modify: PerkDataPlayer.PlayerStat, value: float, duration: float) -> void:
+	print("PlayerPerk emitting timed_modify_stat_requested")
 	timed_modify_stat_requested.emit(stat_to_modify, value, duration)
 
 ## Called each time PlayerSpellSpawner emits `DamageDealt`. Accumulates damage until `data.required_spell_damage` is 
@@ -24,3 +26,5 @@ func accumulate_spell_damage(damage_applied: float) -> void:
 	if spell_damage_accumulated > data.required_spell_damage:
 		perk_action()
 		spell_damage_accumulated = 0
+
+	print("acc spell dmg. New total = ", spell_damage_accumulated)
