@@ -16,3 +16,12 @@ func change_scene(target: PackedScene) -> void:
 	await $AnimationPlayer.animation_finished
 	block_mouse.hide()
 	scene_transition_complete.emit()
+
+func teleport_player(player: PlayerCharacter, target_global_position: Vector2) -> void:
+	$AnimationPlayer.play('dissolve')
+	await $AnimationPlayer.animation_finished
+	player.player_camera.position_smoothing_enabled = false
+	player.global_position = target_global_position
+	player.player_camera.position_smoothing_enabled = false
+	$AnimationPlayer.play_backwards('dissolve')
+	await $AnimationPlayer.animation_finished

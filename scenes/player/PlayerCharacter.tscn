@@ -1438,7 +1438,6 @@ script = ExtResource("27_h3nqo")
 shape = SubResource("CapsuleShape2D_vy23r")
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_ljh2g")
 
