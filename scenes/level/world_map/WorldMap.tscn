@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://c44xbwx307gqq" path="res://scripts/level/world_map.gd" id="1_rwbqg"]
 [ext_resource type="Texture2D" uid="uid://dd44h87wnbk4t" path="res://assets/art/sprites/spr_map.png" id="2_v7h0i"]
 [ext_resource type="PackedScene" uid="uid://dki5b1v23sshc" path="res://scenes/ui/WorldMapInfoPanel.tscn" id="3_gyoph"]
+[ext_resource type="PackedScene" uid="uid://cktn6dyjh3ygr" path="res://scenes/level/LevelTower.tscn" id="5_wo7is"]
 [ext_resource type="Texture2D" uid="uid://cgnu6kwnix7xs" path="res://assets/art/sprites/spr_map_ui.png" id="6_wo7is"]
 [ext_resource type="PackedScene" uid="uid://p5xgj4rjwt1e" path="res://scenes/level/world_map/LevelButton.tscn" id="7_yjmtc"]
-[ext_resource type="PackedScene" uid="uid://jdo45lffrgqj" path="res://scenes/level/0_tutorial/Level0.tscn" id="8_xlnli"]
 [ext_resource type="PackedScene" uid="uid://c2tjlg8bc8rb" path="res://scenes/level/1_wind/Level1.tscn" id="9_musam"]
-[ext_resource type="PackedScene" uid="uid://up6hhofmi3ak" path="res://scenes/level/1_wind/Level2.tscn" id="10_2b0ok"]
+[ext_resource type="PackedScene" uid="uid://bupwctvog5l6d" path="res://scenes/level/1_wind/Level2.tscn" id="10_2b0ok"]
 [ext_resource type="PackedScene" uid="uid://dks8yom7a8nwo" path="res://scenes/level/1_wind/Level3A.tscn" id="11_nc3cf"]
 [ext_resource type="PackedScene" uid="uid://drn4sppwachxq" path="res://scenes/level/1_wind/Level3B.tscn" id="12_dra5x"]
 [ext_resource type="PackedScene" uid="uid://lqrdrmmlicq1" path="res://scenes/level/2_earth/Level4.tscn" id="12_v7h0i"]
@@ -231,7 +231,7 @@ offset_left = 40.0
 offset_top = 128.0
 offset_right = 56.0
 offset_bottom = 144.0
-level_scene = ExtResource("8_xlnli")
+level_scene = ExtResource("5_wo7is")
 metadata/_edit_use_anchors_ = true
 
 [node name="1LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
@@ -488,6 +488,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Clouds" type="CanvasLayer" parent="."]
 layer = 2
+visible = false
 
 [node name="7Cloud" type="AnimatedSprite2D" parent="Clouds"]
 position = Vector2(323, 42)

@@ -7,6 +7,7 @@ var main: Node2D # Reference used to change RoundInfo UI
 
 #res://scenes/level/2_earth/Level5.tscn
 
+var tower_level: PackedScene = load("res://scenes/level/LevelTower.tscn")
 var level_0: PackedScene = load("res://scenes/level/0_tutorial/Level0.tscn")
 var level_1: PackedScene = load("res://scenes/level/1_wind/Level1.tscn")
 var level_2: PackedScene = load("res://scenes/level/1_wind/Level2.tscn")
@@ -37,7 +38,7 @@ var level_20: PackedScene = load("res://scenes/level/7_final/Level20.tscn")
 var level_21: PackedScene = load("res://scenes/level/7_final/Level21.tscn")
 var level_22: PackedScene = load("res://scenes/level/7_final/Level22.tscn")
 
-var levels: Array[PackedScene] = [level_0, level_1, level_2, level_3a, level_3b, level_4, level_5, level_6a, level_6b, 
+var levels: Array[PackedScene] = [tower_level, level_0, level_1, level_2, level_3a, level_3b, level_4, level_5, level_6a, level_6b, 
 level_7, level_8, level_9a, level_9b, level_10, level_11, level_12a, level_12b, level_13, level_14, level_15a, level_15b, 
 level_16, level_17, level_18a, level_18b, level_19, level_20, level_21, level_22]
 var level_index: int = 5
@@ -75,8 +76,9 @@ func restart_level():
 func load_specific_level(_level_environment):
 	level_index = levels.find(_level_environment)
 	if level_index != -1:
-		# level_index = _level_index
 		SceneTransition.change_scene(main_scene)
+	else:
+		push_error("Level not found!")
 
 func complete_game() -> void:
 	level_index = 0

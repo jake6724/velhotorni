@@ -1771,6 +1771,7 @@ offset_left = -28.0
 offset_top = 111.0
 offset_right = 12.0
 offset_bottom = 151.0
+metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer2" parent="WaveInfoPanelParent" instance=ExtResource("22_v2c5h")]
 offset_left = 112.0
@@ -1778,6 +1779,7 @@ offset_top = 373.0
 offset_right = 152.0
 offset_bottom = 413.0
 path = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer3" parent="WaveInfoPanelParent" instance=ExtResource("22_v2c5h")]
 offset_left = 352.0
@@ -1785,3 +1787,4 @@ offset_top = 384.0
 offset_right = 392.0
 offset_bottom = 424.0
 path = 2
+metadata/_edit_use_anchors_ = true

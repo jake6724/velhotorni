@@ -6,6 +6,7 @@ extends Node
 ## 3: 2 star
 ## 4: 3 star
 var stars: Dictionary[PackedScene, int] = {
+	LevelManager.tower_level: 1,
 	LevelManager.level_0: 0, 
 	LevelManager.level_1: 0, 
 	LevelManager.level_2: 1, 
