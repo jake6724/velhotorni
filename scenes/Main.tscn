@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://vb1cipw2nthp"]
+[gd_scene load_steps=13 format=3 uid="uid://vb1cipw2nthp"]
 
 [ext_resource type="Script" uid="uid://c6gn0gwhvt2he" path="res://scripts/main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dmftkyu1m0r7n" path="res://scenes/ui/RoundInfo.tscn" id="3_0bbpv"]
@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://cg4hr6brmiyc4" path="res://scenes/ui/LevelCompletePanel.tscn" id="8_jlsqs"]
 [ext_resource type="PackedScene" uid="uid://44wq0lwrobei" path="res://scenes/player/PlayerCharacter.tscn" id="10_lhr70"]
+[ext_resource type="PackedScene" uid="uid://ck21estk7dkvr" path="res://scenes/ui/perk/PerkUI.tscn" id="12_bjd11"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0bbpv")
@@ -71,3 +72,10 @@ unique_name_in_owner = true
 visible = false
 offset_top = -47.5
 offset_bottom = 47.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="PerkUI" parent="CanvasLayer" instance=ExtResource("12_bjd11")]
+unique_name_in_owner = true
+visible = false

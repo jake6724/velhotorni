@@ -17,5 +17,6 @@ required_spell_damage = inf
 base_value = 0.35
 legendary = false
 perk_icon = SubResource("AtlasTexture_cfvr6")
-perk_desc = ""
+perk_name = "get more faster"
+perk_desc = "Increase player move speed"
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

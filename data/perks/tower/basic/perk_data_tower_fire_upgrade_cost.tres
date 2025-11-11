@@ -18,5 +18,6 @@ buff = 3
 base_value = -0.1
 legendary = false
 perk_icon = SubResource("AtlasTexture_gsq20")
-perk_desc = ""
+perk_name = "fire tax cuts"
+perk_desc = "decrease fire tower upgrade costs"
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

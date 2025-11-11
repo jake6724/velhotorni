@@ -1,11 +1,22 @@
-[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=2 format=3 uid="uid://bd2fwedn2x4gv"]
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=4 format=3 uid="uid://bd2fwedn2x4gv"]
 
 [ext_resource type="Script" uid="uid://tx0ls1d4gwxv" path="res://scripts/perks/data/park_data_player.gd" id="1_budxm"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_p055t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivjrh"]
+atlas = ExtResource("1_p055t")
+region = Rect2(240, 241, 48, 46)
 
 [resource]
 script = ExtResource("1_budxm")
 trigger = 0
 action = 0
 stat = 2
+duration = -1.0
+required_spell_damage = inf
 base_value = 2.0
+legendary = false
+perk_icon = SubResource("AtlasTexture_ivjrh")
+perk_name = "Max Health"
+perk_desc = "Increase max player health"
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

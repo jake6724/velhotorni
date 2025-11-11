@@ -3,13 +3,13 @@ extends Node
 
 @export var selected_spells: Array[SpellData] = [null, null, null, null]
 
-var spells: DoublyLinkedList
+var spells: SpellDataDoublyLinkedList
 var active_spell: SpellData
 
 signal active_spell_switched
 
 func _ready():
-	spells = DoublyLinkedList.new(selected_spells)
+	spells = SpellDataDoublyLinkedList.new(selected_spells)
 	active_spell = spells.head.value
 
 func switch_spells(_switch_direction) -> void:

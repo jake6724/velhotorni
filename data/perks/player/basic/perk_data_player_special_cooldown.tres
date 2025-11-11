@@ -1,6 +1,11 @@
-[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=2 format=3 uid="uid://bnpi4vl5oh2wt"]
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=4 format=3 uid="uid://bnpi4vl5oh2wt"]
 
 [ext_resource type="Script" uid="uid://tx0ls1d4gwxv" path="res://scripts/perks/data/park_data_player.gd" id="1_d3cer"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_s0fyi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7rl6"]
+atlas = ExtResource("1_s0fyi")
+region = Rect2(192, 241, 48, 46)
 
 [resource]
 script = ExtResource("1_d3cer")
@@ -11,5 +16,7 @@ duration = -1.0
 required_spell_damage = inf
 base_value = -0.1
 legendary = false
-perk_desc = ""
+perk_icon = SubResource("AtlasTexture_c7rl6")
+perk_name = "Special Cooldown"
+perk_desc = "Decrease speical cooldown time"
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

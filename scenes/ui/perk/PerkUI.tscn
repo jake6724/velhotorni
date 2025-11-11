@@ -1,10 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://ck21estk7dkvr"]
+[gd_scene load_steps=22 format=3 uid="uid://ck21estk7dkvr"]
 
 [ext_resource type="Texture2D" uid="uid://bw4irqp47tfd7" path="res://assets/art/sprites/ui/spr_ui_letterbox.png" id="1_q4ku2"]
 [ext_resource type="Script" uid="uid://ep6fjr1545lw" path="res://scripts/ui/perks/perk_ui.gd" id="1_trnrl"]
 [ext_resource type="PackedScene" uid="uid://cwvwwlqpm2ccq" path="res://scenes/ui/perk/PerkCard.tscn" id="2_ebruu"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_mk1p4"]
 [ext_resource type="Texture2D" uid="uid://c338q1day45os" path="res://assets/art/sprites/ui/spr_ui_candle_flame.png" id="5_8q562"]
+[ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="6_6io6w"]
+[ext_resource type="Script" uid="uid://bshhqh6p6rwlx" path="res://scripts/ui/controller_button_hint.gd" id="7_julgd"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q4ku2"]
 load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
@@ -70,6 +72,10 @@ load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c
 atlas = SubResource("CompressedTexture2D_trnrl")
 region = Rect2(151, 7, 34, 73)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_04n6p"]
+atlas = ExtResource("6_6io6w")
+region = Rect2(3, 3, 10, 10)
+
 [node name="PerkUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -102,12 +108,11 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -256.0
-offset_top = -32.0
+offset_top = -36.0
 offset_right = 256.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("1_q4ku2")
-stretch_mode = 2
 
 [node name="Candles" type="Control" parent="."]
 unique_name_in_owner = true
@@ -119,9 +124,9 @@ offset_bottom = 141.0
 [node name="Candle1" type="TextureRect" parent="Candles"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 16.0
+offset_left = 18.0
 offset_top = 219.0
-offset_right = 56.0
+offset_right = 58.0
 offset_bottom = 293.0
 texture = SubResource("AtlasTexture_ebruu")
 stretch_mode = 3
@@ -228,13 +233,13 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 176.0
-offset_top = 8.0
+offset_top = 6.0
 offset_right = 297.0
-offset_bottom = 23.0
+offset_bottom = 21.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_mk1p4")
 theme_override_font_sizes/font_size = 16
-text = "Ancient Blessing"
+text = "Ancient Blessings"
 
 [node name="InstructionLabel" type="Label" parent="Header"]
 unique_name_in_owner = true
@@ -243,8 +248,28 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 197.0
-offset_top = 27.0
+offset_top = 22.0
 offset_right = 273.0
-offset_bottom = 37.0
+offset_bottom = 32.0
 grow_horizontal = 2
 text = "Choose one"
+
+[node name="ControllerHint" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 227.0
+offset_top = 254.0
+offset_right = 289.0
+offset_bottom = 286.0
+
+[node name="ButtonHint" type="TextureRect" parent="ControllerHint"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_04n6p")
+stretch_mode = 2
+script = ExtResource("7_julgd")
+metadata/_custom_type_script = "uid://bshhqh6p6rwlx"
+
+[node name="ActionNameLabel" type="Label" parent="ControllerHint"]
+layout_mode = 2
+text = "Select"

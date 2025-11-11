@@ -13,7 +13,7 @@ func perk_action() -> void:
 
 func set_rarity_value() -> void:
 	match data.rarity:
-		PerkData.Rarity.One: pass
-		PerkData.Rarity.Two: data.base_value *= 2
-		PerkData.Rarity.Three: data.base_value *= 4
-		PerkData.Rarity.Four: pass
+		PerkData.Rarity.ONE: pass
+		PerkData.Rarity.TWO: data.base_value *= 2
+		PerkData.Rarity.THREE: data.base_value *= 4
+		PerkData.Rarity.FOUR: pass

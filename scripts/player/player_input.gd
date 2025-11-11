@@ -22,6 +22,7 @@ signal switch_tower_action_pressed
 signal ui_interact_pressed
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	var connected_joypads = Input.get_connected_joypads()
 	for device_id in connected_joypads:
 		var joy_name = Input.get_joy_name(device_id)

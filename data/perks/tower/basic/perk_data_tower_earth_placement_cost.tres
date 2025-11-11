@@ -18,5 +18,6 @@ buff = 3
 base_value = 0.1
 legendary = false
 perk_icon = SubResource("AtlasTexture_u5jvt")
-perk_desc = ""
+perk_name = "Earth discount"
+perk_desc = "decrease earth tower placement costs"
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

@@ -16,5 +16,6 @@ element = 1
 base_value = 0.2
 legendary = false
 perk_icon = SubResource("AtlasTexture_ldapf")
-perk_desc = ""
+perk_name = "Wind max"
+perk_desc = "Increase max wind mana"
 metadata/_custom_type_script = "uid://euw34l8tc2dw"

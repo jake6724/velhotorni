@@ -11,6 +11,7 @@ extends Node2D
 @onready var fps_label: Label = %FPSLabel
 @onready var level_complete_panel: LevelCompletePanel = %LevelCompletePanel
 @onready var perk_manager: PerkManager = %PerkManager
+@onready var perk_ui: PerkUI = %PerkUI
 var player_spawn_point: Node2D
 
 var active_level: LevelEnvironment
@@ -79,12 +80,20 @@ func _ready():
 		breakable.coin_dropped.connect(coin_drop_manager.spawn_coin_drop)
 
 	# Configure PerkManager
+	perk_manager.perk_ui = perk_ui
 	perk_manager.player_perk_manager = player_character.player_perk_manager
 	perk_manager.player_mana_drop_collector = player_character.mana_drop_collector
 	perk_manager.player_hurtbox = player_character.player_hurtbox
 	perk_manager.player_spell_spawner = player_character.player_spell_spawner
 	perk_manager.base_perk_manager = active_level.base.base_perk_manager
 	perk_manager.player_spell_perk_manager = player_character.player_spell_perk_manager
+
+	# Configure PerkUI
+	WaveManager.wave_started.connect(on_wave_completed)
+	perk_ui.perk_selected.connect(on_perk_selected)
+	player_character.player_input.switch_selection_pressed.connect(perk_ui.switch_selected_card)
+	player_character.player_input.ui_interact_pressed.connect(perk_ui.select_card)
+	perk_ui.main = self
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
@@ -96,6 +105,10 @@ func pause_game():
 
 func unpause_game():
 	get_tree().paused = false
+
+func unpause_from_perk_ui() -> void:
+	get_tree().paused = false
+	perk_ui.hide()
 
 func pause_game_with_menu():
 	pause_menu.show()
@@ -116,6 +129,21 @@ func unpause_game_with_bestiary() -> void:
 func set_can_pause(value: bool) -> void:
 	can_pause = value
 
+func on_wave_completed() -> void:
+	# Show Perk Menu, hide player info
+	player_character.player_hud.hide()
+	var perk_hand: Array[PerkData] = perk_manager.get_perk_hand()
+	perk_ui.set_card_data(perk_hand)
+	perk_ui.show()
+	perk_ui.animate()
+	get_tree().paused = true
+
+func on_perk_selected(perk_data: PerkData) -> void:
+	perk_ui.animate_reset()
+
+	player_character.player_hud.show()
+	perk_manager.create_perk(perk_data)
+	
 func on_wave_failed() -> void:
 	wave_failures += 1
 

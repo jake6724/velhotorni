@@ -9,28 +9,29 @@ var player_hurtbox: PlayerHurtbox
 var player_spell_spawner: PlayerSpellSpawner
 var base_perk_manager: BasePerkManager
 var player_spell_perk_manager: PlayerSpellPerkManager
+# Connected by Main
+var perk_ui: PerkUI
 
-var all_basic_perk_data: Array[PerkData] = [
 
-]
+var perk_pool_data: PerkPoolData = preload("res://data/perks/perk_pool/perk_pool_data_wind.tres")
+var all_basic_perk_data: Array[PerkData] = perk_pool_data.basic_perks
 
 ## Perks that can be used this level. Does not include unusable elemental perks
-## Populated at runtime **
-var valid_basic_perk_data: Array[PerkData] = [
-]
+## Populated at runtime ** # TODO: Remove unusable elements
+var valid_basic_perk_data: Array[PerkData] = all_basic_perk_data
 
 var rarity_counts: Dictionary[PerkData.Rarity, int] = {
-	PerkData.Rarity.One: 0,
-	PerkData.Rarity.Two: 0,
-	PerkData.Rarity.Three: 0,
-	PerkData.Rarity.Four: 0
+	PerkData.Rarity.ONE: 0,
+	PerkData.Rarity.TWO: 0,
+	PerkData.Rarity.THREE: 0,
+	PerkData.Rarity.FOUR: 0
 }
 
 var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
-	PerkData.Rarity.One: 4,
-	PerkData.Rarity.Two: 3,
-	PerkData.Rarity.Three: 2,
-	PerkData.Rarity.Four: 2
+	PerkData.Rarity.ONE: 4,
+	PerkData.Rarity.TWO: 3,
+	PerkData.Rarity.THREE: 2,
+	PerkData.Rarity.FOUR: 0 # TODO: Temporarily don't have any legendaries
 }
 
 var rarity_pool: Array
@@ -44,15 +45,13 @@ var test_perk_data: Array[PerkData] = [
 	preload("res://data/perks/player/legendary/perk_data_player_lgd_move_speed_on_dmg.tres"), 
 ]
 
-func _input(_event):
-	if Input.is_action_just_pressed("x"):
-		print("X Pressed")
-		for perk_data: PerkData in test_perk_data:
-			create_perk(perk_data)
+# func _input(_event):
+# 	if Input.is_action_just_pressed("x"):
+# 		for perk_data: PerkData in test_perk_data:
+# 			create_perk(perk_data)
 
 func _ready():
 	fill_rarity_pool()
-	print(rarity_pool)
 
 func create_perk(perk_data: PerkData) -> void:
 	print("Calling create_perk()")
@@ -86,7 +85,7 @@ func create_perk(perk_data: PerkData) -> void:
 
 func configure_perk_trigger(new_perk: Perk) -> void:
 	print("Calling configure_perk_trigger()")
-	# Trigger one shots perks, connect remaining to proper signals
+	# Trigger ONE shots perks, connect remaining to proper signals
 	# Triggers are independent of the PerkData type, all Perks can use the same triggers
 	match new_perk.data.trigger:
 		PerkData.Trigger.OneShot: new_perk.perk_action()
@@ -110,14 +109,14 @@ func update_rarity_data(selected_rarity: PerkData.Rarity) -> void:
 	if rarity_counts[selected_rarity] == rarity_maxes[selected_rarity]:
 		var remove_index: int
 		match selected_rarity:
-			PerkData.Rarity.One:
-				remove_index = rarity_pool.find(PerkData.Rarity.Three)
-			PerkData.Rarity.Two:
-				remove_index = rarity_pool.find(PerkData.Rarity.Four)
-			PerkData.Rarity.Three:
-				remove_index = rarity_pool.find(PerkData.Rarity.One)
-			PerkData.Rarity.Four:
-				remove_index = rarity_pool.find(PerkData.Rarity.Two)
+			PerkData.Rarity.ONE:
+				remove_index = rarity_pool.find(PerkData.Rarity.THREE)
+			PerkData.Rarity.TWO:
+				remove_index = rarity_pool.find(PerkData.Rarity.FOUR)
+			PerkData.Rarity.THREE:
+				remove_index = rarity_pool.find(PerkData.Rarity.ONE)
+			PerkData.Rarity.FOUR:
+				remove_index = rarity_pool.find(PerkData.Rarity.TWO)
 		if remove_index != -1:
 			rarity_pool.remove_at(remove_index)
 
@@ -130,7 +129,7 @@ func fill_rarity_pool() -> void:
 
 ## Create a perk hand made up of basic perks. Active perks (same perk data, same rarity) will be excluded from this hand
 ## The 3 perks are picked in the order they appear in `valid_basic_perk_data`, which is shuffled at the start
-func get_basic_perk_hand(rarity: PerkData.Rarity) -> void:
+func get_basic_perk_hand(rarity: PerkData.Rarity) -> Array[PerkData]:
 	valid_basic_perk_data.shuffle()
 	var perk_hand: Array[PerkData] = []
 	var count: int = 0
@@ -147,3 +146,14 @@ func get_basic_perk_hand(rarity: PerkData.Rarity) -> void:
 				break
 		else:
 			continue
+
+	return perk_hand
+
+func get_perk_hand() -> Array[PerkData]:
+	var perk_hand: Array[PerkData] = []
+	var rarity: PerkData.Rarity = get_rarity()
+
+	if rarity != PerkData.Rarity.FOUR:
+		perk_hand = get_basic_perk_hand(rarity)
+
+	return perk_hand

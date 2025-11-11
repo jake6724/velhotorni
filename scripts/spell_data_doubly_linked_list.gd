@@ -1,4 +1,4 @@
-class_name DoublyLinkedList
+class_name SpellDataDoublyLinkedList
 extends Object
 
 # Sub-class for DLL Nodes
@@ -12,7 +12,7 @@ class DLLNode:
 
 var head: DLLNode = null
 var tail: DLLNode = null
-var array: Array[Variant]
+var array: Array[SpellData]
 
 func _init(_array: Array):
 	for value in _array:
@@ -70,8 +70,6 @@ func update_array() -> void:
 		curr = curr.next
 
 func print_list() -> void:
-	pass
-	#print("[", head.value.perk_data.perk_name, ", ", head.next.value.perk_data.perk_name, ", ", head.next.next.value.perk_data.perk_name, "]")
-	# var curr = head
-	# while curr:
-	# 	curr = curr.next
+	var curr = head
+	while curr:
+		curr = curr.next

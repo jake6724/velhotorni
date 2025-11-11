@@ -16,7 +16,6 @@ func modify_player_stat(stat_to_modify: PerkDataPlayer.PlayerStat, value: float)
 	modify_stat_requested.emit(stat_to_modify, value)
 
 func timed_modify_player_stat(stat_to_modify: PerkDataPlayer.PlayerStat, value: float, duration: float) -> void:
-	print("PlayerPerk emitting timed_modify_stat_requested")
 	timed_modify_stat_requested.emit(stat_to_modify, value, duration)
 
 ## Called each time PlayerSpellSpawner emits `DamageDealt`. Accumulates damage until `data.required_spell_damage` is 
@@ -26,5 +25,3 @@ func accumulate_spell_damage(damage_applied: float) -> void:
 	if spell_damage_accumulated > data.required_spell_damage:
 		perk_action()
 		spell_damage_accumulated = 0
-
-	print("acc spell dmg. New total = ", spell_damage_accumulated)

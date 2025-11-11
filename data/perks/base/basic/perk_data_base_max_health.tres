@@ -16,5 +16,6 @@ required_spell_damage = -1.0
 base_value = 1.0
 legendary = false
 perk_icon = SubResource("AtlasTexture_4o1nv")
+perk_name = ""
 perk_desc = ""
 metadata/_custom_type_script = "uid://cq0cpfg5ke2ax"

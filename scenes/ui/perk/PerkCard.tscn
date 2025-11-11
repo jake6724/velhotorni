@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwvwwlqpm2ccq"]
 
-[ext_resource type="Texture2D" uid="uid://ux5cl4xi3sfi" path="res://assets/art/sprites/ui/spr_ui_box6.png" id="1_riojv"]
+[ext_resource type="Texture2D" uid="uid://bl5ofcdopipn3" path="res://assets/art/sprites/ui/spr_ui_box6_gray.png" id="2_3nta1"]
 [ext_resource type="Script" uid="uid://csocx7w7oryov" path="res://scripts/ui/perks/perk_card.gd" id="2_cr6u4"]
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="3_c0yc6"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="4_3nta1"]
@@ -27,24 +27,13 @@ size_flags_vertical = 4
 script = ExtResource("2_cr6u4")
 metadata/_custom_type_script = "uid://csocx7w7oryov"
 
-[node name="PerkIconControl" type="Control" parent="."]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-offset_left = 59.0
-offset_top = 7.0
-offset_right = 59.0
-offset_bottom = 7.0
-size_flags_horizontal = 4
-size_flags_vertical = 0
-
 [node name="CardBackground" type="NinePatchRect" parent="."]
 unique_name_in_owner = true
 z_index = -1
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 144.0
-texture = ExtResource("1_riojv")
+texture = ExtResource("2_3nta1")
 region_rect = Rect2(1, 1, 30, 30)
 patch_margin_left = 7
 patch_margin_top = 7
@@ -66,15 +55,17 @@ stretch_mode = 2
 
 [node name="Content" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_left = 7.0
 offset_top = 7.0
 offset_right = 111.0
 offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="Content"]
+[node name="PerkName" type="Label" parent="Content"]
+unique_name_in_owner = true
 layout_mode = 2
 offset_top = 9.0
 offset_right = 104.0
@@ -85,7 +76,8 @@ text = "touch of death"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="Content"]
+[node name="Description" type="Label" parent="Content"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(104, 49)
 layout_mode = 2
 offset_left = 1.0
