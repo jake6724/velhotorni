@@ -17,6 +17,8 @@ var prev_aim_input: Vector2 = Vector2(INF, INF)
 
 var look_ahead_func: Callable = look_ahead_mouse
 
+const MOUSE_LOOK_AHEAD_SCALE: float = .15
+
 func _ready():
 	position_smoothing_enabled = true
 	position_smoothing_speed = 8.0
@@ -40,7 +42,7 @@ func _process(delta):
 	else:
 		shake_offset = Vector2.ZERO
 
-	print(aim_follow_offset)
+	#print(aim_follow_offset)
 	offset = shake_offset + aim_follow_offset
 
 func look_ahead_controller() -> void:
@@ -49,16 +51,18 @@ func look_ahead_controller() -> void:
 		tween.tween_property(self, "aim_follow_offset", (player.player_aim.aim_input * aim_follow_multiplier), aim_follow_speed)
 		prev_aim_input = player.player_aim.aim_input
 
+## Mouse-based look ahead is based on the direction and distance of the mouse compared to the player, multiplied by a 
+## scaling constant which determines how far out the camera moves
 func look_ahead_mouse() -> void:
-	# global_position = global_position.lerp(get_global_mouse_position(), .1)
-
-	# var direction_to_mouse: Vector2 = player.global_position.direction_to(get_global_mouse_position())
-	aim_follow_offset = player.global_position.direction_to(get_global_mouse_position()) * ((player.global_position.distance_to(get_global_mouse_position())) * .15)
-
-	# aim_follow_offset = aim_follow_offset.lerp(get_global_mouse_position(), .001)
-	# print("mouse",get_global_mouse_position())
-	# print(aim_follow_offset)
+	aim_follow_offset = (player.global_position.direction_to(get_global_mouse_position())
+	* (player.global_position.distance_to(get_global_mouse_position()) * MOUSE_LOOK_AHEAD_SCALE))
 
 ## Used in camera shake
 func get_random_offset() -> Vector2:
 	return Vector2(rng.randf_range(-curr_power, curr_power), rng.randf_range(-curr_power, curr_power))
+
+func swap_input_type(controller_active: bool) -> void:
+	if controller_active:
+		look_ahead_func = look_ahead_controller
+	else:
+		look_ahead_func = look_ahead_mouse

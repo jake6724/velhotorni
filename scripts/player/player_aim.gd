@@ -13,6 +13,7 @@ const RETICLE_SPEED: float = .1
 const RETICLE_MIN_MAGNITUDE: float = .3
 
 const SWING_DEGREE_INCREMENT: float = 180.0
+const SWING_ROTATION_SPEED: float = .01
 
 const SPELL_SPAWN_POINT_DISTANCE: float = 12.0
 
@@ -20,11 +21,11 @@ const SPELL_SPAWN_POINT_DISTANCE: float = 12.0
 ## Higher values will make the reticle move faster
 @export var reset_speed_modifier: float = .65
 
-
 var aim_input: Vector2 # Manually set by PlayerCharacter
 
-var update_reticle_func: Callable = update_reticle_combat_mouse
+var update_reticle_combat_func: Callable = update_reticle_combat_mouse
 var reset_reticle_position_func: Callable = Callable(reset_reticle_position)
+var update_reticle_func: Callable = update_reticle_combat_func
 
 var staff_rotation_offset_degrees: float = 0.0
 var staff_rotation_sign: float = 1.0
@@ -76,7 +77,7 @@ func switch_mode(_building: bool) -> void:
 		update_reticle_func = update_reticle_build
 		reset_reticle_position_func = reset_reticle_disabled
 	else:
-		update_reticle_func = update_reticle_combat_mouse
+		update_reticle_func = update_reticle_combat_func
 		reset_reticle_position_func = reset_reticle_position
 		
 func rotate_staff() -> void:
@@ -101,10 +102,17 @@ func swing_staff() -> void:
 	staff_rotation_sign = -staff_rotation_sign
 	var tween: Tween = get_tree().create_tween()
 	var target = player.staff_sprite.rotation_degrees + SWING_DEGREE_INCREMENT
-	tween.tween_property(player.staff_sprite, "rotation_degrees", target, .01)
+	tween.tween_property(player.staff_sprite, "rotation_degrees", target, SWING_ROTATION_SPEED)
 
 func flip_sprite() -> void:
 	if aim_input:
 		var flip = aim_input.x <= -0.001
 		player.character_sprite.flip_h = flip
 		player.staff_sprite.flip_v = flip
+
+func swap_input_type(controller_active: bool) -> void:
+	if controller_active:
+		update_reticle_combat_func = update_reticle_combat_controller
+		player.reticle_sprite.global_position = player.spell_spawn_point.global_position + (aim_input * RETICLE_MAX_DISTANCE)
+	else:
+		update_reticle_combat_func = update_reticle_combat_mouse

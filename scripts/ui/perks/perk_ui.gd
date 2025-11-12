@@ -56,8 +56,8 @@ func _ready():
 	# perk_cards_linked.print_list()
 
 func _process(_delta):
-	move_input_x = Input.get_axis("move_left", "move_right")
-	if Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
+	move_input_x = Input.get_axis("move_left_controller", "move_right_controller")
+	if Input.is_action_just_pressed("move_left_controller") or Input.is_action_just_pressed("move_right_controller"):
 		if move_input_x > .01:
 			switch_selected_card(1)
 		elif move_input_x < -.01:

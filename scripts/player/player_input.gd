@@ -4,6 +4,7 @@ extends Node2D
 var move_input: Vector2
 var aim_input: Vector2
 
+var get_move_input_func: Callable = get_move_input_keyboard
 var get_aim_input_func: Callable = get_aim_input_mouse
 
 var primary_action_pressed: bool
@@ -23,6 +24,9 @@ signal switch_player_mode_pressed
 signal switch_tower_action_pressed
 signal ui_interact_pressed
 
+## `true` = controller active, 'false' = mouse active
+signal input_type_changed
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	var connected_joypads = Input.get_connected_joypads()
@@ -32,7 +36,14 @@ func _ready():
 
 ## Returns raw input data, not normalized
 func get_move_input() -> Vector2:
+	return get_move_input_func.call()
+
+func get_move_input_keyboard() -> Vector2: 
 	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	return move_input
+
+func get_move_input_controller() -> Vector2:
+	move_input = Input.get_vector("move_left_controller", "move_right_controller", "move_up_controller", "move_down_controller")
 	return move_input
 
 ## Wrapper
@@ -42,7 +53,6 @@ func get_aim_input() -> Vector2:
 ## Returns raw input data, not normalized
 func get_aim_input_controller() -> Vector2: 
 	aim_input = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
-	print(aim_input)
 	return aim_input
 
 func get_aim_input_mouse() -> Vector2: 
@@ -76,8 +86,8 @@ func _input(event):
 		
 	if event.is_action("ui_interact") and event.is_pressed() and not event.is_echo():
 		ui_interact_pressed.emit()
-		
-	# set_latest_input_type(event)
+
+	set_input_type(event)
 
 func check_primary_action_input(event) -> void:
 	if Input.is_action_just_pressed("primary_action"):
@@ -95,19 +105,29 @@ func check_upgrade_action_input(event) -> void:
 		upgrade_action_pressed = false
 		upgrade_action_charge = 0
 
-# func set_latest_input_type(event) -> void:
-# 	if event is InputEventKey or event is InputEventMouseButton or event is InputEventMouseMotion:
-# 		is_latest_input_controller = false
-# 		# print("Mouse/Keyboard")
+## Set the input type between controller or keyboard, based on the latest input
+func set_input_type(event) -> void:
+	if event is InputEventMouse and controller_active: # Switch to mouse
+		controller_active = false
+		# print("MOUSE INPUT DETECTED")
+		input_type_changed.emit(controller_active)
+		swap_input_type()
 
-# 	elif event is InputEventJoypadButton:
-# 		is_latest_input_controller = true
-# 		# print("Controller Button")
-	
-# 	elif event is InputEventJoypadMotion and abs(move_input) > Vector2(.2,.2):
-# 		is_latest_input_controller = true
-# 		# print("Left Joystick")
+	elif event is InputEventJoypadMotion and not controller_active: # Switch to controller
+		var movement_joystick_input_strength = Input.get_vector("move_left_controller", "move_right_controller", "move_up_controller", "move_down_controller", 0.0)
+		var aim_joystick_input_strength = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down", 0.0)
 
-# 	elif event is InputEventJoypadMotion and abs(aim_input) > Vector2(.2,.2):
-# 		is_latest_input_controller = true
-# 		# print("Right Joystick")
+		if abs(movement_joystick_input_strength) > Vector2(.2, .2) or aim_joystick_input_strength > Vector2(.2, .2):
+			controller_active = true
+			print("CONTROLLER INPUT DETECTED")
+			input_type_changed.emit(controller_active)
+			swap_input_type()
+
+## `true` = controller active, 'false' = mouse active
+func swap_input_type() -> void:
+	if controller_active:
+		get_aim_input_func = get_aim_input_controller
+		get_move_input_func = get_move_input_controller
+	else:
+		get_aim_input_func = get_aim_input_mouse
+		get_move_input_func = get_move_input_keyboard
