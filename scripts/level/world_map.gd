@@ -45,6 +45,9 @@ func _ready():
 	# LevelToggleButton
 	level_toggle_button.toggled.connect(on_level_toggled)
 
+	if not GlobalSettings.controller_active:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func on_level_hovered(_level_name: String, _region_name: String, _level_button: LevelButton) -> void:
 	_level_button.position += hovered_position_offset
 	if _level_button.stars > 0:

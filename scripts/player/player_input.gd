@@ -20,6 +20,7 @@ signal special_action_pressed
 signal switch_selection_pressed
 signal switch_player_mode_pressed
 signal switch_tower_action_pressed
+signal weapon_select_pressed
 signal ui_interact_pressed
 
 func _ready():
@@ -81,6 +82,18 @@ func _input(event):
 		
 	if event.is_action("ui_interact") and event.is_pressed() and not event.is_echo():
 		ui_interact_pressed.emit()
+
+	if event.is_action("weapon_select_0") and event.is_pressed() and not event.is_echo():
+		weapon_select_pressed.emit(0)
+	
+	if event.is_action("weapon_select_1") and event.is_pressed() and not event.is_echo():
+		weapon_select_pressed.emit(1)
+	
+	if event.is_action("weapon_select_2") and event.is_pressed() and not event.is_echo():
+		weapon_select_pressed.emit(2)
+	
+	if event.is_action("weapon_select_3") and event.is_pressed() and not event.is_echo():
+		weapon_select_pressed.emit(3)
 
 	set_input_type(event)
 

@@ -79,15 +79,16 @@ theme_override_font_sizes/font_size = 8
 text = "touch of death"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Description" type="Label" parent="Content"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(104, 49)
 layout_mode = 2
-offset_left = 1.0
-offset_top = 33.0
-offset_right = 105.0
-offset_bottom = 82.0
+offset_left = 5.0
+offset_top = 41.0
+offset_right = 109.0
+offset_bottom = 103.0
 text = "Restore 1 health for every 250 DMG dealt by spells"
 horizontal_alignment = 1
 autowrap_mode = 2

@@ -76,6 +76,7 @@ func _ready():
 	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
 	player_input.switch_tower_action_pressed.connect(player_build.switch_tower_action.bind(player_input))
 	player_input.ui_interact_pressed.connect(on_ui_interact_pressed)
+	player_input.weapon_select_pressed.connect(on_weapon_select_pressed)
 
 	# Connect to GlobalSettings
 	GlobalSettings.input_type_changed.connect(on_swap_input_type)
@@ -417,3 +418,6 @@ func on_tower_action_hint_requested(_value: bool) -> void:
 func on_swap_input_type() -> void:
 	player_camera.swap_input_type()
 	player_aim.swap_input_type()
+
+func on_weapon_select_pressed(index: int) -> void:
+	pass

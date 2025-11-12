@@ -20,6 +20,8 @@ var can_pause: bool = false
 
 var wave_failures: int = 0
 
+const PERK_UI_POPUP_DELAY: float = 2.0
+
 func _ready():
 	SceneTransition.scene_transition_complete.connect(set_can_pause.bind(true))
 	
@@ -141,6 +143,8 @@ func on_wave_completed() -> void:
 	pause_game_with_perk_ui()
 
 func pause_game_with_perk_ui() -> void:
+	await get_tree().create_timer(PERK_UI_POPUP_DELAY).timeout
+	
 	# Show Perk Menu, hide player info
 	player_character.player_hud.hide()
 	var perk_hand: Array[PerkData] = perk_manager.get_perk_hand()

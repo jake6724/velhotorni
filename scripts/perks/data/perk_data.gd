@@ -10,6 +10,7 @@ enum Trigger {OneShot, OnWaveComplete, OnPlayerDamage, OnSpellManaPickup, OnPlay
 @export var legendary: bool = false
 @export_category("Perk UI")
 @export var perk_icon: AtlasTexture
+@export var perk_mini_icon: AtlasTexture
 @export var perk_name: String
 @export var perk_desc: String
 
