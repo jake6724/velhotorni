@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d218nr004vv6w"]
+[gd_scene load_steps=22 format=3 uid="uid://d218nr004vv6w"]
 
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_ivdol"]
 [ext_resource type="Script" uid="uid://cngopxpmylq3o" path="res://scripts/ui/player/player_hud.gd" id="1_l3s77"]
@@ -13,9 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://b420uwxrem6np" path="res://assets/art/sprites/ui/spr_ui_modeswitch.png" id="11_2twuf"]
 [ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="12_nrxgm"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="13_nrxgm"]
-[ext_resource type="Texture2D" uid="uid://hnxttmgepy4x" path="res://assets/placeholders/enemy_placeholder.png" id="14_44ko1"]
-[ext_resource type="Texture2D" uid="uid://c3cjmljr5gae3" path="res://assets/placeholders/grid_placeholder_light.png" id="15_o6umb"]
-[ext_resource type="Texture2D" uid="uid://bc63tyqycfcv5" path="res://assets/placeholders/tower_placeholder.png" id="16_nopip"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rq211"]
 atlas = ExtResource("1_ivdol")
@@ -347,6 +344,7 @@ mouse_filter = 2
 
 [node name="PerkMiniIcons" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -357,23 +355,3 @@ offset_right = 510.0
 offset_bottom = 35.0
 grow_horizontal = 0
 theme_override_constants/separation = 2
-
-[node name="TextureRect" type="TextureRect" parent="PerkMiniIcons"]
-layout_mode = 2
-texture = ExtResource("14_44ko1")
-stretch_mode = 2
-
-[node name="TextureRect4" type="TextureRect" parent="PerkMiniIcons"]
-layout_mode = 2
-texture = ExtResource("14_44ko1")
-stretch_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="PerkMiniIcons"]
-layout_mode = 2
-texture = ExtResource("15_o6umb")
-stretch_mode = 2
-
-[node name="TextureRect3" type="TextureRect" parent="PerkMiniIcons"]
-layout_mode = 2
-texture = ExtResource("16_nopip")
-stretch_mode = 2
