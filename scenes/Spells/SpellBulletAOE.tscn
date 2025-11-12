@@ -180,7 +180,7 @@ metadata/_custom_type_script = "uid://iy0t84qkqr0q"
 libraries = {
 &"": SubResource("AnimationLibrary_ursk0")
 }
-autoplay = "spawn"
+autoplay = "move"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 512

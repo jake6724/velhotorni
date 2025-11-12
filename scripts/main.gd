@@ -92,7 +92,7 @@ func _ready():
 	perk_manager.player_spell_perk_manager = player_character.player_spell_perk_manager
 
 	# Configure PerkUI
-	WaveManager.wave_started.connect(on_wave_completed)
+	WaveManager.wave_completed.connect(on_wave_completed)
 	perk_ui.perk_selected.connect(on_perk_selected)
 	player_character.player_input.switch_selection_pressed.connect(perk_ui.switch_selected_card)
 	player_character.player_input.ui_interact_pressed.connect(perk_ui.select_card)
