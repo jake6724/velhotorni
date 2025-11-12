@@ -34,9 +34,6 @@ func _ready():
 	EnemySpawner.configure_level(LevelManager.active_level)
 	TowerGlobalData.reset()
 
-	# Configure GlobalSettings
-	player_character.player_input.input_type_changed.connect(GlobalSettings.on_input_type_changed)
-
 	# Configure EnemySpawner
 	EnemySpawner.player = player_character
 

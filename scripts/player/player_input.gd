@@ -22,9 +22,6 @@ signal switch_player_mode_pressed
 signal switch_tower_action_pressed
 signal ui_interact_pressed
 
-## `true` = controller active, 'false' = mouse active
-signal input_type_changed
-
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	var connected_joypads = Input.get_connected_joypads()
