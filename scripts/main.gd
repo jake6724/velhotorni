@@ -96,15 +96,20 @@ func _ready():
 	player_character.player_input = player_character.player_input
 	perk_ui.main = self
 
+	# Hide Cursor
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
 		if can_pause and not player_controller.menu_open:
 			pause_game_with_menu()
 
 func pause_game():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
 
 func unpause_game():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().paused = false
 
 func unpause_from_perk_ui() -> void:

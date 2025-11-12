@@ -1,8 +1,10 @@
 class_name PlayerInput
-extends Node
+extends Node2D
 
 var move_input: Vector2
 var aim_input: Vector2
+
+var get_aim_input_func: Callable = get_aim_input_mouse
 
 var primary_action_pressed: bool
 var primary_action_charge: float
@@ -13,14 +15,13 @@ var tower_action_press_multiplier_normal: float = 1.0
 var tower_action_press_multiplier_fast: float = 6.0
 var tower_action_press_multiplier: float = tower_action_press_multiplier_fast
 
-var is_latest_input_controller: bool = true
+var controller_active: bool = true
 
 signal special_action_pressed
 signal switch_selection_pressed
 signal switch_player_mode_pressed
 signal switch_tower_action_pressed
 signal ui_interact_pressed
-signal move_input_updated
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -34,9 +35,18 @@ func get_move_input() -> Vector2:
 	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	return move_input
 
+## Wrapper
+func get_aim_input() -> Vector2:
+	return get_aim_input_func.call()
+
 ## Returns raw input data, not normalized
-func get_aim_input() -> Vector2: 
+func get_aim_input_controller() -> Vector2: 
 	aim_input = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
+	print(aim_input)
+	return aim_input
+
+func get_aim_input_mouse() -> Vector2: 
+	aim_input = get_owner().global_position.direction_to(get_global_mouse_position())
 	return aim_input
 
 func _process(delta):

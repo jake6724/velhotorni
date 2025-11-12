@@ -1347,10 +1347,6 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(-0.00173914, -0.00780034)
 
-[node name="PlayerInput" type="Node" parent="."]
-script = ExtResource("11_hkntq")
-metadata/_custom_type_script = "uid://by6ywjtg3nxyl"
-
 [node name="PlayerSpells" type="Node" parent="."]
 script = ExtResource("10_wrkuw")
 selected_spells = Array[ExtResource("6_adj0b")]([ExtResource("7_akj2q"), ExtResource("8_kuao7"), ExtResource("12_6qouk"), ExtResource("15_mxcls")])
@@ -1388,6 +1384,10 @@ metadata/_custom_type_script = "uid://br1s314vcnsdg"
 [node name="PlayerSpellPerkManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("26_gg8xu")
+
+[node name="PlayerInput" type="Node2D" parent="."]
+script = ExtResource("11_hkntq")
+metadata/_custom_type_script = "uid://by6ywjtg3nxyl"
 
 [node name="PlayerBuild" type="Node2D" parent="."]
 script = ExtResource("13_6qouk")

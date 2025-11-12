@@ -2,6 +2,7 @@ class_name PlayerAim
 extends Node2D
 
 # TODO: Havign a tween on process might be bad!
+# TODO: ^ Try converting to lerp instead
 
 @onready var player: PlayerCharacter = get_owner()
 
@@ -22,7 +23,7 @@ const SPELL_SPAWN_POINT_DISTANCE: float = 12.0
 
 var aim_input: Vector2 # Manually set by PlayerCharacter
 
-var update_reticle_func: Callable = Callable(update_reticle_combat)
+var update_reticle_func: Callable = update_reticle_combat_mouse
 var reset_reticle_position_func: Callable = Callable(reset_reticle_position)
 
 var staff_rotation_offset_degrees: float = 0.0
@@ -43,7 +44,7 @@ func update_spell_spawn_point() -> void:
 	if aim_input:
 		player.spell_spawn_point.global_position = player.global_position + (aim_input.normalized() * SPELL_SPAWN_POINT_DISTANCE)
 	
-func update_reticle_combat() -> void:
+func update_reticle_combat_controller() -> void:
 	if !aim_input:
 		player.reticle_sprite.position = Vector2.ZERO
 		return
@@ -56,6 +57,9 @@ func update_reticle_combat() -> void:
 	# Position reticle based on spell_spawn_point position and aim_inputs UNORMALIZED value
 	var target_position: Vector2 = player.spell_spawn_point.global_position + (aim_input * RETICLE_MAX_DISTANCE)
 	reticle_tween.tween_property(player.reticle_sprite, "global_position", target_position, RETICLE_SPEED)
+
+func update_reticle_combat_mouse() -> void:
+	player.reticle_sprite.global_position = get_global_mouse_position()
 
 func update_reticle_build() -> void:
 	if player.player_build.preview_tower:
@@ -72,7 +76,7 @@ func switch_mode(_building: bool) -> void:
 		update_reticle_func = update_reticle_build
 		reset_reticle_position_func = reset_reticle_disabled
 	else:
-		update_reticle_func = update_reticle_combat
+		update_reticle_func = update_reticle_combat_mouse
 		reset_reticle_position_func = reset_reticle_position
 		
 func rotate_staff() -> void:
