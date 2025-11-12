@@ -23,6 +23,8 @@ extends Control
 
 @onready var wave_complete_label: Label = %WaveCompleteLabel
 
+@onready var perk_mini_icons: HBoxContainer = %PerkMiniIcons
+
 const MAX_TOWER_MANA_DIGITS: int = 4
 const MAX_ACTIVE_SPELL_MANA_DIGITS: int = 3
 const PADDING_COLOR: String = "#adb5bd"

@@ -25,50 +25,47 @@ var timed_modify_stat_stack_count: Dictionary[PerkDataPlayer.PlayerStat, int] = 
 	PerkDataPlayer.PlayerStat.SPECIAL_COOLDOWN: 0,
 }
 
-func on_modify_stat_requested(stat_to_modify: PerkDataPlayer.PlayerStat, value: float) -> float:
+func on_modify_stat_requested(data: PerkData) -> float:
+	add_perk_mini_icon(data)
 	var modified_value: float
-	match stat_to_modify:
+	match data.stat:
 		PerkDataPlayer.PlayerStat.HEALTH: 
-			modified_value = value
-			player.player_stats.health += value
-			print("player.player_stats.health", player.player_stats.health)
+			modified_value = data.base_value
+			player.player_stats.health += data.base_value
 			player.player_hud.on_health_updated(player.player_stats.health)
 		PerkDataPlayer.PlayerStat.MAX_HEALTH: 
-			modified_value = value
-			player.player_stats.max_health += value
+			modified_value = data.base_value
+			player.player_stats.max_health += data.base_value
 		PerkDataPlayer.PlayerStat.MOVE_SPEED: 
-			modified_value = (player.player_stats.base_move_speed * value)
-			player.player_stats.move_speed += (player.player_stats.base_move_speed * value)
+			modified_value = (player.player_stats.base_move_speed * data.base_value)
+			player.player_stats.move_speed += (player.player_stats.base_move_speed * data.base_value)
 		PerkDataPlayer.PlayerStat.SPECIAL_COOLDOWN: 
-			modified_value = (player.player_special.charge_cooldown_duration * value)
-			player.player_special.charge_cooldown_duration += (player.player_special.charge_cooldown_duration * value)
+			modified_value = (player.player_special.charge_cooldown_duration * data.base_value)
+			player.player_special.charge_cooldown_duration += (player.player_special.charge_cooldown_duration * data.base_value)
 		PerkDataPlayer.PlayerStat.REFLECT_CHANCE:
-			modified_value = value
-			player.player_stats.chance_to_reflect += value
+			modified_value = data.base_value
+			player.player_stats.chance_to_reflect += data.base_value
 		PerkDataPlayer.PlayerStat.SPECIAL_MAX_CHARGE:
-			modified_value = value
-			player.player_special.charge_max += value
+			modified_value = data.base_value
+			player.player_special.charge_max += data.base_value
 		PerkDataPlayer.PlayerStat.IFRAME_DURATION:
-			modified_value = player.player_stats.hurtbox_iframe_duration * value
-			player.player_stats.hurtbox_iframe_duration *= value
+			modified_value = player.player_stats.hurtbox_iframe_duration * data.base_value
+			player.player_stats.hurtbox_iframe_duration *= data.base_value
 
 		PerkDataPlayer.PlayerStat.NONE: push_error("PlayerPerkManager.on_modify_stat_requested() called with stat_to_modify = NONE")
 	return modified_value
 
-func on_timed_modify_stat_requested(stat_to_modify: PerkDataPlayer.PlayerStat, value: float, duration: float) -> void:
-	print("PlayerPerk manager heard timed_modify_stat_requested")
-	if timed_modify_stat_stack_count[stat_to_modify] < timed_modify_stat_stack_max[stat_to_modify]:
-
-		var modified_value: float = on_modify_stat_requested(stat_to_modify, value)
-
+func on_timed_modify_stat_requested(data: PerkData) -> void:
+	if timed_modify_stat_stack_count[data.stat] < timed_modify_stat_stack_max[data.stat]:
+		var modified_value: float = on_modify_stat_requested(data)
 		var timer: Timer = Timer.new()
 		timer.one_shot = true
 		timer.autostart = false
-		timer.timeout.connect(on_timed_modify_stat_expired.bind(stat_to_modify, modified_value))
+		timer.timeout.connect(on_timed_modify_stat_expired.bind(data.stat, modified_value))
 		add_child(timer)
-		timer.start(duration)
+		timer.start(data.duration)
 
-		timed_modify_stat_stack_count[stat_to_modify] += 1
+		timed_modify_stat_stack_count[data.stat] += 1
 
 ## Remove the effect applied by `on_timed_modify_stat_requested` on timer timeout. `value` has been pre-calculated
 ## to be the amount the stat was originally changed by. This avoids the error of adding a percentage back to a value
@@ -83,3 +80,8 @@ func on_timed_modify_stat_expired(stat_to_modify: PerkDataPlayer.PlayerStat, val
 		PerkDataPlayer.PlayerStat.NONE: push_error("PlayerPerkManager.on_modify_stat_requested() called with stat_to_modify = NONE")
 
 	timed_modify_stat_stack_count[stat_to_modify] -= 1
+
+func add_perk_mini_icon(data: PerkData) -> void:
+	var new_icon: TextureRect = TextureRect.new()
+	new_icon.texture = data.perk_mini_icon
+	player.player_hud.perk_mini_icons.add_child(new_icon)

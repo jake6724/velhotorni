@@ -1,11 +1,16 @@
-[gd_resource type="Resource" script_class="PerkDataTower" load_steps=4 format=3 uid="uid://qq6sqd0ssmyi"]
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://qq6sqd0ssmyi"]
 
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_pre5w"]
 [ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="2_5br5v"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_uocli"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5jvt"]
 atlas = ExtResource("1_pre5w")
 region = Rect2(48, 1, 48, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gme3t"]
+atlas = ExtResource("2_uocli")
+region = Rect2(64, 64, 16, 15)
 
 [resource]
 script = ExtResource("2_5br5v")
@@ -18,6 +23,7 @@ buff = 3
 base_value = 0.1
 legendary = false
 perk_icon = SubResource("AtlasTexture_u5jvt")
+perk_mini_icon = SubResource("AtlasTexture_gme3t")
 perk_name = "Dark Conjurer"
 perk_desc = "Decrease dark tower placement cost"
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

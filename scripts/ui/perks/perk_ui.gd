@@ -171,7 +171,6 @@ func animate_reset_candles() -> void:
 		bounce_element(candle, 16)
 
 func on_mouse_entered_perk_card(perk_card: PerkCard) -> void:
-	print("Mouse entered a card!")
 	perk_cards_linked.set_value_as_head(perk_card)
 	curr_perk_card = perk_cards_linked.head.value
 

@@ -8,12 +8,8 @@ var spell_damage_accumulated: float = 0
 
 func perk_action() -> void: 
 	match data.action: # could use a func_ref instead
-		PerkDataPlayer.PlayerPerkAction.MODIFY_PLAYER_STAT: 
-			modify_player_stat(data.stat, data.base_value)
+		PerkDataPlayer.PlayerPerkAction.MODIFY_PLAYER_STAT: modify_stat_requested.emit(data)
 		PerkDataPlayer.PlayerPerkAction.MODIFY_TIMED_PLAYER_STAT: timed_modify_player_stat(data.stat, data.base_value, data.duration)
-
-func modify_player_stat(stat_to_modify: PerkDataPlayer.PlayerStat, value: float) -> void:
-	modify_stat_requested.emit(stat_to_modify, value)
 
 func timed_modify_player_stat(stat_to_modify: PerkDataPlayer.PlayerStat, value: float, duration: float) -> void:
 	timed_modify_stat_requested.emit(stat_to_modify, value, duration)

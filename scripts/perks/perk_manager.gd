@@ -12,7 +12,6 @@ var player_spell_perk_manager: PlayerSpellPerkManager
 # Connected by Main
 var perk_ui: PerkUI
 
-
 var perk_pool_data: PerkPoolData = preload("res://data/perks/perk_pool/perk_pool_data_wind.tres")
 var all_basic_perk_data: Array[PerkData] = perk_pool_data.basic_perks
 
@@ -54,7 +53,6 @@ func _ready():
 	fill_rarity_pool()
 
 func create_perk(perk_data: PerkData) -> void:
-	print("Calling create_perk()")
 	# TODO: Rarity needs to be used here somehow
 
 	var perk_data_copy: PerkData = perk_data.duplicate()
@@ -84,7 +82,6 @@ func create_perk(perk_data: PerkData) -> void:
 	active_perks[perk_data] = new_perk.data.rarity
 
 func configure_perk_trigger(new_perk: Perk) -> void:
-	print("Calling configure_perk_trigger()")
 	# Trigger ONE shots perks, connect remaining to proper signals
 	# Triggers are independent of the PerkData type, all Perks can use the same triggers
 	match new_perk.data.trigger:
@@ -120,7 +117,7 @@ func update_rarity_data(selected_rarity: PerkData.Rarity) -> void:
 		if remove_index != -1:
 			rarity_pool.remove_at(remove_index)
 
-## Fill rarity pool with specified number of each rarity defined in `rarity_maxes`. 
+## Fill rarity pool with specified number of each rarity defined in `rarity_maxes`.
 ## This pool will be reduced each wave.
 func fill_rarity_pool() -> void:
 	for rarity: PerkData.Rarity in rarity_maxes.keys():

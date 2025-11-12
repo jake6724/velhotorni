@@ -75,7 +75,6 @@ func set_value_as_head(target_value: Variant) -> void:
 	var curr: DLLNode = head
 	var distance_from_head: int = 0
 	while curr != tail: # Iterate through full list
-		print("LOoping!")
 		if curr.value == target_value:
 			break
 		curr = curr.next

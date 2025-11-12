@@ -1,11 +1,16 @@
-[gd_resource type="Resource" script_class="PerkDataBase" load_steps=4 format=3 uid="uid://bdkdaici4waw5"]
+[gd_resource type="Resource" script_class="PerkDataBase" load_steps=6 format=3 uid="uid://bdkdaici4waw5"]
 
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_aauns"]
 [ext_resource type="Script" uid="uid://cq0cpfg5ke2ax" path="res://scripts/perks/data/perk_data_base.gd" id="1_f7efk"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_4o1nv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4o1nv"]
 atlas = ExtResource("1_aauns")
 region = Rect2(240, 241, 48, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lferv"]
+atlas = ExtResource("2_4o1nv")
+region = Rect2(96, 80, 16, 15)
 
 [resource]
 script = ExtResource("1_f7efk")
@@ -16,6 +21,7 @@ required_spell_damage = -1.0
 base_value = 1.0
 legendary = false
 perk_icon = SubResource("AtlasTexture_4o1nv")
+perk_mini_icon = SubResource("AtlasTexture_lferv")
 perk_name = "Bastion"
 perk_desc = "Increase base max health"
 metadata/_custom_type_script = "uid://cq0cpfg5ke2ax"

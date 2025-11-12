@@ -24,14 +24,7 @@ func switch_spells(_switch_direction) -> void:
 	active_spell_switched.emit(active_spell)
 
 func switch_to_index(index: int) -> void:
-	print("Spells: ", spells)
-	print("spells.head: ", spells.head)
-	print("Spells.head.value: ", spells.head.value)
-	print("test")
-	#var curr_value: PerkData = spells.head.value
-	while spells.head.value != original_spell_positions[index]:
+	var count: int = 0 # TODO: bad work-around sentinel value
+	while spells.head.value != original_spell_positions[index] or count > 5:
 		switch_spells(1)
-
-	# for i in range(index):
-	# 	switch_spells(1)
-	# 	get_tree().create_timer(.1)
+		count += 1

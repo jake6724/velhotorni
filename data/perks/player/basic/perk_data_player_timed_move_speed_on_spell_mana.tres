@@ -1,11 +1,16 @@
-[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=4 format=3 uid="uid://dlxnh6w0yiaxt"]
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=6 format=3 uid="uid://dlxnh6w0yiaxt"]
 
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_bt72r"]
 [ext_resource type="Script" uid="uid://tx0ls1d4gwxv" path="res://scripts/perks/data/park_data_player.gd" id="1_r3i8v"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_4w4fw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4w4fw"]
 atlas = ExtResource("1_bt72r")
 region = Rect2(48, 289, 48, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68huv"]
+atlas = ExtResource("2_4w4fw")
+region = Rect2(16, 96, 16, 15)
 
 [resource]
 script = ExtResource("1_r3i8v")
@@ -17,6 +22,7 @@ required_spell_damage = inf
 base_value = 0.05
 legendary = false
 perk_icon = SubResource("AtlasTexture_4w4fw")
+perk_mini_icon = SubResource("AtlasTexture_68huv")
 perk_name = "Wind's Blessing"
 perk_desc = "Get faster when you pick up coins"
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"
