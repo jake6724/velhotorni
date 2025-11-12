@@ -69,6 +69,8 @@ func update_array() -> void:
 		array.append(curr.value)
 		curr = curr.next
 
+
+
 func print_list() -> void:
 	var curr = head
 	while curr:
