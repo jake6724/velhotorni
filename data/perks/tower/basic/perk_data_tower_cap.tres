@@ -18,6 +18,6 @@ buff = 3
 base_value = 1.0
 legendary = false
 perk_icon = SubResource("AtlasTexture_6y4v3")
-perk_name = "Hoarder"
+perk_name = "Logistics"
 perk_desc = "Increase tower cap"
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

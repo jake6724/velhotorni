@@ -16,6 +16,6 @@ element = 0
 base_value = 0.2
 legendary = false
 perk_icon = SubResource("AtlasTexture_ldapf")
-perk_name = "Fire liker"
+perk_name = "Fire Attunement"
 perk_desc = "Increased max fire mana"
 metadata/_custom_type_script = "uid://euw34l8tc2dw"

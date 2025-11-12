@@ -16,6 +16,6 @@ element = 4
 base_value = 0.2
 legendary = false
 perk_icon = SubResource("AtlasTexture_ldapf")
-perk_name = "Max light"
+perk_name = "Light Attunement"
 perk_desc = "Increase light mana max"
 metadata/_custom_type_script = "uid://euw34l8tc2dw"

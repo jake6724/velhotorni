@@ -17,6 +17,6 @@ required_spell_damage = inf
 base_value = 0.05
 legendary = false
 perk_icon = SubResource("AtlasTexture_4w4fw")
-perk_name = "Greedy"
+perk_name = "Wind's Blessing"
 perk_desc = "Get faster when you pick up coins"
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

@@ -16,6 +16,6 @@ element = 2
 base_value = 0.2
 legendary = false
 perk_icon = SubResource("AtlasTexture_ldapf")
-perk_name = "Wet lover"
+perk_name = "Water Attunement"
 perk_desc = "Increase max water mana"
 metadata/_custom_type_script = "uid://euw34l8tc2dw"
