@@ -34,6 +34,9 @@ func _ready():
 	EnemySpawner.configure_level(LevelManager.active_level)
 	TowerGlobalData.reset()
 
+	# Configure GlobalSettings
+	player_character.player_input.input_type_changed.connect(GlobalSettings.on_input_type_changed)
+
 	# Configure EnemySpawner
 	EnemySpawner.player = player_character
 
@@ -105,7 +108,6 @@ func _input(_event):
 			pause_game_with_menu()
 
 func pause_game():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
 
 func unpause_game():
@@ -117,10 +119,13 @@ func unpause_from_perk_ui() -> void:
 	perk_ui.hide()
 
 func pause_game_with_menu():
+	if not GlobalSettings.controller_active:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	pause_menu.show()
 	get_tree().paused = true
 
 func unpause_game_with_menu():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	pause_menu.hide()
 	get_tree().paused = false
 
@@ -136,18 +141,24 @@ func set_can_pause(value: bool) -> void:
 	can_pause = value
 
 func on_wave_completed() -> void:
+	pause_game_with_perk_ui()
+
+func pause_game_with_perk_ui() -> void:
 	# Show Perk Menu, hide player info
 	player_character.player_hud.hide()
 	var perk_hand: Array[PerkData] = perk_manager.get_perk_hand()
-	# perk_ui.set_process(true)
 	perk_ui.set_card_data(perk_hand)
 	perk_ui.show()
 	perk_ui.animate()
+
+	if not GlobalSettings.controller_active:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 	get_tree().paused = true
 
 func on_perk_selected(perk_data: PerkData) -> void:
 	perk_ui.animate_reset()
-
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	player_character.player_hud.show()
 	perk_manager.create_perk(perk_data)
 	

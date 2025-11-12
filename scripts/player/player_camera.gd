@@ -61,8 +61,8 @@ func look_ahead_mouse() -> void:
 func get_random_offset() -> Vector2:
 	return Vector2(rng.randf_range(-curr_power, curr_power), rng.randf_range(-curr_power, curr_power))
 
-func swap_input_type(controller_active: bool) -> void:
-	if controller_active:
+func swap_input_type() -> void:
+	if GlobalSettings.controller_active:
 		look_ahead_func = look_ahead_controller
 	else:
 		look_ahead_func = look_ahead_mouse

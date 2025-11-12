@@ -16,8 +16,6 @@ var tower_action_press_multiplier_normal: float = 1.0
 var tower_action_press_multiplier_fast: float = 6.0
 var tower_action_press_multiplier: float = tower_action_press_multiplier_fast
 
-var controller_active: bool = true
-
 signal special_action_pressed
 signal switch_selection_pressed
 signal switch_player_mode_pressed
@@ -107,25 +105,22 @@ func check_upgrade_action_input(event) -> void:
 
 ## Set the input type between controller or keyboard, based on the latest input
 func set_input_type(event) -> void:
-	if event is InputEventMouse and controller_active: # Switch to mouse
-		controller_active = false
-		# print("MOUSE INPUT DETECTED")
-		input_type_changed.emit(controller_active)
+	if (event is InputEventMouse or event is InputEventKey) and GlobalSettings.controller_active: # Switch to mouse
+		GlobalSettings.controller_active = false
 		swap_input_type()
 
-	elif event is InputEventJoypadMotion and not controller_active: # Switch to controller
+	elif event is InputEventJoypadMotion and not GlobalSettings.controller_active: # Switch to controller
 		var movement_joystick_input_strength = Input.get_vector("move_left_controller", "move_right_controller", "move_up_controller", "move_down_controller", 0.0)
 		var aim_joystick_input_strength = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down", 0.0)
 
 		if abs(movement_joystick_input_strength) > Vector2(.2, .2) or aim_joystick_input_strength > Vector2(.2, .2):
-			controller_active = true
-			print("CONTROLLER INPUT DETECTED")
-			input_type_changed.emit(controller_active)
+			GlobalSettings.controller_active = true			
 			swap_input_type()
 
 ## `true` = controller active, 'false' = mouse active
 func swap_input_type() -> void:
-	if controller_active:
+	print(GlobalSettings.controller_active)
+	if GlobalSettings.controller_active:
 		get_aim_input_func = get_aim_input_controller
 		get_move_input_func = get_move_input_controller
 	else:

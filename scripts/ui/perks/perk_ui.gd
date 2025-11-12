@@ -24,9 +24,10 @@ var curr_perk_card: PerkCard:
 			curr_perk_card.unhighlight()
 			curr_perk_card.unpop_up()
 		# Configure new curr_perk_card
-		curr_perk_card = value
-		curr_perk_card.highlight()
-		curr_perk_card.pop_up()
+		if value:
+			curr_perk_card = value
+			curr_perk_card.highlight()
+			curr_perk_card.pop_up()
 
 var candles_array: Array = []
 var candle_reset_position: Dictionary[TextureRect, Vector2] = {}
@@ -45,6 +46,11 @@ signal perk_selected
 func _ready():
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	perk_cards = [perk_card_1, perk_card_2, perk_card_3]
+	for card: PerkCard in perk_cards:
+		card.card_background.mouse_entered.connect(on_mouse_entered_perk_card.bind(card))
+		card.card_background.mouse_exited.connect(on_mouse_exited_perk_card)
+		card.card_background.focus_entered.connect(select_card)
+
 	candles_array = [%Candle1, %Candle2, %Candle3, %Candle4]
 	for candle: TextureRect in candles_array:
 		candle_reset_position[candle] = candle.global_position
@@ -92,6 +98,9 @@ func animate() -> void:
 		card.animate()
 		await get_tree().create_timer(delay_between_cards).timeout
 
+	# Allow cards to be hovered now
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 	# # Highlight middle card
 	# perk_cards_linked.head.value.highlight() 
 	# perk_cards_linked.head.value.pop_up()
@@ -101,6 +110,7 @@ func animate_reset() -> void:
 	animate_reset_candles()
 	for card: PerkCard in perk_cards:
 		card.animate_reset()
+	mouse_filter = Control.MOUSE_FILTER_STOP
 
 func animate_letterboxes() -> void:	
 	var top_tween: Tween = get_tree().create_tween()
@@ -159,3 +169,11 @@ func animate_reset_candles() -> void:
 
 		await candle_tween.finished
 		bounce_element(candle, 16)
+
+func on_mouse_entered_perk_card(perk_card: PerkCard) -> void:
+	print("Mouse entered a card!")
+	perk_cards_linked.set_value_as_head(perk_card)
+	curr_perk_card = perk_cards_linked.head.value
+
+func on_mouse_exited_perk_card() -> void:
+	curr_perk_card = null

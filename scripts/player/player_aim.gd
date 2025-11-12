@@ -60,7 +60,7 @@ func update_reticle_combat_controller() -> void:
 	reticle_tween.tween_property(player.reticle_sprite, "global_position", target_position, RETICLE_SPEED)
 
 func update_reticle_combat_mouse() -> void:
-	player.reticle_sprite.global_position = get_global_mouse_position()
+	player.reticle_sprite.global_position = player.reticle_sprite.global_position.lerp(get_global_mouse_position(), .99)
 
 func update_reticle_build() -> void:
 	if player.player_build.preview_tower:
@@ -110,9 +110,14 @@ func flip_sprite() -> void:
 		player.character_sprite.flip_h = flip
 		player.staff_sprite.flip_v = flip
 
-func swap_input_type(controller_active: bool) -> void:
-	if controller_active:
+func swap_input_type() -> void:
+	if GlobalSettings.controller_active:
 		update_reticle_combat_func = update_reticle_combat_controller
 		player.reticle_sprite.global_position = player.spell_spawn_point.global_position + (aim_input * RETICLE_MAX_DISTANCE)
 	else:
 		update_reticle_combat_func = update_reticle_combat_mouse
+
+	# If player is not building, update the reticle func to the new combat type
+	# This ensures that the behavior for the new input type is immeadiately used
+	if !player.building:
+			update_reticle_func = update_reticle_combat_func

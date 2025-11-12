@@ -120,7 +120,7 @@ func on_modify_stat_requested(perk_data: PerkDataTower) -> void:
 			tower_prices[perk_data.element] -= int(roundf(tower_prices_base[perk_data.element] * perk_data.base_value)) # TODO: round here?
 			tower_prices_updated.emit()
 		PerkDataTower.TowerStat.UPGRADE_COST:
-			tower_upgrade_price_modifier[perk_data.element] += perk_data.base_value
+			tower_upgrade_price_modifier[perk_data.element] -= perk_data.base_value
 			tower_upgrade_price_modifier_updated.emit()
 		PerkDataTower.TowerStat.DEBUFF_MODIFIER: 
 			debuff_perk_modifier[perk_data.debuff] += perk_data.base_value

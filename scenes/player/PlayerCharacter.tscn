@@ -1277,13 +1277,16 @@ hframes = 12
 vframes = 12
 frame = 18
 
-[node name="ReticleSprite" type="AnimatedSprite2D" parent="."]
+[node name="ReticleParent" type="Node" parent="."]
+
+[node name="ReticleSprite" type="AnimatedSprite2D" parent="ReticleParent"]
+unique_name_in_owner = true
 z_as_relative = false
 sprite_frames = SubResource("SpriteFrames_wp8q1")
 animation = &"combat"
 autoplay = "combat"
 
-[node name="ReticleCharge" type="TextureProgressBar" parent="ReticleSprite"]
+[node name="ReticleCharge" type="TextureProgressBar" parent="ReticleParent/ReticleSprite"]
 visible = false
 z_index = 1
 anchors_preset = 8

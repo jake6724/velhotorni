@@ -593,7 +593,8 @@ func upgrade() -> void:
 	ap.play("summon")
 
 func update_upgrade_info() -> void:
-	level_upgrade_price = int((level_upgrade_price_base + LEVEL_COST_INCREMENT) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
+	print("TowerGlobalData.tower_upgrade_price_modifier[data.element]: ", TowerGlobalData.tower_upgrade_price_modifier[data.element])
+	level_upgrade_price = int((level_upgrade_price_base + (LEVEL_COST_INCREMENT * level)) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
 	if level >= Constants.TOWER_MAX_LEVEL:
 		upgrade_price_label.text = " MAX"
 		upgrade_coin_icon.hide()

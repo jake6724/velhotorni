@@ -24,6 +24,7 @@ offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_cr6u4")
 metadata/_custom_type_script = "uid://csocx7w7oryov"
 
@@ -33,6 +34,7 @@ z_index = -1
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 144.0
+mouse_filter = 0
 texture = ExtResource("2_3nta1")
 region_rect = Rect2(1, 1, 30, 30)
 patch_margin_left = 7
@@ -50,6 +52,7 @@ offset_bottom = 14.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+mouse_filter = 2
 texture = SubResource("AtlasTexture_3nta1")
 stretch_mode = 2
 
@@ -63,6 +66,7 @@ offset_right = 111.0
 offset_bottom = 137.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="PerkName" type="Label" parent="Content"]
 unique_name_in_owner = true

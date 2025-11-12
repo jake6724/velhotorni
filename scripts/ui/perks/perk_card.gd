@@ -26,6 +26,7 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	card_background.size = Vector2(118, 16)
 	original_position = global_position
+	card_background.focus_mode = Control.FOCUS_CLICK
 
 func animate() -> void:
 	content.hide()
@@ -99,3 +100,4 @@ func unpop_up() -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(self, "global_position", original_position, .15)
+

@@ -27,8 +27,8 @@ extends CharacterBody2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var staff_sprite: StaffSprite = $StaffSprite
 @onready var staff_ap: AnimationPlayer = $StaffAnimationPlayer
-@onready var reticle_sprite: AnimatedSprite2D = $ReticleSprite
-@onready var reticle_charge: TextureProgressBar = $ReticleSprite/ReticleCharge
+@onready var reticle_sprite: AnimatedSprite2D = %ReticleSprite
+# @onready var reticle_charge: TextureProgressBar = $ReticleSprite/ReticleCharge
 @onready var spell_spawn_point: Node2D = %SpellSpawnPoint
 @onready var coin_collector: CoinCollector = $CoinCollector
 @onready var mana_drop_collector: ManaDropCollector = %ManaDropCollector
@@ -76,7 +76,9 @@ func _ready():
 	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
 	player_input.switch_tower_action_pressed.connect(player_build.switch_tower_action.bind(player_input))
 	player_input.ui_interact_pressed.connect(on_ui_interact_pressed)
-	player_input.input_type_changed.connect(on_swap_input_type)
+
+	# Connect to GlobalSettings
+	GlobalSettings.input_type_changed.connect(on_swap_input_type)
 
 	# Configure PlayerSpellSpawner
 	player_spell_spawner.initialize(player_spells.active_spell)
@@ -412,6 +414,6 @@ func on_reset_tower_action(_disable_press: bool) -> void:
 func on_tower_action_hint_requested(_value: bool) -> void:
 	tower_action_hint.visible = _value
 
-func on_swap_input_type(controller_active: bool) -> void:
-	player_camera.swap_input_type(controller_active)
-	player_aim.swap_input_type(controller_active)
+func on_swap_input_type() -> void:
+	player_camera.swap_input_type()
+	player_aim.swap_input_type()
