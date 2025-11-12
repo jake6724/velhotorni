@@ -93,6 +93,7 @@ func _ready():
 	perk_ui.perk_selected.connect(on_perk_selected)
 	player_character.player_input.switch_selection_pressed.connect(perk_ui.switch_selected_card)
 	player_character.player_input.ui_interact_pressed.connect(perk_ui.select_card)
+	player_character.player_input = player_character.player_input
 	perk_ui.main = self
 
 func _input(_event):
@@ -133,6 +134,7 @@ func on_wave_completed() -> void:
 	# Show Perk Menu, hide player info
 	player_character.player_hud.hide()
 	var perk_hand: Array[PerkData] = perk_manager.get_perk_hand()
+	# perk_ui.set_process(true)
 	perk_ui.set_card_data(perk_hand)
 	perk_ui.show()
 	perk_ui.animate()

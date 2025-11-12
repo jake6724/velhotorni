@@ -90,7 +90,6 @@ func unhighlight() -> void:
 	card_background.texture = unhighlight_texture
 
 func pop_up() -> void:
-	print("Popping up")
 	var tween: Tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	var target: Vector2 = original_position + Vector2(0,-6)

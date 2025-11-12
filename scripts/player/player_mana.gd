@@ -44,3 +44,9 @@ func populate_spell_mana(selected_spells: Array[SpellData]) -> void:
 		# Copy base maxes over to the active mana max dict
 		for key in spell_mana_max_base.keys():
 			spell_mana_maxes[key] = spell_mana_max_base[key]
+
+## Increase the max mana of all weapons with the same `Element` as `element`.
+func increase_all_weapon_of_element_max_mana(element: Constants.Element, value: float) -> void:
+	for spell_data: SpellData in spell_mana_maxes.keys():
+		if spell_data.element == element:
+			spell_mana_maxes[spell_data] += (spell_mana_max_base[spell_data] * value)

@@ -13,6 +13,7 @@ extends Control
 @onready var perk_card_3: PerkCard = %PerkCard3
 
 var main: Main # Set manually by main. Used to unpause game
+var player_input: PlayerInput # Used for move_input
 
 var perk_cards: Array = []
 var perk_cards_linked: DoublyLinkedList
@@ -37,6 +38,8 @@ var delay_between_cards: float = 0
 var candle_speed: float = .05
 var candle_delay: float = .05
 
+var move_input_x: float
+
 signal perk_selected
 
 func _ready():
@@ -51,6 +54,15 @@ func _ready():
 	perk_cards_linked.switch_right()
 	curr_perk_card = perk_cards_linked.head.value
 	perk_cards_linked.print_list()
+
+func _process(_delta):
+	move_input_x = Input.get_axis("move_left", "move_right")
+	print(move_input_x)
+	if Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
+		if move_input_x > .01:
+			switch_selected_card(1)
+		elif move_input_x < -.01:
+			switch_selected_card(-1)
 
 func switch_selected_card(switch_direction: int) -> void:
 	if switch_direction == -1: # Switch left

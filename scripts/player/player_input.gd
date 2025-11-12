@@ -20,6 +20,7 @@ signal switch_selection_pressed
 signal switch_player_mode_pressed
 signal switch_tower_action_pressed
 signal ui_interact_pressed
+signal move_input_updated
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
