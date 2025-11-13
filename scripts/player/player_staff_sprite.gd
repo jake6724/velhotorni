@@ -3,8 +3,8 @@ extends Sprite2D
 
 @onready var muzzle_flash: AnimatedSprite2D = $MuzzleFlash
 
-func _ready():
-	print(muzzle_flash)
+# func _ready():
+# 	print(muzzle_flash)
 
 ## Update the region of the staff atlas, changing the staff graphic. Return the corresponding value for
 ## player_aim.staff_rotation_offset_degrees

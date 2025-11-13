@@ -46,7 +46,6 @@ func on_body_entered(_intruder) -> void:
 
 ## Used to collide with and damage player, tower, or enemy if reflected
 func on_area_entered(intruder: Area2D) -> void:
-	print("Collision detected with: ", intruder)
 	active = false
 	if intruder is PlayerHurtbox:
 		var damage_received = intruder.take_bullet_damage(1, global_position, self)

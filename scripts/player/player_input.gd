@@ -16,6 +16,8 @@ var tower_action_press_multiplier_normal: float = 1.0
 var tower_action_press_multiplier_fast: float = 6.0
 var tower_action_press_multiplier: float = tower_action_press_multiplier_fast
 
+var input_enabled: bool = true
+
 signal special_action_pressed
 signal switch_selection_pressed
 signal switch_player_mode_pressed
@@ -63,39 +65,40 @@ func _process(delta):
 		upgrade_action_charge += delta * tower_action_press_multiplier
 		
 func _input(event):
-	check_primary_action_input(event)
-	check_upgrade_action_input(event)
-	if Input.is_action_just_pressed("secondary_action"):
-		special_action_pressed.emit()
+	if input_enabled:
+		check_primary_action_input(event)
+		check_upgrade_action_input(event)
+		if Input.is_action_just_pressed("secondary_action"):
+			special_action_pressed.emit()
 
-	if event.is_action("switch_selection_right") and event.is_pressed() and not event.is_echo():
-		switch_selection_pressed.emit(1)
+		if event.is_action("switch_selection_right") and event.is_pressed() and not event.is_echo():
+			switch_selection_pressed.emit(1)
 
-	if event.is_action("switch_selection_left") and event.is_pressed() and not event.is_echo():
-		switch_selection_pressed.emit(-1)
+		if event.is_action("switch_selection_left") and event.is_pressed() and not event.is_echo():
+			switch_selection_pressed.emit(-1)
 
-	if event.is_action("switch_player_mode") and event.is_pressed() and not event.is_echo():
-		switch_player_mode_pressed.emit()
+		if event.is_action("switch_player_mode") and event.is_pressed() and not event.is_echo():
+			switch_player_mode_pressed.emit()
 
-	if event.is_action("switch_tower_action") and event.is_pressed() and not event.is_echo():
-		switch_tower_action_pressed.emit()
+		if event.is_action("switch_tower_action") and event.is_pressed() and not event.is_echo():
+			switch_tower_action_pressed.emit()
+			
+		if event.is_action("ui_interact") and event.is_pressed() and not event.is_echo():
+			ui_interact_pressed.emit()
+
+		if event.is_action("weapon_select_0") and event.is_pressed() and not event.is_echo():
+			weapon_select_pressed.emit(0)
 		
-	if event.is_action("ui_interact") and event.is_pressed() and not event.is_echo():
-		ui_interact_pressed.emit()
+		if event.is_action("weapon_select_1") and event.is_pressed() and not event.is_echo():
+			weapon_select_pressed.emit(1)
+		
+		if event.is_action("weapon_select_2") and event.is_pressed() and not event.is_echo():
+			weapon_select_pressed.emit(2)
+		
+		if event.is_action("weapon_select_3") and event.is_pressed() and not event.is_echo():
+			weapon_select_pressed.emit(3)
 
-	if event.is_action("weapon_select_0") and event.is_pressed() and not event.is_echo():
-		weapon_select_pressed.emit(0)
-	
-	if event.is_action("weapon_select_1") and event.is_pressed() and not event.is_echo():
-		weapon_select_pressed.emit(1)
-	
-	if event.is_action("weapon_select_2") and event.is_pressed() and not event.is_echo():
-		weapon_select_pressed.emit(2)
-	
-	if event.is_action("weapon_select_3") and event.is_pressed() and not event.is_echo():
-		weapon_select_pressed.emit(3)
-
-	set_input_type(event)
+		set_input_type(event)
 
 func check_primary_action_input(event) -> void:
 	if Input.is_action_just_pressed("primary_action"):

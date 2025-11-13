@@ -149,6 +149,7 @@ func on_wave_completed() -> void:
 func pause_game_with_perk_ui() -> void:
 	await get_tree().create_timer(PERK_UI_POPUP_DELAY).timeout
 	
+	player_character.player_input.input_enabled = false
 	# Show Perk Menu, hide player info
 
 	player_character.player_build_ui.hide()
@@ -173,6 +174,8 @@ func on_perk_selected(perk_data: PerkData) -> void:
 	if player_character.building:
 		player_character.player_build_ui.show()
 	
+	player_character.player_input.input_enabled = true
+
 func on_wave_failed() -> void:
 	wave_failures += 1
 

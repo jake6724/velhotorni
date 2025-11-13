@@ -1,5 +1,8 @@
 extends Node
 
+const TOWER_MIN_UPGRADE_PRICE_MODIFIER: float = .01
+var TOWER_MIN_PLACEMENT_PRICE: float = 1.0
+
 var tower_data: Dictionary[Constants.Element, TowerData] = {
 	Constants.Element.FIRE: load("res://data/towers/tower_data_fire.tres"),
 	Constants.Element.WIND: load("res://data/towers/tower_data_wind.tres"),
@@ -117,10 +120,12 @@ func on_modify_stat_requested(perk_data: PerkDataTower) -> void:
 	# This uses perk_data.base_value instead of value in the other because there is no wrapper for the TowerPerk's signal
 	match perk_data.stat:
 		PerkDataTower.TowerStat.PLACEMENT_COST: 
-			tower_prices[perk_data.element] -= int(roundf(tower_prices_base[perk_data.element] * perk_data.base_value)) # TODO: round here?
+			var new_price: int =  int(tower_prices[perk_data.element] - (roundf(tower_prices_base[perk_data.element] * perk_data.base_value)))
+			tower_prices[perk_data.element] = max(new_price, TOWER_MIN_PLACEMENT_PRICE)
 			tower_prices_updated.emit()
 		PerkDataTower.TowerStat.UPGRADE_COST:
-			tower_upgrade_price_modifier[perk_data.element] -= perk_data.base_value
+			var new_upgrade_price_modifier: float = tower_upgrade_price_modifier[perk_data.element] + perk_data.base_value
+			tower_upgrade_price_modifier[perk_data.element] = max(new_upgrade_price_modifier, TOWER_MIN_UPGRADE_PRICE_MODIFIER)
 			tower_upgrade_price_modifier_updated.emit()
 		PerkDataTower.TowerStat.DEBUFF_MODIFIER: 
 			debuff_perk_modifier[perk_data.debuff] += perk_data.base_value
