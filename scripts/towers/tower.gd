@@ -592,8 +592,6 @@ func upgrade() -> void:
 	ap.play("summon")
 
 func update_upgrade_info() -> void:
-	print("TowerGlobalData.tower_upgrade_price_modifier[data.element]: ", TowerGlobalData.tower_upgrade_price_modifier[data.element])
-	print("level_upgrade_price_base + (LEVEL_COST_INCREMENT * level): ", level_upgrade_price_base + (LEVEL_COST_INCREMENT * level))
 	level_upgrade_price = int((level_upgrade_price_base + (LEVEL_COST_INCREMENT * level)) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
 	if level >= Constants.TOWER_MAX_LEVEL:
 		upgrade_price_label.text = " MAX"

@@ -218,6 +218,8 @@ func check_can_perform_action(_hovered_tower) -> bool:
 		TowerAction.UPGRADE:
 			if _hovered_tower.level < Constants.TOWER_MAX_LEVEL:
 				return true
+			else:
+				return false
 		TowerAction.SELL: 
 			return true
 
