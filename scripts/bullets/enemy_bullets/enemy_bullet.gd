@@ -44,15 +44,22 @@ func on_body_entered(_intruder) -> void:
 	active = false
 	ap.play("hit")
 
-## Used to collide with and damage player 
+## Used to collide with and damage player, tower, or enemy if reflected
 func on_area_entered(intruder: Area2D) -> void:
+	print("Collision detected with: ", intruder)
 	active = false
-	ap.play("hit")
 	if intruder is PlayerHurtbox:
-		intruder.take_damage(1, global_position)
+		var damage_received = intruder.take_bullet_damage(1, global_position, self)
+		if damage_received:
+			ap.play("hit")
 
 	if intruder is TowerHurtbox:
 		intruder.take_damage(damage)
+		ap.play("hit")
+
+	if intruder is Enemy:
+		intruder.take_damage(damage, Constants.Element.ARCANE)
+		ap.play("hit")
 
 func on_animation_finished(anim_name: String) -> void:
 	if anim_name == "hit":

@@ -2,9 +2,23 @@ class_name PlayerCharacterStats # TODO: Change this to PlayerStats
 extends Node 
 
 signal health_updated
-signal mana_updated
 
-var max_health = 8.0
+var max_health: float
+var base_move_speed: float
+var move_speed: float
+var knockback_multiplier: float
+var reflect_chance: float
+var hitstun_recovery_multiplier: float 
+var hurtbox_iframe_duration: float
+
+func load_player_data(data: PlayerData) -> void:
+	max_health = data.max_health
+	base_move_speed = data.base_move_speed
+	move_speed = base_move_speed
+	knockback_multiplier = data.knockback_multiplier
+	reflect_chance = data.reflect_chance
+	hitstun_recovery_multiplier = data.hitstun_recovery_multiplier
+	hurtbox_iframe_duration = data.hurtbox_iframe_duration
 
 var health: float = 8.0:
 	set(value):
@@ -12,20 +26,3 @@ var health: float = 8.0:
 		if health < 1:
 			health = 0
 		health_updated.emit(health)
-
-var mana: float = 100.0:
-	set(value):
-		mana = value
-		mana_updated.emit(mana)
-
-# var combat_speed: float = 100.0
-# var build_speed: float = 100.0
-
-var base_move_speed: float = 100.0
-
-var move_speed: float = base_move_speed
-var knockback_multiplier: float = 70.0
-var chance_to_reflect: float = 0.0
-
-var hitstun_recovery_multiplier: float = 300 # Influences how quickly the player stops sliding when hitstun and recovers back to normal mode
-var hurtbox_iframe_duration: float = 1.5

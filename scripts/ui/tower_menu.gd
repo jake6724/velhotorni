@@ -125,12 +125,12 @@ func hide_placement_phase() -> void:
 	wave_preview_panel.hide()
 	eye_button.hide()
 
-	cycle_indicator.show()
-	fast_forward.show()
+	# cycle_indicator.show()
+	# fast_forward.show()
 
 func show_placement_phase() -> void:
 	# tower_buttons.show()
-	wave_button.show()
+	# wave_button.show()
 	# wave_preview_panel.show()
 	# eye_button.show()
 
@@ -170,10 +170,10 @@ func update_gold(new_amount: int) -> void:
 ## Intended to be called by `player_controller` to directly update token amount
 func update_tokens(new_amount: int) -> void:
 	token.text = str(new_amount)
-	if new_amount > 0:
-		token_bar.show()
-	else:
-		token_bar.hide()
+	# if new_amount > 0:
+	# 	token_bar.show()
+	# else:
+	# 	token_bar.hide()
 		
 func set_tower_button_sprites(_gold: float):
 	for button: TextureButton in all_tower_buttons:
@@ -207,7 +207,7 @@ func on_wave_number_timer_timeout():
 
 func display_wave_info():
 	wave_number.text = "Wave " + str(WaveManager.wave_index+1)
-	wave_number.show()
+	# wave_number.show()
 	wave_number_timer.start(wave_number_duration)
 
 func on_level_number_timer_timeout():

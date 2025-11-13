@@ -70,6 +70,9 @@ var can_switch_mode: bool = true
 signal player_respawned
 
 func _ready():
+	# Configure PlayerStats
+	player_stats.load_player_data(data)
+
 	# Connect to PlayerInput
 	player_input.special_action_pressed.connect(on_special_input_pressed)
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
@@ -110,6 +113,8 @@ func _ready():
 	# Configure PlayerHurtbox
 	player_hurtbox.hit.connect(on_hit)
 	player_hurtbox.pit_entered.connect(on_pit_entered)
+	player_hurtbox.reflect_chance = player_stats.reflect_chance
+	player_hurtbox.camera_shake_requested.connect(player_camera.apply_shake)
 	
 	# Configure PlayerMana
 	player_mana.populate_spell_mana(player_spells.selected_spells)
