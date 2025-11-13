@@ -27,7 +27,7 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var tower_obstacle_collider: CollisionShape2D = %TowerObstacleCollider
 
 @onready var upgrade_display: Control = %UpgradeDisplay
-@onready var upgrade_price_label: Label = %UpgradePriceLabel
+@onready var tower_action_cost_label: Label = %TowerActionCostLabel
 @onready var upgrade_icon: TextureRect = %UpgradeIcon
 @onready var upgrade_coin_icon: TextureRect = %UpgradeCoinIcon
 @onready var upgrade_button_hint: ControllerButtonHint = %UpgradeButtonHint
@@ -198,7 +198,7 @@ func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 
 	upgrade_display.z_index = Constants.z_index_map["top"]
-	upgrade_price_label.z_index = Constants.z_index_map["top"]
+	tower_action_cost_label.z_index = Constants.z_index_map["top"]
 
 	z_index = Constants.z_index_map["tower"]
 
@@ -594,17 +594,17 @@ func upgrade() -> void:
 func update_upgrade_info() -> void:
 	level_upgrade_price = int((level_upgrade_price_base + (LEVEL_COST_INCREMENT * level)) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
 	if level >= Constants.TOWER_MAX_LEVEL:
-		upgrade_price_label.text = " MAX"
+		tower_action_cost_label.text = " MAX"
 		upgrade_coin_icon.hide()
 		upgrade_button_hint.hide()
 	else:
-		upgrade_price_label.text = str(int(level_upgrade_price))
+		tower_action_cost_label.text = str(int(level_upgrade_price))
 
 func show_action_cost_info(cost) -> void:
 	# if cost < 0:
 	# 	cost = -cost
 	cost = abs(cost) # Always show cost as positive, even if refunding for sell
-	upgrade_price_label.text = str(cost)
+	tower_action_cost_label.text = str(cost)
 	upgrade_display.show()
 
 func on_hit(_damage_amount: int) -> void:

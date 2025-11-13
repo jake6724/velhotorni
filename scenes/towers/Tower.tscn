@@ -403,7 +403,7 @@ size_flags_vertical = 4
 texture = ExtResource("14_8dhd2")
 stretch_mode = 2
 
-[node name="UpgradePriceLabel" type="Label" parent="UpgradeDisplay/Hbox"]
+[node name="TowerActionCostLabel" type="Label" parent="UpgradeDisplay/Hbox"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2

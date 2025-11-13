@@ -18,4 +18,5 @@ func on_modify_stat_requested(stat_to_modify: PerkDataBase.BaseStat, value: floa
 		PerkDataBase.BaseStat.MAX_HEALTH:
 			modified_value = value
 			base.max_health += value
+			base.health += value
 	return modified_value

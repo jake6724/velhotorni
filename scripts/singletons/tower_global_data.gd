@@ -1,7 +1,7 @@
 extends Node
 
 const TOWER_MIN_UPGRADE_PRICE_MODIFIER: float = .01
-var TOWER_MIN_PLACEMENT_PRICE: float = 1.0
+var TOWER_MIN_PLACEMENT_PRICE: int = 1
 
 var tower_data: Dictionary[Constants.Element, TowerData] = {
 	Constants.Element.FIRE: load("res://data/towers/tower_data_fire.tres"),
@@ -136,7 +136,6 @@ func on_modify_stat_requested(perk_data: PerkDataTower) -> void:
 		PerkDataTower.TowerStat.TOWER_CAP: 
 			tower_max += perk_data.base_value
 		PerkDataTower.TowerStat.NONE: push_error("TowerPerkManager.on_modify_stat_requested() called with stat_to_modify = NONE")
-
 
 
 

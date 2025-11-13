@@ -36,6 +36,7 @@ func on_modify_stat_requested(data: PerkData) -> float:
 		PerkDataPlayer.PlayerStat.MAX_HEALTH: 
 			modified_value = data.base_value
 			player.player_stats.max_health += data.base_value
+			player.player_stats.health += data.base_value
 		PerkDataPlayer.PlayerStat.MOVE_SPEED: 
 			modified_value = (player.player_stats.base_move_speed * data.base_value)
 			player.player_stats.move_speed += (player.player_stats.base_move_speed * data.base_value)

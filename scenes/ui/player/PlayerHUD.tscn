@@ -250,15 +250,15 @@ offset_bottom = 5.0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("5_fd7yi")
 theme_override_font_sizes/font_size = 8
-text = "8"
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HealthBar" type="TextureProgressBar" parent="VBoxContainer/Stats/HealthIcon"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 17.0
-offset_right = 42.0
+offset_left = 25.0
+offset_right = 50.0
 offset_bottom = 8.0
 max_value = 8.0
 value = 8.0

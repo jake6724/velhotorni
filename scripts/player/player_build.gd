@@ -62,6 +62,7 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	TowerGlobalData.tower_debuff_perk_modifier_data_updated.connect(on_tower_perk_debuff_modifier_data_updated)
 	TowerGlobalData.tower_buff_perk_modifier_data_updated.connect(on_tower_perk_buff_modifier_data_updated)
 	TowerGlobalData.tower_upgrade_price_modifier_updated.connect(on_tower_upgrade_price_modifier_updated)
+	TowerGlobalData.tower_prices_updated.connect(on_tower_prices_updated)
 
 func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
 	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action(hovered_tower):
@@ -103,7 +104,7 @@ func create_preview_tower():
 	if not hovered_tower:
 		preview_tower.upgrade_button_hint.set_hint_icon("joypad_button_0")
 
-	preview_tower.upgrade_price_label.text = str(TowerGlobalData.tower_prices[preview_tower.data.element])
+	preview_tower.tower_action_cost_label.text = str(TowerGlobalData.tower_prices[preview_tower.data.element])
 	preview_tower.died.connect(on_tower_died)
 
 	if not hovered_tower:
@@ -206,7 +207,7 @@ func configure_hovered_tower_for_action(_hovered_tower) -> void:
 		else:
 			_hovered_tower.upgrade_button_hint.hide()
 			_hovered_tower.upgrade_coin_icon.hide()
-			_hovered_tower.upgrade_price_label.text = " MAX"
+			_hovered_tower.tower_action_cost_label.text = " MAX"
 
 func check_can_perform_action(_hovered_tower) -> bool:
 	match tower_action:
@@ -332,3 +333,6 @@ func on_tower_perk_buff_modifier_data_updated() -> void:
 func on_tower_upgrade_price_modifier_updated() -> void:
 	for tower: Tower in active_towers:
 		tower.update_upgrade_info()
+
+func on_tower_prices_updated() -> void:
+	preview_tower.show_action_cost_info(TowerGlobalData.tower_prices[preview_tower.data.element])

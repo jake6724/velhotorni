@@ -41,7 +41,7 @@ var active_perks: Dictionary[PerkData, PerkData.Rarity]
 const PERK_HAND_SIZE: int = 3
 
 var test_perk_data: Array[PerkData] = [
-	preload("res://data/perks/player/legendary/perk_data_player_lgd_move_speed_on_dmg.tres"), 
+	preload("res://data/perks/tower/basic/perk_data_tower_fire_placement_cost.tres"), 
 ]
 
 func _input(_event):
