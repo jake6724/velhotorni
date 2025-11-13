@@ -44,6 +44,11 @@ var test_perk_data: Array[PerkData] = [
 	preload("res://data/perks/player/legendary/perk_data_player_lgd_move_speed_on_dmg.tres"), 
 ]
 
+func _input(_event):
+	if Input.is_action_just_pressed("x"):
+		for perk_data: PerkData in test_perk_data:
+			create_perk(perk_data)
+
 func initialize(_perk_pool_data: PerkPoolData) -> void:
 	perk_pool_data = _perk_pool_data
 	all_basic_perk_data = perk_pool_data.basic_perks
