@@ -1,7 +1,7 @@
 class_name Enemy
 extends Area2D
 
-enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE, REPEATER_SMALL, REPEATER_LARGE}
+enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE, REPEATER_SMALL, REPEATER_LARGE, DUMMY_SMALL}
 
 @export var data: EnemyData
 
@@ -121,6 +121,9 @@ func _ready():
 	enemy_movement.sprite_flip_requested.connect(on_sprite_flip_requested)
 	enemy_movement.damage_base_requested.connect(on_damage_base_requested)
 	enemy_movement.death_requested.connect(on_death_requested)
+
+	# Configure z_indexes
+	health_bar.z_index = Constants.z_index_map["enemy_healthbar"]
 
 func _physics_process(delta):
 	#print(fx_burn.visible)

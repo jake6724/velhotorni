@@ -50,6 +50,9 @@ func reflect_bullet(bullet: EnemyBullet) -> void:
 	# Invert bullet direction
 	bullet.direction = global_position.direction_to(bullet.global_position)
 
+	# Increase bullet damage
+	bullet.damage *= 2
+
 	# Change bullet collision layer to see enemies and ignore player 
 	bullet.collision_area.set_collision_mask_value(4,false) # Ignore tower hurtbox
 	bullet.collision_area.set_collision_mask_value(17,false) # Ignore player hurtbox

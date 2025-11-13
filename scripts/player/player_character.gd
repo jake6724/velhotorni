@@ -1,7 +1,8 @@
 class_name PlayerCharacter
 extends CharacterBody2D
 
-@export var data: PlayerData
+@export var player_data: PlayerData
+@export var perk_pool_data: PerkPoolData
 
 # Components
 @onready var player_movement: PlayerMovement = $PlayerMovement
@@ -71,7 +72,7 @@ signal player_respawned
 
 func _ready():
 	# Configure PlayerStats
-	player_stats.load_player_data(data)
+	player_stats.load_player_data(player_data)
 
 	# Connect to PlayerInput
 	player_input.special_action_pressed.connect(on_special_input_pressed)

@@ -50,16 +50,16 @@ func on_area_entered(intruder: Area2D) -> void:
 	active = false
 	if intruder is PlayerHurtbox:
 		var damage_received = intruder.take_bullet_damage(1, global_position, self)
-		if damage_received:
-			ap.play("hit")
+		if not damage_received:
+			return 
 
 	if intruder is TowerHurtbox:
 		intruder.take_damage(damage)
-		ap.play("hit")
 
 	if intruder is Enemy:
 		intruder.take_damage(damage, Constants.Element.ARCANE)
-		ap.play("hit")
+
+	ap.play("hit")
 
 func on_animation_finished(anim_name: String) -> void:
 	if anim_name == "hit":

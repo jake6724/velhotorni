@@ -32,6 +32,8 @@ var tower_mana_breakables: Array[Breakable] = []
 @export var waves: Array[Wave]
 @export var max_towers: int = 10
 
+@export var start_first_wave_immediately: bool = false
+
 var stars: int = 1 # Tracks the highest number of stars earned for this level
 
 func _ready():

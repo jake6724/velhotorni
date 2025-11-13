@@ -147,7 +147,9 @@ var z_index_map: Dictionary[String, int] = {
 	"tower_upgrade_menu": 1001,
 	"popup": 2000,
 	"reticle": 2001,
+	"enemy_healthbar": 4000, 
 	"top": 4096
+
 }
 
 func get_closest_cardinal_direction_normalized(input_vector) -> Vector2:

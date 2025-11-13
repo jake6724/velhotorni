@@ -82,6 +82,7 @@ func _ready():
 		breakable.coin_dropped.connect(coin_drop_manager.spawn_coin_drop)
 
 	# Configure PerkManager
+	perk_manager.initialize(player_character.perk_pool_data)
 	perk_manager.perk_ui = perk_ui
 	perk_manager.player_perk_manager = player_character.player_perk_manager
 	perk_manager.player_mana_drop_collector = player_character.mana_drop_collector
@@ -100,6 +101,9 @@ func _ready():
 
 	# Hide Cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+	if active_level.start_first_wave_immediately:
+		WaveManager.start_wave()
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
@@ -146,7 +150,10 @@ func pause_game_with_perk_ui() -> void:
 	await get_tree().create_timer(PERK_UI_POPUP_DELAY).timeout
 	
 	# Show Perk Menu, hide player info
+
+	player_character.player_build_ui.hide()
 	player_character.player_hud.hide()
+
 	var perk_hand: Array[PerkData] = perk_manager.get_perk_hand()
 	perk_ui.set_card_data(perk_hand)
 	perk_ui.show()
@@ -162,6 +169,9 @@ func on_perk_selected(perk_data: PerkData) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	player_character.player_hud.show()
 	perk_manager.create_perk(perk_data)
+
+	if player_character.building:
+		player_character.player_build_ui.show()
 	
 func on_wave_failed() -> void:
 	wave_failures += 1

@@ -12,12 +12,12 @@ var player_spell_perk_manager: PlayerSpellPerkManager
 # Connected by Main
 var perk_ui: PerkUI
 
-var perk_pool_data: PerkPoolData = preload("res://data/perks/perk_pool/perk_pool_data_wind.tres")
-var all_basic_perk_data: Array[PerkData] = perk_pool_data.basic_perks
+var perk_pool_data: PerkPoolData # Passed from PlayerCharacter via Main in initialize
+var all_basic_perk_data: Array[PerkData] # Set in initialize
 
 ## Perks that can be used this level. Does not include unusable elemental perks
 ## Populated at runtime ** # TODO: Remove unusable elements
-var valid_basic_perk_data: Array[PerkData] = all_basic_perk_data
+var valid_basic_perk_data: Array[PerkData]
 
 var rarity_counts: Dictionary[PerkData.Rarity, int] = {
 	PerkData.Rarity.ONE: 0,
@@ -44,12 +44,10 @@ var test_perk_data: Array[PerkData] = [
 	preload("res://data/perks/player/legendary/perk_data_player_lgd_move_speed_on_dmg.tres"), 
 ]
 
-# func _input(_event):
-# 	if Input.is_action_just_pressed("x"):
-# 		for perk_data: PerkData in test_perk_data:
-# 			create_perk(perk_data)
-
-func _ready():
+func initialize(_perk_pool_data: PerkPoolData) -> void:
+	perk_pool_data = _perk_pool_data
+	all_basic_perk_data = perk_pool_data.basic_perks
+	valid_basic_perk_data = all_basic_perk_data
 	fill_rarity_pool()
 
 func create_perk(perk_data: PerkData) -> void:

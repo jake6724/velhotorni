@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=7 format=3 uid="uid://4gyuedtj4uty"]
+
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_5lq17"]
+[ext_resource type="Texture2D" uid="uid://d01v81ufk0jvj" path="res://assets/art/atlases/enemy/atl_enemy_fire_ghoul.png" id="1_qp1ad"]
+[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_hd4l5"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="2_m4fqe"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="3_hd4l5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tj1f"]
+atlas = ExtResource("3_hd4l5")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+script = ExtResource("2_m4fqe")
+size = 8
+element = 0
+strong_against_element = 0
+weak_against_element = 0
+health = 100.0
+speed = 20.0
+damage = 0
+tower_mana_drop_chance_base = 0.0
+element_mana_drop_chance = 0.0
+element_mana_drop_amount_multiplier = 0.0
+atlas = ExtResource("1_qp1ad")
+icon = SubResource("AtlasTexture_6tj1f")
+show_light = false
+explosion_sfx = ExtResource("2_hd4l5")
+hex_data_list = Array[ExtResource("1_5lq17")]([])
+knockback_multiplier = 1.5
+enemy_name = "Fire Ghoul Dummy"
+enemy_description = ""
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"
