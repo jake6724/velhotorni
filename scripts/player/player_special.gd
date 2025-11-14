@@ -8,15 +8,9 @@ var active: bool = false
 @export var dash_velocity: float = 250.0
 @export var dash_duration: float = .1
 
-var charge_max: int = 3
-var charges: int = 3
-var charge_cooldown_duration: float = 2
-
-signal velocity_update_requested
 signal camera_shake_requested
 signal hurtbox_update_requested
 signal special_charge_sprite_update_requested
-signal special_animation_requested
 
 var special_func: Callable = Callable(dash)
 var special_cooldown_timer: Timer = Timer.new()
@@ -28,12 +22,12 @@ func _ready():
 	add_child(special_cooldown_timer)
 
 func special(_move_input: Vector2, _aim_input: Vector2) -> void:
-	if charges > 0:	
+	if player.player_stats.special_charges > 0:	
 		active = true
-		charges -= 1
+		player.player_stats.special_charges -= 1
 		special_func.call(_move_input, _aim_input)
-		special_charge_sprite_update_requested.emit(charges)
-		special_cooldown_timer.start(charge_cooldown_duration)
+		special_charge_sprite_update_requested.emit(player.player_stats.special_charges)
+		special_cooldown_timer.start(player.player_stats.special_charge_cooldown_duration)
 
 func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	camera_shake_requested.emit(1)
@@ -60,5 +54,5 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	player.set_collision_mask_value(28, true)
 
 func on_special_cooldown_timeout() -> void:
-	charges = charge_max
-	special_charge_sprite_update_requested.emit(charges)
+	player.player_stats.special_charges = player.player_stats.special_charges_max
+	special_charge_sprite_update_requested.emit(player.player_stats.special_charges)

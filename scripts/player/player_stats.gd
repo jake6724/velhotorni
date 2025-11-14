@@ -10,6 +10,12 @@ var knockback_multiplier: float
 var reflect_chance: float
 var hitstun_recovery_multiplier: float 
 var hurtbox_iframe_duration: float
+var hurtbox_iframe_duration_base: float
+
+var special_charges_max: int
+var special_charges: int
+var special_charge_cooldown_duration: float
+var special_charge_cooldown_duration_base: float
 
 func load_player_data(data: PlayerData) -> void:
 	max_health = data.max_health
@@ -19,6 +25,11 @@ func load_player_data(data: PlayerData) -> void:
 	reflect_chance = data.reflect_chance
 	hitstun_recovery_multiplier = data.hitstun_recovery_multiplier
 	hurtbox_iframe_duration = data.hurtbox_iframe_duration
+	hurtbox_iframe_duration_base = hurtbox_iframe_duration
+	special_charges_max = data.special_charges_max
+	special_charges = data.special_charges
+	special_charge_cooldown_duration = data.special_charge_cooldown_duration
+	special_charge_cooldown_duration_base = special_charge_cooldown_duration
 
 var health: float = 8.0:
 	set(value):

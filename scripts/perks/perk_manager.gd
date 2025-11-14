@@ -1,7 +1,7 @@
 class_name PerkManager
 extends Node
 
-# External references required for connecting perk triggers
+# External references
 # All references manually set by Main
 var player_perk_manager: PlayerPerkManager
 var player_mana_drop_collector: ManaDropCollector
@@ -9,8 +9,10 @@ var player_hurtbox: PlayerHurtbox
 var player_spell_spawner: PlayerSpellSpawner
 var base_perk_manager: BasePerkManager
 var player_spell_perk_manager: PlayerSpellPerkManager
-# Connected by Main
 var perk_ui: PerkUI
+
+## Global for this class, used to track rarity between function calls from main
+var current_perk_hand_rarity: PerkData.Rarity
 
 var perk_pool_data: PerkPoolData # Passed from PlayerCharacter via Main in initialize
 var all_basic_perk_data: Array[PerkData] # Set in initialize
@@ -30,7 +32,7 @@ var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
 	PerkData.Rarity.ONE: 4,
 	PerkData.Rarity.TWO: 3,
 	PerkData.Rarity.THREE: 2,
-	PerkData.Rarity.FOUR: 0 # TODO: Temporarily don't have any legendaries
+	PerkData.Rarity.FOUR: 2
 }
 
 var rarity_pool: Array
@@ -56,8 +58,6 @@ func initialize(_perk_pool_data: PerkPoolData) -> void:
 	fill_rarity_pool()
 
 func create_perk(perk_data: PerkData) -> void:
-	# TODO: Rarity needs to be used here somehow
-
 	var perk_data_copy: PerkData = perk_data.duplicate()
 	var new_perk: Perk
 
@@ -80,6 +80,8 @@ func create_perk(perk_data: PerkData) -> void:
 		new_perk.modify_stat_requested.connect(player_spell_perk_manager.on_modify_stat_requested)
 
 	new_perk.data = perk_data_copy
+	new_perk.data.rarity = current_perk_hand_rarity
+	new_perk.set_rarity_value()
 
 	configure_perk_trigger(new_perk)
 	active_perks[perk_data] = new_perk.data.rarity
@@ -151,9 +153,7 @@ func get_basic_perk_hand(rarity: PerkData.Rarity) -> Array[PerkData]:
 
 func get_perk_hand() -> Array[PerkData]:
 	var perk_hand: Array[PerkData] = []
-	var rarity: PerkData.Rarity = get_rarity()
-
-	if rarity != PerkData.Rarity.FOUR:
-		perk_hand = get_basic_perk_hand(rarity)
-
+	current_perk_hand_rarity = get_rarity()
+	if current_perk_hand_rarity != PerkData.Rarity.FOUR:
+		perk_hand = get_basic_perk_hand(current_perk_hand_rarity)
 	return perk_hand

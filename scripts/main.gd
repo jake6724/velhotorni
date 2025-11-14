@@ -150,11 +150,12 @@ func pause_game_with_perk_ui() -> void:
 	await get_tree().create_timer(PERK_UI_POPUP_DELAY).timeout
 	
 	player_character.player_input.input_enabled = false
-	# Show Perk Menu, hide player info
 
+	# Show Perk Menu, hide player info
 	player_character.player_build_ui.hide()
 	player_character.player_hud.hide()
 
+	# Create perk hand, update perk ui
 	var perk_hand: Array[PerkData] = perk_manager.get_perk_hand()
 	perk_ui.set_card_data(perk_hand)
 	perk_ui.show()

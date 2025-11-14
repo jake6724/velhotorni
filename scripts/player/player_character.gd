@@ -94,11 +94,9 @@ func _ready():
 	player_spell_spawner.check_can_afford_failed.connect(on_spell_cast_failed)
 
 	# Configure PlayerSpecial
-	player_special.velocity_update_requested.connect(on_velocity_update_requested)
 	player_special.camera_shake_requested.connect(player_camera.apply_shake)
 	player_special.hurtbox_update_requested.connect(update_hurtbox_collider)
 	player_special.special_charge_sprite_update_requested.connect(on_special_charge_sprite_update_requested)
-	player_special.special_animation_requested.connect(on_animation_requested)
 	special_charges_hide_timer.autostart = false
 	special_charges_hide_timer.one_shot = true
 	special_charges_hide_timer.timeout.connect(on_special_charges_hide_timer_timeout)
@@ -395,7 +393,7 @@ func update_hurtbox_collider(_value) -> void:
 func on_special_charge_sprite_update_requested(_charges: int) -> void:
 	special_charges_sprite.texture.region = Rect2(0, (3 - _charges) * 6, 24, 6)
 
-	if _charges == player_special.charge_max:
+	if _charges == player_stats.special_charges_max:
 		special_charges_hide_timer.start(1)
 	else:
 		special_charges_hide_timer.stop()

@@ -18,3 +18,9 @@ extends Resource
 
 ## How long the player is invulnerable after being hit. Measured in seconds
 @export var hurtbox_iframe_duration: float = 1.5
+
+@export var special_charges_max: int = 3
+
+@export var special_charges: int = 3
+
+@export var special_charge_cooldown_duration: float = 2

@@ -5,9 +5,6 @@ extends Object
 # dhanges can be made to data without affecting other instances
 var data: PerkData
 
-func _ready():
-	set_rarity_value()
-
 func perk_action() -> void:
 	pass
 

@@ -25,33 +25,34 @@ var timed_modify_stat_stack_count: Dictionary[PerkDataPlayer.PlayerStat, int] = 
 	PerkDataPlayer.PlayerStat.SPECIAL_COOLDOWN: 0,
 }
 
+## Modify a player stat based on perk data. All stat changes are either additive, or work off of a base value
 func on_modify_stat_requested(data: PerkData) -> float:
 	add_perk_mini_icon(data)
 	var modified_value: float
 	match data.stat:
 		PerkDataPlayer.PlayerStat.HEALTH: 
 			modified_value = data.base_value
-			player.player_stats.health += data.base_value
+			player.player_stats.health += modified_value
 			player.player_hud.on_health_updated(player.player_stats.health)
 		PerkDataPlayer.PlayerStat.MAX_HEALTH: 
 			modified_value = data.base_value
-			player.player_stats.max_health += data.base_value
-			player.player_stats.health += data.base_value
+			player.player_stats.max_health += modified_value
+			player.player_stats.health += modified_value
 		PerkDataPlayer.PlayerStat.MOVE_SPEED: 
 			modified_value = (player.player_stats.base_move_speed * data.base_value)
-			player.player_stats.move_speed += (player.player_stats.base_move_speed * data.base_value)
+			player.player_stats.move_speed += modified_value
 		PerkDataPlayer.PlayerStat.SPECIAL_COOLDOWN: 
-			modified_value = (player.player_special.charge_cooldown_duration * data.base_value)
-			player.player_special.charge_cooldown_duration += (player.player_special.charge_cooldown_duration * data.base_value)
+			modified_value = (player.player_stats.special_charge_cooldown_duration_base * data.base_value)
+			player.player_special.charge_cooldown_duration += modified_value
 		PerkDataPlayer.PlayerStat.REFLECT_CHANCE:
 			modified_value = data.base_value
-			player.player_stats.chance_to_reflect += data.base_value
+			player.player_stats.chance_to_reflect += modified_value
 		PerkDataPlayer.PlayerStat.SPECIAL_MAX_CHARGE:
 			modified_value = data.base_value
-			player.player_special.charge_max += data.base_value
+			player.player_special.charge_max += modified_value
 		PerkDataPlayer.PlayerStat.IFRAME_DURATION:
-			modified_value = player.player_stats.hurtbox_iframe_duration * data.base_value
-			player.player_stats.hurtbox_iframe_duration *= data.base_value
+			modified_value = player.player_stats.hurtbox_iframe_duration_base * data.base_value
+			player.player_stats.hurtbox_iframe_duration = modified_value
 
 		PerkDataPlayer.PlayerStat.NONE: push_error("PlayerPerkManager.on_modify_stat_requested() called with stat_to_modify = NONE")
 	return modified_value
