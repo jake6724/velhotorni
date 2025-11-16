@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c44xbwx307gqq" path="res://scripts/level/world_map.gd" id="1_rwbqg"]
 [ext_resource type="Texture2D" uid="uid://dd44h87wnbk4t" path="res://assets/art/sprites/spr_map.png" id="2_v7h0i"]
 [ext_resource type="PackedScene" uid="uid://dki5b1v23sshc" path="res://scenes/ui/WorldMapInfoPanel.tscn" id="3_gyoph"]
-[ext_resource type="PackedScene" uid="uid://cktn6dyjh3ygr" path="res://scenes/level/LevelTower.tscn" id="5_wo7is"]
+[ext_resource type="PackedScene" uid="uid://dnilok8ickyxd" path="res://scenes/level/LevelTower.tscn" id="5_wo7is"]
 [ext_resource type="Texture2D" uid="uid://cgnu6kwnix7xs" path="res://assets/art/sprites/spr_map_ui.png" id="6_wo7is"]
 [ext_resource type="PackedScene" uid="uid://p5xgj4rjwt1e" path="res://scenes/level/world_map/LevelButton.tscn" id="7_yjmtc"]
 [ext_resource type="PackedScene" uid="uid://c2tjlg8bc8rb" path="res://scenes/level/1_wind/Level1.tscn" id="9_musam"]
@@ -223,10 +223,16 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+pivot_offset = Vector2(113, 146)
 metadata/_edit_use_anchors_ = true
 
 [node name="0LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 40.0
 offset_top = 128.0
 offset_right = 56.0
@@ -235,7 +241,12 @@ level_scene = ExtResource("5_wo7is")
 metadata/_edit_use_anchors_ = true
 
 [node name="1LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 56.0
 offset_top = 160.0
 offset_right = 72.0
@@ -244,7 +255,12 @@ level_scene = ExtResource("9_musam")
 metadata/_edit_use_anchors_ = true
 
 [node name="2LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 104.0
 offset_top = 160.0
 offset_right = 120.0
@@ -253,7 +269,12 @@ level_scene = ExtResource("10_2b0ok")
 metadata/_edit_use_anchors_ = true
 
 [node name="3ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 104.0
 offset_top = 128.0
 offset_right = 120.0
@@ -262,7 +283,12 @@ level_scene = ExtResource("11_nc3cf")
 metadata/_edit_use_anchors_ = true
 
 [node name="3BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 136.0
 offset_top = 128.0
 offset_right = 152.0
@@ -271,7 +297,12 @@ level_scene = ExtResource("12_dra5x")
 metadata/_edit_use_anchors_ = true
 
 [node name="4LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 72.0
 offset_top = 112.0
 offset_right = 88.0
@@ -280,7 +311,12 @@ level_scene = ExtResource("12_v7h0i")
 metadata/_edit_use_anchors_ = true
 
 [node name="5LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 72.0
 offset_top = 80.0
 offset_right = 88.0
@@ -289,7 +325,12 @@ level_scene = ExtResource("13_x1bqq")
 metadata/_edit_use_anchors_ = true
 
 [node name="6ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 120.0
 offset_top = 80.0
 offset_right = 136.0
@@ -298,7 +339,12 @@ level_scene = ExtResource("14_juthh")
 metadata/_edit_use_anchors_ = true
 
 [node name="6BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 120.0
 offset_top = 48.0
 offset_right = 136.0
@@ -307,7 +353,12 @@ level_scene = ExtResource("15_j3os7")
 metadata/_edit_use_anchors_ = true
 
 [node name="7LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 152.0
 offset_top = 96.0
 offset_right = 168.0
@@ -316,7 +367,12 @@ level_scene = ExtResource("16_yiddi")
 metadata/_edit_use_anchors_ = true
 
 [node name="8LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 184.0
 offset_top = 96.0
 offset_right = 200.0
@@ -325,7 +381,12 @@ level_scene = ExtResource("17_ib3k0")
 metadata/_edit_use_anchors_ = true
 
 [node name="9ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 184.0
 offset_top = 64.0
 offset_right = 200.0
@@ -334,7 +395,12 @@ level_scene = ExtResource("18_g53v4")
 metadata/_edit_use_anchors_ = true
 
 [node name="9BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 216.0
 offset_top = 32.0
 offset_right = 232.0
@@ -343,7 +409,12 @@ level_scene = ExtResource("19_m1y8g")
 metadata/_edit_use_anchors_ = true
 
 [node name="10LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 216.0
 offset_top = 128.0
 offset_right = 232.0
@@ -352,7 +423,12 @@ level_scene = ExtResource("20_gyoph")
 metadata/_edit_use_anchors_ = true
 
 [node name="11LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 184.0
 offset_top = 144.0
 offset_right = 200.0
@@ -361,7 +437,12 @@ level_scene = ExtResource("20_3jfjl")
 metadata/_edit_use_anchors_ = true
 
 [node name="12ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 184.0
 offset_top = 176.0
 offset_right = 200.0
@@ -370,7 +451,12 @@ level_scene = ExtResource("21_uufd6")
 metadata/_edit_use_anchors_ = true
 
 [node name="12BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 152.0
 offset_top = 160.0
 offset_right = 168.0
@@ -379,7 +465,12 @@ level_scene = ExtResource("22_p2enm")
 metadata/_edit_use_anchors_ = true
 
 [node name="13LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 248.0
 offset_top = 176.0
 offset_right = 264.0
@@ -388,7 +479,12 @@ level_scene = ExtResource("23_hvkia")
 metadata/_edit_use_anchors_ = true
 
 [node name="14LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 296.0
 offset_top = 176.0
 offset_right = 312.0
@@ -397,7 +493,12 @@ level_scene = ExtResource("24_58rp5")
 metadata/_edit_use_anchors_ = true
 
 [node name="15ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 328.0
 offset_top = 144.0
 offset_right = 344.0
@@ -406,7 +507,12 @@ level_scene = ExtResource("25_43b81")
 metadata/_edit_use_anchors_ = true
 
 [node name="15BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 280.0
 offset_top = 144.0
 offset_right = 296.0
@@ -415,7 +521,12 @@ level_scene = ExtResource("26_7scp2")
 metadata/_edit_use_anchors_ = true
 
 [node name="16LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 312.0
 offset_top = 112.0
 offset_right = 328.0
@@ -424,7 +535,12 @@ level_scene = ExtResource("27_ut7o1")
 metadata/_edit_use_anchors_ = true
 
 [node name="17LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 264.0
 offset_top = 112.0
 offset_right = 280.0
@@ -433,7 +549,12 @@ level_scene = ExtResource("28_nfq51")
 metadata/_edit_use_anchors_ = true
 
 [node name="18ALevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 296.0
 offset_top = 80.0
 offset_right = 312.0
@@ -442,7 +563,12 @@ level_scene = ExtResource("29_upivs")
 metadata/_edit_use_anchors_ = true
 
 [node name="18BLevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 328.0
 offset_top = 80.0
 offset_right = 344.0
@@ -451,7 +577,12 @@ level_scene = ExtResource("30_0bakg")
 metadata/_edit_use_anchors_ = true
 
 [node name="19LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 296.0
 offset_top = 48.0
 offset_right = 312.0
@@ -460,7 +591,12 @@ level_scene = ExtResource("31_gwydx")
 metadata/_edit_use_anchors_ = true
 
 [node name="20LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 264.0
 offset_top = 32.0
 offset_right = 280.0
@@ -469,7 +605,12 @@ level_scene = ExtResource("32_xwl00")
 metadata/_edit_use_anchors_ = true
 
 [node name="21LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 296.0
 offset_top = 16.0
 offset_right = 312.0
@@ -478,7 +619,12 @@ level_scene = ExtResource("34_thhux")
 metadata/_edit_use_anchors_ = true
 
 [node name="22LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.4
+anchor_top = 0.8
+anchor_right = 1.4
+anchor_bottom = 0.8
 offset_left = 328.0
 offset_top = 32.0
 offset_right = 344.0
@@ -563,7 +709,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
-slide_pos = Vector2(240, 0)
+slide_pos = Vector2(352, 0)
 
 [node name="Menu" type="CanvasLayer" parent="."]
 layer = 4

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwvwwlqpm2ccq"]
+[gd_scene load_steps=7 format=3 uid="uid://cwvwwlqpm2ccq"]
 
 [ext_resource type="Texture2D" uid="uid://bl5ofcdopipn3" path="res://assets/art/sprites/ui/spr_ui_box6_gray.png" id="2_3nta1"]
 [ext_resource type="Script" uid="uid://csocx7w7oryov" path="res://scripts/ui/perks/perk_card.gd" id="2_cr6u4"]
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="3_c0yc6"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="4_3nta1"]
+[ext_resource type="Texture2D" uid="uid://biu0dfqvw886x" path="res://assets/art/sprites/ui/spr_ui_divider1.png" id="5_63gbg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3nta1"]
 atlas = ExtResource("3_c0yc6")
@@ -70,14 +71,18 @@ mouse_filter = 2
 
 [node name="PerkName" type="Label" parent="Content"]
 unique_name_in_owner = true
-layout_mode = 2
-offset_left = -1.0
-offset_top = 9.0
-offset_right = 107.0
-offset_bottom = 32.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -55.0
+offset_right = 104.0
+offset_bottom = -36.0
+grow_vertical = 2
+theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("4_3nta1")
 theme_override_font_sizes/font_size = 8
-text = "touch of death"
+text = "LIGHT PROFICIENCY"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -86,15 +91,23 @@ autowrap_mode = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(104, 49)
 layout_mode = 2
+offset_left = 1.0
 offset_top = 41.0
-offset_right = 107.0
-offset_bottom = 128.0
+offset_right = 105.0
+offset_bottom = 103.0
+theme_override_constants/line_spacing = -1
 text = "Restore 1 health for every 250 DMG dealt by spells"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Label3" type="Label" parent="Content"]
 layout_mode = 2
-offset_top = 75.0
-offset_right = 104.0
-offset_bottom = 85.0
+offset_left = 1.0
+offset_top = 99.0
+offset_right = 105.0
+offset_bottom = 109.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Content"]
+position = Vector2(53, 32)
+scale = Vector2(6, 1)
+texture = ExtResource("5_63gbg")
