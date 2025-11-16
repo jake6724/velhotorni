@@ -81,8 +81,18 @@ func bounce_element(ui_element: Control, bounce_height: int) -> void:
 
 func populate_card(_data: PerkData) -> void:
 	perk_icon.texture = _data.perk_icon
-	description.text = _data.perk_desc
 	perk_name.text = _data.perk_name
+
+	var desc_data: Dictionary = {}
+	match _data.perk_value_display_mode:
+		PerkData.PerkValueDisplayMode.FLAT:
+			desc_data["value"] =  int(_data.base_value)
+		PerkData.PerkValueDisplayMode.PERCENT:
+			var x: float = _data.base_value * 100
+			print(x)
+			desc_data["value"] =  int(x)
+
+	description.text = _data.perk_desc.format(desc_data)
 
 func highlight() -> void:
 	card_background.texture = highlight_texture
@@ -100,4 +110,3 @@ func unpop_up() -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(self, "global_position", original_position, .15)
-

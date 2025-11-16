@@ -23,5 +23,6 @@ legendary = false
 perk_icon = SubResource("AtlasTexture_4o1nv")
 perk_mini_icon = SubResource("AtlasTexture_lferv")
 perk_name = "Bastion"
-perk_desc = "Increase base max health"
+perk_desc = "Increase base max health by {value}"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://cq0cpfg5ke2ax"

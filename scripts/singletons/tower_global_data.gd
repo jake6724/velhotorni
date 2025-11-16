@@ -70,12 +70,12 @@ var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 }
 
 var debuff_perk_modifier: Dictionary[Debuff.Type, float] = {
-	Debuff.Type.BURN: 1.0,
-	Debuff.Type.STUN: 1.0,
-	Debuff.Type.SLOW: 1.0,
-	Debuff.Type.FREEZE: 1.0,
-	Debuff.Type.WEAKEN: 1.0,
-	Debuff.Type.KNOCKBACK: 1.0,
+	Debuff.Type.BURN: 0.0,
+	Debuff.Type.STUN: 0.0,
+	Debuff.Type.SLOW: 0.0,
+	Debuff.Type.FREEZE: 0.0,
+	Debuff.Type.WEAKEN: 0.0,
+	Debuff.Type.KNOCKBACK: 0.0,
 }
 
 var buff_perk_modifier: Dictionary[Buff.Type, float] = {

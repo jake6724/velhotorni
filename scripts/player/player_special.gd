@@ -8,11 +8,14 @@ var active: bool = false
 @export var dash_velocity: float = 250.0
 @export var dash_duration: float = .1
 
+var player_clone_scene: PackedScene = preload("res://scenes/player/PlayerClone.tscn")
+var player_scene: PackedScene = preload("res://scenes/player/PlayerCharacter.tscn")
+
 signal camera_shake_requested
 signal hurtbox_update_requested
 signal special_charge_sprite_update_requested
 
-var special_func: Callable = Callable(dash)
+var special_func: Callable = spawn_clone
 var special_cooldown_timer: Timer = Timer.new()
 
 func _ready():
@@ -23,13 +26,13 @@ func _ready():
 
 func special(_move_input: Vector2, _aim_input: Vector2) -> void:
 	if player.player_stats.special_charges > 0:	
-		active = true
 		player.player_stats.special_charges -= 1
 		special_func.call(_move_input, _aim_input)
 		special_charge_sprite_update_requested.emit(player.player_stats.special_charges)
 		special_cooldown_timer.start(player.player_stats.special_charge_cooldown_duration)
 
 func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
+	active = true
 	camera_shake_requested.emit(1)
 	hurtbox_update_requested.emit(true)
 	player.set_collision_mask_value(28, false)
@@ -52,6 +55,13 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	await get_tree().create_timer(.5).timeout
 	hurtbox_update_requested.emit(false)
 	player.set_collision_mask_value(28, true)
+
+func spawn_clone(_move_input: Vector2, _aim_input: Vector2) -> void:
+	# var clone: PlayerClone = player_clone_scene.instantiate()
+	var clone: PlayerCharacter = player_scene.instantiate()
+	clone.global_position = player.global_position
+	add_child(clone)
+	clone.player_input.get_move_input_func = clone.player_input.null_func
 
 func on_special_cooldown_timeout() -> void:
 	player.player_stats.special_charges = player.player_stats.special_charges_max

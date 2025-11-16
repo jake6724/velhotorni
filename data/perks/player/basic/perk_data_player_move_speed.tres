@@ -24,5 +24,6 @@ legendary = false
 perk_icon = SubResource("AtlasTexture_cfvr6")
 perk_mini_icon = SubResource("AtlasTexture_1s0o6")
 perk_name = "Fleet-footed"
-perk_desc = "Increase player move speed"
+perk_desc = "Increase move speed by {value}%"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

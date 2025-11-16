@@ -24,5 +24,6 @@ legendary = false
 perk_icon = SubResource("AtlasTexture_gfpml")
 perk_mini_icon = SubResource("AtlasTexture_o38i7")
 perk_name = "Regenerator"
-perk_desc = "Heal after completing a wave"
+perk_desc = "Heal {value} health after completing a wave"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

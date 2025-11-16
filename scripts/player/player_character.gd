@@ -426,4 +426,4 @@ func on_swap_input_type() -> void:
 func on_weapon_select_pressed(index: int) -> void:
 	player_spells.switch_to_index(index)
 	player_hud.update_spells(player_spells.spells.array)
-	pass
+	

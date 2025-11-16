@@ -27,10 +27,7 @@ signal ui_interact_pressed
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	var connected_joypads = Input.get_connected_joypads()
-	for device_id in connected_joypads:
-		var joy_name = Input.get_joy_name(device_id)
-		print("Joypad ", device_id, " name: ", joy_name)
+	#get_controller_info()
 
 ## Returns raw input data, not normalized
 func get_move_input() -> Vector2:
@@ -139,3 +136,12 @@ func swap_input_type() -> void:
 	else:
 		get_aim_input_func = get_aim_input_mouse
 		get_move_input_func = get_move_input_keyboard
+
+func get_controller_info() -> void:
+	var connected_joypads = Input.get_connected_joypads()
+	for device_id in connected_joypads:
+		var joy_name = Input.get_joy_name(device_id)
+		print("Joypad ", device_id, " name: ", joy_name)
+
+func null_func() -> Vector2:
+	return Vector2.ZERO

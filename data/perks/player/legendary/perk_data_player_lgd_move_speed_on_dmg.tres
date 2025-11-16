@@ -19,4 +19,5 @@ legendary = true
 perk_icon = SubResource("AtlasTexture_6wkfo")
 perk_name = "Evade"
 perk_desc = "Gain +100 movespeed for 2 seconds upon taking damage"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

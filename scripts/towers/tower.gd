@@ -332,34 +332,34 @@ func update_debuff_data() -> void:
 	if data.debuff_data:
 		match data.debuff_data.type:
 			Debuff.Type.BURN:
-				data.debuff_data.modified_value = (data.debuff_data.value + (data.debuff_data.value * BURN_DAMAGE_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
+				data.debuff_data.modified_value = (data.debuff_data.value + (data.debuff_data.value * BURN_DAMAGE_MODIFIER * special_level)) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 			Debuff.Type.KNOCKBACK: 
-				data.debuff_data.modified_value = (data.debuff_data.value + (data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
+				data.debuff_data.modified_value = (data.debuff_data.value + (data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER * special_level)) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 			Debuff.Type.SLOW:
-				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
+				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * SLOW_DURATION_MODIFIER * special_level)) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 			Debuff.Type.FREEZE:
-				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
+				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER * special_level)) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 			Debuff.Type.STUN:
-				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
+				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * STUN_DURATION_MODIFIER * special_level)) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 			Debuff.Type.WEAKEN:
-				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * special_level
+				data.debuff_data.modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER * special_level)) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 		update_preview_debuff_data()
 
 func update_preview_debuff_data() -> void:
 	if data.debuff_data:
 		match data.debuff_data.type:
-			Debuff.Type.BURN: 
-				data.debuff_data.preview_modified_value = (data.debuff_data.value + (data.debuff_data.value * BURN_DAMAGE_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
+			Debuff.Type.BURN:
+				data.debuff_data.preview_modified_value = (data.debuff_data.value + (data.debuff_data.value * BURN_DAMAGE_MODIFIER * (special_level + 1))) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 			Debuff.Type.KNOCKBACK: 
-				data.debuff_data.preview_modified_value = (data.debuff_data.value + (data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
+				data.debuff_data.preview_modified_value = (data.debuff_data.value + (data.debuff_data.value * KNOCKBACK_DISTANCE_MODIFIER * (special_level + 1))) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 			Debuff.Type.SLOW:
-				data.debuff_data.preview_modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * SLOW_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
+				data.debuff_data.preview_modified_value = (data.debuff_data.total_duration + (data.debuff_data.total_duration * SLOW_DURATION_MODIFIER * (special_level + 1))) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 			Debuff.Type.FREEZE:
-				data.debuff_data.preview_modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
+				data.debuff_data.preview_modified_value = (data.debuff_data.total_duration + (data.debuff_data.total_duration * FREEZE_DURATION_MODIFIER * (special_level + 1))) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 			Debuff.Type.STUN:
-				data.debuff_data.preview_modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * STUN_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
+				data.debuff_data.preview_modified_value = (data.debuff_data.total_duration + (data.debuff_data.total_duration * STUN_DURATION_MODIFIER * (special_level + 1))) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 			Debuff.Type.WEAKEN:
-				data.debuff_data.preview_modified_total_duration = (data.debuff_data.total_duration + (data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER) * TowerGlobalData.debuff_perk_modifier[data.debuff_data.type]) * (special_level + 1)
+				data.debuff_data.preview_modified_value = (data.debuff_data.total_duration + (data.debuff_data.total_duration * WEAKEN_DURATION_MODIFIER * (special_level + 1))) * (1 + TowerGlobalData.debuff_perk_modifier[data.debuff_data.type])
 
 func update_buff_data() -> void:
 	# Connect to BuffArea

@@ -23,5 +23,5 @@ legendary = false
 perk_icon = SubResource("AtlasTexture_1cpbm")
 perk_mini_icon = SubResource("AtlasTexture_m8t35")
 perk_name = "Stonemason"
-perk_desc = "Restore base health on wave completion"
+perk_desc = "Restore {value} base health on wave completion"
 metadata/_custom_type_script = "uid://cq0cpfg5ke2ax"
