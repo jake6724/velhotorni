@@ -1568,7 +1568,7 @@ texture = ExtResource("8_pc8ms")
 [sub_resource type="TileSet" id="TileSet_grsr5"]
 sources/0 = SubResource("TileSetAtlasSource_3frq3")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h5wmt"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t6r5w"]
 texture = ExtResource("9_s0k01")
 0:0/0 = 0
 0:0/0/modulate = Color(1, 1, 1, 0.196078)
@@ -1590,7 +1590,7 @@ physics_layer_1/collision_layer = 4096
 physics_layer_1/collision_mask = 0
 physics_layer_2/collision_layer = 32768
 physics_layer_2/collision_mask = 0
-sources/0 = SubResource("TileSetAtlasSource_h5wmt")
+sources/0 = SubResource("TileSetAtlasSource_t6r5w")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1rson"]
 shader = ExtResource("11_v2c5h")
