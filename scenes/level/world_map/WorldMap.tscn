@@ -709,7 +709,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
-slide_pos = Vector2(240, 0)
+slide_pos = Vector2(352, 0)
 
 [node name="Menu" type="CanvasLayer" parent="."]
 layer = 4
