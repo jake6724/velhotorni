@@ -15,6 +15,7 @@ region_rect = Rect2(1, 1, 30, 30)
 [node name="PanelContainer" type="PanelContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_whx6b")
 script = ExtResource("1_whx6b")
 metadata/_custom_type_script = "uid://celgbrmvc2054"
@@ -23,6 +24,7 @@ metadata/_custom_type_script = "uid://celgbrmvc2054"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 columns = 3
 
 [node name="UnitWaveInfo" parent="GridContainer" instance=ExtResource("2_whx6b")]

@@ -15,7 +15,7 @@ signal camera_shake_requested
 signal hurtbox_update_requested
 signal special_charge_sprite_update_requested
 
-var special_func: Callable = spawn_clone
+var special_func: Callable = dash
 var special_cooldown_timer: Timer = Timer.new()
 
 func _ready():

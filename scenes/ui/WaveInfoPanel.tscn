@@ -52,6 +52,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -60,11 +61,13 @@ theme_override_constants/margin_bottom = 4
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 
 [node name="Fire" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = -1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Fire"]
@@ -72,6 +75,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qq3wy")
 stretch_mode = 2
 
@@ -87,12 +91,14 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("4_era8b")
 stretch_mode = 2
 
 [node name="Wind" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = -1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Wind"]
@@ -100,6 +106,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_o0vwl")
 stretch_mode = 2
 
@@ -115,12 +122,14 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("4_era8b")
 stretch_mode = 2
 
 [node name="Water" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = -1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Water"]
@@ -128,6 +137,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_o0qm0")
 stretch_mode = 2
 
@@ -143,12 +153,14 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("4_era8b")
 stretch_mode = 2
 
 [node name="Earth" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = -1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Earth"]
@@ -156,6 +168,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_c5esy")
 stretch_mode = 2
 
@@ -171,12 +184,14 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("4_era8b")
 stretch_mode = 2
 
 [node name="Light" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = -1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Light"]
@@ -184,6 +199,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_6igii")
 stretch_mode = 2
 
@@ -199,12 +215,14 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("4_era8b")
 stretch_mode = 2
 
 [node name="Dark" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = -1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Dark"]
@@ -212,6 +230,7 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_itp2p")
 stretch_mode = 2
 
@@ -227,5 +246,6 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("4_era8b")
 stretch_mode = 2

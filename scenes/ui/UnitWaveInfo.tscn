@@ -17,6 +17,7 @@ offset_right = 16.0
 offset_bottom = 25.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("1_yb0tq")
 metadata/_custom_type_script = "uid://cg37mrqu8yy0a"
 
@@ -24,12 +25,14 @@ metadata/_custom_type_script = "uid://cg37mrqu8yy0a"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 color = Color(0.0941176, 0.0941176, 0.25098, 1)
 
 [node name="EnemyCountLabel" type="Label" parent="VBoxContainer/ColorRect"]
@@ -60,5 +63,6 @@ unique_name_in_owner = true
 z_index = 2
 layout_mode = 2
 size_flags_vertical = 8
+mouse_filter = 2
 texture = SubResource("AtlasTexture_dxjwx")
 stretch_mode = 2
