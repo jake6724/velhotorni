@@ -36,6 +36,7 @@ TimeManager="*res://scripts/singletons/time_manager.gd"
 Telemetry="*res://scripts/singletons/telemetry.gd"
 StarRegistry="*res://scripts/singletons/star_registry.gd"
 GlobalSettings="*res://scripts/singletons/global_settings.gd"
+PlayerLoadout="*res://scripts/singletons/player_loadout.gd"
 
 [debug]
 
