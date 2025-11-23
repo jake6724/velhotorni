@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_mw6y2"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_0dxoa"]
-[ext_resource type="Resource" uid="uid://4q7ppn5mcqoa" path="res://data/waves/level_6A_wave_1.tres" id="3_h6g50"]
+[ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/wave_one_fire.tres" id="3_p2wns"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="8_6u4td"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_4q10q"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="11_k3tvx"]
@@ -1058,7 +1058,7 @@ script = ExtResource("1_mw6y2")
 level_name = "Level 6A"
 region = 3
 initial_gold = 85
-waves = Array[ExtResource("2_0dxoa")]([ExtResource("3_h6g50")])
+waves = Array[ExtResource("2_0dxoa")]([ExtResource("3_p2wns")])
 
 [node name="LevelMaskLayer" type="TileMapLayer" parent="."]
 visible = false

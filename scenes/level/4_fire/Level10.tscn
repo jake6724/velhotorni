@@ -1,30 +1,13 @@
-[gd_scene load_steps=22 format=4 uid="uid://cam0jb5m4ylm8"]
+[gd_scene load_steps=17 format=4 uid="uid://cam0jb5m4ylm8"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_kr0tb"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_nohyw"]
-[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="3_vbsi1"]
-[ext_resource type="Resource" uid="uid://fhwurvcdissg" path="res://data/spawn/spawn_fire_ghoul_1.tres" id="4_5peo2"]
-[ext_resource type="Resource" uid="uid://x66pfmgm8khf" path="res://data/spawn/path_2_spawns/spawn_path_2_earth_ghoul_1.tres" id="5_lnp1w"]
-[ext_resource type="Resource" uid="uid://daypgtvog0225" path="res://data/spawn/spawn_fire_ghoul_half.tres" id="6_lnp1w"]
+[ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/wave_one_fire.tres" id="3_okbb3"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="8_8g3og"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="9_gw67d"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_7rxul"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="11_c7i2g"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="12_53ivh"]
-
-[sub_resource type="Resource" id="Resource_lnp1w"]
-script = ExtResource("2_nohyw")
-data = Array[ExtResource("3_vbsi1")]([ExtResource("4_5peo2"), ExtResource("6_lnp1w"), ExtResource("6_lnp1w"), ExtResource("6_lnp1w"), ExtResource("6_lnp1w"), ExtResource("6_lnp1w"), ExtResource("6_lnp1w"), ExtResource("6_lnp1w"), ExtResource("5_lnp1w"), ExtResource("5_lnp1w"), ExtResource("5_lnp1w"), ExtResource("5_lnp1w"), ExtResource("5_lnp1w")])
-reward = 1.0
-token_reward = 0
-metadata/_custom_type_script = "uid://cskry1sw3vqba"
-
-[sub_resource type="Resource" id="Resource_7gwmq"]
-script = ExtResource("2_nohyw")
-data = Array[ExtResource("3_vbsi1")]([ExtResource("4_5peo2"), ExtResource("4_5peo2"), ExtResource("4_5peo2"), ExtResource("5_lnp1w")])
-reward = 1.0
-token_reward = 0
-metadata/_custom_type_script = "uid://cskry1sw3vqba"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpffg"]
 texture = ExtResource("8_8g3og")
@@ -1099,7 +1082,7 @@ level_name = "Level 10"
 region = 5
 initial_gold = 1000
 initial_token = 2
-waves = Array[ExtResource("2_nohyw")]([SubResource("Resource_lnp1w"), SubResource("Resource_7gwmq")])
+waves = Array[ExtResource("2_nohyw")]([ExtResource("3_okbb3")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false

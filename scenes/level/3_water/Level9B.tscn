@@ -1,12 +1,8 @@
-[gd_scene load_steps=19 format=4 uid="uid://do6soiybchkuq"]
+[gd_scene load_steps=15 format=4 uid="uid://do6soiybchkuq"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_frcge"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_lh6dv"]
-[ext_resource type="Resource" uid="uid://btjsovrjc4lwe" path="res://data/waves/all_enemies.tres" id="3_p4cv2"]
-[ext_resource type="Resource" uid="uid://b2yfh77l0ppp4" path="res://data/waves/lots_of_fire.tres" id="4_maim5"]
-[ext_resource type="Resource" uid="uid://ug83h80mgmk3" path="res://data/waves/quick_fire.tres" id="5_upxcm"]
 [ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/wave_one_fire.tres" id="6_vqnk4"]
-[ext_resource type="Resource" uid="uid://de1v4aby50v21" path="res://data/waves/wave_lots_of_krasue.tres" id="7_sw03r"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="8_6ylpg"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="9_x3dfy"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_fmg05"]
@@ -1069,7 +1065,7 @@ script = ExtResource("1_frcge")
 level_name = "Level 9B"
 region = 4
 initial_gold = 1000
-waves = Array[ExtResource("2_lh6dv")]([ExtResource("3_p4cv2"), ExtResource("4_maim5"), ExtResource("5_upxcm"), ExtResource("6_vqnk4"), ExtResource("7_sw03r"), ExtResource("6_vqnk4")])
+waves = Array[ExtResource("2_lh6dv")]([ExtResource("6_vqnk4")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://p436lng5xl1f"]
+
+[ext_resource type="Resource" uid="uid://u8fs8orhyfe1" path="res://data/enemies/ghouls/enemy_data_wind_ghoul.tres" id="1_nk1j4"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_oef5r"]
+
+[resource]
+script = ExtResource("2_oef5r")
+enemy_data = ExtResource("1_nk1j4")
+delay = 0.5
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

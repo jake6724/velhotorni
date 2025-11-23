@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Wave" load_steps=4 format=3 uid="uid://bo5bv1t7rxl51"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_xbfum"]
-[ext_resource type="Resource" uid="uid://cbcg8g4owjgrc" path="res://data/spawn/spawn_wind_ghoul_1.tres" id="2_2a1ca"]
+[ext_resource type="Resource" uid="uid://cbcg8g4owjgrc" path="res://data/spawn/spawn_path_1_ghouls/spawn_wind_ghoul_1.tres" id="2_2a1ca"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="3_fegvm"]
 
 [resource]

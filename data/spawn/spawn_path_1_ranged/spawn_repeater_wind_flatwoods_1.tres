@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://b7rvci4vb72wl"]
 
+[ext_resource type="Resource" uid="uid://ddcgo1ofajnp2" path="res://data/enemies/ranged_enemies/repeaters/enemy_data_ranged_repeater_wind_flatwoods.tres" id="1_mhqnt"]
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_ndmba"]
-[ext_resource type="Resource" uid="uid://b50fqbgtcgbuu" path="res://data/enemies/ranged_enemies/enemy_data_ranged_repeater_wind_flatwoods.tres" id="1_pj2i3"]
 
 [resource]
 script = ExtResource("1_ndmba")
-enemy_data = ExtResource("1_pj2i3")
+enemy_data = ExtResource("1_mhqnt")
 delay = 1.0
 path_index = 0
 metadata/_custom_type_script = "uid://drj0bkkfpdi50"

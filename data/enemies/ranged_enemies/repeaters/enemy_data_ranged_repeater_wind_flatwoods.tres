@@ -13,10 +13,10 @@ region = Rect2(48, 16, 16, 16)
 
 [resource]
 script = ExtResource("3_sst40")
-attack_cooldown = 1.0
-burst_cooldown = 0.1
+attack_cooldown = 2.0
+burst_cooldown = 0.05
 num_bursts = 2
-initial_delay = 3.0
+initial_delay = 1.0
 num_bullets_per_burst = 4
 start_angle = 45.0
 angle_increment = 90.0
