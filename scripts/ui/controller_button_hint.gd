@@ -1,5 +1,7 @@
+@tool
 class_name ControllerButtonHint
 extends TextureRect
+
 
 func set_hint_icon(_button_name: String):
 	match _button_name:

@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlbwij60dynj1"]
+
+[ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="1_fk8t4"]
+[ext_resource type="Texture2D" uid="uid://ducm8wc7gd0vx" path="res://assets/art/sprites/ui/spr_ui_tower_fire.png" id="2_fk8t4"]
+[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="3_64f3x"]
+[ext_resource type="Texture2D" uid="uid://dhkmplnpdot7" path="res://assets/art/sprites/ui/spr_ui_stat_ammo.png" id="4_dkp2u"]
+
+[node name="TowerCard" type="NinePatchRect"]
+custom_minimum_size = Vector2(85, 35)
+offset_right = 85.0
+offset_bottom = 35.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_fk8t4")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+
+[node name="Content" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="WeaponIcon" type="TextureRect" parent="MarginContainer/Content"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_fk8t4")
+stretch_mode = 2
+
+[node name="WeaponInfo" type="VBoxContainer" parent="MarginContainer/Content"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="WeaponName" type="Label" parent="MarginContainer/Content/WeaponInfo"]
+custom_minimum_size = Vector2(39, 0)
+layout_mode = 2
+text = "Tower"
+clip_text = true
+
+[node name="StatInfo" type="HBoxContainer" parent="MarginContainer/Content/WeaponInfo"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="DamageInfo" type="HBoxContainer" parent="MarginContainer/Content/WeaponInfo/StatInfo"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="DamageIcon" type="TextureRect" parent="MarginContainer/Content/WeaponInfo/StatInfo/DamageInfo"]
+layout_mode = 2
+texture = ExtResource("3_64f3x")
+stretch_mode = 2
+
+[node name="DamageValue" type="Label" parent="MarginContainer/Content/WeaponInfo/StatInfo/DamageInfo"]
+layout_mode = 2
+text = "5"
+
+[node name="AmmoInfo" type="HBoxContainer" parent="MarginContainer/Content/WeaponInfo/StatInfo"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="AmmoIcon" type="TextureRect" parent="MarginContainer/Content/WeaponInfo/StatInfo/AmmoInfo"]
+layout_mode = 2
+texture = ExtResource("4_dkp2u")
+stretch_mode = 2
+
+[node name="AmmoValue" type="Label" parent="MarginContainer/Content/WeaponInfo/StatInfo/AmmoInfo"]
+layout_mode = 2
+text = "5"

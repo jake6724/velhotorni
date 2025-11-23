@@ -1,0 +1,237 @@
+[gd_scene load_steps=14 format=3 uid="uid://c0wqw7uejk3mw"]
+
+[ext_resource type="Script" uid="uid://bqouaylieliuj" path="res://scripts/ui/loadout/loadout_page_spell.gd" id="1_wyn1w"]
+[ext_resource type="Texture2D" uid="uid://c0a8rf6rqjted" path="res://assets/art/sprites/ui/spr_ui_equip.png" id="2_cj5bq"]
+[ext_resource type="Texture2D" uid="uid://go0bba7gghi8" path="res://assets/art/sprites/ui/spr_ui_divider2.png" id="3_n7vgk"]
+[ext_resource type="PackedScene" uid="uid://dgjjoqehad7w5" path="res://scenes/ui/loadout/SpellCard.tscn" id="4_t7qcb"]
+[ext_resource type="Texture2D" uid="uid://d0yijylvpeqaf" path="res://assets/art/sprites/ui/spr_ui_divider_vertical_2.png" id="5_qv0er"]
+[ext_resource type="Texture2D" uid="uid://cytlhw8oe0657" path="res://assets/art/sprites/ui/spr_ui_chest.png" id="6_dpvov"]
+[ext_resource type="Texture2D" uid="uid://r5y0aa5js6bu" path="res://assets/art/sprites/ui/spr_ui_filter.png" id="7_178le"]
+[ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="8_e8cq7"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="9_rb0hj"]
+[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="10_3rumr"]
+[ext_resource type="Texture2D" uid="uid://dhkmplnpdot7" path="res://assets/art/sprites/ui/spr_ui_stat_ammo.png" id="11_vj4cj"]
+[ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="12_gms8u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y4h41"]
+
+[node name="LoadoutPageSpell" type="MarginContainer"]
+script = ExtResource("1_wyn1w")
+
+[node name="Content" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="EquipColumn" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="EquipHeader" type="VBoxContainer" parent="Content/EquipColumn"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = -1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/EquipColumn/EquipHeader"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content/EquipColumn/EquipHeader/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_cj5bq")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Content/EquipColumn/EquipHeader/HBoxContainer"]
+layout_mode = 2
+text = "equip"
+
+[node name="TextureRect" type="TextureRect" parent="Content/EquipColumn/EquipHeader"]
+layout_mode = 2
+texture = ExtResource("3_n7vgk")
+
+[node name="EquipSpellCards" type="VBoxContainer" parent="Content/EquipColumn"]
+layout_mode = 2
+
+[node name="EquipSpellCard1" parent="Content/EquipColumn/EquipSpellCards" instance=ExtResource("4_t7qcb")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../EquipSpellCard4")
+focus_neighbor_bottom = NodePath("../EquipSpellCard2")
+
+[node name="EquipSpellCard2" parent="Content/EquipColumn/EquipSpellCards" instance=ExtResource("4_t7qcb")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../EquipSpellCard1")
+focus_neighbor_bottom = NodePath("../EquipSpellCard3")
+
+[node name="EquipSpellCard3" parent="Content/EquipColumn/EquipSpellCards" instance=ExtResource("4_t7qcb")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../EquipSpellCard2")
+focus_neighbor_bottom = NodePath("../EquipSpellCard4")
+
+[node name="EquipSpellCard4" parent="Content/EquipColumn/EquipSpellCards" instance=ExtResource("4_t7qcb")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../EquipSpellCard3")
+focus_neighbor_bottom = NodePath("../EquipSpellCard1")
+
+[node name="Divider" type="TextureRect" parent="Content"]
+custom_minimum_size = Vector2(0, 149)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("5_qv0er")
+
+[node name="ChestColumn" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="ChestHeader" type="VBoxContainer" parent="Content/ChestColumn"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = -1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/ChestColumn/ChestHeader"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content/ChestColumn/ChestHeader/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_dpvov")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Content/ChestColumn/ChestHeader/HBoxContainer"]
+layout_mode = 2
+text = "Chest"
+
+[node name="TextureRect2" type="TextureRect" parent="Content/ChestColumn/ChestHeader/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("7_178le")
+stretch_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content/ChestColumn/ChestHeader"]
+layout_mode = 2
+texture = ExtResource("3_n7vgk")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Content/ChestColumn"]
+custom_minimum_size = Vector2(149.155, 152)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="ChestSpellCards" type="VBoxContainer" parent="Content/ChestColumn/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SpellCard" parent="Content/ChestColumn/ScrollContainer/ChestSpellCards" instance=ExtResource("4_t7qcb")]
+layout_mode = 2
+
+[node name="Divider2" type="TextureRect" parent="Content"]
+custom_minimum_size = Vector2(0, 149)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("5_qv0er")
+
+[node name="SpellInfo" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="SpellName" type="Label" parent="Content/SpellInfo"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_e8cq7")
+theme_override_font_sizes/font_size = 16
+text = "Weapon Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpellElement" type="Label" parent="Content/SpellInfo"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_rb0hj")
+theme_override_font_sizes/font_size = 8
+text = "Element"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpellDesc" type="Label" parent="Content/SpellInfo"]
+custom_minimum_size = Vector2(175, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
+theme_override_fonts/font = ExtResource("9_rb0hj")
+theme_override_font_sizes/font_size = 8
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea com"
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="Content/SpellInfo"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_y4h41")
+
+[node name="SpellStats" type="VBoxContainer" parent="Content/SpellInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="SpellDamageInfo" type="HBoxContainer" parent="Content/SpellInfo/SpellStats"]
+layout_mode = 2
+
+[node name="SpellDamageIcon" type="TextureRect" parent="Content/SpellInfo/SpellStats/SpellDamageInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("10_3rumr")
+stretch_mode = 2
+
+[node name="SpellDamageLabel" type="Label" parent="Content/SpellInfo/SpellStats/SpellDamageInfo"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
+text = "Damage"
+
+[node name="SpellDamage Value" type="Label" parent="Content/SpellInfo/SpellStats/SpellDamageInfo"]
+layout_mode = 2
+text = "5"
+
+[node name="SpellCapacityInfo" type="HBoxContainer" parent="Content/SpellInfo/SpellStats"]
+layout_mode = 2
+
+[node name="SpellCapacityIcon" type="TextureRect" parent="Content/SpellInfo/SpellStats/SpellCapacityInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_vj4cj")
+stretch_mode = 2
+
+[node name="SpellCapacityLabel" type="Label" parent="Content/SpellInfo/SpellStats/SpellCapacityInfo"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
+text = "Capacity"
+
+[node name="SpellCapacityValue" type="Label" parent="Content/SpellInfo/SpellStats/SpellCapacityInfo"]
+layout_mode = 2
+text = "5"
+
+[node name="SpellFireRateInfo" type="HBoxContainer" parent="Content/SpellInfo/SpellStats"]
+layout_mode = 2
+
+[node name="SpellFireRateIcon" type="TextureRect" parent="Content/SpellInfo/SpellStats/SpellFireRateInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("12_gms8u")
+stretch_mode = 2
+
+[node name="SpellFireRateLabel" type="Label" parent="Content/SpellInfo/SpellStats/SpellFireRateInfo"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
+text = "Fire rate"
+
+[node name="SpellFireRateValue" type="Label" parent="Content/SpellInfo/SpellStats/SpellFireRateInfo"]
+layout_mode = 2
+text = "5"

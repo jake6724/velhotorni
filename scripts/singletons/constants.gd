@@ -31,6 +31,7 @@ const TOWER_MAX_LEVEL: int = 3
 
 # const ui_color_base: String = "#adb5bd"
 const ui_color_select: String = "#98a8f8"
+var ui_color_unselected: Color = Color.from_string("#425984", Color.LIGHT_GREEN)
 const color_green: String = "#10a500"
 const color_red: String = "#d63100"
 
@@ -193,3 +194,5 @@ func get_weighted_random(spawn_chance_array) -> Variant:
 
 	push_error("get_weighted_random reached final return, which should not be possible")
 	return # Only here to allow for typed return signature. Should never return here
+
+# Crit

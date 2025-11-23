@@ -16,8 +16,11 @@ enum StaffType {ARCANE, WATER_SWORD, FIRE_STAFF, TRIPLE_STAFF}
 @export var initial_mana_amount: int = 100
 @export var max_mana_amount: int = 100
 var mana_cost: float = 1
+
+@export var spell_name: String = ""
 @export var popup_name: String = ""
 
+@export var active_icon: AtlasTexture
 @export var active_icon_region: Rect2 = Rect2(0,0,32,31)
 @export var inactive_icon_region: Rect2 = Rect2(0,0,16,16)
 
