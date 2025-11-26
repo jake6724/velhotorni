@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://bupwctvog5l6d"]
+[gd_scene load_steps=42 format=4 uid="uid://bupwctvog5l6d"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_ssuxm"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_3ew8m"]
@@ -9,7 +9,6 @@
 [ext_resource type="Resource" uid="uid://c8e1j62t8jvnq" path="res://data/waves/level_2_wave_8.tres" id="3_vgefi"]
 [ext_resource type="Resource" uid="uid://b0ywdwxj1lr4r" path="res://data/waves/level_2_wave_1.tres" id="3_yalw7"]
 [ext_resource type="Resource" uid="uid://oi85m43dik4l" path="res://data/enemies/flying_enemies/enemy_data_flying_wind_imp.tres" id="4_clfgj"]
-[ext_resource type="Resource" uid="uid://c8841rfnrhpw3" path="res://data/spawn/spawn_path_1_ranged/spawn_fire_ukobach_1.tres" id="4_t6r5w"]
 [ext_resource type="Script" uid="uid://bfdgnsa03uum7" path="res://scripts/enemies/spawn_flying.gd" id="5_v2c5h"]
 [ext_resource type="Texture2D" uid="uid://cm5ugpqpl32g4" path="res://assets/art/sprites/environment/spr_environment_animation_atlas.png" id="8_ivb0d"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="8_pc8ms"]
@@ -25,13 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://biakr4djd85dt" path="res://assets/art/sprites/environment/spr_environment_build.png" id="17_v2c5h"]
 [ext_resource type="PackedScene" uid="uid://dtbjym5jhrudw" path="res://scenes/ui/WaveInfo.tscn" id="22_v2c5h"]
 [ext_resource type="PackedScene" uid="uid://inrss5007qxm" path="res://scenes/breakables/BreakableCrystalSmall.tscn" id="23_pfbjf"]
-
-[sub_resource type="Resource" id="Resource_vgefi"]
-script = ExtResource("2_3ew8m")
-data = Array[ExtResource("3_s0k01")]([ExtResource("4_t6r5w")])
-reward = 1.0
-token_reward = 0
-metadata/_custom_type_script = "uid://cskry1sw3vqba"
 
 [sub_resource type="Resource" id="Resource_pfbjf"]
 script = ExtResource("5_v2c5h")
@@ -1632,7 +1624,7 @@ script = ExtResource("1_ssuxm")
 level_name = "Level 2"
 region = 2
 initial_gold = 1250
-waves = Array[ExtResource("2_3ew8m")]([SubResource("Resource_vgefi"), ExtResource("3_clfgj"), ExtResource("3_yalw7"), ExtResource("3_v2c5h"), ExtResource("3_pfbjf"), ExtResource("12_h5wmt"), ExtResource("13_t6r5w"), ExtResource("3_vgefi"), SubResource("Resource_h5wmt")])
+waves = Array[ExtResource("2_3ew8m")]([ExtResource("3_yalw7"), ExtResource("3_clfgj"), ExtResource("3_v2c5h"), ExtResource("3_pfbjf"), ExtResource("12_h5wmt"), ExtResource("13_t6r5w"), ExtResource("3_vgefi"), SubResource("Resource_h5wmt")])
 
 [node name="AnimationLayer" type="TileMapLayer" parent="."]
 z_index = -1
