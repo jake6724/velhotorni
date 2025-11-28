@@ -24,4 +24,5 @@ perk_icon = SubResource("AtlasTexture_ldapf")
 perk_mini_icon = SubResource("AtlasTexture_2o3fj")
 perk_name = "Water Attunement"
 perk_desc = "Increase max water mana"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://euw34l8tc2dw"

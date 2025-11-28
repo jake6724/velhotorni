@@ -20,4 +20,5 @@ legendary = false
 perk_icon = SubResource("AtlasTexture_5qwqo")
 perk_name = "Farsight"
 perk_desc = "increase tower range for all towers?"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

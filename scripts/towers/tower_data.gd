@@ -29,3 +29,4 @@ extends Resource
 @export var buff_data_list: Array[BuffData]
 @export_category("Other")
 @export var tower_name: String = ""
+@export var desc: String = ""

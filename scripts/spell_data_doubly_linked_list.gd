@@ -35,32 +35,35 @@ func insert(_value: Variant) -> void:
 	update_array()
 
 func switch_right() -> void:
-	# Make list circular
-	tail.next = head
-	head.prev = tail
+	# Make list circular if larger than 1 node
+	if array.size() > 1:
+		tail.next = head
+		head.prev = tail
 
-	# Rotate 1 right
-	head = head.next
-	tail = tail.next
+		# Rotate 1 right
+		head = head.next
+		tail = tail.next
 
-	# Break circular connection
-	tail.next = null
-	head.prev = null
-	update_array()
+		# Break circular connection
+		tail.next = null
+		head.prev = null
+		update_array()
 
 func switch_left() -> void:
-	# Make list circular
-	tail.next = head
-	head.prev = tail
+	# Make list circular if larger than 1 node
+	if array.size() > 1:
+		# Make list circular
+		tail.next = head
+		head.prev = tail
 
-	# Rotate 1 left
-	head = head.prev
-	tail = tail.prev
+		# Rotate 1 left
+		head = head.prev
+		tail = tail.prev
 
-	# Break circular connection
-	tail.next = null
-	head.prev = null
-	update_array()
+		# Break circular connection
+		tail.next = null
+		head.prev = null
+		update_array()
 	
 func update_array() -> void:
 	array = []
@@ -68,8 +71,6 @@ func update_array() -> void:
 	while curr:
 		array.append(curr.value)
 		curr = curr.next
-
-
 
 func print_list() -> void:
 	var curr = head

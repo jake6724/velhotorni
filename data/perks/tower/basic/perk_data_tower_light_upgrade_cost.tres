@@ -20,4 +20,5 @@ legendary = false
 perk_icon = SubResource("AtlasTexture_gsq20")
 perk_name = "Light Proficiency"
 perk_desc = "decrease light tower upgrade cost"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

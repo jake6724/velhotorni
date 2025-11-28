@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dx8fo7wasdbc1"]
+[gd_scene load_steps=20 format=3 uid="uid://dx8fo7wasdbc1"]
 
 [ext_resource type="Script" uid="uid://o0ah8ynakwqi" path="res://scripts/ui/loadout/loadout_ui.gd" id="1_48vr1"]
 [ext_resource type="Texture2D" uid="uid://bo2earot85i1p" path="res://assets/art/sprites/ui/spr_ui_box9.png" id="3_is5or"]
@@ -10,12 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://go0bba7gghi8" path="res://assets/art/sprites/ui/spr_ui_divider2.png" id="5_mq5qe"]
 [ext_resource type="Texture2D" uid="uid://d0yijylvpeqaf" path="res://assets/art/sprites/ui/spr_ui_divider_vertical_2.png" id="6_rqhqp"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="7_4dafm"]
-[ext_resource type="Texture2D" uid="uid://cytlhw8oe0657" path="res://assets/art/sprites/ui/spr_ui_chest.png" id="7_rqhqp"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="8_kpnvq"]
-[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="9_07f6b"]
-[ext_resource type="Texture2D" uid="uid://dhkmplnpdot7" path="res://assets/art/sprites/ui/spr_ui_stat_ammo.png" id="10_m0am3"]
-[ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="11_rqhqp"]
-[ext_resource type="PackedScene" uid="uid://dlbwij60dynj1" path="res://scenes/ui/loadout/TowerCard.tscn" id="14_03icx"]
+[ext_resource type="PackedScene" uid="uid://chvdnsi5v7rd0" path="res://scenes/ui/loadout/LoadoutPageTower.tscn" id="11_m0am3"]
 [ext_resource type="PackedScene" uid="uid://cyucuik70symo" path="res://scenes/ui/loadout/DeityCard.tscn" id="15_ag6ya"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4j13"]
@@ -41,8 +37,6 @@ texture_margin_top = 10.0
 texture_margin_right = 13.0
 texture_margin_bottom = 10.0
 region_rect = Rect2(1, 1, 30, 30)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rqhqp"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rgcv0"]
 load_path = "res://.godot/imported/atl_ui_controllerbuttons.png-f2d5621cdae42100bc6efcc448ad4e18.ctex"
@@ -177,248 +171,6 @@ patch_margin_top = 10
 patch_margin_right = 13
 patch_margin_bottom = 10
 
-[node name="TowerPage" type="MarginContainer" parent="Body"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Body/TowerPage"]
-layout_mode = 2
-theme_override_constants/separation = 7
-
-[node name="EquipColumn" type="VBoxContainer" parent="Body/TowerPage/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 3
-
-[node name="EquipHeader" type="VBoxContainer" parent="Body/TowerPage/HBoxContainer/EquipColumn"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = -1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Body/TowerPage/HBoxContainer/EquipColumn/EquipHeader"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Body/TowerPage/HBoxContainer/EquipColumn/EquipHeader/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("4_maai5")
-stretch_mode = 2
-
-[node name="Label" type="Label" parent="Body/TowerPage/HBoxContainer/EquipColumn/EquipHeader/HBoxContainer"]
-layout_mode = 2
-text = "equip"
-
-[node name="TextureRect" type="TextureRect" parent="Body/TowerPage/HBoxContainer/EquipColumn/EquipHeader"]
-layout_mode = 2
-texture = ExtResource("5_mq5qe")
-
-[node name="TowerCards" type="VBoxContainer" parent="Body/TowerPage/HBoxContainer/EquipColumn"]
-layout_mode = 2
-theme_override_constants/separation = 3
-
-[node name="TowerCard" parent="Body/TowerPage/HBoxContainer/EquipColumn/TowerCards" instance=ExtResource("14_03icx")]
-layout_mode = 2
-
-[node name="TowerCard2" parent="Body/TowerPage/HBoxContainer/EquipColumn/TowerCards" instance=ExtResource("14_03icx")]
-layout_mode = 2
-
-[node name="TowerCard3" parent="Body/TowerPage/HBoxContainer/EquipColumn/TowerCards" instance=ExtResource("14_03icx")]
-layout_mode = 2
-
-[node name="TowerCard4" parent="Body/TowerPage/HBoxContainer/EquipColumn/TowerCards" instance=ExtResource("14_03icx")]
-layout_mode = 2
-
-[node name="Divider" type="TextureRect" parent="Body/TowerPage/HBoxContainer"]
-custom_minimum_size = Vector2(0, 149)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-texture = ExtResource("6_rqhqp")
-
-[node name="ChestColumn" type="VBoxContainer" parent="Body/TowerPage/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 3
-
-[node name="ChestHeader" type="VBoxContainer" parent="Body/TowerPage/HBoxContainer/ChestColumn"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = -1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Body/TowerPage/HBoxContainer/ChestColumn/ChestHeader"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Body/TowerPage/HBoxContainer/ChestColumn/ChestHeader/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("7_rqhqp")
-stretch_mode = 2
-
-[node name="Label" type="Label" parent="Body/TowerPage/HBoxContainer/ChestColumn/ChestHeader/HBoxContainer"]
-layout_mode = 2
-text = "Chest"
-
-[node name="TextureRect" type="TextureRect" parent="Body/TowerPage/HBoxContainer/ChestColumn/ChestHeader"]
-layout_mode = 2
-texture = ExtResource("5_mq5qe")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Body/TowerPage/HBoxContainer/ChestColumn"]
-layout_mode = 2
-theme_override_constants/separation = 3
-
-[node name="TowerCard" parent="Body/TowerPage/HBoxContainer/ChestColumn/VBoxContainer" instance=ExtResource("14_03icx")]
-layout_mode = 2
-
-[node name="TowerCard2" parent="Body/TowerPage/HBoxContainer/ChestColumn/VBoxContainer" instance=ExtResource("14_03icx")]
-layout_mode = 2
-
-[node name="TowerCard3" parent="Body/TowerPage/HBoxContainer/ChestColumn/VBoxContainer" instance=ExtResource("14_03icx")]
-layout_mode = 2
-
-[node name="TowerCard4" parent="Body/TowerPage/HBoxContainer/ChestColumn/VBoxContainer" instance=ExtResource("14_03icx")]
-layout_mode = 2
-
-[node name="Divider2" type="TextureRect" parent="Body/TowerPage/HBoxContainer"]
-custom_minimum_size = Vector2(0, 149)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-texture = ExtResource("6_rqhqp")
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="Body/TowerPage/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="WeaponName" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_4dafm")
-theme_override_font_sizes/font_size = 16
-text = "Familiar Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaponElement" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("8_kpnvq")
-theme_override_font_sizes/font_size = 8
-text = "Element"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaponDesc" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3"]
-custom_minimum_size = Vector2(175, 70)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
-theme_override_fonts/font = ExtResource("8_kpnvq")
-theme_override_font_sizes/font_size = 8
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea com"
-vertical_alignment = 1
-autowrap_mode = 2
-clip_text = true
-
-[node name="HSeparator" type="HSeparator" parent="Body/TowerPage/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_constants/separation = 8
-theme_override_styles/separator = SubResource("StyleBoxEmpty_rqhqp")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Body/TowerPage/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 1
-alignment = 1
-
-[node name="DamageInfo" type="HBoxContainer" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer"]
-layout_mode = 2
-
-[node name="DamageIcon" type="TextureRect" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/DamageInfo"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("9_07f6b")
-stretch_mode = 2
-
-[node name="DamageLabel" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/DamageInfo"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
-text = "Damage"
-
-[node name="Damage Value" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/DamageInfo"]
-layout_mode = 2
-text = "5"
-
-[node name="SpeedInfo" type="HBoxContainer" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer"]
-layout_mode = 2
-
-[node name="SpeedIcon" type="TextureRect" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/SpeedInfo"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("11_rqhqp")
-stretch_mode = 2
-
-[node name="SpeedLabel" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/SpeedInfo"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
-text = "Speed"
-
-[node name="SpeedValue" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/SpeedInfo"]
-layout_mode = 2
-text = "5"
-
-[node name="RangeInfo" type="HBoxContainer" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer"]
-layout_mode = 2
-
-[node name="RangeIcon" type="TextureRect" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/RangeInfo"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("10_m0am3")
-stretch_mode = 2
-
-[node name="RangeLabel" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/RangeInfo"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
-text = "Range"
-
-[node name="RangeValue" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/RangeInfo"]
-layout_mode = 2
-text = "5"
-
-[node name="SpecialInfo" type="HBoxContainer" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer"]
-layout_mode = 2
-
-[node name="SpecialIcon" type="TextureRect" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/SpecialInfo"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("11_rqhqp")
-stretch_mode = 2
-
-[node name="SpecialLabel" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/SpecialInfo"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
-text = "Fire rate"
-
-[node name="SpecialValue" type="Label" parent="Body/TowerPage/HBoxContainer/VBoxContainer3/VBoxContainer/SpecialInfo"]
-layout_mode = 2
-text = "5"
-
 [node name="DeityPage" type="MarginContainer" parent="Body"]
 unique_name_in_owner = true
 visible = false
@@ -533,11 +285,27 @@ clip_text = true
 
 [node name="LoadoutPageSpell" parent="Body" instance=ExtResource("4_ag6ya")]
 unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.5
+offset_top = -85.5
+offset_right = 194.5
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadoutPageTower" parent="Body" instance=ExtResource("11_m0am3")]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 424.0
-offset_bottom = 187.0
+offset_left = 26.0
+offset_top = 15.0
+offset_right = 403.0
+offset_bottom = 186.0
 
 [node name="TabSwitchLeftButtonHint" type="TextureRect" parent="."]
 layout_mode = 0

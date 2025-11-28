@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://2q57wnjujp3b"]
+[gd_scene load_steps=10 format=3 uid="uid://2q57wnjujp3b"]
 
 [ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="1_600g7"]
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="2_76dxu"]
 [ext_resource type="Texture2D" uid="uid://pa0f6ftr6q6s" path="res://assets/art/sprites/ui/spr_ui_box3_hollow_gray.png" id="2_xo78o"]
 [ext_resource type="Script" uid="uid://n6glkcx486ir" path="res://scripts/ui/loadout/spell_card.gd" id="3_tk546"]
+[ext_resource type="PackedScene" uid="uid://b26c6r5s37hup" path="res://scenes/ui/ButtonHint.tscn" id="5_nek0p"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nkqto"]
 texture = ExtResource("1_600g7")
@@ -37,9 +38,9 @@ region = Rect2(100, 1, 27, 27)
 [node name="SpellCard" type="Button"]
 custom_minimum_size = Vector2(33, 35)
 anchors_preset = -1
-anchor_right = 0.156
+anchor_right = 0.064
 anchor_bottom = 0.122
-offset_right = -46.872
+offset_right = 0.231998
 offset_bottom = -0.136002
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -59,22 +60,24 @@ script = ExtResource("3_tk546")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -13.5
-offset_top = -14.5
-offset_right = 13.5
-offset_bottom = 12.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="SpellIcon" type="TextureRect" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_q8p5k")
 stretch_mode = 2
+
+[node name="ButtonHint" parent="MarginContainer" instance=ExtResource("5_nek0p")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4

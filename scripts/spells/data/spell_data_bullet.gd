@@ -7,7 +7,6 @@ extends SpellData
 
 ## The number of bullets per shot
 @export var num_bullets: int
-@export var cooldown: float
 
 ## The angle of difference between each bullet per shot. 
 @export var angle_seperation: float

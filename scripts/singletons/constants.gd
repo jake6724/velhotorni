@@ -196,3 +196,29 @@ func get_weighted_random(spawn_chance_array) -> Variant:
 	return # Only here to allow for typed return signature. Should never return here
 
 # Crit
+
+var element_text: Dictionary[Element, String] ={
+	Element.FIRE: "Fire",
+	Element.WIND: "Wind",
+	Element.WATER: "Water",
+	Element.EARTH: "Earth",
+	Element.LIGHT: "Light",
+	Element.DARK: "Dark",
+	Element.LAVA: "Lava",
+	Element.PLASMA: "Plasma",
+	Element.STORM: "Storm",
+	Element.LIGHTNING: "Lightning",
+	Element.ICE: "Ice",
+	Element.FLOOD: "Flood",
+	Element.MUD: "Mud",
+	Element.CRYSTAL: "Crystal",
+	Element.SPIRIT: "Spirit",
+	Element.SUN: "Sun",
+	Element.CURSE: "Curse",
+	Element.VOID: "Void",
+	Element.ARCANE: "Arcane",
+	Element.NONE: "None ?",
+}
+
+func get_element_text(element: Element) -> String:
+	return element_text.get(element, "Element not found!")

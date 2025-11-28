@@ -20,4 +20,5 @@ legendary = false
 perk_icon = SubResource("AtlasTexture_xcorj")
 perk_name = "Maim"
 perk_desc = "tower weaken is stronger"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

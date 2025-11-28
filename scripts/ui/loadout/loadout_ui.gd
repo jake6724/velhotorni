@@ -12,7 +12,8 @@ const TAB_BUTTON_POPUP_SPEED: float = .1
 const TAB_BUTTON_POPUP_OFFSET: Vector2 = Vector2(0,-4)
 
 @onready var spell_page: LoadoutPageSpell = %LoadoutPageSpell
-@onready var curr_loadout_page: LoadoutPage = spell_page
+@onready var tower_page: LoadoutPageTower = %LoadoutPageTower
+@onready var curr_loadout_page: LoadoutPage = tower_page
 
 func _ready() -> void:
 	spell_tab_button.pressed.connect(on_tab_button_pressed.bind(spell_tab_button))
@@ -55,10 +56,9 @@ func popup_curr_tab_button() -> void:
 	_curr_tab_button.get_child(0).add_theme_color_override("font_color", Color.WHITE)
 
 func show_page(tab_button: Button) -> void:
-	pass
-	# _curr_page.hide()
-	# match tab_button:
-	# 	spell_tab_button: _curr_page = spell_page
-	# 	tower_tab_button: _curr_page = tower_page
-	# 	deity_tab_button: _curr_page = deity_page
-	# _curr_page.show()
+	curr_loadout_page.hide()
+	match tab_button:
+		spell_tab_button: curr_loadout_page = spell_page
+		tower_tab_button: curr_loadout_page = tower_page
+		# deity_tab_button: _curr_page = deity_page
+	curr_loadout_page.show()

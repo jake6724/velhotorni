@@ -24,4 +24,5 @@ perk_icon = SubResource("AtlasTexture_ldapf")
 perk_mini_icon = SubResource("AtlasTexture_ftr82")
 perk_name = "Earth Attunement"
 perk_desc = "Increased earth mana"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://euw34l8tc2dw"

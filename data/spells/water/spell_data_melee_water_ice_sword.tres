@@ -1,23 +1,30 @@
-[gd_resource type="Resource" script_class="SpellDataMelee" load_steps=4 format=3 uid="uid://bcov2rckhliwp"]
+[gd_resource type="Resource" script_class="SpellDataMelee" load_steps=6 format=3 uid="uid://bcov2rckhliwp"]
 
+[ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_4eorw"]
 [ext_resource type="Texture2D" uid="uid://doed56qoyb4ta" path="res://assets/art/sprites/spr_fx_slash.png" id="1_e4yop"]
 [ext_resource type="Script" uid="uid://dcu7dihypm0k3" path="res://scripts/spells/data/spell_data_melee.gd" id="1_xb82k"]
 [ext_resource type="Resource" uid="uid://wu5nsovo6hnf" path="res://data/debuffs/debuff_data_slow_water.tres" id="2_0i1w0"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbtra"]
+atlas = ExtResource("1_4eorw")
+region = Rect2(68, 2, 25, 26)
+
 [resource]
 script = ExtResource("1_xb82k")
-cooldown = 0.5
 atlas = ExtResource("1_e4yop")
 type = 2
 staff_type = 1
 element = 2
 damage = 65.0
+cooldown = 0.5
 debuff_data = ExtResource("2_0i1w0")
 base_spell_mana_per_drop = 2
 initial_mana_amount = 10
 max_mana_amount = 10
-spell_name = ""
+spell_name = "Ice Sword"
 popup_name = "Ice Sword"
+desc = "This is an ice sword. A sword made of ice. This is ice which is in the form of a sword"
+active_icon = SubResource("AtlasTexture_bbtra")
 active_icon_region = Rect2(64, 0, 32, 31)
 inactive_icon_region = Rect2(32, 0, 16, 16)
 camera_shake = 0.1

@@ -19,4 +19,5 @@ legendary = true
 perk_icon = SubResource("AtlasTexture_vgxxx")
 perk_name = ""
 perk_desc = ""
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

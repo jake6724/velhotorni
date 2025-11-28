@@ -13,4 +13,5 @@ base_value = 3.0
 legendary = true
 perk_name = ""
 perk_desc = ""
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

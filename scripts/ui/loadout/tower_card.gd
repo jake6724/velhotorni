@@ -1,7 +1,7 @@
-class_name SpellCard
+class_name TowerCard
 extends LoadoutCard
 
-@onready var spell_icon: TextureRect = %SpellIcon
+@onready var tower_icon: TextureRect = %TowerIcon
 @onready var button_hint: ButtonHint = %ButtonHint
 
 var greyscale_shader = preload("res://shader/greyscale.gdshader")
@@ -10,28 +10,28 @@ var greyscale_shader_material = ShaderMaterial.new()
 signal primary_press
 signal secondary_press
 
-var data: SpellData
+var data: TowerData
 var chest_disabled: bool = false:
 	set(value):
 		chest_disabled = value
 		if chest_disabled:
-			spell_icon.material = greyscale_shader_material
+			tower_icon.material = greyscale_shader_material
 		else:
-			spell_icon.material = null
+			tower_icon.material = null
 
 func _ready():
 	greyscale_shader_material.shader = greyscale_shader
 
-## Must be called AFTER SpellCard is added to scene
-func populate(_data: SpellData) -> void:
+## Must be called AFTER LoadoutCard is added to scene
+func populate(_data: TowerData) -> void:
 	data = _data
 	if _data:
-		spell_icon.texture = _data.active_icon
-		spell_icon.show()
+		tower_icon.texture = _data.portrait
+		tower_icon.show()
 		button_hint.hide()
 	else:
 		button_hint.show()
-		spell_icon.hide()
+		tower_icon.hide()
 
 func disable() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE

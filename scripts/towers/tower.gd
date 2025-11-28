@@ -30,7 +30,7 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var tower_action_cost_label: Label = %TowerActionCostLabel
 @onready var upgrade_icon: TextureRect = %UpgradeIcon
 @onready var upgrade_coin_icon: TextureRect = %UpgradeCoinIcon
-@onready var upgrade_button_hint: ControllerButtonHint = %UpgradeButtonHint
+@onready var upgrade_button_hint: ButtonHint = %UpgradeButtonHint
 
 # Internal data
 var active_target: Enemy

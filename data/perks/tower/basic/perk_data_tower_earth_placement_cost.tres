@@ -20,4 +20,5 @@ legendary = false
 perk_icon = SubResource("AtlasTexture_u5jvt")
 perk_name = "Earth Conjurer"
 perk_desc = "decrease earth tower placement costs"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

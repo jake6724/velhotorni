@@ -24,4 +24,5 @@ perk_icon = SubResource("AtlasTexture_eejlt")
 perk_mini_icon = SubResource("AtlasTexture_0c86a")
 perk_name = ""
 perk_desc = ""
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://cq0cpfg5ke2ax"

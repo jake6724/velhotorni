@@ -1,5 +1,5 @@
 @tool
-class_name ControllerButtonHint
+class_name ButtonHint
 extends TextureRect
 
 

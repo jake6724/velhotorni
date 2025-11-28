@@ -26,4 +26,5 @@ perk_icon = SubResource("AtlasTexture_gsq20")
 perk_mini_icon = SubResource("AtlasTexture_ot55c")
 perk_name = "Dark Proficiency"
 perk_desc = "Decrease dark tower upgrade costs"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

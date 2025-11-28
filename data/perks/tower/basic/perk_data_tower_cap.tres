@@ -26,4 +26,5 @@ perk_icon = SubResource("AtlasTexture_6y4v3")
 perk_mini_icon = SubResource("AtlasTexture_vu4bu")
 perk_name = "Logistics"
 perk_desc = "Increase tower cap"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

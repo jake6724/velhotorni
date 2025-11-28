@@ -1,0 +1,289 @@
+[gd_scene load_steps=20 format=3 uid="uid://chvdnsi5v7rd0"]
+
+[ext_resource type="Script" uid="uid://cq3xbv8k2fhyr" path="res://scripts/ui/loadout/loadout_page_tower.gd" id="1_qgi4t"]
+[ext_resource type="Texture2D" uid="uid://c0a8rf6rqjted" path="res://assets/art/sprites/ui/spr_ui_equip.png" id="2_hx4xo"]
+[ext_resource type="Texture2D" uid="uid://go0bba7gghi8" path="res://assets/art/sprites/ui/spr_ui_divider2.png" id="3_kj83b"]
+[ext_resource type="Texture2D" uid="uid://cytlhw8oe0657" path="res://assets/art/sprites/ui/spr_ui_chest.png" id="4_evm6g"]
+[ext_resource type="Texture2D" uid="uid://r5y0aa5js6bu" path="res://assets/art/sprites/ui/spr_ui_filter.png" id="5_waemb"]
+[ext_resource type="Texture2D" uid="uid://bd53eb1y6soba" path="res://assets/art/sprites/ui/spr_ui_grabber_area.png" id="6_14i24"]
+[ext_resource type="Texture2D" uid="uid://dkbs47rlwhacw" path="res://assets/art/sprites/ui/spr_ui_slider.png" id="7_qke25"]
+[ext_resource type="Texture2D" uid="uid://d0yijylvpeqaf" path="res://assets/art/sprites/ui/spr_ui_divider_vertical_2.png" id="8_l5pw1"]
+[ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="9_5x73f"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="10_lrofc"]
+[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="11_0c5oq"]
+[ext_resource type="Texture2D" uid="uid://dhkmplnpdot7" path="res://assets/art/sprites/ui/spr_ui_stat_ammo.png" id="12_gmmyn"]
+[ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="13_5kg1q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcl2p"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.75)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wav5o"]
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcl2p"]
+texture = ExtResource("6_14i24")
+texture_margin_left = 2.0
+texture_margin_top = 4.0
+texture_margin_right = 2.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(1, 1, 14, 6)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wav5o"]
+texture = ExtResource("7_qke25")
+texture_margin_left = 4.0
+texture_margin_top = 3.0
+texture_margin_right = 4.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(0, 0, 16, 8)
+
+[sub_resource type="Theme" id="Theme_vipef"]
+ScrollContainer/styles/focus = SubResource("StyleBoxFlat_gcl2p")
+ScrollContainer/styles/panel = SubResource("StyleBoxFlat_wav5o")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_gcl2p")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_gcl2p")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_gcl2p")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_wav5o")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxTexture_wav5o")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y4h41"]
+
+[node name="LoadoutPageTower" type="MarginContainer"]
+offset_right = 377.0
+offset_bottom = 171.0
+script = ExtResource("1_qgi4t")
+metadata/_custom_type_script = "uid://cq3xbv8k2fhyr"
+
+[node name="Content" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Towers" type="VBoxContainer" parent="Content"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="EquipColumn" type="VBoxContainer" parent="Content/Towers"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="EquipHeader" type="VBoxContainer" parent="Content/Towers/EquipColumn"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = -1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/Towers/EquipColumn/EquipHeader"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content/Towers/EquipColumn/EquipHeader/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_hx4xo")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Content/Towers/EquipColumn/EquipHeader/HBoxContainer"]
+layout_mode = 2
+text = "equip"
+
+[node name="TextureRect" type="TextureRect" parent="Content/Towers/EquipColumn/EquipHeader"]
+layout_mode = 2
+texture = ExtResource("3_kj83b")
+
+[node name="EquipTowerCardsParent" type="HBoxContainer" parent="Content/Towers/EquipColumn"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 5
+
+[node name="ChestColumn" type="VBoxContainer" parent="Content/Towers"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="ChestHeader" type="VBoxContainer" parent="Content/Towers/ChestColumn"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = -1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/Towers/ChestColumn/ChestHeader"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content/Towers/ChestColumn/ChestHeader/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_evm6g")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Content/Towers/ChestColumn/ChestHeader/HBoxContainer"]
+layout_mode = 2
+text = "Chest"
+
+[node name="TextureRect2" type="TextureRect" parent="Content/Towers/ChestColumn/ChestHeader/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("5_waemb")
+stretch_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content/Towers/ChestColumn/ChestHeader"]
+layout_mode = 2
+texture = ExtResource("3_kj83b")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Content/Towers/ChestColumn"]
+clip_children = 2
+custom_minimum_size = Vector2(180, 100.64)
+layout_mode = 2
+theme = SubResource("Theme_vipef")
+horizontal_scroll_mode = 0
+
+[node name="ChestTowerCardsParent" type="GridContainer" parent="Content/Towers/ChestColumn/ScrollContainer"]
+unique_name_in_owner = true
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(147, 114.255)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 6
+
+[node name="Divider" type="TextureRect" parent="Content"]
+custom_minimum_size = Vector2(0, 149)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("8_l5pw1")
+
+[node name="TowerInfo" type="VBoxContainer" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="TowerName" type="Label" parent="Content/TowerInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_5x73f")
+theme_override_font_sizes/font_size = 16
+text = "Tower Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TowerElement" type="Label" parent="Content/TowerInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_lrofc")
+theme_override_font_sizes/font_size = 8
+text = "Element"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TowerDesc" type="Label" parent="Content/TowerInfo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(175, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
+theme_override_fonts/font = ExtResource("10_lrofc")
+theme_override_font_sizes/font_size = 8
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea com"
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="Content/TowerInfo"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxEmpty_y4h41")
+
+[node name="TowerStats" type="VBoxContainer" parent="Content/TowerInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TowerDamageInfo" type="HBoxContainer" parent="Content/TowerInfo/TowerStats"]
+layout_mode = 2
+
+[node name="TowerDamageIcon" type="TextureRect" parent="Content/TowerInfo/TowerStats/TowerDamageInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_0c5oq")
+stretch_mode = 2
+
+[node name="TowerDamageLabel" type="Label" parent="Content/TowerInfo/TowerStats/TowerDamageInfo"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
+text = "Damage"
+
+[node name="TowerDamageValue" type="Label" parent="Content/TowerInfo/TowerStats/TowerDamageInfo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 10)
+layout_mode = 2
+text = "332"
+horizontal_alignment = 2
+
+[node name="TowerRangeInfo" type="HBoxContainer" parent="Content/TowerInfo/TowerStats"]
+layout_mode = 2
+
+[node name="TowerRangeIcon" type="TextureRect" parent="Content/TowerInfo/TowerStats/TowerRangeInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("12_gmmyn")
+stretch_mode = 2
+
+[node name="TowerRangeLabel" type="Label" parent="Content/TowerInfo/TowerStats/TowerRangeInfo"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
+text = "Capacity"
+
+[node name="TowerRangeValue" type="Label" parent="Content/TowerInfo/TowerStats/TowerRangeInfo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 10)
+layout_mode = 2
+text = "5"
+horizontal_alignment = 2
+
+[node name="TowerFireRateInfo" type="HBoxContainer" parent="Content/TowerInfo/TowerStats"]
+layout_mode = 2
+
+[node name="TowerFireRateIcon" type="TextureRect" parent="Content/TowerInfo/TowerStats/TowerFireRateInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("13_5kg1q")
+stretch_mode = 2
+
+[node name="TowerFireRateLabel" type="Label" parent="Content/TowerInfo/TowerStats/TowerFireRateInfo"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
+text = "Fire rate"
+
+[node name="TowerFireRateValue" type="Label" parent="Content/TowerInfo/TowerStats/TowerFireRateInfo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 10)
+layout_mode = 2
+text = "5"
+horizontal_alignment = 2

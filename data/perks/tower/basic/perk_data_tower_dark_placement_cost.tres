@@ -26,4 +26,5 @@ perk_icon = SubResource("AtlasTexture_u5jvt")
 perk_mini_icon = SubResource("AtlasTexture_gme3t")
 perk_name = "Dark Conjurer"
 perk_desc = "Decrease dark tower placement cost"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

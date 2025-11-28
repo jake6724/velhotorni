@@ -24,4 +24,5 @@ perk_icon = SubResource("AtlasTexture_ldapf")
 perk_mini_icon = SubResource("AtlasTexture_xdbrf")
 perk_name = "Light Attunement"
 perk_desc = "Increase light mana max"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://euw34l8tc2dw"

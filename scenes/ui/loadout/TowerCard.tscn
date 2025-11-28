@@ -1,22 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlbwij60dynj1"]
+[gd_scene load_steps=8 format=3 uid="uid://6p6btn5jj57y"]
 
 [ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="1_fk8t4"]
+[ext_resource type="Script" uid="uid://bclbcfcfow57" path="res://scripts/ui/loadout/tower_card.gd" id="1_q4p6r"]
 [ext_resource type="Texture2D" uid="uid://ducm8wc7gd0vx" path="res://assets/art/sprites/ui/spr_ui_tower_fire.png" id="2_fk8t4"]
-[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="3_64f3x"]
-[ext_resource type="Texture2D" uid="uid://dhkmplnpdot7" path="res://assets/art/sprites/ui/spr_ui_stat_ammo.png" id="4_dkp2u"]
+[ext_resource type="Texture2D" uid="uid://pa0f6ftr6q6s" path="res://assets/art/sprites/ui/spr_ui_box3_hollow_gray.png" id="2_rvpqt"]
+[ext_resource type="PackedScene" uid="uid://b26c6r5s37hup" path="res://scenes/ui/ButtonHint.tscn" id="5_6sae6"]
 
-[node name="TowerCard" type="NinePatchRect"]
-custom_minimum_size = Vector2(85, 35)
-offset_right = 85.0
-offset_bottom = 35.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fk8t4"]
 texture = ExtResource("1_fk8t4")
+texture_margin_left = 5.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
 region_rect = Rect2(1, 1, 30, 30)
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rvpqt"]
+texture = ExtResource("2_rvpqt")
+texture_margin_left = 5.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(1, 1, 30, 30)
+
+[node name="TowerCard" type="Button"]
+custom_minimum_size = Vector2(32, 34)
+offset_right = 32.0
+offset_bottom = 34.0
+theme_override_styles/focus = SubResource("StyleBoxTexture_fk8t4")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_rvpqt")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_rvpqt")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_rvpqt")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_rvpqt")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_rvpqt")
+theme_override_styles/hover = SubResource("StyleBoxTexture_fk8t4")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_rvpqt")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_rvpqt")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_rvpqt")
+theme_override_styles/normal = SubResource("StyleBoxTexture_fk8t4")
+script = ExtResource("1_q4p6r")
+metadata/_custom_type_script = "uid://bclbcfcfow57"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -25,57 +47,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 2
+mouse_filter = 2
+theme_override_constants/margin_bottom = 1
 
-[node name="Content" type="HBoxContainer" parent="MarginContainer"]
+[node name="TowerIcon" type="TextureRect" parent="MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 0
-
-[node name="WeaponIcon" type="TextureRect" parent="MarginContainer/Content"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("2_fk8t4")
 stretch_mode = 2
 
-[node name="WeaponInfo" type="VBoxContainer" parent="MarginContainer/Content"]
+[node name="ButtonHint" parent="MarginContainer" instance=ExtResource("5_6sae6")]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="WeaponName" type="Label" parent="MarginContainer/Content/WeaponInfo"]
-custom_minimum_size = Vector2(39, 0)
-layout_mode = 2
-text = "Tower"
-clip_text = true
-
-[node name="StatInfo" type="HBoxContainer" parent="MarginContainer/Content/WeaponInfo"]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="DamageInfo" type="HBoxContainer" parent="MarginContainer/Content/WeaponInfo/StatInfo"]
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="DamageIcon" type="TextureRect" parent="MarginContainer/Content/WeaponInfo/StatInfo/DamageInfo"]
-layout_mode = 2
-texture = ExtResource("3_64f3x")
-stretch_mode = 2
-
-[node name="DamageValue" type="Label" parent="MarginContainer/Content/WeaponInfo/StatInfo/DamageInfo"]
-layout_mode = 2
-text = "5"
-
-[node name="AmmoInfo" type="HBoxContainer" parent="MarginContainer/Content/WeaponInfo/StatInfo"]
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="AmmoIcon" type="TextureRect" parent="MarginContainer/Content/WeaponInfo/StatInfo/AmmoInfo"]
-layout_mode = 2
-texture = ExtResource("4_dkp2u")
-stretch_mode = 2
-
-[node name="AmmoValue" type="Label" parent="MarginContainer/Content/WeaponInfo/StatInfo/AmmoInfo"]
-layout_mode = 2
-text = "5"

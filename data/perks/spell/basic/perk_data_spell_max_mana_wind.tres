@@ -24,4 +24,5 @@ perk_icon = SubResource("AtlasTexture_ldapf")
 perk_mini_icon = SubResource("AtlasTexture_evt18")
 perk_name = "Wind Attunement"
 perk_desc = "Increase max wind mana"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://euw34l8tc2dw"

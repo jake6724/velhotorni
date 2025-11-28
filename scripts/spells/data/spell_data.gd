@@ -9,6 +9,7 @@ enum StaffType {ARCANE, WATER_SWORD, FIRE_STAFF, TRIPLE_STAFF}
 
 @export var element: Constants.Element
 @export var damage: float
+@export var cooldown: float
 @export var debuff_data: DebuffData
 
 ## How many base individual charges for this weapon per spell mana drop pickup
@@ -19,6 +20,7 @@ var mana_cost: float = 1
 
 @export var spell_name: String = ""
 @export var popup_name: String = ""
+@export var desc: String = ""
 
 @export var active_icon: AtlasTexture
 @export var active_icon_region: Rect2 = Rect2(0,0,32,31)

@@ -25,4 +25,5 @@ perk_icon = SubResource("AtlasTexture_ivjrh")
 perk_mini_icon = SubResource("AtlasTexture_xty37")
 perk_name = "Guardian"
 perk_desc = "Increase max player health"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

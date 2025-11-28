@@ -26,4 +26,5 @@ perk_icon = SubResource("AtlasTexture_gsq20")
 perk_mini_icon = SubResource("AtlasTexture_pb5ky")
 perk_name = "Wind Proficiency"
 perk_desc = "wind cheapter to upgrade"
+perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"
