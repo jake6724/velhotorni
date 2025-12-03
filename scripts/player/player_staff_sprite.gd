@@ -6,9 +6,13 @@ extends Sprite2D
 # func _ready():
 # 	print(muzzle_flash)
 
+func _ready():
+	texture = AtlasTexture.new()
+	texture.atlas = load("res://assets/art/atlases/atl_player_mage_staff.png")
+
 ## Update the region of the staff atlas, changing the staff graphic. Return the corresponding value for
 ## player_aim.staff_rotation_offset_degrees
-func switch_staff_texture(_spell_type: SpellData.Type) -> int:
+func switch_staff_texture(_spell_type: SpellData.StaffType) -> int:
 	match _spell_type:
 		SpellData.StaffType.ARCANE: 
 			texture.region = Rect2(0,0,217,15)
@@ -35,5 +39,5 @@ func switch_staff_texture(_spell_type: SpellData.Type) -> int:
 		_: return 0
 
 func display_muzzle_flash() -> void:
-	print("test")
+
 	muzzle_flash.play("flash")

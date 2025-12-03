@@ -11,11 +11,13 @@ var active: bool = false
 var player_clone_scene: PackedScene = preload("res://scenes/player/PlayerClone.tscn")
 var player_scene: PackedScene = preload("res://scenes/player/PlayerCharacter.tscn")
 
+var clone: PlayerClone
+
 signal camera_shake_requested
 signal hurtbox_update_requested
 signal special_charge_sprite_update_requested
 
-var special_func: Callable = dash
+var special_func: Callable = spawn_clone
 var special_cooldown_timer: Timer = Timer.new()
 
 func _ready():
@@ -57,11 +59,26 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	player.set_collision_mask_value(28, true)
 
 func spawn_clone(_move_input: Vector2, _aim_input: Vector2) -> void:
-	# var clone: PlayerClone = player_clone_scene.instantiate()
-	var clone: PlayerCharacter = player_scene.instantiate()
-	clone.global_position = player.global_position
-	add_child(clone)
-	clone.player_input.get_move_input_func = clone.player_input.null_func
+	if not clone:
+		clone = player_clone_scene.instantiate()
+		clone.global_position = player.global_position
+		clone.player = player
+		add_child(clone)
+		player.player_spell_spawner.spell_spawn_points.append(clone.spell_spawn_point)
+		player.player_spell_spawner.melee_spell_spawn_points.append(clone)
+		player.player_spell_spawner.staff_switched.connect(clone.on_staff_switched)
+		player.player_spell_spawner.melee_spell_cast.connect(clone.swing_staff)
+		player.spell_cast.connect(clone.on_spell_cast)
+	
+	else:
+		player.global_position = clone.global_position
+		var index: int = player.player_spell_spawner.spell_spawn_points.find(clone.spell_spawn_point)
+		var index_2: int = player.player_spell_spawner.melee_spell_spawn_points.find(clone)
+		if index != -1: player.player_spell_spawner.spell_spawn_points.remove_at(index)
+		if index_2 != -1: player.player_spell_spawner.melee_spell_spawn_points.remove_at(index_2)
+
+		clone.queue_free()
+		clone = null
 
 func on_special_cooldown_timeout() -> void:
 	player.player_stats.special_charges = player.player_stats.special_charges_max

@@ -161,7 +161,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 5
-columns = 6
+columns = 3
 
 [node name="Divider" type="TextureRect" parent="Content"]
 custom_minimum_size = Vector2(0, 149)

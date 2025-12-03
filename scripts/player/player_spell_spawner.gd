@@ -2,8 +2,10 @@ class_name PlayerSpellSpawner
 extends Node
 
 @onready var player: PlayerCharacter = get_owner()
-var spell_spawn_point: Node2D # Set by PlayerCharacter
 
+var spell_spawn_points: Array[Node2D] # Set by PlayerCharacter
+var melee_spell_spawn_points: Array[Node2D] 
+ 
 var spell_func: Callable = Callable(parent_spawn_bullet_spell)
 
 var can_attack: bool = true
@@ -109,32 +111,34 @@ func spawn_bullet_spell_charged(_player_aim_direction: Vector2) -> void:
 
 ## Spawn a single spell bullet
 func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellDataBullet, new_spell_scene: PackedScene, angle_seperation: float, angle_sign: float) -> void:
-	var new_spell: Spell = new_spell_scene.instantiate()
-	new_spell.global_position = spell_spawn_point.global_position
-	new_spell.z_index = player.z_index + 2
-	var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
-	add_child(new_spell)
-	new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)))
-	new_spell.damage_dealt.connect(on_spell_damage_dealt)
+	for spell_spawn_point: Node2D in spell_spawn_points:
+		var new_spell: Spell = new_spell_scene.instantiate()
+		new_spell.global_position = spell_spawn_point.global_position
+		new_spell.z_index = player.z_index + 2
+		var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
+		add_child(new_spell)
+		new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)))
+		new_spell.damage_dealt.connect(on_spell_damage_dealt)
 
 func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 	var new_spell_data: SpellDataMelee = curr_spell_data
 	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
-	var new_spell: Spell = new_spell_scene.instantiate()
 
-	new_spell.initialize(new_spell_data, player)
-	new_spell.global_position = player.global_position + (_player_aim_direction * 16)
-	new_spell.rotation = _player_aim_direction.angle()
+	for melee_spell_spawn_point: Node2D in melee_spell_spawn_points:
+		var new_spell: Spell = new_spell_scene.instantiate()
+		new_spell.initialize(new_spell_data, player)
+		new_spell.global_position = melee_spell_spawn_point.global_position + (_player_aim_direction * 16)
+		new_spell.rotation = _player_aim_direction.angle()
 
-	new_spell.z_index = player.z_index + 2
-	add_child(new_spell)
-	new_spell.damage_dealt.connect(on_spell_damage_dealt)
-	spell_cast.emit(new_spell_data)
-	melee_spell_cast.emit()
+		new_spell.z_index = player.z_index + 2
+		add_child(new_spell)
+		new_spell.damage_dealt.connect(on_spell_damage_dealt)
+		spell_cast.emit(new_spell_data)
+
 	attack_timer.start(new_spell_data.cooldown)
-
 	player.player_camera.apply_shake(.4)
 	player.jump_forward()
+	melee_spell_cast.emit()
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true

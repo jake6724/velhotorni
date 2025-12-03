@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dnilok8ickyxd"]
+[gd_scene load_steps=35 format=4 uid="uid://dnilok8ickyxd"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_qvp6q"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_tpnjg"]
@@ -15,6 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://inrss5007qxm" path="res://scenes/breakables/BreakableCrystalSmall.tscn" id="12_j43g6"]
 [ext_resource type="PackedScene" uid="uid://dtbjym5jhrudw" path="res://scenes/ui/WaveInfo.tscn" id="13_gdaoa"]
 [ext_resource type="PackedScene" uid="uid://dght28oeuiccb" path="res://scenes/level/TeleportArea.tscn" id="14_k7twg"]
+[ext_resource type="PackedScene" uid="uid://8b1uucou5x1l" path="res://scenes/level/PromptArea.tscn" id="16_dj51x"]
+[ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="17_gdaoa"]
+[ext_resource type="Script" uid="uid://bshhqh6p6rwlx" path="res://scripts/ui/controller_button_hint.gd" id="18_lhvu1"]
+[ext_resource type="PackedScene" uid="uid://7pywjw1t8qqu" path="res://scenes/level/world_map/WorldMapMenu.tscn" id="19_lhvu1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dj51x"]
 texture = ExtResource("4_bpcou")
@@ -1513,6 +1517,17 @@ point_count = 3
 offsets = PackedFloat32Array(0, 0.121951, 0.821138, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.784314, 1, 1, 1, 0.490196, 1, 1, 1, 0)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j43g6"]
+radius = 32.0
+height = 80.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dq5yt"]
+atlas = ExtResource("17_gdaoa")
+region = Rect2(3, 3, 10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gdaoa"]
+radius = 43.0
+
 [node name="LevelTower" type="Node2D"]
 z_index = -2
 z_as_relative = false
@@ -1703,3 +1718,65 @@ initial_velocity_max = 6.0
 scale_amount_max = 2.0
 color = Color(1, 1, 1, 0.490196)
 color_ramp = SubResource("Gradient_bpcou")
+
+[node name="LoadoutPromptArea" parent="." instance=ExtResource("16_dj51x")]
+position = Vector2(184, 112)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoadoutPromptArea"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_j43g6")
+
+[node name="ButtonHint" type="TextureRect" parent="LoadoutPromptArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 18.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_dq5yt")
+stretch_mode = 2
+script = ExtResource("18_lhvu1")
+metadata/_custom_type_script = "uid://bshhqh6p6rwlx"
+
+[node name="MapPromptArea" parent="." node_paths=PackedStringArray("ui_element") instance=ExtResource("16_dj51x")]
+position = Vector2(232, 640)
+ui_element = NodePath("../UI/WorldMapMenu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapPromptArea"]
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_gdaoa")
+
+[node name="ButtonHint" type="TextureRect" parent="MapPromptArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 18.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_dq5yt")
+stretch_mode = 2
+script = ExtResource("18_lhvu1")
+metadata/_custom_type_script = "uid://bshhqh6p6rwlx"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="WorldMapMenu" parent="UI" instance=ExtResource("19_lhvu1")]
+visible = false
+
+[editable path="LoadoutPromptArea"]
+[editable path="MapPromptArea"]

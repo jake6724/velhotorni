@@ -285,7 +285,6 @@ clip_text = true
 
 [node name="LoadoutPageSpell" parent="Body" instance=ExtResource("4_ag6ya")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -301,6 +300,7 @@ grow_vertical = 2
 
 [node name="LoadoutPageTower" parent="Body" instance=ExtResource("11_m0am3")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 26.0
 offset_top = 15.0

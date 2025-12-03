@@ -46,6 +46,8 @@ func _ready():
 
 	update_all_chest_disabled()
 
+	start_card = equip_tower_card_1
+
 func populate_equip_cards() -> void:
 	for i in range(PlayerLoadout.equipped_towers.size()):
 		var new_tower_card: TowerCard = tower_card_scene.instantiate()

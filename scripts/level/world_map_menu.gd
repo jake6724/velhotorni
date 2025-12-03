@@ -1,5 +1,5 @@
-class_name WorldMap
-extends Node2D
+class_name WorldMapMenu
+extends Control
 
 # @onready var background_sprite: Sprite2D = $BackgroundSprite
 @onready var level_buttons: Control = %LevelButtons
@@ -38,9 +38,9 @@ func _ready():
 		button.level_button_pressed.connect(on_level_button_pressed)
 
 	# Configure PauseMenu
-	pause_menu.parent_scene = self
-	pause_menu.exit_scene = exit_scene
-	pause_menu.restart.hide()
+	# pause_menu.parent_scene = self
+	# pause_menu.exit_scene = exit_scene
+	# pause_menu.restart.hide()
 
 	# LevelToggleButton
 	level_toggle_button.toggled.connect(on_level_toggled)
@@ -83,11 +83,6 @@ func on_level_button_pressed(_level_scene: PackedScene) -> void:
 	hide_timer.stop()
 	on_hide_timer_timeout()
 	LevelManager.load_specific_level(_level_scene)
-
-func _input(_event):
-	if Input.is_action_just_pressed("escape"): # TODO: Input action change
-		if can_pause:
-			pause_game_with_menu()
 
 # PauseMenu functions
 func pause_game():

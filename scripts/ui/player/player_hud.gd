@@ -11,12 +11,12 @@ extends Control
 @onready var inactive_spell_1_icon: TextureRect = %InactiveSpell1Icon
 @onready var inactive_spell_2_icon: TextureRect = %InactiveSpell2Icon
 @onready var inactive_spell_3_icon: TextureRect = %InactiveSpell3Icon
-@onready var inactive_spell_icons: Array[TextureRect] = [inactive_spell_1_icon, inactive_spell_2_icon, inactive_spell_3_icon]
+@onready var inactive_spell_icons: Array[TextureRect] = [null, inactive_spell_1_icon, inactive_spell_2_icon, inactive_spell_3_icon] # null is used to make array parallel in size to spell_data_list
 
 @onready var inactive_spell_1_mana: TextureProgressBar = %InactiveSpell1Mana
 @onready var inactive_spell_2_mana: TextureProgressBar = %InactiveSpell2Mana
 @onready var inactive_spell_3_mana: TextureProgressBar = %InactiveSpell3Mana
-@onready var inactive_spell_manas: Array[TextureProgressBar] = [inactive_spell_1_mana, inactive_spell_2_mana, inactive_spell_3_mana]
+@onready var inactive_spell_manas: Array[TextureProgressBar] = [null, inactive_spell_1_mana, inactive_spell_2_mana, inactive_spell_3_mana] # null is used to make array parallel in size to spell_data_list
 
 @onready var no_mana_label: Label = %NoManaLabel
 
@@ -45,7 +45,7 @@ func _ready():
 
 	no_mana_label.add_theme_constant_override("outline_size", 0)
 
-	for icon in inactive_spell_icons:
+	for icon in inactive_spell_icons.slice(1,-1):
 		icon.hide()
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats) -> void:
@@ -60,10 +60,6 @@ func update_spells(spell_data_list: Array[SpellData]) -> void:
 	for i in range(1, spell_data_list.size()):
 		inactive_spell_icons[i].show()
 		inactive_spell_icons[i].texture.region = spell_data_list[i].inactive_icon_region
-
-	# inactive_spell_1_icon.texture.region = spell_data_list[1].inactive_icon_region
-	# inactive_spell_2_icon.texture.region = spell_data_list[2].inactive_icon_region
-	# inactive_spell_3_icon.texture.region = spell_data_list[3].inactive_icon_region
 
 func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
 	var active_spell_mana_text: String = str(int(player_mana.spell_mana[spell_data_list[0]]))
@@ -84,7 +80,7 @@ func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> 
 
 	active_spell_mana_label.text = bbc_string % PADDING_COLOR + zero_pad + "[/color]" + bbc_color_mana_text % mana_text_color + active_spell_mana_text + "[/color]"
 
-	for i in range(spell_data_list.size()):
+	for i in range(1,spell_data_list.size()):
 		inactive_spell_manas[i].value = (player_mana.spell_mana[spell_data_list[i]] / player_mana.spell_mana_maxes[spell_data_list[i]]) * 100
 			
 	# inactive_spell_1_mana.value = (player_mana.spell_mana[spell_data_list[1]] / player_mana.spell_mana_maxes[spell_data_list[1]]) * 100

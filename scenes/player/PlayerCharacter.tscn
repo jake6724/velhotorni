@@ -1309,6 +1309,7 @@ texture_under = ExtResource("4_xiasu")
 texture_progress = ExtResource("5_ydu3x")
 
 [node name="StaffSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 5)
 texture = ExtResource("3_v81jw")
 offset = Vector2(4, 0.5)

@@ -23,4 +23,5 @@ bullet_speed = 300.0
 debuff_data = ExtResource("4_l860k")
 buff_data_list = Array[ExtResource("2_l860k")]([])
 tower_name = "Water"
+desc = ""
 metadata/_custom_type_script = "uid://v7b6nq74b314"

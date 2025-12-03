@@ -70,6 +70,11 @@ var can_switch_mode: bool = true
 
 signal player_respawned
 
+## Used by PlayerClone
+signal staff_switched
+## Used by PlayerClone
+signal spell_cast
+
 func _ready():
 	# Configure PlayerStats
 	player_stats.load_player_data(player_data)
@@ -88,7 +93,8 @@ func _ready():
 	# Configure PlayerSpellSpawner
 	player_spell_spawner.initialize(player_spells.active_spell)
 	player_spells.active_spell_switched.connect(player_spell_spawner.on_switch_spell)
-	player_spell_spawner.spell_spawn_point = spell_spawn_point
+	player_spell_spawner.spell_spawn_points.append(spell_spawn_point)
+	player_spell_spawner.melee_spell_spawn_points.append(self)
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
 	player_spell_spawner.staff_switched.connect(on_staff_switched)
 	player_spell_spawner.check_can_afford_failed.connect(on_spell_cast_failed)
@@ -206,6 +212,9 @@ func on_spell_cast(spell_data) -> void:
 	player_mana.decrement_spell_mana(spell_data)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
 	staff_ap.play("fire")
+
+	spell_cast.emit()
+
 	# staff_sprite.display_muzzle_flash()
 	
 func on_spell_cast_failed() -> void:
@@ -230,7 +239,7 @@ func switch_spell(_switch_direction: int) -> void:
 
 ## Update the region of the staff atlas, changing the staff graphic. Plays the switch animation and temporarily hides
 ## the staff sprite. Prevents firing spells while switching.
-func on_staff_switched(_spell_type: SpellData.Type) -> void:
+func on_staff_switched(_spell_type: SpellData.StaffType) -> void:
 	# The switch animation modifies the atlas and texture, then resets the values. It must 
 	# complete before a normal staff animation plays
 	can_fire = false
@@ -238,6 +247,7 @@ func on_staff_switched(_spell_type: SpellData.Type) -> void:
 	await staff_ap.animation_finished
 	can_fire = true
 	player_aim.staff_rotation_offset_degrees = staff_sprite.switch_staff_texture(_spell_type)
+	staff_switched.emit()
 
 func switch_tower(_switch_direction: int) -> void:
 	player_build.tower_index += _switch_direction
@@ -426,4 +436,3 @@ func on_swap_input_type() -> void:
 func on_weapon_select_pressed(index: int) -> void:
 	player_spells.switch_to_index(index)
 	player_hud.update_spells(player_spells.spells.array)
-	

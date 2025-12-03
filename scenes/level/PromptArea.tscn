@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://8b1uucou5x1l"]
+
+[ext_resource type="Script" uid="uid://bahdfxtrg4a7m" path="res://scripts/level/prompt_area.gd" id="1_wt7xw"]
+
+[node name="PromptArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 16384
+script = ExtResource("1_wt7xw")
+metadata/_custom_type_script = "uid://bahdfxtrg4a7m"

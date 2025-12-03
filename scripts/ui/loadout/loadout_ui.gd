@@ -13,7 +13,7 @@ const TAB_BUTTON_POPUP_OFFSET: Vector2 = Vector2(0,-4)
 
 @onready var spell_page: LoadoutPageSpell = %LoadoutPageSpell
 @onready var tower_page: LoadoutPageTower = %LoadoutPageTower
-@onready var curr_loadout_page: LoadoutPage = tower_page
+@onready var curr_loadout_page: LoadoutPage = spell_page
 
 func _ready() -> void:
 	spell_tab_button.pressed.connect(on_tab_button_pressed.bind(spell_tab_button))
@@ -25,7 +25,7 @@ func _ready() -> void:
 
 	popup_curr_tab_button()
 
-	# curr_loadout_page.start_card.grab_focus()
+	curr_loadout_page.start_card.grab_focus()
 
 # func _input(event):
 # 	if event.is_action("switch_selection_right") and event.is_pressed() and not event.is_echo():

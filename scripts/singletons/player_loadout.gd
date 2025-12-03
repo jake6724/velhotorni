@@ -3,8 +3,8 @@ extends Node
 # SPELLS ###################################################################################################################
 var equipped_spell_1: SpellData = preload("res://data/spells/spell_data_bullet_arcane_basic.tres")
 var equipped_spell_2: SpellData = preload("res://data/spells/spell_data_bullet_arcane_basic_triple.tres")
-var equipped_spell_3: SpellData
-var equipped_spell_4: SpellData
+var equipped_spell_3: SpellData = preload("res://data/spells/water/spell_data_melee_water_ice_sword.tres")
+var equipped_spell_4: SpellData = preload("res://data/spells/fire/spell_data_bullet_aoe_fireball.tres")
 var equipped_spells: Array[SpellData] = [equipped_spell_1, equipped_spell_2, equipped_spell_3, equipped_spell_4]
 
 var spells: Dictionary[SpellData, bool] = {
