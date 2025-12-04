@@ -9,9 +9,13 @@ var active: bool = false
 @export var dash_duration: float = .1
 
 var after_image_scene: PackedScene = preload("res://scenes/player/PlayerAfterImage.tscn")
+# How long between spawning afterimages
 var after_image_create_time_value: float = .01
+# How long an afterimage lasts before despawning
 var after_image_lifetime: float = .15
+# Random jitter min and max (so if value is 3 range will be -3 to 3)
 var after_image_position_jitter_range: float = 0
+# This should always remain at 0, it is just a counter var
 var after_image_create_time_count: float = 0
 
 var player_clone_scene: PackedScene = preload("res://scenes/player/PlayerClone.tscn")
