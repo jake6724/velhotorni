@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=116 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Resource" uid="uid://dkeqm5qym5h01" path="res://data/player/player_data_mage.tres" id="2_5mqjb"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c4ck865w024vt" path="res://assets/art/sprites/spr_fx_weaponswap.png" id="4_7q84o"]
 [ext_resource type="AnimationNodeBlendSpace2D" uid="uid://bh72fgnii8gd2" path="res://scenes/animations/PlayerWalkBlend.tres" id="4_ljh2g"]
 [ext_resource type="Texture2D" uid="uid://bs1li1amcuwmf" path="res://assets/art/sprites/ui/spr_ui_health_bg.png" id="4_xiasu"]
+[ext_resource type="Shader" uid="uid://c4hipotqcfhqb" path="res://shader/color_mixer.gdshader" id="4_ykwnp"]
 [ext_resource type="Texture2D" uid="uid://rwec3xnhkxkf" path="res://assets/art/sprites/ui/spr_ui_health_bar.png" id="5_ydu3x"]
 [ext_resource type="Script" uid="uid://jvulch3v1pbm" path="res://scripts/player/player_spell_spawner.gd" id="6_g7j5r"]
 [ext_resource type="Script" uid="uid://dhctbtmi6vl0o" path="res://scripts/player/player_staff_sprite.gd" id="7_hnid3"]
@@ -39,6 +40,14 @@
 [ext_resource type="Texture2D" uid="uid://cqn6fyjhd4r4x" path="res://assets/art/sprites/ui/atl_ui_toweractions_small.png" id="38_t4l3f"]
 [ext_resource type="Script" uid="uid://b7p3mdiusjhxc" path="res://scripts/player/tower_action_hint.gd" id="39_cshdu"]
 [ext_resource type="Script" uid="uid://br1s314vcnsdg" path="res://scripts/player/player_perk_manager.gd" id="40_ykwnp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ykwnp"]
+shader = ExtResource("4_ykwnp")
+shader_parameter/opacity = 1.0
+shader_parameter/r = 0.0
+shader_parameter/g = 0.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qouk"]
 atlas = ExtResource("3_j4yks")
@@ -1270,6 +1279,7 @@ player_data = ExtResource("2_5mqjb")
 perk_pool_data = ExtResource("3_dm1k7")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ykwnp")
 position = Vector2(0, 2.38419e-07)
 texture = ExtResource("2_fhwjy")
 hframes = 12

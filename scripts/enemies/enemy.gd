@@ -60,6 +60,7 @@ var positive_modifier: float = 2.0
 
 var is_alive: bool = true
 var is_taking_damage = false
+var winding_up: bool = false
 
 var base: Base
 
@@ -80,6 +81,7 @@ signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
 signal coin_dropped
 signal enemy_damage_recieved
+signal wind_up_completed
 
 func _ready():
 	data.resource_local_to_scene = true # TODO: probably/maybe not needed
@@ -126,25 +128,25 @@ func _ready():
 	health_bar.z_index = Constants.z_index_map["enemy_healthbar"]
 
 func _physics_process(delta):
-	#print(fx_burn.visible)
 	if is_alive:
 		move(delta)
 
 func move(delta) -> void:
-	if is_alive:
-		if not is_frozen and not is_stunned:
-			if not is_taking_damage:
-				ap.play("walk")
+	if not winding_up:
+		if is_alive:
+			if not is_frozen and not is_stunned:
+				if not is_taking_damage:
+					ap.play("walk")
 
-			sprite.flip_h = path_follow.rotation_degrees >= 91
-				
-			if path_follow.progress_ratio < .99:
-				path_follow.progress += (speed - ((speed * (slow_percent/100)))) * delta
+				sprite.flip_h = path_follow.rotation_degrees >= 91
+					
+				if path_follow.progress_ratio < .99:
+					path_follow.progress += (speed - ((speed * (slow_percent/100)))) * delta
+				else:
+					base.take_damage(damage)
+					die()
 			else:
-				base.take_damage(damage)
-				die()
-		else:
-			ap.play("idle")
+				ap.play("idle")
 
 	debuff_manager.enemy_progress = path_follow.progress
 
@@ -404,3 +406,37 @@ func on_boon_expired(boon: Boon) -> void:
 			sprite.modulate.a = 1
 			collider.set_deferred("disabled", false)
 		_: pass
+
+func wind_up() -> void:
+
+	var shake_distance_x: int = 1.5
+	var duration: float = .05
+	var interval_duration: float = .05
+	var loops: int = 3
+
+
+	winding_up = true
+
+	var shake_tween: Tween = get_tree().create_tween()
+	var modulate_tween: Tween = get_tree().create_tween()
+
+	shake_tween.set_loops(loops)
+	modulate_tween.set_loops(loops)
+
+	var target: Vector2 = position + Vector2(shake_distance_x,0)
+	shake_tween.tween_property(self, "position", target, duration)
+	shake_tween.tween_interval(interval_duration)
+
+	modulate_tween.tween_property(self, "modulate:v", 100, duration) 
+	modulate_tween.tween_interval(interval_duration)
+
+	var target_2: Vector2 = position + Vector2(-shake_distance_x,0)
+	shake_tween.tween_property(self, "position", target_2, duration)
+	shake_tween.tween_interval(interval_duration)
+
+	modulate_tween.tween_property(self, "modulate:v", 1, duration) 
+	modulate_tween.tween_interval(interval_duration)
+
+	await shake_tween.finished
+	wind_up_completed.emit()
+	winding_up = false

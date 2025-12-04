@@ -8,6 +8,12 @@ var active: bool = false
 @export var dash_velocity: float = 250.0
 @export var dash_duration: float = .1
 
+var after_image_scene: PackedScene = preload("res://scenes/player/PlayerAfterImage.tscn")
+var after_image_create_time_value: float = .01
+var after_image_lifetime: float = .15
+var after_image_position_jitter_range: float = 0
+var after_image_create_time_count: float = 0
+
 var player_clone_scene: PackedScene = preload("res://scenes/player/PlayerClone.tscn")
 var player_scene: PackedScene = preload("res://scenes/player/PlayerCharacter.tscn")
 
@@ -17,14 +23,20 @@ signal camera_shake_requested
 signal hurtbox_update_requested
 signal special_charge_sprite_update_requested
 
-var special_func: Callable = spawn_clone
+var special_func: Callable = dash
 var special_cooldown_timer: Timer = Timer.new()
+
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready():
 	special_cooldown_timer.autostart = false
 	special_cooldown_timer.one_shot = true
 	special_cooldown_timer.timeout.connect(on_special_cooldown_timeout)
 	add_child(special_cooldown_timer)
+
+func _physics_process(delta):
+	if active:
+		run_after_image(delta)
 
 func special(_move_input: Vector2, _aim_input: Vector2) -> void:
 	if player.player_stats.special_charges > 0:	
@@ -57,6 +69,28 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	await get_tree().create_timer(.5).timeout
 	hurtbox_update_requested.emit(false)
 	player.set_collision_mask_value(28, true)
+
+func create_after_image() -> void:
+	var new_after_image: PlayerAfterImage = after_image_scene.instantiate()
+	new_after_image.texture = player.character_sprite.texture
+	new_after_image.vframes = player.character_sprite.vframes
+	new_after_image.hframes = player.character_sprite.hframes
+	new_after_image.frame = player.character_sprite.frame
+	new_after_image.scale = Vector2(1,1)
+	new_after_image.z_index = player.character_sprite.z_index - 1
+
+	new_after_image.global_position = player.character_sprite.global_position
+	new_after_image.global_position += Vector2(rng.randf_range(-after_image_position_jitter_range,after_image_position_jitter_range), rng.randf_range(-after_image_position_jitter_range,after_image_position_jitter_range))
+
+	new_after_image.lifetime = after_image_lifetime
+	add_child(new_after_image)	
+
+func run_after_image(delta: float) -> void:
+	after_image_create_time_count += delta
+	if after_image_create_time_count >= after_image_create_time_value:
+		print("hit")
+		after_image_create_time_count = 0
+		create_after_image()
 
 func spawn_clone(_move_input: Vector2, _aim_input: Vector2) -> void:
 	if not clone:

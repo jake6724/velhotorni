@@ -17,6 +17,7 @@ func _ready():
 	collision_area.body_entered.connect(on_body_entered)
 	collision_area.area_entered.connect(on_area_entered)
 	ap.animation_finished.connect(on_animation_finished)
+	hide()
 
 func initialize(_direction: Vector2, _spawn_pos: Vector2, _damage: int, _speed: float, _max_distance: float, _z_index: int, atlas: CompressedTexture2D) -> void:
 	damage = _damage
@@ -28,6 +29,8 @@ func initialize(_direction: Vector2, _spawn_pos: Vector2, _damage: int, _speed: 
 	z_index = _z_index
 	direction = _direction
 	ap.play("move")
+	await get_tree().create_timer(.001).timeout
+	show()
 
 func _physics_process(delta) -> void:
 	move(delta)

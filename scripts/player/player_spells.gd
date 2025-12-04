@@ -20,8 +20,6 @@ func configure_spells() -> void:
 		if item:
 			selected_spells.append(item)
 
-	print(selected_spells)
-
 	original_spell_positions = selected_spells
 	spells = SpellDataDoublyLinkedList.new(selected_spells)
 	active_spell = spells.head.value
@@ -41,3 +39,4 @@ func switch_to_index(index: int) -> void:
 	while spells.head.value != original_spell_positions[index] or count > 5:
 		switch_spells(1)
 		count += 1
+	

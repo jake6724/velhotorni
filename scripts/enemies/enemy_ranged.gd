@@ -21,7 +21,12 @@ func configure_ranged_enemy() -> void:
 
 func on_area_entered(intruder: Area2D) -> void:
 	if can_attack:
-		attack_target(intruder.global_position)
+		if data.wind_up: 
+			wind_up()
+			await wind_up_completed
+			attack_target(intruder.global_position)
+		else:
+			attack_target(intruder.global_position)
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
@@ -33,6 +38,10 @@ func check_for_target() -> void:
 		# Check if the player is in range (always the highest target priority)
 		for area: Area2D in areas:
 			if area is PlayerBeacon:
+				if data.wind_up: 
+					wind_up()
+					await wind_up_completed
+
 				attack_target(area.global_position)
 				return
 		
@@ -67,10 +76,10 @@ func spawn_all_bullets(target_pos: Vector2) -> void:
 		if i % 2 == 1:
 			angle_increment += data.angle_increment
 		angle_sign = -angle_sign
-		# angle_increment += data.angle_increment
 
 func spawn_enemy_bullet(direction: Vector2, spawn_pos) -> void:
 	var new_enemy_bullet: EnemyBullet = enemy_bullet_scene.instantiate()
+	new_enemy_bullet.hide()
 	enemy_bullet_parent.call_deferred("add_child", new_enemy_bullet)
 	new_enemy_bullet.call_deferred("initialize", direction, spawn_pos, data.bullet_damage, data.bullet_speed, data.bullet_max_distance,
 	z_index + 1, data.bullet_atlas)

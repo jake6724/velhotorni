@@ -167,6 +167,7 @@ func _ready():
 	upgrade_action_charge_cirlce.z_index = Constants.z_index_map["top"]
 
 func _physics_process(delta): # This can go in a state eventually
+
 	if alive:
 		# Update Aim
 		player_aim.update_aim(delta, player_input.get_aim_input())
@@ -214,8 +215,6 @@ func on_spell_cast(spell_data) -> void:
 	staff_ap.play("fire")
 
 	spell_cast.emit()
-
-	# staff_sprite.display_muzzle_flash()
 	
 func on_spell_cast_failed() -> void:
 	player_number_popup.display_mana_empty(global_position)
@@ -231,7 +230,7 @@ func on_switch_selection_pressed(_switch_direction) -> void:
 	switch_action_func.call(_switch_direction)
 
 ## `PlayerSpellSpawner` determines the next spell type based on player input in `PlayerSpellSpawner.switch_spell()`
-## and then returns this data via a signal connected to `PlayerCharacter.on_staff_switched()`
+## and then PlayerSpellSpawner returns this data via a signal connected to `PlayerCharacter.on_staff_switched()`
 func switch_spell(_switch_direction: int) -> void:
 	player_spells.switch_spells(_switch_direction)
 	player_hud.update_spells(player_spells.spells.array)
@@ -436,3 +435,4 @@ func on_swap_input_type() -> void:
 func on_weapon_select_pressed(index: int) -> void:
 	player_spells.switch_to_index(index)
 	player_hud.update_spells(player_spells.spells.array)
+	player_hud.update_mana(player_spells.spells.array, player_mana)

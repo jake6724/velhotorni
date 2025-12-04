@@ -17,6 +17,9 @@ extends Resource
 @export var explosion_sfx: AudioStreamOggVorbis
 var pos_offset: Vector2
 
+@export var wind_up: bool = true
+@export var wind_up_duration: float = .5
+
 @export_category("Boon")
 @export var boon_data: BoonData
 
