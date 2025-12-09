@@ -1,7 +1,7 @@
 class_name Enemy
 extends Area2D
 
-enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE, REPEATER_SMALL, REPEATER_LARGE, DUMMY_SMALL}
+enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE, REPEATER_SMALL, REPEATER_LARGE, DUMMY_SMALL, SNAKE}
 
 @export var data: EnemyData
 
@@ -409,34 +409,36 @@ func on_boon_expired(boon: Boon) -> void:
 
 func wind_up() -> void:
 
-	var shake_distance_x: int = 1.5
-	var duration: float = .05
-	var interval_duration: float = .05
-	var loops: int = 3
+	pass
+
+	# var shake_distance_x: int = 1.5
+	# var duration: float = .05
+	# var interval_duration: float = .05
+	# var loops: int = 3
 
 
-	winding_up = true
+	# winding_up = true
 
-	var shake_tween: Tween = get_tree().create_tween()
-	var modulate_tween: Tween = get_tree().create_tween()
+	# var shake_tween: Tween = get_tree().create_tween()
+	# var modulate_tween: Tween = get_tree().create_tween()
 
-	shake_tween.set_loops(loops)
-	modulate_tween.set_loops(loops)
+	# shake_tween.set_loops(loops)
+	# modulate_tween.set_loops(loops)
 
-	var target: Vector2 = position + Vector2(shake_distance_x,0)
-	shake_tween.tween_property(self, "position", target, duration)
-	shake_tween.tween_interval(interval_duration)
+	# var target: Vector2 = position + Vector2(shake_distance_x,0)
+	# shake_tween.tween_property(self, "position", target, duration)
+	# shake_tween.tween_interval(interval_duration)
 
-	modulate_tween.tween_property(self, "modulate:v", 100, duration) 
-	modulate_tween.tween_interval(interval_duration)
+	# modulate_tween.tween_property(self, "modulate:v", 100, duration) 
+	# modulate_tween.tween_interval(interval_duration)
 
-	var target_2: Vector2 = position + Vector2(-shake_distance_x,0)
-	shake_tween.tween_property(self, "position", target_2, duration)
-	shake_tween.tween_interval(interval_duration)
+	# var target_2: Vector2 = position + Vector2(-shake_distance_x,0)
+	# shake_tween.tween_property(self, "position", target_2, duration)
+	# shake_tween.tween_interval(interval_duration)
 
-	modulate_tween.tween_property(self, "modulate:v", 1, duration) 
-	modulate_tween.tween_interval(interval_duration)
+	# modulate_tween.tween_property(self, "modulate:v", 1, duration) 
+	# modulate_tween.tween_interval(interval_duration)
 
-	await shake_tween.finished
-	wind_up_completed.emit()
-	winding_up = false
+	# await shake_tween.finished
+	# wind_up_completed.emit()
+	# winding_up = false

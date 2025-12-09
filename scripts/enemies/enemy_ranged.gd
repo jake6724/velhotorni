@@ -21,12 +21,13 @@ func configure_ranged_enemy() -> void:
 
 func on_area_entered(intruder: Area2D) -> void:
 	if can_attack:
-		if data.wind_up: 
-			wind_up()
-			await wind_up_completed
-			attack_target(intruder.global_position)
-		else:
-			attack_target(intruder.global_position)
+		# if data.wind_up: 
+		# 	wind_up()
+		# 	await wind_up_completed
+		# 	attack_target(intruder.global_position)
+		# else:
+		# 	attack_target(intruder.global_position)
+		attack_target(intruder.global_position)
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
@@ -38,9 +39,9 @@ func check_for_target() -> void:
 		# Check if the player is in range (always the highest target priority)
 		for area: Area2D in areas:
 			if area is PlayerBeacon:
-				if data.wind_up: 
-					wind_up()
-					await wind_up_completed
+				# if data.wind_up:
+				# 	wind_up()
+				# 	# await wind_up_completed
 
 				attack_target(area.global_position)
 				return

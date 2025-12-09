@@ -95,6 +95,7 @@ func _ready():
 	player_spells.active_spell_switched.connect(player_spell_spawner.on_switch_spell)
 	player_spell_spawner.spell_spawn_points.append(spell_spawn_point)
 	player_spell_spawner.melee_spell_spawn_points.append(self)
+	player_spell_spawner.shield_spell_spawn_points.append(self)
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
 	player_spell_spawner.staff_switched.connect(on_staff_switched)
 	player_spell_spawner.check_can_afford_failed.connect(on_spell_cast_failed)

@@ -92,7 +92,6 @@ func create_after_image() -> void:
 func run_after_image(delta: float) -> void:
 	after_image_create_time_count += delta
 	if after_image_create_time_count >= after_image_create_time_value:
-		print("hit")
 		after_image_create_time_count = 0
 		create_after_image()
 
@@ -104,6 +103,8 @@ func spawn_clone(_move_input: Vector2, _aim_input: Vector2) -> void:
 		add_child(clone)
 		player.player_spell_spawner.spell_spawn_points.append(clone.spell_spawn_point)
 		player.player_spell_spawner.melee_spell_spawn_points.append(clone)
+		player.player_spell_spawner.shield_spell_spawn_points.append(clone)
+		
 		player.player_spell_spawner.staff_switched.connect(clone.on_staff_switched)
 		player.player_spell_spawner.melee_spell_cast.connect(clone.swing_staff)
 		player.spell_cast.connect(clone.on_spell_cast)

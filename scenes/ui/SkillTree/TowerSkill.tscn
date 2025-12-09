@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbxheklqw1nkn"]
+
+[ext_resource type="Script" uid="uid://c6p8bvsehtw0k" path="res://scripts/ui/skilltree/tower_skill.gd" id="1_l3r82"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ajyg"]
+load_path = "res://.godot/imported/spr_ui_skill_tower_locked.png-a28b3697cdb527ecfd5fb026ee5428f0.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwhyl"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_5ajyg")
+region = Rect2(0, 0, 16, 16)
+
+[node name="TowerSkill" type="TextureButton"]
+offset_right = 16.0
+offset_bottom = 16.0
+focus_mode = 0
+mouse_filter = 1
+script = ExtResource("1_l3r82")
+locked_icon = SubResource("AtlasTexture_vwhyl")
+metadata/_custom_type_script = "uid://c6p8bvsehtw0k"

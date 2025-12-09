@@ -5,6 +5,7 @@ extends Node
 
 var spell_spawn_points: Array[Node2D] # Set by PlayerCharacter
 var melee_spell_spawn_points: Array[Node2D] 
+var shield_spell_spawn_points: Array[Node2D]
  
 var spell_func: Callable = Callable(parent_spawn_bullet_spell)
 
@@ -15,7 +16,8 @@ var spell_scenes: Dictionary[SpellData.Type, PackedScene] = {
 	SpellData.Type.BULLET: preload("res://scenes/Spells/SpellBullet.tscn"), 
 	SpellData.Type.BULLET_AOE: preload("res://scenes/Spells/SpellBulletAOE.tscn"),
 	SpellData.Type.MELEE: preload("res://scenes/Spells/SpellMelee.tscn"),
-	SpellData.Type.BULLET_CHARGED: preload("res://scenes/Spells/SpellBulletCharged.tscn")
+	SpellData.Type.BULLET_CHARGED: preload("res://scenes/Spells/SpellBulletCharged.tscn"),
+	SpellData.Type.SHIELD_DIRECTIONAL: preload("res://scenes/Spells/SpellShield.tscn")
 }
 
 var curr_spell_data: SpellData
@@ -63,12 +65,15 @@ func get_spell_func(_spell_type: SpellData.Type) -> Callable:
 		SpellData.Type.BULLET_AOE: 
 			curr_spell_is_melee = false
 			return parent_spawn_bullet_spell
-		SpellData.Type.BULLET_CHARGED:
-			curr_spell_is_melee = false
-			return spawn_bullet_spell_charged
+		# SpellData.Type.BULLET_CHARGED:
+		# 	curr_spell_is_melee = false
+		# 	return spawn_bullet_spell_charged
 		SpellData.Type.MELEE: 
 			curr_spell_is_melee = true
 			return spawn_melee_spell
+		SpellData.Type.SHIELD_DIRECTIONAL:
+			curr_spell_is_melee = false
+			return spawn_shield_spell
 		_: 
 			push_error("Unknown spell type")
 			curr_spell_is_melee = false
@@ -100,15 +105,6 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
 		
 	spell_cast.emit(new_spell_data)
 
-func spawn_bullet_spell_charged(_player_aim_direction: Vector2) -> void:
-	var charge_value = min(100, player.player_input.primary_action_charge)
-	var new_spell_data: SpellDataBullet = curr_spell_data.duplicate()
-	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
-
-	new_spell_data.speed = new_spell_data.speed * charge_value
-
-	spawn_bullet_spell(_player_aim_direction, new_spell_data, new_spell_scene, 0, 1)
-
 ## Spawn a single spell bullet
 func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellDataBullet, new_spell_scene: PackedScene, angle_seperation: float, angle_sign: float) -> void:
 	for spell_spawn_point: Node2D in spell_spawn_points:
@@ -136,9 +132,32 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 		spell_cast.emit(new_spell_data)
 
 	attack_timer.start(new_spell_data.cooldown)
-	player.player_camera.apply_shake(.4)
+	player.player_camera.apply_shake(curr_spell_data.camera_shake)
 	player.jump_forward()
 	melee_spell_cast.emit()
+
+func spawn_shield_spell(_player_aim_direction: Vector2) -> void:
+	var new_spell_data: SpellDataShieldDirectional = curr_spell_data
+	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
+
+	for shield_spell_spawn_point: Node2D in shield_spell_spawn_points:
+		var new_spell: Spell = new_spell_scene.instantiate()
+		new_spell.data = curr_spell_data
+
+		new_spell.z_index = player.z_index + 2 # TODO: ?
+		add_child(new_spell)
+		new_spell.initialize(curr_spell_data, player)
+
+		new_spell.global_position = shield_spell_spawn_point.global_position
+		new_spell.rotation = _player_aim_direction.angle()
+
+		new_spell.damage_dealt.connect(on_spell_damage_dealt)
+		spell_cast.emit(new_spell_data)
+
+	attack_timer.start(new_spell_data.cooldown)
+	player.player_camera.apply_shake(curr_spell_data.camera_shake)
+	player.jump_forward()
+	# melee_spell_cast.emit()
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
@@ -155,3 +174,13 @@ func check_can_afford(new_spell_data: SpellData) -> bool:
 
 func on_spell_damage_dealt(damage_amount: float) -> void:
 	spell_damage_dealt.emit(damage_amount)
+
+
+# func spawn_bullet_spell_charged(_player_aim_direction: Vector2) -> void:
+# 	var charge_value = min(100, player.player_input.primary_action_charge)
+# 	var new_spell_data: SpellDataBullet = curr_spell_data.duplicate()
+# 	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
+
+# 	new_spell_data.speed = new_spell_data.speed * charge_value
+
+# 	spawn_bullet_spell(_player_aim_direction, new_spell_data, new_spell_scene, 0, 1)

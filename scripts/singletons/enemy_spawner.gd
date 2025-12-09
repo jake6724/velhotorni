@@ -30,6 +30,7 @@ var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
 	Enemy.Size.REPEATER_SMALL: preload("res://scenes/enemies/EnemyRangedRepeaterSmall.tscn"),
 	Enemy.Size.REPEATER_LARGE: preload("res://scenes/enemies/EnemyRangedRepeaterLarge.tscn"),
 	Enemy.Size.DUMMY_SMALL: preload("res://scenes/enemies/EnemyDummySmall.tscn"),
+	Enemy.Size.SNAKE: preload("res://scenes/enemies/EnemySnake.tscn"),
 }
 
 # Signals
@@ -138,7 +139,7 @@ func spawn_enemy(_spawn: Spawn) -> void:
 	add_child(new_enemy)
 	active_enemies.append(new_enemy)
 
-	if new_enemy is FlyingEnemy:
+	if new_enemy is FlyingEnemy or new_enemy is EnemySnake:
 		new_enemy.player = player
 		new_enemy.global_position = flying_spawn_points[_spawn.flying_spawn_index]
 	else:
@@ -147,6 +148,9 @@ func spawn_enemy(_spawn: Spawn) -> void:
 
 	if new_enemy is EnemyRanged or new_enemy is EnemyRangedRepeater:
 		new_enemy.configure_ranged_enemy()
+	
+	if new_enemy is EnemySnake:
+		new_enemy.configure_snake_enemy()
 
 	if boss_wave_active: 
 		new_enemy.is_boss = true

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1tkfw73xx5oj"]
+
+[ext_resource type="Texture2D" uid="uid://crhe81qb5yqhb" path="res://assets/art/sprites/ui/spr_ui_skill_lines.png" id="1_aonyr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aonyr"]
+resource_local_to_scene = true
+atlas = ExtResource("1_aonyr")
+region = Rect2(0, 0, 16, 16)
+
+[node name="SkillLine" type="TextureRect"]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -496.0
+offset_bottom = -272.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_aonyr")
+stretch_mode = 2

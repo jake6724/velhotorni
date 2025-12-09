@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxlv6dd0mopw4"]
+
+[ext_resource type="Script" uid="uid://li8lndrreon7" path="res://scripts/ui/skilltree/deity_skill.gd" id="1_g57fp"]
+[ext_resource type="Texture2D" uid="uid://bfj053ko5g348" path="res://assets/art/sprites/ui/spr_ui_skill_deity_locked.png" id="2_mh7py"]
+[ext_resource type="Texture2D" uid="uid://i62vbd1q7e58" path="res://assets/art/sprites/ui/spr_ui_skill_deity.png" id="3_vvonu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trjmd"]
+resource_local_to_scene = true
+atlas = ExtResource("2_mh7py")
+region = Rect2(6, 6, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl3cw"]
+resource_local_to_scene = true
+atlas = ExtResource("3_vvonu")
+region = Rect2(6, 6, 20, 20)
+
+[node name="DeitySkill" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -492.0
+offset_bottom = -268.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_trjmd")
+stretch_mode = 2
+script = ExtResource("1_g57fp")
+locked = SubResource("AtlasTexture_trjmd")
+unlocked = SubResource("AtlasTexture_tl3cw")
+metadata/_custom_type_script = "uid://li8lndrreon7"
