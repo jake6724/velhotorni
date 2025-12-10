@@ -63,7 +63,9 @@ func on_exit_button_pressed():
 	WaveManager.wave_failed.emit()
 
 func on_restart_button_pressed():
-	parent_scene.unpause_game_with_menu()
+	print("Restart button pressed")
+	# parent_scene.unpause_game_with_menu()
+	# get_tree().paused = false
 	LevelManager.restart_level()
 
 func on_settings_button_pressed():

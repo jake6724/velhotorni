@@ -5,8 +5,6 @@ var main_scene: PackedScene = load("res://scenes/Main.tscn")
 var main_menu_scene: PackedScene = load("res://scenes/MainMenu.tscn")
 var main: Node2D # Reference used to change RoundInfo UI
 
-#res://scenes/level/2_earth/Level5.tscn
-
 var tower_level: PackedScene = load("res://scenes/level/LevelTower.tscn")
 var level_0: PackedScene = load("res://scenes/level/0_tutorial/Level0.tscn")
 var level_1: PackedScene = load("res://scenes/level/1_wind/Level1.tscn")
@@ -70,8 +68,8 @@ func load_next_level():
 	SceneTransition.change_scene(main_scene)
 
 func restart_level():
-	# WaveManager.wave_failed.emit() # Ensure enemies are cleared
-	SceneTransition.change_scene_no_animation(main_scene)
+	print("Restart level")
+	SceneTransition.change_scene(main_scene)
 
 func load_specific_level(_level_environment):
 	level_index = levels.find(_level_environment)

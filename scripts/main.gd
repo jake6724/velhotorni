@@ -128,7 +128,6 @@ func pause_game_with_menu():
 	get_tree().paused = true
 
 func unpause_game_with_menu():
-	print("Test 2")
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	pause_menu.hide()
 	get_tree().paused = false
