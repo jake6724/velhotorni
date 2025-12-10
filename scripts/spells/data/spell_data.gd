@@ -23,7 +23,8 @@ var mana_cost: float = 1
 @export var desc: String = ""
 
 @export var active_icon: AtlasTexture
-@export var active_icon_region: Rect2 = Rect2(0,0,32,31)
-@export var inactive_icon_region: Rect2 = Rect2(0,0,16,16)
+@export var inactive_icon: AtlasTexture
+# @export var active_icon_region: Rect2 = Rect2(0,0,32,31)
+# @export var inactive_icon_region: Rect2 = Rect2(0,0,16,16)
 
 @export var camera_shake: float = .1

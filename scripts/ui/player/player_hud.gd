@@ -55,11 +55,11 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 	on_health_updated(player_stats.health)
 
 func update_spells(spell_data_list: Array[SpellData]) -> void:
-	active_spell_icon.texture.region = spell_data_list[0].active_icon_region
+	active_spell_icon.texture = spell_data_list[0].active_icon
 
 	for i in range(1, spell_data_list.size()):
 		inactive_spell_icons[i].show()
-		inactive_spell_icons[i].texture.region = spell_data_list[i].inactive_icon_region
+		inactive_spell_icons[i].texture = spell_data_list[i].inactive_icon
 
 func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
 	var active_spell_mana_text: String = str(int(player_mana.spell_mana[spell_data_list[0]]))

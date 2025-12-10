@@ -14,6 +14,7 @@ func _enter_tree():
 	set_physics_process(false)
 
 func _ready():
+	ap.animation_finished.connect(on_animation_finished)
 	ap.play("spawn")
 
 	timer.one_shot = true
@@ -35,7 +36,17 @@ func take_damage(damage: int) -> void:
 	health -= damage
 	
 	if health <= 0:
-		queue_free()
+		ap.play("die")
+		print("Test")
+	else:
+		ap.play("move")
 
 func on_timer_timeout() -> void:
-	queue_free()
+	ap.play("die")
+
+func on_animation_finished(anim_name: String) -> void:
+	print(anim_name)
+	if anim_name == "die":
+		queue_free()
+	if anim_name == "move":
+		ap.play("idle")
