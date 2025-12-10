@@ -70,8 +70,8 @@ func load_next_level():
 	SceneTransition.change_scene(main_scene)
 
 func restart_level():
-	WaveManager.wave_failed.emit() # Ensure enemies are cleared
-	SceneTransition.change_scene(main_scene)
+	# WaveManager.wave_failed.emit() # Ensure enemies are cleared
+	SceneTransition.change_scene_no_animation(main_scene)
 
 func load_specific_level(_level_environment):
 	level_index = levels.find(_level_environment)

@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://vb1cipw2nthp"]
+[gd_scene load_steps=12 format=3 uid="uid://vb1cipw2nthp"]
 
 [ext_resource type="Script" uid="uid://c6gn0gwhvt2he" path="res://scripts/main.gd" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dmftkyu1m0r7n" path="res://scenes/ui/RoundInfo.tscn" id="3_0bbpv"]
-[ext_resource type="PackedScene" uid="uid://btulqisr6vlgj" path="res://scenes/player/PlayerController.tscn" id="4_rarhs"]
 [ext_resource type="Script" uid="uid://gu8su5txi8b8" path="res://scripts/coin_drops/coin_drop_manager.gd" id="5_c01mt"]
 [ext_resource type="Script" uid="uid://xlw22h6007at" path="res://scripts/coin_drops/mana_drop_manager.gd" id="5_lhr70"]
 [ext_resource type="PackedScene" uid="uid://cyqs2ueeu4k80" path="res://scenes/ui/PauseMenu.tscn" id="5_vcsgt"]
@@ -15,9 +14,6 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0bbpv")
-
-[node name="PlayerController" parent="." instance=ExtResource("4_rarhs")]
-unique_name_in_owner = true
 
 [node name="CoinDropManager" type="Node2D" parent="."]
 unique_name_in_owner = true

@@ -17,7 +17,7 @@ var hovered_tower: Tower
 
 const TOWER_PLACEMENT_RANGE: int = 16
 const TOWER_MANA_COST_PER_HEAL: int = 1
-const TOWER_HEAL_AMOUNT: int = 10
+const TOWER_HEAL_AMOUNT: int = 25
 
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var preview_tower: Tower

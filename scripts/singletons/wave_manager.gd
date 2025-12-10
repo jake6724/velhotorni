@@ -9,6 +9,8 @@ var wave_index: int
 var wave_index_checkpoint: int
 var boss_wave_health: float
 
+var wave_active: bool = false
+
 signal wave_started
 signal wave_failed
 signal wave_completed
@@ -33,10 +35,12 @@ func configure_level(active_level: LevelEnvironment) -> void:
 
 ## Intended to be called directly by current `PlayerController`
 func start_wave() -> void:
-	is_wave_failed = false
-	if wave_index == 9:
-		final_wave_started.emit()
-	wave_started.emit()
+	if not wave_active:
+		is_wave_failed = false
+		if wave_index == 9:
+			final_wave_started.emit()
+		wave_started.emit()
+		wave_active = true
 
 func check_wave_complete(global_pos: Vector2) -> void:
 	if EnemySpawner.enemy_index == active_wave.data.size():
@@ -55,11 +59,12 @@ func on_wave_complete() -> void:
 	
 	wave_index_checkpoint = wave_index
 	wave_completed.emit()
+	wave_active = false
 
 func on_wave_failed() -> void:
-	is_wave_failed = true
 	wave_index = wave_index_checkpoint
 	wave_failed.emit()
+	is_wave_failed = true
 
 func on_enemy_died(global_pos: Vector2) -> void:
 	check_wave_complete(global_pos)

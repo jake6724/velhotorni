@@ -113,8 +113,10 @@ func spawn_clone(_move_input: Vector2, _aim_input: Vector2) -> void:
 		player.global_position = clone.global_position
 		var index: int = player.player_spell_spawner.spell_spawn_points.find(clone.spell_spawn_point)
 		var index_2: int = player.player_spell_spawner.melee_spell_spawn_points.find(clone)
+		var index_3: int = player.player_spell_spawner.spell_spawn_points.find(clone)
 		if index != -1: player.player_spell_spawner.spell_spawn_points.remove_at(index)
 		if index_2 != -1: player.player_spell_spawner.melee_spell_spawn_points.remove_at(index_2)
+		if index_3 != -1: player.player_spell_spawner.melee_spell_spawn_points.remove_at(index_3)
 
 		clone.queue_free()
 		clone = null

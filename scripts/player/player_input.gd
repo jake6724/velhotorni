@@ -95,6 +95,9 @@ func _input(event):
 		if event.is_action("weapon_select_3") and event.is_pressed() and not event.is_echo():
 			weapon_select_pressed.emit(3)
 
+		if event.is_action("start_wave_action") and event.is_pressed() and not event.is_echo():
+			WaveManager.start_wave()
+
 		set_input_type(event)
 
 func check_primary_action_input(event) -> void:

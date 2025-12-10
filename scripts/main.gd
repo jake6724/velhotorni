@@ -4,7 +4,7 @@ extends Node2D
 @onready var round_info: RoundInfo = $UI/RoundInfo
 @onready var pause_menu: PauseMenu = $UI/PauseMenu
 @onready var bestiary_menu: BestiaryMenu = $UI/BestiaryMenu
-@onready var player_controller: PlayerController = %PlayerController
+# @onready var player_controller: PlayerController = %PlayerController
 @onready var player_character: PlayerCharacter = %PlayerCharacter
 @onready var coin_drop_manager: CoinDropManager = %CoinDropManager
 @onready var mana_drop_manager: ManaDropManager = %ManaDropManager
@@ -47,10 +47,10 @@ func _ready():
 	TowerGlobalData.tower_max = active_level.max_towers
 
 	# Configure PlayerController
-	player_controller.setup()
-	player_controller.bestiary_pressed.connect(pause_game_with_bestiary)
-	coin_drop_manager.reward_completed.connect(player_controller.on_reward_complete)
-	player_controller.coin_collector = player_character.coin_collector
+	# player_controller.setup()
+	# player_controller.bestiary_pressed.connect(pause_game_with_bestiary)
+	# coin_drop_manager.reward_completed.connect(player_controller.on_reward_complete)
+	# player_controller.coin_collector = player_character.coin_collector
 
 	# Configure PlayerCharacter
 	player_spawn_point = active_level.player_spawn_point
@@ -107,7 +107,7 @@ func _ready():
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
-		if can_pause and not player_controller.menu_open:
+		if can_pause:
 			pause_game_with_menu()
 
 func pause_game():
@@ -185,11 +185,11 @@ func on_perk_selected(perk_data: PerkData) -> void:
 
 func on_wave_failed() -> void:
 	wave_failures += 1
-	SceneTransition.reload_active_scene()
+	LevelManager.restart_level()
 
 func show_level_complete() -> void:
 	level_complete_panel.set_stars(calc_stars())
-	player_controller.tower_menu.hide()
+	# player_controller.tower_menu.hide()
 	level_complete_panel.show()
 
 func calc_stars() -> int:

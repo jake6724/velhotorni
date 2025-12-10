@@ -4,8 +4,6 @@ extends CanvasLayer
 
 @onready var block_mouse: Control = %BlockMouse
 
-var active_scene: PackedScene
-
 signal scene_transition_complete
 
 func change_scene(target: PackedScene) -> void:
@@ -22,7 +20,11 @@ func change_scene(target: PackedScene) -> void:
 	block_mouse.hide()
 	scene_transition_complete.emit()
 
-	active_scene = target
+func change_scene_no_animation(target: PackedScene) -> void:
+	# if get_tree().current_scene:
+	# 	get_tree().current_scene.queue_free()
+	get_tree().change_scene_to_packed(target)
+	scene_transition_complete.emit()
 
 func teleport_player(player: PlayerCharacter, target_global_position: Vector2) -> void:
 	$AnimationPlayer.play('dissolve')
@@ -33,8 +35,8 @@ func teleport_player(player: PlayerCharacter, target_global_position: Vector2) -
 	$AnimationPlayer.play_backwards('dissolve')
 	await $AnimationPlayer.animation_finished
 
-func reload_active_scene() -> void:
-	if get_tree().current_scene:
-		get_tree().current_scene.queue_free()
-	get_tree().change_scene_to_packed(active_scene)
-	scene_transition_complete.emit()
+# func reload_active_scene() -> void:
+# 	if get_tree().current_scene:
+# 		get_tree().current_scene.queue_free()
+# 	get_tree().change_scene_to_packed(active_scene)
+# 	scene_transition_complete.emit()

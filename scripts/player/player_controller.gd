@@ -23,11 +23,11 @@ var can_open_tower_upgrades: bool = true
 var selected_tower_element: Constants.Element = Constants.Element.NONE
 var active_towers: Array[Tower] = []
 var placement_enabled: bool = true
-var gold: int:
-	set(value):
-		gold = value
-		tower_menu.update_gold(gold)
-		tower_menu.set_tower_button_sprites(gold)
+var gold: int
+	# set(value):
+	# 	gold = value
+	# 	tower_menu.update_gold(gold)
+	# 	tower_menu.set_tower_button_sprites(gold)
 var reward: float
 var tokens: int: 
 	set(value): 
