@@ -32,6 +32,8 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var upgrade_coin_icon: TextureRect = %UpgradeCoinIcon
 @onready var upgrade_button_hint: ButtonHint = %UpgradeButtonHint
 
+var alive: bool = true
+
 # Internal data
 var active_target: Enemy
 var in_range_targets: Array[Enemy] = []
@@ -623,6 +625,7 @@ func heal(_value: int) -> void:
 		can_heal = false
 
 func die() -> void:
+	alive = false
 	died.emit(self)
 	ap.play("die")
 	await ap.animation_finished
