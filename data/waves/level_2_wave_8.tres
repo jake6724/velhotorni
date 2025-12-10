@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Wave" load_steps=4 format=3 uid="uid://c8e1j62t8jvnq"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_dn1le"]
-[ext_resource type="Resource" uid="uid://bbilkulbaoamw" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_ranged_wind_wizard.tres" id="2_dn1le"]
+[ext_resource type="Resource" uid="uid://c8841rfnrhpw3" path="res://data/spawn/spawn_path_1_ranged/spawn_fire_ukobach_1.tres" id="2_dn1le"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="3_uloin"]
 
 [resource]
