@@ -184,6 +184,7 @@ func on_perk_selected(perk_data: PerkData) -> void:
 
 func on_wave_failed() -> void:
 	wave_failures += 1
+	SceneTransition.reload_active_scene()
 
 func show_level_complete() -> void:
 	level_complete_panel.set_stars(calc_stars())

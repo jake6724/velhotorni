@@ -31,8 +31,8 @@ var rarity_counts: Dictionary[PerkData.Rarity, int] = {
 var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
 	PerkData.Rarity.ONE: 4,
 	PerkData.Rarity.TWO: 3,
-	PerkData.Rarity.THREE: 2,
-	PerkData.Rarity.FOUR: 2
+	PerkData.Rarity.THREE: 4,
+	PerkData.Rarity.FOUR: 0,
 }
 
 var rarity_pool: Array
@@ -155,5 +155,6 @@ func get_perk_hand() -> Array[PerkData]:
 	var perk_hand: Array[PerkData] = []
 	current_perk_hand_rarity = get_rarity()
 	if current_perk_hand_rarity != PerkData.Rarity.FOUR:
+		print("Getting basic perk hand")
 		perk_hand = get_basic_perk_hand(current_perk_hand_rarity)
 	return perk_hand
