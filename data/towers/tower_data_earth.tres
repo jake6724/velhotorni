@@ -13,9 +13,9 @@
 script = ExtResource("1_7skyr")
 element = 3
 base_element = 3
-damage = 12.0
+damage = 9.0
 speed = 1.5
-attack_range = 40.0
+attack_range = 36.0
 atlas = ExtResource("1_w305r")
 transform_hint_texture = ExtResource("5_aswkh")
 portrait = ExtResource("5_o6fw3")
@@ -25,4 +25,5 @@ bullet_modifier_data = ExtResource("4_q8iot")
 debuff_data = ExtResource("4_aswkh")
 buff_data_list = Array[ExtResource("2_uckxk")]([null])
 tower_name = "Earth"
+desc = ""
 metadata/_custom_type_script = "uid://v7b6nq74b314"
