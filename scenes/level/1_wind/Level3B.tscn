@@ -1,10 +1,13 @@
-[gd_scene load_steps=23 format=4 uid="uid://drn4sppwachxq"]
+[gd_scene load_steps=26 format=4 uid="uid://drn4sppwachxq"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_eds8m"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_l0qwy"]
 [ext_resource type="Resource" uid="uid://co7wcw64w51at" path="res://data/waves/level_3b_wave_1.tres" id="3_eds8m"]
-[ext_resource type="Resource" uid="uid://cybctwrb3c3hf" path="res://data/waves/level_3b_wave_2.tres" id="4_l0qwy"]
+[ext_resource type="Resource" uid="uid://7l8w0eldkpg6" path="res://data/waves/level_3B_wave_2_1.tres" id="4_mssc7"]
+[ext_resource type="Resource" uid="uid://422mucaf6pga" path="res://data/waves/level_3B_wave_3_1.tres" id="5_tioql"]
+[ext_resource type="Resource" uid="uid://b2hk0mgojeylo" path="res://data/waves/level_3B_wave_4_1.tres" id="6_n6xay"]
 [ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/wave_one_fire.tres" id="6_tioql"]
+[ext_resource type="Resource" uid="uid://wrgqiym0m33q" path="res://data/waves/level_3B_wave_5_1.tres" id="7_6muwd"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="8_6muwd"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="9_d0lic"]
 [ext_resource type="PackedScene" uid="uid://inrss5007qxm" path="res://scenes/breakables/BreakableCrystalSmall.tscn" id="9_m4axy"]
@@ -1100,7 +1103,7 @@ script = ExtResource("1_eds8m")
 level_name = "Level 3B"
 region = 2
 initial_gold = 125
-waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_eds8m"), ExtResource("4_l0qwy"), ExtResource("6_tioql")])
+waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd"), ExtResource("6_tioql")])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false
