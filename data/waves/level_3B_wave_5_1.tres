@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=15 format=3 uid="uid://wrgqiym0m33q"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_kp3ex"]
+[ext_resource type="Resource" uid="uid://cbcg8g4owjgrc" path="res://data/spawn/spawn_path_1_ghouls/spawn_wind_ghoul_1.tres" id="2_fd4x2"]
+[ext_resource type="Resource" uid="uid://bitpf4j6arf0m" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_water_merman.tres" id="3_3g6b5"]
+[ext_resource type="Resource" uid="uid://cxaxxqst73uhc" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_0.tres" id="4_nxcs0"]
+[ext_resource type="Resource" uid="uid://bwkq2oxotnbg2" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_1.tres" id="5_o23b8"]
+[ext_resource type="Resource" uid="uid://cq22ja1a4sp6r" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_2.tres" id="6_d03i6"]
+[ext_resource type="Resource" uid="uid://cn6dypb484hsx" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_3.tres" id="7_iefnd"]
+[ext_resource type="Resource" uid="uid://bq0ou24k2tfwy" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_wind_ghoul_1.tres" id="8_vypha"]
+[ext_resource type="Resource" uid="uid://c1hg1v78yvaw3" path="res://data/spawn/spawn_path_2_water_kappa_1.tres" id="9_fddjc"]
+[ext_resource type="Resource" uid="uid://fhwurvcdissg" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_1.tres" id="10_t04ha"]
+[ext_resource type="Resource" uid="uid://ccsvnn47vtltj" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_wind_barbatos.tres" id="11_kp3ex"]
+[ext_resource type="Resource" uid="uid://b668sucylpsqa" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_wind_barbatos.tres" id="12_khhcv"]
+[ext_resource type="Resource" uid="uid://fikb252yks35" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_2_water_ghoul_1.tres" id="13_b1nfv"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="14_b0vgc"]
+
+[resource]
+script = ExtResource("14_b0vgc")
+data = Array[ExtResource("1_kp3ex")]([ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("3_3g6b5"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("3_3g6b5"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("3_3g6b5"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("3_3g6b5"), ExtResource("4_nxcs0"), ExtResource("4_nxcs0"), ExtResource("4_nxcs0"), ExtResource("5_o23b8"), ExtResource("5_o23b8"), ExtResource("5_o23b8"), ExtResource("6_d03i6"), ExtResource("6_d03i6"), ExtResource("6_d03i6"), ExtResource("7_iefnd"), ExtResource("7_iefnd"), ExtResource("7_iefnd"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("2_fd4x2"), ExtResource("3_3g6b5"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("9_fddjc"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("9_fddjc"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("9_fddjc"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("9_fddjc"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("9_fddjc"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("8_vypha"), ExtResource("9_fddjc"), ExtResource("10_t04ha"), ExtResource("10_t04ha"), ExtResource("10_t04ha"), ExtResource("10_t04ha"), ExtResource("11_kp3ex"), ExtResource("10_t04ha"), ExtResource("10_t04ha"), ExtResource("10_t04ha"), ExtResource("10_t04ha"), ExtResource("11_kp3ex"), ExtResource("12_khhcv"), ExtResource("13_b1nfv"), ExtResource("13_b1nfv"), ExtResource("13_b1nfv"), ExtResource("13_b1nfv"), ExtResource("13_b1nfv"), ExtResource("13_b1nfv"), ExtResource("13_b1nfv"), ExtResource("13_b1nfv"), ExtResource("12_khhcv")])
+reward = 1.0
+token_reward = 0
+metadata/_custom_type_script = "uid://cskry1sw3vqba"
