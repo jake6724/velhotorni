@@ -1,8 +1,10 @@
 class_name TowerHurtbox
 extends Area2D
 
+@onready var tower: Tower = get_owner()
+
 signal hit
 
 func take_damage(_damage) -> void:
-	if owner.alive:
+	if tower.alive:
 		hit.emit(_damage)
