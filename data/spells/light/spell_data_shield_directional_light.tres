@@ -9,16 +9,16 @@ region = Rect2(36, 35, 24, 25)
 
 [resource]
 script = ExtResource("2_g4s1j")
-shield_health = 10.0
-shield_duration = 7.0
+shield_health = 8.0
+shield_duration = 6.0
 type = 4
 staff_type = 0
 element = 4
 damage = 0.0
-cooldown = 0.25
-base_spell_mana_per_drop = 10
-initial_mana_amount = 100
-max_mana_amount = 100
+cooldown = 0.5
+base_spell_mana_per_drop = 2
+initial_mana_amount = 10
+max_mana_amount = 10
 spell_name = "Light Shield"
 popup_name = "Light Shield"
 desc = "A light shield"
