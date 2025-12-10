@@ -4,4 +4,5 @@ extends Area2D
 signal hit
 
 func take_damage(_damage) -> void:
-	hit.emit(_damage)
+	if owner.alive:
+		hit.emit(_damage)

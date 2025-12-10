@@ -147,24 +147,29 @@ func on_wave_completed() -> void:
 	pause_game_with_perk_ui()
 
 func pause_game_with_perk_ui() -> void:
-	await get_tree().create_timer(PERK_UI_POPUP_DELAY).timeout
+	pass
+
+	# TEMPORARILY disable the perk pop up
+
+	# await get_tree().create_timer(PERK_UI_POPUP_DELAY).timeout
 	
-	player_character.player_input.input_enabled = false
+	# player_character.player_input.input_enabled = false
 
-	# Show Perk Menu, hide player info
-	player_character.player_build_ui.hide()
-	player_character.player_hud.hide()
+	# # Show Perk Menu, hide player info
+	# player_character.player_build_ui.hide()
+	# player_character.player_hud.hide()
 
-	# Create perk hand, update perk ui
-	var perk_hand: Array[PerkData] = perk_manager.get_perk_hand()
-	perk_ui.set_card_data(perk_hand)
-	perk_ui.show()
-	perk_ui.animate()
+	# # Create perk hand, update perk ui
+	# var perk_hand: Array[PerkData] = perk_manager.get_perk_hand()
+	# print(perk_hand)
+	# perk_ui.set_card_data(perk_hand)
+	# perk_ui.show()
+	# perk_ui.animate()
 
-	if not GlobalSettings.controller_active:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	# if not GlobalSettings.controller_active:
+	# 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-	get_tree().paused = true
+	# get_tree().paused = true
 
 func on_perk_selected(perk_data: PerkData) -> void:
 	perk_ui.animate_reset()
