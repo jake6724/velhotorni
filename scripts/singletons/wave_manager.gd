@@ -65,6 +65,7 @@ func on_wave_failed() -> void:
 	wave_index = wave_index_checkpoint
 	wave_failed.emit()
 	is_wave_failed = true
+	wave_active = false
 
 func on_enemy_died(global_pos: Vector2) -> void:
 	check_wave_complete(global_pos)

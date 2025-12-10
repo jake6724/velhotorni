@@ -21,8 +21,8 @@ func change_scene(target: PackedScene) -> void:
 	scene_transition_complete.emit()
 
 func change_scene_no_animation(target: PackedScene) -> void:
-	# if get_tree().current_scene:
-	# 	get_tree().current_scene.queue_free()
+	if get_tree().current_scene:
+		get_tree().current_scene.queue_free()
 	get_tree().change_scene_to_packed(target)
 	scene_transition_complete.emit()
 
