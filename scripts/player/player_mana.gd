@@ -1,7 +1,7 @@
 class_name PlayerMana
 extends Node
 
-const SPELL_MANA_LOW_THRESHOLD: float = .2 # multiplied by the max value to get a percentage
+const SPELL_MANA_LOW_THRESHOLD: float = .3 # multiplied by the max value to get a percentage
 
 var spell_mana: Dictionary[SpellData, float] = {}
 var spell_mana_base_drop_amount: Dictionary[SpellData, float] = {}

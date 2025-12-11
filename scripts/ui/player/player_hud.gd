@@ -38,6 +38,8 @@ var bbc_color_mana_text: String = "[color=%s]"
 
 var blinking_no_mana: bool = false
 
+signal active_spell_mana_value_calculated
+
 func _ready():
 	active_spell_mana_label.bbcode_enabled = true
 	tower_mana_label.bbcode_enabled = true
@@ -65,7 +67,8 @@ func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> 
 	var active_spell_mana_text: String = str(int(player_mana.spell_mana[spell_data_list[0]]))
 	active_spell_mana.value = (player_mana.spell_mana[spell_data_list[0]] / player_mana.spell_mana_maxes[spell_data_list[0]]) * 100
 	var zero_pad: String = get_zero_padding(MAX_ACTIVE_SPELL_MANA_DIGITS - len(active_spell_mana_text))
-	
+	active_spell_mana_value_calculated.emit(active_spell_mana.value)
+
 	var mana_text_color: String
 	if player_mana.spell_mana_low[spell_data_list[0]]:
 		no_mana_label.show()

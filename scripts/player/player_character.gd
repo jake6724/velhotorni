@@ -29,6 +29,7 @@ extends CharacterBody2D
 @onready var staff_sprite: StaffSprite = $StaffSprite
 @onready var staff_ap: AnimationPlayer = $StaffAnimationPlayer
 @onready var reticle_sprite: AnimatedSprite2D = %ReticleSprite
+@onready var reticle_ammo: TextureProgressBar = %ReticleAmmo
 # @onready var reticle_charge: TextureProgressBar = $ReticleSprite/ReticleCharge
 @onready var spell_spawn_point: Node2D = %SpellSpawnPoint
 @onready var coin_collector: CoinCollector = $CoinCollector
@@ -44,6 +45,8 @@ extends CharacterBody2D
 @onready var player_build_ui: PlayerBuildUI = %PlayerBuildUI
 
 var staff_texture: CompressedTexture2D = preload("res://assets/art/atlases/atl_player_mage_staff.png")
+var reticle_ammo_texture: Texture2D = preload("res://assets/art/sprites/ui/reticle_ammo_progress.png")
+var reticle_ammo_low_texture: Texture2D = preload("res://assets/art/sprites/ui/reticle_ammo_progress_low.png")
 
 var alive: bool = true
 var respawn_time: float = 1.0
@@ -129,6 +132,9 @@ func _ready():
 	player_hud.initialize(player_spells.spells.array, player_mana, player_stats)
 	player_stats.health_updated.connect(player_hud.on_health_updated)
 	WaveManager.wave_completed.connect(player_hud.blink_wave_complete)
+
+	# Configure PlayerReticleAmmo
+	player_hud.active_spell_mana_value_calculated.connect(update_reticle_ammo)
 
 	# Configure PlayerBuild
 	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area, player_mana)
@@ -437,3 +443,10 @@ func on_weapon_select_pressed(index: int) -> void:
 	player_spells.switch_to_index(index)
 	player_hud.update_spells(player_spells.spells.array)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
+
+func update_reticle_ammo(_value: float) -> void:
+	reticle_ammo.value = _value
+	if _value <= player_mana.SPELL_MANA_LOW_THRESHOLD * 100:
+		reticle_ammo.texture_progress = reticle_ammo_low_texture
+	else:
+		reticle_ammo.texture_progress = reticle_ammo_texture

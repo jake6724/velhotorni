@@ -182,7 +182,7 @@ func upgrade_tower() -> void:
 	if hovered_tower:
 		tower_mana_spent.emit(hovered_tower.level_upgrade_price)
 		hovered_tower.upgrade()
-
+		hovered_tower.heal(10000) # Heal em up full
 func sell_tower() -> void:
 	if hovered_tower:
 		# Update WorldGrid

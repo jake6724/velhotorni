@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=118 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Resource" uid="uid://dkeqm5qym5h01" path="res://data/player/player_data_mage.tres" id="2_5mqjb"]
@@ -16,7 +16,9 @@
 [ext_resource type="Script" uid="uid://dhctbtmi6vl0o" path="res://scripts/player/player_staff_sprite.gd" id="7_hnid3"]
 [ext_resource type="Texture2D" uid="uid://btu23m1c7slb3" path="res://assets/art/sprites/ui/spr_ui_placementgrid.png" id="7_vycf0"]
 [ext_resource type="Texture2D" uid="uid://blqioud0kn28e" path="res://assets/art/atlases/bullet/atl_bullet_arcane_charge_muzzle.png" id="8_yirxs"]
+[ext_resource type="Texture2D" uid="uid://2alhehdwdia2" path="res://assets/art/sprites/ui/reticle_ammo.png" id="9_gg8xu"]
 [ext_resource type="Script" uid="uid://b5keun6k5cxfo" path="res://scripts/player/player_aim.gd" id="9_laqyv"]
+[ext_resource type="Texture2D" uid="uid://dur5v7hsre8pi" path="res://assets/art/sprites/ui/reticle_ammo_progress.png" id="10_5mqjb"]
 [ext_resource type="Script" uid="uid://bmfid24mjnj0v" path="res://scripts/player/player_movement.gd" id="10_hkntq"]
 [ext_resource type="PackedScene" uid="uid://bno5o5pbi8s3e" path="res://scenes/player/CoinCollector.tscn" id="10_wp8q1"]
 [ext_resource type="Script" uid="uid://b23tgyr1eik40" path="res://scripts/player/player_spells.gd" id="10_wrkuw"]
@@ -1317,6 +1319,25 @@ stretch_margin_right = 1
 stretch_margin_bottom = 1
 texture_under = ExtResource("4_xiasu")
 texture_progress = ExtResource("5_ydu3x")
+
+[node name="ReticleAmmo" type="TextureProgressBar" parent="ReticleParent/ReticleSprite"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -16.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+value = 100.0
+fill_mode = 3
+texture_under = ExtResource("9_gg8xu")
+texture_progress = ExtResource("10_5mqjb")
 
 [node name="StaffSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
