@@ -71,9 +71,9 @@ func create_debuff(_data: DebuffData) -> void:
 	var new_debuff: Debuff = _data.debuff_script.new(_data)
 	call_deferred("add_child",new_debuff)
 	await new_debuff.ready
-	print("New debuff ready")
 	add_new_debuff.emit(new_debuff)
-	new_debuff.call_deferred("start_debuff")
+	if new_debuff.is_node_ready():
+		new_debuff.call_deferred("start_debuff")
 
 func check_can_cc(_data: DebuffData) -> bool:
 	match _data.type:

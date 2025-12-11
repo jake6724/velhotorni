@@ -216,6 +216,8 @@ func die() -> void:
 	indicator.can_show_hex_range = false
 	await get_tree().create_timer(.1).timeout
 
+	hide_all_fx() # Somehow, the burn fx can turn back on. The debuff not seem to be active, just the fx. Ensure it is off
+
 func on_animation_finished(anim_name):
 	if anim_name == "hit":
 		is_taking_damage = false
@@ -314,7 +316,6 @@ func on_debuff_remove_burn(_debuff: Debuff) -> void:
 	fx_burn.hide()
 	fx_burn.stop()
 
-	# print(fx_burn.visible)
 	_debuff.can_burn = false
 	_debuff.queue_free()
 
@@ -443,3 +444,13 @@ func wind_up() -> void:
 	# await shake_tween.finished
 	# wind_up_completed.emit()
 	# winding_up = false
+
+func hide_all_fx() -> void:
+	fx_burn.hide()
+	fx_freeze.hide()
+	fx_cleanse.hide()
+	fx_heal.hide()
+	fx_slow.hide()
+	fx_slow.hide()
+	fx_speed.hide()
+	fx_stun.hide()
