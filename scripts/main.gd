@@ -15,7 +15,6 @@ extends Node2D
 var player_spawn_point: Node2D
 
 var active_level: LevelEnvironment
-var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # passed to PauseMenu
 var can_pause: bool = false
 
 var wave_failures: int = 0
@@ -29,7 +28,7 @@ func _ready():
 	LevelManager.configure_level(self)
 	active_level = LevelManager.active_level
 	add_child(active_level)
-
+	
 	# Configure other singletons
 	WorldGrid.configure_level(LevelManager.active_level)
 	WaveManager.configure_level(LevelManager.active_level)
@@ -40,7 +39,7 @@ func _ready():
 	EnemySpawner.player = player_character
 
 	# Connect to WaveManager
-	WaveManager.wave_failed.connect(on_wave_failed)
+	# WaveManager.wave_failed.connect(on_wave_failed)
 
 	# Configure TowerGlobalData
 	TowerGlobalData.reset()
@@ -69,7 +68,6 @@ func _ready():
 
 	# Configure PauseMenu
 	pause_menu.parent_scene = self
-	pause_menu.exit_scene = exit_scene
 	pause_menu.restart.show()
 
 	# Configure Bestiary
@@ -107,6 +105,7 @@ func _ready():
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
+		print("Escape pressed; can pause = ", can_pause)
 		if can_pause:
 			pause_game_with_menu()
 
@@ -182,9 +181,9 @@ func on_perk_selected(perk_data: PerkData) -> void:
 	
 	player_character.player_input.input_enabled = true
 
-func on_wave_failed() -> void:
-	wave_failures += 1
-	LevelManager.restart_level()
+# func on_wave_failed() -> void:
+# 	wave_failures += 1
+# 	LevelManager.restart_level()
 
 func show_level_complete() -> void:
 	level_complete_panel.set_stars(calc_stars())
@@ -202,3 +201,11 @@ func calc_stars() -> int:
 		StarRegistry.stars[LevelManager.levels[LevelManager.level_index]] = count
 
 	return count
+
+func on_unpause_menu_restart_level() -> void:
+	get_tree().paused = false
+	LevelManager.restart_level()
+
+func on_unpause_menu_exit_level() -> void:
+	get_tree().paused = false
+	LevelManager.exit_level()

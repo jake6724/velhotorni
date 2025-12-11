@@ -39,7 +39,6 @@ func _ready():
 
 	# Configure PauseMenu
 	pause_menu.parent_scene = self
-	pause_menu.exit_scene = exit_scene
 	pause_menu.restart.hide()
 
 	# LevelToggleButton

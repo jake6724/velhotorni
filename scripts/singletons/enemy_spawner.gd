@@ -80,11 +80,13 @@ func start_wave() -> void:
 
 ## Called when a wave is completed or failed.
 func reset() -> void:
-	remove_all_enemies()
-	active_enemies = []
-	active_path_enemies = []
 	can_spawn_enemy = false
 	stop_all_spawn_timers()
+
+	set_physics_process(false)
+	active_enemies = []
+	active_path_enemies = []
+	remove_all_enemies()
 	reset_indexes()
 
 func on_wave_complete() -> void:

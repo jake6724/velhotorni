@@ -16,8 +16,7 @@ extends Control
 
 @export var main: Main # Set in editor
 
-# var main_menu: PackedScene = load("res://scenes/MainMenu.tscn") # Don't make pre-load; weird circular dep issue
-var exit_scene: PackedScene
+var main_menu: PackedScene = load("res://scenes/MainMenu.tscn") # Don't make pre-load; weird circular dep issue
 var parent_scene: Node2D # The scene that the pause menu exists in; Main or WorldMap
 
 func _ready():
@@ -57,16 +56,10 @@ func on_resume_button_pressed():
 	parent_scene.unpause_game_with_menu()
 
 func on_exit_button_pressed():
-	parent_scene.unpause_game_with_menu()
-	SceneTransition.change_scene(exit_scene)
-	LevelManager.level_index = 1 # TODO: Make 0 or most recent once loading is in
-	WaveManager.wave_failed.emit()
+	parent_scene.on_unpause_menu_exit_level()
 
 func on_restart_button_pressed():
-	print("Restart button pressed")
-	# parent_scene.unpause_game_with_menu()
-	# get_tree().paused = false
-	LevelManager.restart_level()
+	parent_scene.on_unpause_menu_restart_level()
 
 func on_settings_button_pressed():
 	pause_menu.hide()

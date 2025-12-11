@@ -25,6 +25,7 @@ func change_scene_no_animation(target: PackedScene) -> void:
 	# if get_tree().current_scene:
 	# 	get_tree().current_scene.queue_free()
 	get_tree().change_scene_to_packed(target)
+	await get_tree().create_timer(.1).timeout # Give time for Main to come up so this signal can be observed
 	scene_transition_complete.emit()
 	print("Complete")
 

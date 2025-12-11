@@ -69,7 +69,9 @@ func add_debuff(new_debuff_data: DebuffData) -> void:
 func create_debuff(_data: DebuffData) -> void:
 	# Create a new Debuff object of the class defined in debuff_script
 	var new_debuff: Debuff = _data.debuff_script.new(_data)
-	add_child(new_debuff)
+	call_deferred("add_child",new_debuff)
+	await new_debuff.ready
+	print("New debuff ready")
 	add_new_debuff.emit(new_debuff)
 	new_debuff.call_deferred("start_debuff")
 

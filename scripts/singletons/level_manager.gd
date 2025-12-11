@@ -5,6 +5,8 @@ var main_scene: PackedScene = load("res://scenes/Main.tscn")
 var main_menu_scene: PackedScene = load("res://scenes/MainMenu.tscn")
 var main: Node2D # Reference used to change RoundInfo UI
 
+var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # The scene that 'exit' in menu takes you to
+
 var tower_level: PackedScene = load("res://scenes/level/LevelTower.tscn")
 var level_0: PackedScene = load("res://scenes/level/0_tutorial/Level0.tscn")
 var level_1: PackedScene = load("res://scenes/level/1_wind/Level1.tscn")
@@ -68,8 +70,9 @@ func load_next_level():
 	SceneTransition.change_scene(main_scene)
 
 func restart_level():
-	print("Restart level")
-	SceneTransition.change_scene(main_scene)
+	EnemySpawner.reset()
+	WaveManager.reset()
+	SceneTransition.change_scene_no_animation(main_scene)
 
 func load_specific_level(_level_environment):
 	level_index = levels.find(_level_environment)
@@ -77,6 +80,11 @@ func load_specific_level(_level_environment):
 		SceneTransition.change_scene(main_scene)
 	else:
 		push_error("Level not found!")
+
+func exit_level() -> void: # TODO: Eventually this should load the tower not the map
+	EnemySpawner.reset()
+	WaveManager.reset()
+	SceneTransition.change_scene(exit_scene)
 
 func complete_game() -> void:
 	level_index = 0

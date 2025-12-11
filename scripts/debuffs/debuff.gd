@@ -22,7 +22,7 @@ func _ready():
 	total_timer.timeout.connect(on_total_timer_timeout)
 	repeat_timer.timeout.connect(on_repeat_timer_timeout)
 
-## Triggered at the end of `_ready()`
+## Called by DebuffManager.create_debuff()
 func start_debuff() -> void:
 	pass
 

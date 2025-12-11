@@ -315,6 +315,7 @@ func on_debuff_remove_burn(_debuff: Debuff) -> void:
 	fx_burn.stop()
 
 	# print(fx_burn.visible)
+	_debuff.can_burn = false
 	_debuff.queue_free()
 
 func on_debuff_apply_weaken(_value) -> void:
