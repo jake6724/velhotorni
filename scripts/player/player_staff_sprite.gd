@@ -35,7 +35,12 @@ func switch_staff_texture(_spell_type: SpellData.StaffType) -> int:
 			texture.region = Rect2(0,60,217,15)
 			offset = Vector2(4, 0.5)
 			return 0
-			
+		
+		SpellData.StaffType.LIGHT_UMBRELLA:
+			texture.region = Rect2(0,75,217,15)
+			offset = Vector2(4, 0.5)
+			return 0
+
 		_: return 0
 
 func display_muzzle_flash() -> void:

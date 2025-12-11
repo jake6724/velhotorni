@@ -4,14 +4,13 @@ extends Spell
 @onready var area: Area2D = $Area2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 
+var active: bool = true
 var timer: Timer = Timer.new()
 var health: float
 var target: Node2D
+var player_aim: PlayerAim # Reference to PlayerCharacter.PlayerAim, used to rotate the shield sprite without influence from staff offset degrees
 
 const POSITION_LERP_SCALE: float = 15
-
-func _enter_tree():
-	set_physics_process(false)
 
 func _ready():
 	ap.animation_finished.connect(on_animation_finished)
@@ -27,25 +26,25 @@ func initialize(spell_data: SpellDataShieldDirectional, _target: Node2D) -> void
 	timer.start(spell_data.shield_duration)
 
 	target = _target
-	set_physics_process(true)
 
 func _physics_process(delta):
+	rotation = player_aim.aim_input.angle()
 	global_position = global_position.lerp(target.global_position, delta * POSITION_LERP_SCALE)
 
 func take_damage(damage: int) -> void:
-	health -= damage
-	
-	if health <= 0:
-		ap.play("die")
-		print("Test")
-	else:
-		ap.play("move")
+	if active:
+		health -= damage
+		
+		if health <= 0:
+			active = false
+			ap.play("die")
+		else:
+			ap.play("move")
 
 func on_timer_timeout() -> void:
 	ap.play("die")
 
 func on_animation_finished(anim_name: String) -> void:
-	print(anim_name)
 	if anim_name == "die":
 		queue_free()
 	if anim_name == "move":

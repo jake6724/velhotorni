@@ -141,16 +141,16 @@ func spawn_shield_spell(_player_aim_direction: Vector2) -> void:
 	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
 
 	for shield_spell_spawn_point: Node2D in shield_spell_spawn_points:
-		var new_spell: Spell = new_spell_scene.instantiate()
+		var new_spell: SpellShield = new_spell_scene.instantiate()
 		new_spell.data = curr_spell_data
 
 		new_spell.z_index = player.z_index + 2 # TODO: ?
 		add_child(new_spell)
-		new_spell.initialize(curr_spell_data, player)
+		new_spell.initialize(curr_spell_data, shield_spell_spawn_point)
 
 		new_spell.global_position = shield_spell_spawn_point.global_position
 		new_spell.rotation = _player_aim_direction.angle()
-
+		new_spell.player_aim = player.player_aim
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
 		spell_cast.emit(new_spell_data)
 
