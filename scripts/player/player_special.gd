@@ -22,6 +22,7 @@ var player_clone_scene: PackedScene = preload("res://scenes/player/PlayerClone.t
 var player_scene: PackedScene = preload("res://scenes/player/PlayerCharacter.tscn")
 
 var clone: PlayerClone
+const CLONE_RESET_DURATION: float = 12.0
 
 signal camera_shake_requested
 signal hurtbox_update_requested
@@ -95,8 +96,9 @@ func run_after_image(delta: float) -> void:
 		after_image_create_time_count = 0
 		create_after_image()
 
-func spawn_clone(_move_input: Vector2, _aim_input: Vector2) -> void:
-	if not clone:
+## Spawn or remove clone, based on whether one already exists. _move_input and _aim_input and not used.
+func spawn_clone(_move_input: Vector2=Vector2.ZERO, _aim_input: Vector2=Vector2.ZERO) -> void:
+	if not clone: # Spawn a new clone
 		clone = player_clone_scene.instantiate()
 		clone.global_position = player.global_position
 		clone.player = player
@@ -109,8 +111,11 @@ func spawn_clone(_move_input: Vector2, _aim_input: Vector2) -> void:
 		player.player_spell_spawner.staff_switched.connect(clone.on_staff_switched)
 		player.player_spell_spawner.melee_spell_cast.connect(clone.swing_staff)
 		player.spell_cast.connect(clone.on_spell_cast)
+
+		clone.reset_timer.start(CLONE_RESET_DURATION)
+		clone.reset_timer.timeout.connect(spawn_clone)
 	
-	else:
+	else:   	# Remove active clone
 		player.global_position = clone.global_position
 
 		var index: int = player.player_spell_spawner.spell_spawn_points.find(clone.spell_spawn_point)
@@ -120,6 +125,9 @@ func spawn_clone(_move_input: Vector2, _aim_input: Vector2) -> void:
 		if index != -1: player.player_spell_spawner.spell_spawn_points.remove_at(index)
 		if index_2 != -1: player.player_spell_spawner.melee_spell_spawn_points.remove_at(index_2)
 		if index_3 != -1: player.player_spell_spawner.shield_spell_spawn_points.remove_at(index_3)
+
+		clone.reset_timer.stop()
+		clone.reset_timer.timeout.disconnect(spawn_clone)
 
 		clone.queue_free()
 		clone = null

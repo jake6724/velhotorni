@@ -44,7 +44,6 @@ func spawn_coin_drop_helper(_global_pos, drop_chance) -> void:
 		if drop_chance > 0.0:
 			spawn_coin_drop_helper(_global_pos, drop_chance)
 	
-
 ## Called when an enemy that `CoinDropManager` is connected to dies. `CoinDropManager` connects to enemies in `on_enemy_spawned()`
 func spawn_reward(_global_pos, drop_chance) -> void:
 	var roll: float = rng.randf()

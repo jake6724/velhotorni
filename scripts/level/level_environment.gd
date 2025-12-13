@@ -79,10 +79,8 @@ func configure_wave_info_panels() -> void:
 
 func populate_wave_info_panels() -> void:
 	for child in wave_info_panel_parent.get_children():
-		print("Populating a wave info panel")
 		var wave_info: WaveInfoPanel = child as WaveInfoPanel
 		if wave_info:
-			print("WaveManager.wave_index", WaveManager.wave_index)
 			wave_info.populate_unit_wave_info(WaveManager.wave_index)
 
 func hide_wave_info_panels() -> void:

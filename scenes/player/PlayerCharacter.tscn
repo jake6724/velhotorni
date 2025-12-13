@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=120 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Resource" uid="uid://dkeqm5qym5h01" path="res://data/player/player_data_mage.tres" id="2_5mqjb"]
@@ -28,6 +28,8 @@
 [ext_resource type="Script" uid="uid://c67nlh7a52smp" path="res://scripts/player/player_build.gd" id="13_6qouk"]
 [ext_resource type="Script" uid="uid://ckfb2xehi2wqu" path="res://scripts/player/player_camera.gd" id="13_bnayp"]
 [ext_resource type="Script" uid="uid://ctk0c5nv8o7mf" path="res://scripts/player/player_audio.gd" id="14_kkcsf"]
+[ext_resource type="Texture2D" uid="uid://cfudyx8vbglxd" path="res://assets/art/atlases/bullet/special_bar_clone_under.png" id="15_dm1k7"]
+[ext_resource type="Texture2D" uid="uid://b5874p6qrrbpm" path="res://assets/art/atlases/bullet/special_bar_clone_progress.png" id="16_rwb4p"]
 [ext_resource type="Script" uid="uid://cmfd0jyw7me5n" path="res://scripts/player/player_mana.gd" id="17_07k56"]
 [ext_resource type="Texture2D" uid="uid://kkqxipsicds5" path="res://assets/art/sprites/spr_fx_dust.png" id="20_88aji"]
 [ext_resource type="Script" uid="uid://dcfta3oxiix4o" path="res://scripts/player/player_special.gd" id="20_fyjgo"]
@@ -1356,12 +1358,23 @@ position = Vector2(14, -4)
 sprite_frames = SubResource("SpriteFrames_ykwnp")
 animation = &"flash"
 
-[node name="SpecialChargesSprite" type="Sprite2D" parent="."]
+[node name="SpecialBarDash" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-visible = false
 z_index = 4096
 position = Vector2(0, -12)
 texture = SubResource("AtlasTexture_fyjgo")
+
+[node name="SpecialBarClone" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -8.0
+offset_top = -15.0
+offset_right = 8.0
+offset_bottom = -9.0
+step = 0.1
+value = 64.9
+texture_under = ExtResource("15_dm1k7")
+texture_progress = ExtResource("16_rwb4p")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1444,7 +1457,6 @@ script = ExtResource("9_laqyv")
 metadata/_custom_type_script = "uid://b5keun6k5cxfo"
 
 [node name="CoinCollector" parent="." instance=ExtResource("10_wp8q1")]
-visible = false
 position = Vector2(-6, -7)
 
 [node name="ManaDropCollector" parent="." instance=ExtResource("25_vy23r")]

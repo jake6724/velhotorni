@@ -105,7 +105,6 @@ func _ready():
 
 func _input(_event):
 	if Input.is_action_just_pressed("escape"): # TODO: Input action change
-		print("Escape pressed; can pause = ", can_pause)
 		if can_pause:
 			pause_game_with_menu()
 

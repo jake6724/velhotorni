@@ -35,7 +35,8 @@ extends CharacterBody2D
 @onready var coin_collector: CoinCollector = $CoinCollector
 @onready var mana_drop_collector: ManaDropCollector = %ManaDropCollector
 @onready var build_grid_sprite = $PlayerBuild/BuildGridSprite
-@onready var special_charges_sprite: Sprite2D = %SpecialChargesSprite
+@onready var special_bar_dash: Sprite2D = %SpecialBarDash
+@onready var special_bar_clone: TextureProgressBar = %SpecialBarClone
 @onready var special_charges_hide_timer: Timer = Timer.new()
 @onready var tower_detect_area: Area2D = %TowerDetectArea
 @onready var tower_detect_collider: CollisionShape2D = %TowerDetectCollider
@@ -132,6 +133,7 @@ func _ready():
 	player_hud.initialize(player_spells.spells.array, player_mana, player_stats)
 	player_stats.health_updated.connect(player_hud.on_health_updated)
 	WaveManager.wave_completed.connect(player_hud.blink_wave_complete)
+	# WaveManager.wave_completed.connect(func(): coin_collector.magnet_collider.shape.radius *= 5)
 
 	# Configure PlayerReticleAmmo
 	player_hud.active_spell_mana_value_calculated.connect(update_reticle_ammo)
@@ -407,16 +409,16 @@ func update_hurtbox_collider(_value) -> void:
 	player_hurtbox.collider.set_deferred("disabled", _value)
 
 func on_special_charge_sprite_update_requested(_charges: int) -> void:
-	special_charges_sprite.texture.region = Rect2(0, (3 - _charges) * 6, 24, 6)
+	special_bar_dash.texture.region = Rect2(0, (3 - _charges) * 6, 24, 6)
 
 	if _charges == player_stats.special_charges_max:
 		special_charges_hide_timer.start(1)
 	else:
 		special_charges_hide_timer.stop()
-		special_charges_sprite.show()
+		special_bar_dash.show()
 
 func on_special_charges_hide_timer_timeout() -> void:
-	special_charges_sprite.hide()
+	special_bar_dash.hide()
 
 func on_animation_requested(_anim_name: String) -> void:
 	ap.play(_anim_name)

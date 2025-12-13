@@ -12,10 +12,16 @@ var player: PlayerCharacter # Set manually by PlayerSpecial
 @onready var clone_staff_ap: AnimationPlayer = %StaffAnimationPlayer
 @onready var spell_spawn_point: Node2D = %SpellSpawnPoint
 
+var reset_timer: Timer = Timer.new()
+
 func _ready():
 	ap.play("idle")
 	staff_sprite.switch_staff_texture(player.player_spell_spawner.curr_spell_data.staff_type)
 	clone_staff_ap.animation_finished.connect(on_staff_animation_finished)
+
+	add_child(reset_timer)
+	reset_timer.autostart = false
+	reset_timer.one_shot = true
 
 func _physics_process(_delta):
 	rotate_staff()

@@ -11,6 +11,12 @@ var repeat_timer: Timer = Timer.new()
 
 func _init(_data: DebuffData) -> void:
 	data = _data
+	total_timer.autostart = true
+	total_timer.wait_time = _data.total_duration
+
+## Call before add child. Primarily used to configure repeat timer for debuff_burn (which must be done before adding to scene)
+func initialize() -> void:
+	pass
 
 func _ready():
 	add_child(total_timer)
