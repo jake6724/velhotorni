@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dki5b1v23sshc" path="res://scenes/ui/WorldMapInfoPanel.tscn" id="3_gyoph"]
 [ext_resource type="PackedScene" uid="uid://dnilok8ickyxd" path="res://scenes/level/LevelTower.tscn" id="5_wo7is"]
 [ext_resource type="Texture2D" uid="uid://cgnu6kwnix7xs" path="res://assets/art/sprites/spr_map_ui.png" id="6_wo7is"]
+[ext_resource type="PackedScene" uid="uid://c834s0blo3yw2" path="res://scenes/level/0_tutorial/LevelTutorial.tscn" id="6_yjmtc"]
 [ext_resource type="PackedScene" uid="uid://p5xgj4rjwt1e" path="res://scenes/level/world_map/LevelButton.tscn" id="7_yjmtc"]
-[ext_resource type="PackedScene" uid="uid://c2tjlg8bc8rb" path="res://scenes/level/1_wind/Level1.tscn" id="9_musam"]
 [ext_resource type="PackedScene" uid="uid://bupwctvog5l6d" path="res://scenes/level/1_wind/Level2.tscn" id="10_2b0ok"]
 [ext_resource type="PackedScene" uid="uid://dks8yom7a8nwo" path="res://scenes/level/1_wind/Level3A.tscn" id="11_nc3cf"]
 [ext_resource type="PackedScene" uid="uid://drn4sppwachxq" path="res://scenes/level/1_wind/Level3B.tscn" id="12_dra5x"]
@@ -251,7 +251,7 @@ offset_left = 56.0
 offset_top = 160.0
 offset_right = 72.0
 offset_bottom = 176.0
-level_scene = ExtResource("9_musam")
+level_scene = ExtResource("6_yjmtc")
 metadata/_edit_use_anchors_ = true
 
 [node name="2LevelButton" parent="UI/LevelUI/LevelButtons" instance=ExtResource("7_yjmtc")]

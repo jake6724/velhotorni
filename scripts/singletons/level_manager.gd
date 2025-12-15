@@ -8,7 +8,7 @@ var main: Node2D # Reference used to change RoundInfo UI
 var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # The scene that 'exit' in menu takes you to
 
 var tower_level: PackedScene = load("res://scenes/level/LevelTower.tscn")
-var level_0: PackedScene = load("res://scenes/level/0_tutorial/Level0.tscn")
+var level_0: PackedScene = load("res://scenes/level/0_tutorial/LevelTutorial.tscn")
 var level_1: PackedScene = load("res://scenes/level/1_wind/Level1.tscn")
 var level_2: PackedScene = load("res://scenes/level/1_wind/Level2.tscn")
 var level_3a: PackedScene = load("res://scenes/level/1_wind/Level3A.tscn")

@@ -9,14 +9,20 @@ var active: bool = false
 @export var dash_duration: float = .1
 
 var after_image_scene: PackedScene = preload("res://scenes/player/PlayerAfterImage.tscn")
-# How long between spawning afterimages
-var after_image_create_time_value: float = .01
-# How long an afterimage lasts before despawning
-var after_image_lifetime: float = .15
-# Random jitter min and max (so if value is 3 range will be -3 to 3)
-var after_image_position_jitter_range: float = 0
 # This should always remain at 0, it is just a counter var
 var after_image_create_time_count: float = 0
+
+# How long between spawning afterimages
+var dash_after_image_create_time: float = .01
+# How long an afterimage lasts before despawning
+var dash_after_image_lifetime: float = .15
+# Random jitter min and max (so if value is 3 range will be -3 to 3)
+var dash_after_image_position_jitter_range: float = 0
+
+const SHADOW_DURATION: float = 1.4
+var shadow_after_image_create_time: float = .001
+var shadow_after_image_lifetime: float = .2
+var shadow_after_image_position_jitter_range: float = 30
 
 var player_clone_scene: PackedScene = preload("res://scenes/player/PlayerClone.tscn")
 var player_scene: PackedScene = preload("res://scenes/player/PlayerCharacter.tscn")
@@ -29,6 +35,7 @@ signal hurtbox_update_requested
 signal special_charge_sprite_update_requested
 
 var special_func: Callable = dash
+var after_image_func: Callable = dash_run_after_image
 var special_cooldown_timer: Timer = Timer.new()
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -41,7 +48,7 @@ func _ready():
 
 func _physics_process(delta):
 	if active:
-		run_after_image(delta)
+		after_image_func.call(delta)
 
 func special(_move_input: Vector2, _aim_input: Vector2) -> void:
 	if player.player_stats.special_charges > 0:	
@@ -75,7 +82,7 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	hurtbox_update_requested.emit(false)
 	player.set_collision_mask_value(28, true)
 
-func create_after_image() -> void:
+func create_after_image(after_image_lifetime, after_image_position_jitter_range) -> void:
 	var new_after_image: PlayerAfterImage = after_image_scene.instantiate()
 	new_after_image.texture = player.character_sprite.texture
 	new_after_image.vframes = player.character_sprite.vframes
@@ -90,11 +97,28 @@ func create_after_image() -> void:
 	new_after_image.lifetime = after_image_lifetime
 	add_child(new_after_image)	
 
-func run_after_image(delta: float) -> void:
+func dash_run_after_image(delta: float) -> void:
 	after_image_create_time_count += delta
-	if after_image_create_time_count >= after_image_create_time_value:
+	if after_image_create_time_count >= dash_after_image_create_time:
 		after_image_create_time_count = 0
-		create_after_image()
+		create_after_image(dash_after_image_lifetime, dash_after_image_position_jitter_range)
+
+func shadow_run_after_image(delta: float) -> void:
+	after_image_create_time_count += delta
+	if after_image_create_time_count >= dash_after_image_create_time:
+		after_image_create_time_count = 0
+		create_after_image(shadow_after_image_lifetime, shadow_after_image_position_jitter_range)
+		create_after_image(shadow_after_image_lifetime, shadow_after_image_position_jitter_range)
+
+func shadow(_move_input: Vector2=Vector2.ZERO, _aim_input: Vector2=Vector2.ZERO) -> void:
+	active = true
+	player.can_fire = false
+	player.graphics_parent.hide()
+
+	await get_tree().create_timer(SHADOW_DURATION).timeout
+	player.graphics_parent.show()
+	player.can_fire = true
+	active = false 
 
 ## Spawn or remove clone, based on whether one already exists. _move_input and _aim_input and not used.
 func spawn_clone(_move_input: Vector2=Vector2.ZERO, _aim_input: Vector2=Vector2.ZERO) -> void:

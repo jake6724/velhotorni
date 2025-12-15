@@ -23,10 +23,12 @@ extends CharacterBody2D
 @onready var player_number_popup: PlayerNumberPopup = %PlayerNumberPopup
 @onready var player_perk_manager: PlayerPerkManager = %PlayerPerkManager
 @onready var player_spell_perk_manager: PlayerSpellPerkManager = %PlayerSpellPerkManager
+@onready var pit_hurtbox: PitHurtbox = %PitHurtbox
+@onready var graphics_parent: Node2D = %GraphicsParent
 
-@onready var character_sprite: Sprite2D = $CharacterSprite
+@onready var character_sprite: Sprite2D = %CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer
-@onready var staff_sprite: StaffSprite = $StaffSprite
+@onready var staff_sprite: StaffSprite = %StaffSprite
 @onready var staff_ap: AnimationPlayer = $StaffAnimationPlayer
 @onready var reticle_sprite: AnimatedSprite2D = %ReticleSprite
 @onready var reticle_ammo: TextureProgressBar = %ReticleAmmo
@@ -122,9 +124,11 @@ func _ready():
 
 	# Configure PlayerHurtbox
 	player_hurtbox.hit.connect(on_hit)
-	player_hurtbox.pit_entered.connect(on_pit_entered)
 	player_hurtbox.reflect_chance = player_stats.reflect_chance
 	player_hurtbox.camera_shake_requested.connect(player_camera.apply_shake)
+
+	# Configure PitHurtbox
+	pit_hurtbox.pit_entered.connect(on_pit_entered)
 	
 	# Configure PlayerMana
 	player_mana.populate_spell_mana(player_spells.selected_spells)
@@ -286,6 +290,7 @@ func switch_to_build_mode() -> void:
 	# player_stats.active_speed = player_stats.build_speed
 	tower_detect_collider.set_deferred("disabled", false)
 	reticle_sprite.hide()
+	reticle_ammo.hide()
 	await get_tree().create_timer(.1).timeout
 	reticle_sprite.play("build")
 	reticle_sprite.show()
@@ -304,6 +309,7 @@ func switch_to_combat_mode() -> void:
 	await get_tree().create_timer(.05).timeout
 	reticle_sprite.play("combat")
 	reticle_sprite.show()
+	reticle_ammo.show()
 
 func on_animation_finished(anim_name) -> void:
 	if anim_name == "fall":
@@ -407,6 +413,7 @@ func on_velocity_update_requested(new_velocity: Vector2) -> void:
 
 func update_hurtbox_collider(_value) -> void:
 	player_hurtbox.collider.set_deferred("disabled", _value)
+	pit_hurtbox.collider.set_deferred("disabled", _value)
 
 func on_special_charge_sprite_update_requested(_charges: int) -> void:
 	special_bar_dash.texture.region = Rect2(0, (3 - _charges) * 6, 24, 6)
