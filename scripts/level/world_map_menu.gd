@@ -5,7 +5,7 @@ extends Control
 @onready var level_buttons: Control = %LevelButtons
 @onready var left_world_map_info_panel: WorldMapInfoPanel = %LeftWorldMapInfoPanel
 @onready var right_world_map_info_panel: WorldMapInfoPanel = %RightWorldMapInfoPanel
-@onready var pause_menu: PauseMenu = %PauseMenu
+# @onready var pause_menu: PauseMenu = %PauseMenu
 @onready var level_toggle_button: TextureButton = %LevelToggleButton
 @onready var level_ui: TextureRect = %LevelUI
 
@@ -93,11 +93,11 @@ func unpause_game():
 
 func pause_game_with_menu():
 	on_hide_timer_timeout()
-	pause_menu.show()
+	# pause_menu.show()
 	get_tree().paused = true
 
 func unpause_game_with_menu():
-	pause_menu.hide()
+	# pause_menu.hide()
 	get_tree().paused = false
 
 func set_can_pause(value: bool) -> void:

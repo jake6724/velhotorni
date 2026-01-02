@@ -3,7 +3,7 @@ extends Node
 
 var main_scene: PackedScene = load("res://scenes/Main.tscn")
 var main_menu_scene: PackedScene = load("res://scenes/MainMenu.tscn")
-var main: Node2D # Reference used to change RoundInfo UI
+var main: Main # Reference used to change RoundInfo UI
 
 var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # The scene that 'exit' in menu takes you to
 

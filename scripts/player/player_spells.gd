@@ -1,7 +1,7 @@
 class_name PlayerSpells
 extends Node
 
-@onready var selected_spells: Array[SpellData] = PlayerLoadout.equipped_spells
+var selected_spells: Array[SpellData]
 var original_spell_positions: Array[SpellData] = []
 
 var spells: SpellDataDoublyLinkedList
@@ -13,6 +13,8 @@ func _ready():
 	configure_spells()
 
 func configure_spells() -> void:
+	selected_spells = PlayerLoadout.equipped_spells
+
 	# Copy selected spells, clear it, and only put back spelldata and not null values
 	var selected_spells_clone = selected_spells.duplicate()
 	selected_spells = []
@@ -22,7 +24,9 @@ func configure_spells() -> void:
 
 	original_spell_positions = selected_spells
 	spells = SpellDataDoublyLinkedList.new(selected_spells)
-	active_spell = spells.head.value
+
+	if spells.array.size() > 0:
+		active_spell = spells.head.value
 
 func switch_spells(_switch_direction) -> void:
 	if spells.array.size() > 1:

@@ -156,6 +156,9 @@ func _ready():
 	# Connect to CoinCollector (Tower Mana)
 	coin_collector.coin_collected.connect(on_tower_mana_collected)
 
+	# Connect to PlayerLoadout
+	PlayerLoadout.player_loadout_updated.connect(on_player_loadout_updated)
+
 	# Configure Timers
 	# Respawn Timer
 	respawn_timer.autostart = false
@@ -459,3 +462,9 @@ func update_reticle_ammo(_value: float) -> void:
 		reticle_ammo.texture_progress = reticle_ammo_low_texture
 	else:
 		reticle_ammo.texture_progress = reticle_ammo_texture
+
+func on_player_loadout_updated() -> void:
+	print("On player loadout updated called!")
+	player_spells.configure_spells()
+	player_mana.populate_spell_mana(player_spells.selected_spells)
+	player_hud.on_spell_loadout_updated(player_spells.spells.array, player_mana)

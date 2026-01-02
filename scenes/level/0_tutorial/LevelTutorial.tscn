@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://c834s0blo3yw2"]
+[gd_scene load_steps=38 format=4 uid="uid://c834s0blo3yw2"]
 
 [ext_resource type="Script" uid="uid://f60hwpg87qo0" path="res://scripts/level/tutorial_level_environment.gd" id="1_m4hgg"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_g7icy"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="14_mi3hr"]
 [ext_resource type="Script" uid="uid://bshhqh6p6rwlx" path="res://scripts/ui/controller_button_hint.gd" id="15_g7icy"]
 [ext_resource type="PackedScene" uid="uid://b26c6r5s37hup" path="res://scenes/ui/ButtonHint.tscn" id="16_g7icy"]
+[ext_resource type="Script" uid="uid://bqlvm84h6ory3" path="res://scripts/level/trigger_area.gd" id="17_b1rh7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_do1fp"]
 texture = ExtResource("2_p3lqo")
@@ -798,6 +799,7 @@ texture = ExtResource("4_mi3hr")
 20:13/0 = 0
 21:13/0 = 0
 22:13/0 = 0
+22:13/0/z_index = -4096
 23:13/0 = 0
 23:13/0/z_index = -4096
 24:13/0 = 0
@@ -852,6 +854,7 @@ texture = ExtResource("4_mi3hr")
 20:14/0 = 0
 21:14/0 = 0
 22:14/0 = 0
+22:14/0/z_index = -4096
 23:14/0 = 0
 23:14/0/z_index = -4096
 24:14/0 = 0
@@ -1583,6 +1586,9 @@ shader_parameter/debug = false
 _data = [Vector2(0, 0.0473282), 0.0, 0.0, 0, 0, Vector2(0.389706, 0.980153), 0.0, 0.0, 0, 0, Vector2(1, 0.474046), 0.0, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1rh7"]
+size = Vector2(160, 80)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_smqmd"]
 atlas = ExtResource("14_mi3hr")
 region = Rect2(34, 50, 12, 12)
@@ -1601,6 +1607,10 @@ region = Rect2(67, 16, 11, 16)
 resource_local_to_scene = true
 atlas = ExtResource("14_mi3hr")
 region = Rect2(50, 16, 11, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_swjki"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/spr_ui_box2.png-0dd94c0cf4b3909f276c409ca529f5f7.ctex"
 
 [node name="LevelTutorial" type="Node2D"]
 script = ExtResource("1_m4hgg")
@@ -1653,15 +1663,7 @@ unique_name_in_owner = true
 
 [node name="EnemySpawnPortal" parent="PortalParent" instance=ExtResource("9_swjki")]
 visible = false
-position = Vector2(-8, 104)
-
-[node name="EnemySpawnPortal2" parent="PortalParent" instance=ExtResource("9_swjki")]
-visible = false
-position = Vector2(104, 392)
-
-[node name="EnemySpawnPortal3" parent="PortalParent" instance=ExtResource("9_swjki")]
-visible = false
-position = Vector2(344, 408)
+position = Vector2(-280, -408)
 
 [node name="FlyingSpawnParent" type="Node" parent="."]
 unique_name_in_owner = true
@@ -1700,6 +1702,20 @@ position = Vector2(288, 288)
 
 [node name="TowerManaBreakablesParent" type="Node" parent="."]
 unique_name_in_owner = true
+
+[node name="TriggerAreaParent" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Dialogue1TriggerArea" type="Area2D" parent="TriggerAreaParent"]
+position = Vector2(288, -40)
+collision_layer = 0
+collision_mask = 65536
+script = ExtResource("17_b1rh7")
+allow_wave_start = true
+metadata/_custom_type_script = "uid://bqlvm84h6ory3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerAreaParent/Dialogue1TriggerArea"]
+shape = SubResource("RectangleShape2D_b1rh7")
 
 [node name="WaveInfoPanelParent" type="Node" parent="."]
 unique_name_in_owner = true
@@ -1792,3 +1808,529 @@ offset_top = 56.0
 offset_right = 215.0
 offset_bottom = 72.0
 texture = SubResource("AtlasTexture_mi3hr")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DialogueParent" type="Control" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Dialogue1" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 12.0
+offset_right = 464.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue1/MarginContainer"]
+layout_mode = 2
+text = "These are the training grounds
+
+Press 'r' to summon the first wave of enemies"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue2" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 12.0
+offset_right = 464.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue2/MarginContainer"]
+layout_mode = 2
+text = "Shoot enemies with your arcane staff to protect the tower"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue3" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 124.0
+offset_right = 464.0
+offset_bottom = 238.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue3/MarginContainer"]
+layout_mode = 2
+text = "Great! 
+
+Press 'Tab' to enter summon mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue4" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 140.0
+offset_right = 464.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue4/MarginContainer"]
+layout_mode = 2
+text = "'Left-click' to summon a fire familiar.
+
+The familiar will help guard the path"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue5" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 140.0
+offset_right = 464.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue5/MarginContainer"]
+layout_mode = 2
+text = "Awesome!
+
+ Press 'tab' to go back to combat mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue6" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 140.0
+offset_right = 464.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue6/MarginContainer"]
+layout_mode = 2
+text = "Now press 'r' to call the next wave!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue7" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 140.0
+offset_right = 464.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue7/MarginContainer"]
+layout_mode = 2
+text = "The fire familiar with attack and burn enemies as they come into range!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue8" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 140.0
+offset_right = 464.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue8/MarginContainer"]
+layout_mode = 2
+text = "Some enemies can cast powerful spells
+
+Press 'r' to continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue9" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 316.0
+offset_top = 140.0
+offset_right = 484.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue9/MarginContainer"]
+layout_mode = 2
+text = "Enemy spells will damage you and your familiars! 
+
+Dash, dodge, and take cover behind familiars to survive"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue10" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 140.0
+offset_right = 464.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue10/MarginContainer"]
+layout_mode = 2
+text = "Powerful enemies may target you or your familiars directly!
+
+Press 'r'"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue11" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 140.0
+offset_right = 464.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue11/MarginContainer"]
+layout_mode = 2
+text = "Duel this ukobach!
+
+He will attack your familiar if you are not in range"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue12" type="NinePatchRect" parent="UI/DialogueParent"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 140.0
+offset_right = 464.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.990018, 1.01198)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("CompressedTexture2D_swjki")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueParent/Dialogue12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueParent/Dialogue12/MarginContainer"]
+layout_mode = 2
+text = "You can fight many enemies at once with help from your familiars!
+
+'r' to continue"
+horizontal_alignment = 1
+vertical_alignment = 1
