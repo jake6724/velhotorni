@@ -63,20 +63,26 @@ func on_spell_loadout_updated(spell_data_list: Array[SpellData], player_mana: Pl
 	update_mana(spell_data_list, player_mana)
 
 func update_spells(spell_data_list: Array[SpellData]) -> void:
+
 	if spell_data_list.size() > 0:
 		weapons.show()
 		active_spell_icon.texture = spell_data_list[0].active_icon
 
-		for icon in inactive_spell_icons.slice(1,-1):
+		# Hide all inactive spell icons. They will be shown below if required
+		for icon in inactive_spell_icons.slice(1,inactive_spell_icons.size()):
+		
 			icon.hide()
 
 		# Update texture and show any inactive icons which have corresponding spell data
 		for i in range(1, spell_data_list.size()):
+	
 			if spell_data_list[i]:
 				inactive_spell_icons[i].show()
 				inactive_spell_icons[i].texture = spell_data_list[i].inactive_icon
 
 	else:
+		for icon in inactive_spell_icons.slice(1,inactive_spell_icons.size()):
+			icon.hide()
 		weapons.hide()
 
 func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:

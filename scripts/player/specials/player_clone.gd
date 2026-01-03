@@ -16,7 +16,7 @@ var reset_timer: Timer = Timer.new()
 
 func _ready():
 	ap.play("idle")
-	staff_sprite.switch_staff_texture(player.player_spell_spawner.curr_spell_data.staff_type)
+	staff_sprite.switch_staff_texture(player.player_spell_spawner.curr_spell_data)
 	clone_staff_ap.animation_finished.connect(on_staff_animation_finished)
 
 	add_child(reset_timer)
@@ -64,10 +64,10 @@ func update_spell_spawn_point() -> void:
 func on_spell_cast() -> void:
 	clone_staff_ap.play("fire")
 
-func on_staff_switched(_spell_type: SpellData.StaffType) -> void:
+func on_staff_switched(_spell_data: SpellData) -> void:
 	clone_staff_ap.play("switch")
 	await clone_staff_ap.animation_finished
-	staff_sprite.switch_staff_texture(_spell_type)
+	staff_sprite.switch_staff_texture(_spell_data)
 
 func show_staff_sprite_custom(): 
 	if player.staff_sprite.visible:

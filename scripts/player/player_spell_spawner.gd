@@ -36,8 +36,8 @@ func _ready():
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	add_child(attack_timer)
 
-func initialize(_spell_data: SpellData) -> void:
-	curr_spell_data = _spell_data
+func set_active_spell(_active_spell_data: SpellData) -> void:
+	curr_spell_data = _active_spell_data
 	spell_func = get_spell_func(curr_spell_data.type)
 
 ## Wrapper for the `spell_func` Callable. Used as an easy interface for other scripts to call.
@@ -55,7 +55,7 @@ func on_switch_spell(new_spell_data: SpellData) -> void:
 	# Update spell_func()
 	spell_func = get_spell_func(curr_spell_data.type)
 	# Update staff
-	staff_switched.emit(curr_spell_data.staff_type) # this could move to player_spells.gd
+	staff_switched.emit(curr_spell_data) # this could move to player_spells.gd
 
 func get_spell_func(_spell_type: SpellData.Type) -> Callable:
 	match _spell_type:
@@ -74,6 +74,9 @@ func get_spell_func(_spell_type: SpellData.Type) -> Callable:
 		SpellData.Type.SHIELD_DIRECTIONAL:
 			curr_spell_is_melee = false
 			return spawn_shield_spell
+		SpellData.Type.EMPTY:
+			curr_spell_is_melee = false
+			return spawn_empty_spell
 		_: 
 			push_error("Unknown spell type")
 			curr_spell_is_melee = false
@@ -163,8 +166,11 @@ func on_attack_timer_timeout() -> void:
 	can_attack = true
 	
 func check_can_afford(new_spell_data: SpellData) -> bool:
-	if new_spell_data.mana_cost <= player.player_mana.spell_mana[new_spell_data]:
-		return true
+	if new_spell_data.type != SpellData.Type.EMPTY:
+		if new_spell_data.mana_cost <= player.player_mana.spell_mana[new_spell_data]:
+			return true
+		else:
+			return false
 	else:
 		return false
 
@@ -175,6 +181,8 @@ func check_can_afford(new_spell_data: SpellData) -> bool:
 func on_spell_damage_dealt(damage_amount: float) -> void:
 	spell_damage_dealt.emit(damage_amount)
 
+func spawn_empty_spell(_player_aim_direction: Vector2) -> void:
+	pass
 
 # func spawn_bullet_spell_charged(_player_aim_direction: Vector2) -> void:
 # 	var charge_value = min(100, player.player_input.primary_action_charge)
