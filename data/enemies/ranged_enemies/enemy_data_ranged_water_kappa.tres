@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("3_nq7n2")
 attack_cooldown = 0.75
-attack_range = 112.0
+attack_range = 144.0
 burst_cooldown = 0.0
 num_bursts = 1
 num_bullets_per_burst = 3
@@ -17,7 +17,7 @@ angle_increment = 5.0
 spawn_center_bullet = false
 bullet_damage = 1
 bullet_speed = 60.0
-bullet_max_distance = 112.0
+bullet_max_distance = 144.0
 bullet_atlas = ExtResource("1_tuydb")
 size = 5
 element = 2
@@ -32,6 +32,8 @@ element_mana_drop_amount_multiplier = 1.5
 atlas = ExtResource("1_pg5il")
 show_light = false
 explosion_sfx = ExtResource("3_0d3mo")
+wind_up = true
+wind_up_duration = 0.5
 hex_data_list = Array[ExtResource("2_pg5il")]([])
 knockback_multiplier = 1.5
 enemy_name = ""

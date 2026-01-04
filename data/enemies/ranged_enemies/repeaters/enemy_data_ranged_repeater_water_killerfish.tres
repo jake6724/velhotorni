@@ -8,8 +8,8 @@
 
 [resource]
 script = ExtResource("3_vsw5l")
-attack_cooldown = 0.75
-burst_cooldown = 0.75
+attack_cooldown = 0.85
+burst_cooldown = 0.85
 num_bursts = 4
 initial_delay = 3.0
 num_bullets_per_burst = 6
@@ -19,7 +19,7 @@ burst_angle_increment = -90.0
 burst_bullet_speed_increment = 0.0
 bullet_damage = 1
 bullet_speed = 100.0
-bullet_max_distance = 96.0
+bullet_max_distance = 112.0
 bullet_atlas = ExtResource("1_lqa3j")
 size = 7
 element = 2

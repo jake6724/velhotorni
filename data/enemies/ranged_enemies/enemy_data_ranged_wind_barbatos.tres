@@ -13,8 +13,8 @@ region = Rect2(64, 16, 16, 16)
 
 [resource]
 script = ExtResource("3_6v4xo")
-attack_cooldown = 0.2
-attack_range = 300.0
+attack_cooldown = 0.25
+attack_range = 112.0
 burst_cooldown = 0.0
 num_bursts = 1
 num_bullets_per_burst = 0
@@ -22,7 +22,7 @@ angle_increment = 0.0
 spawn_center_bullet = true
 bullet_damage = 1
 bullet_speed = 100.0
-bullet_max_distance = 100.0
+bullet_max_distance = 112.0
 bullet_atlas = ExtResource("1_jx34f")
 size = 5
 element = 1

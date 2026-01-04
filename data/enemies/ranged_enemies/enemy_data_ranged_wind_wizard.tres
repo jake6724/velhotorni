@@ -7,15 +7,15 @@
 
 [resource]
 script = ExtResource("3_mo727")
-attack_cooldown = 0.6
-attack_range = 120.0
-burst_cooldown = 0.15
+attack_cooldown = 1.0
+attack_range = 144.0
+burst_cooldown = 0.2
 num_bursts = 3
 num_bullets_per_burst = 1
 angle_increment = 0.0
 spawn_center_bullet = true
 bullet_damage = 1
-bullet_speed = 110.0
+bullet_speed = 140.0
 bullet_max_distance = 120.0
 bullet_atlas = ExtResource("1_geqlr")
 size = 5

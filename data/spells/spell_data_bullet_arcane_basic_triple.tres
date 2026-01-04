@@ -16,7 +16,7 @@ region = Rect2(1, 17, 14, 15)
 
 [resource]
 script = ExtResource("2_74xtx")
-speed = 300.0
+speed = 250.0
 num_bullets = 3
 angle_seperation = 15.0
 pierce = 1
@@ -27,7 +27,7 @@ sfx = ExtResource("3_fwiyq")
 type = 0
 staff_type = 3
 element = 19
-damage = 6.0
+damage = 9.0
 cooldown = 0.2
 base_spell_mana_per_drop = 100
 initial_mana_amount = 400
