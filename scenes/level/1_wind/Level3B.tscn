@@ -25,7 +25,7 @@
 [ext_resource type="Resource" uid="uid://cxd8nwnyfepqw" path="res://data/waves/test_waves/wave_wind_wizard_test.tres" id="11_2wwi5"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="11_7ycjr"]
 [ext_resource type="PackedScene" uid="uid://dtbjym5jhrudw" path="res://scenes/ui/WaveInfo.tscn" id="11_eds8m"]
-[ext_resource type="Texture2D" uid="uid://bwonyc48uhooj" path="res://assets/art/sprites/environment/spr_mask_fog.png" id="14_tioql"]
+[ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="23_btpk1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6xay"]
 texture = ExtResource("9_tioql")
@@ -1848,7 +1848,7 @@ texture_filter = 1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_1rson")
 position = Vector2(420, 304)
-texture = ExtResource("14_tioql")
+texture = ExtResource("23_btpk1")
 region_enabled = true
 region_rect = Rect2(0, 0, 1400, 800)
 
