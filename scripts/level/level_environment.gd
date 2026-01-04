@@ -21,8 +21,8 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 @onready var tower_mana_breakables_parent: Node = %TowerManaBreakablesParent
 var tower_mana_breakables: Array[Breakable] = []
 
-@onready var wave_info_panel_parent: Node = %WaveInfoPanelParent
 
+@onready var wave_info_panel_parent: Node = %WaveInfoPanelParent
 # Export vars
 @export var level_name: String
 @export var region: Region
@@ -35,6 +35,7 @@ var tower_mana_breakables: Array[Breakable] = []
 @export var start_first_wave_immediately: bool = false
 
 var stars: int = 1 # Tracks the highest number of stars earned for this level
+var can_start_wave: bool = true # Used so that levels can disable wave start, specifically in the tutorial
 
 func _ready():
 	""" *** Z INDEXES ARE NOW PAINTED IN THE TILESET ITSELF *** """
@@ -60,6 +61,14 @@ func _ready():
 	WaveManager.wave_completed.connect(populate_wave_info_panels)
 	WaveManager.wave_started.connect(hide_wave_info_panels)
 	WaveManager.wave_started.connect(on_wave_started_start_breakables)
+
+	child_custom_ready()
+
+## Allows for inheriting classes to extends _ready()'s functionality (such as TutorialLevelEnvironment)
+## Called as the final step of _ready()
+func child_custom_ready() -> void:
+	pass
+
 
 func configure_tower_mana_breakables() -> void:
 	for child: Breakable in tower_mana_breakables_parent.get_children():

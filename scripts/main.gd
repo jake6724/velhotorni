@@ -57,6 +57,7 @@ func _ready():
 	player_character.global_position = player_character.spawn_point
 	player_character.on_tower_mana_collected(active_level.initial_gold)
 	player_character.player_respawned.connect(active_level.base.take_damage.bind(1))
+	player_character.player_input.escape_pressed.connect(on_escape_pressed)
 
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
@@ -103,10 +104,9 @@ func _ready():
 	if active_level.start_first_wave_immediately:
 		WaveManager.start_wave()
 
-func _input(_event):
-	if Input.is_action_just_pressed("escape"): # TODO: Input action change
-		if can_pause:
-			pause_game_with_menu()
+func on_escape_pressed() -> void:
+	if can_pause:
+		pause_game_with_menu()
 
 func pause_game():
 	get_tree().paused = true

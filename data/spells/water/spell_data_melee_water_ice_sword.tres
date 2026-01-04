@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="SpellDataMelee" load_steps=8 format=3 uid="uid://bcov2rckhliwp"]
+[gd_resource type="Resource" script_class="SpellDataMelee" load_steps=10 format=3 uid="uid://bcov2rckhliwp"]
 
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_4eorw"]
 [ext_resource type="Texture2D" uid="uid://doed56qoyb4ta" path="res://assets/art/sprites/spr_fx_slash.png" id="1_e4yop"]
 [ext_resource type="Script" uid="uid://dcu7dihypm0k3" path="res://scripts/spells/data/spell_data_melee.gd" id="1_xb82k"]
 [ext_resource type="Resource" uid="uid://dwlj5i5bl8hcy" path="res://data/debuffs/debuff_data_freeze_ice_sword.tres" id="3_bbtra"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="4_bbtra"]
+[ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="6_x4vkg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbtra"]
 atlas = ExtResource("1_4eorw")
@@ -13,6 +14,10 @@ region = Rect2(68, 2, 25, 26)
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4vkg"]
 atlas = ExtResource("4_bbtra")
 region = Rect2(33, 1, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q04qu"]
+atlas = ExtResource("6_x4vkg")
+region = Rect2(0, 15, 217, 15)
 
 [resource]
 script = ExtResource("1_xb82k")
@@ -31,4 +36,5 @@ popup_name = "Ice Sword"
 desc = "This is an ice sword. A sword made of ice. This is ice which is in the form of a sword"
 active_icon = SubResource("AtlasTexture_bbtra")
 inactive_icon = SubResource("AtlasTexture_x4vkg")
+staff_texture = SubResource("AtlasTexture_q04qu")
 camera_shake = 0.1

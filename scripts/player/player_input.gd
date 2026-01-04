@@ -24,6 +24,7 @@ signal switch_player_mode_pressed
 signal switch_tower_action_pressed
 signal weapon_select_pressed
 signal ui_interact_pressed
+signal escape_pressed
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -97,6 +98,9 @@ func _input(event):
 
 		if event.is_action("start_wave_action") and event.is_pressed() and not event.is_echo():
 			WaveManager.start_wave()
+
+		if event.is_action("escape") and event.is_pressed() and not event.is_echo():
+			escape_pressed.emit()
 
 		set_input_type(event)
 

@@ -97,7 +97,7 @@ func _ready():
 	GlobalSettings.input_type_changed.connect(on_swap_input_type)
 
 	# Configure PlayerSpellSpawner
-	player_spell_spawner.initialize(player_spells.active_spell)
+	player_spell_spawner.set_active_spell(player_spells.active_spell)
 	player_spells.active_spell_switched.connect(player_spell_spawner.on_switch_spell)
 	player_spell_spawner.spell_spawn_points.append(spell_spawn_point)
 	player_spell_spawner.melee_spell_spawn_points.append(self)
@@ -155,6 +155,9 @@ func _ready():
 
 	# Connect to CoinCollector (Tower Mana)
 	coin_collector.coin_collected.connect(on_tower_mana_collected)
+
+	# Connect to PlayerLoadout
+	PlayerLoadout.player_loadout_updated.connect(on_player_loadout_updated)
 
 	# Configure Timers
 	# Respawn Timer
@@ -251,14 +254,14 @@ func switch_spell(_switch_direction: int) -> void:
 
 ## Update the region of the staff atlas, changing the staff graphic. Plays the switch animation and temporarily hides
 ## the staff sprite. Prevents firing spells while switching.
-func on_staff_switched(_spell_type: SpellData.StaffType) -> void:
+func on_staff_switched(_spell_data: SpellData) -> void:
 	# The switch animation modifies the atlas and texture, then resets the values. It must 
 	# complete before a normal staff animation plays
 	can_fire = false
 	staff_ap.play("switch")
 	await staff_ap.animation_finished
 	can_fire = true
-	player_aim.staff_rotation_offset_degrees = staff_sprite.switch_staff_texture(_spell_type)
+	player_aim.staff_rotation_offset_degrees = staff_sprite.switch_staff_texture(_spell_data)
 	staff_switched.emit()
 
 func switch_tower(_switch_direction: int) -> void:
@@ -459,3 +462,11 @@ func update_reticle_ammo(_value: float) -> void:
 		reticle_ammo.texture_progress = reticle_ammo_low_texture
 	else:
 		reticle_ammo.texture_progress = reticle_ammo_texture
+
+func on_player_loadout_updated() -> void:
+	print("On player loadout updated called!")
+	player_spells.configure_spells()
+	player_mana.populate_spell_mana(player_spells.selected_spells)
+	player_hud.on_spell_loadout_updated(player_spells.spells.array, player_mana)
+	player_spell_spawner.set_active_spell(player_spells.active_spell)
+	player_spell_spawner.on_switch_spell(player_spells.active_spell)

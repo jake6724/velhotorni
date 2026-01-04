@@ -23,19 +23,22 @@ func get_path_enemy_info(active_level: LevelEnvironment) -> void:
 					wave_previews[i][spawn.enemy_data] = 1
 				
 func populate_unit_wave_info(wave_index: int) -> void:
-	if wave_previews and wave_previews[wave_index] and wave_previews[wave_index].keys():
-		# Remove existing children to make way for new wave
-		for child in grid_container.get_children():
-			child.queue_free()
+	if wave_index < wave_previews.size():
+		if wave_previews and wave_previews[wave_index] and wave_previews[wave_index].keys():
+			# Remove existing children to make way for new wave
+			for child in grid_container.get_children():
+				child.queue_free()
 
-		for enemy_data: EnemyData in wave_previews[wave_index].keys():
-			var new_unit_wave_info: UnitWaveInfo = unit_wave_info_scene.instantiate()
-			grid_container.add_child(new_unit_wave_info)
-			new_unit_wave_info.initialize(enemy_data.icon, wave_previews[wave_index][enemy_data]) # enemy_data_icon, count
+			for enemy_data: EnemyData in wave_previews[wave_index].keys():
+				var new_unit_wave_info: UnitWaveInfo = unit_wave_info_scene.instantiate()
+				grid_container.add_child(new_unit_wave_info)
+				new_unit_wave_info.initialize(enemy_data.icon, wave_previews[wave_index][enemy_data]) # enemy_data_icon, count
 
-		if wave_previews[wave_index].keys().size() == 0:
-			hide()
+			if wave_previews[wave_index].keys().size() == 0:
+				hide()
+			else:
+				show()
 		else:
-			show()
+			hide()
 	else:
 		hide()

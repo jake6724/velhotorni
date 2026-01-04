@@ -35,7 +35,7 @@ func configure_level(active_level: LevelEnvironment) -> void:
 
 ## Intended to be called directly by current `PlayerController`
 func start_wave() -> void:
-	if not wave_active:
+	if not wave_active and LevelManager.active_level.can_start_wave:
 		is_wave_failed = false
 		if wave_index == 9:
 			final_wave_started.emit()
@@ -51,6 +51,7 @@ func check_wave_complete(global_pos: Vector2) -> void:
 
 func on_wave_complete() -> void:
 	wave_index += 1
+	print("Wave index: ", wave_index)
 	if wave_index < level_waves.size():
 		active_wave = level_waves[wave_index]
 	else:

@@ -1,6 +1,8 @@
 class_name PlayerHUD
 extends Control
 
+@onready var weapons: HBoxContainer = %Weapons
+
 @onready var active_spell_icon: TextureRect = %ActiveSpellIcon
 @onready var active_spell_mana: TextureProgressBar = %ActiveSpellMana
 @onready var active_spell_mana_label: RichTextLabel = %ActiveSpellManaLabel
@@ -56,39 +58,56 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 	update_tower_mana(player_mana)
 	on_health_updated(player_stats.health)
 
-func update_spells(spell_data_list: Array[SpellData]) -> void:
-	active_spell_icon.texture = spell_data_list[0].active_icon
+func on_spell_loadout_updated(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
+	update_spells(spell_data_list)
+	update_mana(spell_data_list, player_mana)
 
-	for i in range(1, spell_data_list.size()):
-		inactive_spell_icons[i].show()
-		inactive_spell_icons[i].texture = spell_data_list[i].inactive_icon
+func update_spells(spell_data_list: Array[SpellData]) -> void:
+
+	if spell_data_list.size() > 0:
+		weapons.show()
+		active_spell_icon.texture = spell_data_list[0].active_icon
+
+		# Hide all inactive spell icons. They will be shown below if required
+		for icon in inactive_spell_icons.slice(1,inactive_spell_icons.size()):
+		
+			icon.hide()
+
+		# Update texture and show any inactive icons which have corresponding spell data
+		for i in range(1, spell_data_list.size()):
+	
+			if spell_data_list[i]:
+				inactive_spell_icons[i].show()
+				inactive_spell_icons[i].texture = spell_data_list[i].inactive_icon
+
+	else:
+		for icon in inactive_spell_icons.slice(1,inactive_spell_icons.size()):
+			icon.hide()
+		weapons.hide()
 
 func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
-	var active_spell_mana_text: String = str(int(player_mana.spell_mana[spell_data_list[0]]))
-	active_spell_mana.value = (player_mana.spell_mana[spell_data_list[0]] / player_mana.spell_mana_maxes[spell_data_list[0]]) * 100
-	var zero_pad: String = get_zero_padding(MAX_ACTIVE_SPELL_MANA_DIGITS - len(active_spell_mana_text))
-	active_spell_mana_value_calculated.emit(active_spell_mana.value)
+	if spell_data_list.size() > 0:
+		var active_spell_mana_text: String = str(int(player_mana.spell_mana[spell_data_list[0]]))
+		active_spell_mana.value = (player_mana.spell_mana[spell_data_list[0]] / player_mana.spell_mana_maxes[spell_data_list[0]]) * 100
+		var zero_pad: String = get_zero_padding(MAX_ACTIVE_SPELL_MANA_DIGITS - len(active_spell_mana_text))
+		active_spell_mana_value_calculated.emit(active_spell_mana.value)
 
-	var mana_text_color: String
-	if player_mana.spell_mana_low[spell_data_list[0]]:
-		no_mana_label.show()
-		mana_text_color = LOW_MANA_COLOR
-		if player_mana.spell_mana[spell_data_list[0]] == 0:
-			no_mana_label.text = "EMPTY"
+		var mana_text_color: String
+		if player_mana.spell_mana_low[spell_data_list[0]]:
+			no_mana_label.show()
+			mana_text_color = LOW_MANA_COLOR
+			if player_mana.spell_mana[spell_data_list[0]] == 0:
+				no_mana_label.text = "EMPTY"
+			else:
+				no_mana_label.text = "LOW MANA"
 		else:
-			no_mana_label.text = "LOW MANA"
-	else:
-		mana_text_color = "ffffff"
-		no_mana_label.hide()
+			mana_text_color = "ffffff"
+			no_mana_label.hide()
 
-	active_spell_mana_label.text = bbc_string % PADDING_COLOR + zero_pad + "[/color]" + bbc_color_mana_text % mana_text_color + active_spell_mana_text + "[/color]"
+		active_spell_mana_label.text = bbc_string % PADDING_COLOR + zero_pad + "[/color]" + bbc_color_mana_text % mana_text_color + active_spell_mana_text + "[/color]"
 
-	for i in range(1,spell_data_list.size()):
-		inactive_spell_manas[i].value = (player_mana.spell_mana[spell_data_list[i]] / player_mana.spell_mana_maxes[spell_data_list[i]]) * 100
-			
-	# inactive_spell_1_mana.value = (player_mana.spell_mana[spell_data_list[1]] / player_mana.spell_mana_maxes[spell_data_list[1]]) * 100
-	# inactive_spell_2_mana.value = (player_mana.spell_mana[spell_data_list[2]] / player_mana.spell_mana_maxes[spell_data_list[2]]) * 100
-	# inactive_spell_3_mana.value = (player_mana.spell_mana[spell_data_list[3]] / player_mana.spell_mana_maxes[spell_data_list[3]]) * 100
+		for i in range(1,spell_data_list.size()):
+			inactive_spell_manas[i].value = (player_mana.spell_mana[spell_data_list[i]] / player_mana.spell_mana_maxes[spell_data_list[i]]) * 100
 
 func update_tower_mana(player_mana) -> void:
 	var text = str(int(player_mana.tower_mana))

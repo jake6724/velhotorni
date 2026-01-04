@@ -35,6 +35,7 @@ script = ExtResource("6_wp0k4")
 metadata/_custom_type_script = "uid://bjkhw2thvqfa4"
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="PauseMenu" parent="UI" node_paths=PackedStringArray("main") instance=ExtResource("5_vcsgt")]
 visible = false

@@ -1,8 +1,8 @@
 class_name SpellData
 extends Resource
 
-enum Type {BULLET, BULLET_AOE, MELEE, BULLET_CHARGED, SHIELD_DIRECTIONAL}
-enum StaffType {ARCANE, WATER_SWORD, FIRE_STAFF, TRIPLE_STAFF, LIGHT_UMBRELLA}
+enum Type {BULLET, BULLET_AOE, MELEE, BULLET_CHARGED, SHIELD_DIRECTIONAL, EMPTY}
+enum StaffType {ARCANE, WATER_SWORD, FIRE_STAFF, TRIPLE_STAFF, LIGHT_UMBRELLA, EMPTY}
 
 @export var type: Type
 @export var staff_type: StaffType = StaffType.ARCANE
@@ -24,6 +24,7 @@ var mana_cost: float = 1
 
 @export var active_icon: AtlasTexture
 @export var inactive_icon: AtlasTexture
+@export var staff_texture: AtlasTexture
 # @export var active_icon_region: Rect2 = Rect2(0,0,32,31)
 # @export var inactive_icon_region: Rect2 = Rect2(0,0,16,16)
 

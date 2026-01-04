@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SpellDataShieldDirectional" load_steps=6 format=3 uid="uid://uh4rcnnycu7s"]
+[gd_resource type="Resource" script_class="SpellDataShieldDirectional" load_steps=8 format=3 uid="uid://uh4rcnnycu7s"]
 
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_8hsw4"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="2_avrr5"]
 [ext_resource type="Script" uid="uid://3dqja03a1opn" path="res://scripts/spells/data/spell_data_shield_directional.gd" id="2_g4s1j"]
+[ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="4_avrr5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_avrr5"]
 atlas = ExtResource("1_8hsw4")
@@ -11,6 +12,10 @@ region = Rect2(36, 35, 24, 25)
 [sub_resource type="AtlasTexture" id="AtlasTexture_g4s1j"]
 atlas = ExtResource("2_avrr5")
 region = Rect2(17, 17, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqdug"]
+atlas = ExtResource("4_avrr5")
+region = Rect2(0, 75, 217, 15)
 
 [resource]
 script = ExtResource("2_g4s1j")
@@ -29,5 +34,6 @@ popup_name = "Light Shield"
 desc = "A light shield"
 active_icon = SubResource("AtlasTexture_avrr5")
 inactive_icon = SubResource("AtlasTexture_g4s1j")
+staff_texture = SubResource("AtlasTexture_cqdug")
 camera_shake = 0.1
 metadata/_custom_type_script = "uid://3dqja03a1opn"
