@@ -50,4 +50,3 @@ func switch_to_index(index: int) -> void:
 		while spells.head.value != original_spell_positions[index] or count > 5:
 			switch_spells(1)
 			count += 1
-	

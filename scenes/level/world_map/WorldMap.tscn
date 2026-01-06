@@ -679,6 +679,7 @@ layer = 3
 
 [node name="LevelToggleButton" type="TextureButton" parent="InfoPanels"]
 unique_name_in_owner = true
+visible = false
 z_index = 5
 anchors_preset = -1
 anchor_left = 0.042
@@ -700,11 +701,13 @@ texture_hover = ExtResource("36_yjmtc")
 
 [node name="LeftWorldMapInfoPanel" parent="InfoPanels" instance=ExtResource("3_gyoph")]
 unique_name_in_owner = true
+visible = false
 offset_left = -160.0
 offset_right = 0.0
 
 [node name="RightWorldMapInfoPanel" parent="InfoPanels" instance=ExtResource("3_gyoph")]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

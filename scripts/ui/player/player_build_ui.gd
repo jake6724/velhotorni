@@ -29,15 +29,36 @@ const RAISE_POSITION: Vector2 = Vector2(0, -8)
 const RAISE_DURATION: float = .1
 
 func _ready():
-	tower_buttons = [%FireButton, %WindButton, %WaterButton, $%EarthButton, %LightButton, %DarkButton]
-	tower_button_price_labels = [%FirePriceLabel, %WindPriceLabel, %WaterPriceLabel, %EarthPriceLabel, %LightPriceLabel, %DarkPriceLabel]
-	set_tower_button_prices()
+	tower_buttons = [%TowerButton1, %TowerButton2, %TowerButton3, $%TowerButton4, %TowerButton5, %TowerButton6]
+	tower_button_price_labels = [%TowerPriceLabel1, %TowerPriceLabel2, %TowerPriceLabel3, %TowerPriceLabel4, %TowerPriceLabel5, %TowerPriceLabel6]
 	raise_button(tower_buttons[tower_index])
 
 	tower_action_icons = [heal_icon, upgrade_icon, sell_icon]
 	tower_action_button_hint_icon.z_index = Constants.z_index_map["tower_menu"]
 
 	TowerGlobalData.tower_prices_updated.connect(set_tower_button_prices)
+
+## Set the element for each tower button, and prices. This DOES NOT update the actual icon of the button; that is 
+## done in update(), which requires PlayerMana information. Ensure that update() is called from a parent script with
+## PlayerMana included to update icons
+func configure_loadout(tower_element_options: Array[Constants.Element]) -> void:
+	populate_tower_button_data(tower_element_options)
+	set_tower_button_prices(tower_element_options)
+
+func populate_tower_button_data(tower_element_options: Array[Constants.Element]) -> void:
+	# Clean-slate, hide all tower buttons
+	for tower_button: TowerButton in tower_buttons:
+		tower_button.hide()
+	# Show tower buttons starting from left-to-right and assigning elements
+	for i in range(tower_element_options.size()):
+		tower_buttons[i].element = tower_element_options[i]
+		tower_buttons[i].show()
+
+# This is seperate from populate_tower_button_data() so that it can be called seperately when prices update,
+# such as a perk that reduces fire tower cost
+func set_tower_button_prices(tower_element_options: Array[Constants.Element]) -> void:
+	for i in range(tower_element_options.size()):
+		tower_button_price_labels[i].text = str(TowerGlobalData.tower_prices[tower_element_options[i]])
 
 func update(player_mana: PlayerMana) -> void:
 	update_tower_button_icons(player_mana)
@@ -52,14 +73,6 @@ func lower_button(_button) -> void:
 
 func raise_current() -> void:
 	raise_button(tower_buttons[tower_index])
-
-func set_tower_button_prices() -> void:
-	%FirePriceLabel.text = str(TowerGlobalData.tower_prices[Constants.Element.FIRE])
-	%WindPriceLabel.text = str(TowerGlobalData.tower_prices[Constants.Element.WIND])
-	%WaterPriceLabel.text = str(TowerGlobalData.tower_prices[Constants.Element.WATER])
-	%EarthPriceLabel.text = str(TowerGlobalData.tower_prices[Constants.Element.EARTH])
-	%LightPriceLabel.text = str(TowerGlobalData.tower_prices[Constants.Element.LIGHT])
-	%DarkPriceLabel.text = str(TowerGlobalData.tower_prices[Constants.Element.DARK])
 
 func update_tower_info_panel(tower: Tower) -> void:
 	tower_info_panel.update_stats(tower)

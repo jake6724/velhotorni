@@ -21,8 +21,6 @@ var chest_spell_cards: Array[SpellCard] = []
 var spell_card_scene: PackedScene = preload("res://scenes/ui/loadout/SpellCard.tscn")
 var selected_equip_spell_card: SpellCard = null
 
-signal player_loadout_updated
-
 func _ready():
 	populate_equip_cards()
 	populate_chest_cards()
@@ -104,4 +102,4 @@ func update_player_loadout() -> void:
 	PlayerLoadout.equipped_spell_2 = equip_spell_card_2.data
 	PlayerLoadout.equipped_spell_3 = equip_spell_card_3.data
 	PlayerLoadout.equipped_spell_4 = equip_spell_card_4.data
-	PlayerLoadout.loadout_updated()
+	PlayerLoadout.trigger_spell_loadout_update()

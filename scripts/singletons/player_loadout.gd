@@ -1,10 +1,15 @@
 extends Node
 
-signal player_loadout_updated
+signal spell_loadout_updated
+signal tower_loadout_updated
 
-func loadout_updated() -> void:
+func trigger_spell_loadout_update() -> void:
 	equipped_spells = [equipped_spell_1, equipped_spell_2, equipped_spell_3, equipped_spell_4]
-	player_loadout_updated.emit()
+	spell_loadout_updated.emit()
+
+func trigger_tower_loadout_update() -> void:
+	equipped_towers = [equipped_tower_1, equipped_tower_2, equipped_tower_3, equipped_tower_4, equipped_tower_5, equipped_tower_6]
+	tower_loadout_updated.emit() 
 
 var stars: int = 0
 

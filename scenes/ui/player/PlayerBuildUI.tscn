@@ -87,36 +87,37 @@ stretch_mode = 2
 [node name="TowerButtons" type="HBoxContainer" parent="TextureRect"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 offset_left = -96.0
-offset_top = -23.0
+offset_top = -14.5
 offset_right = 96.0
-offset_bottom = 6.0
+offset_bottom = 14.5
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/separation = 0
+alignment = 1
 
-[node name="FireVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+[node name="TowerVbox1" type="VBoxContainer" parent="TextureRect/TowerButtons"]
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/separation = -3
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/FireVbox"]
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/TowerVbox1"]
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_right = 0
 
-[node name="FireButton" type="TextureButton" parent="TextureRect/TowerButtons/FireVbox"]
+[node name="TowerButton1" type="TextureButton" parent="TextureRect/TowerButtons/TowerVbox1"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -126,7 +127,7 @@ mouse_filter = 1
 texture_normal = ExtResource("4_e8jwa")
 script = ExtResource("6_xq5g3")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/FireVbox/FireButton"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox1/TowerButton1"]
 layout_mode = 2
 offset_left = 5.0
 offset_top = -7.00002
@@ -138,7 +139,7 @@ mouse_filter = 2
 theme_override_constants/separation = 1
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/FireVbox/FireButton/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/TowerVbox1/TowerButton1/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -147,7 +148,7 @@ size_flags_vertical = 4
 mouse_filter = 2
 texture = ExtResource("5_4whgm")
 
-[node name="FirePriceLabel" type="Label" parent="TextureRect/TowerButtons/FireVbox/FireButton/HBoxContainer"]
+[node name="TowerPriceLabel1" type="Label" parent="TextureRect/TowerButtons/TowerVbox1/TowerButton1/HBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -161,16 +162,16 @@ theme_override_font_sizes/font_size = 8
 text = "00"
 vertical_alignment = 1
 
-[node name="WindVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+[node name="TowerVbox2" type="VBoxContainer" parent="TextureRect/TowerButtons"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = -3
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/WindVbox"]
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/TowerVbox2"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="WindButton" type="TextureButton" parent="TextureRect/TowerButtons/WindVbox"]
+[node name="TowerButton2" type="TextureButton" parent="TextureRect/TowerButtons/TowerVbox2"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -180,7 +181,7 @@ texture_normal = ExtResource("7_vi7rs")
 script = ExtResource("6_xq5g3")
 element = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/WindVbox/WindButton"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox2/TowerButton2"]
 layout_mode = 2
 offset_left = 5.0
 offset_top = -7.0
@@ -188,7 +189,7 @@ offset_right = 32.0
 offset_bottom = 3.0
 theme_override_constants/separation = 1
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/WindVbox/WindButton/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/TowerVbox2/TowerButton2/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -196,7 +197,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_4whgm")
 
-[node name="WindPriceLabel" type="Label" parent="TextureRect/TowerButtons/WindVbox/WindButton/HBoxContainer"]
+[node name="TowerPriceLabel2" type="Label" parent="TextureRect/TowerButtons/TowerVbox2/TowerButton2/HBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -209,16 +210,16 @@ theme_override_fonts/font = ExtResource("6_27m2f")
 theme_override_font_sizes/font_size = 8
 text = "00"
 
-[node name="WaterVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+[node name="TowerVbox3" type="VBoxContainer" parent="TextureRect/TowerButtons"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = -3
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/WaterVbox"]
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/TowerVbox3"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="WaterButton" type="TextureButton" parent="TextureRect/TowerButtons/WaterVbox"]
+[node name="TowerButton3" type="TextureButton" parent="TextureRect/TowerButtons/TowerVbox3"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -228,7 +229,7 @@ texture_normal = ExtResource("8_mr62x")
 script = ExtResource("6_xq5g3")
 element = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/WaterVbox/WaterButton"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox3/TowerButton3"]
 layout_mode = 2
 offset_left = 5.0
 offset_top = -7.00002
@@ -236,7 +237,7 @@ offset_right = 32.0
 offset_bottom = 2.99998
 theme_override_constants/separation = 1
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/WaterVbox/WaterButton/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/TowerVbox3/TowerButton3/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -244,7 +245,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_4whgm")
 
-[node name="WaterPriceLabel" type="Label" parent="TextureRect/TowerButtons/WaterVbox/WaterButton/HBoxContainer"]
+[node name="TowerPriceLabel3" type="Label" parent="TextureRect/TowerButtons/TowerVbox3/TowerButton3/HBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -257,16 +258,16 @@ theme_override_fonts/font = ExtResource("6_27m2f")
 theme_override_font_sizes/font_size = 8
 text = "00"
 
-[node name="EarthVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+[node name="TowerVbox4" type="VBoxContainer" parent="TextureRect/TowerButtons"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = -3
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/EarthVbox"]
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/TowerVbox4"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="EarthButton" type="TextureButton" parent="TextureRect/TowerButtons/EarthVbox"]
+[node name="TowerButton4" type="TextureButton" parent="TextureRect/TowerButtons/TowerVbox4"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -276,7 +277,7 @@ texture_normal = ExtResource("9_mnvwy")
 script = ExtResource("6_xq5g3")
 element = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/EarthVbox/EarthButton"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox4/TowerButton4"]
 layout_mode = 2
 offset_left = 5.0
 offset_top = -7.0
@@ -284,7 +285,7 @@ offset_right = 32.0
 offset_bottom = 3.0
 theme_override_constants/separation = 1
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/EarthVbox/EarthButton/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/TowerVbox4/TowerButton4/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -292,7 +293,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_4whgm")
 
-[node name="EarthPriceLabel" type="Label" parent="TextureRect/TowerButtons/EarthVbox/EarthButton/HBoxContainer"]
+[node name="TowerPriceLabel4" type="Label" parent="TextureRect/TowerButtons/TowerVbox4/TowerButton4/HBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -305,16 +306,16 @@ theme_override_fonts/font = ExtResource("6_27m2f")
 theme_override_font_sizes/font_size = 8
 text = "00"
 
-[node name="LightVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+[node name="TowerVbox5" type="VBoxContainer" parent="TextureRect/TowerButtons"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = -3
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/LightVbox"]
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/TowerVbox5"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="LightButton" type="TextureButton" parent="TextureRect/TowerButtons/LightVbox"]
+[node name="TowerButton5" type="TextureButton" parent="TextureRect/TowerButtons/TowerVbox5"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -324,7 +325,7 @@ texture_normal = ExtResource("10_jni78")
 script = ExtResource("6_xq5g3")
 element = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/LightVbox/LightButton"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox5/TowerButton5"]
 layout_mode = 2
 offset_left = 4.99997
 offset_top = -7.00002
@@ -332,7 +333,7 @@ offset_right = 32.0
 offset_bottom = 2.99998
 theme_override_constants/separation = 1
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/LightVbox/LightButton/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/TowerVbox5/TowerButton5/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -340,7 +341,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_4whgm")
 
-[node name="LightPriceLabel" type="Label" parent="TextureRect/TowerButtons/LightVbox/LightButton/HBoxContainer"]
+[node name="TowerPriceLabel5" type="Label" parent="TextureRect/TowerButtons/TowerVbox5/TowerButton5/HBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -353,16 +354,16 @@ theme_override_fonts/font = ExtResource("6_27m2f")
 theme_override_font_sizes/font_size = 8
 text = "00"
 
-[node name="DarkVbox" type="VBoxContainer" parent="TextureRect/TowerButtons"]
+[node name="TowerVbox6" type="VBoxContainer" parent="TextureRect/TowerButtons"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = -3
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/DarkVbox"]
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/TowerButtons/TowerVbox6"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="DarkButton" type="TextureButton" parent="TextureRect/TowerButtons/DarkVbox"]
+[node name="TowerButton6" type="TextureButton" parent="TextureRect/TowerButtons/TowerVbox6"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -372,7 +373,7 @@ texture_normal = ExtResource("11_6qvig")
 script = ExtResource("6_xq5g3")
 element = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/DarkVbox/DarkButton"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox6/TowerButton6"]
 layout_mode = 2
 offset_left = 4.99997
 offset_top = -7.0
@@ -380,7 +381,7 @@ offset_right = 32.0
 offset_bottom = 3.0
 theme_override_constants/separation = 1
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/DarkVbox/DarkButton/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TowerButtons/TowerVbox6/TowerButton6/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(7, 9)
 layout_mode = 2
@@ -388,7 +389,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_4whgm")
 
-[node name="DarkPriceLabel" type="Label" parent="TextureRect/TowerButtons/DarkVbox/DarkButton/HBoxContainer"]
+[node name="TowerPriceLabel6" type="Label" parent="TextureRect/TowerButtons/TowerVbox6/TowerButton6/HBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2

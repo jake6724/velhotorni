@@ -109,3 +109,4 @@ func update_player_loadout() -> void:
 	PlayerLoadout.equipped_tower_4 = equip_tower_card_4.data
 	PlayerLoadout.equipped_tower_5 = equip_tower_card_5.data
 	PlayerLoadout.equipped_tower_6 = equip_tower_card_6.data
+	PlayerLoadout.trigger_tower_loadout_update()
