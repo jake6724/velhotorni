@@ -65,6 +65,8 @@ func update_reticle_combat_mouse() -> void:
 func update_reticle_build() -> void:
 	if player.player_build.preview_tower:
 		player.reticle_sprite.global_position = player.player_build.preview_tower.global_position + Vector2(8,8)
+	else:
+		player.reticle_sprite.global_position = player.global_position
 
 func reset_reticle_position(delta) -> void:
 	aim_input -= aim_input.normalized() * delta * reset_speed_modifier

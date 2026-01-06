@@ -31,8 +31,8 @@ var tower_index: int = 0:
 	set(value):
 		tower_index = value
 		if tower_index < 0:
-			tower_index = 5
-		elif tower_index > 5:
+			tower_index = (tower_element_options.size()-1)
+		elif tower_index > (tower_element_options.size()-1):
 			tower_index = 0
 
 		player_build_ui.tower_index = tower_index
@@ -64,6 +64,8 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	TowerGlobalData.tower_upgrade_price_modifier_updated.connect(on_tower_upgrade_price_modifier_updated)
 	TowerGlobalData.tower_prices_updated.connect(on_tower_prices_updated)
 
+	player_build_ui.configure_loadout(tower_element_options)
+
 func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
 	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action(hovered_tower):
 		if check_can_afford_action(hovered_tower):
@@ -81,7 +83,7 @@ func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: Textur
 		upgrade_action_charge_cirlce.value = 0
 
 		
-		if preview_tower.visible:
+		if preview_tower and preview_tower.visible:
 			if get_tower_placement_info()[0]:
 				preview_tower.upgrade_button_hint.show()
 			else:
@@ -90,43 +92,46 @@ func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: Textur
 ## Creates a new instance of `tower_scene`, fully initialized. Modulated to be transparent.
 ## This is an active and ready tower that just needs to be placed.
 func create_preview_tower():
-	# Reset previous selection
-	preview_tower = tower_scene.instantiate()
-	tower_parent.add_child(preview_tower)
-	preview_tower.initialize(tower_element_options[tower_index])
-	preview_tower.attack_collider.set_deferred("disabled", true)
-	preview_tower.transform_collider.set_deferred("disabled", true)
-	preview_tower.tower_obstacle_collider.set_deferred("disabled", true)
-	preview_tower.buff_collider.set_deferred("disabled", true)
-	preview_tower.hurtbox_collider.set_deferred("disabled", true)
-	preview_tower.sprite.modulate.a = .75
-	preview_tower.can_show_range = true	
-	if not hovered_tower:
-		preview_tower.upgrade_button_hint.set_hint_icon("joypad_button_0")
+	if tower_element_options.size():
+		# Reset previous selection
+		preview_tower = tower_scene.instantiate()
+		tower_parent.add_child(preview_tower)
+		preview_tower.initialize(tower_element_options[tower_index])
+		preview_tower.attack_collider.set_deferred("disabled", true)
+		preview_tower.transform_collider.set_deferred("disabled", true)
+		preview_tower.tower_obstacle_collider.set_deferred("disabled", true)
+		preview_tower.buff_collider.set_deferred("disabled", true)
+		preview_tower.hurtbox_collider.set_deferred("disabled", true)
+		preview_tower.sprite.modulate.a = .75
+		preview_tower.can_show_range = true	
+		if not hovered_tower:
+			preview_tower.upgrade_button_hint.set_hint_icon("joypad_button_0")
 
-	preview_tower.tower_action_cost_label.text = str(TowerGlobalData.tower_prices[preview_tower.data.element])
-	preview_tower.died.connect(on_tower_died)
+		preview_tower.tower_action_cost_label.text = str(TowerGlobalData.tower_prices[preview_tower.data.element])
+		preview_tower.died.connect(on_tower_died)
 
-	if not hovered_tower:
-		player_build_ui.update_tower_info_panel(preview_tower)
-		preview_tower.show()
-	else:
-		preview_tower.hide()
+		if not hovered_tower:
+			player_build_ui.update_tower_info_panel(preview_tower)
+			preview_tower.show()
+		else:
+			preview_tower.hide()
 
 ## Update the `global_position` of `preview_tower`, which is calculated based on
 ## the position of `PlayerCharacter` and the current `aim_input`
 func update_preview_tower_position(player_global_position: Vector2, aim_input: Vector2) -> void:
-	aim_input = Constants.get_closest_cardinal_4_direction_normalized(aim_input)
-	preview_tower_grid_position = WorldGrid.world_to_grid(player_global_position + (aim_input * TOWER_PLACEMENT_RANGE))
-	preview_tower.global_position = WorldGrid.grid_to_world(preview_tower_grid_position)
+	if preview_tower:
+		aim_input = Constants.get_closest_cardinal_4_direction_normalized(aim_input)
+		preview_tower_grid_position = WorldGrid.world_to_grid(player_global_position + (aim_input * TOWER_PLACEMENT_RANGE))
+		preview_tower.global_position = WorldGrid.grid_to_world(preview_tower_grid_position)
 
-	var target: Vector2
-	if not grid_follow_tower:
-		target = WorldGrid.grid_to_world(WorldGrid.world_to_grid(player_global_position)) + Vector2(8,8)
-	else:
-		target = preview_tower.global_position + Vector2(8,8)
-		
-	build_grid_sprite.global_position = target
+		var target: Vector2
+		if not grid_follow_tower:
+			target = WorldGrid.grid_to_world(WorldGrid.world_to_grid(player_global_position)) + Vector2(8,8)
+		else:
+			target = preview_tower.global_position + Vector2(8,8)
+			
+		build_grid_sprite.global_position = target
+	
 
 func update_tower_detect_area_position() -> void:
 	tower_detect_area.global_position = build_grid_sprite.global_position
@@ -246,15 +251,17 @@ func get_action_cost(_hovered_tower) -> int:
 		return -1
 
 func get_tower_placement_info() -> Array:
-	# Check tower count
-	if active_towers.size() < TowerGlobalData.tower_max:
-		# Check can afford
-		var cost: int = TowerGlobalData.tower_prices[preview_tower.data.element]
-		if _tower_mana >= cost:
-			# Check if placement position is valid
-			var tower_grid_position: Vector2 = WorldGrid.world_to_grid(preview_tower.global_position)
-			if tower_grid_position in WorldGrid.data and WorldGrid.data[tower_grid_position]:
-				return [true, tower_grid_position, cost]
+	if preview_tower:
+		# Check tower count
+		if active_towers.size() < TowerGlobalData.tower_max:
+			# Check can afford
+			var cost: int = TowerGlobalData.tower_prices[preview_tower.data.element]
+			if _tower_mana >= cost:
+				# Check if placement position is valid
+				var tower_grid_position: Vector2 = WorldGrid.world_to_grid(preview_tower.global_position)
+				if tower_grid_position in WorldGrid.data and WorldGrid.data[tower_grid_position]:
+					return [true, tower_grid_position, cost]
+		return [false, -1, -1]
 	return [false, -1, -1]
 
 func on_tower_detect_area_entered(intruder: Area2D) -> void:
@@ -337,3 +344,22 @@ func on_tower_upgrade_price_modifier_updated() -> void:
 func on_tower_prices_updated() -> void:
 	if preview_tower:
 		preview_tower.show_action_cost_info(TowerGlobalData.tower_prices[preview_tower.data.element])
+
+func loadout_updated() -> void:
+	tower_element_options = []
+	tower_index = 0
+	remove_preview_tower()
+	for i in range(PlayerLoadout.equipped_towers.size()):
+		if PlayerLoadout.equipped_towers[i]:
+			var tower_data: TowerData = PlayerLoadout.equipped_towers[i]
+			tower_element_options.append(tower_data.element)
+
+	player_build_ui.configure_loadout(tower_element_options)
+
+	print("Loadout updated. tower_element_options: ", tower_element_options)
+	create_preview_tower()
+
+func remove_preview_tower() -> void:
+	if preview_tower:
+		preview_tower.queue_free()
+		preview_tower = null

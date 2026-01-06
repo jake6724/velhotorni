@@ -31,6 +31,18 @@ var tower_prices_base: Dictionary[Constants.Element, float] = {
 	Constants.Element.EARTH: 65,
 	Constants.Element.LIGHT: 70,
 	Constants.Element.DARK:  75,
+	Constants.Element.LAVA: 1,
+	Constants.Element.PLASMA: 1,
+	Constants.Element.STORM: 1,
+	Constants.Element.LIGHTNING: 1,
+	Constants.Element.ICE: 1,
+	Constants.Element.FLOOD: 1,
+	Constants.Element.MUD: 1,
+	Constants.Element.CRYSTAL: 1,
+	Constants.Element.SPIRIT: 1,
+	Constants.Element.SUN: 1,
+	Constants.Element.CURSE: 1,
+	Constants.Element.VOID: 1,
 }
 
 var tower_prices: Dictionary[Constants.Element, int] = {
@@ -40,6 +52,18 @@ var tower_prices: Dictionary[Constants.Element, int] = {
 	Constants.Element.EARTH: tower_prices_base[Constants.Element.EARTH],
 	Constants.Element.LIGHT: tower_prices_base[Constants.Element.LIGHT],
 	Constants.Element.DARK:  tower_prices_base[Constants.Element.DARK],
+	Constants.Element.LAVA: tower_prices_base[Constants.Element.DARK],
+	Constants.Element.PLASMA: tower_prices_base[Constants.Element.PLASMA],
+	Constants.Element.STORM: tower_prices_base[Constants.Element.STORM],
+	Constants.Element.LIGHTNING: tower_prices_base[Constants.Element.LIGHTNING],
+	Constants.Element.ICE: tower_prices_base[Constants.Element.ICE],
+	Constants.Element.FLOOD: tower_prices_base[Constants.Element.FLOOD],
+	Constants.Element.MUD: tower_prices_base[Constants.Element.MUD],
+	Constants.Element.CRYSTAL: tower_prices_base[Constants.Element.CRYSTAL],
+	Constants.Element.SPIRIT: tower_prices_base[Constants.Element.SPIRIT],
+	Constants.Element.SUN: tower_prices_base[Constants.Element.SUN],
+	Constants.Element.CURSE: tower_prices_base[Constants.Element.CURSE],
+	Constants.Element.VOID: tower_prices_base[Constants.Element.VOID],
 }
 
 var tower_upgrade_price_modifier: Dictionary[Constants.Element, float] = {
@@ -49,6 +73,18 @@ var tower_upgrade_price_modifier: Dictionary[Constants.Element, float] = {
 	Constants.Element.EARTH: 1.0,
 	Constants.Element.LIGHT: 1.0,
 	Constants.Element.DARK:  1.0,
+	Constants.Element.LAVA: 1.0,
+	Constants.Element.PLASMA: 1.0,
+	Constants.Element.STORM: 1.0,
+	Constants.Element.LIGHTNING: 1.0,
+	Constants.Element.ICE: 1.0,
+	Constants.Element.FLOOD: 1.0,
+	Constants.Element.MUD: 1.0,
+	Constants.Element.CRYSTAL: 1.0,
+	Constants.Element.SPIRIT: 1.0,
+	Constants.Element.SUN: 1.0,
+	Constants.Element.CURSE: 1.0,
+	Constants.Element.VOID: 1.0,
 }
 
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
@@ -58,6 +94,18 @@ var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.EARTH: preload("res://assets/art/sprites/ui/spr_ui_tower_earth.png"),
 	Constants.Element.LIGHT: preload("res://assets/art/sprites/ui/spr_ui_tower_light.png"),
 	Constants.Element.DARK: preload("res://assets/art/sprites/ui/spr_ui_tower_dark.png"),
+	Constants.Element.LAVA: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.PLASMA: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.STORM: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.LIGHTNING: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.ICE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.FLOOD: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.MUD: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.CRYSTAL: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.SPIRIT: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.SUN: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.CURSE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.VOID: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
 }
 
 var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
@@ -67,6 +115,18 @@ var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.EARTH: preload("res://assets/art/sprites/ui/spr_ui_tower_earth_locked.png"),
 	Constants.Element.LIGHT: preload("res://assets/art/sprites/ui/spr_ui_tower_light_locked.png"),
 	Constants.Element.DARK: preload("res://assets/art/sprites/ui/spr_ui_tower_dark_locked.png"),
+	Constants.Element.LAVA: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.PLASMA: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.STORM: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.LIGHTNING: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.ICE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.FLOOD: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.MUD: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.CRYSTAL: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.SPIRIT: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.SUN: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.CURSE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.VOID: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
 }
 
 var debuff_perk_modifier: Dictionary[Debuff.Type, float] = {

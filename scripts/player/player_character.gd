@@ -157,7 +157,8 @@ func _ready():
 	coin_collector.coin_collected.connect(on_tower_mana_collected)
 
 	# Connect to PlayerLoadout
-	PlayerLoadout.player_loadout_updated.connect(on_player_loadout_updated)
+	PlayerLoadout.spell_loadout_updated.connect(on_spell_loadout_updated)
+	PlayerLoadout.tower_loadout_updated.connect(on_tower_loadout_updated)
 
 	# Configure Timers
 	# Respawn Timer
@@ -266,7 +267,7 @@ func on_staff_switched(_spell_data: SpellData) -> void:
 
 func switch_tower(_switch_direction: int) -> void:
 	player_build.tower_index += _switch_direction
-	player_build.preview_tower.queue_free()
+	player_build.remove_preview_tower()
 	player_build.create_preview_tower()
 
 ## Switch between combat and building modes
@@ -463,10 +464,13 @@ func update_reticle_ammo(_value: float) -> void:
 	else:
 		reticle_ammo.texture_progress = reticle_ammo_texture
 
-func on_player_loadout_updated() -> void:
-	print("On player loadout updated called!")
+func on_spell_loadout_updated() -> void:
 	player_spells.configure_spells()
 	player_mana.populate_spell_mana(player_spells.selected_spells)
 	player_hud.on_spell_loadout_updated(player_spells.spells.array, player_mana)
 	player_spell_spawner.set_active_spell(player_spells.active_spell)
 	player_spell_spawner.on_switch_spell(player_spells.active_spell)
+
+func on_tower_loadout_updated() -> void:
+	player_build.loadout_updated()
+	player_build_ui.update(player_mana)

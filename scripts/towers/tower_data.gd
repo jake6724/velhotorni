@@ -18,6 +18,7 @@ extends Resource
 @export var atlas: Texture2D
 @export var transform_hint_texture: Texture
 @export var portrait: Texture
+@export var locked_portrait: Texture
 ## A reference to the `Bullet` scene which the `Tower` will spawn when attacking.
 @export_category("Bullet")
 @export var bullet: PackedScene
