@@ -22,10 +22,7 @@ const TOWER_HEAL_AMOUNT: int = 25
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var preview_tower: Tower
 var preview_tower_grid_position: Vector2
-var tower_element_options: Array[Constants.Element] = [
-Constants.Element.FIRE, Constants.Element.WIND, 
-Constants.Element.WATER, Constants.Element.EARTH,
-Constants.Element.LIGHT, Constants.Element.DARK]
+var tower_element_options: Array[Constants.Element] = []
 
 var tower_index: int = 0: 
 	set(value):
@@ -54,6 +51,11 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	tower_detect_area = _tower_detect_area
 	tower_detect_area.area_entered.connect(on_tower_detect_area_entered)
 	tower_detect_area.area_exited.connect(on_tower_detect_area_exited)
+
+	for tower_data: TowerData in PlayerLoadout.equipped_towers:
+		if tower_data:
+			tower_element_options.append(tower_data.element)
+
 	player_build_ui.update_tower_count_label(0)
 	player_build_ui.update_tower_max_label(TowerGlobalData.tower_max)
 	_tower_mana = player_mana.tower_mana
@@ -120,18 +122,24 @@ func create_preview_tower():
 ## the position of `PlayerCharacter` and the current `aim_input`
 func update_preview_tower_position(player_global_position: Vector2, aim_input: Vector2) -> void:
 	if preview_tower:
-		aim_input = Constants.get_closest_cardinal_4_direction_normalized(aim_input)
-		preview_tower_grid_position = WorldGrid.world_to_grid(player_global_position + (aim_input * TOWER_PLACEMENT_RANGE))
-		preview_tower.global_position = WorldGrid.grid_to_world(preview_tower_grid_position)
 
-		var target: Vector2
-		if not grid_follow_tower:
-			target = WorldGrid.grid_to_world(WorldGrid.world_to_grid(player_global_position)) + Vector2(8,8)
+		if GlobalSettings.controller_active:
+			aim_input = Constants.get_closest_cardinal_4_direction_normalized(aim_input)
+			preview_tower_grid_position = WorldGrid.world_to_grid(player_global_position + (aim_input * TOWER_PLACEMENT_RANGE))
+			preview_tower.global_position = WorldGrid.grid_to_world(preview_tower_grid_position)
+
+			var target: Vector2
+			if not grid_follow_tower:
+				target = WorldGrid.grid_to_world(WorldGrid.world_to_grid(player_global_position)) + Vector2(8,8)
+			else:
+				target = preview_tower.global_position + Vector2(8,8)
+				
+			build_grid_sprite.global_position = target
+
 		else:
-			target = preview_tower.global_position + Vector2(8,8)
-			
-		build_grid_sprite.global_position = target
-	
+			preview_tower_grid_position = WorldGrid.grid_to_world(WorldGrid.world_to_grid(get_global_mouse_position()))
+			preview_tower.global_position = preview_tower_grid_position
+			build_grid_sprite.global_position = preview_tower.global_position + Vector2(8,8)
 
 func update_tower_detect_area_position() -> void:
 	tower_detect_area.global_position = build_grid_sprite.global_position
