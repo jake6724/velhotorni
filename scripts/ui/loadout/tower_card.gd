@@ -21,12 +21,16 @@ var chest_disabled: bool = false:
 
 func _ready():
 	greyscale_shader_material.shader = greyscale_shader
+	tower_icon.texture = AtlasTexture.new()
+	
 
 ## Must be called AFTER LoadoutCard is added to scene
 func populate(_data: TowerData) -> void:
 	data = _data
 	if _data:
-		tower_icon.texture = _data.portrait
+		# tower_icon.texture = _data.portrait
+		tower_icon.texture.atlas = TowerGlobalData.tower_icon_atl
+		tower_icon.texture.region = TowerGlobalData.tower_icon_atl_regions[_data.element]
 		tower_icon.show()
 		button_hint.hide()
 	else:

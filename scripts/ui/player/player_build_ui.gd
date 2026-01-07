@@ -30,6 +30,10 @@ const RAISE_DURATION: float = .1
 
 func _ready():
 	tower_buttons = [%TowerButton1, %TowerButton2, %TowerButton3, $%TowerButton4, %TowerButton5, %TowerButton6]
+
+	for tower_button: TowerButton in tower_buttons:
+		tower_button.texture_normal = AtlasTexture.new()
+
 	tower_button_price_labels = [%TowerPriceLabel1, %TowerPriceLabel2, %TowerPriceLabel3, %TowerPriceLabel4, %TowerPriceLabel5, %TowerPriceLabel6]
 	raise_button(tower_buttons[tower_index])
 
@@ -80,9 +84,14 @@ func update_tower_info_panel(tower: Tower) -> void:
 func update_tower_button_icons(player_mana: PlayerMana) -> void:
 	for button: TowerButton in tower_buttons:
 		if player_mana.tower_mana >= TowerGlobalData.tower_prices[button.element]:
-			button.texture_normal = TowerGlobalData.ui_tower_sprites[button.element]
+			# button.texture_normal = TowerGlobalData.ui_tower_sprites[button.element]
+			button.texture_normal.atlas = TowerGlobalData.tower_icon_atl
+			button.texture_normal.region = TowerGlobalData.tower_icon_atl_regions[button.element]
+		
 		else:
-			button.texture_normal = TowerGlobalData.locked_ui_tower_sprites[button.element]
+			# button.texture_normal = TowerGlobalData.locked_ui_tower_sprites[button.element]
+			button.texture_normal.atlas = TowerGlobalData.tower_icon_atl_locked
+			button.texture_normal.region = TowerGlobalData.tower_icon_atl_regions[button.element]
 
 ## Update tower_count_label with the provided value. 
 func update_tower_count_label(_value: int) -> void:

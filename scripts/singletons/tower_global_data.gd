@@ -87,6 +87,29 @@ var tower_upgrade_price_modifier: Dictionary[Constants.Element, float] = {
 	Constants.Element.VOID: 1.0,
 }
 
+var tower_icon_atl: Texture2D = preload("res://assets/art/sprites/ui/atl_ui_tower_icon.png")
+var tower_icon_atl_locked: Texture2D = preload("res://assets/art/sprites/ui/atl_ui_tower_icon_locked.png")
+var tower_icon_atl_regions: Dictionary[Constants.Element, Rect2] = {
+	Constants.Element.FIRE:  Rect2(0,0,32,32),
+	Constants.Element.WIND:  Rect2(96,0,32,32),
+	Constants.Element.WATER: Rect2(0,32,32,32),
+	Constants.Element.EARTH: Rect2(96,32,32,32),
+	Constants.Element.LIGHT: Rect2(0,64,32,32),
+	Constants.Element.DARK:  Rect2(96,64,32,32),
+	Constants.Element.LAVA: Rect2(32,0,32,32),
+	Constants.Element.PLASMA: Rect2(64,0,32,32),
+	Constants.Element.STORM: Rect2(128,0,32,32),
+	Constants.Element.LIGHTNING: Rect2(160,0,32,32),
+	Constants.Element.ICE: Rect2(32,32,32,32),
+	Constants.Element.FLOOD: Rect2(64,32,32,32),
+	Constants.Element.MUD: Rect2(160,32,32,32),
+	Constants.Element.CRYSTAL: Rect2(128,32,32,32),
+	Constants.Element.SPIRIT: Rect2(32,64,32,32),
+	Constants.Element.SUN: Rect2(64,64,32,32),
+	Constants.Element.CURSE: Rect2(160,64,32,32),
+	Constants.Element.VOID: Rect2(128,64,32,32),
+}
+
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
  	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
 	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind.png"),
