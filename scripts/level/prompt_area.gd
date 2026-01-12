@@ -33,6 +33,7 @@ func on_body_exited(_player: PlayerCharacter) -> void:
 
 func show_ui() -> void:
 	player.player_input.input_enabled = false
+	player.player_hud.hide()
 	player.player_camera.set_process(false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	ui_element.show()
@@ -40,5 +41,6 @@ func show_ui() -> void:
 func hide_ui() -> void:
 	ui_element.hide()
 	player.player_camera.set_process(true)
+	player.player_hud.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	player.player_input.set_deferred("input_enabled",true)

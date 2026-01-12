@@ -15,7 +15,6 @@ func _ready():
 	configure_spells()
 
 func configure_spells() -> void:
-	print("PlayerSpells.configure_spells() - PlayerLoadout.equipped_spells: ", PlayerLoadout.equipped_spells)
 	selected_spells = PlayerLoadout.equipped_spells
 
 	# Copy selected spells, clear it, and only put back spelldata and not null values

@@ -51,8 +51,11 @@ func _ready():
 	WaveManager.all_waves_completed.connect(reset)
 	WaveManager.final_wave_started.connect(on_final_wave_started)
 
-func _physics_process(_delta): # TODO: It would be great to not call this on tick
+func _physics_process(_delta):
 	sort_path_enemies_z_index_by_progress()
+
+	# if spawn_timers.size() > 2:
+	# 	print(spawn_timers[1].time_left)
 
 ## Called by LevelManager.
 func configure_level(active_level: LevelEnvironment):
@@ -71,12 +74,14 @@ func configure_level(active_level: LevelEnvironment):
 
 	flying_spawn_points = active_level.flying_spawn_points
 
-## Intended to be triggered directly by `player_controller`.
+## Oberserves WaveManager.wave_started
 func start_wave() -> void:
 	can_spawn_enemy = true
 	open_portals()
 	for i in range(spawn_timers.size()):
 		on_spawn_timer_timeout(i)
+
+	set_physics_process(true)
 
 ## Called when a wave is completed or failed.
 func reset() -> void:
@@ -206,6 +211,11 @@ func on_boss_enemy_damage_recieved(_damage: float):
 	boss_enemy_damage_recieved.emit(_damage)
 
 func create_spawn_timers(active_level) -> void:
+	# Remove any existing spawn timers from previous levels
+	for spawn_timer: Timer in spawn_timers:
+		spawn_timer.queue_free()
+	spawn_timers = []
+	
 	for i in range(active_level.enemy_paths.size()):
 		var new_timer: Timer = Timer.new()
 		new_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS

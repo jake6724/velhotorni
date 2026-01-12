@@ -1,5 +1,12 @@
 extends Node
 
+signal player_star_count_updated
+
+var player_star_count: int = 44:
+	set(value):
+		player_star_count = value
+		player_star_count_updated.emit()
+
 ## 0: Locked
 ## 1: Unlocked, unplayed
 ## 2: 1 star

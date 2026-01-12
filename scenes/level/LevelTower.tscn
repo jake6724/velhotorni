@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://dnilok8ickyxd"]
+[gd_scene load_steps=37 format=4 uid="uid://dnilok8ickyxd"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_qvp6q"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_tpnjg"]
@@ -10,16 +10,17 @@
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="8_p1qut"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="8_yqoiu"]
 [ext_resource type="PackedScene" uid="uid://bwrw0vxyrshx2" path="res://scenes/level/EnemySpawnPortal.tscn" id="9_k7twg"]
-[ext_resource type="Shader" uid="uid://pvf7vah26qjs" path="res://assets/art/heat_haze.gdshader" id="10_bpcou"]
+[ext_resource type="Shader" path="res://assets/art/heat_haze.gdshader" id="10_bpcou"]
 [ext_resource type="Texture2D" uid="uid://bg5wqpo6k5mck" path="res://assets/art/sprites/spr_fx_heatmask.png" id="11_dj51x"]
 [ext_resource type="PackedScene" uid="uid://inrss5007qxm" path="res://scenes/breakables/BreakableCrystalSmall.tscn" id="12_j43g6"]
 [ext_resource type="PackedScene" uid="uid://dtbjym5jhrudw" path="res://scenes/ui/WaveInfo.tscn" id="13_gdaoa"]
 [ext_resource type="PackedScene" uid="uid://dght28oeuiccb" path="res://scenes/level/TeleportArea.tscn" id="14_k7twg"]
 [ext_resource type="PackedScene" uid="uid://8b1uucou5x1l" path="res://scenes/level/PromptArea.tscn" id="16_dj51x"]
 [ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="17_gdaoa"]
-[ext_resource type="Script" uid="uid://bshhqh6p6rwlx" path="res://scripts/ui/controller_button_hint.gd" id="18_lhvu1"]
+[ext_resource type="Script" path="res://scripts/ui/controller_button_hint.gd" id="18_lhvu1"]
 [ext_resource type="PackedScene" uid="uid://7pywjw1t8qqu" path="res://scenes/level/world_map/WorldMapMenu.tscn" id="19_lhvu1"]
 [ext_resource type="PackedScene" uid="uid://dx8fo7wasdbc1" path="res://scenes/ui/loadout/LoadoutUI.tscn" id="20_dq5yt"]
+[ext_resource type="PackedScene" uid="uid://cahss8ju2i2fv" path="res://scenes/ui/SkillTree/SkillTree.tscn" id="21_6p3h5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dj51x"]
 texture = ExtResource("4_bpcou")
@@ -1747,7 +1748,32 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_dq5yt")
 stretch_mode = 2
 script = ExtResource("18_lhvu1")
-metadata/_custom_type_script = "uid://bshhqh6p6rwlx"
+
+[node name="SkillTreePromptArea" parent="." node_paths=PackedStringArray("ui_element") instance=ExtResource("16_dj51x")]
+position = Vector2(128, 168)
+ui_element = NodePath("../UI/SkillTree")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SkillTreePromptArea"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_j43g6")
+
+[node name="ButtonHint" type="TextureRect" parent="SkillTreePromptArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 18.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_dq5yt")
+stretch_mode = 2
+script = ExtResource("18_lhvu1")
 
 [node name="MapPromptArea" parent="." node_paths=PackedStringArray("ui_element") instance=ExtResource("16_dj51x")]
 position = Vector2(232, 640)
@@ -1775,7 +1801,6 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_dq5yt")
 stretch_mode = 2
 script = ExtResource("18_lhvu1")
-metadata/_custom_type_script = "uid://bshhqh6p6rwlx"
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -1785,5 +1810,9 @@ visible = false
 [node name="LoadoutUI" parent="UI" instance=ExtResource("20_dq5yt")]
 visible = false
 
+[node name="SkillTree" parent="UI" instance=ExtResource("21_6p3h5")]
+visible = false
+
 [editable path="LoadoutPromptArea"]
+[editable path="SkillTreePromptArea"]
 [editable path="MapPromptArea"]

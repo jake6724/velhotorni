@@ -23,5 +23,5 @@ bullet_speed = 100.0
 debuff_data = ExtResource("4_elw1t")
 buff_data_list = Array[ExtResource("2_elw1t")]([])
 tower_name = "Fire"
-desc = ""
+desc = "test 1`123123123"
 metadata/_custom_type_script = "uid://v7b6nq74b314"

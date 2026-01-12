@@ -1802,7 +1802,7 @@ z_as_relative = false
 script = ExtResource("1_eds8m")
 level_name = "Level 3B"
 region = 2
-initial_gold = 145
+initial_gold = 14500
 waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd"), ExtResource("8_f1ecl"), ExtResource("7_wsimo"), ExtResource("5_h8vnd"), ExtResource("4_uelw8"), ExtResource("3_btpk1"), ExtResource("11_2wwi5"), ExtResource("6_oxg84"), ExtResource("9_o7b5e"), ExtResource("10_r64x4"), ExtResource("6_tioql")])
 max_towers = 15
 
