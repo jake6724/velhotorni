@@ -27,15 +27,6 @@ func _ready() -> void:
 
 	curr_loadout_page.start_card.grab_focus()
 
-# func _input(event):
-# 	if event.is_action("switch_selection_right") and event.is_pressed() and not event.is_echo():
-# 		tab_buttons_dll.switch_right()
-# 		on_tab_button_pressed(tab_buttons_dll.head.value)
-
-# 	if event.is_action("switch_selection_left") and event.is_pressed() and not event.is_echo():
-# 		tab_buttons_dll.switch_left()
-# 		on_tab_button_pressed(tab_buttons_dll.head.value)
-
 func on_tab_button_pressed(tab_button: Button) -> void:
 	if _curr_tab_button:
 		_curr_tab_button.get_child(0).add_theme_color_override("font_color", Constants.ui_color_unselected)
@@ -62,3 +53,12 @@ func show_page(tab_button: Button) -> void:
 		tower_tab_button: curr_loadout_page = tower_page
 		# deity_tab_button: _curr_page = deity_page
 	curr_loadout_page.show()
+
+# func _input(event):
+# 	if event.is_action("switch_selection_right") and event.is_pressed() and not event.is_echo():
+# 		tab_buttons_dll.switch_right()
+# 		on_tab_button_pressed(tab_buttons_dll.head.value)
+
+# 	if event.is_action("switch_selection_left") and event.is_pressed() and not event.is_echo():
+# 		tab_buttons_dll.switch_left()
+# 		on_tab_button_pressed(tab_buttons_dll.head.value)

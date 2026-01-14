@@ -11,8 +11,6 @@ func trigger_tower_loadout_update() -> void:
 	equipped_towers = [equipped_tower_1, equipped_tower_2, equipped_tower_3, equipped_tower_4, equipped_tower_5, equipped_tower_6]
 	tower_loadout_updated.emit() 
 
-var stars: int = 0
-
 var light_shield: SpellData = preload("res://data/spells/light/spell_data_shield_directional_light.tres")
 var arcane_basic: SpellData = preload("res://data/spells/spell_data_bullet_arcane_basic.tres")
 var arcane_horn: SpellData = preload("res://data/spells/spell_data_bullet_arcane_basic_triple.tres")
@@ -36,8 +34,8 @@ var spells: Dictionary[SpellData, bool] = {
 
 # TOWERS ###################################################################################################################
 var equipped_tower_1: TowerData = preload("res://data/towers/tower_data_fire.tres")
-var equipped_tower_2: TowerData = preload("res://data/towers/tower_data_wind.tres")
-var equipped_tower_3: TowerData = preload("res://data/towers/tower_data_water.tres")
+var equipped_tower_2: TowerData = null
+var equipped_tower_3: TowerData = null
 var equipped_tower_4: TowerData = null
 var equipped_tower_5: TowerData = null
 var equipped_tower_6: TowerData = null

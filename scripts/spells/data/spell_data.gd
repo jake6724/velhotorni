@@ -29,3 +29,5 @@ var mana_cost: float = 1
 # @export var inactive_icon_region: Rect2 = Rect2(0,0,16,16)
 
 @export var camera_shake: float = .1
+
+@export var unlock_cost: int = 1

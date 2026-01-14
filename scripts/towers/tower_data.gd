@@ -31,3 +31,5 @@ extends Resource
 @export_category("Other")
 @export var tower_name: String = ""
 @export var desc: String = ""
+
+@export var unlock_cost: int = 1

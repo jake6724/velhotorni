@@ -48,6 +48,8 @@ func _ready():
 
 	start_card = equip_tower_card_1
 
+	StarRegistry.player_star_count_updated.connect(populate_chest_cards)
+
 func populate_equip_cards() -> void:
 	for i in range(PlayerLoadout.equipped_towers.size()):
 		var new_tower_card: TowerCard = tower_card_scene.instantiate()
@@ -58,13 +60,27 @@ func populate_equip_cards() -> void:
 		new_tower_card.secondary_press.connect(on_equip_card_secondary_press.bind(new_tower_card))
 
 func populate_chest_cards() -> void:
+	# # Start from a blank-slate
+	# for child in chest_tower_cards_parent.get_children():
+	# 	chest_tower_cards_parent.remove_child(child)
+	# 	child.queue_free()
+
+	# Get the data that already exists; don't re-add it
+	var existing_data: Array[TowerData] = []
+	for child in chest_tower_cards_parent.get_children():
+		var tower_card: TowerCard = child as TowerCard
+		if tower_card:
+			var tower_card_data: TowerData = tower_card.data
+			existing_data.append(tower_card_data)
+
 	for tower_data: TowerData in PlayerLoadout.towers.keys():
 		if PlayerLoadout.towers[tower_data]:
-			var new_tower_card: TowerCard = tower_card_scene.instantiate()
-			chest_tower_cards_parent.add_child(new_tower_card)
-			new_tower_card.populate(tower_data)
-			new_tower_card.primary_press.connect(on_card_pressed.bind(new_tower_card))
-			new_tower_card.primary_press.connect(on_chest_card_pressed.bind(new_tower_card))
+			if tower_data not in existing_data: # Do not add tower cards more than once per tower data
+				var new_tower_card: TowerCard = tower_card_scene.instantiate()
+				chest_tower_cards_parent.add_child(new_tower_card)
+				new_tower_card.populate(tower_data)
+				new_tower_card.primary_press.connect(on_card_pressed.bind(new_tower_card))
+				new_tower_card.primary_press.connect(on_chest_card_pressed.bind(new_tower_card))
 
 ## Called for all cards; displays info about card in the tower_card info panel
 func on_card_pressed(tower_card: TowerCard) -> void:
