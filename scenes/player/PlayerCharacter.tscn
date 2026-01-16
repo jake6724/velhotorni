@@ -1543,7 +1543,6 @@ visible = false
 
 [node name="PlayerHUD" parent="PlayerUI" instance=ExtResource("25_ydu3x")]
 unique_name_in_owner = true
-visible = false
 
 [node name="TowerDetectArea" type="Area2D" parent="."]
 unique_name_in_owner = true
