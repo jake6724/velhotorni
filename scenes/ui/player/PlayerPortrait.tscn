@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://0f26b1isgric"]
+
+[ext_resource type="Script" uid="uid://dudfhr3jodngi" path="res://scripts/ui/player/player_portrait.gd" id="1_7piun"]
+[ext_resource type="Texture2D" uid="uid://7v2st6m3nxlm" path="res://assets/art/sprites/ui/atl_ui_playerportrait.png" id="1_npw6c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q38x"]
+resource_local_to_scene = true
+atlas = ExtResource("1_npw6c")
+region = Rect2(0, 0, 50, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npw6c"]
+atlas = ExtResource("1_npw6c")
+region = Rect2(0, 0, 50, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d60v5"]
+atlas = ExtResource("1_npw6c")
+region = Rect2(50, 0, 50, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfukn"]
+atlas = ExtResource("1_npw6c")
+region = Rect2(0, 25, 50, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c6gx"]
+atlas = ExtResource("1_npw6c")
+region = Rect2(50, 25, 50, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kob32"]
+atlas = ExtResource("1_npw6c")
+region = Rect2(0, 50, 50, 25)
+
+[node name="PlayerPortrait" type="TextureRect"]
+offset_right = 50.0
+offset_bottom = 25.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_0q38x")
+stretch_mode = 2
+script = ExtResource("1_7piun")
+portrait_full = SubResource("AtlasTexture_npw6c")
+portrait_half = SubResource("AtlasTexture_d60v5")
+portrait_low = SubResource("AtlasTexture_qfukn")
+portrait_dead = SubResource("AtlasTexture_1c6gx")
+portrait_flash = SubResource("AtlasTexture_kob32")
+metadata/_custom_type_script = "uid://dudfhr3jodngi"

@@ -19,6 +19,7 @@ extends Control
 @onready var inactive_spell_manas: Array[TextureProgressBar] = [null, inactive_spell_1_mana, inactive_spell_2_mana, inactive_spell_3_mana] # null is used to make array parallel in size to spell_data_list
 
 @onready var player_hearts: HBoxContainer = %PlayerHearts
+@onready var player_portrait: PlayerPortrait = %PlayerPortrait
 
 @onready var no_mana_label: Label = %NoManaLabel
 
@@ -125,6 +126,21 @@ func on_health_updated(_health: float) -> void:
 
 	for heart: PlayerHUDHeart in player_hearts.get_children():
 		heart.flash()
+
+func set_player_portrait(_health, _player_max_health) -> void:
+	if _health == _player_max_health:
+		player_portrait.set_texture_full()
+
+	elif _health == int(_player_max_health / 2):
+		player_portrait.set_texture_half()
+
+	elif _health == 1:
+		player_portrait.set_texture_low()
+
+	elif _health == 0:
+		player_portrait.set_texture_dead()
+
+	player_portrait.flash()
 
 func get_zero_padding(count: int):
 	var zero: String = "0"

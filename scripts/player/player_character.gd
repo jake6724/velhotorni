@@ -359,6 +359,7 @@ func on_hit(_direction) -> void:
 		hit_blink()
 
 		display_hearts(player_stats.health)
+		player_hud.set_player_portrait(player_stats.health, player_stats.max_health) # Called here because it needs max health data that PlayerHUD does not have
 
 func on_pit_entered() -> void:
 	global_position += player_input.move_input.normalized() * 10 # Move the character to be fully over the pit
@@ -381,6 +382,7 @@ func respawn() -> void:
 	player_stats.health = player_stats.max_health
 	update_hurtbox_collider(false)
 	hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
+	player_hud.set_player_portrait(player_stats.health, player_stats.max_health)
 	player_respawned.emit()	
 	hit_blink()
 
