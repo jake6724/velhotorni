@@ -13,7 +13,7 @@ func _ready():
 	
 	set_process(false)
 
-func _gui_input(event):
+func _gui_input(_event):
 	if Input.is_action_just_pressed("left_click"):
 		click_start = get_global_mouse_position()
 		old_scroll = Vector2(scroll_horizontal, scroll_vertical)
@@ -22,7 +22,7 @@ func _gui_input(event):
 		click_start = Vector2.ZERO
 		set_process(false)
 
-func _process(delta):
+func _process(_delta):
 	if click_start:
 		var new_scroll:Vector2 = old_scroll + click_start - get_global_mouse_position()
 		scroll_horizontal = new_scroll.x

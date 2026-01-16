@@ -25,6 +25,7 @@ extends CharacterBody2D
 @onready var player_spell_perk_manager: PlayerSpellPerkManager = %PlayerSpellPerkManager
 @onready var pit_hurtbox: PitHurtbox = %PitHurtbox
 @onready var graphics_parent: Node2D = %GraphicsParent
+@onready var player_hearts: HBoxContainer = %PlayerHearts
 
 @onready var character_sprite: Sprite2D = %CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer
@@ -73,6 +74,9 @@ var switch_action_func: Callable = Callable(switch_spell)
 var switch_delay_timer: Timer = Timer.new()
 var switch_delay: float = .25
 var can_switch_mode: bool = true
+
+var player_hearts_timer: Timer = Timer.new()
+const DISPLAY_HEARTS_DURATION: float = 2
 
 signal player_respawned
 
@@ -182,6 +186,10 @@ func _ready():
 	z_index = Constants.z_index_map["player_character"]
 	reticle_sprite.z_index = Constants.z_index_map["reticle"]
 	upgrade_action_charge_cirlce.z_index = Constants.z_index_map["top"]
+	player_hearts_timer.one_shot = true
+	player_hearts_timer.autostart = false
+	add_child(player_hearts_timer)
+	player_hearts_timer.timeout.connect(on_player_hearts_timer_timeout)
 
 func _physics_process(delta): # This can go in a state eventually
 
@@ -276,7 +284,6 @@ func on_switch_player_mode_pressed() -> void: # TODO: Clean up, make functions
 		can_switch_mode = false
 		building = !building
 
-		player_hud.animate_switch_mode(building)
 		player_aim.switch_mode(building)
 		switch_delay_timer.start(switch_delay)
 
@@ -331,11 +338,6 @@ func on_staff_animation_finished(_anim_name) -> void:
 	if _anim_name == "fire":
 		staff_ap.play("idle")
 
-func on_damage_recieved(_damage) -> void:
-	player_stats.health -= 1
-	if player_stats.health < 0:
-		die()
-
 ## Does not update health
 func on_hit(_direction) -> void:
 	_direction = Constants.get_closest_cardinal_direction_normalized(_direction)
@@ -355,6 +357,8 @@ func on_hit(_direction) -> void:
 		player_camera.apply_shake(1)
 		TimeManager.apply_hitstop()
 		hit_blink()
+
+		display_hearts(player_stats.health)
 
 func on_pit_entered() -> void:
 	global_position += player_input.move_input.normalized() * 10 # Move the character to be fully over the pit
@@ -474,3 +478,26 @@ func on_spell_loadout_updated() -> void:
 func on_tower_loadout_updated() -> void:
 	player_build.loadout_updated()
 	player_build_ui.update(player_mana)
+
+func display_hearts(_health) -> void:
+	player_hearts.show()
+	for heart: PlayerHeart in player_hearts.get_children():
+		print(heart)
+		if _health >= 2:
+			heart.set_texture_full()
+			_health -= 2
+
+		elif _health == 1:
+			heart.set_texture_half()
+			_health -= 1
+
+		else:
+			heart.set_texture_empty()
+
+	for heart: PlayerHeart in player_hearts.get_children():
+		heart.flash()
+
+	player_hearts_timer.start(DISPLAY_HEARTS_DURATION)
+
+func on_player_hearts_timer_timeout() -> void:
+	player_hearts.hide()

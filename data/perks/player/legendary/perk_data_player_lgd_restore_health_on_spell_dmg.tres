@@ -1,11 +1,16 @@
-[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=4 format=3 uid="uid://dt67bj8tgwxdj"]
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=6 format=3 uid="uid://dt67bj8tgwxdj"]
 
 [ext_resource type="Script" uid="uid://tx0ls1d4gwxv" path="res://scripts/perks/data/park_data_player.gd" id="1_6w0wc"]
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_ttgef"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_vgxxx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgxxx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6w0wc"]
 atlas = ExtResource("1_ttgef")
-region = Rect2(48, 337, 48, 46)
+region = Rect2(192, 241, 48, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttgef"]
+atlas = ExtResource("2_vgxxx")
+region = Rect2(64, 80, 16, 16)
 
 [resource]
 script = ExtResource("1_6w0wc")
@@ -14,10 +19,12 @@ action = 0
 stat = 1
 duration = -1.0
 required_spell_damage = 250.0
+player_stat_display = 2
 base_value = 1.0
 legendary = true
-perk_icon = SubResource("AtlasTexture_vgxxx")
-perk_name = ""
-perk_desc = ""
+perk_icon = SubResource("AtlasTexture_6w0wc")
+perk_mini_icon = SubResource("AtlasTexture_ttgef")
+perk_name = "Battlehealer"
+perk_desc = "Restore 1 health for every {value} spell damage"
 perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

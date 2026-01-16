@@ -13,7 +13,6 @@ extends Sprite2D
 ## Update the region of the staff atlas, changing the staff graphic. Return the corresponding value for
 ## player_aim.staff_rotation_offset_degrees
 func switch_staff_texture(_spell_data: SpellData) -> int:
-	print(_spell_data.staff_texture)
 	match _spell_data.staff_type:
 		SpellData.StaffType.ARCANE: 
 			# texture.region = Rect2(0,0,217,15)

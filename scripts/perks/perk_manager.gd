@@ -16,10 +16,13 @@ var current_perk_hand_rarity: PerkData.Rarity
 
 var perk_pool_data: PerkPoolData # Passed from PlayerCharacter via Main in initialize
 var all_basic_perk_data: Array[PerkData] # Set in initialize
+var all_legendary_perk_data: Array[PerkData]
 
 ## Perks that can be used this level. Does not include unusable elemental perks
-## Populated at runtime ** # TODO: Remove unusable elements
-var valid_basic_perk_data: Array[PerkData]
+## Populated at runtime
+## TODO: Remove unusable elements
+var valid_basic_perk_data: Array[PerkData] = []
+var valid_legendary_perk_data: Array[PerkData] = []
 
 var rarity_counts: Dictionary[PerkData.Rarity, int] = {
 	PerkData.Rarity.ONE: 0,
@@ -28,11 +31,18 @@ var rarity_counts: Dictionary[PerkData.Rarity, int] = {
 	PerkData.Rarity.FOUR: 0
 }
 
+# var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
+# 	PerkData.Rarity.ONE: 4,
+# 	PerkData.Rarity.TWO: 3,
+# 	PerkData.Rarity.THREE: 2,
+# 	PerkData.Rarity.FOUR: 2,
+# }
+
 var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
-	PerkData.Rarity.ONE: 4,
-	PerkData.Rarity.TWO: 3,
-	PerkData.Rarity.THREE: 4,
-	PerkData.Rarity.FOUR: 0,
+	PerkData.Rarity.ONE: 0,
+	PerkData.Rarity.TWO: 0,
+	PerkData.Rarity.THREE: 0,
+	PerkData.Rarity.FOUR: 10,
 }
 
 var rarity_pool: Array
@@ -54,7 +64,11 @@ func _input(_event):
 func initialize(_perk_pool_data: PerkPoolData) -> void:
 	perk_pool_data = _perk_pool_data
 	all_basic_perk_data = perk_pool_data.basic_perks
-	valid_basic_perk_data = all_basic_perk_data
+	all_legendary_perk_data = perk_pool_data.legendary_perks
+
+	valid_basic_perk_data = all_basic_perk_data # TODO: This needs to remove non-used elements
+	valid_legendary_perk_data = all_legendary_perk_data # TODO: This needs to remove non-used elements
+
 	fill_rarity_pool()
 
 func create_perk(perk_data: PerkData) -> void:
@@ -99,6 +113,7 @@ func configure_perk_trigger(new_perk: Perk) -> void:
 ## Choose a valid rarity from `rarity_pool`. Automatically calls update_rarity_data() to keep `rarity_pool` valid.
 func get_rarity() -> PerkData.Rarity:
 	var selected_rarity: PerkData.Rarity = rarity_pool.pick_random()
+	print("Selected Rarity: ", selected_rarity)
 	update_rarity_data(selected_rarity)
 	return selected_rarity
 
@@ -129,6 +144,19 @@ func fill_rarity_pool() -> void:
 		for i in range(rarity_maxes[rarity]):
 			rarity_pool.append(rarity)
 
+func get_perk_hand() -> Array[PerkData]:
+	var perk_hand: Array[PerkData] = []
+	current_perk_hand_rarity = get_rarity()
+	if current_perk_hand_rarity != PerkData.Rarity.FOUR:
+		print("Getting basic perk hand")
+		perk_hand = get_basic_perk_hand(current_perk_hand_rarity)
+
+	else:
+		print("Getting legendary perk hand")
+		perk_hand = get_legendary_perk_hand()
+
+	return perk_hand
+
 ## Create a perk hand made up of basic perks. Active perks (same perk data, same rarity) will be excluded from this hand
 ## The 3 perks are picked in the order they appear in `valid_basic_perk_data`, which is shuffled at the start
 func get_basic_perk_hand(rarity: PerkData.Rarity) -> Array[PerkData]:
@@ -151,10 +179,7 @@ func get_basic_perk_hand(rarity: PerkData.Rarity) -> Array[PerkData]:
 
 	return perk_hand
 
-func get_perk_hand() -> Array[PerkData]:
-	var perk_hand: Array[PerkData] = []
-	current_perk_hand_rarity = get_rarity()
-	if current_perk_hand_rarity != PerkData.Rarity.FOUR:
-		print("Getting basic perk hand")
-		perk_hand = get_basic_perk_hand(current_perk_hand_rarity)
+func get_legendary_perk_hand() -> Array[PerkData]: 
+	valid_legendary_perk_data.shuffle()
+	var perk_hand: Array[PerkData] = [valid_legendary_perk_data[-1], valid_legendary_perk_data[-2], valid_legendary_perk_data[-3]]
 	return perk_hand

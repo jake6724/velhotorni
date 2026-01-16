@@ -49,4 +49,5 @@ active_icon = SubResource("AtlasTexture_g1hpo")
 inactive_icon = SubResource("AtlasTexture_0wp76")
 staff_texture = SubResource("AtlasTexture_yham7")
 camera_shake = 1.0
+unlock_cost = 1
 metadata/_custom_type_script = "uid://ckis74h51j2x4"

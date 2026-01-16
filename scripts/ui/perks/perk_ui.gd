@@ -7,6 +7,7 @@ extends Control
 @onready var instruction_label: Label = %InstructionLabel
 @onready var header: Control = %Header
 @onready var candles: Control = %Candles
+@onready var rarity_label: Label = %RarityLabel
 
 @onready var perk_card_1: PerkCard = %PerkCard1
 @onready var perk_card_2: PerkCard = %PerkCard2
@@ -176,3 +177,13 @@ func on_mouse_entered_perk_card(perk_card: PerkCard) -> void:
 
 func on_mouse_exited_perk_card() -> void:
 	curr_perk_card = null
+
+func set_rarity_label(rarity: PerkData.Rarity) -> void:
+	print("Incoming label rarity: ", rarity)
+	var text: String = ""
+	match rarity:
+		PerkData.Rarity.ONE: text = "Common"
+		PerkData.Rarity.TWO: text = "Rare"
+		PerkData.Rarity.THREE: text = "Epic"
+		PerkData.Rarity.FOUR: text = "Legendary"
+	rarity_label.text = text

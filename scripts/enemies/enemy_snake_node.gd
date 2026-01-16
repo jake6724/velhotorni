@@ -4,7 +4,7 @@ extends Sprite2D
 var target # Set by EnemySnake parent
 var speed: float 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# var direction = global_position.direction_to(target.global_position)
 	# global_position += direction.round().normalized() * speed * delta
 

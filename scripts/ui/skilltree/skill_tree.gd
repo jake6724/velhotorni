@@ -23,16 +23,14 @@ var spell_skills: Array[SpellSkill] = []
 @onready var unlock_section: Control = %UnlockSection
 
 const UNLOCK_PROGRESS_SPEED_MULTIPLIER: float = 200
+var charging: bool = false
 
 func _ready(): 
-	print("Selected Skill: ", selected_skill)
-
 	for child in tower_skills_parent.get_children():
 		if child is TowerSkill:
 			tower_skills.append(child)
 			child.pressed.connect(on_skill_pressed.bind(child))
 			# child.mouse_entered.connect(on_skill_pressed.bind(child))
-			print(child.data)
 			child.locked = not PlayerLoadout.towers[child.data]
 
 	for child in spell_skills_parent.get_children():
@@ -52,12 +50,17 @@ func _ready():
 	set_process(false)
 
 func _process(delta):
-	unlock_progress.value += delta * UNLOCK_PROGRESS_SPEED_MULTIPLIER
+	if charging:
+		unlock_progress.value += delta * UNLOCK_PROGRESS_SPEED_MULTIPLIER
+	else:
+		unlock_progress.value -= delta * (UNLOCK_PROGRESS_SPEED_MULTIPLIER * 1.5)
 
 	if unlock_progress.value >= 100:
 		unlock_button.button_pressed = false
 		unlock_skill(selected_skill)
-		
+	
+	if unlock_progress.value <= 0:
+		set_process(false)
 
 func on_skill_pressed(skill: Skill) -> void:
 	selected_skill = skill
@@ -70,7 +73,14 @@ func on_skill_pressed(skill: Skill) -> void:
 		skill_desc.text = skill.data.desc
 
 	if skill.locked:
-		unlock_section.show()
+		if skill.prereq_skills.size():
+			if skill.check_prereq_met():
+				unlock_section.show()
+			else:
+				unlock_section.hide()
+		else:
+			unlock_section.show()
+
 	else:
 		unlock_section.hide()
 
@@ -80,14 +90,11 @@ func on_player_star_count_updated() -> void:
 func on_unlock_button_down() -> void:
 	if selected_skill and selected_skill.data:
 		if selected_skill.data.unlock_cost <= StarRegistry.player_star_count:
-			print("Process true")
+			charging = true
 			set_process(true)
 
 func on_unlock_button_up() -> void:
-	# print("Button Up!")
-	set_process(false)
-
-	unlock_progress.value = 0.0
+	charging = false
 
 func unlock_skill(skill: Skill) -> void:
 	if skill is TowerSkill:
@@ -107,9 +114,9 @@ func shake_skill(skill: Skill) -> void:
 	var rotation_tween: Tween = get_tree().create_tween()
 
 	var prev_pos_y: float = skill.position.y
-	movement_tween.tween_property(skill, "position:y", prev_pos_y - 5, .02)
+	movement_tween.tween_property(skill, "position:y", prev_pos_y - 5, .1)
 	movement_tween.tween_interval(.5)
-	movement_tween.tween_property(skill, "position:y", prev_pos_y, .02)
+	movement_tween.tween_property(skill, "position:y", prev_pos_y, .1)
 
 	rotation_tween.tween_property(skill, "rotation_degrees", 40, .05)
 	rotation_tween.tween_interval(.5)

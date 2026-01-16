@@ -1,11 +1,16 @@
-[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=4 format=3 uid="uid://bt4qsf2d2gilb"]
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=6 format=3 uid="uid://bt4qsf2d2gilb"]
 
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_6lhkt"]
 [ext_resource type="Script" uid="uid://tx0ls1d4gwxv" path="res://scripts/perks/data/park_data_player.gd" id="1_6wkfo"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_ajgg6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6wkfo"]
 atlas = ExtResource("1_6lhkt")
 region = Rect2(48, 289, 48, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvete"]
+atlas = ExtResource("2_ajgg6")
+region = Rect2(16, 96, 16, 15)
 
 [resource]
 script = ExtResource("1_6wkfo")
@@ -14,10 +19,12 @@ action = 1
 stat = 3
 duration = 2.0
 required_spell_damage = inf
-base_value = 1.0
+player_stat_display = 1
+base_value = 2.0
 legendary = true
 perk_icon = SubResource("AtlasTexture_6wkfo")
+perk_mini_icon = SubResource("AtlasTexture_xvete")
 perk_name = "Evade"
-perk_desc = "Gain +100 movespeed for 2 seconds upon taking damage"
+perk_desc = "Double move speed for {value} seconds after taking damage"
 perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

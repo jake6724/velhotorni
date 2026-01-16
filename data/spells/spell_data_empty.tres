@@ -22,4 +22,5 @@ popup_name = ""
 desc = ""
 staff_texture = SubResource("AtlasTexture_4oavr")
 camera_shake = 0.0
+unlock_cost = 1
 metadata/_custom_type_script = "uid://bpllj5ap3pp45"

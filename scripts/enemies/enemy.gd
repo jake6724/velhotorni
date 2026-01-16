@@ -81,7 +81,6 @@ signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
 signal coin_dropped
 signal enemy_damage_recieved
-signal wind_up_completed
 
 func _ready():
 	data.resource_local_to_scene = true # TODO: probably/maybe not needed

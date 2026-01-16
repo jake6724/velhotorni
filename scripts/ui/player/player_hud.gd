@@ -7,9 +7,7 @@ extends Control
 @onready var active_spell_mana: TextureProgressBar = %ActiveSpellMana
 @onready var active_spell_mana_label: RichTextLabel = %ActiveSpellManaLabel
 @onready var tower_mana_label: RichTextLabel = %TowerManaLabel
-@onready var health_label: Label = %HealthLabel
-@onready var health_bar: TextureProgressBar = %HealthBar
-
+# 
 @onready var inactive_spell_1_icon: TextureRect = %InactiveSpell1Icon
 @onready var inactive_spell_2_icon: TextureRect = %InactiveSpell2Icon
 @onready var inactive_spell_3_icon: TextureRect = %InactiveSpell3Icon
@@ -20,12 +18,9 @@ extends Control
 @onready var inactive_spell_3_mana: TextureProgressBar = %InactiveSpell3Mana
 @onready var inactive_spell_manas: Array[TextureProgressBar] = [null, inactive_spell_1_mana, inactive_spell_2_mana, inactive_spell_3_mana] # null is used to make array parallel in size to spell_data_list
 
-@onready var no_mana_label: Label = %NoManaLabel
+@onready var player_hearts: HBoxContainer = %PlayerHearts
 
-@onready var combat_mode_margin_container: MarginContainer = %CombatModeMarginContainer
-@onready var combat_mode_icon: TextureRect = %CombatModeIcon
-@onready var build_mode_margin_container: MarginContainer = %BuildModeMarginContainer
-@onready var build_mode_icon: TextureRect = %BuildModeIcon
+@onready var no_mana_label: Label = %NoManaLabel
 
 @onready var wave_complete_label: Label = %WaveCompleteLabel
 
@@ -115,8 +110,21 @@ func update_tower_mana(player_mana) -> void:
 	tower_mana_label.text = bbc_string % PADDING_COLOR + zero_pad + "[/color]" + text
 
 func on_health_updated(_health: float) -> void:
-	health_label.text = str(int(_health))
-	health_bar.value = _health
+	for heart: PlayerHUDHeart in player_hearts.get_children():
+		
+		if _health >= 2:
+			heart.set_texture_full()
+			_health -= 2
+
+		elif _health == 1:
+			heart.set_texture_half()
+			_health -= 1
+
+		else:
+			heart.set_texture_empty()
+
+	for heart: PlayerHUDHeart in player_hearts.get_children():
+		heart.flash()
 
 func get_zero_padding(count: int):
 	var zero: String = "0"
@@ -136,34 +144,6 @@ func blink_no_mana_label() -> void:
 		blink_tween.tween_interval(.1)
 		await blink_tween.finished
 		blinking_no_mana = false
-
-func animate_switch_mode(_building: bool) -> void:
-	var combat_tween: Tween = get_tree().create_tween()
-	var build_tween: Tween = get_tree().create_tween()
-
-	if _building: 																		   # Move build to the front
-		build_mode_margin_container.add_theme_constant_override("margin_left", 0)
-		build_mode_margin_container.add_theme_constant_override("margin_top", 0)
-		var build_target_pos_1: Vector2 = Vector2(12, -5)
-		build_tween.tween_property(build_mode_icon, "position", build_target_pos_1, .2)
-		build_mode_icon.z_index += 1
-
-		var combat_target_pos_1: Vector2 = Vector2(2, 2)
-		combat_tween.tween_property(combat_mode_icon, "position", combat_target_pos_1, .2)
-
-		var build_target_pos_2: Vector2 = Vector2(0, -2)
-		build_tween.tween_property(build_mode_icon, "position", build_target_pos_2, .2)
-
-	else:		  																			# Move combat to the front
-		var combat_target_pos_1: Vector2 = Vector2(12, -3)
-		combat_tween.tween_property(combat_mode_icon, "position", combat_target_pos_1, .2)
-		build_mode_icon.z_index -= 1
-
-		var build_target_pos_1: Vector2 = Vector2(2, 0)
-		build_tween.tween_property(build_mode_icon, "position", build_target_pos_1, .2)
-
-		var combat_target_pos_2: Vector2 = Vector2(0, 0)
-		combat_tween.tween_property(combat_mode_icon, "position", combat_target_pos_2, .2)
 
 func blink_wave_complete() -> void:
 	wave_complete_label.show()

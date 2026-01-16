@@ -84,11 +84,26 @@ func populate_card(_data: PerkData) -> void:
 	perk_name.text = _data.perk_name
 
 	var desc_data: Dictionary = {}
+
+
+	var display_value
+	# Player Perks allow for different stats to be displayed other than base_value. Configure here
+	if _data is PerkDataPlayer:
+		match _data.player_stat_display:
+			PerkDataPlayer.PlayerStatDisplay.BASE_VALUE: display_value = _data.base_value
+			PerkDataPlayer.PlayerStatDisplay.DURATION: display_value = _data.duration
+			PerkDataPlayer.PlayerStatDisplay.REQUIRED_SPELL_DAMAGE: display_value = _data.required_spell_damage
+	
+	# Non-player perks will always use base_value
+	else:
+		display_value = _data.base_value
+
+	# Perk display value will either show the flat, unmodified value, or the value converted to a percentage-friendly format
 	match _data.perk_value_display_mode:
 		PerkData.PerkValueDisplayMode.FLAT:
-			desc_data["value"] =  int(_data.base_value)
+			desc_data["value"] =  int(display_value)
 		PerkData.PerkValueDisplayMode.PERCENT:
-			var x: float = _data.base_value * 100
+			var x: float = display_value * 100
 			print(x)
 			desc_data["value"] =  int(x)
 

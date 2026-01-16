@@ -7,12 +7,37 @@
 [ext_resource type="Texture2D" uid="uid://b1giqh0joaalh" path="res://assets/art/sprites/ui/spr_ui_spell_ammo_progress.png" id="4_bhg3x"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="5_fd7yi"]
 [ext_resource type="Texture2D" uid="uid://coitoxlmdhayv" path="res://assets/art/sprites/ui/spr_ui_gem_counter.png" id="6_knakh"]
-[ext_resource type="Texture2D" uid="uid://bfgmcle80412a" path="res://assets/art/sprites/ui/spr_ui_player_health_icon.png" id="7_844kx"]
-[ext_resource type="Texture2D" uid="uid://gknitvbgo0h0" path="res://assets/art/sprites/ui/spr_ui_player_health_bar_bg.png" id="9_gbyaf"]
-[ext_resource type="Texture2D" uid="uid://ctu4ujve6dvck" path="res://assets/art/sprites/ui/spr_ui_player_health_bar.png" id="10_tmo30"]
-[ext_resource type="Texture2D" uid="uid://b420uwxrem6np" path="res://assets/art/sprites/ui/spr_ui_modeswitch.png" id="11_2twuf"]
-[ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="12_nrxgm"]
+[ext_resource type="PackedScene" uid="uid://b8lj4sa60cw4n" path="res://scenes/ui/player/PlayerHUDHeart.tscn" id="6_tmo30"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="13_nrxgm"]
+[ext_resource type="Texture2D" uid="uid://w7csq7p838uq" path="res://assets/art/sprites/ui/spr_ui_box10.png" id="14_84rr0"]
+[ext_resource type="Texture2D" uid="uid://7v2st6m3nxlm" path="res://assets/art/sprites/ui/atl_ui_playerportrait.png" id="15_44ko1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6umb"]
+atlas = ExtResource("15_44ko1")
+region = Rect2(0, 0, 50, 25)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qbr1g"]
+load_path = "res://.godot/imported/atl_ui_health.png-812b8d89433eae597811dcb0ede44f5e.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2twuf"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_qbr1g")
+region = Rect2(0, 0, 12, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrxgm"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_qbr1g")
+region = Rect2(0, 0, 12, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5koxd"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_qbr1g")
+region = Rect2(0, 0, 12, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84rr0"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_qbr1g")
+region = Rect2(0, 0, 12, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rq211"]
 atlas = ExtResource("1_ivdol")
@@ -30,46 +55,98 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("2_rq211")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2twuf"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5koxd"]
-atlas = ExtResource("11_2twuf")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_84rr0"]
-atlas = ExtResource("11_2twuf")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_44ko1"]
-atlas = ExtResource("12_nrxgm")
-region = Rect2(51, 3, 10, 10)
-
 [node name="PlayerHUD" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_l3s77")
 metadata/_custom_type_script = "uid://cngopxpmylq3o"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PlayerInfo" type="NinePatchRect" parent="."]
+z_index = -1
 layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 125.0
-offset_bottom = 74.0
-theme_override_constants/separation = -1
+offset_top = 2.0
+offset_right = 109.0
+offset_bottom = 32.0
+texture = ExtResource("14_84rr0")
+patch_margin_right = 2
 
-[node name="Weapons" type="HBoxContainer" parent="VBoxContainer"]
-unique_name_in_owner = true
+[node name="PlayerPortrait" type="TextureRect" parent="PlayerInfo"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 50.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_o6umb")
+stretch_mode = 2
+
+[node name="TowerManaIcon" type="TextureRect" parent="PlayerInfo"]
+custom_minimum_size = Vector2(42, 10)
 layout_mode = 2
+offset_left = 51.0
+offset_top = 16.0
+offset_right = 93.0
+offset_bottom = 26.0
+texture = ExtResource("6_knakh")
+stretch_mode = 2
+
+[node name="TowerManaLabel" type="RichTextLabel" parent="PlayerInfo/TowerManaIcon"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 8)
+layout_mode = 2
+offset_left = 4.0
+offset_right = 41.0
+offset_bottom = 10.0
+theme_override_fonts/normal_font = ExtResource("5_fd7yi")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "0200"
+scroll_active = false
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PlayerHearts" type="HBoxContainer" parent="PlayerInfo"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 52.0
+offset_right = 112.0
+offset_bottom = 14.0
+theme_override_constants/separation = 2
+
+[node name="PlayerHudHeart1" parent="PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_2twuf")
+
+[node name="PlayerHudHeart2" parent="PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_nrxgm")
+
+[node name="PlayerHudHeart3" parent="PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_5koxd")
+
+[node name="PlayerHudHeart4" parent="PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_84rr0")
+
+[node name="Weapons" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 256.0
+offset_right = 124.0
+offset_bottom = 288.0
+grow_vertical = 0
 theme_override_constants/separation = 1
 
-[node name="ActiveSpellIcon" type="TextureRect" parent="VBoxContainer/Weapons"]
+[node name="ActiveSpellIcon" type="TextureRect" parent="Weapons"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_rq211")
 stretch_mode = 2
 
-[node name="ActiveSpellMana" type="TextureProgressBar" parent="VBoxContainer/Weapons/ActiveSpellIcon"]
+[node name="ActiveSpellMana" type="TextureProgressBar" parent="Weapons/ActiveSpellIcon"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
@@ -86,28 +163,28 @@ stretch_margin_bottom = 1
 texture_under = ExtResource("3_0741g")
 texture_progress = ExtResource("4_bhg3x")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Weapons"]
+[node name="MarginContainer" type="MarginContainer" parent="Weapons"]
 layout_mode = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Weapons/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Weapons/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 1
 
-[node name="InactiveSpells" type="HBoxContainer" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer"]
+[node name="InactiveSpells" type="HBoxContainer" parent="Weapons/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
 theme_override_constants/separation = 2
 
-[node name="InactiveSpell1Icon" type="TextureRect" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells"]
+[node name="InactiveSpell1Icon" type="TextureRect" parent="Weapons/MarginContainer/VBoxContainer/InactiveSpells"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_0741g")
 
-[node name="InactiveSpell1Mana" type="TextureProgressBar" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells/InactiveSpell1Icon"]
+[node name="InactiveSpell1Mana" type="TextureProgressBar" parent="Weapons/MarginContainer/VBoxContainer/InactiveSpells/InactiveSpell1Icon"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -125,12 +202,12 @@ value = 100.0
 texture_under = ExtResource("3_0741g")
 texture_progress = ExtResource("4_bhg3x")
 
-[node name="InactiveSpell2Icon" type="TextureRect" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells"]
+[node name="InactiveSpell2Icon" type="TextureRect" parent="Weapons/MarginContainer/VBoxContainer/InactiveSpells"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_bhg3x")
 
-[node name="InactiveSpell2Mana" type="TextureProgressBar" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells/InactiveSpell2Icon"]
+[node name="InactiveSpell2Mana" type="TextureProgressBar" parent="Weapons/MarginContainer/VBoxContainer/InactiveSpells/InactiveSpell2Icon"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -149,12 +226,12 @@ value = 100.0
 texture_under = ExtResource("3_0741g")
 texture_progress = ExtResource("4_bhg3x")
 
-[node name="InactiveSpell3Icon" type="TextureRect" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells"]
+[node name="InactiveSpell3Icon" type="TextureRect" parent="Weapons/MarginContainer/VBoxContainer/InactiveSpells"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_fd7yi")
 
-[node name="InactiveSpell3Mana" type="TextureProgressBar" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/InactiveSpells/InactiveSpell3Icon"]
+[node name="InactiveSpell3Mana" type="TextureProgressBar" parent="Weapons/MarginContainer/VBoxContainer/InactiveSpells/InactiveSpell3Icon"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -172,11 +249,11 @@ value = 100.0
 texture_under = ExtResource("3_0741g")
 texture_progress = ExtResource("4_bhg3x")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Weapons/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ActiveSpellManaLabel" type="RichTextLabel" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ActiveSpellManaLabel" type="RichTextLabel" parent="Weapons/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 9)
 layout_mode = 2
@@ -188,7 +265,7 @@ scroll_active = false
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/HBoxContainer/ActiveSpellManaLabel"]
+[node name="ColorRect" type="ColorRect" parent="Weapons/MarginContainer/VBoxContainer/HBoxContainer/ActiveSpellManaLabel"]
 z_index = -2
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
@@ -198,7 +275,7 @@ offset_bottom = 9.0
 size_flags_horizontal = 0
 color = Color(0.0941176, 0.0941176, 0.25098, 1)
 
-[node name="NoManaLabel" type="Label" parent="VBoxContainer/Weapons/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="NoManaLabel" type="Label" parent="Weapons/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 texture_repeat = 1
@@ -210,110 +287,6 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_fd7yi")
 theme_override_font_sizes/font_size = 8
 text = "LOW MANA"
-
-[node name="Stats" type="VBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="TowerManaIcon" type="TextureRect" parent="VBoxContainer/Stats"]
-custom_minimum_size = Vector2(42, 10)
-layout_mode = 2
-texture = ExtResource("6_knakh")
-stretch_mode = 2
-
-[node name="TowerManaLabel" type="RichTextLabel" parent="VBoxContainer/Stats/TowerManaIcon"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 8)
-layout_mode = 2
-offset_left = 4.0
-offset_right = 41.0
-offset_bottom = 10.0
-theme_override_fonts/normal_font = ExtResource("5_fd7yi")
-theme_override_font_sizes/normal_font_size = 8
-bbcode_enabled = true
-text = "0200"
-scroll_active = false
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="HealthIcon" type="TextureRect" parent="VBoxContainer/Stats"]
-layout_mode = 2
-texture = ExtResource("7_844kx")
-stretch_mode = 2
-
-[node name="HealthLabel" type="Label" parent="VBoxContainer/Stats/HealthIcon"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 9.0
-offset_top = -5.0
-offset_right = 17.0
-offset_bottom = 5.0
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HealthBar" type="TextureProgressBar" parent="VBoxContainer/Stats/HealthIcon"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 25.0
-offset_right = 50.0
-offset_bottom = 8.0
-max_value = 8.0
-value = 8.0
-texture_under = ExtResource("9_gbyaf")
-texture_progress = ExtResource("10_tmo30")
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 3
-theme_override_styles/separator = SubResource("StyleBoxEmpty_2twuf")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = -14
-
-[node name="CombatModeMarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="CombatModeIcon" type="TextureRect" parent="VBoxContainer/VBoxContainer2/CombatModeMarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-texture = SubResource("AtlasTexture_5koxd")
-stretch_mode = 2
-
-[node name="BuildModeMarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/margin_left = 2
-
-[node name="BuildModeIcon" type="TextureRect" parent="VBoxContainer/VBoxContainer2/BuildModeMarginContainer"]
-unique_name_in_owner = true
-z_index = -1
-layout_mode = 2
-size_flags_horizontal = 0
-texture = SubResource("AtlasTexture_84rr0")
-stretch_mode = 2
-
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/margin_left = 11
-theme_override_constants/margin_top = 7
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer2/MarginContainer3"]
-layout_mode = 2
-size_flags_horizontal = 4
-texture = SubResource("AtlasTexture_44ko1")
-stretch_mode = 2
 
 [node name="WaveCompleteLabel" type="Label" parent="."]
 unique_name_in_owner = true
