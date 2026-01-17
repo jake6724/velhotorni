@@ -18,6 +18,8 @@ var tower_action_press_multiplier: float = tower_action_press_multiplier_fast
 
 var input_enabled: bool = true
 
+signal primary_action_just_pressed
+signal primary_action_released
 signal special_action_pressed
 signal switch_selection_pressed
 signal switch_player_mode_pressed
@@ -107,10 +109,12 @@ func _input(event):
 func check_primary_action_input(event) -> void:
 	if Input.is_action_just_pressed("primary_action"):
 		primary_action_pressed = true
+		primary_action_just_pressed.emit()
 
 	if event.is_action_released("primary_action"):
 		primary_action_pressed = false
 		primary_action_charge = 0
+		primary_action_released.emit()
 
 func check_upgrade_action_input(event) -> void:
 	if Input.is_action_just_pressed("upgrade_action"):
