@@ -371,7 +371,6 @@ func on_hit(_direction) -> void:
 
 		display_hearts(player_stats.health)
 
-		
 		player_hud.set_player_portrait(player_stats.health, player_stats.max_health) # Called here because it needs max health data that PlayerHUD does not have
 
 func on_pit_entered() -> void:
@@ -385,6 +384,7 @@ func die() -> void:
 	reticle_sprite.hide()
 	staff_sprite.hide()
 	alive = false
+	player_hud.set_player_portrait(player_stats.health, player_stats.max_health)
 
 func respawn() -> void:
 	character_sprite.show()

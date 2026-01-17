@@ -34,5 +34,12 @@ func on_hit() -> void:
     await get_tree().create_timer(HIT_PORTRAIT_TIME).timeout
     texture = active_portrait
 
+func flash() -> void:
+    texture = portrait_flash_black
+    await get_tree().create_timer(FLASH_TIME).timeout
+    texture = portrait_flash_white
+    await get_tree().create_timer(FLASH_TIME).timeout
+    texture = active_portrait
+
 func reset_portrait() -> void:
     texture = active_portrait
