@@ -128,7 +128,6 @@ func on_health_updated(_health: float) -> void:
 		heart.flash()
 
 func set_player_portrait(_health, _player_max_health) -> void:
-	print("set_player_portrait _health: ", _health)
 	if _health > 1:
 		player_portrait.on_hit()
 		player_portrait.set_texture_full()

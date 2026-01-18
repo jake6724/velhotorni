@@ -21,6 +21,10 @@ var wave_failures: int = 0
 
 const PERK_UI_POPUP_DELAY: float = 2.0
 
+func _input(_event):
+	if Input.is_action_just_pressed("x"):
+		pause_game_with_perk_ui()
+
 func _ready():
 	SceneTransition.scene_transition_complete.connect(set_can_pause.bind(true))
 	
@@ -152,7 +156,7 @@ func pause_game_with_perk_ui() -> void:
 	player_character.player_build_ui.hide()
 	player_character.player_hud.hide()
 
-	# Create perk hand, update perk ui
+	# Create perk hand, update perk ui'
 	var perk_hand: Array[PerkData] = perk_manager.get_perk_hand()
 	print(perk_hand)
 	var rarity = perk_manager.current_perk_hand_rarity

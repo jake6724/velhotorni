@@ -8,20 +8,20 @@
 [ext_resource type="Texture2D" uid="uid://8k0oajw470vq" path="res://assets/art/sprites/ui/spr_ui_cross.png" id="6_cmp23"]
 [ext_resource type="Texture2D" uid="uid://b4g8en84fxspy" path="res://assets/placeholders/test_range.png" id="7_o8o11"]
 [ext_resource type="Texture2D" uid="uid://dralbmpfuw6ej" path="res://assets/placeholders/aoe_base_test.png" id="8_ig0xk"]
-[ext_resource type="Script" uid="uid://glgm0sqpjq0a" path="res://scripts/towers/tower_targeting.gd" id="9_aoo5e"]
+[ext_resource type="Script" path="res://scripts/towers/tower_targeting.gd" id="9_aoo5e"]
 [ext_resource type="Script" uid="uid://n5jrnk3kfl2e" path="res://scripts/buffs/buff_manager.gd" id="10_av7pv"]
 [ext_resource type="Script" uid="uid://b07kx8y1ebqjj" path="res://scripts/buffs/buff_area.gd" id="11_cmp23"]
 [ext_resource type="Script" uid="uid://cfmjvdcmboi5k" path="res://scripts/hexes/hex_manager.gd" id="12_o8o11"]
-[ext_resource type="Script" uid="uid://croyb1uheb13t" path="res://scripts/towers/tower_audio.gd" id="13_ub3td"]
+[ext_resource type="Script" path="res://scripts/towers/tower_audio.gd" id="13_ub3td"]
 [ext_resource type="Texture2D" uid="uid://d3uwhutrtqgwi" path="res://assets/art/sprites/ui/spr_ui_coin_small.png" id="14_8dhd2"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="15_3p7h3"]
 [ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="16_3p7h3"]
 [ext_resource type="Texture2D" uid="uid://qr44ws5evlmm" path="res://assets/art/sprites/ui/atl_ui_lvlup_compact.png" id="17_wl0l1"]
 [ext_resource type="Script" uid="uid://dryk4xnlrt6ig" path="res://scripts/towers/tower_hurtbox.gd" id="18_tkeu4"]
-[ext_resource type="Script" uid="uid://bshhqh6p6rwlx" path="res://scripts/ui/controller_button_hint.gd" id="19_3d6kj"]
+[ext_resource type="Script" path="res://scripts/ui/controller_button_hint.gd" id="19_3d6kj"]
 [ext_resource type="Texture2D" uid="uid://bs1li1amcuwmf" path="res://assets/art/sprites/ui/spr_ui_health_bg.png" id="19_4s542"]
 [ext_resource type="Texture2D" uid="uid://rwec3xnhkxkf" path="res://assets/art/sprites/ui/spr_ui_health_bar.png" id="20_3xpr4"]
-[ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="21_3xpr4"]
+[ext_resource type="Script" path="res://scripts/player/number_popup.gd" id="21_3xpr4"]
 
 [sub_resource type="Animation" id="Animation_bfb4r"]
 length = 0.001
@@ -339,7 +339,6 @@ offset = Vector2(8, 8)
 [node name="TowerTargeting" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("9_aoo5e")
-metadata/_custom_type_script = "uid://glgm0sqpjq0a"
 
 [node name="BuffManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -364,7 +363,6 @@ metadata/_custom_type_script = "uid://cfmjvdcmboi5k"
 
 [node name="TowerAudio" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("13_ub3td")
-metadata/_custom_type_script = "uid://croyb1uheb13t"
 
 [node name="UpgradeIcon" type="TextureRect" parent="."]
 unique_name_in_owner = true
@@ -428,7 +426,6 @@ size_flags_vertical = 8
 texture = SubResource("AtlasTexture_wl0l1")
 stretch_mode = 2
 script = ExtResource("19_3d6kj")
-metadata/_custom_type_script = "uid://bshhqh6p6rwlx"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -462,7 +459,6 @@ texture_progress = ExtResource("20_3xpr4")
 [node name="NumberPopup" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("21_3xpr4")
-metadata/_custom_type_script = "uid://c75pt0b6io16g"
 
 [node name="TowerObstacleBody" type="StaticBody2D" parent="."]
 position = Vector2(8, 8)

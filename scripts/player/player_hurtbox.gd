@@ -12,6 +12,7 @@ var reflect_chance: float # Set manually by PlayerCharacter
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 const REFLECT_CAMERA_SHAKE: float = .4
+const REFLECT_SPEED_MULTIPLIER: float = 4
 
 func _ready():
 	body_entered.connect(on_body_entered)
@@ -52,6 +53,7 @@ func reflect_bullet(bullet: EnemyBullet) -> void:
 
 	# Increase bullet damage
 	bullet.damage *= 2
+	bullet.speed *= REFLECT_SPEED_MULTIPLIER
 
 	# Change bullet collision layer to see enemies and ignore player 
 	bullet.collision_area.set_collision_mask_value(4,false) # Ignore tower hurtbox
@@ -60,3 +62,6 @@ func reflect_bullet(bullet: EnemyBullet) -> void:
 	bullet.collision_area.set_collision_mask_value.call_deferred(5,true) # see enemies
 
 	bullet.active = true # Make bullet active again
+
+func on_reflect_chance_updated(_reflect_chance: float) -> void:
+	reflect_chance = _reflect_chance

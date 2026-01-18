@@ -8,6 +8,12 @@ const FAST_FORWARD_SPEED: float = 10
 const HITSTOP_SPEED: float = 0
 const HITSTOP_DURATION: float = .01
 
+func _input(_event):
+	if Input.is_action_just_pressed("q"):
+		set_fast_forward_speed()
+	if Input.is_action_just_released("q"):
+		set_normal_speed()
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	Engine.time_scale = NORMAL_SPEED

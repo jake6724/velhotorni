@@ -83,6 +83,11 @@ func select_card() -> void:
 	get_tree().paused = false
 
 func set_card_data(perk_hand: Array[PerkData]) -> void:
+	print("typeof perk_hand[0]: ", typeof(perk_hand[0]))
+	print("typeof perk_hand[1]: ", typeof(perk_hand[1]))
+	print("typeof perk_hand[2]: ", typeof(perk_hand[2]))
+
+
 	perk_card_1.perk_data = perk_hand[0]
 	perk_card_2.perk_data = perk_hand[1]
 	perk_card_3.perk_data = perk_hand[2]

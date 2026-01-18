@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=6 format=3 uid="uid://blqkxitswt1lr"]
 
-[ext_resource type="Script" uid="uid://tx0ls1d4gwxv" path="res://scripts/perks/data/park_data_player.gd" id="1_j0183"]
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="1_j0183"]
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_xhtmu"]
 [ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_blpg5"]
 
@@ -20,11 +20,10 @@ stat = 5
 duration = -1.0
 required_spell_damage = inf
 player_stat_display = 0
-base_value = 20.0
+base_value = 0.2
 legendary = true
 perk_icon = SubResource("AtlasTexture_kl2vp")
 perk_mini_icon = SubResource("AtlasTexture_h2y5u")
 perk_name = "Wind Cloak"
 perk_desc = "Gain a {value}% chance to reflect incoming bullets"
-perk_value_display_mode = 0
-metadata/_custom_type_script = "uid://tx0ls1d4gwxv"
+perk_value_display_mode = 1

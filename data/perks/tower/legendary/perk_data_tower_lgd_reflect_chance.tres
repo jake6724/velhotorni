@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://bhmxfywqgnrqu"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_cmyll"]
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="1_coql2"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_b4wdc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coql2"]
+atlas = ExtResource("1_cmyll")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmyll"]
+atlas = ExtResource("2_b4wdc")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_coql2")
+trigger = 0
+action = 0
+stat = 7
+element = 6
+debuff = 6
+buff = 3
+base_value = 0.2
+legendary = true
+perk_icon = SubResource("AtlasTexture_coql2")
+perk_mini_icon = SubResource("AtlasTexture_cmyll")
+perk_name = "Summoner's Shield"
+perk_desc = "Familiars have a {value}% chance to reflect incoming enemy spells"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

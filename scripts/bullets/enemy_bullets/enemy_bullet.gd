@@ -57,10 +57,12 @@ func on_area_entered(intruder: Area2D) -> void:
 				return 
 
 		if intruder is TowerHurtbox:
-			intruder.take_damage(damage)
+			var damage_received = intruder.take_damage(damage, self)
+			if not damage_received:
+				return
 
 		if intruder is Enemy:
-			intruder.take_damage(damage, Constants.Element.ARCANE)
+			intruder.take_damage(damage, Constants.Element.ARCANE) # Reflected bullets deal Arcane
 
 		if intruder.owner is SpellShield:
 			intruder.owner.take_damage(damage)

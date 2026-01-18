@@ -350,6 +350,7 @@ func on_tower_upgrade_price_modifier_updated() -> void:
 		tower.update_upgrade_info()
 
 func on_tower_prices_updated() -> void:
+	player_build_ui.set_tower_button_prices(tower_element_options)
 	if preview_tower:
 		preview_tower.show_action_cost_info(TowerGlobalData.tower_prices[preview_tower.data.element])
 

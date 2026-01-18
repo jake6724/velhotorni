@@ -18,7 +18,7 @@ var original_position: Vector2
 
 signal bounce_complete
 
-var perk_data: PerkData = preload("res://data/perks/player/legendary/perk_data_player_lgd_move_speed_on_dmg.tres")
+var perk_data: PerkData
 var highlight_texture: CompressedTexture2D = preload("res://assets/art/sprites/ui/spr_ui_box6.png")
 var unhighlight_texture: CompressedTexture2D = preload("res://assets/art/sprites/ui/spr_ui_box6_gray.png")
 

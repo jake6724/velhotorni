@@ -40,8 +40,6 @@ func _ready():
 	tower_action_icons = [heal_icon, upgrade_icon, sell_icon]
 	tower_action_button_hint_icon.z_index = Constants.z_index_map["tower_menu"]
 
-	TowerGlobalData.tower_prices_updated.connect(set_tower_button_prices)
-
 ## Set the element for each tower button, and prices. This DOES NOT update the actual icon of the button; that is 
 ## done in update(), which requires PlayerMana information. Ensure that update() is called from a parent script with
 ## PlayerMana included to update icons
@@ -60,7 +58,7 @@ func populate_tower_button_data(tower_element_options: Array[Constants.Element])
 
 # This is seperate from populate_tower_button_data() so that it can be called seperately when prices update,
 # such as a perk that reduces fire tower cost
-func set_tower_button_prices(tower_element_options: Array[Constants.Element]) -> void:
+func set_tower_button_prices(tower_element_options: Array[Constants.Element]=) -> void:
 	for i in range(tower_element_options.size()):
 		tower_button_price_labels[i].text = str(TowerGlobalData.tower_prices[tower_element_options[i]])
 

@@ -172,6 +172,8 @@ var tower_max: int: # Set manually by Main from active_level
 		tower_max = value
 		tower_max_updated.emit(tower_max) 
 
+var reflect_chance: float = 0.0
+
 signal tower_max_updated
 signal tower_debuff_perk_modifier_data_updated
 signal tower_buff_perk_modifier_data_updated
@@ -218,6 +220,9 @@ func on_modify_stat_requested(perk_data: PerkDataTower) -> void:
 			tower_buff_perk_modifier_data_updated.emit()
 		PerkDataTower.TowerStat.TOWER_CAP: 
 			tower_max += perk_data.base_value
+		PerkDataTower.TowerStat.ALL_REFLECT_CHANCE:
+			print("Upating reflect chance")
+			reflect_chance += perk_data.base_value
 		PerkDataTower.TowerStat.NONE: push_error("TowerPerkManager.on_modify_stat_requested() called with stat_to_modify = NONE")
 
 

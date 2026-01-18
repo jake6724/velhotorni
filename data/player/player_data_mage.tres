@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3 uid="uid://dkeqm5qym5h01"]
 
-[ext_resource type="Script" uid="uid://b81fiu24xw16p" path="res://scripts/player/player_data.gd" id="1_aeyg5"]
+[ext_resource type="Script" path="res://scripts/player/player_data.gd" id="1_aeyg5"]
 
 [resource]
 script = ExtResource("1_aeyg5")
@@ -10,4 +10,6 @@ knockback_multiplier = 70.0
 reflect_chance = 0.0
 hitstun_recovery_multiplier = 300.0
 hurtbox_iframe_duration = 1.5
-metadata/_custom_type_script = "uid://b81fiu24xw16p"
+special_charges_max = 3
+special_charges = 3
+special_charge_cooldown_duration = 2.0

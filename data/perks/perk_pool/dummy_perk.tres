@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=4 format=3 uid="uid://c8u7fkck5jlpf"]
 
-[ext_resource type="Script" uid="uid://tx0ls1d4gwxv" path="res://scripts/perks/data/park_data_player.gd" id="1_1f5bp"]
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="1_1f5bp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f5bp"]
 

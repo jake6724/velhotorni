@@ -240,6 +240,9 @@ func initialize(element: Constants.Element):
 	attack_timer.start(curr_speed)
 	ap.play("idle")
 
+	# Initialize Hurtbox
+	hurtbox.initialize(data)
+
 func _physics_process(_delta):	
 	if can_attack:
 		attack()

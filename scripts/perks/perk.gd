@@ -1,8 +1,8 @@
 class_name Perk
 extends Object
 
-# This has been duplicated before setting for the perk;
-# dhanges can be made to data without affecting other instances
+# This data has been duplicated already;
+# changes can be made to data without affecting other instances
 var data: PerkData
 
 func perk_action() -> void:

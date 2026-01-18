@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=6 format=3 uid="uid://bbyqkwnr3snlp"]
+
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="1_ae37k"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_ytip5"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_jiobt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae37k"]
+atlas = ExtResource("1_ytip5")
+region = Rect2(48, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytip5"]
+atlas = ExtResource("2_jiobt")
+region = Rect2(16, 96, 16, 16)
+
+[resource]
+script = ExtResource("1_ae37k")
+trigger = 2
+action = 1
+stat = 3
+duration = 3.0
+required_spell_damage = inf
+player_stat_display = 1
+base_value = 1.2
+legendary = true
+perk_icon = SubResource("AtlasTexture_ae37k")
+perk_mini_icon = SubResource("AtlasTexture_ytip5")
+perk_name = "Evade"
+perk_desc = "Greatly increase move speed for {value} seconds upon taking damage"
+perk_value_display_mode = 0
+metadata/_custom_type_script = "uid://73abv3ia3v27"

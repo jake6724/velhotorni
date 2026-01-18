@@ -2,12 +2,16 @@ class_name PlayerCharacterStats # TODO: Change this to PlayerStats
 extends Node 
 
 signal health_updated
+signal reflect_chance_updated
 
 var max_health: float
 var base_move_speed: float
 var move_speed: float
 var knockback_multiplier: float
-var reflect_chance: float
+var reflect_chance: float:
+	set(value):
+		reflect_chance = value
+		reflect_chance_updated.emit(reflect_chance)
 var hitstun_recovery_multiplier: float 
 var hurtbox_iframe_duration: float
 var hurtbox_iframe_duration_base: float

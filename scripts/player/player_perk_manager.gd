@@ -43,13 +43,14 @@ func on_modify_stat_requested(data: PerkData) -> float:
 			player.player_stats.move_speed += modified_value
 		PerkDataPlayer.PlayerStat.SPECIAL_COOLDOWN: 
 			modified_value = (player.player_stats.special_charge_cooldown_duration_base * data.base_value)
-			player.player_special.charge_cooldown_duration += modified_value
+			player.player_stats.special_charge_cooldown_duration -= modified_value
 		PerkDataPlayer.PlayerStat.REFLECT_CHANCE:
 			modified_value = data.base_value
-			player.player_stats.chance_to_reflect += modified_value
+			player.player_stats.reflect_chance += modified_value
 		PerkDataPlayer.PlayerStat.SPECIAL_MAX_CHARGE:
 			modified_value = data.base_value
-			player.player_special.charge_max += modified_value
+			player.player_stats.special_charges_max += modified_value
+			player.on_special_charge_sprite_update_requested(player.player_stats.special_charges_max)
 		PerkDataPlayer.PlayerStat.IFRAME_DURATION:
 			modified_value = player.player_stats.hurtbox_iframe_duration_base * data.base_value
 			player.player_stats.hurtbox_iframe_duration = modified_value

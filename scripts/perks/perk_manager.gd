@@ -179,7 +179,8 @@ func get_basic_perk_hand(rarity: PerkData.Rarity) -> Array[PerkData]:
 
 	return perk_hand
 
-func get_legendary_perk_hand() -> Array[PerkData]: 
+func get_legendary_perk_hand() -> Array[PerkData]:  # TODO: Need to remove perks after using them!
 	valid_legendary_perk_data.shuffle()
-	var perk_hand: Array[PerkData] = [valid_legendary_perk_data[-1], valid_legendary_perk_data[-2], valid_legendary_perk_data[-3]]
+	var perk_hand: Array[PerkData] = [valid_legendary_perk_data[0], valid_legendary_perk_data[1], valid_legendary_perk_data[2]]
+	print("Legendary Perk hand: ", perk_hand)
 	return perk_hand

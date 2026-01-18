@@ -135,6 +135,7 @@ func _ready():
 	# Configure PlayerHurtbox
 	player_hurtbox.hit.connect(on_hit)
 	player_hurtbox.reflect_chance = player_stats.reflect_chance
+	player_stats.reflect_chance_updated.connect(player_hurtbox.on_reflect_chance_updated)
 	player_hurtbox.camera_shake_requested.connect(player_camera.apply_shake)
 
 	# Configure PitHurtbox
@@ -400,9 +401,9 @@ func respawn() -> void:
 	hit_blink()
 
 func hit_blink() -> void:
-	var loops: int = 10
-	var blink_time: float = (player_stats.hurtbox_iframe_duration / loops) / 2
-	var blink_tween: Tween = get_tree().create_tween().set_loops(loops)
+	var blink_time: float = .075
+	var loops: int = player_stats.hurtbox_iframe_duration / blink_time
+	var blink_tween: Tween = get_tree().create_tween().set_loops(loops/2) # Loops halved because you are waiting twice in the tween loop below
 	blink_tween.tween_property(self, "modulate:a", 0.0, .01)
 	blink_tween.tween_interval(blink_time)
 	blink_tween.tween_property(self, "modulate:a", 1.0, .01)
@@ -439,7 +440,7 @@ func update_hurtbox_collider(_value) -> void:
 	pit_hurtbox.collider.set_deferred("disabled", _value)
 
 func on_special_charge_sprite_update_requested(_charges: int) -> void:
-	special_bar_dash.texture.region = Rect2(0, (3 - _charges) * 6, 24, 6)
+	special_bar_dash.texture.region = Rect2(0, (4 - _charges) * 6, 24, 6)
 
 	if _charges == player_stats.special_charges_max:
 		special_charges_hide_timer.start(1)
@@ -497,7 +498,6 @@ func on_tower_loadout_updated() -> void:
 func display_hearts(_health) -> void:
 	player_hearts.show()
 	for heart: PlayerHeart in player_hearts.get_children():
-		print(heart)
 		if _health >= 2:
 			heart.set_texture_full()
 			_health -= 2
