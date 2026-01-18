@@ -128,19 +128,23 @@ func on_health_updated(_health: float) -> void:
 		heart.flash()
 
 func set_player_portrait(_health, _player_max_health) -> void:
-	if _health == _player_max_health:
+	print("set_player_portrait _health: ", _health)
+	if _health > 1:
+		player_portrait.on_hit()
 		player_portrait.set_texture_full()
-
-	elif _health == int(_player_max_health / 2):
-		player_portrait.set_texture_half()
-
+		player_portrait.active_portrait = player_portrait.portrait_full
 	elif _health == 1:
-		player_portrait.set_texture_low()
-
-	elif _health == 0:
+		player_portrait.on_hit()
+		player_portrait.set_texture_hit()
+		player_portrait.active_portrait = player_portrait.portrait_hit
+	else:
 		player_portrait.set_texture_dead()
 
-	player_portrait.flash()
+func set_player_portrait_firing() -> void:
+	player_portrait.set_texture_firing()
+
+func reset_player_portrait() -> void:
+	player_portrait.reset_portrait()
 
 func get_zero_padding(count: int):
 	var zero: String = "0"

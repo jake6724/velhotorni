@@ -78,6 +78,10 @@ var can_switch_mode: bool = true
 var player_hearts_timer: Timer = Timer.new()
 const DISPLAY_HEARTS_DURATION: float = 2
 
+# Used to trigger the firing playerhud player portrait after a delay of PRIMARY_ACTION_TIMER_DELAY
+var primary_action_timer: Timer = Timer.new()
+const PRIMARY_ACTION_TIMER_DELAY: float = 2
+
 signal player_respawned
 
 ## Used by PlayerClone
@@ -96,6 +100,8 @@ func _ready():
 	player_input.switch_tower_action_pressed.connect(player_build.switch_tower_action.bind(player_input))
 	player_input.ui_interact_pressed.connect(on_ui_interact_pressed)
 	player_input.weapon_select_pressed.connect(on_weapon_select_pressed)
+	player_input.primary_action_just_pressed.connect(func():primary_action_timer.start(PRIMARY_ACTION_TIMER_DELAY))
+	player_input.primary_action_released.connect(on_primary_action_released)
 
 	# Connect to GlobalSettings
 	GlobalSettings.input_type_changed.connect(on_swap_input_type)
@@ -190,6 +196,11 @@ func _ready():
 	player_hearts_timer.autostart = false
 	add_child(player_hearts_timer)
 	player_hearts_timer.timeout.connect(on_player_hearts_timer_timeout)
+	primary_action_timer.one_shot = true
+	primary_action_timer.autostart = false
+	add_child(primary_action_timer)
+	primary_action_timer.timeout.connect(on_primary_action_timer_timeout)
+
 
 func _physics_process(delta): # This can go in a state eventually
 
@@ -359,6 +370,7 @@ func on_hit(_direction) -> void:
 		hit_blink()
 
 		display_hearts(player_stats.health)
+
 		player_hud.set_player_portrait(player_stats.health, player_stats.max_health) # Called here because it needs max health data that PlayerHUD does not have
 
 func on_pit_entered() -> void:
@@ -372,6 +384,7 @@ func die() -> void:
 	reticle_sprite.hide()
 	staff_sprite.hide()
 	alive = false
+	player_hud.set_player_portrait(player_stats.health, player_stats.max_health)
 
 func respawn() -> void:
 	character_sprite.show()
@@ -503,3 +516,10 @@ func display_hearts(_health) -> void:
 
 func on_player_hearts_timer_timeout() -> void:
 	player_hearts.hide()
+
+func on_primary_action_timer_timeout() -> void:
+	player_hud.set_player_portrait_firing()
+
+func on_primary_action_released() -> void:
+	primary_action_timer.stop()
+	player_hud.reset_player_portrait()
