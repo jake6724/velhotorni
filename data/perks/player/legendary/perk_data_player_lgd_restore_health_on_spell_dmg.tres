@@ -6,11 +6,11 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6w0wc"]
 atlas = ExtResource("1_ttgef")
-region = Rect2(192, 241, 48, 46)
+region = Rect2(240, 240, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ttgef"]
 atlas = ExtResource("2_vgxxx")
-region = Rect2(64, 80, 16, 16)
+region = Rect2(80, 80, 16, 16)
 
 [resource]
 script = ExtResource("1_6w0wc")
@@ -24,7 +24,7 @@ base_value = 1.0
 legendary = true
 perk_icon = SubResource("AtlasTexture_6w0wc")
 perk_mini_icon = SubResource("AtlasTexture_ttgef")
-perk_name = "Battlehealer"
+perk_name = "Battle Healer"
 perk_desc = "Restore 1 health for every {value} spell damage"
 perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

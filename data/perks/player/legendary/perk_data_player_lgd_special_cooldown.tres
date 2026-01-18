@@ -6,11 +6,11 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uc2xk"]
 atlas = ExtResource("1_ygywp")
-region = Rect2(192, 241, 48, 46)
+region = Rect2(336, 240, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nncjf"]
 atlas = ExtResource("2_uc2xk")
-region = Rect2(64, 80, 16, 16)
+region = Rect2(112, 80, 16, 16)
 
 [resource]
 script = ExtResource("1_k3av8")
@@ -24,7 +24,7 @@ base_value = 0.5
 legendary = true
 perk_icon = SubResource("AtlasTexture_uc2xk")
 perk_mini_icon = SubResource("AtlasTexture_nncjf")
-perk_name = "Quick witted"
+perk_name = "Quick-witted"
 perk_desc = "Reduce special ability cooldown by {value}% "
 perk_value_display_mode = 1
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"
