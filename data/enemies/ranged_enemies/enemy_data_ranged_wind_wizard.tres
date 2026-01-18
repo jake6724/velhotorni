@@ -1,9 +1,14 @@
-[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=5 format=3 uid="uid://dtsxss2wos66k"]
+[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=7 format=3 uid="uid://dtsxss2wos66k"]
 
 [ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_geqlr"]
 [ext_resource type="Texture2D" uid="uid://couihrwp6f87" path="res://assets/art/atlases/enemy/atl_enemy_wind_wizard.png" id="1_gmv7n"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_gmv7n"]
 [ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="3_mo727"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="4_mo727"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euhdb"]
+atlas = ExtResource("4_mo727")
+region = Rect2(80, 16, 16, 16)
 
 [resource]
 script = ExtResource("3_mo727")
@@ -29,6 +34,7 @@ tower_mana_drop_chance_base = 5.0
 element_mana_drop_chance = 1.0
 element_mana_drop_amount_multiplier = 2.0
 atlas = ExtResource("1_gmv7n")
+icon = SubResource("AtlasTexture_euhdb")
 show_light = false
 wind_up = true
 wind_up_duration = 0.5

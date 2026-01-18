@@ -1,9 +1,14 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://btrbcslh3u2xs"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=7 format=3 uid="uid://btrbcslh3u2xs"]
 
 [ext_resource type="Texture2D" uid="uid://bq47oi0l1ytjj" path="res://assets/art/atlases/enemy/atl_enemy_light_ghoul.png" id="1_m3cyp"]
 [ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_24baa"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="3_kdnea"]
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="4_i34bl"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="4_qa3md"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ro2y"]
+atlas = ExtResource("4_qa3md")
+region = Rect2(0, 80, 16, 16)
 
 [resource]
 script = ExtResource("3_kdnea")
@@ -18,6 +23,7 @@ tower_mana_drop_chance_base = 2.0
 element_mana_drop_chance = 0.35
 element_mana_drop_amount_multiplier = 1.5
 atlas = ExtResource("1_m3cyp")
+icon = SubResource("AtlasTexture_4ro2y")
 show_light = true
 explosion_sfx = ExtResource("2_24baa")
 wind_up = true
