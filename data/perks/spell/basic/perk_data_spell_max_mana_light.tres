@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://cmws463kh7avp"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_51tao"]
+[ext_resource type="Script" uid="uid://euw34l8tc2dw" path="res://scripts/perks/data/perk_data_spell.gd" id="2_26r1o"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_piquw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldapf"]
+atlas = ExtResource("1_51tao")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdbrf"]
+atlas = ExtResource("2_piquw")
+region = Rect2(16, 64, 16, 16)
+
+[resource]
+script = ExtResource("2_26r1o")
+trigger = 0
+action = 0
+stat = 1
+element = 4
+base_value = 0.2
+legendary = false
+perk_icon = SubResource("AtlasTexture_ldapf")
+perk_mini_icon = SubResource("AtlasTexture_xdbrf")
+perk_name = "Light Attunement"
+perk_desc = "Increase light mana max"
+perk_value_display_mode = 0
+metadata/_custom_type_script = "uid://euw34l8tc2dw"

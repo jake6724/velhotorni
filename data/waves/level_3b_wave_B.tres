@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=17 format=3 uid="uid://daxe1ewhkxmu6"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_w315t"]
+[ext_resource type="Resource" uid="uid://cbcg8g4owjgrc" path="res://data/spawn/spawn_path_1_ghouls/spawn_wind_ghoul_1.tres" id="2_vivqy"]
+[ext_resource type="Resource" uid="uid://b7w0r53onbm06" path="res://data/spawn/spawn_path_1_ranged/spawn_fire_ukobach_10.tres" id="2_yp6x2"]
+[ext_resource type="Resource" uid="uid://fhwurvcdissg" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_1.tres" id="3_ahf6k"]
+[ext_resource type="Resource" uid="uid://dq8rkogdpwek1" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_wind_ghoul_10.tres" id="3_pc0x2"]
+[ext_resource type="Resource" uid="uid://cxaxxqst73uhc" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_0.tres" id="4_w315t"]
+[ext_resource type="Resource" uid="uid://bwkq2oxotnbg2" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_1.tres" id="5_vivqy"]
+[ext_resource type="Resource" uid="uid://cq22ja1a4sp6r" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_2.tres" id="6_ahf6k"]
+[ext_resource type="Resource" uid="uid://bq0ou24k2tfwy" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_wind_ghoul_1.tres" id="7_0opwh"]
+[ext_resource type="Resource" uid="uid://cn6dypb484hsx" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_3.tres" id="7_mqmto"]
+[ext_resource type="Resource" uid="uid://ckk4i8w477iwh" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_fire_ghoul_1.tres" id="8_4q4av"]
+[ext_resource type="Resource" uid="uid://bn2bf7ddx2ox4" path="res://data/spawn/spawn_path_1_ghouls/spawn_wind_ghoul_10.tres" id="10_ahf6k"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="12_k2rd1"]
+[ext_resource type="Resource" uid="uid://n7hd4gkbyr88" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_fire_buer_10.tres" id="13_mqmto"]
+[ext_resource type="Resource" uid="uid://s74btb7dhr11" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_ranged_wind_wizard_3.tres" id="14_o7v8u"]
+[ext_resource type="Resource" uid="uid://cqomox5gh7mi2" path="res://data/spawn/spawn_path_2_ranged_wind_wizard_3.tres" id="15_0ivsi"]
+
+[resource]
+script = ExtResource("12_k2rd1")
+data = Array[ExtResource("1_w315t")]([ExtResource("2_yp6x2"), ExtResource("3_pc0x2"), ExtResource("4_w315t"), ExtResource("5_vivqy"), ExtResource("6_ahf6k"), ExtResource("7_mqmto"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("3_ahf6k"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("3_ahf6k"), ExtResource("2_vivqy"), ExtResource("10_ahf6k"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("8_4q4av"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("8_4q4av"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("13_mqmto"), ExtResource("4_w315t"), ExtResource("4_w315t"), ExtResource("5_vivqy"), ExtResource("5_vivqy"), ExtResource("6_ahf6k"), ExtResource("6_ahf6k"), ExtResource("7_mqmto"), ExtResource("7_mqmto"), ExtResource("7_mqmto"), ExtResource("14_o7v8u"), ExtResource("14_o7v8u"), ExtResource("15_0ivsi"), ExtResource("15_0ivsi")])
+reward = 1.0
+token_reward = 100
+metadata/_custom_type_script = "uid://cskry1sw3vqba"

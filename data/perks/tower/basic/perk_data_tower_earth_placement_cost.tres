@@ -1,11 +1,16 @@
-[gd_resource type="Resource" script_class="PerkDataTower" load_steps=4 format=3 uid="uid://bc5ao34ph1hxr"]
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://bc5ao34ph1hxr"]
 
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_yqytf"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_g8kr0"]
 [ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="2_o3rmg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5jvt"]
 atlas = ExtResource("1_yqytf")
-region = Rect2(48, 1, 48, 45)
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuwxg"]
+atlas = ExtResource("2_g8kr0")
+region = Rect2(16, 0, 16, 16)
 
 [resource]
 script = ExtResource("2_o3rmg")
@@ -18,6 +23,7 @@ buff = 3
 base_value = 0.1
 legendary = false
 perk_icon = SubResource("AtlasTexture_u5jvt")
+perk_mini_icon = SubResource("AtlasTexture_tuwxg")
 perk_name = "Earth Conjurer"
 perk_desc = "decrease earth tower placement costs"
 perk_value_display_mode = 0
