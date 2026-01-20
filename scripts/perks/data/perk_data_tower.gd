@@ -2,7 +2,8 @@ class_name PerkDataTower
 extends PerkData
 
 enum TowerPerkAction {TowerStat}
-enum TowerStat {NONE, ALL_COSTS, PLACEMENT_COST, UPGRADE_COST, TOWER_CAP, DEBUFF_MODIFIER, BUFF_MODIFIER, ALL_REFLECT_CHANCE}
+enum TowerStat {NONE, ALL_COSTS, PLACEMENT_COST, UPGRADE_COST, TOWER_CAP, DEBUFF_MODIFIER, BUFF_MODIFIER, 
+                ALL_REFLECT_CHANCE, ALL_ELEMENT_DAMAGE}
 
 @export var trigger: Trigger = Trigger.OneShot
 @export var action: TowerPerkAction = TowerPerkAction.TowerStat
