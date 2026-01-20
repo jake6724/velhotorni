@@ -24,6 +24,16 @@ var curr_spell_data: SpellData
 var curr_spell_is_melee: bool = false
 var spread_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+var spell_element_damage_perk_modifier: Dictionary[Constants.Element, float] = {
+	Constants.Element.FIRE: 1.0,
+	Constants.Element.WIND: 1.0,
+	Constants.Element.WATER: 1.0,
+	Constants.Element.EARTH: 1.0,
+	Constants.Element.LIGHT: 1.0,
+	Constants.Element.DARK: 1.0,
+	Constants.Element.ARCANE: 1.0,
+}
+
 signal spell_cast
 signal staff_switched
 signal melee_spell_cast # Just used to call the swing sword function; not for mana data
@@ -116,7 +126,7 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 		new_spell.z_index = player.z_index + 2
 		var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
 		add_child(new_spell)
-		new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)))
+		new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)), spell_element_damage_perk_modifier[new_spell_data.element])
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
 
 func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
@@ -125,7 +135,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 
 	for melee_spell_spawn_point: Node2D in melee_spell_spawn_points:
 		var new_spell: Spell = new_spell_scene.instantiate()
-		new_spell.initialize(new_spell_data, player)
+		new_spell.initialize(new_spell_data, player, spell_element_damage_perk_modifier[new_spell_data.element])
 		new_spell.global_position = melee_spell_spawn_point.global_position + (_player_aim_direction * 16)
 		new_spell.rotation = _player_aim_direction.angle()
 

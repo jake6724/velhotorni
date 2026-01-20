@@ -13,6 +13,7 @@ var type: Debuff.Type
 var element: Constants.Element # TODO: this should just come from the bullet? 
 
 var modified_total_duration: float = total_duration
+## This is calculated in `Tower.update_debuff_data()`. Calculation includes global variables from `GlobalTowerData`
 var modified_value: float
 
 var preview_modified_total_duration: float

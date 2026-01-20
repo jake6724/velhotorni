@@ -104,7 +104,6 @@ func populate_card(_data: PerkData) -> void:
 			desc_data["value"] =  int(display_value)
 		PerkData.PerkValueDisplayMode.PERCENT:
 			var x: float = display_value * 100
-			print(x)
 			desc_data["value"] =  int(x)
 
 	description.text = _data.perk_desc.format(desc_data)

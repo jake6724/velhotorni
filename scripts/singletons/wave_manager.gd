@@ -51,7 +51,6 @@ func check_wave_complete(global_pos: Vector2) -> void:
 
 func on_wave_complete() -> void:
 	wave_index += 1
-	print("Wave index: ", wave_index)
 	if wave_index < level_waves.size():
 		active_wave = level_waves[wave_index]
 	else:

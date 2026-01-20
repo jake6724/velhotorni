@@ -4,13 +4,15 @@ extends SpellBullet
 @onready var aoe_area: Area2D = $AOEArea
 @onready var aoe_collider: CollisionShape2D = $AOEArea/AOECollider
 
-func initialize(_data: SpellDataBullet, cast_direction: Vector2) -> void:
+func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_damage_perk_modifier: float) -> void:
 	data = _data
 	original_position = global_position
 	if cast_direction:
 		move_direction = cast_direction
 	else:
 		move_direction = Vector2(1, 0) # Need to be the direction player is facing? 
+
+	set_damage(data, spell_element_damage_perk_modifier)
 
 	texture = data.atlas
 

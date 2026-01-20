@@ -152,6 +152,15 @@ var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.VOID: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
 }
 
+var tower_element_damage_perk_modifier: Dictionary[Constants.Element, float] = {
+	Constants.Element.FIRE: 1.0,
+	Constants.Element.WIND: 1.0,
+	Constants.Element.WATER: 1.0,
+	Constants.Element.EARTH: 1.0,
+	Constants.Element.LIGHT: 1.0,
+	Constants.Element.DARK: 1.0,
+}
+
 var debuff_perk_modifier: Dictionary[Debuff.Type, float] = {
 	Debuff.Type.BURN: 0.0,
 	Debuff.Type.STUN: 0.0,
@@ -221,10 +230,10 @@ func on_modify_stat_requested(perk_data: PerkDataTower) -> void:
 		PerkDataTower.TowerStat.TOWER_CAP: 
 			tower_max += perk_data.base_value
 		PerkDataTower.TowerStat.ALL_REFLECT_CHANCE:
-			print("Upating reflect chance")
 			reflect_chance += perk_data.base_value
+		PerkDataTower.TowerStat.ALL_ELEMENT_DAMAGE:
+			tower_element_damage_perk_modifier[perk_data.element] += perk_data.base_value
 		PerkDataTower.TowerStat.NONE: push_error("TowerPerkManager.on_modify_stat_requested() called with stat_to_modify = NONE")
-
 
 
 

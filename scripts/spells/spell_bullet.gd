@@ -15,7 +15,7 @@ func _ready():
 	area.area_entered.connect(on_area_entered)
 	area.body_entered.connect(on_body_entered)
 
-func initialize(_data: SpellDataBullet, cast_direction: Vector2) -> void:
+func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_damage_perk_modifier: float) -> void:
 	data = _data
 	original_position = global_position
 	if cast_direction:
@@ -23,7 +23,10 @@ func initialize(_data: SpellDataBullet, cast_direction: Vector2) -> void:
 	else:
 		move_direction = Vector2(1, 0) # Need to be the direction player is facing? 
 
+	set_damage(data, spell_element_damage_perk_modifier)
+
 	texture = data.atlas
+	
 
 func move(delta) -> void:
 	if active:

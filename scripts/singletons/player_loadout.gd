@@ -34,7 +34,7 @@ var spells: Dictionary[SpellData, bool] = {
 
 # TOWERS ###################################################################################################################
 var equipped_tower_1: TowerData = preload("res://data/towers/tower_data_fire.tres")
-var equipped_tower_2: TowerData = null
+var equipped_tower_2: TowerData = preload("res://data/towers/tower_data_wind.tres")
 var equipped_tower_3: TowerData = null
 var equipped_tower_4: TowerData = null
 var equipped_tower_5: TowerData = null

@@ -2,7 +2,7 @@ class_name PerkDataSpell
 extends PerkData
 
 enum SpellPerkAction {MODIFY_SPELL_STAT}
-enum SpellStat {NONE, MANA_MAX, MANA_COST}
+enum SpellStat {NONE, MANA_MAX, MANA_COST, ELEMENT_DAMAGE}
 
 @export var trigger: Trigger = Trigger.OneShot
 @export var action: SpellPerkAction = SpellPerkAction.MODIFY_SPELL_STAT

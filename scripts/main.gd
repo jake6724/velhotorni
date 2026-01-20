@@ -158,7 +158,6 @@ func pause_game_with_perk_ui() -> void:
 
 	# Create perk hand, update perk ui'
 	var perk_hand: Array[PerkData] = perk_manager.get_perk_hand()
-	print(perk_hand)
 	var rarity = perk_manager.current_perk_hand_rarity
 	perk_ui.set_rarity_label(rarity)
 	perk_ui.set_card_data(perk_hand)

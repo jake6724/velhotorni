@@ -315,7 +315,7 @@ func on_animation_finished(_anim_name) -> void:
 		ap.play("idle")
 
 func update_current_combat_data() -> void:
-	_leveled_damage = data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))  
+	_leveled_damage = (data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))) * TowerGlobalData.tower_element_damage_perk_modifier[data.base_element]
 	_leveled_speed = data.speed / (1.0 + (speed_level * SPEED_MODIFIER))
 	_leveled_range = data.attack_range * (1.0 + (range_level * RANGE_MODIFIER))
 	curr_damage = (_leveled_damage + _damage_buff) * _hex_damage_multiplier
@@ -325,7 +325,7 @@ func update_current_combat_data() -> void:
 	update_preview_combat_data()
 
 func update_preview_combat_data() -> void:
-	_preview_leveled_damage = data.damage + ((damage_level + 1) * (data.damage * DAMAGE_MODIFIER))
+	_preview_leveled_damage = ((data.damage + ((damage_level + 1) * (data.damage * DAMAGE_MODIFIER)))) * TowerGlobalData.tower_element_damage_perk_modifier[data.base_element]
 	_preview_leveled_speed = data.speed / (1.0 + ((speed_level + 1) * SPEED_MODIFIER))
 	_preview_leveled_range = data.attack_range * (1.0 + ((range_level + 1 )* RANGE_MODIFIER))
 
