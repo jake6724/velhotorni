@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=17 format=3 uid="uid://d0chydhfdxrx4"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_2xjud"]
+[ext_resource type="Resource" uid="uid://cro2d3kf1qr8n" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothman_half_0.tres" id="2_b1ufj"]
+[ext_resource type="Resource" uid="uid://by7s5gj5chgyk" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothman_half_1.tres" id="3_i1f88"]
+[ext_resource type="Resource" uid="uid://cxtbpf647xkee" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothman_half_2.tres" id="4_2xjud"]
+[ext_resource type="Resource" uid="uid://q2x0q4cgyaxu" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothman_half_3.tres" id="5_j7eeq"]
+[ext_resource type="Resource" uid="uid://c5lfwv1d4v351" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothling_half_0.tres" id="6_a42h4"]
+[ext_resource type="Resource" uid="uid://coro28emmkqoq" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothling_half_1.tres" id="7_oqc7e"]
+[ext_resource type="Resource" uid="uid://up4pfroipbak" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothling_half_2.tres" id="8_b87im"]
+[ext_resource type="Resource" uid="uid://ma2vkjap3ne7" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothling_half_3.tres" id="9_nwkam"]
+[ext_resource type="Resource" uid="uid://08q0ac6hgnp0" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_ranged_water_kappa_2.tres" id="10_b87im"]
+[ext_resource type="Resource" uid="uid://b8qo2bund5au8" path="res://data/spawn/spawn_path_2_water_kappa_2.tres" id="11_nwkam"]
+[ext_resource type="Resource" uid="uid://p436lng5xl1f" path="res://data/spawn/spawn_path_1_ghouls/spawn_wind_ghoul_half.tres" id="12_m1ypl"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="12_se0s7"]
+[ext_resource type="Resource" uid="uid://c0xx0v05o7wj5" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_water_killerfish_1.tres" id="13_mwfqb"]
+[ext_resource type="Resource" uid="uid://75jiaxnl1mff" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_wind_ghoul_half.tres" id="14_bnxsy"]
+[ext_resource type="Resource" uid="uid://cmxc5jg8u8fdh" path="res://data/spawn/spawn_path_2_water_killerfish_1.tres" id="15_v63s6"]
+
+[resource]
+script = ExtResource("12_se0s7")
+data = Array[ExtResource("1_2xjud")]([ExtResource("2_b1ufj"), ExtResource("3_i1f88"), ExtResource("4_2xjud"), ExtResource("5_j7eeq"), ExtResource("6_a42h4"), ExtResource("6_a42h4"), ExtResource("7_oqc7e"), ExtResource("7_oqc7e"), ExtResource("8_b87im"), ExtResource("8_b87im"), ExtResource("9_nwkam"), ExtResource("9_nwkam"), ExtResource("10_b87im"), ExtResource("11_nwkam"), ExtResource("10_b87im"), ExtResource("11_nwkam"), ExtResource("10_b87im"), ExtResource("11_nwkam"), ExtResource("10_b87im"), ExtResource("11_nwkam"), ExtResource("2_b1ufj"), ExtResource("3_i1f88"), ExtResource("4_2xjud"), ExtResource("5_j7eeq"), ExtResource("6_a42h4"), ExtResource("6_a42h4"), ExtResource("7_oqc7e"), ExtResource("7_oqc7e"), ExtResource("8_b87im"), ExtResource("8_b87im"), ExtResource("9_nwkam"), ExtResource("9_nwkam"), ExtResource("12_m1ypl"), ExtResource("12_m1ypl"), ExtResource("12_m1ypl"), ExtResource("13_mwfqb"), ExtResource("14_bnxsy"), ExtResource("14_bnxsy"), ExtResource("14_bnxsy"), ExtResource("15_v63s6")])
+reward = 1.0
+token_reward = 100
+metadata/_custom_type_script = "uid://cskry1sw3vqba"

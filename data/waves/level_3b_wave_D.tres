@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=13 format=3 uid="uid://bimuqqcuyyb36"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_4oqed"]
+[ext_resource type="Resource" uid="uid://cbcg8g4owjgrc" path="res://data/spawn/spawn_path_1_ghouls/spawn_wind_ghoul_1.tres" id="2_cqran"]
+[ext_resource type="Resource" uid="uid://fhwurvcdissg" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_1.tres" id="3_mygco"]
+[ext_resource type="Resource" uid="uid://b5jw4xjsb7ffa" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_3.tres" id="4_cc3qu"]
+[ext_resource type="Resource" uid="uid://b7rvci4vb72wl" path="res://data/spawn/spawn_path_1_ranged/spawn_repeater_wind_flatwoods_1.tres" id="5_5uup3"]
+[ext_resource type="Resource" uid="uid://ck18rtrrckxl1" path="res://data/spawn/spawn_path_1_ranged/spawn_ranged_wind_harpy_1.tres" id="6_b627f"]
+[ext_resource type="Resource" uid="uid://bq0ou24k2tfwy" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_wind_ghoul_1.tres" id="7_oxagb"]
+[ext_resource type="Resource" uid="uid://ckk4i8w477iwh" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_fire_ghoul_1.tres" id="8_wfqf7"]
+[ext_resource type="Resource" uid="uid://crd8l2562ecih" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_fire_ghoul_3.tres" id="9_qa1hs"]
+[ext_resource type="Resource" uid="uid://4xqwaeqd3alw" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_wind_flatwoods_1.tres" id="10_rr305"]
+[ext_resource type="Resource" uid="uid://88wopr8wpwsi" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_wind_harpy_1.tres" id="11_r3sca"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="12_nflb2"]
+
+[resource]
+script = ExtResource("12_nflb2")
+data = Array[ExtResource("1_4oqed")]([ExtResource("2_cqran"), ExtResource("2_cqran"), ExtResource("3_mygco"), ExtResource("2_cqran"), ExtResource("2_cqran"), ExtResource("4_cc3qu"), ExtResource("5_5uup3"), ExtResource("2_cqran"), ExtResource("2_cqran"), ExtResource("3_mygco"), ExtResource("2_cqran"), ExtResource("2_cqran"), ExtResource("4_cc3qu"), ExtResource("2_cqran"), ExtResource("2_cqran"), ExtResource("3_mygco"), ExtResource("2_cqran"), ExtResource("2_cqran"), ExtResource("3_mygco"), ExtResource("6_b627f"), ExtResource("7_oxagb"), ExtResource("7_oxagb"), ExtResource("8_wfqf7"), ExtResource("7_oxagb"), ExtResource("7_oxagb"), ExtResource("9_qa1hs"), ExtResource("10_rr305"), ExtResource("7_oxagb"), ExtResource("7_oxagb"), ExtResource("8_wfqf7"), ExtResource("7_oxagb"), ExtResource("7_oxagb"), ExtResource("9_qa1hs"), ExtResource("7_oxagb"), ExtResource("7_oxagb"), ExtResource("8_wfqf7"), ExtResource("7_oxagb"), ExtResource("7_oxagb"), ExtResource("8_wfqf7"), ExtResource("11_r3sca")])
+reward = 1.0
+token_reward = 100
+metadata/_custom_type_script = "uid://cskry1sw3vqba"
