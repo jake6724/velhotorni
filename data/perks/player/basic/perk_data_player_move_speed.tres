@@ -2,15 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_vtpjk"]
 [ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_cfvr6"]
-[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="2_q18bq"]
+[ext_resource type="Script" path="res://scripts/perks/data/perk_data_player.gd" id="2_q18bq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cfvr6"]
 atlas = ExtResource("1_vtpjk")
-region = Rect2(48, 289, 48, 46)
+region = Rect2(144, 240, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1s0o6"]
 atlas = ExtResource("2_cfvr6")
-region = Rect2(16, 96, 16, 15)
+region = Rect2(48, 80, 16, 16)
 
 [resource]
 script = ExtResource("2_q18bq")

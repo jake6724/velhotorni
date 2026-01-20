@@ -6,11 +6,11 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldapf"]
 atlas = ExtResource("1_i3uf0")
-region = Rect2(96, 193, 48, 46)
+region = Rect2(96, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2o3fj"]
 atlas = ExtResource("2_b6cd8")
-region = Rect2(32, 64, 16, 15)
+region = Rect2(32, 64, 16, 16)
 
 [resource]
 script = ExtResource("2_1oet8")
