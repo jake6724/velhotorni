@@ -37,5 +37,3 @@ desc = "This is an ice sword. A sword made of ice. This is ice which is in the f
 active_icon = SubResource("AtlasTexture_bbtra")
 inactive_icon = SubResource("AtlasTexture_x4vkg")
 staff_texture = SubResource("AtlasTexture_q04qu")
-camera_shake = 0.1
-unlock_cost = 1

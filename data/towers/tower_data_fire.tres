@@ -10,20 +10,15 @@
 
 [resource]
 script = ExtResource("1_1uxtb")
-element = 0
-base_element = 0
-damage = 2.5
+damage = 2.0
 speed = 0.35
 attack_range = 40.0
-reflect_chance = 0.0
 atlas = ExtResource("1_vod4o")
 transform_hint_texture = ExtResource("4_vod4o")
 portrait = ExtResource("5_ppxow")
 bullet = ExtResource("2_vod4o")
 bullet_speed = 100.0
 debuff_data = ExtResource("4_elw1t")
-buff_data_list = Array[ExtResource("2_elw1t")]([])
 tower_name = "Fire"
 desc = "test 1`123123123"
-unlock_cost = 1
 metadata/_custom_type_script = "uid://v7b6nq74b314"
