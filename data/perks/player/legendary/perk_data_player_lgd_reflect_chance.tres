@@ -14,12 +14,7 @@ region = Rect2(48, 96, 16, 16)
 
 [resource]
 script = ExtResource("1_j0183")
-trigger = 0
-action = 0
 stat = 5
-duration = -1.0
-required_spell_damage = inf
-player_stat_display = 0
 base_value = 0.2
 legendary = true
 perk_icon = SubResource("AtlasTexture_kl2vp")

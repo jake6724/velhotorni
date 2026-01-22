@@ -15,9 +15,7 @@ region = Rect2(80, 80, 16, 16)
 [resource]
 script = ExtResource("1_6w0wc")
 trigger = 4
-action = 0
 stat = 1
-duration = -1.0
 required_spell_damage = 250.0
 player_stat_display = 2
 base_value = 1.0
@@ -26,5 +24,4 @@ perk_icon = SubResource("AtlasTexture_6w0wc")
 perk_mini_icon = SubResource("AtlasTexture_ttgef")
 perk_name = "Battle Healer"
 perk_desc = "Restore 1 health for every {value} spell damage"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

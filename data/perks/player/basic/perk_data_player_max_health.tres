@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=6 format=3 uid="uid://bd2fwedn2x4gv"]
 
-[ext_resource type="Script" path="res://scripts/perks/data/perk_data_player.gd" id="1_budxm"]
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="1_budxm"]
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_p055t"]
 [ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_ivjrh"]
 
@@ -14,17 +14,10 @@ region = Rect2(80, 80, 16, 16)
 
 [resource]
 script = ExtResource("1_budxm")
-trigger = 0
-action = 0
 stat = 2
-duration = -1.0
-required_spell_damage = inf
-player_stat_display = 0
 base_value = 2.0
-legendary = false
 perk_icon = SubResource("AtlasTexture_ivjrh")
 perk_mini_icon = SubResource("AtlasTexture_xty37")
 perk_name = "Guardian"
 perk_desc = "Increase max player health"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

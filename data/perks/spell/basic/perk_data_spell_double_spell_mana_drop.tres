@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=4 format=3 uid="uid://nqu4bjryjmgc"]
+
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_c1pg0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1pg0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg7yt"]
+
+[resource]
+script = ExtResource("1_c1pg0")
+stat = 7
+base_value = 1.0
+perk_icon = SubResource("AtlasTexture_c1pg0")
+perk_mini_icon = SubResource("AtlasTexture_mg7yt")
+perk_name = "Infuse Power"
+perk_desc = "If an enemy killed by a spell would drop spell mana on death, {value}% chance to drop double instead"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

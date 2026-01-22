@@ -23,6 +23,9 @@ var spell_scenes: Dictionary[SpellData.Type, PackedScene] = {
 var curr_spell_data: SpellData
 var curr_spell_is_melee: bool = false
 var spread_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var free_cast_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var double_spell_mana_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var perk_debuff_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 var spell_element_damage_perk_modifier: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE: 1.0,
@@ -33,6 +36,39 @@ var spell_element_damage_perk_modifier: Dictionary[Constants.Element, float] = {
 	Constants.Element.DARK: 1.0,
 	Constants.Element.ARCANE: 1.0,
 }
+
+var spell_element_cooldown_perk_modifier: Dictionary[Constants.Element, float] = {
+	Constants.Element.FIRE: 0.0,
+	Constants.Element.WIND: 0.0,
+	Constants.Element.WATER: 0.0,
+	Constants.Element.EARTH: 0.0,
+	Constants.Element.LIGHT: 0.0,
+	Constants.Element.DARK: 0.0,
+	Constants.Element.ARCANE: 0.0,
+}
+
+var spell_element_free_cast_perk_modifier: Dictionary[Constants.Element, float] = {
+	Constants.Element.FIRE: 0.0,
+	Constants.Element.WIND: 0.0,
+	Constants.Element.WATER: 0.0,
+	Constants.Element.EARTH: 0.0,
+	Constants.Element.LIGHT: 0.0,
+	Constants.Element.DARK: 0.0,
+	Constants.Element.ARCANE: 0.0,
+}
+
+## DebuffData to apply and chance to pass on to spell
+var perk_debuffs: Dictionary[DebuffData, float] = {
+	preload("res://data/debuffs/perk_debuffs/debuff_data_knockback_perk.tres"): 0.0,
+	preload("res://data/debuffs/perk_debuffs/debuff_data_slow_perk.tres"): 0.0,
+	preload("res://data/debuffs/perk_debuffs/debuff_data_burn_perk.tres"): 0.0,
+	preload("res://data/debuffs/perk_debuffs/debuff_data_weaken_perk.tres"): 0.0,
+	preload("res://data/debuffs/perk_debuffs/debuff_data_freeze_perk.tres"): 0.0,
+	preload("res://data/debuffs/perk_debuffs/debuff_data_stun_perk.tres"): 0.0,
+}
+
+var spell_execution_threshold: float = 0.0
+var double_spell_mana_drop_chance: float = 0.0
 
 signal spell_cast
 signal staff_switched
@@ -45,6 +81,7 @@ func _ready():
 	attack_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	attack_timer.timeout.connect(on_attack_timer_timeout)
 	add_child(attack_timer)
+	initialize_perk_debuffs()
 
 func set_active_spell(_active_spell_data: SpellData) -> void:
 	curr_spell_data = _active_spell_data
@@ -58,7 +95,7 @@ func spawn_spell(player_aim_direction: Vector2) -> void:
 			spell_func.call(player_aim_direction.normalized())
 		else:
 			check_can_afford_failed.emit()
-			attack_timer.start(curr_spell_data.cooldown)
+			start_attack_cooldown(curr_spell_data)
 
 func on_switch_spell(new_spell_data: SpellData) -> void:
 	curr_spell_data = new_spell_data
@@ -106,7 +143,7 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
 
 	# Stuff that is done 1 time for all bullets in this burst group
 	player.player_audio.play_audio_stream(new_spell_data.sfx)
-	attack_timer.start(new_spell_data.cooldown)
+	start_attack_cooldown(new_spell_data)
 	player.player_camera.apply_shake(new_spell_data.camera_shake)
 
 	for i in range(new_spell_data.num_bullets - 1):
@@ -126,7 +163,11 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 		new_spell.z_index = player.z_index + 2
 		var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
 		add_child(new_spell)
-		new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)), spell_element_damage_perk_modifier[new_spell_data.element])
+
+		new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)), 
+		spell_element_damage_perk_modifier[new_spell_data.element], spell_execution_threshold, 
+		check_should_drop_double_spell_mana(), get_perk_debuffs())
+
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
 
 func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
@@ -135,7 +176,10 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 
 	for melee_spell_spawn_point: Node2D in melee_spell_spawn_points:
 		var new_spell: Spell = new_spell_scene.instantiate()
-		new_spell.initialize(new_spell_data, player, spell_element_damage_perk_modifier[new_spell_data.element])
+
+		new_spell.initialize(new_spell_data, player, spell_element_damage_perk_modifier[new_spell_data.element], 
+		spell_execution_threshold, check_should_drop_double_spell_mana(), get_perk_debuffs())
+
 		new_spell.global_position = melee_spell_spawn_point.global_position + (_player_aim_direction * 16)
 		new_spell.rotation = _player_aim_direction.angle()
 
@@ -144,7 +188,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
 		spell_cast.emit(new_spell_data)
 
-	attack_timer.start(new_spell_data.cooldown)
+	start_attack_cooldown(new_spell_data)
 	player.player_camera.apply_shake(curr_spell_data.camera_shake)
 	player.jump_forward()
 	melee_spell_cast.emit()
@@ -167,16 +211,22 @@ func spawn_shield_spell(_player_aim_direction: Vector2) -> void:
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
 		spell_cast.emit(new_spell_data)
 
-	attack_timer.start(new_spell_data.cooldown)
+	start_attack_cooldown(new_spell_data)
 	player.player_camera.apply_shake(curr_spell_data.camera_shake)
 	player.jump_forward()
 	# melee_spell_cast.emit()
 
+func start_attack_cooldown(_spell_data: SpellData) -> void:
+	var _cooldown: float = _spell_data.cooldown - (_spell_data.cooldown * spell_element_cooldown_perk_modifier[_spell_data.element])
+	attack_timer.start(_cooldown)
+
 func on_attack_timer_timeout() -> void:
 	can_attack = true
-	
+
 func check_can_afford(new_spell_data: SpellData) -> bool:
 	if new_spell_data.type != SpellData.Type.EMPTY:
+		# var mana_cost: float = new_spell_data.mana_cost * spell_element_cost_perk_modifier[new_spell_data.element]
+		print(new_spell_data.mana_base_cost)
 		if new_spell_data.mana_cost <= player.player_mana.spell_mana[new_spell_data]:
 			return true
 		else:
@@ -184,15 +234,29 @@ func check_can_afford(new_spell_data: SpellData) -> bool:
 	else:
 		return false
 
-# func apply_spell_kick(kick_amount: float) -> void:
-# 	print("applying kick")
-# 	player.velocity += -player.aim_input * kick_amount
+func check_should_drop_double_spell_mana() -> bool:
+	return double_spell_mana_rng.randf() < double_spell_mana_drop_chance
+
+func get_perk_debuffs() -> Array[DebuffData]:
+	var res: Array[DebuffData] = []
+	for debuff_data: DebuffData in perk_debuffs.keys():
+		if perk_debuff_rng.randf() < perk_debuffs[debuff_data]:
+			print("debuff_data.value: ", debuff_data.value)
+			res.append(debuff_data)
+	print("res: ", res)
+	return res
 
 func on_spell_damage_dealt(damage_amount: float) -> void:
 	spell_damage_dealt.emit(damage_amount)
 
 func spawn_empty_spell(_player_aim_direction: Vector2) -> void:
 	pass
+
+func initialize_perk_debuffs() -> void:
+	for debuff_data: DebuffData in perk_debuffs:
+		var _value = debuff_data.get("value")
+		if _value:
+			debuff_data.modified_value = _value
 
 # func spawn_bullet_spell_charged(_player_aim_direction: Vector2) -> void:
 # 	var charge_value = min(100, player.player_input.primary_action_charge)
@@ -202,3 +266,7 @@ func spawn_empty_spell(_player_aim_direction: Vector2) -> void:
 # 	new_spell_data.speed = new_spell_data.speed * charge_value
 
 # 	spawn_bullet_spell(_player_aim_direction, new_spell_data, new_spell_scene, 0, 1)
+
+# func apply_spell_kick(kick_amount: float) -> void:
+# 	print("applying kick")
+# 	player.velocity += -player.aim_input * kick_amount

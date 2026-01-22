@@ -26,7 +26,7 @@ func move(delta) -> void:
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
 ## Returns the amount of damage actually received (after calculating resistances and other modifiers)
-func take_damage(damage_recieved: float, tower_element: Constants.Element) -> float:
+func take_damage(damage_recieved: float, tower_element: Constants.Element, _execution_threshold_recieved: float = 0.0, _double_spell_mana_drop=false) -> float:
 	if is_alive:
 		is_taking_damage = true
 		ap.play("hit")

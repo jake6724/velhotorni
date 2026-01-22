@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://xbnhji331oum"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_urk1l"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_fp2vn"]
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="3_fc0ka"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kacy"]
+atlas = ExtResource("1_urk1l")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rdlu"]
+atlas = ExtResource("2_fp2vn")
+region = Rect2(32, 32, 16, 16)
+
+[resource]
+script = ExtResource("3_fc0ka")
+stat = 5
+element = 2
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_5kacy")
+perk_mini_icon = SubResource("AtlasTexture_1rdlu")
+perk_name = "Aquatic"
+perk_desc = "Gain a {value}% chance to cast water spells for free"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

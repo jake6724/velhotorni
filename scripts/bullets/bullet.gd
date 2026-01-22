@@ -89,7 +89,7 @@ func on_primary_area_entered(intruder: Node2D) -> void:
 			direction_at_collision = global_position.direction_to(target.global_position + _pos_offset)
 			is_active = false
 			target.apply_drop_chance_bonus(data.drop_chance_bonus)
-			target.take_damage(data.damage, data.element)
+			target.take_damage(data.damage, data.element, 0.0, false)
 			if data.debuff_data and target.debuff_manager:
 				target.debuff_manager.add_debuff(data.debuff_data)
 

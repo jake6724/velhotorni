@@ -14,15 +14,10 @@ region = Rect2(96, 80, 16, 15)
 
 [resource]
 script = ExtResource("1_f7efk")
-trigger = 0
-action = 0
 stat = 2
-required_spell_damage = -1.0
 base_value = 1.0
-legendary = false
 perk_icon = SubResource("AtlasTexture_4o1nv")
 perk_mini_icon = SubResource("AtlasTexture_lferv")
 perk_name = "Bastion"
 perk_desc = "Increase base max health by {value}"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://cq0cpfg5ke2ax"

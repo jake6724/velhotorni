@@ -15,7 +15,7 @@ func _ready():
 	area.area_entered.connect(on_area_entered)
 	area.body_entered.connect(on_body_entered)
 
-func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_damage_perk_modifier: float) -> void:
+func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_damage_perk_modifier: float, _execution_threshold: float, _double_spell_mana_drop: bool, _perk_debuffs: Array[DebuffData]) -> void:
 	data = _data
 	original_position = global_position
 	if cast_direction:
@@ -24,9 +24,10 @@ func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_d
 		move_direction = Vector2(1, 0) # Need to be the direction player is facing? 
 
 	set_damage(data, spell_element_damage_perk_modifier)
-
+	execution_threshold = _execution_threshold
+	double_spell_mana_drop = _double_spell_mana_drop
+	perk_debuffs = _perk_debuffs
 	texture = data.atlas
-	
 
 func move(delta) -> void:
 	if active:

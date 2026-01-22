@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://7abr4o72v147"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_q2vpt"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_w7ila"]
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="3_kgqqj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yudnl"]
+atlas = ExtResource("1_q2vpt")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fn30"]
+atlas = ExtResource("2_w7ila")
+region = Rect2(32, 32, 16, 16)
+
+[resource]
+script = ExtResource("3_kgqqj")
+stat = 4
+element = 5
+base_value = 0.05
+perk_icon = SubResource("AtlasTexture_yudnl")
+perk_mini_icon = SubResource("AtlasTexture_5fn30")
+perk_name = "Consume"
+perk_desc = "Increase the fire rate of dark spells by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

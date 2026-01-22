@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://bgaqk6vndl16i"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_wlips"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_nmac0"]
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="3_1bqhu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yudnl"]
+atlas = ExtResource("1_wlips")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fn30"]
+atlas = ExtResource("2_nmac0")
+region = Rect2(32, 32, 16, 16)
+
+[resource]
+script = ExtResource("3_1bqhu")
+stat = 4
+element = 4
+base_value = 0.05
+perk_icon = SubResource("AtlasTexture_yudnl")
+perk_mini_icon = SubResource("AtlasTexture_5fn30")
+perk_name = "Argent"
+perk_desc = "Increase the fire rate of light spells by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

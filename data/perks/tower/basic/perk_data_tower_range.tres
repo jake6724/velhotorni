@@ -9,16 +9,10 @@ region = Rect2(192, 0, 48, 48)
 
 [resource]
 script = ExtResource("1_ad1ac")
-trigger = 0
-action = 0
 stat = 6
-element = 6
-debuff = 6
 buff = 0
 base_value = 0.1
-legendary = false
 perk_icon = SubResource("AtlasTexture_5qwqo")
 perk_name = "Farsight"
 perk_desc = "increase tower range for all towers?"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

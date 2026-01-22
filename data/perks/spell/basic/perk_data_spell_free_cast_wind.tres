@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://c061264bp2scw"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_bogxk"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_ahigd"]
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="3_mjjp3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kacy"]
+atlas = ExtResource("1_bogxk")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rdlu"]
+atlas = ExtResource("2_ahigd")
+region = Rect2(32, 32, 16, 16)
+
+[resource]
+script = ExtResource("3_mjjp3")
+stat = 5
+element = 1
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_5kacy")
+perk_mini_icon = SubResource("AtlasTexture_1rdlu")
+perk_name = "Weightless"
+perk_desc = "Gain a {value}% chance to cast wind spells for free"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

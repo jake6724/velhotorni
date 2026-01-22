@@ -9,16 +9,10 @@ region = Rect2(288, 0, 48, 48)
 
 [resource]
 script = ExtResource("1_g1a5c")
-trigger = 0
-action = 0
 stat = 5
-element = 6
 debuff = 0
-buff = 3
 base_value = 0.1
-legendary = false
 perk_icon = SubResource("AtlasTexture_oowsp")
 perk_name = "Deceleration"
 perk_desc = "increase tower slowing power"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

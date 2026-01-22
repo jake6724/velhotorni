@@ -65,3 +65,4 @@ func increase_all_weapon_of_element_max_mana(element: Constants.Element, value: 
 	for spell_data: SpellData in spell_mana_maxes.keys():
 		if spell_data.element == element:
 			spell_mana_maxes[spell_data] += (spell_mana_max_base[spell_data] * value)
+			spell_mana[spell_data] = spell_mana_maxes[spell_data]

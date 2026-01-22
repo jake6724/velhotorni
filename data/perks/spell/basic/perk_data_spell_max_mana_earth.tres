@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://vmqbbr163ax5"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_ekonk"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_853sh"]
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="3_ftr82"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldapf"]
+atlas = ExtResource("1_ekonk")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h60b"]
+atlas = ExtResource("2_853sh")
+region = Rect2(32, 32, 16, 16)
+
+[resource]
+script = ExtResource("3_ftr82")
+stat = 1
+element = 3
+base_value = 0.2
+perk_icon = SubResource("AtlasTexture_ldapf")
+perk_mini_icon = SubResource("AtlasTexture_6h60b")
+perk_name = "Earth Attunement"
+perk_desc = "Increase max mana for earth spells by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

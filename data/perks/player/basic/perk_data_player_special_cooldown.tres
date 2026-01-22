@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=6 format=3 uid="uid://bnpi4vl5oh2wt"]
 
-[ext_resource type="Script" path="res://scripts/perks/data/perk_data_player.gd" id="1_d3cer"]
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="1_d3cer"]
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_s0fyi"]
 [ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_c7rl6"]
 
@@ -14,17 +14,10 @@ region = Rect2(64, 80, 16, 16)
 
 [resource]
 script = ExtResource("1_d3cer")
-trigger = 0
-action = 0
 stat = 4
-duration = -1.0
-required_spell_damage = inf
-player_stat_display = 0
 base_value = -0.1
-legendary = false
 perk_icon = SubResource("AtlasTexture_c7rl6")
 perk_mini_icon = SubResource("AtlasTexture_0c8hi")
 perk_name = "Clear Mind"
 perk_desc = "Decrease speical cooldown time"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

@@ -9,16 +9,10 @@ region = Rect2(144, 0, 48, 48)
 
 [resource]
 script = ExtResource("1_rj301")
-trigger = 0
-action = 0
 stat = 5
-element = 6
 debuff = 4
-buff = 3
 base_value = 0.1
-legendary = false
 perk_icon = SubResource("AtlasTexture_xcorj")
 perk_name = "Maim"
 perk_desc = "tower weaken is stronger"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

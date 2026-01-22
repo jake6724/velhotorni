@@ -246,10 +246,11 @@ func place_tower() -> void:
 	player_input.primary_action_pressed = false
 
 func on_spell_cast(spell_data) -> void:
-	player_mana.decrement_spell_mana(spell_data)
-	player_hud.update_mana(player_spells.spells.array, player_mana)
-	staff_ap.play("fire")
+	if player_spell_spawner.free_cast_rng.randf() > player_spell_spawner.spell_element_free_cast_perk_modifier[spell_data.element]:
+		player_mana.decrement_spell_mana(spell_data)
+		player_hud.update_mana(player_spells.spells.array, player_mana)
 
+	staff_ap.play("fire")
 	spell_cast.emit()
 	
 func on_spell_cast_failed() -> void:

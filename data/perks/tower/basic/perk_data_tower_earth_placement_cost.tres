@@ -14,17 +14,11 @@ region = Rect2(16, 0, 16, 16)
 
 [resource]
 script = ExtResource("2_o3rmg")
-trigger = 0
-action = 0
 stat = 2
 element = 3
-debuff = 6
-buff = 3
 base_value = 0.1
-legendary = false
 perk_icon = SubResource("AtlasTexture_u5jvt")
 perk_mini_icon = SubResource("AtlasTexture_tuwxg")
 perk_name = "Earth Conjurer"
 perk_desc = "decrease earth tower placement costs"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

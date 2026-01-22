@@ -73,8 +73,11 @@ var is_frozen: bool = false
 var is_stunned: bool = false
 
 var drop_chance: float # data.drop_chance_base + drop_chance_bonus passed by bullet
+var spell_mana_drop_chance: float
 
 @onready var knockback_tween: Tween
+
+const EXECUTION_POPUP_VALUE: int = 999
 
 # Signals
 signal died # Pass ref to the enemy object
@@ -97,6 +100,7 @@ func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 	light.visible = data.show_light
 	drop_chance = data.tower_mana_drop_chance_base
+	spell_mana_drop_chance = data.element_mana_drop_chance
 
 	set_pos_offset()
 
@@ -158,7 +162,7 @@ func reset_drop_chance() -> void:
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
 ## Returns the amount of damage actually received (after calculating resistances and other modifiers)
-func take_damage(damage_recieved: float, tower_element: Constants.Element) -> float:
+func take_damage(damage_recieved: float, tower_element: Constants.Element, execution_threshold_recieved: float, _double_spell_mana_drop: bool) -> float:
 	if is_alive:
 		is_taking_damage = true
 		ap.play("hit")
@@ -174,13 +178,20 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element) -> fl
 		damage_recieved = damage_recieved + (damage_recieved * (weaken_percent/100))
 		number_popup.display_damage_number(damage_recieved, global_position)
 
-
 		var damage_applied: float = min(health, damage_recieved)
 
 		health = max(0, health - damage_recieved)
 
 		if is_boss: enemy_damage_recieved.emit(damage_recieved)
-		if health <= 0: die()
+		if health <= 0:
+			if _double_spell_mana_drop:
+				spell_mana_drop_chance *= 2
+			die()
+		# Check if should execute
+		elif (health / max_health) <= execution_threshold_recieved:
+			if _double_spell_mana_drop:
+				spell_mana_drop_chance *= 2
+			die()
 
 		return damage_applied
 	else:
@@ -304,7 +315,7 @@ func on_debuff_remove_stun() -> void:
 func on_debuff_apply_burn(_value, _element) -> void:
 	if is_alive:
 		reset_drop_chance()
-		take_damage(_value, _element)
+		take_damage(_value, _element, 0.0, false)
 		fx_burn.show()
 		fx_burn.play("burn")
 
@@ -329,9 +340,13 @@ func on_debuff_remove_weaken() -> void:
 	fx_weaken.stop()
 
 func on_debuff_apply_knockback(_value, _total_duration) -> void:
+	print("on_debuff_apply_knockback _value: ", _value)
 	if is_alive:
+		print("Enemy Applying knoback to themself")
 		knockback_tween = create_tween()
 		var progress_target: float = max(0, path_follow.progress - _value)
+		print("Current progress: ", path_follow.progress)
+		print("Progress target: ", progress_target)
 		knockback_tween.tween_property(path_follow, "progress", progress_target, _total_duration)
 
 func on_debuff_remove_knockback() -> void:
@@ -407,41 +422,7 @@ func on_boon_expired(boon: Boon) -> void:
 			collider.set_deferred("disabled", false)
 		_: pass
 
-func wind_up() -> void:
-
-	pass
-
-	# var shake_distance_x: int = 1.5
-	# var duration: float = .05
-	# var interval_duration: float = .05
-	# var loops: int = 3
-
-
-	# winding_up = true
-
-	# var shake_tween: Tween = get_tree().create_tween()
-	# var modulate_tween: Tween = get_tree().create_tween()
-
-	# shake_tween.set_loops(loops)
-	# modulate_tween.set_loops(loops)
-
-	# var target: Vector2 = position + Vector2(shake_distance_x,0)
-	# shake_tween.tween_property(self, "position", target, duration)
-	# shake_tween.tween_interval(interval_duration)
-
-	# modulate_tween.tween_property(self, "modulate:v", 100, duration) 
-	# modulate_tween.tween_interval(interval_duration)
-
-	# var target_2: Vector2 = position + Vector2(-shake_distance_x,0)
-	# shake_tween.tween_property(self, "position", target_2, duration)
-	# shake_tween.tween_interval(interval_duration)
-
-	# modulate_tween.tween_property(self, "modulate:v", 1, duration) 
-	# modulate_tween.tween_interval(interval_duration)
-
-	# await shake_tween.finished
-	# wind_up_completed.emit()
-	# winding_up = false
+func wind_up() -> void: pass
 
 func hide_all_fx() -> void:
 	fx_burn.hide()

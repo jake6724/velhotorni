@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=6 format=3 uid="uid://brclnsfuam8fs"]
 
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_ckreg"]
-[ext_resource type="Script" path="res://scripts/perks/data/perk_data_player.gd" id="2_cmijv"]
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="2_cmijv"]
 [ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_jbh5k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfpml"]
@@ -15,16 +15,10 @@ region = Rect2(32, 80, 16, 16)
 [resource]
 script = ExtResource("2_cmijv")
 trigger = 1
-action = 0
 stat = 1
-duration = -1.0
-required_spell_damage = inf
-player_stat_display = 0
 base_value = 3.0
-legendary = false
 perk_icon = SubResource("AtlasTexture_gfpml")
 perk_mini_icon = SubResource("AtlasTexture_o38i7")
 perk_name = "Regenerator"
 perk_desc = "Heal {value} health after completing a wave"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

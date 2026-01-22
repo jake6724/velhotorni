@@ -11,8 +11,11 @@ func _ready():
 	hitbox.area_entered.connect(on_enemy_hit)
 	z_index = Constants.z_index_map["melee_spell"]
 
-func initialize(_data: SpellDataMelee, _spell_spawn_point: Node2D, spell_element_damage_perk_modifier: float) -> void:
+func initialize(_data: SpellDataMelee, _spell_spawn_point: Node2D, spell_element_damage_perk_modifier: float, _execution_threshold: float, _double_spell_mana_drop: bool, _perk_debuffs: Array[DebuffData]) -> void:
 	data = _data
+	execution_threshold = _execution_threshold
+	double_spell_mana_drop = _double_spell_mana_drop
+	perk_debuffs = _perk_debuffs
 	set_damage(data, spell_element_damage_perk_modifier)
 
 func on_enemy_hit(enemy: Enemy) -> void:

@@ -118,7 +118,7 @@ func on_enemy_died(enemy: Enemy) -> void:
 			active_path_enemies.remove_at(index_2)
 	enemy_died.emit()
 	enemy_died_with_global_pos.emit(enemy.global_position)
-	enemy_died_with_global_pos_drop_chance.emit(enemy.global_position, enemy.data.element_mana_drop_chance, enemy.data.element_mana_drop_amount_multiplier)
+	enemy_died_with_global_pos_drop_chance.emit(enemy.global_position, enemy.spell_mana_drop_chance, enemy.data.element_mana_drop_amount_multiplier)
 
 func on_spawn_timer_timeout(path_index: int) -> void:
 	if path_index < path_spawns.size() and path_spawns[path_index].size() > 0:

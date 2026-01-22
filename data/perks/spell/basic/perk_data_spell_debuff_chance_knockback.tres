@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=4 format=3 uid="uid://du8tfgrttgube"]
+
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_2ti8s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ti8s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mowm2"]
+
+[resource]
+script = ExtResource("1_2ti8s")
+stat = 8
+debuff_type = 5
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_2ti8s")
+perk_mini_icon = SubResource("AtlasTexture_mowm2")
+perk_name = "Wind Blast"
+perk_desc = "All spells have a {value}% chance to apply knockback"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

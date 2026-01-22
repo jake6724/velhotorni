@@ -9,16 +9,10 @@ region = Rect2(48, 0, 48, 48)
 
 [resource]
 script = ExtResource("2_401mn")
-trigger = 0
-action = 0
 stat = 3
 element = 4
-debuff = 6
-buff = 3
 base_value = -0.1
-legendary = false
 perk_icon = SubResource("AtlasTexture_gsq20")
 perk_name = "Light Proficiency"
 perk_desc = "decrease light tower upgrade cost"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"
