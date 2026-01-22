@@ -14,12 +14,7 @@ region = Rect2(80, 96, 16, 16)
 
 [resource]
 script = ExtResource("1_coql2")
-trigger = 0
-action = 0
 stat = 7
-element = 6
-debuff = 6
-buff = 3
 base_value = 0.2
 legendary = true
 perk_icon = SubResource("AtlasTexture_coql2")

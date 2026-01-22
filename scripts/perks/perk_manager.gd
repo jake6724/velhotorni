@@ -14,8 +14,10 @@ var perk_ui: PerkUI
 ## Global for this class, used to track rarity between function calls from main
 var current_perk_hand_rarity: PerkData.Rarity
 
-var perk_pool_data: PerkPoolData # Passed from PlayerCharacter via Main in initialize
-var all_basic_perk_data: Array[PerkData] # Set in initialize
+var perk_data_pool: PerkDataPool
+
+# var perk_pool_data: PerkPoolData # Passed from PlayerCharacter via Main in initialize
+var all_basic_perk_data: Array[PerkData]# Set in initialize
 var all_legendary_perk_data: Array[PerkData]
 
 ## Perks that can be used this level. Does not include unusable elemental perks
@@ -61,10 +63,14 @@ var test_perk_data: Array[PerkData] = [
 # 		for perk_data: PerkData in test_perk_data:
 # 			create_perk(perk_data)
 
-func initialize(_perk_pool_data: PerkPoolData) -> void:
-	perk_pool_data = _perk_pool_data
-	all_basic_perk_data = perk_pool_data.basic_perks
-	all_legendary_perk_data = perk_pool_data.legendary_perks
+func initialize(_perk_data_pool: PerkDataPool) -> void:
+	perk_data_pool = _perk_data_pool
+
+	for perk: PerkData in perk_data_pool.perks:
+		if perk.legendary:
+			all_legendary_perk_data.append(perk)
+		else:
+			all_basic_perk_data.append(perk)
 
 	valid_basic_perk_data = all_basic_perk_data # TODO: This needs to remove non-used elements
 	valid_legendary_perk_data = all_legendary_perk_data # TODO: This needs to remove non-used elements
@@ -151,7 +157,7 @@ func get_perk_hand() -> Array[PerkData]:
 
 	else:
 		perk_hand = get_legendary_perk_hand()
-
+	print("Perk hand: ", perk_hand)
 	return perk_hand
 
 ## Create a perk hand made up of basic perks. Active perks (same perk data, same rarity) will be excluded from this hand

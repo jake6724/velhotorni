@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://dpj6rvve6lap7"]
+
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_e5ykc"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_u4j2x"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_fnqj5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5ykc"]
+atlas = ExtResource("1_u4j2x")
+region = Rect2(240, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4j2x"]
+atlas = ExtResource("2_fnqj5")
+region = Rect2(80, 48, 16, 16)
+
+[resource]
+script = ExtResource("1_e5ykc")
+stat = 3
+element = 3
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_e5ykc")
+perk_mini_icon = SubResource("AtlasTexture_u4j2x")
+perk_name = "Seismic"
+perk_desc = "Increase damage from earth spells by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

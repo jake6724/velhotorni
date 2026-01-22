@@ -14,16 +14,9 @@ region = Rect2(112, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_q5svd")
-trigger = 0
-action = 0
 stat = 1
-element = 6
-debuff = 6
-buff = 3
 base_value = 0.1
-legendary = false
 perk_icon = SubResource("AtlasTexture_aeyae")
 perk_mini_icon = SubResource("AtlasTexture_ak03l")
 perk_name = "Fire discount"
 perk_desc = "Decrease fire tower placement cost"
-perk_value_display_mode = 0

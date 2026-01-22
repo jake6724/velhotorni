@@ -2,7 +2,6 @@ class_name PlayerCharacter
 extends CharacterBody2D
 
 @export var player_data: PlayerData
-@export var perk_pool_data: PerkPoolData
 
 # Components
 @onready var player_movement: PlayerMovement = $PlayerMovement

@@ -85,7 +85,7 @@ func _ready():
 		breakable.coin_dropped.connect(coin_drop_manager.spawn_coin_drop)
 
 	# Configure PerkManager
-	perk_manager.initialize(player_character.perk_pool_data)
+	perk_manager.initialize(player_character.player_data.perk_data_pool)
 	perk_manager.perk_ui = perk_ui
 	perk_manager.player_perk_manager = player_character.player_perk_manager
 	perk_manager.player_mana_drop_collector = player_character.mana_drop_collector
@@ -149,6 +149,7 @@ func on_wave_completed() -> void:
 	pause_game_with_perk_ui()
 
 func pause_game_with_perk_ui() -> void:
+	pass
 	await get_tree().create_timer(PERK_UI_POPUP_DELAY).timeout
 	player_character.player_input.input_enabled = false
 
@@ -170,6 +171,7 @@ func pause_game_with_perk_ui() -> void:
 	get_tree().paused = true
 
 func on_perk_selected(perk_data: PerkData) -> void:
+	print("Perk selected perk: ", perk_data)
 	perk_ui.animate_reset()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	player_character.player_hud.show()

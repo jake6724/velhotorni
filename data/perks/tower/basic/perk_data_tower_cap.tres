@@ -14,17 +14,10 @@ region = Rect2(16, 0, 16, 16)
 
 [resource]
 script = ExtResource("2_2o4ba")
-trigger = 0
-action = 0
 stat = 4
-element = 6
-debuff = 6
-buff = 3
 base_value = 1.0
-legendary = false
 perk_icon = SubResource("AtlasTexture_6y4v3")
 perk_mini_icon = SubResource("AtlasTexture_vu4bu")
 perk_name = "Logistics"
 perk_desc = "Increase tower cap"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

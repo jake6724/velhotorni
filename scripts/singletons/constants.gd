@@ -195,6 +195,15 @@ func get_weighted_random(spawn_chance_array) -> Variant:
 	push_error("get_weighted_random reached final return, which should not be possible")
 	return # Only here to allow for typed return signature. Should never return here
 
+
+
+
+
+
+
+
+
+
 # Crit
 
 var element_text: Dictionary[Element, String] ={

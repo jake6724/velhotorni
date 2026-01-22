@@ -14,17 +14,12 @@ region = Rect2(112, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_ljl7l")
-trigger = 0
-action = 0
 stat = 5
 element = 0
 debuff = 3
-buff = 3
 base_value = 0.1
-legendary = false
 perk_icon = SubResource("AtlasTexture_earwm")
 perk_mini_icon = SubResource("AtlasTexture_nd12n")
 perk_name = "Scorcher"
 perk_desc = "Increase tower burn"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

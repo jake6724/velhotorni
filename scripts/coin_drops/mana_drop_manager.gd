@@ -12,7 +12,7 @@ const DESTINATION_THRESHOLD: Vector2 = Vector2(5,5)
 
 func initialize(player_spells: PlayerSpells) -> void:
 	for spell: SpellData in player_spells.spells.array:
-		selected_spell_mana_chances.append([spell, 1.0]) # Chance value doesn't matter if they are all the same (in the weighted random algo)
+		selected_spell_mana_chances.append([spell, spell.mana_drop_chance]) # Chance value doesn't matter if they are all the same (in the weighted random algo)
 
 func _physics_process(delta):
 	for child: ManaDrop in get_children():

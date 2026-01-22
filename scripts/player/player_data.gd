@@ -24,3 +24,5 @@ extends Resource
 @export var special_charges: int = 3
 
 @export var special_charge_cooldown_duration: float = 2
+
+@export var perk_data_pool: PerkDataPool

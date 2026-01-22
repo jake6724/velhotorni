@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PerkDataPool" load_steps=6 format=3 uid="uid://b57glwlbavxr4"]
+
+[ext_resource type="Script" uid="uid://vo8qx2uo2i1k" path="res://scripts/perks/data/perk_data.gd" id="1_ey0mx"]
+[ext_resource type="Resource" uid="uid://dunlpbq1fny36" path="res://data/perks/spell/basic/perk_data_spell_damage_fire.tres" id="2_58tmt"]
+[ext_resource type="Script" uid="uid://waefmf1117ew" path="res://scripts/perks/data/perk_data_pool.gd" id="2_ykimd"]
+[ext_resource type="Resource" uid="uid://dqf7l2oayytvc" path="res://data/perks/spell/basic/perk_data_spell_damage_wind.tres" id="3_tbtfk"]
+[ext_resource type="Resource" uid="uid://d0k41usspod4d" path="res://data/perks/spell/basic/perk_data_spell_damage_water.tres" id="4_qikaa"]
+
+[resource]
+script = ExtResource("2_ykimd")
+metadata/_custom_type_script = "uid://waefmf1117ew"

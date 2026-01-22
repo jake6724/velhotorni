@@ -16,6 +16,8 @@ enum StaffType {ARCANE, WATER_SWORD, FIRE_STAFF, TRIPLE_STAFF, LIGHT_UMBRELLA, E
 @export var base_spell_mana_per_drop: int = 10
 @export var initial_mana_amount: int = 100
 @export var max_mana_amount: int = 100
+## This is used by the weighted random algorithm in Constants.gd.
+@export var mana_drop_chance: float = 1.0
 var mana_cost: float = 1
 
 @export var spell_name: String = ""

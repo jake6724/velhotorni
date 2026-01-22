@@ -18,7 +18,7 @@ var original_position: Vector2
 
 signal bounce_complete
 
-var perk_data: PerkData
+var perk_data
 var highlight_texture: CompressedTexture2D = preload("res://assets/art/sprites/ui/spr_ui_box6.png")
 var unhighlight_texture: CompressedTexture2D = preload("res://assets/art/sprites/ui/spr_ui_box6_gray.png")
 
@@ -79,7 +79,7 @@ func bounce_element(ui_element: Control, bounce_height: int) -> void:
 
 	bounce_complete.emit()
 
-func populate_card(_data: PerkData) -> void:
+func populate_card(_data) -> void:
 	perk_icon.texture = _data.perk_icon
 	perk_name.text = _data.perk_name
 

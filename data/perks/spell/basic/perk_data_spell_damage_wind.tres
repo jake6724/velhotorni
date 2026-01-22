@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://dqf7l2oayytvc"]
+
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_3cckj"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_trbh5"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_fc0lv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cckj"]
+atlas = ExtResource("1_trbh5")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trbh5"]
+atlas = ExtResource("2_fc0lv")
+region = Rect2(16, 48, 16, 16)
+
+[resource]
+script = ExtResource("1_3cckj")
+stat = 3
+element = 1
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_3cckj")
+perk_mini_icon = SubResource("AtlasTexture_trbh5")
+perk_name = "Typhoon"
+perk_desc = "Increase damage from wind spells by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

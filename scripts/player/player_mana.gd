@@ -24,7 +24,7 @@ func _ready():
 	timer.one_shot = false
 	timer.timeout.connect(on_timer_timeout)
 	add_child(timer)
-	timer.start(regen_rate)
+# timer.start(regen_rate)
 
 func on_timer_timeout() -> void:
 	print("Timer timeout")

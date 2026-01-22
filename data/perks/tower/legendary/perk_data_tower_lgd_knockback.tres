@@ -14,17 +14,12 @@ region = Rect2(16, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_h1aky")
-trigger = 0
-action = 0
 stat = 5
-element = 6
 debuff = 5
-buff = 3
 base_value = 2.0
 legendary = true
 perk_icon = SubResource("AtlasTexture_h1aky")
 perk_mini_icon = SubResource("AtlasTexture_hwqkq")
 perk_name = "Tempest"
 perk_desc = "Familiar Knockback powers are doubled"
-perk_value_display_mode = 0
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"
