@@ -79,8 +79,9 @@ func switch_selected_card(switch_direction: int) -> void:
 		curr_perk_card = perk_cards_linked.head.value
 
 func select_card() -> void:
-	perk_selected.emit(curr_perk_card.perk_data)
-	get_tree().paused = false
+	if visible:
+		perk_selected.emit(curr_perk_card.perk_data)
+		get_tree().paused = false
 
 func set_card_data(perk_hand: Array[PerkData]) -> void:
 	perk_card_1.perk_data = perk_hand[0]

@@ -21,6 +21,10 @@ var special_charges: int
 var special_charge_cooldown_duration: float
 var special_charge_cooldown_duration_base: float
 
+var aoe_damage: float = 0.0
+var aoe_debuffs: Array[DebuffData] = []
+var aoe_element: Constants.Element = Constants.Element.ARCANE
+
 func load_player_data(data: PlayerData) -> void:
 	max_health = data.max_health
 	base_move_speed = data.base_move_speed
@@ -34,6 +38,9 @@ func load_player_data(data: PlayerData) -> void:
 	special_charges = data.special_charges
 	special_charge_cooldown_duration = data.special_charge_cooldown_duration
 	special_charge_cooldown_duration_base = special_charge_cooldown_duration
+	aoe_damage = data.aoe_damage
+	aoe_debuffs = data.aoe_debuffs
+	aoe_element = data.aoe_element
 
 var health: float = 8.0:
 	set(value):

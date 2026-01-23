@@ -11,8 +11,6 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var reward_remaining: int = 0
 var direction_to_mouse: Vector2
 
-var drop_chance_perk_modifier: float = 0.0
-
 signal reward_completed
 
 func _ready():
@@ -25,7 +23,7 @@ func on_enemy_spawned(_enemy: Enemy) -> void:
 ## Called when an enemy that `CoinDropManager` is connected to dies. `CoinDropManager` connects to enemies in `on_enemy_spawned()`
 ## helper function is used so that parent function can modify drop_chance with perk bonus before recursive calls start
 func spawn_coin_drop(_global_pos, drop_chance) -> void:
-	drop_chance += drop_chance_perk_modifier
+	drop_chance = drop_chance + TowerGlobalData.tower_mana_drop_perk_bonus
 	spawn_coin_drop_helper(_global_pos, drop_chance)
 
 func spawn_coin_drop_helper(_global_pos, drop_chance) -> void:

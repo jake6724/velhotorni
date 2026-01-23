@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=4 format=3 uid="uid://dygshygtmeg2c"]
+
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_rhx5x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyd72"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7m0o3"]
+
+[resource]
+script = ExtResource("1_rhx5x")
+stat = 11
+element = 0
+base_value = 0.25
+secondary_value = 2.0
+legendary = true
+perk_icon = SubResource("AtlasTexture_eyd72")
+perk_mini_icon = SubResource("AtlasTexture_7m0o3")
+perk_name = "Cyclone"
+perk_desc = "Spell mana drops have double the chance to be wind. Increase all wind damage by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

@@ -226,7 +226,6 @@ func on_attack_timer_timeout() -> void:
 func check_can_afford(new_spell_data: SpellData) -> bool:
 	if new_spell_data.type != SpellData.Type.EMPTY:
 		# var mana_cost: float = new_spell_data.mana_cost * spell_element_cost_perk_modifier[new_spell_data.element]
-		print(new_spell_data.mana_base_cost)
 		if new_spell_data.mana_cost <= player.player_mana.spell_mana[new_spell_data]:
 			return true
 		else:
@@ -241,9 +240,7 @@ func get_perk_debuffs() -> Array[DebuffData]:
 	var res: Array[DebuffData] = []
 	for debuff_data: DebuffData in perk_debuffs.keys():
 		if perk_debuff_rng.randf() < perk_debuffs[debuff_data]:
-			print("debuff_data.value: ", debuff_data.value)
 			res.append(debuff_data)
-	print("res: ", res)
 	return res
 
 func on_spell_damage_dealt(damage_amount: float) -> void:

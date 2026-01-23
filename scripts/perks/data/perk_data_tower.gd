@@ -3,7 +3,7 @@ extends PerkData
 
 enum TowerPerkAction {TowerStat}
 enum TowerStat {NONE, ALL_COSTS, PLACEMENT_COST, UPGRADE_COST, TOWER_CAP, DEBUFF_MODIFIER, BUFF_MODIFIER, 
-                ALL_REFLECT_CHANCE, ALL_ELEMENT_DAMAGE}
+                ALL_REFLECT_CHANCE, ALL_ELEMENT_DAMAGE, TOWER_MANA_DROP, BULLET_MODIFIER}
 
 @export var trigger: Trigger = Trigger.OneShot
 @export var action: TowerPerkAction = TowerPerkAction.TowerStat
@@ -14,3 +14,4 @@ enum TowerStat {NONE, ALL_COSTS, PLACEMENT_COST, UPGRADE_COST, TOWER_CAP, DEBUFF
 @export var debuff: Debuff.Type = Debuff.Type.NONE
 ## This variable is ONLY USED if the TowerStat is BUFF_MODIFIER
 @export var buff: Buff.Type = Buff.Type.NONE
+@export var bullet_modifier: BulletModifierData.Type = BulletModifierData.Type.NONE

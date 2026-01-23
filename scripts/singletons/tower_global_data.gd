@@ -176,12 +176,20 @@ var buff_perk_modifier: Dictionary[Buff.Type, float] = {
 	Buff.Type.DAMAGE: 1.0,
 }
 
+var bullet_modifier_perk_modifier: Dictionary[BulletModifierData.Type, float] = {
+	BulletModifierData.Type.COIN: 0.0,
+	BulletModifierData.Type.NONE: 0.0
+}
+
 var tower_max: int: # Set manually by Main from active_level
 	set(value):
 		tower_max = value
 		tower_max_updated.emit(tower_max) 
 
 var reflect_chance: float = 0.0
+
+## Additive to the tower mana drop chance in coin_drop_manager.gd
+var tower_mana_drop_perk_bonus: float = 0.0
 
 signal tower_max_updated
 signal tower_debuff_perk_modifier_data_updated
@@ -233,6 +241,10 @@ func on_modify_stat_requested(perk_data: PerkDataTower) -> void:
 			reflect_chance += perk_data.base_value
 		PerkDataTower.TowerStat.ALL_ELEMENT_DAMAGE:
 			tower_element_damage_perk_modifier[perk_data.element] += perk_data.base_value
+		PerkDataTower.TowerStat.TOWER_MANA_DROP:
+			tower_mana_drop_perk_bonus += perk_data.base_value
+		PerkDataTower.TowerStat.BULLET_MODIFIER:
+			bullet_modifier_perk_modifier[perk_data.bullet_modifier] += perk_data.base_value
 		PerkDataTower.TowerStat.NONE: push_error("TowerPerkManager.on_modify_stat_requested() called with stat_to_modify = NONE")
 
 

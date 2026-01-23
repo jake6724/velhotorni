@@ -49,3 +49,10 @@ func switch_to_index(index: int) -> void:
 		while spells.head.value != original_spell_positions[index] or count > 5:
 			switch_spells(1)
 			count += 1
+
+func get_all_spell_data_of_element(target_element: Constants.Element) -> Array[SpellData]:
+	var res: Array[SpellData] = []
+	for spell_data: SpellData in spells.array:
+		if spell_data.element == target_element:
+			res.append(spell_data)
+	return res

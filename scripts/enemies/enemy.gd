@@ -340,13 +340,9 @@ func on_debuff_remove_weaken() -> void:
 	fx_weaken.stop()
 
 func on_debuff_apply_knockback(_value, _total_duration) -> void:
-	print("on_debuff_apply_knockback _value: ", _value)
 	if is_alive:
-		print("Enemy Applying knoback to themself")
 		knockback_tween = create_tween()
 		var progress_target: float = max(0, path_follow.progress - _value)
-		print("Current progress: ", path_follow.progress)
-		print("Progress target: ", progress_target)
 		knockback_tween.tween_property(path_follow, "progress", progress_target, _total_duration)
 
 func on_debuff_remove_knockback() -> void:

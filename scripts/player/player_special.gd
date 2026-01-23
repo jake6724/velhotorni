@@ -33,6 +33,7 @@ const CLONE_RESET_DURATION: float = 12.0
 signal camera_shake_requested
 signal hurtbox_update_requested
 signal special_charge_sprite_update_requested
+signal player_special_activated
 
 var special_func: Callable = dash
 var after_image_func: Callable = dash_run_after_image
@@ -75,7 +76,7 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	var target: Vector2 = player.velocity + (Vector2(dash_velocity, dash_velocity) * direction)
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(player, "velocity", target, dash_duration)
-
+	player_special_activated.emit()
 	await tween.finished
 	active = false
 	await get_tree().create_timer(.5).timeout
@@ -155,6 +156,7 @@ func spawn_clone(_move_input: Vector2=Vector2.ZERO, _aim_input: Vector2=Vector2.
 
 		clone.queue_free()
 		clone = null
+	player_special_activated.emit()
 
 func on_special_cooldown_timeout() -> void:
 	player.player_stats.special_charges = player.player_stats.special_charges_max

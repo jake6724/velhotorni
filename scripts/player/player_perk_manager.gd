@@ -70,6 +70,9 @@ func on_timed_modify_stat_requested(data: PerkData) -> void:
 
 		timed_modify_stat_stack_count[data.stat] += 1
 
+func on_player_aoe_requested(perk_data: PerkDataPlayer) -> void:
+	player.player_aoe.attack(perk_data.base_value, perk_data.debuffs, perk_data.element) 
+
 ## Remove the effect applied by `on_timed_modify_stat_requested` on timer timeout. `value` has been pre-calculated
 ## to be the amount the stat was originally changed by. This avoids the error of adding a percentage back to a value
 ## that may have changed since the original effect was applied, which would make the percentage inaccurate

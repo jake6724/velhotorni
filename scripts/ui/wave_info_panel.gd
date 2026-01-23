@@ -9,6 +9,7 @@ var unit_wave_info_scene: PackedScene = preload("res://scenes/ui/UnitWaveInfo.ts
 
 func _ready():
 	z_index = Constants.z_index_map["top"]
+	float_animation()
 
 func get_path_enemy_info(active_level: LevelEnvironment) -> void:
 	for i in range(active_level.waves.size()): 
@@ -42,3 +43,14 @@ func populate_unit_wave_info(wave_index: int) -> void:
 			hide()
 	else:
 		hide()
+
+
+func float_animation() -> void:
+	var float_tween: Tween = get_tree().create_tween()
+	var target: Vector2 = position + Vector2(0,-2)
+	var prev: Vector2 = position
+	float_tween.tween_property(self, "position", target, .2)
+	float_tween.tween_interval(1)
+	float_tween.tween_property(self, "position", prev, .2)
+	float_tween.tween_interval(1)
+	float_tween.set_loops(0) # 0 will cause infinite looping

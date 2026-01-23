@@ -8,6 +8,5 @@ func _ready():
 	body_entered.connect(on_body_entered)
 
 func on_body_entered(player: PlayerCharacter) -> void:
-	print(player)
 	# player.player_camera.position_smoothing_enabled = false
 	SceneTransition.teleport_player(player, link.teleport_point.global_position)

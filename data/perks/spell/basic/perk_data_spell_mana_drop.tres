@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=4 format=3 uid="uid://bp3lc82irhufj"]
+
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_5nfc7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nfc7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkl7o"]
+
+[resource]
+script = ExtResource("1_5nfc7")
+stat = 9
+base_value = 0.05
+perk_icon = SubResource("AtlasTexture_5nfc7")
+perk_mini_icon = SubResource("AtlasTexture_fkl7o")
+perk_name = "Overcharged"
+perk_desc = "Increase spell mana drop chance by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

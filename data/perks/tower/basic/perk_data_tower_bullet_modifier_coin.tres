@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=4 format=3 uid="uid://c7uurcu0v578c"]
+
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="1_tccar"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tccar"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bvce"]
+
+[resource]
+script = ExtResource("1_tccar")
+stat = 10
+bullet_modifier = 0
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_tccar")
+perk_mini_icon = SubResource("AtlasTexture_6bvce")
+perk_name = "Mana lore"
+perk_desc = "Increase earth familiar summon mana drop buff power {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

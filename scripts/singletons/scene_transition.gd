@@ -21,13 +21,11 @@ func change_scene(target: PackedScene) -> void:
 	scene_transition_complete.emit()
 
 func change_scene_no_animation(target: PackedScene) -> void:
-	print("Scene transition change_scene_no_animation start")
 	# if get_tree().current_scene:
 	# 	get_tree().current_scene.queue_free()
 	get_tree().change_scene_to_packed(target)
 	await get_tree().create_timer(.1).timeout # Give time for Main to come up so this signal can be observed
 	scene_transition_complete.emit()
-	print("Complete")
 
 ## This does not load a new scene; it only uses the scene transition animation along with updating the players position
 func teleport_player(player: PlayerCharacter, target_global_position: Vector2) -> void:

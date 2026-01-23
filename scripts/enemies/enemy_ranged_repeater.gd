@@ -20,17 +20,20 @@ func configure_ranged_enemy() -> void:
 
 func on_attack_timer_timeout() -> void:
 	if is_alive:
-		spawn_all_bullets()
-		burst_count += 1
-		if burst_count >= data.num_bursts:
-			attack_timer.start(data.attack_cooldown)
-			burst_count = 0
-			start_angle = data.start_angle
-			bullet_speed = data.bullet_speed
+		if not is_frozen and not is_stunned:
+			spawn_all_bullets()
+			burst_count += 1
+			if burst_count >= data.num_bursts:
+				attack_timer.start(data.attack_cooldown)
+				burst_count = 0
+				start_angle = data.start_angle
+				bullet_speed = data.bullet_speed
+			else:
+				attack_timer.start(data.burst_cooldown)
+				start_angle += data.burst_angle_increment
+				bullet_speed += data.burst_bullet_speed_increment
 		else:
-			attack_timer.start(data.burst_cooldown)
-			start_angle += data.burst_angle_increment
-			bullet_speed += data.burst_bullet_speed_increment
+			attack_timer.start(data.attack_cooldown)
 
 func spawn_all_bullets() -> void:
 	var curr_angle: float = start_angle

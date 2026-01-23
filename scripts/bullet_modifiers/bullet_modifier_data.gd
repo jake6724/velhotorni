@@ -1,7 +1,7 @@
 class_name BulletModifierData
 extends Resource
 
-enum Type {COIN}
+enum Type {COIN, NONE}
 
 @export var type: BulletModifierData.Type
 @export var value: float

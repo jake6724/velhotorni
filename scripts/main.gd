@@ -70,6 +70,8 @@ func _ready():
 	# Configure ManaDropManager
 	EnemySpawner.enemy_died_with_global_pos_drop_chance.connect(mana_drop_manager.on_enemy_died)
 	mana_drop_manager.initialize(player_character.player_spells)
+	player_character.player_spell_perk_manager.spell_mana_drop_perk_bonus_incremented.connect(mana_drop_manager.on_spell_mana_drop_perk_bonus_incremented)
+	player_character.player_spell_perk_manager.spell_mana_drop_chance_multiplier_added.connect(mana_drop_manager.on_spell_mana_drop_chance_multiplier_added)
 
 	# Configure PauseMenu
 	pause_menu.parent_scene = self
@@ -93,6 +95,7 @@ func _ready():
 	perk_manager.player_spell_spawner = player_character.player_spell_spawner
 	perk_manager.base_perk_manager = active_level.base.base_perk_manager
 	perk_manager.player_spell_perk_manager = player_character.player_spell_perk_manager
+	perk_manager.player_special = player_character.player_special
 
 	# Configure PerkUI
 	WaveManager.wave_completed.connect(on_wave_completed)
@@ -171,7 +174,6 @@ func pause_game_with_perk_ui() -> void:
 	get_tree().paused = true
 
 func on_perk_selected(perk_data: PerkData) -> void:
-	print("Perk selected perk: ", perk_data)
 	perk_ui.animate_reset()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	player_character.player_hud.show()

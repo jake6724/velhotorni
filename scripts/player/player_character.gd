@@ -25,6 +25,7 @@ extends CharacterBody2D
 @onready var pit_hurtbox: PitHurtbox = %PitHurtbox
 @onready var graphics_parent: Node2D = %GraphicsParent
 @onready var player_hearts: HBoxContainer = %PlayerHearts
+@onready var player_aoe: PlayerAOE = %PlayerAOE
 
 @onready var character_sprite: Sprite2D = %CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer

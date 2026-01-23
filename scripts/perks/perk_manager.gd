@@ -3,12 +3,14 @@ extends Node
 
 # External references
 # All references manually set by Main
+# TODO: At this point just give it the fucking player
 var player_perk_manager: PlayerPerkManager
 var player_mana_drop_collector: ManaDropCollector
 var player_hurtbox: PlayerHurtbox
 var player_spell_spawner: PlayerSpellSpawner
 var base_perk_manager: BasePerkManager
 var player_spell_perk_manager: PlayerSpellPerkManager
+var player_special: PlayerSpecial
 var perk_ui: PerkUI
 
 ## Global for this class, used to track rarity between function calls from main
@@ -41,10 +43,10 @@ var rarity_counts: Dictionary[PerkData.Rarity, int] = {
 # }
 
 var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
-	PerkData.Rarity.ONE: 10,
+	PerkData.Rarity.ONE: 0,
 	PerkData.Rarity.TWO: 0,
 	PerkData.Rarity.THREE: 0,
-	PerkData.Rarity.FOUR: 0,
+	PerkData.Rarity.FOUR: 1,
 }
 
 var rarity_pool: Array
@@ -86,6 +88,7 @@ func create_perk(perk_data: PerkData) -> void:
 		new_perk = PerkPlayer.new()
 		new_perk.modify_stat_requested.connect(player_perk_manager.on_modify_stat_requested)
 		new_perk.timed_modify_stat_requested.connect(player_perk_manager.on_timed_modify_stat_requested)
+		new_perk.player_aoe_requested.connect(player_perk_manager.on_player_aoe_requested)
 
 	elif perk_data is PerkDataBase:
 		new_perk = PerkBase.new()
@@ -115,6 +118,7 @@ func configure_perk_trigger(new_perk: Perk) -> void:
 		PerkData.Trigger.OnSpellManaPickup: player_mana_drop_collector.mana_drop_collected_no_data.connect(new_perk.perk_action)
 		PerkData.Trigger.OnPlayerDamage: player_hurtbox.hit_no_data.connect(new_perk.perk_action)
 		PerkData.Trigger.OnPlayerSpellDamageDealt: player_spell_spawner.spell_damage_dealt.connect(new_perk.accumulate_spell_damage)
+		PerkData.Trigger.PLAYER_SPECIAL: player_special.player_special_activated.connect(new_perk.perk_action)
 
 ## Choose a valid rarity from `rarity_pool`. Automatically calls update_rarity_data() to keep `rarity_pool` valid.
 func get_rarity() -> PerkData.Rarity:

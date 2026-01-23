@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("1_c1pg0")
 stat = 7
-base_value = 1.0
+base_value = 0.1
 perk_icon = SubResource("AtlasTexture_c1pg0")
 perk_mini_icon = SubResource("AtlasTexture_mg7yt")
 perk_name = "Infuse Power"

@@ -109,5 +109,5 @@ func apply_bullet_modifier_data() -> void:
 	if data.bullet_modifier_data:
 		match data.bullet_modifier_data.type:
 			BulletModifierData.Type.COIN:
-				data.drop_chance_bonus = data.bullet_modifier_data.leveled_value
+				data.drop_chance_bonus = (data.bullet_modifier_data.leveled_value + TowerGlobalData.bullet_modifier_perk_modifier[data.bullet_modifier_data.type])
 			_: pass

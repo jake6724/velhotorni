@@ -26,3 +26,7 @@ extends Resource
 @export var special_charge_cooldown_duration: float = 2
 
 @export var perk_data_pool: PerkDataPool
+
+@export var aoe_damage: float = 0.0
+@export var aoe_debuffs: Array[DebuffData] = []
+@export var aoe_element: Constants.Element = Constants.Element.ARCANE

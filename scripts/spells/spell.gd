@@ -22,7 +22,6 @@ func deal_damage(enemy: Enemy) -> void:
 		enemy.debuff_manager.add_debuff(data.debuff_data)
 
 	for perk_debuff_data in perk_debuffs:
-		print("Applying debuff data: ", perk_debuff_data)
 		enemy.debuff_manager.add_debuff(perk_debuff_data)
 
 	damage_dealt.emit(damage_applied)
