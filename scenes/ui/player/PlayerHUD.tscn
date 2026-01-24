@@ -333,97 +333,14 @@ offset_bottom = 35.0
 grow_horizontal = 0
 theme_override_constants/separation = 2
 
-[node name="ManaDropDisplay" type="VBoxContainer" parent="."]
-visible = false
+[node name="SpellManaDropDisplay" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 clip_contents = true
+layout_direction = 2
 layout_mode = 0
-offset_left = 8.0
+offset_left = 6.0
 offset_top = 48.0
 offset_right = 96.0
-offset_bottom = 252.0
+offset_bottom = 248.0
 size_flags_horizontal = 4
 alignment = 2
-
-[node name="Label" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "+100 Horn"
-
-[node name="Label2" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "+10 Ice"
-
-[node name="Label3" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "+10 Dragon"
-
-[node name="Label4" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "+400 Arcane"
-
-[node name="Label5" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "+10 Ice"
-
-[node name="Label6" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "+10 Ice"
-
-[node name="Label7" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "+10 Ice"
-
-[node name="Label8" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "Horn Full"
-
-[node name="Label9" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "Dargon full"
-
-[node name="Label10" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "Ice full"
-
-[node name="Label11" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "Ice full"
-
-[node name="Label12" type="Label" parent="ManaDropDisplay"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("5_fd7yi")
-theme_override_font_sizes/font_size = 8
-text = "Ice full"

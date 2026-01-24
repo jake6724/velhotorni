@@ -78,6 +78,7 @@ extends Resource
     # preload("res://data/perks/spell/legendary/perk_data_spell_lgd_mana_drop_chance_dmg_fire.tres"),
     # preload("res://data/perks/spell/legendary/perk_data_spell_lgd_mana_drop_chance_dmg_wind.tres"),
     # preload("res://data/perks/spell/legendary/perk_data_spell_lgd_mana_drop_chance_dmg_water.tres"),
+    preload("res://data/perks/spell/legendary/perk_data_spell_spawn_tower_mana_as_spell.tres")
     
     # Base Basic
     # preload("res://data/perks/base/basic/perk_data_base_health_on_wc.tres"),

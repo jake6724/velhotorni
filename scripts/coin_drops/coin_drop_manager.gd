@@ -11,7 +11,10 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var reward_remaining: int = 0
 var direction_to_mouse: Vector2
 
+var spawn_tower_mana_as_spell_mana_chance: float = .5
+
 signal reward_completed
+signal spell_mana_spawn_requested
 
 func _ready():
 	WaveManager.wave_failed.connect(on_wave_failed)
@@ -29,15 +32,22 @@ func spawn_coin_drop(_global_pos, drop_chance) -> void:
 func spawn_coin_drop_helper(_global_pos, drop_chance) -> void:
 	var roll: float = rng.randf()
 	if roll <= drop_chance:
-		var coin: CoinDrop = coin_drop_scene.instantiate()
-		call_deferred("add_child", coin)
-		coin.global_position = _global_pos
-		var closest_valid: Vector2 = WorldGrid.get_closest_valid_point(_global_pos)
-		coin.destination = calc_destination(closest_valid)
-		coin.destination.clamp(Vector2(0,0), Vector2(400,224))
-		#print("Origin point: ", _global_pos, " Coin Destination: ", coin.destination, "Diff: ", coin.global_position.distance_to(coin.destination))
-		coin.destination_direction = coin.global_position.direction_to(coin.destination)
+		# Decide if should spawn as tower or spell mana (required by a perk)
+		var spell_mana_roll: float = rng.randf()
+		if spell_mana_roll <= spawn_tower_mana_as_spell_mana_chance:
+			spell_mana_spawn_requested.emit(_global_pos)
 
+		else:
+			var coin: CoinDrop = coin_drop_scene.instantiate()
+			call_deferred("add_child", coin)
+			coin.global_position = _global_pos
+			var closest_valid: Vector2 = WorldGrid.get_closest_valid_point(_global_pos)
+			coin.destination = calc_destination(closest_valid)
+			coin.destination.clamp(Vector2(0,0), Vector2(400,224))
+			#print("Origin point: ", _global_pos, " Coin Destination: ", coin.destination, "Diff: ", coin.global_position.distance_to(coin.destination))
+			coin.destination_direction = coin.global_position.direction_to(coin.destination)
+		
+		# Recursive call if drop chance remaining
 		drop_chance -= 1.0
 		if drop_chance > 0.0:
 			spawn_coin_drop_helper(_global_pos, drop_chance)
@@ -94,3 +104,6 @@ func on_wave_failed() -> void:
 		var coin: CoinDrop = child as CoinDrop
 		if coin:
 			coin.queue_free()
+
+func on_spawn_tower_mana_as_spell_mana_chance_incremented(_increment: float) -> void:
+	spawn_tower_mana_as_spell_mana_chance += _increment

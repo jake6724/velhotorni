@@ -420,8 +420,9 @@ func show_staff_sprite_custom():
 func on_spell_mana_collected(spell_data: SpellData, _amount_modifier: float) -> void:
 	var spell_mana_collected: int = player_mana.increment_spell_mana(spell_data, _amount_modifier)
 	player_hud.update_mana(player_spells.spells.array, player_mana)
-	player_number_popup.display_mana_number(spell_mana_collected, global_position + Vector2(0,-6), spell_data)
-	player_number_popup.increase_up_distance()
+	# player_number_popup.display_mana_number(spell_mana_collected, global_position + Vector2(0,-6), spell_data)
+	# player_number_popup.increase_up_distance()
+	player_hud.add_spell_mana_popup(spell_data, spell_mana_collected)
 	
 func on_tower_mana_collected(_value: int = 1) -> void:
 	player_mana.tower_mana += _value

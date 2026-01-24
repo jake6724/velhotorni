@@ -7,6 +7,9 @@ extends Node
 signal spell_mana_drop_perk_bonus_incremented
 signal spell_mana_drop_chance_multiplier_added
 
+## Observed by CoinDropManager
+signal spawn_tower_mana_as_spell_mana_chance_incremented
+
 func on_modify_stat_requested(perk_data: PerkData) -> void:
 	match perk_data.stat:
 		PerkDataSpell.SpellStat.MANA_MAX: 
@@ -47,5 +50,7 @@ func on_modify_stat_requested(perk_data: PerkData) -> void:
 			# DIRECTLY MODIFY TowerGlobalData. Probably not a great idea but here we are...
 			print("test")
 			TowerGlobalData.tower_element_damage_perk_modifier[perk_data.element] += perk_data.base_value
+		PerkDataSpell.SpellStat.SPAWN_TOWER_MANA_AS_SPELL_MANA_CHANCE:
+			spawn_tower_mana_as_spell_mana_chance_incremented.emit(perk_data.base_value)
 
 		PerkDataSpell.SpellStat.NONE: push_error("PlayerSpellPerkManager.on_modify_stat_requested() called with stat_to_modify = NONE")

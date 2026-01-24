@@ -72,6 +72,9 @@ func _ready():
 	mana_drop_manager.initialize(player_character.player_spells)
 	player_character.player_spell_perk_manager.spell_mana_drop_perk_bonus_incremented.connect(mana_drop_manager.on_spell_mana_drop_perk_bonus_incremented)
 	player_character.player_spell_perk_manager.spell_mana_drop_chance_multiplier_added.connect(mana_drop_manager.on_spell_mana_drop_chance_multiplier_added)
+	player_character.player_spell_perk_manager.spawn_tower_mana_as_spell_mana_chance_incremented.connect(coin_drop_manager.on_spawn_tower_mana_as_spell_mana_chance_incremented)
+	coin_drop_manager.spell_mana_spawn_requested.connect(mana_drop_manager.on_spell_mana_spawn_requested)
+
 
 	# Configure PauseMenu
 	pause_menu.parent_scene = self

@@ -63,3 +63,7 @@ func on_spell_mana_drop_chance_multiplier_added(spell_data_list: Array[SpellData
 		for pair in selected_spell_mana_chances:
 			if spell_data == pair[0]:
 				pair[1] *= _multiplier
+
+## Observes CoinManager.gd's tower_mana_spawned signal. Used for perks which convert tower mana into spell mana
+func on_spell_mana_spawn_requested(_global_pos) -> void:
+	spawn_mana_drop(_global_pos, 1.0, 1.0)

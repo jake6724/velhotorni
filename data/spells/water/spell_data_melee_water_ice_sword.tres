@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="SpellDataMelee" load_steps=10 format=3 uid="uid://bcov2rckhliwp"]
 
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_4eorw"]
-[ext_resource type="Texture2D" uid="uid://doed56qoyb4ta" path="res://assets/art/sprites/spr_fx_slash.png" id="1_e4yop"]
 [ext_resource type="Script" uid="uid://dcu7dihypm0k3" path="res://scripts/spells/data/spell_data_melee.gd" id="1_xb82k"]
+[ext_resource type="Texture2D" uid="uid://21bn2fhyphgf" path="res://assets/art/sprites/spr_fx_slash_small_arcane.png" id="2_x4vkg"]
 [ext_resource type="Resource" uid="uid://dwlj5i5bl8hcy" path="res://data/debuffs/debuff_data_freeze_ice_sword.tres" id="3_bbtra"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="4_bbtra"]
 [ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="6_x4vkg"]
@@ -21,7 +21,7 @@ region = Rect2(0, 15, 217, 15)
 
 [resource]
 script = ExtResource("1_xb82k")
-atlas = ExtResource("1_e4yop")
+atlas = ExtResource("2_x4vkg")
 type = 2
 staff_type = 1
 element = 2

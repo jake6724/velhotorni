@@ -27,6 +27,12 @@ extends Control
 
 @onready var perk_mini_icons: HBoxContainer = %PerkMiniIcons
 
+@onready var spell_mana_drop_display: VBoxContainer = %SpellManaDropDisplay
+var clear_spell_mana_drop_display_timer: Timer = Timer.new()
+const CLEAR_SPELL_MANA_DROP_DISPLAY_DELAY: float = 3.0
+
+const SPELL_MANA_POPUP_SCENE: PackedScene = preload("res://scenes/ui/player/SpellManaPopup.tscn")
+
 const MAX_TOWER_MANA_DIGITS: int = 4
 const MAX_ACTIVE_SPELL_MANA_DIGITS: int = 3
 const PADDING_COLOR: String = "#adb5bd"
@@ -47,6 +53,11 @@ func _ready():
 
 	for icon in inactive_spell_icons.slice(1,-1):
 		icon.hide()
+
+	clear_spell_mana_drop_display_timer.autostart = false
+	clear_spell_mana_drop_display_timer.one_shot = true
+	clear_spell_mana_drop_display_timer.timeout.connect(on_spell_mana_popup_timeout)
+	add_child(clear_spell_mana_drop_display_timer)
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats) -> void:
 	update_spells(spell_data_list)
@@ -177,3 +188,36 @@ func blink_ui_element(_ui_element: Control, _blink_amount: int=3, hide_duration:
 	blink_tween.tween_interval(show_duration)
 	await blink_tween.finished
 	if hide_on_finished: _ui_element.hide()
+
+func add_spell_mana_popup(spell_data: SpellData, _mana_amount: int) -> void:
+	var new_popup: SpellManaPopup = SPELL_MANA_POPUP_SCENE.instantiate()
+	# new_popup.hide()
+	spell_mana_drop_display.add_child(new_popup)
+	new_popup.set_icon(spell_data.inactive_icon)
+	new_popup.set_text(_mana_amount)
+
+	# Ease out 
+	var slide_out_tween: Tween = get_tree().create_tween()
+	var target_out: float = new_popup.position.x - 60
+	slide_out_tween.tween_property(new_popup, "position:x", target_out, 0)
+	await slide_out_tween.finished
+
+	# Ease back in
+	var slide_in_tween: Tween = get_tree().create_tween()
+	var target_in: float = new_popup.position.x + 60
+	slide_in_tween.tween_property(new_popup, "position:x", target_in, .1)
+	await slide_in_tween.finished
+
+	clear_spell_mana_drop_display_timer.start(CLEAR_SPELL_MANA_DROP_DISPLAY_DELAY)
+
+func on_spell_mana_popup_timeout() -> void:
+	# Ease out popups
+	for popup: SpellManaPopup in spell_mana_drop_display.get_children():
+		var slide_tween: Tween = get_tree().create_tween()
+		var target: float = popup.position.x - 60
+		slide_tween.tween_property(popup, "position:x", target, .1)
+		await slide_tween.finished
+
+	for popup: SpellManaPopup in spell_mana_drop_display.get_children():
+		spell_mana_drop_display.remove_child(popup)
+		popup.queue_free()
