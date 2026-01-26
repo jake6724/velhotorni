@@ -5,6 +5,7 @@ var is_wave_failed: bool
 var level_waves: Array[Wave] = []
 var active_wave: Wave
 var wave_index: int
+var wave_total: int
 
 var wave_index_checkpoint: int
 var boss_wave_health: float
@@ -17,6 +18,7 @@ signal wave_completed
 signal wave_completed_coin_manager
 signal all_waves_completed
 signal final_wave_started
+signal wave_total_updated
 
 func _ready():
 	# Connect to EnemySpawner
@@ -26,6 +28,8 @@ func configure_level(active_level: LevelEnvironment) -> void:
 	level_waves = active_level.waves
 	active_wave = level_waves[0]
 	wave_index = 0
+	wave_total = level_waves.size()
+	wave_total_updated.emit(wave_total)
 
 	# Connect to current Base
 	active_level.base.destroyed.connect(on_wave_failed)

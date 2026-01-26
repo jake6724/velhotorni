@@ -1,17 +1,20 @@
 class_name PlayerHUD
 extends Control
 
-@onready var weapons: HBoxContainer = %Weapons
+@onready var weapons: Control = %Weapons
 
-@onready var active_spell_icon: TextureRect = %ActiveSpellIcon
+# @onready var active_spell_icon: TextureRect = %ActiveSpellIcon
 @onready var active_spell_mana: TextureProgressBar = %ActiveSpellMana
 @onready var active_spell_mana_label: RichTextLabel = %ActiveSpellManaLabel
 @onready var tower_mana_label: RichTextLabel = %TowerManaLabel
-# 
+
 @onready var inactive_spell_1_icon: TextureRect = %InactiveSpell1Icon
 @onready var inactive_spell_2_icon: TextureRect = %InactiveSpell2Icon
 @onready var inactive_spell_3_icon: TextureRect = %InactiveSpell3Icon
-@onready var inactive_spell_icons: Array[TextureRect] = [null, inactive_spell_1_icon, inactive_spell_2_icon, inactive_spell_3_icon] # null is used to make array parallel in size to spell_data_list
+@onready var inactive_spell_4_icon: TextureRect = %InactiveSpell4Icon
+@onready var inactive_spell_icons: Array[TextureRect] = [inactive_spell_1_icon, inactive_spell_2_icon, inactive_spell_3_icon, inactive_spell_4_icon] # null is used to make array parallel in size to spell_data_list
+
+@onready var spell_icons: Dictionary[SpellData, TextureRect] = {}
 
 @onready var inactive_spell_1_mana: TextureProgressBar = %InactiveSpell1Mana
 @onready var inactive_spell_2_mana: TextureProgressBar = %InactiveSpell2Mana
@@ -28,6 +31,18 @@ extends Control
 @onready var perk_mini_icons: HBoxContainer = %PerkMiniIcons
 
 @onready var spell_mana_drop_display: VBoxContainer = %SpellManaDropDisplay
+
+@onready var wave_count: Label = %WaveCount
+@onready var wave_total: Label = %WaveTotal
+@onready var tower_count: Label = %TowerCount
+@onready var tower_total: Label = %TowerTotal
+@onready var enemy_count: Label = %EnemyCount
+@onready var enemy_total: Label = %EnemyTotal
+@onready var enemy_progress: TextureProgressBar = %EnemyProgressbar
+
+var enemy_info_total: int
+var enemy_info_count: int
+
 var clear_spell_mana_drop_display_timer: Timer = Timer.new()
 const CLEAR_SPELL_MANA_DROP_DISPLAY_DELAY: float = 3.0
 
@@ -59,33 +74,49 @@ func _ready():
 	clear_spell_mana_drop_display_timer.timeout.connect(on_spell_mana_popup_timeout)
 	add_child(clear_spell_mana_drop_display_timer)
 
-func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats) -> void:
+func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats, player_build: PlayerBuild) -> void:
+	on_spell_loadout_updated(spell_data_list, player_mana)
 	update_spells(spell_data_list)
 	update_mana(spell_data_list, player_mana)
 	update_tower_mana(player_mana)
 	on_health_updated(player_stats.health)
 
+	WaveManager.wave_completed.connect(on_wave_complete)
+	WaveManager.wave_total_updated.connect(func wave_total_updated(total: int): wave_total.text = str(total))
+	wave_count.text = "1"
+
+	player_build.tower_count_updated.connect(func on_tower_count_updated(count: int): tower_count.text = str(count))
+	TowerGlobalData.tower_max_updated.connect(func on_tower_total_updated(total: int): tower_total.text = str(total))
+
+	EnemySpawner.wave_enemy_total_updated.connect(on_enemy_total_updated)
+	EnemySpawner.enemy_died.connect(on_enemy_count_decremented)
+
 func on_spell_loadout_updated(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
+
+	for i in range(spell_data_list.size()):
+		spell_icons[spell_data_list[i]] = inactive_spell_icons[i]
+
 	update_spells(spell_data_list)
 	update_mana(spell_data_list, player_mana)
 
 func update_spells(spell_data_list: Array[SpellData]) -> void:
-
 	if spell_data_list.size() > 0:
 		weapons.show()
-		active_spell_icon.texture = spell_data_list[0].active_icon
 
 		# Hide all inactive spell icons. They will be shown below if required
-		for icon in inactive_spell_icons.slice(1,inactive_spell_icons.size()):
-		
-			icon.hide()
+		for key in spell_icons.keys():
+			spell_icons[key].hide()
 
-		# Update texture and show any inactive icons which have corresponding spell data
-		for i in range(1, spell_data_list.size()):
-	
-			if spell_data_list[i]:
-				inactive_spell_icons[i].show()
-				inactive_spell_icons[i].texture = spell_data_list[i].inactive_icon
+		# The first spell in the array will be active
+		spell_icons[spell_data_list[0]].texture = spell_data_list[0].active_icon
+		spell_icons[spell_data_list[0]].show()
+		spell_icons[spell_data_list[0]].get_children()[0].hide()
+		# active_spell_mana_label.global_position = spell_icons[spell_data_list[0]].global_position + Vector2(0, -30)
+		
+		for spell_data: SpellData in spell_data_list.slice(1, spell_data_list.size()):
+			spell_icons[spell_data].texture = spell_data.inactive_icon
+			spell_icons[spell_data].show()
+			spell_icons[spell_data].get_children()[0].show()
 
 	else:
 		for icon in inactive_spell_icons.slice(1,inactive_spell_icons.size()):
@@ -106,7 +137,7 @@ func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> 
 			if player_mana.spell_mana[spell_data_list[0]] == 0:
 				no_mana_label.text = "EMPTY"
 			else:
-				no_mana_label.text = "LOW MANA"
+				no_mana_label.text = "LOW"
 		else:
 			mana_text_color = "ffffff"
 			no_mana_label.hide()
@@ -128,7 +159,7 @@ func on_health_updated(_health: float) -> void:
 			heart.set_texture_full()
 			_health -= 2
 
-		elif _health == 1:
+		elif _health == 1: 
 			heart.set_texture_half()
 			_health -= 1
 
@@ -191,7 +222,7 @@ func blink_ui_element(_ui_element: Control, _blink_amount: int=3, hide_duration:
 
 func add_spell_mana_popup(spell_data: SpellData, _mana_amount: int) -> void:
 	var new_popup: SpellManaPopup = SPELL_MANA_POPUP_SCENE.instantiate()
-	# new_popup.hide()
+	new_popup.spell_data = spell_data
 	spell_mana_drop_display.add_child(new_popup)
 	new_popup.set_icon(spell_data.inactive_icon)
 	new_popup.set_text(_mana_amount)
@@ -221,3 +252,25 @@ func on_spell_mana_popup_timeout() -> void:
 	for popup: SpellManaPopup in spell_mana_drop_display.get_children():
 		spell_mana_drop_display.remove_child(popup)
 		popup.queue_free()
+
+func get_spell_popup_by_spell_data(_spell_data: SpellData) -> void:
+	pass
+
+func on_wave_complete() -> void:
+	wave_count.text = str(WaveManager.wave_index + 1)
+
+func on_enemy_total_updated(_total: int) -> void:
+	enemy_info_count = _total
+	enemy_info_total = _total
+	enemy_progress.value = (float(enemy_info_count) / enemy_info_total) * 100* 100
+	enemy_total.text = str(enemy_info_total)
+	enemy_count.text = str(enemy_info_count)
+
+func on_enemy_count_decremented() -> void:
+	enemy_info_count -= 1
+	enemy_count.text = str(enemy_info_count)
+	enemy_progress.value = (float(enemy_info_count) / enemy_info_total) * 100
+	print("enemy_info_count: ", enemy_info_count)
+	print("enemy_info_total: ", enemy_info_total)
+	print("Val: ", (enemy_info_count / enemy_info_total) * 100)
+	print("enemy_progress.value: ", enemy_progress.value)

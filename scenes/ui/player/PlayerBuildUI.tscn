@@ -128,7 +128,7 @@ texture_normal = ExtResource("4_e8jwa")
 script = ExtResource("6_xq5g3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox1/TowerButton1"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 5.0
 offset_top = -7.00002
 offset_right = 29.0
@@ -182,7 +182,7 @@ script = ExtResource("6_xq5g3")
 element = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox2/TowerButton2"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 5.0
 offset_top = -7.0
 offset_right = 32.0
@@ -230,7 +230,7 @@ script = ExtResource("6_xq5g3")
 element = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox3/TowerButton3"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 5.0
 offset_top = -7.00002
 offset_right = 32.0
@@ -278,7 +278,7 @@ script = ExtResource("6_xq5g3")
 element = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox4/TowerButton4"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 5.0
 offset_top = -7.0
 offset_right = 32.0
@@ -326,7 +326,7 @@ script = ExtResource("6_xq5g3")
 element = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox5/TowerButton5"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 4.99997
 offset_top = -7.00002
 offset_right = 32.0
@@ -374,7 +374,7 @@ script = ExtResource("6_xq5g3")
 element = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TowerButtons/TowerVbox6/TowerButton6"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 4.99997
 offset_top = -7.0
 offset_right = 32.0
@@ -405,26 +405,25 @@ text = "00"
 [node name="TowerInfoPanel" parent="." instance=ExtResource("13_5fpji")]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -91.0
-offset_top = 3.0
-offset_right = -3.0
-offset_bottom = 91.0
-grow_horizontal = 0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = -8.0
+grow_vertical = 0
 
 [node name="TowerLimit" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 189.0
-offset_top = 91.0
-offset_right = 229.0
-offset_bottom = 131.0
-grow_horizontal = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
 theme_override_constants/separation = 0
 alignment = 1
 

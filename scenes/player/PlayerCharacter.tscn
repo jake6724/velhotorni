@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=133 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Resource" uid="uid://dkeqm5qym5h01" path="res://data/player/player_data_mage.tres" id="2_5mqjb"]
@@ -46,6 +46,7 @@
 [ext_resource type="Script" uid="uid://ck63ge0cgdftp" path="res://scripts/player/pit_hurtbox.gd" id="45_rwb4p"]
 [ext_resource type="Script" uid="uid://cifyw7t2d2q8a" path="res://scripts/player/player_aoe.gd" id="46_ahw3v"]
 [ext_resource type="PackedScene" uid="uid://dc40niqoka1bq" path="res://scenes/ui/player/PlayerHeart.tscn" id="46_wsgx3"]
+[ext_resource type="Texture2D" uid="uid://2amsemavchfv" path="res://assets/art/sprites/spr_fx_wind_shockwave.png" id="47_ahw3v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ykwnp"]
 shader = ExtResource("4_ykwnp")
@@ -1305,6 +1306,92 @@ region = Rect2(0, 0, 8, 7)
 [sub_resource type="CircleShape2D" id="CircleShape2D_rol34"]
 radius = 58.077534
 
+[sub_resource type="Animation" id="Animation_1s53w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAOESprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerAOESprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerAOESprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_rol34"]
+resource_name = "attack"
+length = 0.3
+step = 0.06
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAOESprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerAOESprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerAOESprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.12, 0.17999999, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2u747"]
+_data = {
+&"RESET": SubResource("Animation_1s53w"),
+&"attack": SubResource("Animation_rol34")
+}
+
 [node name="PlayerCharacter" type="CharacterBody2D"]
 collision_layer = 16384
 collision_mask = 218112000
@@ -1632,3 +1719,13 @@ metadata/_custom_type_script = "uid://cifyw7t2d2q8a"
 [node name="PlayerAOECollider" type="CollisionShape2D" parent="PlayerAOE"]
 shape = SubResource("CircleShape2D_rol34")
 debug_color = Color(0.84424186, 0.0010430897, 0.9147864, 0.41960785)
+
+[node name="PlayerAOEAnimationPlayer" type="AnimationPlayer" parent="PlayerAOE"]
+libraries = {
+&"": SubResource("AnimationLibrary_2u747")
+}
+
+[node name="PlayerAOESprite" type="Sprite2D" parent="PlayerAOE"]
+visible = false
+texture = ExtResource("47_ahw3v")
+hframes = 5

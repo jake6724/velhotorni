@@ -41,6 +41,7 @@ signal tower_mana_spent
 signal reset_tower_action
 signal tower_action_changed
 signal tower_action_hint_requested
+signal tower_count_updated
 
 func _ready():
 	add_child(tower_parent)
@@ -57,6 +58,7 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 			tower_element_options.append(tower_data.element)
 
 	player_build_ui.update_tower_count_label(0)
+	tower_count_updated.emit(0)
 	player_build_ui.update_tower_max_label(TowerGlobalData.tower_max)
 	_tower_mana = player_mana.tower_mana
 	tower_action_changed.emit(tower_action)
@@ -164,6 +166,7 @@ func place_tower() -> void:
 		# Update internal data and BuildUI
 		active_towers.append(preview_tower)
 		player_build_ui.update_tower_count_label(active_towers.size())
+		tower_count_updated.emit(active_towers.size())
 		tower_mana_spent.emit(tower_placement_info[2])
 
 		# Get a new preview tower
@@ -310,6 +313,7 @@ func on_tower_died(tower: Tower) -> void:
 		active_towers.remove_at(index)
 
 	player_build_ui.update_tower_count_label(active_towers.size())
+	tower_count_updated.emit(active_towers.size())
 
 func on_tower_mana_updated(_value) -> void:
 	_tower_mana = _value

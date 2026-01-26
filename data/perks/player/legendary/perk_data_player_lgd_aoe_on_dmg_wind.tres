@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cm72v2ilme5nr" path="res://scripts/debuffs/data/debuff_data.gd" id="1_rx0ag"]
 [ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="2_4jd5l"]
-[ext_resource type="Resource" uid="uid://qllq302csbsr" path="res://data/debuffs/perk_debuffs/debuff_data_knockback_perk.tres" id="2_jjlti"]
+[ext_resource type="Resource" uid="uid://clwernqgclwvh" path="res://data/debuffs/perk_debuffs/debuff_data_freeze_perk.tres" id="2_jjlti"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sqjyk"]
 

@@ -8,6 +8,8 @@ extends Area2D
 var execution_threshold: float = 0.0
 
 @onready var player_aoe_collider: CollisionShape2D = $PlayerAOECollider
+@onready var player_aoe_ap: AnimationPlayer = $PlayerAOEAnimationPlayer
+@onready var player_aoe_sprite: Sprite2D = $PlayerAOESprite
 
 # func _input(_event):
 #     if Input.is_action_just_pressed("g"):
@@ -22,6 +24,10 @@ func attack(aoe_damage: float, aoe_debuffs: Array[DebuffData], aoe_element: Cons
     var enemies: Array[Enemy] = get_in_range_enemies()
     for enemy: Enemy in enemies:
         deal_damage(enemy, aoe_damage, aoe_debuffs, aoe_element)
+    player_aoe_sprite.show()
+    player_aoe_ap.play("attack")
+    await player_aoe_ap.animation_finished
+    player_aoe_sprite.hide()
 
 func deal_damage(enemy: Enemy, aoe_damage, aoe_debuffs, aoe_element) -> void:
     enemy.take_damage(aoe_damage, aoe_element, execution_threshold, false)

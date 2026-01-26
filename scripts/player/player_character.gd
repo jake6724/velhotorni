@@ -145,7 +145,7 @@ func _ready():
 	player_mana.populate_spell_mana(player_spells.selected_spells)
 
 	# Configure PlayerHUD
-	player_hud.initialize(player_spells.spells.array, player_mana, player_stats)
+	player_hud.initialize(player_spells.spells.array, player_mana, player_stats, player_build)
 	player_stats.health_updated.connect(player_hud.on_health_updated)
 	WaveManager.wave_completed.connect(player_hud.blink_wave_complete)
 	# WaveManager.wave_completed.connect(func(): coin_collector.magnet_collider.shape.radius *= 5)
@@ -405,9 +405,9 @@ func hit_blink() -> void:
 	var blink_time: float = .075
 	var loops: int = player_stats.hurtbox_iframe_duration / blink_time
 	var blink_tween: Tween = get_tree().create_tween().set_loops(loops/2) # Loops halved because you are waiting twice in the tween loop below
-	blink_tween.tween_property(self, "modulate:a", 0.0, .01)
+	blink_tween.tween_property(character_sprite, "modulate:a", 0.0, .01)
 	blink_tween.tween_interval(blink_time)
-	blink_tween.tween_property(self, "modulate:a", 1.0, .01)
+	blink_tween.tween_property(character_sprite, "modulate:a", 1.0, .01)
 	blink_tween.tween_interval(blink_time)
 
 func on_hurtbox_reset_timer_timeout() -> void:

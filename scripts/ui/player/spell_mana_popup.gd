@@ -5,6 +5,8 @@ extends Control
 @onready var mana_amount_label: Label = %ManaAmountLabel
 @onready var plus_icon: TextureRect = %PlusIcon
 
+var spell_data: SpellData
+
 const full_text: String = " FULL"
 
 func set_icon(_spell_icon: AtlasTexture) -> void:

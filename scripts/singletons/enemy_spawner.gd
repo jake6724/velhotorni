@@ -40,6 +40,7 @@ signal enemy_died
 signal enemy_died_with_global_pos
 signal enemy_died_with_global_pos_drop_chance
 signal boss_enemy_damage_recieved
+signal wave_enemy_total_updated
 
 func _ready():
 	z_index = Constants.z_index_map["enemy_spawner"]
@@ -71,6 +72,8 @@ func configure_level(active_level: LevelEnvironment):
 
 	sort_enemies_by_path()
 	preview_portals()
+	
+	wave_enemy_total_updated.emit(get_wave_enemy_total(WaveManager.active_wave))
 
 	flying_spawn_points = active_level.flying_spawn_points
 
@@ -98,6 +101,7 @@ func on_wave_complete() -> void:
 	active_enemies = []
 	active_path_enemies = []
 	can_spawn_enemy = false
+	wave_enemy_total_updated.emit(get_wave_enemy_total(WaveManager.active_wave))
 	stop_all_spawn_timers()
 	sort_enemies_by_path()
 	preview_portals() 
@@ -250,3 +254,9 @@ func preview_portals() -> void:
 	for path_spawn_array in path_spawns:
 		if path_spawn_array.size() > 0:
 			LevelManager.active_level.enemy_portals[path_spawn_array[0].path_index].preview()
+
+func get_wave_enemy_total(active_wave: Wave) -> int:
+	var count = 0
+	for spawn: Spawn in active_wave.data:
+		count += 1
+	return count
