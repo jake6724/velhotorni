@@ -556,10 +556,10 @@ unique_name_in_owner = true
 clip_contents = true
 layout_direction = 2
 layout_mode = 0
-offset_left = 456.0
-offset_top = 128.0
-offset_right = 508.0
-offset_bottom = 248.0
+offset_left = 424.0
+offset_top = 112.0
+offset_right = 504.0
+offset_bottom = 232.0
 size_flags_horizontal = 4
 alignment = 2
 
