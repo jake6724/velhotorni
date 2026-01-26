@@ -310,6 +310,7 @@ func switch_to_build_mode() -> void:
 	player_build_ui.show()
 	player_build_ui.raise_current()
 	player_build.create_preview_tower()
+	player_hud.weapons.hide()
 	build_grid_sprite.show()
 	# player_stats.active_speed = player_stats.build_speed
 	tower_detect_collider.set_deferred("disabled", false)
@@ -326,6 +327,7 @@ func switch_to_combat_mode() -> void:
 	if player_build.preview_tower:		# Remove preview tower
 		player_build.preview_tower.queue_free()
 	player_build_ui.hide()
+	player_hud.weapons.show()
 	build_grid_sprite.hide()
 	# player_stats.active_speed = player_stats.combat_speed
 	tower_detect_collider.set_deferred("disabled", true)
