@@ -59,6 +59,8 @@ var bbc_color_mana_text: String = "[color=%s]"
 
 var blinking_no_mana: bool = false
 
+const PLAYER_HUD_HEART_SCENE: PackedScene = preload("res://scenes/ui/player/PlayerHUDHeart.tscn")
+
 signal active_spell_mana_value_calculated
 
 func _ready():
@@ -285,3 +287,8 @@ func on_enemy_count_decremented() -> void:
 	print("enemy_info_total: ", enemy_info_total)
 	print("Val: ", (enemy_info_count / enemy_info_total) * 100)
 	print("enemy_progress.value: ", enemy_progress.value)
+
+func add_hearts(_count: int) -> void:
+	for i in range(_count):
+		var new_heart: PlayerHUDHeart = PLAYER_HUD_HEART_SCENE.instantiate()
+		player_hearts.add_child(new_heart)
