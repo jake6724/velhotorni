@@ -62,7 +62,7 @@ func on_area_entered(intruder: Area2D) -> void:
 				return
 
 		if intruder is Enemy:
-			intruder.take_damage(damage, Constants.Element.ARCANE) # Reflected bullets deal Arcane
+			intruder.take_damage(damage, Constants.Element.ARCANE, 0.0, false) # Reflected bullets deal Arcane
 
 		if intruder.owner is SpellShield:
 			intruder.owner.take_damage(damage)

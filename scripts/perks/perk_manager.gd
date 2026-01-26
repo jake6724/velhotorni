@@ -16,12 +16,6 @@ var perk_ui: PerkUI
 ## Global for this class, used to track rarity between function calls from main
 var current_perk_hand_rarity: PerkData.Rarity
 
-var perk_data_pool: PerkDataPool
-
-# var perk_pool_data: PerkPoolData # Passed from PlayerCharacter via Main in initialize
-var all_basic_perk_data: Array[PerkData]# Set in initialize
-var all_legendary_perk_data: Array[PerkData]
-
 ## Perks that can be used this level. Does not include unusable elemental perks
 ## Populated at runtime
 ## TODO: Remove unusable elements
@@ -35,19 +29,20 @@ var rarity_counts: Dictionary[PerkData.Rarity, int] = {
 	PerkData.Rarity.FOUR: 0
 }
 
-# var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
-# 	PerkData.Rarity.ONE: 4,
-# 	PerkData.Rarity.TWO: 3,
-# 	PerkData.Rarity.THREE: 2,
-# 	PerkData.Rarity.FOUR: 2,
-# }
-
 var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
-	PerkData.Rarity.ONE: 1,
-	PerkData.Rarity.TWO: 0,
-	PerkData.Rarity.THREE: 0,
-	PerkData.Rarity.FOUR: 0,
+	PerkData.Rarity.ONE: 4,
+	PerkData.Rarity.TWO: 3,
+	PerkData.Rarity.THREE: 2,
+	PerkData.Rarity.FOUR: 2,
 }
+
+# For testing
+# var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
+# 	PerkData.Rarity.ONE: 1,
+# 	PerkData.Rarity.TWO: 0,
+# 	PerkData.Rarity.THREE: 0,
+# 	PerkData.Rarity.FOUR: 0,
+# }
 
 var rarity_pool: Array
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -65,17 +60,25 @@ var test_perk_data: Array[PerkData] = [
 # 		for perk_data: PerkData in test_perk_data:
 # 			create_perk(perk_data)
 
-func initialize(_perk_data_pool: PerkDataPool) -> void:
-	perk_data_pool = _perk_data_pool
+func initialize(_perk_data_pool: PerkDataPool, player_spells: PlayerSpells) -> void:
+	var perk_data_unfiltered: Array[PerkData] = _perk_data_pool.perks
+	var perk_data_filtered: Array[PerkData] = []
 
-	for perk: PerkData in perk_data_pool.perks:
-		if perk.legendary:
-			all_legendary_perk_data.append(perk)
+	# Filter out perks with inactive elements
+	var active_elements: Array[Constants.Element] = player_spells.get_active_elements()
+	for perk_data: PerkData in perk_data_unfiltered:
+		if "element" in perk_data:
+			if perk_data.element == Constants.Element.NONE or perk_data.element in active_elements:
+				print(perk_data.perk_name)
+				perk_data_filtered.append(perk_data)
 		else:
-			all_basic_perk_data.append(perk)
+			perk_data_filtered.append(perk_data)
 
-	valid_basic_perk_data = all_basic_perk_data # TODO: This needs to remove non-used elements
-	valid_legendary_perk_data = all_legendary_perk_data # TODO: This needs to remove non-used elements
+	for perk_data: PerkData in perk_data_filtered:
+		if perk_data.legendary:
+			valid_legendary_perk_data.append(perk_data)
+		else:
+			valid_basic_perk_data.append(perk_data)
 
 	fill_rarity_pool()
 

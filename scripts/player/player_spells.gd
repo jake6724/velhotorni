@@ -56,3 +56,9 @@ func get_all_spell_data_of_element(target_element: Constants.Element) -> Array[S
 		if spell_data.element == target_element:
 			res.append(spell_data)
 	return res
+
+func get_active_elements() -> Array[Constants.Element]:
+	var res: Array[Constants.Element] = []
+	for spell_data: SpellData in spells.array:
+		res.append(spell_data.element)
+	return res
