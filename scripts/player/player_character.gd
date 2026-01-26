@@ -147,7 +147,6 @@ func _ready():
 	# Configure PlayerHUD
 	player_hud.initialize(player_spells.spells.array, player_mana, player_stats, player_build)
 	player_stats.health_updated.connect(player_hud.on_health_updated)
-	WaveManager.wave_completed.connect(player_hud.blink_wave_complete)
 	# WaveManager.wave_completed.connect(func(): coin_collector.magnet_collider.shape.radius *= 5)
 
 	# Configure PlayerReticleAmmo

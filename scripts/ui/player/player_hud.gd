@@ -26,13 +26,10 @@ extends Control
 
 @onready var no_mana_label: Label = %NoManaLabel
 
-@onready var wave_complete_label: Label = %WaveCompleteLabel
-
 @onready var perk_mini_icons: HBoxContainer = %PerkMiniIcons
 
 @onready var spell_mana_drop_display: VBoxContainer = %SpellManaDropDisplay
 @onready var spell_mana_popups: Dictionary[SpellData, SpellManaPopup]
-
 
 @onready var wave_count: Label = %WaveCount
 @onready var wave_total: Label = %WaveTotal
@@ -41,9 +38,12 @@ extends Control
 @onready var enemy_count: Label = %EnemyCount
 @onready var enemy_total: Label = %EnemyTotal
 @onready var enemy_progress: TextureProgressBar = %EnemyProgressbar
-
 var enemy_info_total: int
 var enemy_info_count: int
+
+@onready var banner_ap: AnimationPlayer = $BannerAnimationPlayer
+@onready var banner: Sprite2D = %Banner
+@onready var banner_label: Label = %BannerLabel
 
 var clear_spell_mana_drop_display_timer: Timer = Timer.new()
 const CLEAR_SPELL_MANA_DROP_DISPLAY_DELAY: float = 3.0
@@ -62,6 +62,8 @@ var blinking_no_mana: bool = false
 const PLAYER_HUD_HEART_SCENE: PackedScene = preload("res://scenes/ui/player/PlayerHUDHeart.tscn")
 
 signal active_spell_mana_value_calculated
+signal wave_complete_banner_animation_finished
+signal wave_start_banner_animation_finished
 
 func _ready():
 	active_spell_mana_label.bbcode_enabled = true
@@ -85,6 +87,7 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 	update_tower_mana(player_mana)
 	on_health_updated(player_stats.health)
 
+	WaveManager.wave_started.connect(on_wave_started)
 	WaveManager.wave_completed.connect(on_wave_complete)
 	WaveManager.wave_total_updated.connect(func wave_total_updated(total: int): wave_total.text = str(total))
 	wave_count.text = "1"
@@ -210,10 +213,6 @@ func blink_no_mana_label() -> void:
 		await blink_tween.finished
 		blinking_no_mana = false
 
-func blink_wave_complete() -> void:
-	wave_complete_label.show()
-	blink_ui_element(wave_complete_label, 5, .4, .4, true)
-
 func blink_ui_element(_ui_element: Control, _blink_amount: int=3, hide_duration: float=0.1, show_duration:float=0.1, hide_on_finished: bool=true) -> void:
 	var blink_tween: Tween = get_tree().create_tween()
 	blink_tween.set_loops(_blink_amount)
@@ -269,9 +268,6 @@ func on_spell_mana_popup_timeout() -> void:
 func get_spell_popup_by_spell_data(_spell_data: SpellData) -> void:
 	pass
 
-func on_wave_complete() -> void:
-	wave_count.text = str(WaveManager.wave_index + 1)
-
 func on_enemy_total_updated(_total: int) -> void:
 	enemy_info_count = _total
 	enemy_info_total = _total
@@ -287,6 +283,31 @@ func on_enemy_count_decremented() -> void:
 	print("enemy_info_total: ", enemy_info_total)
 	print("Val: ", (enemy_info_count / enemy_info_total) * 100)
 	print("enemy_progress.value: ", enemy_progress.value)
+
+func on_wave_complete() -> void:
+	wave_count.text = str(WaveManager.wave_index + 1)
+	show_banner("Wave Complete", wave_complete_banner_animation_finished)
+
+func on_wave_started() -> void:
+	show_banner("Wave Started", wave_start_banner_animation_finished)
+
+func show_banner(text: String, completed_signal: Signal) -> void:
+	banner_label.text = text
+	banner.show()
+	banner_ap.play("open")
+	await banner_ap.animation_finished
+	banner_ap.play("hold")
+	await get_tree().create_timer(2).timeout
+	banner_ap.play("close")
+	await banner_ap.animation_finished
+	banner.hide()
+	completed_signal.emit()
+
+func show_banner_label() -> void:
+	banner_label.show()
+
+func hide_banner_label() -> void:
+	banner_label.hide()
 
 func add_hearts(_count: int) -> void:
 	for i in range(_count):

@@ -1,7 +1,6 @@
 class_name Main
 extends Node2D
 
-@onready var round_info: RoundInfo = $UI/RoundInfo
 @onready var pause_menu: PauseMenu = $UI/PauseMenu
 @onready var bestiary_menu: BestiaryMenu = $UI/BestiaryMenu
 # @onready var player_controller: PlayerController = %PlayerController
@@ -19,7 +18,7 @@ var can_pause: bool = false
 
 var wave_failures: int = 0
 
-const PERK_UI_POPUP_DELAY: float = 2.0
+const PERK_UI_POPUP_DELAY: float = .5
 
 func _input(_event):
 	if Input.is_action_just_pressed("x"):
@@ -75,7 +74,6 @@ func _ready():
 	player_character.player_spell_perk_manager.spawn_tower_mana_as_spell_mana_chance_incremented.connect(coin_drop_manager.on_spawn_tower_mana_as_spell_mana_chance_incremented)
 	coin_drop_manager.spell_mana_spawn_requested.connect(mana_drop_manager.on_spell_mana_spawn_requested)
 
-
 	# Configure PauseMenu
 	pause_menu.parent_scene = self
 	pause_menu.restart.show()
@@ -101,7 +99,8 @@ func _ready():
 	perk_manager.player_special = player_character.player_special
 
 	# Configure PerkUI
-	WaveManager.wave_completed.connect(on_wave_completed)
+	# WaveManager.wave_completed.connect(on_wave_completed)
+	player_character.player_hud.wave_complete_banner_animation_finished.connect(pause_game_with_perk_ui)
 	perk_ui.perk_selected.connect(on_perk_selected)
 	player_character.player_input.switch_selection_pressed.connect(perk_ui.switch_selected_card)
 	player_character.player_input.ui_interact_pressed.connect(perk_ui.select_card)
@@ -151,8 +150,8 @@ func unpause_game_with_bestiary() -> void:
 func set_can_pause(value: bool) -> void:
 	can_pause = value
 
-func on_wave_completed() -> void:
-	pause_game_with_perk_ui()
+# func on_wave_completed() -> void:
+# 	pause_game_with_perk_ui()
 
 func pause_game_with_perk_ui() -> void:
 	pass
