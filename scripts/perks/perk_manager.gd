@@ -43,10 +43,10 @@ var rarity_counts: Dictionary[PerkData.Rarity, int] = {
 # }
 
 var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
-	PerkData.Rarity.ONE: 0,
+	PerkData.Rarity.ONE: 1,
 	PerkData.Rarity.TWO: 0,
 	PerkData.Rarity.THREE: 0,
-	PerkData.Rarity.FOUR: 1,
+	PerkData.Rarity.FOUR: 0,
 }
 
 var rarity_pool: Array
