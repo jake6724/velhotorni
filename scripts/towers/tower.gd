@@ -220,7 +220,7 @@ func initialize(element: Constants.Element):
 	
 	max_health = data.max_health
 	health = max_health
-	level_upgrade_price_base = data.upgrade_cost
+	level_upgrade_price_base = data.upgrade_cost_base
 	level_cost_increment = data.upgrade_cost_increment
 
 	transform_timer.timeout.connect(on_transform_timer_timeout)
