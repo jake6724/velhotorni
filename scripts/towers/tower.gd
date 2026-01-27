@@ -56,8 +56,8 @@ var buff_range_transparency: float = .9
 var color_buff_range_indicator: String = "#94ffbd"
 
 # Combat Data
-var max_health: float = 200
-var health: float = max_health:
+var max_health: float 
+var health: float:
 	set(value):
 		health = value
 		healthbar.value = (health / max_health) * 100
@@ -217,7 +217,10 @@ func initialize(element: Constants.Element):
 	update_textures()
 	update_colliders()
 	update_audio()
-
+	
+	max_health = data.max_health
+	health = max_health
+	
 	transform_timer.timeout.connect(on_transform_timer_timeout)
 	transform_timer.one_shot = true
 	add_child(transform_timer)
