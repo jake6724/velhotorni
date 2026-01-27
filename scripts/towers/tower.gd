@@ -87,8 +87,8 @@ var _preview_leveled_range: float
 var _preview_leveled_speed: float
 
 const MAX_LEVEL_PRICE: int = 125
-const LEVEL_COST_INCREMENT: int = 25
-var level_upgrade_price_base: int = 75
+var level_cost_increment: int
+var level_upgrade_price_base: int
 var level_upgrade_price: int
 var level: int = 0
 var sell_price: int # Set in initialize
@@ -220,7 +220,9 @@ func initialize(element: Constants.Element):
 	
 	max_health = data.max_health
 	health = max_health
-	
+	level_upgrade_price_base = data.upgrade_cost
+	level_cost_increment = data.upgrade_cost_increment
+
 	transform_timer.timeout.connect(on_transform_timer_timeout)
 	transform_timer.one_shot = true
 	add_child(transform_timer)
@@ -600,7 +602,7 @@ func upgrade() -> void:
 	ap.play("summon")
 
 func update_upgrade_info() -> void:
-	level_upgrade_price = int((level_upgrade_price_base + (LEVEL_COST_INCREMENT * level)) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
+	level_upgrade_price = int((level_upgrade_price_base + (level_cost_increment * level)) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
 	if level >= Constants.TOWER_MAX_LEVEL:
 		tower_action_cost_label.text = " MAX"
 		upgrade_coin_icon.hide()

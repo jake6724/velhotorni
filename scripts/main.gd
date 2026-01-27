@@ -88,7 +88,7 @@ func _ready():
 		breakable.coin_dropped.connect(coin_drop_manager.spawn_coin_drop)
 
 	# Configure PerkManager
-	perk_manager.initialize(player_character.player_data.perk_data_pool, player_character.player_spells)
+	perk_manager.initialize(player_character.player_data.perk_data_pool, player_character.player_spells, player_character.player_build)
 	perk_manager.perk_ui = perk_ui
 	perk_manager.player_perk_manager = player_character.player_perk_manager
 	perk_manager.player_mana_drop_collector = player_character.mana_drop_collector

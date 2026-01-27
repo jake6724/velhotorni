@@ -15,6 +15,8 @@ extends Resource
 @export var attack_range: float
 @export var max_health: float
 @export var reflect_chance: float = 0.0
+@export var upgrade_cost: int
+@export var upgrade_cost_increment: int
 @export_category("Assets")
 ## The sprite atlas containing every animation for the tower. 
 @export var atlas: Texture2D

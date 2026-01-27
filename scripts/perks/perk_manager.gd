@@ -60,12 +60,17 @@ var test_perk_data: Array[PerkData] = [
 # 		for perk_data: PerkData in test_perk_data:
 # 			create_perk(perk_data)
 
-func initialize(_perk_data_pool: PerkDataPool, player_spells: PlayerSpells) -> void:
+func initialize(_perk_data_pool: PerkDataPool, player_spells: PlayerSpells, player_build: PlayerBuild) -> void:
 	var perk_data_unfiltered: Array[PerkData] = _perk_data_pool.perks
 	var perk_data_filtered: Array[PerkData] = []
 
 	# Filter out perks with inactive elements
-	var active_elements: Array[Constants.Element] = player_spells.get_active_elements()
+	var active_spell_elements: Array[Constants.Element] = player_spells.get_active_elements()
+	var active_tower_elements: Array[Constants.Element] = player_build.tower_element_options
+	var active_elements: Array[Constants.Element] = []
+	active_elements.append_array(active_spell_elements)
+	active_elements.append_array(active_tower_elements)
+	
 	for perk_data: PerkData in perk_data_unfiltered:
 		if "element" in perk_data:
 			if perk_data.element == Constants.Element.NONE or perk_data.element in active_elements:
