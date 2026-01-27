@@ -28,13 +28,13 @@ func _ready():
 	original_position = global_position
 	card_background.focus_mode = Control.FOCUS_CLICK
 
-func animate() -> void:
+func animate(rarity_multiplier: float) -> void:
 	content.hide()
 	perk_icon.texture.region = Rect2(0,1,48,46)
 	card_background.size = Vector2(118, 16)
 	expand()
 	bounce_perk_icon()
-	populate_card(perk_data)
+	populate_card(perk_data, rarity_multiplier)
 
 func animate_reset() -> void:
 	collapse()
@@ -79,24 +79,23 @@ func bounce_element(ui_element: Control, bounce_height: int) -> void:
 
 	bounce_complete.emit()
 
-func populate_card(_data) -> void:
+func populate_card(_data, rarity_multiplier: float) -> void:
 	perk_icon.texture = _data.perk_icon
 	perk_name.text = _data.perk_name
 
 	var desc_data: Dictionary = {}
 
-
 	var display_value
 	# Player Perks allow for different stats to be displayed other than base_value. Configure here
 	if _data is PerkDataPlayer:
 		match _data.player_stat_display:
-			PerkDataPlayer.PlayerStatDisplay.BASE_VALUE: display_value = _data.base_value
+			PerkDataPlayer.PlayerStatDisplay.BASE_VALUE: display_value = _data.base_value * rarity_multiplier
 			PerkDataPlayer.PlayerStatDisplay.DURATION: display_value = _data.duration
 			PerkDataPlayer.PlayerStatDisplay.REQUIRED_SPELL_DAMAGE: display_value = _data.required_spell_damage
 	
 	# Non-player perks will always use base_value
 	else:
-		display_value = _data.base_value
+		display_value = _data.base_value * rarity_multiplier
 
 	# Perk display value will either show the flat, unmodified value, or the value converted to a percentage-friendly format
 	match _data.perk_value_display_mode:

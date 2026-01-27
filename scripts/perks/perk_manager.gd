@@ -67,18 +67,32 @@ func initialize(_perk_data_pool: PerkDataPool, player_spells: PlayerSpells, play
 	# Filter out perks with inactive elements
 	var active_spell_elements: Array[Constants.Element] = player_spells.get_active_elements()
 	var active_tower_elements: Array[Constants.Element] = player_build.tower_element_options
-	var active_elements: Array[Constants.Element] = []
-	active_elements.append_array(active_spell_elements)
-	active_elements.append_array(active_tower_elements)
-	
-	for perk_data: PerkData in perk_data_unfiltered:
-		if "element" in perk_data:
-			if perk_data.element == Constants.Element.NONE or perk_data.element in active_elements:
-				print(perk_data.perk_name)
-				perk_data_filtered.append(perk_data)
-		else:
-			perk_data_filtered.append(perk_data)
+	var active_tower_debuff_types: Array[Debuff.Type] = player_build.get_active_debuff_types()
 
+	print("Spell Elements:")
+	for element in active_spell_elements:
+		print(Constants.get_element_text(element))
+	print("")
+	print("Tower Elements: ")
+	for element in active_tower_elements:
+		print(Constants.get_element_text(element))
+	print("")
+	print("Tower debuff types: ")
+	for debuff_type in active_tower_debuff_types:
+		print(debuff_type)
+
+	var valid_perk_data_spell: Array[PerkDataSpell] = filter_spell_perks(perk_data_unfiltered, active_spell_elements)
+	var valid_perk_data_tower: Array[PerkDataTower] = filter_tower_perks(perk_data_unfiltered, active_tower_elements, active_tower_debuff_types)
+	var valid_perk_data_player: Array[PerkDataPlayer] = filter_player_perks(perk_data_unfiltered)
+	var valid_perk_data_base: Array[PerkDataBase] = filter_base_perks(perk_data_unfiltered)
+
+	perk_data_filtered.append_array(valid_perk_data_spell)
+	perk_data_filtered.append_array(valid_perk_data_tower)
+	perk_data_filtered.append_array(valid_perk_data_player)
+	perk_data_filtered.append_array(valid_perk_data_base)
+
+	print("perk_data_filtered.size(): ", perk_data_filtered.size())
+	# Sort into legendary or basic pools
 	for perk_data: PerkData in perk_data_filtered:
 		if perk_data.legendary:
 			valid_legendary_perk_data.append(perk_data)
@@ -86,6 +100,51 @@ func initialize(_perk_data_pool: PerkDataPool, player_spells: PlayerSpells, play
 			valid_basic_perk_data.append(perk_data)
 
 	fill_rarity_pool()
+
+func filter_spell_perks(perk_data_unfiltered: Array[PerkData], active_spell_elements: Array[Constants.Element]) -> Array[PerkDataSpell]:
+	var perk_data_spell_filtered: Array[PerkDataSpell]
+	for perk_data: PerkData in perk_data_unfiltered:
+		if perk_data is PerkDataSpell:
+			if "element" in perk_data:
+				if perk_data.element == Constants.Element.NONE or perk_data.element in active_spell_elements:
+					perk_data_spell_filtered.append(perk_data)
+					print("Adding spell perk. Element = ", Constants.get_element_text(perk_data.element))
+			else:
+				perk_data_spell_filtered.append(perk_data)
+
+	return perk_data_spell_filtered
+
+func filter_tower_perks(perk_data_unfiltered: Array[PerkData], active_tower_elements: Array[Constants.Element], active_tower_debuff_types) -> Array[PerkDataTower]:
+	var perk_data_tower_filtered: Array[PerkDataTower]
+	for perk_data: PerkData in perk_data_unfiltered:
+		if perk_data is PerkDataTower:
+			# Add all towers perks with active elements
+			if perk_data.element in active_tower_elements:
+				perk_data_tower_filtered.append(perk_data)
+				print("Adding tower perk under element. Element = ", Constants.get_element_text(perk_data.element))
+			# Add all tower perks with active debuffs
+			if perk_data.debuff in active_tower_debuff_types:
+				perk_data_tower_filtered.append(perk_data)
+				print("Adding tower perk under debuff. Debuff = ", Constants.get_debuff_type_text(perk_data.debuff))
+
+			if perk_data.element == Constants.Element.NONE and perk_data.debuff == Debuff.Type.NONE:
+				perk_data_tower_filtered.append(perk_data)
+
+	return perk_data_tower_filtered
+
+func filter_player_perks(perk_data_unfiltered: Array[PerkData]) -> Array[PerkDataPlayer]:
+	var perk_data_player_filtered: Array[PerkDataPlayer]
+	for perk_data: PerkData in perk_data_unfiltered:
+		if perk_data is PerkDataPlayer:
+			perk_data_player_filtered.append(perk_data)
+	return perk_data_player_filtered
+
+func filter_base_perks(perk_data_unfiltered: Array[PerkData]) -> Array[PerkDataBase]:
+	var perk_data_base_filtered: Array[PerkDataBase]
+	for perk_data: PerkData in perk_data_unfiltered:
+		if perk_data is PerkDataBase:
+			perk_data_base_filtered.append(perk_data)
+	return perk_data_base_filtered
 
 func create_perk(perk_data: PerkData) -> void:
 	var perk_data_copy: PerkData = perk_data.duplicate()
@@ -194,7 +253,9 @@ func get_basic_perk_hand(rarity: PerkData.Rarity) -> Array[PerkData]:
 
 	return perk_hand
 
-func get_legendary_perk_hand() -> Array[PerkData]:  # TODO: Need to remove perks after using them!
+func get_legendary_perk_hand() -> Array[PerkData]:
 	valid_legendary_perk_data.shuffle()
-	var perk_hand: Array[PerkData] = [valid_legendary_perk_data[0], valid_legendary_perk_data[1], valid_legendary_perk_data[2]]
+	var perk_hand: Array[PerkData]
+	for i in range(3):
+		perk_hand.append(valid_legendary_perk_data.pop_front())
 	return perk_hand

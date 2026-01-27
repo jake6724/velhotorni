@@ -354,7 +354,6 @@ func on_tower_upgrade_price_modifier_updated() -> void:
 		tower.update_upgrade_info()
 
 func on_tower_prices_updated() -> void:
-	print("on_tower_prices_updated called")
 	player_build_ui.set_tower_button_prices(tower_element_options)
 	if preview_tower:
 		preview_tower.show_action_cost_info(TowerGlobalData.tower_prices[preview_tower.data.element])
@@ -369,11 +368,17 @@ func loadout_updated() -> void:
 			tower_element_options.append(tower_data.element)
 
 	player_build_ui.configure_loadout(tower_element_options)
-
-	print("Loadout updated. tower_element_options: ", tower_element_options)
 	create_preview_tower()
 
 func remove_preview_tower() -> void:
 	if preview_tower:
 		preview_tower.queue_free()
 		preview_tower = null
+
+func get_active_debuff_types() -> Array[Debuff.Type]:
+	var res: Array[Debuff.Type]
+	for element: Constants.Element in tower_element_options:
+		var tower_data: TowerData = TowerGlobalData.tower_data[element]
+		if tower_data.debuff_data:
+			res.append(tower_data.debuff_data.type)
+	return res

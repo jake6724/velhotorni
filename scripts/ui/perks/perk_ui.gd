@@ -88,7 +88,7 @@ func set_card_data(perk_hand: Array[PerkData]) -> void:
 	perk_card_2.perk_data = perk_hand[1]
 	perk_card_3.perk_data = perk_hand[2]
 
-func animate() -> void:
+func animate(rarity: PerkData.Rarity) -> void:
 	top_letterbox.position = Vector2(-512, 0)
 	bottom_letterbox.position = Vector2(512, 256)
 
@@ -96,8 +96,17 @@ func animate() -> void:
 	animate_candles()
 	bounce_element(header, 4)
 
+	var rarity_multiplier: float = 1.0
+	match rarity:
+		PerkData.Rarity.ONE: pass
+		PerkData.Rarity.TWO: 
+			rarity_multiplier = 2.0
+		PerkData.Rarity.THREE: 
+			rarity_multiplier = 4.0
+		PerkData.Rarity.FOUR: pass
+
 	for card: PerkCard in perk_cards:
-		card.animate()
+		card.animate(rarity_multiplier)
 		await get_tree().create_timer(delay_between_cards).timeout
 
 	# Allow cards to be hovered now

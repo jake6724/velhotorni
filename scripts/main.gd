@@ -168,7 +168,7 @@ func pause_game_with_perk_ui() -> void:
 	perk_ui.set_rarity_label(rarity)
 	perk_ui.set_card_data(perk_hand)
 	perk_ui.show()
-	perk_ui.animate()
+	perk_ui.animate(rarity)
 
 	if not GlobalSettings.controller_active:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

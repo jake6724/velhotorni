@@ -226,8 +226,22 @@ var element_text: Dictionary[Element, String] ={
 	Element.CURSE: "Curse",
 	Element.VOID: "Void",
 	Element.ARCANE: "Arcane",
-	Element.NONE: "None ?",
+	Element.NONE: "None",
+}
+
+var debuff_type_text: Dictionary[Debuff.Type, String] = {
+	Debuff.Type.BURN: "Burn",
+	Debuff.Type.SLOW: "Slow",
+	Debuff.Type.FREEZE: "Freeze",
+	Debuff.Type.STUN: "Stun", 
+	Debuff.Type.WEAKEN: "Weaken",
+	Debuff.Type.KNOCKBACK: "Knockback", 
+	Debuff.Type.NONE: "None"
+
 }
 
 func get_element_text(element: Element) -> String:
 	return element_text.get(element, "Element not found!")
+
+func get_debuff_type_text(debuff_type: Debuff.Type) -> String:
+	return debuff_type_text.get(debuff_type, "Debuff type not found!")
