@@ -8,7 +8,6 @@ This node directly manages and makes changes to PlayerCharacter and its child no
 PerkPlayer objects. 
 """
 
-
 @onready var player: PlayerCharacter = get_owner()
 
 var timed_modify_stat_stack_max: Dictionary[PerkDataPlayer.PlayerStat, int] = {
@@ -39,6 +38,7 @@ func on_modify_stat_requested(data: PerkData) -> float:
 			player.player_stats.max_health += modified_value
 			player.player_stats.health += modified_value
 			player.player_hud.add_hearts(modified_value/2)
+			player.player_hud.on_health_updated(player.player_stats.health)
 		PerkDataPlayer.PlayerStat.MOVE_SPEED: 
 			modified_value = (player.player_stats.base_move_speed * data.base_value)
 			player.player_stats.move_speed += modified_value

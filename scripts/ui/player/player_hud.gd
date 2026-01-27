@@ -279,10 +279,6 @@ func on_enemy_count_decremented() -> void:
 	enemy_info_count -= 1
 	enemy_count.text = str(enemy_info_count)
 	enemy_progress.value = (float(enemy_info_count) / enemy_info_total) * 100
-	print("enemy_info_count: ", enemy_info_count)
-	print("enemy_info_total: ", enemy_info_total)
-	print("Val: ", (enemy_info_count / enemy_info_total) * 100)
-	print("enemy_progress.value: ", enemy_progress.value)
 
 func on_wave_complete() -> void:
 	wave_count.text = str(WaveManager.wave_index + 1)
