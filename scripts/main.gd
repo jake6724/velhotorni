@@ -179,6 +179,7 @@ func on_perk_selected(perk_data: PerkData) -> void:
 	perk_ui.animate_reset()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	player_character.player_hud.show()
+	player_character.player_hud.add_perk_mini_icon(perk_data.perk_mini_icon)
 	perk_manager.create_perk(perk_data)
 
 	if player_character.building:

@@ -60,36 +60,6 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("2_rq211")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="Animation" id="Animation_jbb8n"]
-resource_name = "open"
-step = 0.0833
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Banner:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0833, 0.1666, 0.24990001, 0.3332, 0.4165, 0.49980003, 0.5831, 0.6664, 0.7497),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.25),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"show_banner_label"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_5f4n5"]
 length = 0.001
 tracks/0/type = "value"
@@ -201,6 +171,36 @@ tracks/0/keys = {
 "values": [9]
 }
 
+[sub_resource type="Animation" id="Animation_jbb8n"]
+resource_name = "open"
+step = 0.0833
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Banner:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833, 0.1666, 0.24990001, 0.3332, 0.4165, 0.49980003, 0.5831, 0.6664, 0.7497),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"show_banner_label"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fl26y"]
 _data = {
 &"RESET": SubResource("Animation_5f4n5"),
@@ -211,7 +211,11 @@ _data = {
 
 [node name="PlayerHUD" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_l3s77")
 metadata/_custom_type_script = "uid://cngopxpmylq3o"
 
@@ -668,20 +672,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PerkMiniIcons" type="HBoxContainer" parent="."]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 424.0
-offset_top = 3.0
-offset_right = 510.0
-offset_bottom = 35.0
-grow_horizontal = 0
-theme_override_constants/separation = 2
-
 [node name="SpellManaDropDisplay" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 clip_contents = true
@@ -743,3 +733,15 @@ theme_override_font_sizes/font_size = 16
 text = "Wave Cleared"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PerkMiniIcons" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_right = 44.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_constants/separation = 2

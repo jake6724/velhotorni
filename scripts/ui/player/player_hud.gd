@@ -309,3 +309,10 @@ func add_hearts(_count: int) -> void:
 	for i in range(_count):
 		var new_heart: PlayerHUDHeart = PLAYER_HUD_HEART_SCENE.instantiate()
 		player_hearts.add_child(new_heart)
+
+func add_perk_mini_icon(perk_mini_icon: AtlasTexture):
+	var texture_rect: TextureRect = TextureRect.new()
+	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP
+	texture_rect.texture = perk_mini_icon
+	texture_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	perk_mini_icons.add_child(texture_rect)
