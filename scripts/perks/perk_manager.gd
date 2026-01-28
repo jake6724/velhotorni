@@ -69,17 +69,18 @@ func initialize(_perk_data_pool: PerkDataPool, player_spells: PlayerSpells, play
 	var active_tower_elements: Array[Constants.Element] = player_build.tower_element_options
 	var active_tower_debuff_types: Array[Debuff.Type] = player_build.get_active_debuff_types()
 
-	print("Spell Elements:")
-	for element in active_spell_elements:
-		print(Constants.get_element_text(element))
-	print("")
-	print("Tower Elements: ")
-	for element in active_tower_elements:
-		print(Constants.get_element_text(element))
-	print("")
-	print("Tower debuff types: ")
-	for debuff_type in active_tower_debuff_types:
-		print(debuff_type)
+	# DEBUG PRINT
+	# print("Spell Elements:")
+	# for element in active_spell_elements:
+	# 	print(Constants.get_element_text(element))
+	# print("")
+	# print("Tower Elements: ")
+	# for element in active_tower_elements:
+	# 	print(Constants.get_element_text(element))
+	# print("")
+	# print("Tower debuff types: ")
+	# for debuff_type in active_tower_debuff_types:
+	# 	print(debuff_type)
 
 	var valid_perk_data_spell: Array[PerkDataSpell] = filter_spell_perks(perk_data_unfiltered, active_spell_elements)
 	var valid_perk_data_tower: Array[PerkDataTower] = filter_tower_perks(perk_data_unfiltered, active_tower_elements, active_tower_debuff_types)
@@ -91,7 +92,7 @@ func initialize(_perk_data_pool: PerkDataPool, player_spells: PlayerSpells, play
 	perk_data_filtered.append_array(valid_perk_data_player)
 	perk_data_filtered.append_array(valid_perk_data_base)
 
-	print("perk_data_filtered.size(): ", perk_data_filtered.size())
+	# print("perk_data_filtered.size(): ", perk_data_filtered.size())
 	# Sort into legendary or basic pools
 	for perk_data: PerkData in perk_data_filtered:
 		if perk_data.legendary:
@@ -99,6 +100,7 @@ func initialize(_perk_data_pool: PerkDataPool, player_spells: PlayerSpells, play
 		else:
 			valid_basic_perk_data.append(perk_data)
 
+	
 	fill_rarity_pool()
 
 func filter_spell_perks(perk_data_unfiltered: Array[PerkData], active_spell_elements: Array[Constants.Element]) -> Array[PerkDataSpell]:
