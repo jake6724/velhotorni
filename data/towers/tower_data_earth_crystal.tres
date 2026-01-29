@@ -19,6 +19,5 @@ transform_hint_texture = ExtResource("4_cjikw")
 bullet = ExtResource("3_xiexo")
 bullet_speed = 150.0
 bullet_modifier_data = ExtResource("4_vi1tn")
-buff_data_list = Array[ExtResource("1_1m4k5")]([])
-tower_name = "Crystal"
+tower_name = "Crystal Golem"
 metadata/_custom_type_script = "uid://v7b6nq74b314"

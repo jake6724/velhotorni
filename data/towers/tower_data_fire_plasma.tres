@@ -10,7 +10,6 @@
 [resource]
 script = ExtResource("2_oe7gi")
 element = 8
-base_element = 0
 damage = 4.0
 speed = 0.15
 attack_range = 50.0
@@ -19,6 +18,6 @@ transform_hint_texture = ExtResource("4_aoppd")
 bullet = ExtResource("3_aoppd")
 bullet_speed = 150.0
 debuff_data = ExtResource("4_5i7bn")
-buff_data_list = Array[ExtResource("1_5kjju")]([])
-tower_name = "Plasma"
+tower_name = "Will-o'-Wisp"
+desc = "A wandering flame that travels by night."
 metadata/_custom_type_script = "uid://v7b6nq74b314"
