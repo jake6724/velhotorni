@@ -31,6 +31,7 @@ debuff_data = ExtResource("3_bbtra")
 base_spell_mana_per_drop = 4
 initial_mana_amount = 10
 max_mana_amount = 10
+mana_drop_chance = 2.0
 spell_name = "Ice Sword"
 popup_name = "Ice Sword"
 desc = "This is an ice sword. A sword made of ice. This is ice which is in the form of a sword"

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bqouaylieliuj" path="res://scripts/ui/loadout/loadout_page_spell.gd" id="1_wyn1w"]
 [ext_resource type="Texture2D" uid="uid://c0a8rf6rqjted" path="res://assets/art/sprites/ui/spr_ui_equip.png" id="2_cj5bq"]
 [ext_resource type="Texture2D" uid="uid://go0bba7gghi8" path="res://assets/art/sprites/ui/spr_ui_divider2.png" id="3_n7vgk"]
-[ext_resource type="PackedScene" uid="uid://dgjjoqehad7w5" path="res://scenes/ui/loadout/SpellCard.tscn" id="4_t7qcb"]
+[ext_resource type="PackedScene" uid="uid://2q57wnjujp3b" path="res://scenes/ui/loadout/SpellCard.tscn" id="4_t7qcb"]
 [ext_resource type="Texture2D" uid="uid://d0yijylvpeqaf" path="res://assets/art/sprites/ui/spr_ui_divider_vertical_2.png" id="5_qv0er"]
 [ext_resource type="Texture2D" uid="uid://cytlhw8oe0657" path="res://assets/art/sprites/ui/spr_ui_chest.png" id="6_dpvov"]
 [ext_resource type="Texture2D" uid="uid://r5y0aa5js6bu" path="res://assets/art/sprites/ui/spr_ui_filter.png" id="7_178le"]

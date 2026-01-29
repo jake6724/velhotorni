@@ -11,7 +11,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var reward_remaining: int = 0
 var direction_to_mouse: Vector2
 
-var spawn_tower_mana_as_spell_mana_chance: float = .5
+var spawn_tower_mana_as_spell_mana_chance: float = 0
 
 signal reward_completed
 signal spell_mana_spawn_requested

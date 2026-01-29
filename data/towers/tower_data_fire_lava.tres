@@ -10,15 +10,15 @@
 [resource]
 script = ExtResource("2_cov3p")
 element = 7
-base_element = 0
-damage = 25.0
-speed = 1.2
+damage = 30.0
+speed = 3.0
 attack_range = 40.0
+max_health = 150.0
+upgrade_cost_base = 75
+upgrade_cost_increment = 25
 atlas = ExtResource("1_vi8qm")
 transform_hint_texture = ExtResource("6_y4xb0")
 bullet = ExtResource("3_pkruq")
-bullet_speed = 0.0
 debuff_data = ExtResource("4_mkh2m")
-buff_data_list = Array[ExtResource("1_2udl8")]([])
 tower_name = "Lava"
 metadata/_custom_type_script = "uid://v7b6nq74b314"

@@ -20,5 +20,6 @@ base_value = 0.1
 perk_icon = SubResource("AtlasTexture_u5jvt")
 perk_mini_icon = SubResource("AtlasTexture_gme3t")
 perk_name = "Dark Conjurer"
-perk_desc = "Decrease dark tower placement cost"
+perk_desc = "summon dark familiars for {value}% less mana"
+perk_value_display_mode = 1
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

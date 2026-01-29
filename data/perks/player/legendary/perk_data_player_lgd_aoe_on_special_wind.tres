@@ -25,5 +25,5 @@ legendary = true
 perk_icon = SubResource("AtlasTexture_sqjyk")
 perk_mini_icon = SubResource("AtlasTexture_lo3p8")
 perk_name = "Shockwave"
-perk_desc = "After casting your special ability, knockback all nearby enemies"
+perk_desc = "Casting your special ability knocks back all nearby enemies"
 metadata/_custom_type_script = "uid://73abv3ia3v27"

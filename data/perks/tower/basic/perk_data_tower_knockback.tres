@@ -14,5 +14,6 @@ debuff = 5
 base_value = 0.1
 perk_icon = SubResource("AtlasTexture_hvetj")
 perk_name = "Gust"
-perk_desc = "increase tower knockback force"
+perk_desc = "Increase the knockback distance from wind familiars by {value}% "
+perk_value_display_mode = 1
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

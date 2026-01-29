@@ -40,6 +40,7 @@ debuff_data = ExtResource("2_tcqn3")
 base_spell_mana_per_drop = 4
 initial_mana_amount = 10
 max_mana_amount = 10
+mana_drop_chance = 2.0
 spell_name = "Fire Dragon"
 popup_name = "Fire Dragon"
 desc = "Fire dragon which creates massive fireballs and explosions. Flavor text idk this is a dragon hes on fire"

@@ -23,5 +23,5 @@ base_value = 0.05
 perk_icon = SubResource("AtlasTexture_4w4fw")
 perk_mini_icon = SubResource("AtlasTexture_68huv")
 perk_name = "Wind's Blessing"
-perk_desc = "Get faster when you pick up coins"
-metadata/_custom_type_script = "uid://tx0ls1d4gwxv"
+perk_desc = "Picking up summoning mana grants a {value}% move speed buff for 3 seconds. Stacks up to 6 times."
+perk_value_display_mode = 1

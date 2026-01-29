@@ -14,6 +14,6 @@ base_value = 0.1
 perk_icon = SubResource("AtlasTexture_2ti8s")
 perk_mini_icon = SubResource("AtlasTexture_mowm2")
 perk_name = "Wind Blast"
-perk_desc = "All spells have a {value}% chance to apply knockback"
+perk_desc = "Grant all spells a {value}% chance to apply knockback"
 perk_value_display_mode = 1
 metadata/_custom_type_script = "uid://ce7tlskrqn27f"
