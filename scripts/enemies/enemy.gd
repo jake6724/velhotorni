@@ -84,6 +84,7 @@ signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
 signal coin_dropped
 signal enemy_damage_recieved
+signal wind_up_completed
 
 func _ready():
 	data.resource_local_to_scene = true # TODO: probably/maybe not needed
@@ -212,7 +213,7 @@ func die() -> void:
 	shield.hide()
 	weak.hide()
 
-	SFXPlayer.play_sfx_resource(data.explosion_sfx)
+	# SFXPlayer.play_sfx_resource(data.explosion_sfx)
 
 	ap.play("die")
 
@@ -418,7 +419,9 @@ func on_boon_expired(boon: Boon) -> void:
 			collider.set_deferred("disabled", false)
 		_: pass
 
-func wind_up() -> void: pass
+func wind_up() -> void:
+	pass
+	# ap.play("wind_up")
 
 func hide_all_fx() -> void:
 	fx_burn.hide()

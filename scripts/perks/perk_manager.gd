@@ -110,7 +110,7 @@ func filter_spell_perks(perk_data_unfiltered: Array[PerkData], active_spell_elem
 			if "element" in perk_data:
 				if perk_data.element == Constants.Element.NONE or perk_data.element in active_spell_elements:
 					perk_data_spell_filtered.append(perk_data)
-					print("Adding spell perk. Element = ", Constants.get_element_text(perk_data.element))
+					# print("Adding spell perk. Element = ", Constants.get_element_text(perk_data.element))
 			else:
 				perk_data_spell_filtered.append(perk_data)
 
@@ -123,11 +123,11 @@ func filter_tower_perks(perk_data_unfiltered: Array[PerkData], active_tower_elem
 			# Add all towers perks with active elements
 			if perk_data.element in active_tower_elements:
 				perk_data_tower_filtered.append(perk_data)
-				print("Adding tower perk under element. Element = ", Constants.get_element_text(perk_data.element))
+				#print("Adding tower perk under element. Element = ", Constants.get_element_text(perk_data.element))
 			# Add all tower perks with active debuffs
 			if perk_data.debuff in active_tower_debuff_types:
 				perk_data_tower_filtered.append(perk_data)
-				print("Adding tower perk under debuff. Debuff = ", Constants.get_debuff_type_text(perk_data.debuff))
+				#print("Adding tower perk under debuff. Debuff = ", Constants.get_debuff_type_text(perk_data.debuff))
 
 			if perk_data.element == Constants.Element.NONE and perk_data.debuff == Debuff.Type.NONE:
 				perk_data_tower_filtered.append(perk_data)
@@ -230,7 +230,7 @@ func get_perk_hand() -> Array[PerkData]:
 
 	else:
 		perk_hand = get_legendary_perk_hand()
-	print("Perk hand: ", perk_hand)
+	#print("Perk hand: ", perk_hand)
 	return perk_hand
 
 ## Create a perk hand made up of basic perks. Active perks (same perk data, same rarity) will be excluded from this hand

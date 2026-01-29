@@ -70,7 +70,9 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 		direction = Constants.get_closest_cardinal_direction_normalized(_aim_input)
 	else:
 		direction = Vector2(1,0)
-		
+	
+	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.DASH)
+
 	# var boost_velocity: Vector2 = player.velocity + (Vector2(dash_velocity*.25, dash_velocity*.25) * direction)
 	player.velocity = player.velocity + (Vector2(200, 200) * direction)
 	var target: Vector2 = player.velocity + (Vector2(dash_velocity, dash_velocity) * direction)

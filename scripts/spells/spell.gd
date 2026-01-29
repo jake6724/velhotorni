@@ -19,7 +19,6 @@ func deal_damage(enemy: Enemy) -> void:
 	var damage_applied: float = enemy.take_damage(damage, data.element, execution_threshold, double_spell_mana_drop)
 
 	if data.debuff_data and enemy.debuff_manager:
-		print("Adding debuff from spell")
 		enemy.debuff_manager.add_debuff(data.debuff_data)
 
 	for perk_debuff_data in perk_debuffs:

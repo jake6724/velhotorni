@@ -113,6 +113,8 @@ func _ready():
 	if active_level.start_first_wave_immediately:
 		WaveManager.start_wave()
 
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.AMBIANCE_WIND_1)
+
 func on_escape_pressed() -> void:
 	if can_pause:
 		pause_game_with_menu()

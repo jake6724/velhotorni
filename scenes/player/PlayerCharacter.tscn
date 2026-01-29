@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=134 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Resource" uid="uid://dkeqm5qym5h01" path="res://data/player/player_data_mage.tres" id="2_5mqjb"]
@@ -622,6 +622,23 @@ tracks/3/keys = {
 "update": 1,
 "values": [Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0), Vector2i(9, 0), Vector2i(10, 0), Vector2i(11, 0)]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerAudio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_v81jw"]
 resource_name = "walk_down"
@@ -676,6 +693,23 @@ tracks/3/keys = {
 "update": 1,
 "values": [Vector2i(6, 1), Vector2i(7, 1), Vector2i(8, 1), Vector2i(9, 1), Vector2i(10, 1), Vector2i(11, 1)]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerAudio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_g7j5r"]
 resource_name = "walk_up"
@@ -729,6 +763,23 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerAudio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g7j5r"]
@@ -1392,6 +1443,9 @@ _data = {
 &"attack": SubResource("Animation_rol34")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahw3v"]
+size = Vector2(12, 2)
+
 [node name="PlayerCharacter" type="CharacterBody2D"]
 collision_layer = 16384
 collision_mask = 218112000
@@ -1729,3 +1783,11 @@ libraries = {
 visible = false
 texture = ExtResource("47_ahw3v")
 hframes = 5
+
+[node name="PlayerGroundBeacon" type="Area2D" parent="."]
+collision_layer = 268435456
+collision_mask = 0
+
+[node name="PlayerGroundBeaconCollider" type="CollisionShape2D" parent="PlayerGroundBeacon"]
+position = Vector2(1, 8)
+shape = SubResource("RectangleShape2D_ahw3v")

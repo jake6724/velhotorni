@@ -31,8 +31,8 @@ func _ready():
 	music_player.finished.connect(on_track_finished)
 
 	# Start
-	music_player.stream = active_track
-	music_player.play()
+	# music_player.stream = active_track
+	# music_player.play()
 
 func update_bus_volume(new_bus_volume_linear: float):
 	AudioServer.set_bus_volume_linear(bus_index, new_bus_volume_linear)

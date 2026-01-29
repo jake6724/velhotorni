@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=9 format=3 uid="uid://b7wsjmjppidpa"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_h7wxm"]
+[ext_resource type="AudioStream" uid="uid://d3t7rs7rvl851" path="res://assets/audio/footstep_cobblestone_1.mp3" id="2_3vg5t"]
+[ext_resource type="AudioStream" uid="uid://bklfs1piuah8y" path="res://assets/audio/footstep_cobblestone_2.mp3" id="3_vqtdb"]
+[ext_resource type="AudioStream" uid="uid://crsq2pu8v2yls" path="res://assets/audio/footstep_cobblestone_3.mp3" id="4_26hu3"]
+[ext_resource type="AudioStream" uid="uid://wh5jdijx2mo5" path="res://assets/audio/footstep_cobblestone_4.mp3" id="5_u6pwd"]
+[ext_resource type="AudioStream" uid="uid://omvrjftpjgd0" path="res://assets/audio/footstep_cobblestone_5.mp3" id="6_s4joq"]
+[ext_resource type="AudioStream" uid="uid://cquwmtqnywhoh" path="res://assets/audio/footstep_cobblestone_6.mp3" id="7_4c5um"]
+[ext_resource type="AudioStream" uid="uid://6io1u83vn2n0" path="res://assets/audio/footstep_cobblestone_7.mp3" id="8_hg651"]
+
+[resource]
+script = ExtResource("1_h7wxm")
+limit = 1
+type = 6
+sounds = Array[AudioStreamMP3]([ExtResource("2_3vg5t"), ExtResource("3_vqtdb"), ExtResource("4_26hu3"), ExtResource("5_u6pwd"), ExtResource("6_s4joq"), ExtResource("7_4c5um"), ExtResource("8_hg651")])
+volume = -20.0
+select_mode = 0
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

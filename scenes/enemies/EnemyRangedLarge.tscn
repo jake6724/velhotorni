@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://de461rdesl57b"]
+[gd_scene load_steps=127 format=3 uid="uid://de461rdesl57b"]
 
 [ext_resource type="Script" uid="uid://bj0h1eevyweax" path="res://scripts/enemies/enemy_ranged.gd" id="1_bjuyy"]
 [ext_resource type="Texture2D" uid="uid://b55stadqnynpd" path="res://assets/art/atlases/enemy/atl_enemy_wind_harpy.png" id="2_uh888"]
@@ -880,6 +880,9 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_tw3kj"]
+resource_name = "wind_up"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hpe7p"]
 _data = {
 &"RESET": SubResource("Animation_hpe7p"),
@@ -887,7 +890,8 @@ _data = {
 &"die": SubResource("Animation_8axbs"),
 &"hit": SubResource("Animation_k7o7a"),
 &"idle": SubResource("Animation_vtlqb"),
-&"walk": SubResource("Animation_jsdvy")
+&"walk": SubResource("Animation_jsdvy"),
+&"wind_up": SubResource("Animation_tw3kj")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5u8w3"]

@@ -37,6 +37,7 @@ Telemetry="*res://scripts/singletons/telemetry.gd"
 StarRegistry="*res://scripts/singletons/star_registry.gd"
 GlobalSettings="*res://scripts/singletons/global_settings.gd"
 PlayerLoadout="*res://scripts/singletons/player_loadout.gd"
+AudioManager="*res://scenes/audio/AudioManager.tscn"
 
 [debug]
 
@@ -301,6 +302,7 @@ g={
 2d_physics/layer_25="BreakableTerrainObstacle"
 2d_physics/layer_27="TowerObstacleBody"
 2d_physics/layer_28="Obstacle"
+2d_physics/layer_29="PlayerGroundBeacon"
 
 [rendering]
 

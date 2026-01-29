@@ -28,7 +28,8 @@ func on_collect_area_entered(intruder) -> void:
 		if index != -1:
 			magnetized_coins.remove_at(magnetized_coins.find(coin))
 		
-		SFXPlayer.play_sfx("coin_collect")
+		AudioManager.create_2d_audio_at_location(coin.global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_MANA_COLLECT)
+
 		coin_collected.emit()
 		if coin.is_reward:
 			reward_collected.emit()

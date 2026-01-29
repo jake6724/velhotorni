@@ -31,6 +31,8 @@ var mana_base_cost = mana_cost
 # @export var active_icon_region: Rect2 = Rect2(0,0,32,31)
 # @export var inactive_icon_region: Rect2 = Rect2(0,0,16,16)
 
+@export var sound_effect: SoundEffect
+
 @export var camera_shake: float = .1
 
 @export var unlock_cost: int = 1

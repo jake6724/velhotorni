@@ -7,6 +7,5 @@
 [resource]
 script = ExtResource("2_hlgpr")
 data = Array[ExtResource("1_temu6")]([ExtResource("2_jb8hy")])
-reward = 25.0
-token_reward = 0
+reward = 50.0
 metadata/_custom_type_script = "uid://cskry1sw3vqba"

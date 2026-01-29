@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=2 format=3 uid="uid://3qnrbgkj5l3i"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_u4tcm"]
+
+[resource]
+script = ExtResource("1_u4tcm")
+limit = 10
+type = 1
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

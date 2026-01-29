@@ -1,0 +1,16 @@
+[gd_scene load_steps=11 format=3 uid="uid://ddh2ackt4kohs"]
+
+[ext_resource type="Script" uid="uid://do262wkjorqq" path="res://scripts/audio/audio_manager.gd" id="1_r1srg"]
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="2_tv3b6"]
+[ext_resource type="Resource" uid="uid://dpl6u8jw014y4" path="res://data/audio/sfx/tower_mana_collect.tres" id="3_yg0am"]
+[ext_resource type="Resource" uid="uid://3qnrbgkj5l3i" path="res://data/audio/sfx/sfx_arcane_basic_shoot.tres" id="4_yg0am"]
+[ext_resource type="Resource" uid="uid://vie2nghq13n0" path="res://data/audio/sfx/sfx_dash.tres" id="5_mbly1"]
+[ext_resource type="Resource" uid="uid://dykwoeyiyqcym" path="res://data/audio/sfx/sfx_arcane_horn.tres" id="6_qw11x"]
+[ext_resource type="Resource" uid="uid://dmtn484ob61ym" path="res://data/audio/sfx/sfx_ice_sword_swing.tres" id="7_isk6y"]
+[ext_resource type="Resource" uid="uid://cgyt0ve4xsts2" path="res://data/audio/sfx/sfx_footstep_grass.tres" id="8_2hebn"]
+[ext_resource type="Resource" uid="uid://b7wsjmjppidpa" path="res://data/audio/sfx/sfx_footstep_cobblestone.tres" id="9_ns8hx"]
+[ext_resource type="Resource" uid="uid://c4wvihk0f4c5s" path="res://data/audio/ambiance/ambiance_wind_1.tres" id="10_b86ia"]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_r1srg")
+sound_effects = Array[ExtResource("2_tv3b6")]([ExtResource("3_yg0am"), ExtResource("4_yg0am"), ExtResource("5_mbly1"), ExtResource("6_qw11x"), ExtResource("7_isk6y"), ExtResource("8_2hebn"), ExtResource("9_ns8hx"), ExtResource("10_b86ia")])

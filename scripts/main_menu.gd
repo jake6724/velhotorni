@@ -42,7 +42,7 @@ func _ready() -> void:
 
 func _on_play_button_pressed() -> void:
 	SceneTransition.change_scene(world_map)
-	SFXPlayer.play_sfx("click_1")
+	# SFXPlayer.play_sfx("click_1")
 
 func on_settings_button_pressed() -> void:
 	title_menu.hide()

@@ -142,7 +142,10 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
 	angle_seperation += new_spell_data.angle_seperation
 
 	# Stuff that is done 1 time for all bullets in this burst group
-	player.player_audio.play_audio_stream(new_spell_data.sfx)
+
+	if new_spell_data.sound_effect:
+		AudioManager.create_2d_audio_at_location(spell_spawn_points[0].global_position, new_spell_data.sound_effect.type)
+
 	start_attack_cooldown(new_spell_data)
 	player.player_camera.apply_shake(new_spell_data.camera_shake)
 
@@ -187,6 +190,9 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 		add_child(new_spell)
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
 		spell_cast.emit(new_spell_data)
+
+	if new_spell_data.sound_effect:
+		AudioManager.create_2d_audio_at_location(spell_spawn_points[0].global_position, new_spell_data.sound_effect.type)
 
 	start_attack_cooldown(new_spell_data)
 	player.player_camera.apply_shake(curr_spell_data.camera_shake)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://drn4sppwachxq"]
+[gd_scene load_steps=42 format=4 uid="uid://drn4sppwachxq"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_eds8m"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_l0qwy"]
@@ -29,6 +29,7 @@
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="11_7ycjr"]
 [ext_resource type="PackedScene" uid="uid://dtbjym5jhrudw" path="res://scenes/ui/WaveInfo.tscn" id="11_eds8m"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="23_btpk1"]
+[ext_resource type="PackedScene" uid="uid://5kegew63jmcv" path="res://scenes/level/GroundInfoTrigger.tscn" id="30_wsimo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6xay"]
 texture = ExtResource("9_tioql")
@@ -1806,7 +1807,7 @@ script = ExtResource("1_eds8m")
 level_name = "Level 3B"
 region = 2
 initial_gold = 175
-waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_uelw8"), ExtResource("4_h8vnd"), ExtResource("3_oxg84"), ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd"), ExtResource("8_f1ecl"), ExtResource("7_wsimo"), ExtResource("5_h8vnd"), ExtResource("4_uelw8"), ExtResource("3_btpk1"), ExtResource("11_2wwi5"), ExtResource("6_oxg84"), ExtResource("9_o7b5e"), ExtResource("10_r64x4"), ExtResource("6_tioql")])
+waves = Array[ExtResource("2_l0qwy")]([ExtResource("6_tioql"), ExtResource("3_uelw8"), ExtResource("4_h8vnd"), ExtResource("3_oxg84"), ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd"), ExtResource("8_f1ecl"), ExtResource("7_wsimo"), ExtResource("5_h8vnd"), ExtResource("4_uelw8"), ExtResource("3_btpk1"), ExtResource("11_2wwi5"), ExtResource("6_oxg84"), ExtResource("9_o7b5e"), ExtResource("10_r64x4")])
 max_towers = 15
 
 [node name="AnimationLayer" type="TileMapLayer" parent="."]
@@ -1961,3 +1962,18 @@ offset_right = 368.0
 offset_bottom = 72.0
 path = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="Node" type="Node" parent="."]
+
+[node name="GroundInfoTrigger" parent="Node" instance=ExtResource("30_wsimo")]
+position = Vector2(72, 104)
+footstep_type = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node/GroundInfoTrigger"]
+polygon = PackedVector2Array(-8, -8, 24, -8, 24, 40, 56, 40, 56, 88, 136, 88, 136, 24, 152, 24, 152, -24, 232, -24, 232, 8, 296, 8, 296, -136, 312, -136, 312, 104, 392, 104, 392, 24, 504, 24, 504, 8, 600, 8, 600, 24, 632, 24, 632, 56, 648, 56, 648, 40, 664, 40, 664, 120, 648, 120, 648, 248, 664, 248, 664, 360, 616, 360, 616, 376, 520, 376, 520, 312, 376, 312, 376, 248, 360, 248, 360, 184, 296, 184, 296, 264, 184, 264, 184, 248, 40, 248, 40, 216, -24, 216, -24, 232, 8, 232, 8, 288, 8, 296, -8, 296, -8, 248, -40, 248, -40, 200, 56, 200, 56, 232, 200, 232, 200, 248, 280, 248, 280, 168, 376, 168, 376, 232, 392, 232, 392, 296, 536, 296, 536, 360, 600, 360, 600, 344, 648, 344, 648, 264, 632, 264, 632, 104, 648, 104, 648, 72, 616, 72, 616, 40, 584, 40, 584, 24, 520, 24, 520, 40, 408, 40, 408, 120, 296, 120, 296, 24, 216, 24, 216, -8, 168, -8, 168, 40, 152, 40, 152, 104, 40, 104, 40, 56, 8, 56, 8, 8, -8, 8)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Node/GroundInfoTrigger"]
+polygon = PackedVector2Array(232, -24, 296, -24, 296, -88, 328, -88, 328, -24, 488, -24, 488, 328, 344, 328, 312, 328, 312, 272, 232, 272, 232, 232, 248, 232, 248, 216, 264, 216, 264, 152, 408, 152, 408, 136, 264, 136, 264, 40, 248, 40, 248, 24, 232, 24)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Node/GroundInfoTrigger"]
+polygon = PackedVector2Array(248, 40, 248, 72, 232, 72, 232, 136, 216, 136, 216, 160, 248, 160, 248, 216, 264, 216, 264, 152, 408, 152, 408, 136, 264, 136, 264, 40)
