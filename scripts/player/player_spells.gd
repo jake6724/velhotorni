@@ -27,11 +27,19 @@ func configure_spells() -> void:
 	original_spell_positions = selected_spells
 	spells = SpellDataDoublyLinkedList.new(selected_spells)
 
-	# print("PlayerSpells.configure_spells() - active_spell: ", spells.head.value)
 	if spells.head:
 		active_spell = spells.head.value
 	else:
 		active_spell = empty_spell
+
+	configure_spell_debuffs()
+
+## Debuffs were set up to work with towers, and many are expected to have a modified value which is set based on tower level
+## Since we don't have spell levels, just set the modified value equal to the base value, if it has one. 
+func configure_spell_debuffs() -> void:
+	for spell: SpellData in spells.array:
+		if spell.debuff_data and "value" in spell.debuff_data:
+			spell.debuff_data.modified_value = spell.debuff_data.value
 
 func switch_spells(_switch_direction) -> void:
 	if spells.array.size() > 1:

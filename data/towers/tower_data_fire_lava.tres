@@ -20,5 +20,6 @@ atlas = ExtResource("1_vi8qm")
 transform_hint_texture = ExtResource("6_y4xb0")
 bullet = ExtResource("3_pkruq")
 debuff_data = ExtResource("4_mkh2m")
-tower_name = "Lava"
+tower_name = "Searing Slime"
+desc = "A monster made from lava."
 metadata/_custom_type_script = "uid://v7b6nq74b314"

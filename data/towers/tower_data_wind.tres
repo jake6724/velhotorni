@@ -24,5 +24,6 @@ portrait = ExtResource("5_jiedl")
 bullet = ExtResource("2_wsq5c")
 bullet_speed = 200.0
 debuff_data = ExtResource("3_3hdua")
-tower_name = "Wind"
+tower_name = "Faerie"
+desc = "A magical spirit."
 metadata/_custom_type_script = "uid://v7b6nq74b314"

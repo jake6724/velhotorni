@@ -24,5 +24,6 @@ portrait = ExtResource("5_ivdd0")
 bullet = ExtResource("2_1scag")
 bullet_speed = 300.0
 debuff_data = ExtResource("4_l860k")
-tower_name = "Water"
+tower_name = "Iku-Turso"
+desc = "A formidable sea monster."
 metadata/_custom_type_script = "uid://v7b6nq74b314"

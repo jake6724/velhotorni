@@ -24,5 +24,6 @@ portrait = ExtResource("5_006ys")
 bullet = ExtResource("2_ms340")
 bullet_speed = 400.0
 buff_data_list = Array[ExtResource("2_b2u2v")]([ExtResource("3_b2u2v")])
-tower_name = "Light"
+tower_name = "Unicorn"
+desc = "A horse-like creature with a magical horn."
 metadata/_custom_type_script = "uid://v7b6nq74b314"

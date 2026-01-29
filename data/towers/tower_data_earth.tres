@@ -27,5 +27,6 @@ bullet_speed = 1.0
 bullet_modifier_data = ExtResource("4_q8iot")
 debuff_data = ExtResource("4_aswkh")
 buff_data_list = Array[ExtResource("2_uckxk")]([null])
-tower_name = "Earth"
+tower_name = "Stone Spirit"
+desc = "A living rock monster."
 metadata/_custom_type_script = "uid://v7b6nq74b314"

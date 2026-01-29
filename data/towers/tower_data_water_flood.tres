@@ -22,5 +22,6 @@ transform_hint_texture = ExtResource("6_wmtpu")
 bullet = ExtResource("3_0bn2v")
 bullet_speed = 200.0
 debuff_data = ExtResource("4_0bn2v")
-tower_name = "Flood"
+tower_name = "Toad"
+desc = "A frog with magical properties."
 metadata/_custom_type_script = "uid://v7b6nq74b314"

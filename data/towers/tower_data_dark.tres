@@ -24,5 +24,6 @@ portrait = ExtResource("5_un32t")
 bullet = ExtResource("2_p4k1s")
 bullet_speed = 1250.0
 debuff_data = ExtResource("4_un32t")
-tower_name = "Dark"
+tower_name = "Warg"
+desc = "A large wolf."
 metadata/_custom_type_script = "uid://v7b6nq74b314"

@@ -22,5 +22,5 @@ transform_hint_texture = ExtResource("4_4icc0")
 bullet = ExtResource("3_5kima")
 bullet_speed = 200.0
 debuff_data = ExtResource("2_4icc0")
-tower_name = "Storm"
+tower_name = "Thunderbird"
 metadata/_custom_type_script = "uid://v7b6nq74b314"
