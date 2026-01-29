@@ -20,4 +20,4 @@ base_value = 2.0
 perk_icon = SubResource("AtlasTexture_ivjrh")
 perk_mini_icon = SubResource("AtlasTexture_xty37")
 perk_name = "Guardian"
-perk_desc = "Increase max player health"
+perk_desc = "Increase your max health by {value}"

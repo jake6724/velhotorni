@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_qw7e4")
-priority = 2
 repeat_duration = 0.5
 value = 1.0
 total_duration = 5.7

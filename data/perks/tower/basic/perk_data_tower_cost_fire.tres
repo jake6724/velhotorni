@@ -19,4 +19,5 @@ base_value = 0.1
 perk_icon = SubResource("AtlasTexture_aeyae")
 perk_mini_icon = SubResource("AtlasTexture_ak03l")
 perk_name = "Fire discount"
-perk_desc = "Decrease fire tower placement cost"
+perk_desc = "Decrease fire tower placement cost by {value}%"
+perk_value_display_mode = 1

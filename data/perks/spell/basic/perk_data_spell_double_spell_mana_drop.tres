@@ -13,6 +13,6 @@ base_value = 0.1
 perk_icon = SubResource("AtlasTexture_c1pg0")
 perk_mini_icon = SubResource("AtlasTexture_mg7yt")
 perk_name = "Infuse Power"
-perk_desc = "If an enemy killed by a spell would drop spell mana on death, {value}% chance to drop double instead"
+perk_desc = "gain a {value}% chance for enemies to drop double spell mana after being killed by a spell"
 perk_value_display_mode = 1
 metadata/_custom_type_script = "uid://ce7tlskrqn27f"

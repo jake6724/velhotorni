@@ -14,5 +14,6 @@ element = 4
 base_value = 0.1
 perk_icon = SubResource("AtlasTexture_u5jvt")
 perk_name = "Light Conjurer"
-perk_desc = "decrease light tower placement cost"
+perk_desc = "summon light familiars for {value}% less mana"
+perk_value_display_mode = 1
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

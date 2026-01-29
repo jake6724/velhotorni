@@ -5,6 +5,5 @@
 [resource]
 script = ExtResource("1_4er07")
 value = 20.0
-priority = 0
-total_duration = 0.65
+total_duration = 0.55
 metadata/_custom_type_script = "uid://cm72v2ilme5nr"

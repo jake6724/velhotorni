@@ -14,6 +14,6 @@ base_value = 0.1
 perk_icon = SubResource("AtlasTexture_tccar")
 perk_mini_icon = SubResource("AtlasTexture_6bvce")
 perk_name = "Mana lore"
-perk_desc = "Increase earth familiar summon mana drop buff power {value}%"
+perk_desc = "Increase the mana drop effect from earth familiars by {value}% "
 perk_value_display_mode = 1
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

@@ -20,4 +20,5 @@ base_value = -0.1
 perk_icon = SubResource("AtlasTexture_c7rl6")
 perk_mini_icon = SubResource("AtlasTexture_0c8hi")
 perk_name = "Clear Mind"
-perk_desc = "Decrease special cooldown time"
+perk_desc = "Decrease the cooldown of your special ability by {value}%"
+perk_value_display_mode = 1

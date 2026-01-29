@@ -21,5 +21,6 @@ legendary = true
 perk_icon = SubResource("AtlasTexture_h1aky")
 perk_mini_icon = SubResource("AtlasTexture_hwqkq")
 perk_name = "Tempest"
-perk_desc = "Familiar Knockback powers are doubled"
+perk_desc = "Double the knockback distance from wind familiars "
+perk_value_display_mode = 1
 metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

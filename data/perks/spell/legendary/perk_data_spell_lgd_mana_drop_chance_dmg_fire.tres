@@ -17,4 +17,5 @@ perk_icon = SubResource("AtlasTexture_eyd72")
 perk_mini_icon = SubResource("AtlasTexture_7m0o3")
 perk_name = "Flame Disciple"
 perk_desc = "Spell mana drops have double the chance to be fire. Increase all fire damage by {value}%"
+perk_value_display_mode = 1
 metadata/_custom_type_script = "uid://ce7tlskrqn27f"

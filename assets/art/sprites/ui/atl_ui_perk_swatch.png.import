@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b80at4w1kac12"
-path="res://.godot/imported/atl_ui_spell_icon - Copy.png-2c7e442e7c5b93129fbe5512270e1aa0.ctex"
+uid="uid://b5eciw6brjfsx"
+path="res://.godot/imported/atl_ui_perk_swatch.png-4c2893eafdee69e310f73ef84abfdfa7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sprites/ui/atl_ui_spell_icon - Copy.png"
-dest_files=["res://.godot/imported/atl_ui_spell_icon - Copy.png-2c7e442e7c5b93129fbe5512270e1aa0.ctex"]
+source_file="res://assets/art/sprites/ui/atl_ui_perk_swatch.png"
+dest_files=["res://.godot/imported/atl_ui_perk_swatch.png-4c2893eafdee69e310f73ef84abfdfa7.ctex"]
 
 [params]
 

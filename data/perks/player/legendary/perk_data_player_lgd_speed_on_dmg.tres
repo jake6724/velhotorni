@@ -25,5 +25,5 @@ legendary = true
 perk_icon = SubResource("AtlasTexture_ae37k")
 perk_mini_icon = SubResource("AtlasTexture_ytip5")
 perk_name = "Evade"
-perk_desc = "Greatly increase move speed for {value} seconds upon taking damage"
+perk_desc = "Gain a burst of move speed for {value} seconds upon taking damage"
 metadata/_custom_type_script = "uid://73abv3ia3v27"

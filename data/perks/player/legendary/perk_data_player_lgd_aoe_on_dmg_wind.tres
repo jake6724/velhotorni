@@ -19,5 +19,5 @@ legendary = true
 perk_icon = SubResource("AtlasTexture_sqjyk")
 perk_mini_icon = SubResource("AtlasTexture_lo3p8")
 perk_name = "Outburst"
-perk_desc = "After receiving damage, knockback all nearby enemies"
+perk_desc = "taking damage knocks back all nearby enemies"
 metadata/_custom_type_script = "uid://73abv3ia3v27"

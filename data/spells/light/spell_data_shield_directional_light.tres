@@ -28,6 +28,7 @@ cooldown = 0.5
 base_spell_mana_per_drop = 2
 initial_mana_amount = 4
 max_mana_amount = 4
+mana_drop_chance = 2.0
 spell_name = "Light Shield"
 popup_name = "Light Shield"
 desc = "A light shield"
