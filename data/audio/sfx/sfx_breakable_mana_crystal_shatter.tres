@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=4 format=3 uid="uid://dc5j4jlndwsvs"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_bay4h"]
+[ext_resource type="AudioStream" uid="uid://cn0wg1k6yxil1" path="res://assets/audio/mana_crystal_shatter_2_1.mp3" id="2_tnrmm"]
+[ext_resource type="AudioStream" uid="uid://b4xy424r4o330" path="res://assets/audio/mana_crystal_shatter_2_2.mp3" id="3_6oued"]
+
+[resource]
+script = ExtResource("1_bay4h")
+limit = 3
+type = 13
+sounds = Array[AudioStreamMP3]([ExtResource("2_tnrmm"), ExtResource("3_6oued")])
+select_mode = 2
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

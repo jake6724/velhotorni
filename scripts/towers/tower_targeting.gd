@@ -56,3 +56,6 @@ func get_lowest_target(in_range_targets:Array[Enemy]) -> Enemy:
 		return selected_target
 	else: 
 		return null
+
+func get_no_target() -> void:
+	return

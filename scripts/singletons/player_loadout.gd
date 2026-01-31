@@ -34,7 +34,7 @@ var spells: Dictionary[SpellData, bool] = {
 
 # TOWERS ###################################################################################################################
 # Preload started causing issues after I added the bullet_modifier stuff in TowerGlobal data (and other related scripts such as bullet) when working on perk_data_tower_bullet_modifier_coin. Likely caused a cyclical dependency
-var equipped_tower_1: TowerData = load("res://data/towers/tower_data_fire_plasma.tres")
+var equipped_tower_1: TowerData = load("res://data/towers/tower_data_arcane.tres")
 var equipped_tower_2: TowerData = load("res://data/towers/tower_data_wind_storm.tres")
 var equipped_tower_3: TowerData = load("res://data/towers/tower_data_water_ice.tres")
 var equipped_tower_4: TowerData = load("res://data/towers/tower_data_earth_crystal.tres")
@@ -62,4 +62,5 @@ var towers: Dictionary[TowerData, bool] = {
 	preload("res://data/towers/tower_data_dark.tres"): false,
 	preload("res://data/towers/tower_data_dark_curse.tres"): false,
 	preload("res://data/towers/tower_data_dark_void.tres"): false,
+	preload("res://data/towers/tower_data_arcane.tres"): true,
 }

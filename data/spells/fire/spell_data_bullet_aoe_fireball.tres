@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpellDataBulletAOE" load_steps=12 format=3 uid="uid://0ape3v2kdph1"]
+[gd_resource type="Resource" script_class="SpellDataBulletAOE" load_steps=13 format=3 uid="uid://0ape3v2kdph1"]
 
 [ext_resource type="Script" uid="uid://ckis74h51j2x4" path="res://scripts/spells/data/spell_data_bullet_aoe.gd" id="1_kxwn6"]
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_o1jq0"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cj7e86n5s2vln" path="res://assets/audio/sfx/Fire_Shot.ogg" id="3_hjvbd"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="5_g1hpo"]
 [ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="8_0wp76"]
+[ext_resource type="Resource" uid="uid://d1wwg3i5u02hf" path="res://data/audio/sfx/sfx_fireball_shoot.tres" id="8_yham7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g1hpo"]
 atlas = ExtResource("1_o1jq0")
@@ -47,5 +48,6 @@ desc = "A wand crafted from a serpent not quite alive or dead. Spews out balls o
 active_icon = SubResource("AtlasTexture_g1hpo")
 inactive_icon = SubResource("AtlasTexture_0wp76")
 staff_texture = SubResource("AtlasTexture_yham7")
+sound_effect = ExtResource("8_yham7")
 camera_shake = 1.0
 metadata/_custom_type_script = "uid://ckis74h51j2x4"

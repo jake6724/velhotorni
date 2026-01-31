@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://ria547ksda6"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=8 format=3 uid="uid://ria547ksda6"]
 
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_5kjju"]
 [ext_resource type="Texture2D" uid="uid://cttctfsnln8k7" path="res://assets/art/atlases/tower/atl_tower_fire_plasma.png" id="1_v7dg2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bw272633o5sfg" path="res://scenes/bullets/FirePlasmaBullet.tscn" id="3_aoppd"]
 [ext_resource type="Resource" uid="uid://ecvitwr7sxq8" path="res://data/debuffs/debuff_data_burn_plasma.tres" id="4_5i7bn"]
 [ext_resource type="Texture2D" uid="uid://wnb4niuilf1x" path="res://assets/art/sprites/ui/spr_ui_wind.png" id="4_aoppd"]
+[ext_resource type="Resource" uid="uid://cfbcytxi2if7e" path="res://data/audio/sfx/towers/sfx_tower_shoot_fire.tres" id="6_hpuq5"]
 
 [resource]
 script = ExtResource("2_oe7gi")
@@ -18,6 +19,7 @@ upgrade_cost_base = 100
 upgrade_cost_increment = 25
 atlas = ExtResource("1_v7dg2")
 transform_hint_texture = ExtResource("4_aoppd")
+shoot_sfx = ExtResource("6_hpuq5")
 bullet = ExtResource("3_aoppd")
 bullet_speed = 150.0
 debuff_data = ExtResource("4_5i7bn")

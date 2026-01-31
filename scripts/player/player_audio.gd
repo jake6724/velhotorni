@@ -10,7 +10,6 @@ var audio: Dictionary[String, AudioStreamOggVorbis] = {
 var sfx_tpye_footstep_default: SoundEffect.SOUND_EFFECT_TYPE = SoundEffect.SOUND_EFFECT_TYPE.FOOTSTEP_GRASS
 var sfx_tpye_footstep: SoundEffect.SOUND_EFFECT_TYPE = sfx_tpye_footstep_default:
 	set(value):
-		print("Setting sfx_tpye_footstep to: ", value)
 		sfx_tpye_footstep = value
 
 func _ready():
@@ -28,5 +27,4 @@ func play_audio_by_name(audio_name: String) -> void:
 	play()
 
 func play_footstep() -> void:
-	print("sfx_tpye_footstep: ", sfx_tpye_footstep)
 	AudioManager.create_audio(sfx_tpye_footstep)

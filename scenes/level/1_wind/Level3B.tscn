@@ -1966,6 +1966,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Node" type="Node" parent="."]
 
 [node name="GroundInfoTrigger" parent="Node" instance=ExtResource("30_wsimo")]
+visible = false
 position = Vector2(72, 104)
 footstep_type = 6
 
@@ -1977,3 +1978,5 @@ polygon = PackedVector2Array(232, -24, 296, -24, 296, -88, 328, -88, 328, -24, 4
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Node/GroundInfoTrigger"]
 polygon = PackedVector2Array(248, 40, 248, 72, 232, 72, 232, 136, 216, 136, 216, 160, 248, 160, 248, 216, 264, 216, 264, 152, 408, 152, 408, 136, 264, 136, 264, 40)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Node/GroundInfoTrigger"]

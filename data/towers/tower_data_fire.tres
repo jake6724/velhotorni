@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=8 format=3 uid="uid://dmqkrjnii0xbf"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=9 format=3 uid="uid://dmqkrjnii0xbf"]
 
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_1uxtb"]
 [ext_resource type="Texture2D" uid="uid://l4yp0bln4h3l" path="res://assets/art/atlases/tower/atl_tower_fire.png" id="1_vod4o"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://ddoy0mrmvm6u2" path="res://data/debuffs/debuff_data_burn_fire.tres" id="4_elw1t"]
 [ext_resource type="Texture2D" uid="uid://wnb4niuilf1x" path="res://assets/art/sprites/ui/spr_ui_wind.png" id="4_vod4o"]
 [ext_resource type="Texture2D" uid="uid://ducm8wc7gd0vx" path="res://assets/art/sprites/ui/spr_ui_tower_fire.png" id="5_ppxow"]
+[ext_resource type="Resource" uid="uid://cfbcytxi2if7e" path="res://data/audio/sfx/towers/sfx_tower_shoot_fire.tres" id="7_fragp"]
 
 [resource]
 script = ExtResource("1_1uxtb")
@@ -19,6 +20,7 @@ upgrade_cost_increment = 25
 atlas = ExtResource("1_vod4o")
 transform_hint_texture = ExtResource("4_vod4o")
 portrait = ExtResource("5_ppxow")
+shoot_sfx = ExtResource("7_fragp")
 bullet = ExtResource("2_vod4o")
 bullet_speed = 100.0
 debuff_data = ExtResource("4_elw1t")

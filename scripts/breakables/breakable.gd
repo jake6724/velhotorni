@@ -47,6 +47,7 @@ func start_grow() -> void:
 func on_area_entered(_intruder) -> void:
 	if not broken:
 		broken = true
+		AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BREAKABLE_MANA_CRYSTAL_SHATTER)
 		shimmer_timer.stop()
 		ap.play("hit")
 		ap.queue("corpse")

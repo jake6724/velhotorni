@@ -22,6 +22,7 @@ var tower_data: Dictionary[Constants.Element, TowerData] = {
 	Constants.Element.SUN: load("res://data/towers/tower_data_light_sun.tres"),
 	Constants.Element.CURSE: load("res://data/towers/tower_data_dark_curse.tres"),
 	Constants.Element.VOID: load("res://data/towers/tower_data_dark_void.tres"),
+	Constants.Element.ARCANE: load("res://data/towers/tower_data_arcane.tres"),
 }
 
 var tower_prices_base: Dictionary[Constants.Element, float] = {
@@ -43,6 +44,7 @@ var tower_prices_base: Dictionary[Constants.Element, float] = {
 	Constants.Element.SUN: 200,
 	Constants.Element.CURSE: 200,
 	Constants.Element.VOID: 200,
+	Constants.Element.ARCANE: 1,
 }
 
 var tower_prices: Dictionary[Constants.Element, int] = {
@@ -64,6 +66,7 @@ var tower_prices: Dictionary[Constants.Element, int] = {
 	Constants.Element.SUN: tower_prices_base[Constants.Element.SUN],
 	Constants.Element.CURSE: tower_prices_base[Constants.Element.CURSE],
 	Constants.Element.VOID: tower_prices_base[Constants.Element.VOID],
+	Constants.Element.ARCANE: tower_prices_base[Constants.Element.ARCANE],
 }
 
 var tower_upgrade_price_modifier: Dictionary[Constants.Element, float] = {
@@ -85,6 +88,7 @@ var tower_upgrade_price_modifier: Dictionary[Constants.Element, float] = {
 	Constants.Element.SUN: 1.0,
 	Constants.Element.CURSE: 1.0,
 	Constants.Element.VOID: 1.0,
+	Constants.Element.ARCANE: 1.0,
 }
 
 var tower_icon_atl: Texture2D = preload("res://assets/art/sprites/ui/atl_ui_tower_icon.png")
@@ -108,8 +112,11 @@ var tower_icon_atl_regions: Dictionary[Constants.Element, Rect2] = {
 	Constants.Element.SUN: Rect2(64,64,32,32),
 	Constants.Element.CURSE: Rect2(160,64,32,32),
 	Constants.Element.VOID: Rect2(128,64,32,32),
+	Constants.Element.ARCANE: Rect2(0,96,32,32),
 }
 
+
+# TODO: I think this is obsolete
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
  	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
 	Constants.Element.WIND: preload("res://assets/art/sprites/ui/spr_ui_tower_wind.png"),
@@ -129,6 +136,7 @@ var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.SUN: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
 	Constants.Element.CURSE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
 	Constants.Element.VOID: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
+	Constants.Element.ARCANE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
 }
 
 var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
@@ -150,6 +158,7 @@ var locked_ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
 	Constants.Element.SUN: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
 	Constants.Element.CURSE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
 	Constants.Element.VOID: preload("res://assets/art/sprites/ui/spr_ui_tower_fire_locked.png"),
+	Constants.Element.ARCANE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),
 }
 
 var tower_element_damage_perk_modifier: Dictionary[Constants.Element, float] = {
@@ -159,6 +168,7 @@ var tower_element_damage_perk_modifier: Dictionary[Constants.Element, float] = {
 	Constants.Element.EARTH: 1.0,
 	Constants.Element.LIGHT: 1.0,
 	Constants.Element.DARK: 1.0,
+	Constants.Element.ARCANE: 1.0,
 }
 
 var debuff_perk_modifier: Dictionary[Debuff.Type, float] = {

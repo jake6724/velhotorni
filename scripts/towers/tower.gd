@@ -160,7 +160,7 @@ const FLOAT_ERROR_MARGIN: float = .00001
 # TowerData resources
 var data: TowerData
 var base_data: TowerData
-var transform_data: TowerData
+# var transform_data: TowerData
 
 var target_priority: TargetPriority = TargetPriority.FIRST
 
@@ -207,7 +207,7 @@ func _ready():
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
 	base_data = get_tower_data_copy(TowerGlobalData.tower_data[element])
-	transform_data = get_tower_data_copy(TowerGlobalData.tower_data[Constants.get_next_element(element)])
+	# transform_data = get_tower_data_copy(TowerGlobalData.tower_data[Constants.get_next_element(element)])
 	data = base_data
 
 	update_current_combat_data()
@@ -248,9 +248,19 @@ func initialize(element: Constants.Element):
 	# Initialize Hurtbox
 	hurtbox.initialize(data)
 
+	child_initialize()
+
+func child_initialize() -> void:
+	pass
+
 func _physics_process(_delta):	
 	if can_attack:
 		attack()
+
+	child_physics_process(_delta)
+
+func child_physics_process(_delta) -> void:
+	pass
 
 func attack() -> void:
 	active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
@@ -259,7 +269,8 @@ func attack() -> void:
 		attack_timer.start(curr_speed)
 		flip_to_face_active_target()
 		spawn_bullet()
-		play_shot_sfx()
+		if data.shoot_sfx:
+			AudioManager.create_2d_audio_at_location(global_position, data.shoot_sfx.type)
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
@@ -272,7 +283,7 @@ func spawn_bullet() -> void:
 
 ## Transform into the next tower type in the cycle. 
 func transform() -> void:
-	data = transform_data
+	# data = transform_data
 	swap_sprite.hide()
 	cross_sprite.show()
 	can_transform = false
@@ -294,7 +305,7 @@ func revert() -> void:
 func evolve(selected_element: Constants.Element) -> void:
 	is_evolved = true
 	base_data = get_tower_data_copy(TowerGlobalData.tower_data[selected_element])
-	transform_data = get_tower_data_copy(TowerGlobalData.tower_data[Constants.get_next_element(selected_element)])
+	# transform_data = get_tower_data_copy(TowerGlobalData.tower_data[Constants.get_next_element(selected_element)])
 	data = base_data
 	reset_tower()
 
@@ -423,9 +434,6 @@ func flip_to_face_active_target():
 			sprite.flip_h = false
 		else:
 			sprite.flip_h = true
-
-func play_shot_sfx() -> void:
-	tower_audio.play_shot()
 
 func update_textures() -> void:
 	sprite.texture = data.atlas
@@ -560,7 +568,7 @@ func revert_to_checkpoint() -> void:
 func revert_to_base_evolution() -> void:
 	TowerGlobalData.tower_evolution_status[data.element] = true
 	base_data = get_tower_data_copy(TowerGlobalData.tower_data[data.base_element])
-	transform_data = get_tower_data_copy(TowerGlobalData.tower_data[Constants.get_next_element(base_data.element)])
+	# transform_data = get_tower_data_copy(TowerGlobalData.tower_data[Constants.get_next_element(base_data.element)])
 	data = base_data
 	reset_tower()
 

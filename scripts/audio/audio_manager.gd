@@ -87,5 +87,4 @@ func select_sound(sound_effect: SoundEffect) -> AudioStreamMP3:
 				selected_sound = sound_effect.sounds.pick_random()
 
 	sound_effect_previous_sound_dict[sound_effect] = selected_sound
-	# print(selected_sound)
 	return selected_sound

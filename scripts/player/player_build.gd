@@ -20,6 +20,7 @@ const TOWER_MANA_COST_PER_HEAL: int = 1
 const TOWER_HEAL_AMOUNT: int = 25
 
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
+var shield_tower_scene: PackedScene = preload("res://scenes/towers/ShieldTower.tscn")
 var preview_tower: Tower
 var preview_tower_grid_position: Vector2
 var tower_element_options: Array[Constants.Element] = []
@@ -98,7 +99,12 @@ func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: Textur
 func create_preview_tower():
 	if tower_element_options.size():
 		# Reset previous selection
-		preview_tower = tower_scene.instantiate()
+
+		if tower_element_options[tower_index] == Constants.Element.ARCANE:
+			preview_tower = shield_tower_scene.instantiate()
+		else:
+			preview_tower = tower_scene.instantiate()
+
 		tower_parent.add_child(preview_tower)
 		preview_tower.initialize(tower_element_options[tower_index])
 		preview_tower.attack_collider.set_deferred("disabled", true)
@@ -280,7 +286,7 @@ func on_tower_detect_area_entered(intruder: Area2D) -> void:
 		preview_tower.hide()
 	
 	hovered_tower = intruder.owner
-	hovered_tower.show_action_cost_info(get_action_cost(hovered_tower))	
+	hovered_tower.show_action_cost_info(get_action_cost(hovered_tower))
 	hovered_tower.can_show_range = true
 	player_build_ui.update_tower_info_panel(hovered_tower)
 	hovered_tower.upgrade_button_hint.set_hint_icon("joypad_button_2")
