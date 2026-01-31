@@ -20,6 +20,7 @@ func initialize(_data: SpellDataMelee, _spell_spawn_point: Node2D, spell_element
 
 func on_enemy_hit(enemy: Enemy) -> void:
 	deal_damage(enemy)
+	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BULLET_IMPACT_FLESH)
 
 func on_animation_finished(_anim_name) -> void:
 	queue_free()

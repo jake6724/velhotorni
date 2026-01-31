@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=6 format=3 uid="uid://cysyflfi6g8oo"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_ofjik"]
+[ext_resource type="AudioStream" uid="uid://btmyqenqheovb" path="res://assets/audio/bullet_impact_flesh_1.mp3" id="2_bupmh"]
+[ext_resource type="AudioStream" uid="uid://cg11jd7fbvnui" path="res://assets/audio/bullet_impact_flesh_2.mp3" id="3_gopm1"]
+[ext_resource type="AudioStream" uid="uid://dhxojq2mcqjaa" path="res://assets/audio/bullet_impact_flesh_3.mp3" id="4_ddd7u"]
+[ext_resource type="AudioStream" uid="uid://bmr7o4u45eu8g" path="res://assets/audio/bullet_impact_flesh_4.mp3" id="5_ovt6u"]
+
+[resource]
+script = ExtResource("1_ofjik")
+limit = 10
+type = 11
+sounds = Array[AudioStreamMP3]([ExtResource("2_bupmh"), ExtResource("3_gopm1"), ExtResource("4_ddd7u"), ExtResource("5_ovt6u")])
+volume = -5.0
+pitch_randomness = 0.1
+select_mode = 2
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

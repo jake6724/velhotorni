@@ -214,7 +214,7 @@ func die() -> void:
 	weak.hide()
 
 	# SFXPlayer.play_sfx_resource(data.explosion_sfx)
-
+	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.ENEMY_DEATH_FLESH)
 	ap.play("die")
 
 	light.visible = false

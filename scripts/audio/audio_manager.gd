@@ -15,6 +15,7 @@ var sound_effect_sequence_index_dict: Dictionary[SoundEffect, int]
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	for sound_effect: SoundEffect in sound_effects:
 		sound_effect_dict[sound_effect.type] = sound_effect
 		sound_effect_sequence_index_dict[sound_effect] = 0

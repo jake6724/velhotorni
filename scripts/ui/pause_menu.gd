@@ -24,23 +24,31 @@ func _ready():
 
 	# Resume/exit buttons
 	resume_button.pressed.connect(on_resume_button_pressed)
+	resume_button.pressed.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_SELECT_1))
 	exit_button.pressed.connect(on_exit_button_pressed)
+	exit_button.pressed.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_SELECT_1))
 
 	# Restart button
 	restart_button.pressed.connect(on_restart_button_pressed)
+	restart_button.pressed.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_SELECT_1))
 
 	# Settings
 	settings_button.pressed.connect(on_settings_button_pressed)
+	settings_button.pressed.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_SELECT_1))
 	settings_menu.back_button_pressed.connect(on_settings_menu_back_button_pressed)
 
 	# Connect highlighting
 	resume.mouse_entered.connect(highlight_ui_element.bind(resume))
+	resume.mouse_entered.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1))
 	resume.mouse_exited.connect(un_highlight_ui_element.bind(resume))
 	settings.mouse_entered.connect(highlight_ui_element.bind(settings))
+	settings.mouse_entered.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1))
 	settings.mouse_exited.connect(un_highlight_ui_element.bind(settings))
 	restart.mouse_entered.connect(highlight_ui_element.bind(restart))
+	restart.mouse_entered.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1))
 	restart.mouse_exited.connect(un_highlight_ui_element.bind(restart))
 	exit.mouse_entered.connect(highlight_ui_element.bind(exit))
+	exit.mouse_entered.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1))
 	exit.mouse_exited.connect(un_highlight_ui_element.bind(exit))
 
 func _input(_event):

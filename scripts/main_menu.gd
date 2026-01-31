@@ -21,14 +21,22 @@ var world_map: PackedScene = preload("res://scenes/level/world_map/WorldMap.tscn
 func _ready() -> void:
 	# Connect to signals
 	play_button.pressed.connect(_on_play_button_pressed)
+	exit_button.pressed.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_SELECT_1))
+	play_button.mouse_entered.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1))
 
 	settings_button.pressed.connect(on_settings_button_pressed)
+	settings_button.pressed.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_SELECT_1))
 	settings_menu.back_button_pressed.connect(on_settings_menu_back_button_pressed)
+	settings_button.mouse_entered.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1))
 
 	credits_button.pressed.connect(on_credits_button_pressed)
+	credits_button.pressed.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_SELECT_1))
 	credits_menu.back_button_pressed.connect(on_credits_menu_back_button_pressed)
+	credits_button.mouse_entered.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1))
 
 	exit_button.pressed.connect(on_exit_button_pressed)
+	exit_button.pressed.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_SELECT_1))
+	exit_button.mouse_entered.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1))
 
 	# Configure Highlighting
 	play.mouse_entered.connect(highlight_ui_element.bind(play))

@@ -22,3 +22,4 @@ perk_icon = SubResource("AtlasTexture_x0imu")
 perk_mini_icon = SubResource("AtlasTexture_2tr2h")
 perk_name = "Attune"
 perk_desc = "Increase the number of charges of your special ability by {value}"
+metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

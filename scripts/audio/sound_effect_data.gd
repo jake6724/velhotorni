@@ -12,6 +12,11 @@ enum SOUND_EFFECT_TYPE {
 	FOOTSTEP_GRASS,
 	FOOTSTEP_COBBLESTONE,
 	AMBIANCE_WIND_1,
+	UI_HOVER_1,
+	UI_SELECT_1,
+	BULLET_IMPACT_TERRAIN,
+	BULLET_IMPACT_FLESH,
+	ENEMY_DEATH_FLESH,
 }
 
 enum SelectMode {
@@ -20,7 +25,7 @@ enum SelectMode {
 	TRUE_RANDOM,
 }
 
-@export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
+@export_range(0, 20) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
 @export var type: SOUND_EFFECT_TYPE ## The unique sound effect in the [enum SOUND_EFFECT_TYPE] to associate with this effect. Each SoundEffect resource should have it's own unique [enum SOUND_EFFECT_TYPE] setting.
 @export var sounds: Array[AudioStreamMP3] ## A list of possible [AudioStreamMP3] audio resources to play for this sound effect.
 @export_range(-40, 20) var volume: float = 0 ## The volume of the [member sound_effect].
