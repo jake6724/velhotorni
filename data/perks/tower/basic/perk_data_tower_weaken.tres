@@ -1,11 +1,16 @@
-[gd_resource type="Resource" script_class="PerkDataTower" load_steps=4 format=3 uid="uid://ctmo75mxea7f"]
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://ctmo75mxea7f"]
 
 [ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_3fm7b"]
 [ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="1_rj301"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_xcorj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xcorj"]
 atlas = ExtResource("1_3fm7b")
-region = Rect2(144, 0, 48, 48)
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w032q"]
+atlas = ExtResource("2_xcorj")
+region = Rect2(96, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_rj301")
@@ -13,6 +18,7 @@ stat = 5
 debuff = 4
 base_value = 0.1
 perk_icon = SubResource("AtlasTexture_xcorj")
+perk_mini_icon = SubResource("AtlasTexture_w032q")
 perk_name = "Maim"
 perk_desc = "Increase the weaken effect from dark familiars by {value}% "
 perk_value_display_mode = 1
