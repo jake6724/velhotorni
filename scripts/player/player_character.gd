@@ -375,6 +375,8 @@ func on_hit(_direction) -> void:
 		display_hearts(player_stats.health)
 
 		player_hud.set_player_portrait(player_stats.health, player_stats.max_health) # Called here because it needs max health data that PlayerHUD does not have
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PLAYER_HIT)
+
 
 func on_pit_entered() -> void:
 	global_position += player_input.move_input.normalized() * 10 # Move the character to be fully over the pit
