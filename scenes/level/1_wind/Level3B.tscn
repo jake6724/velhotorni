@@ -1801,7 +1801,7 @@ level_name = "Level 3B"
 region = 2
 initial_gold = 1200
 waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_oxg84"), ExtResource("3_uelw8"), ExtResource("4_h8vnd"), ExtResource("6_f1ecl"), ExtResource("7_o7b5e"), ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd"), ExtResource("6_tioql")])
-max_towers = 15
+max_towers = 12
 
 [node name="AnimationLayer" type="TileMapLayer" parent="."]
 z_index = 1
