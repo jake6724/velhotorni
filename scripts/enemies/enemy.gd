@@ -357,9 +357,10 @@ func set_pos_offset() -> void:
 
 # Boons
 func on_boon_connected(new_boon: Boon) -> void:
-	new_boon.boon_triggered.connect(on_boon_triggered.bind(new_boon))
-	new_boon.boon_expired.connect(on_boon_expired.bind(new_boon))
-	boon_manager.add_boon(new_boon)
+	if is_alive:
+		new_boon.boon_triggered.connect(on_boon_triggered.bind(new_boon))
+		new_boon.boon_expired.connect(on_boon_expired.bind(new_boon))
+		boon_manager.add_boon(new_boon)
 
 func on_boon_triggered(boon: Boon) -> void:
 	match boon.type:
