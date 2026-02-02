@@ -12,13 +12,11 @@ var shield_spawn_position_modifiers: Array[Vector2] = [Vector2(30,0), Vector2(-3
 func child_initialize() -> void:
 	spawn_shields()
 	WaveManager.wave_completed.connect(spawn_shields)
-
 # func _input(event):
 # 	if Input.is_action_just_pressed("g"):
 # 		spawn_shields()
 
 func child_physics_process(delta: float) -> void:
-	pass
 	tower_shield_parent.rotation_degrees += (delta * ROTATION_SPEED_MULTIPLIER)
 	if tower_shield_parent.rotation_degrees >= 360:
 		tower_shield_parent.rotation_degrees -= 360

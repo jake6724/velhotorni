@@ -7,6 +7,7 @@ extends Area2D
 var health: float = 5.0
 
 func _ready():
+	z_index = Constants.z_index_map["tower_shield"]
 	ap.animation_finished.connect(on_animation_finished)
 
 func take_damage(damage: float) -> void:
