@@ -26,5 +26,6 @@ func initialize():
 		_: pass
 
 func play_shot() -> void:
-	stream = shot_sfx
-	play()
+	pass
+	# stream = shot_sfx
+	# play()
