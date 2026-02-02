@@ -1,31 +1,24 @@
-[gd_scene load_steps=42 format=4 uid="uid://drn4sppwachxq"]
+[gd_scene load_steps=35 format=4 uid="uid://drn4sppwachxq"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_eds8m"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_l0qwy"]
-[ext_resource type="Resource" uid="uid://c5l8cv61vo6e4" path="res://data/waves/test_waves/wave_fire_buer_test.tres" id="3_btpk1"]
 [ext_resource type="Resource" uid="uid://co7wcw64w51at" path="res://data/waves/level_3b_wave_1.tres" id="3_eds8m"]
 [ext_resource type="Resource" uid="uid://d0chydhfdxrx4" path="res://data/waves/level_3b_wave_C.tres" id="3_oxg84"]
 [ext_resource type="Resource" uid="uid://c2q8pbh5t4wd3" path="res://data/waves/level_3b_wave_A.tres" id="3_uelw8"]
 [ext_resource type="Resource" uid="uid://daxe1ewhkxmu6" path="res://data/waves/level_3b_wave_B.tres" id="4_h8vnd"]
 [ext_resource type="Resource" uid="uid://7l8w0eldkpg6" path="res://data/waves/level_3B_wave_2_1.tres" id="4_mssc7"]
-[ext_resource type="Resource" uid="uid://ckoy15mspgx2v" path="res://data/waves/test_waves/wave_fire_ukobach_test.tres" id="4_uelw8"]
-[ext_resource type="Resource" uid="uid://cqv61f3rxktf4" path="res://data/waves/test_waves/wave_water_kappa_test.tres" id="5_h8vnd"]
 [ext_resource type="Resource" uid="uid://422mucaf6pga" path="res://data/waves/level_3B_wave_3_1.tres" id="5_tioql"]
+[ext_resource type="Resource" uid="uid://bimuqqcuyyb36" path="res://data/waves/level_3b_wave_D.tres" id="6_f1ecl"]
 [ext_resource type="Resource" uid="uid://b2hk0mgojeylo" path="res://data/waves/level_3B_wave_4_1.tres" id="6_n6xay"]
-[ext_resource type="Resource" uid="uid://ym1ajxsbdj34" path="res://data/waves/test_waves/wave_water_killer_fish_test.tres" id="6_oxg84"]
 [ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/wave_one_fire.tres" id="6_tioql"]
 [ext_resource type="Resource" uid="uid://wrgqiym0m33q" path="res://data/waves/level_3B_wave_5_1.tres" id="7_6muwd"]
-[ext_resource type="Resource" uid="uid://b240hq1kqsrr8" path="res://data/waves/test_waves/wave_water_merman_test.tres" id="7_wsimo"]
+[ext_resource type="Resource" uid="uid://cuxcbyhx0k237" path="res://data/waves/level_3b_wave_E.tres" id="7_o7b5e"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="8_6muwd"]
-[ext_resource type="Resource" uid="uid://dkbp3kpbitotq" path="res://data/waves/test_waves/wave_wind_barbatos_test.tres" id="8_f1ecl"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="9_d0lic"]
 [ext_resource type="PackedScene" uid="uid://inrss5007qxm" path="res://scenes/breakables/BreakableCrystalSmall.tscn" id="9_m4axy"]
-[ext_resource type="Resource" uid="uid://d31j2ni64282h" path="res://data/waves/test_waves/wave_wind_flatwoods_test.tres" id="9_o7b5e"]
 [ext_resource type="Texture2D" uid="uid://cm5ugpqpl32g4" path="res://assets/art/sprites/environment/spr_environment_animation_atlas.png" id="9_tioql"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="10_4byri"]
 [ext_resource type="PackedScene" uid="uid://bwrw0vxyrshx2" path="res://scenes/level/EnemySpawnPortal.tscn" id="10_ce0o5"]
-[ext_resource type="Resource" uid="uid://csmeq1riqs5d8" path="res://data/waves/test_waves/wave_wind_harpy_test.tres" id="10_r64x4"]
-[ext_resource type="Resource" uid="uid://cxd8nwnyfepqw" path="res://data/waves/test_waves/wave_wind_wizard_test.tres" id="11_2wwi5"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="11_7ycjr"]
 [ext_resource type="PackedScene" uid="uid://dtbjym5jhrudw" path="res://scenes/ui/WaveInfo.tscn" id="11_eds8m"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="23_btpk1"]
@@ -1806,8 +1799,8 @@ z_as_relative = false
 script = ExtResource("1_eds8m")
 level_name = "Level 3B"
 region = 2
-initial_gold = 175
-waves = Array[ExtResource("2_l0qwy")]([ExtResource("6_tioql"), ExtResource("3_uelw8"), ExtResource("4_h8vnd"), ExtResource("3_oxg84"), ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd"), ExtResource("8_f1ecl"), ExtResource("7_wsimo"), ExtResource("5_h8vnd"), ExtResource("4_uelw8"), ExtResource("3_btpk1"), ExtResource("11_2wwi5"), ExtResource("6_oxg84"), ExtResource("9_o7b5e"), ExtResource("10_r64x4")])
+initial_gold = 1200
+waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_oxg84"), ExtResource("3_uelw8"), ExtResource("4_h8vnd"), ExtResource("6_f1ecl"), ExtResource("7_o7b5e"), ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd"), ExtResource("6_tioql")])
 max_towers = 15
 
 [node name="AnimationLayer" type="TileMapLayer" parent="."]

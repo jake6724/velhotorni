@@ -44,7 +44,7 @@ var tower_prices_base: Dictionary[Constants.Element, float] = {
 	Constants.Element.SUN: 200,
 	Constants.Element.CURSE: 200,
 	Constants.Element.VOID: 200,
-	Constants.Element.ARCANE: 1,
+	Constants.Element.ARCANE: 50,
 }
 
 var tower_prices: Dictionary[Constants.Element, int] = {

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://bqferpaeeqjvd"]
+
+[ext_resource type="Resource" uid="uid://v0rhg2s0tdar" path="res://data/enemies/ranged_enemies/enemy_data_ranged_water_kappa.tres" id="1_u24mw"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_67iia"]
+
+[resource]
+script = ExtResource("2_67iia")
+enemy_data = ExtResource("1_u24mw")
+delay = 6.0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

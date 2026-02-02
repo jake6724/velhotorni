@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://dwn5ff3643ggt"]
+
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_krhke"]
+[ext_resource type="Texture2D" uid="uid://bsm8bg8lr2ga5" path="res://assets/art/atlases/enemy/atl_enemy_dark_armor.png" id="1_pq011"]
+[ext_resource type="Resource" uid="uid://cstheffc1k5lv" path="res://data/boons/boon_data_conceal_earth_bigfoot.tres" id="2_422k0"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="2_44600"]
+
+[resource]
+script = ExtResource("2_44600")
+size = 1
+element = 5
+weak_against_element = 4
+health = 1000.0
+speed = 20.0
+damage = 3
+tower_mana_drop_chance_base = 10.0
+atlas = ExtResource("1_pq011")
+boon_data = ExtResource("2_422k0")
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

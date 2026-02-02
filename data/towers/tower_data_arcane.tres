@@ -10,7 +10,9 @@
 script = ExtResource("2_qcipg")
 element = 19
 base_element = 19
-max_health = 100.0
+max_health = 15.0
+upgrade_cost_base = 50
+upgrade_cost_increment = 25
 atlas = ExtResource("1_qcipg")
 transform_hint_texture = SubResource("AtlasTexture_3uf5b")
 tower_name = "Arcane"

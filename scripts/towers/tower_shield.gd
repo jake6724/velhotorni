@@ -4,7 +4,7 @@ extends Area2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 
-var health: float = 5.0
+var health: float = 20.0
 
 func _ready():
 	z_index = Constants.z_index_map["tower_shield"]

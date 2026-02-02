@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://cbcg8g4owjgrc" path="res://data/spawn/spawn_path_1_ghouls/spawn_wind_ghoul_1.tres" id="3_0vfno"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="3_lobw1"]
 [ext_resource type="Resource" uid="uid://c8841rfnrhpw3" path="res://data/spawn/spawn_path_1_ranged/spawn_fire_ukobach_1.tres" id="4_n7qet"]
-[ext_resource type="Resource" uid="uid://dufov0a8qj7ph" path="res://data/spawn/spawn_path_2_ranged_wind_wizard.tres" id="5_0vfno"]
+[ext_resource type="Resource" uid="uid://dufov0a8qj7ph" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_ranged_wind_wizard.tres" id="5_0vfno"]
 [ext_resource type="Resource" uid="uid://ckk4i8w477iwh" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_fire_ghoul_1.tres" id="5_qmlh5"]
 [ext_resource type="Resource" uid="uid://bq0ou24k2tfwy" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_wind_ghoul_1.tres" id="6_em352"]
 

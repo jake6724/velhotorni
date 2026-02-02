@@ -15,11 +15,11 @@
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="12_k2rd1"]
 [ext_resource type="Resource" uid="uid://n7hd4gkbyr88" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_fire_buer_10.tres" id="13_mqmto"]
 [ext_resource type="Resource" uid="uid://s74btb7dhr11" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_ranged_wind_wizard_3.tres" id="14_o7v8u"]
-[ext_resource type="Resource" uid="uid://cqomox5gh7mi2" path="res://data/spawn/spawn_path_2_ranged_wind_wizard_3.tres" id="15_0ivsi"]
+[ext_resource type="Resource" uid="uid://cqomox5gh7mi2" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_ranged_wind_wizard_3.tres" id="15_o7v8u"]
 
 [resource]
 script = ExtResource("12_k2rd1")
-data = Array[ExtResource("1_w315t")]([ExtResource("2_yp6x2"), ExtResource("3_pc0x2"), ExtResource("4_w315t"), ExtResource("5_vivqy"), ExtResource("6_ahf6k"), ExtResource("7_mqmto"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("3_ahf6k"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("3_ahf6k"), ExtResource("2_vivqy"), ExtResource("10_ahf6k"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("8_4q4av"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("8_4q4av"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("13_mqmto"), ExtResource("4_w315t"), ExtResource("4_w315t"), ExtResource("5_vivqy"), ExtResource("5_vivqy"), ExtResource("6_ahf6k"), ExtResource("6_ahf6k"), ExtResource("7_mqmto"), ExtResource("7_mqmto"), ExtResource("7_mqmto"), ExtResource("14_o7v8u"), ExtResource("14_o7v8u"), ExtResource("15_0ivsi"), ExtResource("15_0ivsi")])
-reward = 100.0
+data = Array[ExtResource("1_w315t")]([ExtResource("2_yp6x2"), ExtResource("3_pc0x2"), ExtResource("4_w315t"), ExtResource("5_vivqy"), ExtResource("6_ahf6k"), ExtResource("7_mqmto"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("3_ahf6k"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("2_vivqy"), ExtResource("3_ahf6k"), ExtResource("2_vivqy"), ExtResource("10_ahf6k"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("8_4q4av"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("8_4q4av"), ExtResource("7_0opwh"), ExtResource("7_0opwh"), ExtResource("13_mqmto"), ExtResource("4_w315t"), ExtResource("4_w315t"), ExtResource("5_vivqy"), ExtResource("5_vivqy"), ExtResource("6_ahf6k"), ExtResource("6_ahf6k"), ExtResource("7_mqmto"), ExtResource("7_mqmto"), ExtResource("7_mqmto"), ExtResource("14_o7v8u"), ExtResource("14_o7v8u"), ExtResource("15_o7v8u"), ExtResource("15_o7v8u")])
+reward = 150.0
 token_reward = 100
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
