@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_hm1rf"]
 [ext_resource type="Resource" uid="uid://b6mmygvf76vlc" path="res://data/spawn/spawn_light_kuse_1.tres" id="2_a5avg"]
 [ext_resource type="Resource" uid="uid://cqh4w6poaaob6" path="res://data/spawn/spawn_water_vepar_1.tres" id="3_ajs5k"]
-[ext_resource type="Resource" uid="uid://25em23upunww" path="res://data/spawn/spawn_dark_armor_1.tres" id="4_quah4"]
+[ext_resource type="Resource" uid="uid://25em23upunww" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_dark_armor_1.tres" id="4_quah4"]
 [ext_resource type="Resource" uid="uid://nbhhsakm1cd8" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_10.tres" id="5_4fifi"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="5_w67vb"]
 [ext_resource type="Resource" uid="uid://daypgtvog0225" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_half.tres" id="6_d8bnx"]

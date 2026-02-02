@@ -8,11 +8,11 @@
 [ext_resource type="Resource" uid="uid://cq22ja1a4sp6r" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_2.tres" id="6_d03i6"]
 [ext_resource type="Resource" uid="uid://cn6dypb484hsx" path="res://data/spawn/spawns_flying/spawn_flying_wind_imp_half_3.tres" id="7_iefnd"]
 [ext_resource type="Resource" uid="uid://bq0ou24k2tfwy" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_wind_ghoul_1.tres" id="8_vypha"]
-[ext_resource type="Resource" uid="uid://c1hg1v78yvaw3" path="res://data/spawn/spawn_path_2_water_kappa_1.tres" id="9_fddjc"]
+[ext_resource type="Resource" uid="uid://c1hg1v78yvaw3" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_water_kappa_1.tres" id="9_fddjc"]
 [ext_resource type="Resource" uid="uid://fhwurvcdissg" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_1.tres" id="10_t04ha"]
 [ext_resource type="Resource" uid="uid://ccsvnn47vtltj" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_wind_barbatos.tres" id="11_kp3ex"]
 [ext_resource type="Resource" uid="uid://b668sucylpsqa" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_wind_barbatos.tres" id="12_khhcv"]
-[ext_resource type="Resource" uid="uid://fikb252yks35" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_2_water_ghoul_1.tres" id="13_b1nfv"]
+[ext_resource type="Resource" uid="uid://fikb252yks35" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_water_ghoul_1.tres" id="13_b1nfv"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="14_b0vgc"]
 
 [resource]

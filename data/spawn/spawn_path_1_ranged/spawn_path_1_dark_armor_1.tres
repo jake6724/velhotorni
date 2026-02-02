@@ -1,10 +1,9 @@
 [gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://25em23upunww"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_ew4j7"]
-[ext_resource type="Resource" uid="uid://cmds30uxri0o0" path="res://data/enemies/enemy_data_dark_armor.tres" id="1_td56f"]
+[ext_resource type="Resource" uid="uid://dwn5ff3643ggt" path="res://data/enemies/ghouls/enemy_data_dark_armor.tres" id="1_fogyr"]
 
 [resource]
 script = ExtResource("1_ew4j7")
-enemy_data = ExtResource("1_td56f")
-delay = 1.0
+enemy_data = ExtResource("1_fogyr")
 metadata/_custom_type_script = "uid://drj0bkkfpdi50"

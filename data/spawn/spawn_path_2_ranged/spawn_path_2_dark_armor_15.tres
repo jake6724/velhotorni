@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://dyhca3braprwp"]
+
+[ext_resource type="Resource" uid="uid://dwn5ff3643ggt" path="res://data/enemies/ghouls/enemy_data_dark_armor.tres" id="1_sayk0"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_t6cnh"]
+
+[resource]
+script = ExtResource("2_t6cnh")
+enemy_data = ExtResource("1_sayk0")
+delay = 15.0
+path_index = 1
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

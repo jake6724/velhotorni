@@ -4,7 +4,7 @@ extends Area2D
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 
-var health: float = 5.0
+var health: float = 20.0
 
 func _ready():
 	ap.animation_finished.connect(on_animation_finished)

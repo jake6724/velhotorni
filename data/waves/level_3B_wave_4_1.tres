@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://d4nwi0i61gyxx" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_fire_buer.tres" id="7_6cw18"]
 [ext_resource type="Resource" uid="uid://c0xx0v05o7wj5" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_water_killerfish_1.tres" id="8_6cw18"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="8_ks0kw"]
-[ext_resource type="Resource" uid="uid://cmxc5jg8u8fdh" path="res://data/spawn/spawn_path_2_water_killerfish_1.tres" id="9_lg10v"]
+[ext_resource type="Resource" uid="uid://cmxc5jg8u8fdh" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_water_killerfish_1.tres" id="9_lg10v"]
 
 [resource]
 script = ExtResource("8_ks0kw")
