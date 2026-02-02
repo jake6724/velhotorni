@@ -6,4 +6,5 @@
 [resource]
 script = ExtResource("2_yo74g")
 enemy_data = ExtResource("1_uec8a")
+path_index = 1
 metadata/_custom_type_script = "uid://drj0bkkfpdi50"
