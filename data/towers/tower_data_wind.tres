@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=8 format=3 uid="uid://dcfain1omg1p0"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=9 format=3 uid="uid://dcfain1omg1p0"]
 
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_fairw"]
 [ext_resource type="Texture2D" uid="uid://5nl3odlo5q6d" path="res://assets/art/atlases/tower/atl_tower_wind.png" id="1_jiedl"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://fem5s7qur7b8" path="res://data/debuffs/debuff_data_knockback_wind.tres" id="3_3hdua"]
 [ext_resource type="Texture2D" uid="uid://bt1v03t0h2bp6" path="res://assets/art/sprites/ui/spr_ui_water.png" id="3_g6jon"]
 [ext_resource type="Texture2D" uid="uid://cmp3lb2x5ig6v" path="res://assets/art/sprites/ui/spr_ui_tower_wind.png" id="5_jiedl"]
+[ext_resource type="Resource" uid="uid://c3q35cide34n4" path="res://data/audio/sfx/towers/sfx_tower_shoot_wind.tres" id="7_cwwly"]
 
 [resource]
 script = ExtResource("1_fairw")
@@ -21,6 +22,7 @@ upgrade_cost_increment = 25
 atlas = ExtResource("1_jiedl")
 transform_hint_texture = ExtResource("3_g6jon")
 portrait = ExtResource("5_jiedl")
+shoot_sfx = ExtResource("7_cwwly")
 bullet = ExtResource("2_wsq5c")
 bullet_speed = 200.0
 debuff_data = ExtResource("3_3hdua")

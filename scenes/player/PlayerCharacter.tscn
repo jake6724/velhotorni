@@ -1791,3 +1791,6 @@ collision_mask = 0
 [node name="PlayerGroundBeaconCollider" type="CollisionShape2D" parent="PlayerGroundBeacon"]
 position = Vector2(1, 8)
 shape = SubResource("RectangleShape2D_ahw3v")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true

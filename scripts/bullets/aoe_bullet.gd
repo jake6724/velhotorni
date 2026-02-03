@@ -25,6 +25,7 @@ func explode() -> void:
 	is_active = false
 	primary_collider.set_deferred("disabled", true)
 	aoe_collider.set_deferred("disabled", false)
+	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_SHOOT_EXPLOSION_FIRE)
 	ap.play("aoe_hit")
 
 func on_aoe_area_entered(intruder):

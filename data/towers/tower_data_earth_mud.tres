@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://panxipe3uuw1"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=8 format=3 uid="uid://panxipe3uuw1"]
 
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_c6u32"]
 [ext_resource type="Texture2D" uid="uid://dy44hd56xu17i" path="res://assets/art/atlases/tower/atl_tower_earth_mud.png" id="1_gppaj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cxk71q5dnca7t" path="res://scenes/bullets/EarthMudBullet.tscn" id="3_t3qv7"]
 [ext_resource type="Resource" uid="uid://b5jxsh2bi41ep" path="res://data/debuffs/debuff_data_slow_mud.tres" id="4_58s0b"]
 [ext_resource type="Texture2D" uid="uid://bpvgv3s34e6g5" path="res://assets/art/sprites/ui/spr_ui_light.png" id="6_61kak"]
+[ext_resource type="Resource" uid="uid://cvt60hmbpymqd" path="res://data/audio/sfx/towers/sfx_tower_shoot_earth.tres" id="6_t3qv7"]
 
 [resource]
 script = ExtResource("2_lvkv5")
@@ -19,6 +20,7 @@ upgrade_cost_base = 75
 upgrade_cost_increment = 25
 atlas = ExtResource("1_gppaj")
 transform_hint_texture = ExtResource("6_61kak")
+shoot_sfx = ExtResource("6_t3qv7")
 bullet = ExtResource("3_t3qv7")
 debuff_data = ExtResource("4_58s0b")
 tower_name = "Mudman"

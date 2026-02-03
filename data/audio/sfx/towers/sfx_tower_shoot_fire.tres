@@ -5,8 +5,10 @@
 
 [resource]
 script = ExtResource("1_egwd0")
-limit = 10
+limit = 8
 type = 15
 sounds = Array[AudioStreamMP3]([ExtResource("2_8c2n4")])
+volume = -10.0
 pitch_randomness = 0.1
+select_mode = 2
 metadata/_custom_type_script = "uid://cg5mrsass8jcd"

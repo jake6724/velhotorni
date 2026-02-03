@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=9 format=3 uid="uid://dscca5hkneedb"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=10 format=3 uid="uid://dscca5hkneedb"]
 
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_7skyr"]
 [ext_resource type="Texture2D" uid="uid://chaltceraasei" path="res://assets/art/atlases/tower/atl_tower_earth.png" id="1_w305r"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://du87ok63ed8e5" path="res://data/bullet_modifiers/bullet_modifier_coin_crystal.tres" id="4_q8iot"]
 [ext_resource type="Texture2D" uid="uid://bpvgv3s34e6g5" path="res://assets/art/sprites/ui/spr_ui_light.png" id="5_aswkh"]
 [ext_resource type="Texture2D" uid="uid://rvf7vwl6ny54" path="res://assets/art/sprites/ui/spr_ui_tower_earth.png" id="5_o6fw3"]
+[ext_resource type="Resource" uid="uid://cvt60hmbpymqd" path="res://data/audio/sfx/towers/sfx_tower_shoot_earth.tres" id="8_sgqhp"]
 
 [resource]
 script = ExtResource("1_7skyr")
@@ -22,6 +23,7 @@ upgrade_cost_increment = 25
 atlas = ExtResource("1_w305r")
 transform_hint_texture = ExtResource("5_aswkh")
 portrait = ExtResource("5_o6fw3")
+shoot_sfx = ExtResource("8_sgqhp")
 bullet = ExtResource("3_v7v5i")
 bullet_speed = 1.0
 bullet_modifier_data = ExtResource("4_q8iot")

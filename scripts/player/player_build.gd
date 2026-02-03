@@ -165,6 +165,7 @@ func place_tower() -> void:
 		preview_tower.hurtbox_collider.set_deferred("disabled", false)
 		preview_tower.healthbar.visible = true	
 		preview_tower.ap.play("summon")
+		AudioManager.create_2d_audio_at_location(WorldGrid.grid_to_world(tower_placement_info[1]), SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON)
 
 		# Update WorldGrid
 		WorldGrid.data[tower_placement_info[1]] = false
@@ -267,6 +268,7 @@ func get_action_cost(_hovered_tower) -> int:
 	else:
 		return -1
 
+## Returns is_placement_positon_valid: bool, tower_grid_position: Vector2, cost: int
 func get_tower_placement_info() -> Array:
 	if preview_tower:
 		# Check tower count

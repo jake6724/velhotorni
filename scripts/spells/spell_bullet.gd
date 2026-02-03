@@ -43,7 +43,7 @@ func on_area_entered(enemy: Enemy) -> void:
 	if active:
 		deal_damage(enemy)
 		pierce_count += 1
-		AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BULLET_IMPACT_FLESH)
+		# AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BULLET_IMPACT_FLESH)
 
 	if pierce_count >= data.pierce:
 		active = false

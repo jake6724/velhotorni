@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="velhotorni"
-run/main_scene="uid://421d4m7r6dw3"
+run/main_scene="uid://yaumfsyoni78"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 run/max_fps=60
 boot_splash/bg_color=Color(0.0941176, 0.0941176, 0.25098, 1)
@@ -49,7 +49,6 @@ gdscript/warnings/narrowing_conversion=0
 
 window/size/viewport_width=512
 window/size/viewport_height=288
-window/size/mode=3
 window/size/initial_position_type=2
 window/size/window_width_override=1440
 window/size/window_height_override=810

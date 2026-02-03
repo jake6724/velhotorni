@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://m2fawq1du3fb"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=8 format=3 uid="uid://m2fawq1du3fb"]
 
 [ext_resource type="Texture2D" uid="uid://dlof8lvxe6bit" path="res://assets/art/atlases/tower/atl_tower_water_flood.png" id="1_0bn2v"]
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_fefpo"]
 [ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="2_n376y"]
 [ext_resource type="PackedScene" uid="uid://xie3flu7b1ur" path="res://scenes/bullets/WaterFloodBullet.tscn" id="3_0bn2v"]
 [ext_resource type="Resource" uid="uid://vdatkjkttkwh" path="res://data/debuffs/debuff_data_slow_flood.tres" id="4_0bn2v"]
+[ext_resource type="Resource" uid="uid://dktlf0b6xjkiu" path="res://data/audio/sfx/towers/sfx_tower_shoot_water.tres" id="6_pnbim"]
 [ext_resource type="Texture2D" uid="uid://cdhft8awohll1" path="res://assets/art/sprites/ui/spr_ui_earth.png" id="6_wmtpu"]
 
 [resource]
@@ -19,6 +20,7 @@ upgrade_cost_base = 100
 upgrade_cost_increment = 25
 atlas = ExtResource("1_0bn2v")
 transform_hint_texture = ExtResource("6_wmtpu")
+shoot_sfx = ExtResource("6_pnbim")
 bullet = ExtResource("3_0bn2v")
 bullet_speed = 200.0
 debuff_data = ExtResource("4_0bn2v")

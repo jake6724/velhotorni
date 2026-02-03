@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ddh2ackt4kohs"]
+[gd_scene load_steps=26 format=3 uid="uid://ddh2ackt4kohs"]
 
 [ext_resource type="Script" uid="uid://do262wkjorqq" path="res://scripts/audio/audio_manager.gd" id="1_r1srg"]
 [ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="2_tv3b6"]
@@ -19,7 +19,13 @@
 [ext_resource type="Resource" uid="uid://d1wwg3i5u02hf" path="res://data/audio/sfx/sfx_fireball_shoot.tres" id="17_exrf6"]
 [ext_resource type="Resource" uid="uid://cfbcytxi2if7e" path="res://data/audio/sfx/towers/sfx_tower_shoot_fire.tres" id="18_hhuud"]
 [ext_resource type="Resource" uid="uid://dy1fm4obvvjve" path="res://data/audio/sfx/sfx_player_hit.tres" id="19_p71v7"]
+[ext_resource type="Resource" uid="uid://dgfboeoyvr5ne" path="res://data/audio/sfx/towers/sfx_tower_summon.tres" id="20_digtg"]
+[ext_resource type="Resource" uid="uid://dsoyidyl8ai8v" path="res://data/audio/sfx/towers/sfx_tower_shoot_explosion_fire.tres" id="21_ymfr7"]
+[ext_resource type="Resource" uid="uid://c3q35cide34n4" path="res://data/audio/sfx/towers/sfx_tower_shoot_wind.tres" id="22_h2t8c"]
+[ext_resource type="Resource" uid="uid://dktlf0b6xjkiu" path="res://data/audio/sfx/towers/sfx_tower_shoot_water.tres" id="23_fxdbt"]
+[ext_resource type="Resource" uid="uid://cw0rue1g84hdo" path="res://data/audio/sfx/towers/sfx_tower_hit.tres" id="24_qfswg"]
+[ext_resource type="Resource" uid="uid://cvt60hmbpymqd" path="res://data/audio/sfx/towers/sfx_tower_shoot_earth.tres" id="25_wupwt"]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_r1srg")
-sound_effects = Array[ExtResource("2_tv3b6")]([ExtResource("3_yg0am"), ExtResource("4_yg0am"), ExtResource("5_mbly1"), ExtResource("6_qw11x"), ExtResource("7_isk6y"), ExtResource("8_2hebn"), ExtResource("9_ns8hx"), ExtResource("10_b86ia"), ExtResource("11_sly4s"), ExtResource("12_nxkdp"), ExtResource("13_r174t"), ExtResource("14_g1n41"), ExtResource("15_7speq"), ExtResource("16_ah1rr"), ExtResource("17_exrf6"), ExtResource("18_hhuud"), ExtResource("19_p71v7")])
+sound_effects = Array[ExtResource("2_tv3b6")]([ExtResource("3_yg0am"), ExtResource("4_yg0am"), ExtResource("5_mbly1"), ExtResource("6_qw11x"), ExtResource("7_isk6y"), ExtResource("8_2hebn"), ExtResource("9_ns8hx"), ExtResource("10_b86ia"), ExtResource("11_sly4s"), ExtResource("12_nxkdp"), ExtResource("13_r174t"), ExtResource("14_g1n41"), ExtResource("15_7speq"), ExtResource("16_ah1rr"), ExtResource("17_exrf6"), ExtResource("18_hhuud"), ExtResource("19_p71v7"), ExtResource("20_digtg"), ExtResource("21_ymfr7"), ExtResource("22_h2t8c"), ExtResource("23_fxdbt"), ExtResource("24_qfswg"), ExtResource("25_wupwt")])

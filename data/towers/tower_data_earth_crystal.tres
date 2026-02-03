@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://bpscmagxsa5h0"]
+[gd_resource type="Resource" script_class="TowerData" load_steps=8 format=3 uid="uid://bpscmagxsa5h0"]
 
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_1m4k5"]
 [ext_resource type="Texture2D" uid="uid://cia3n3yo10tsr" path="res://assets/art/atlases/tower/atl_tower_earth_crystal.png" id="1_h0ijk"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://lq856dmc4h4" path="res://scenes/bullets/EarthCrystalBullet.tscn" id="3_xiexo"]
 [ext_resource type="Texture2D" uid="uid://bpvgv3s34e6g5" path="res://assets/art/sprites/ui/spr_ui_light.png" id="4_cjikw"]
 [ext_resource type="Resource" uid="uid://du87ok63ed8e5" path="res://data/bullet_modifiers/bullet_modifier_coin_crystal.tres" id="4_vi1tn"]
+[ext_resource type="Resource" uid="uid://cvt60hmbpymqd" path="res://data/audio/sfx/towers/sfx_tower_shoot_earth.tres" id="6_3brrk"]
 
 [resource]
 script = ExtResource("2_h0ijk")
@@ -19,6 +20,7 @@ upgrade_cost_base = 75
 upgrade_cost_increment = 25
 atlas = ExtResource("1_h0ijk")
 transform_hint_texture = ExtResource("4_cjikw")
+shoot_sfx = ExtResource("6_3brrk")
 bullet = ExtResource("3_xiexo")
 bullet_speed = 150.0
 bullet_modifier_data = ExtResource("4_vi1tn")
