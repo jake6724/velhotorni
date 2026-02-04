@@ -7,8 +7,8 @@ var countdown: float = 20 # in seconds
 var destination: Vector2 = Vector2.ZERO
 var destination_direction: Vector2 = Vector2.ZERO
 var destination_reached: bool = false
-var speed: float = 150
 var float_speed: float = 20
+var wave_complete_collect: bool
 
 var blink_start: float = 4 # second that blink starts
 var blink_rate: float = .25

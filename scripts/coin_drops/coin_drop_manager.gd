@@ -3,7 +3,10 @@ extends Node2D
 
 ## Manages all of the inidividual coin drops. Does not handle collection, see coin_collector.gd
 
+var player: PlayerCharacter # Used to move coins to player on wave completion
+
 var coin_drop_scene: PackedScene = preload("res://scenes/enemies/CoinDrop.tscn")
+var COIN_MOVE_SPEED: float = 150
 const JITTER: float = 7
 const REWARD_JITTER: float = 10
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -68,6 +71,10 @@ func spawn_reward(_global_pos, drop_chance) -> void:
 		await get_tree().create_timer(.01).timeout
 		if drop_chance > 0.0:
 			spawn_reward(_global_pos, drop_chance)
+		else:
+			gather_remaining_coins()
+	else:
+		gather_remaining_coins()
 
 func decrement_reward_remaining() -> void:
 	reward_remaining -= 1
@@ -78,8 +85,12 @@ func _physics_process(delta):
 	for child in get_children():
 		var coin: CoinDrop = child as CoinDrop
 		if coin: 
+			if coin.wave_complete_collect:
+				var direction = coin.global_position.direction_to(player.global_position)
+				coin.global_position += direction * COIN_MOVE_SPEED * delta
+
 			if not coin.destination_reached:
-				coin.global_position += coin.destination_direction * coin.speed * delta
+				coin.global_position += coin.destination_direction * COIN_MOVE_SPEED * delta
 				#print(coin.global_position.distance_to(coin.destination))
 				if coin.global_position.distance_to(coin.destination) <= 1 or coin.global_position.distance_to(coin.destination) > 15:
 					coin.destination_reached = true
@@ -107,3 +118,10 @@ func on_wave_failed() -> void:
 
 func on_spawn_tower_mana_as_spell_mana_chance_incremented(_increment: float) -> void:
 	spawn_tower_mana_as_spell_mana_chance += _increment
+
+func gather_remaining_coins() -> void:
+	print("get_children(): ", get_children())
+	for coin: CoinDrop in get_children():
+		print("Setting coin.wave_complete_collect = true")
+		coin.destination_reached = true
+		coin.wave_complete_collect = true

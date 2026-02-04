@@ -9,7 +9,6 @@ func perk_action() -> void:
 	pass
 
 func set_rarity_value() -> void:
-	print("Perk set_rarity_value()")
 	match data.rarity:
 		PerkData.Rarity.ONE: pass
 		PerkData.Rarity.TWO: 
