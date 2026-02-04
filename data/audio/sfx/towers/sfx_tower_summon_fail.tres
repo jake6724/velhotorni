@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://dp325yxq488td"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_oqoln"]
+[ext_resource type="AudioStream" uid="uid://g5icb7of4ui3" path="res://assets/audio/tower_summon_fail.mp3" id="2_jtdv7"]
+
+[resource]
+script = ExtResource("1_oqoln")
+limit = 1
+type = 23
+sounds = Array[AudioStreamMP3]([ExtResource("2_jtdv7")])
+volume = -7.0
+pitch_randomness = 0.1
+select_mode = 2
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

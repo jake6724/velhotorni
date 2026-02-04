@@ -136,6 +136,7 @@ func get_evolve_element_2(_element: Element) -> Element:
 var z_index_map: Dictionary[String, int] = {
 	"bg": -4096,
 	"melee_spell": -4094,
+	"enemy_corpse": -3500,
 	"tower_shield": -3000,
 	"terrain_obstacle": -2000, # Not actually used, but this is the value painted on the tileset. used so sword always goes behind these
 	"base": -1001,

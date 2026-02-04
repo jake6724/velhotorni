@@ -21,9 +21,7 @@ func die() -> void:
 	ap.play("die")
 
 func on_animation_finished(_anim_name: String) -> void:
-	print("Tower shield animation finished: ", _anim_name)
 	if _anim_name == "die":
-		print("QF ing")
 		queue_free()
 	
 	if _anim_name == "hit":

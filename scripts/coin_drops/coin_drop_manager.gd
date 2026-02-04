@@ -120,8 +120,6 @@ func on_spawn_tower_mana_as_spell_mana_chance_incremented(_increment: float) -> 
 	spawn_tower_mana_as_spell_mana_chance += _increment
 
 func gather_remaining_coins() -> void:
-	print("get_children(): ", get_children())
 	for coin: CoinDrop in get_children():
-		print("Setting coin.wave_complete_collect = true")
 		coin.destination_reached = true
 		coin.wave_complete_collect = true

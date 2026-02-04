@@ -61,7 +61,12 @@ var health: float:
 	set(value):
 		health = value
 		healthbar.value = (health / max_health) * 100
+		tower_health_updated.emit(self)
+
 var can_heal = false # Starts at full health so can't heal
+var heal_cost: float: # Set by player build, using the tower a container to pass along the info
+	set(value):
+		heal_cost = value
 
 var curr_damage: float
 var curr_speed: float
@@ -91,7 +96,11 @@ var level_cost_increment: int
 var level_upgrade_price_base: int
 var level_upgrade_price: int
 var level: int = 0
-var sell_price: int # Set in initialize
+var sell_price: int: # Set in initialize
+	set(_value):
+		sell_price = _value
+		sell_price_updated.emit(self)
+
 var damage_level: int = 0:
 	set(value):
 		damage_level = value
@@ -138,6 +147,8 @@ var is_evolve_checkpointed: bool = false
 
 var checkpoint_level_upgrade_price: int
 
+var sell_price_locked_in: bool = false
+
 const DAMAGE_MODIFIER: float = 0.5
 const RANGE_MODIFIER: float = 0.2
 const SPEED_MODIFIER: float = 0.3334
@@ -177,6 +188,8 @@ signal tower_clicked
 signal tower_hovered
 signal tower_unhovered
 signal died
+signal sell_price_updated
+signal tower_health_updated
 
 func _ready():
 	# Configure Area2D
@@ -240,7 +253,7 @@ func initialize(element: Constants.Element):
 
 	# Configure prices and price UI
 	update_upgrade_info()
-	sell_price = int(TowerGlobalData.tower_prices[data.element] / 2)
+	sell_price = int(TowerGlobalData.tower_prices[data.element])
 
 	attack_timer.start(curr_speed)
 	ap.play("idle")

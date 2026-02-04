@@ -105,6 +105,8 @@ func _ready():
 
 	set_pos_offset()
 
+	z_as_relative = false
+
 	# Configure DebuffManager
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
 	debuff_manager.knockback_multiplier = data.knockback_multiplier
@@ -212,6 +214,7 @@ func die() -> void:
 	health_bar.hide()
 	shield.hide()
 	weak.hide()
+	z_index = Constants.z_index_map["enemy_corpse"]
 
 	# SFXPlayer.play_sfx_resource(data.explosion_sfx)
 	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.ENEMY_DEATH_FLESH)

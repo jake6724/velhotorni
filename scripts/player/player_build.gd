@@ -16,8 +16,11 @@ var tower_detect_area: Area2D # Set by PlayerCharacter
 var hovered_tower: Tower
 
 const TOWER_PLACEMENT_RANGE: int = 16
-const TOWER_MANA_COST_PER_HEAL: int = 1
+# const TOWER_MANA_COST_PER_HEAL: int = 1
 const TOWER_HEAL_AMOUNT: int = 25
+const TOWER_SHAKE_DURATION: float = .01
+const TOWER_SHAKE_LOOPS: int = 3
+const TOWER_SHAKE_DISTANCE: float = 1
 
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var shield_tower_scene: PackedScene = preload("res://scenes/towers/ShieldTower.tscn")
@@ -46,6 +49,7 @@ signal tower_count_updated
 
 func _ready():
 	add_child(tower_parent)
+	WaveManager.wave_started.connect(on_wave_started)
 
 func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _tower_detect_area: Area2D, player_mana: PlayerMana) -> void:
 	player_build_ui = _player_build_ui
@@ -119,6 +123,8 @@ func create_preview_tower():
 
 		preview_tower.tower_action_cost_label.text = str(TowerGlobalData.tower_prices[preview_tower.data.element])
 		preview_tower.died.connect(on_tower_died)
+		preview_tower.sell_price_updated.connect(on_tower_stat_updated)
+		preview_tower.tower_health_updated.connect(on_tower_stat_updated)
 
 		if not hovered_tower:
 			player_build_ui.update_tower_info_panel(preview_tower)
@@ -176,8 +182,15 @@ func place_tower() -> void:
 		tower_count_updated.emit(active_towers.size())
 		tower_mana_spent.emit(tower_placement_info[2])
 
+		# If wave is running tower sell prices are immeadiately locked
+		if WaveManager.wave_active:
+			lock_in_tower_sell_prices()
+
 		# Get a new preview tower
 		create_preview_tower()
+	else:
+		shake_preview_tower()
+		AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON_FAIL)
 
 func switch_tower_action(player_input: PlayerInput) -> void:
 	tower_action_options.append(tower_action_options[0]) # Move front action to back 
@@ -198,8 +211,8 @@ func switch_tower_action(player_input: PlayerInput) -> void:
 
 func heal_tower() -> void:
 	if hovered_tower and hovered_tower.can_heal:
-		tower_mana_spent.emit(TOWER_MANA_COST_PER_HEAL)
-		hovered_tower.heal(TOWER_HEAL_AMOUNT)
+		tower_mana_spent.emit(hovered_tower.heal_cost)
+		hovered_tower.heal(hovered_tower.max_health)
 
 func upgrade_tower() -> void:
 	if hovered_tower:
@@ -261,7 +274,9 @@ func get_action_cost(_hovered_tower) -> int:
 	if _hovered_tower:
 		var cost: int = 0
 		match tower_action:
-			TowerAction.HEAL: cost = TOWER_MANA_COST_PER_HEAL
+			TowerAction.HEAL: 
+				cost = max(((_hovered_tower.max_health - _hovered_tower.health) / TOWER_HEAL_AMOUNT), 1)
+				_hovered_tower.heal_cost = cost
 			TowerAction.UPGRADE: cost = _hovered_tower.level_upgrade_price
 			TowerAction.SELL: cost = -_hovered_tower.sell_price
 		return cost
@@ -390,3 +405,30 @@ func get_active_debuff_types() -> Array[Debuff.Type]:
 		if tower_data.debuff_data:
 			res.append(tower_data.debuff_data.type)
 	return res
+
+func shake_preview_tower() -> void:
+	if preview_tower:
+		var tween: Tween = get_tree().create_tween()
+		tween.set_loops(TOWER_SHAKE_LOOPS)
+		var target = preview_tower.sprite.position.x + TOWER_SHAKE_DISTANCE
+		tween.tween_property(preview_tower.sprite, "position:x", target, TOWER_SHAKE_DURATION)
+		tween.tween_interval(TOWER_SHAKE_DURATION)
+		var return_target = preview_tower.sprite.position.x - TOWER_SHAKE_DISTANCE
+		tween.tween_property(preview_tower.sprite, "position:x", return_target, TOWER_SHAKE_DURATION)
+		tween.tween_interval(TOWER_SHAKE_DURATION)
+		tween.tween_property(preview_tower.sprite, "position:x", 0, TOWER_SHAKE_DURATION)
+		tween.tween_interval(TOWER_SHAKE_DURATION)
+
+func on_wave_started() -> void:
+	lock_in_tower_sell_prices()
+
+func lock_in_tower_sell_prices() -> void:
+	for child in tower_parent.get_children():
+		var tower: Tower = child as Tower
+		if tower and not tower.sell_price_locked_in:
+			tower.sell_price_locked_in = true
+			tower.sell_price = tower.sell_price / 2
+
+func on_tower_stat_updated(tower: Tower) -> void:
+	if hovered_tower and hovered_tower == tower:
+		configure_hovered_tower_for_action(hovered_tower)

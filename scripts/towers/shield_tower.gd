@@ -28,7 +28,6 @@ func spawn_shields() -> void:
 
 		if i == (tower_shield_parent.get_child_count() - 1):
 			await tower_shield.tree_exited
-			print("Child exited")
 
 	for i in range(NUM_OF_SHIELDS):
 		var new_shield: TowerShield = TOWER_SHIELD_SCENE.instantiate()
@@ -37,12 +36,10 @@ func spawn_shields() -> void:
 		tower_shield_parent.call_deferred("add_child", new_shield)
 	
 func on_shield_ready() -> void:
-	print("Last Shield is ready!")
 	set_physics_process(false)
 	tower_shield_parent.rotation_degrees = 0
 	var shields = tower_shield_parent.get_children()
 	
-	print(shields)
 	for i in range(NUM_OF_SHIELDS):
 		shields[i].z_index -= 1
 		shields[i].global_position = (tower_shield_parent.global_position + shield_spawn_position_modifiers[i])

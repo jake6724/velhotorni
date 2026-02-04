@@ -27,4 +27,4 @@ func play_audio_by_name(audio_name: String) -> void:
 	play()
 
 func play_footstep() -> void:
-	AudioManager.create_audio(sfx_tpye_footstep)
+	AudioManager.create_2d_audio_at_location(global_position, sfx_tpye_footstep)

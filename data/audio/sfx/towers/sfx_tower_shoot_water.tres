@@ -13,4 +13,5 @@ type = 20
 sounds = Array[AudioStreamMP3]([ExtResource("2_4hgky"), ExtResource("3_u7ec3"), ExtResource("4_ebw3y"), ExtResource("5_064v4")])
 volume = -8.0
 pitch_randomness = 0.1
+max_distance = 200.0
 metadata/_custom_type_script = "uid://cg5mrsass8jcd"

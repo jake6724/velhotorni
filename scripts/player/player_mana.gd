@@ -27,7 +27,6 @@ func _ready():
 # timer.start(regen_rate)
 
 func on_timer_timeout() -> void:
-	print("Timer timeout")
 	increment_spell_mana(preload("res://data/spells/spell_data_bullet_arcane_basic.tres"), 1)
 
 func increment_spell_mana(spell_data, _drop_amount_modifier) -> int:

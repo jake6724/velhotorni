@@ -27,6 +27,7 @@ enum SOUND_EFFECT_TYPE {
 	TOWER_SHOOT_WATER,
 	TOWER_HIT,
 	TOWER_SHOOT_EARTH,
+	TOWER_SUMMON_FAIL,
 }
 
 enum SelectMode {
@@ -42,6 +43,7 @@ enum SelectMode {
 @export_range(0.0, 4.0,.01) var pitch_scale: float = 1.0 ## The pitch scale of the [member sound_effect].
 @export_range(0.0, 1.0,.01) var pitch_randomness: float = 0.0 ## The pitch randomness setting of the [member sound_effect].
 @export var select_mode: SelectMode = SelectMode.RANDOM
+@export var max_distance: float = 700
 
 var audio_count: int = 0 ## The instances of this [AudioStreamMP3] currently playing.
 

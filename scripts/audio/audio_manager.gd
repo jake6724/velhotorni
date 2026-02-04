@@ -34,6 +34,7 @@ func create_2d_audio_at_location(location: Vector2, type: SoundEffect.SOUND_EFFE
 			new_2D_audio.volume_db = sound_effect.volume
 			new_2D_audio.pitch_scale = sound_effect.pitch_scale
 			new_2D_audio.pitch_scale += rng.randf_range(-sound_effect.pitch_randomness, sound_effect.pitch_randomness )
+			new_2D_audio.max_distance = sound_effect.max_distance
 			new_2D_audio.finished.connect(sound_effect.on_audio_finished)
 			new_2D_audio.finished.connect(new_2D_audio.queue_free)
 			new_2D_audio.play()
@@ -48,7 +49,6 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 			var selected_sound: AudioStreamMP3 = select_sound(sound_effect)
 			sound_effect.change_audio_count(1)
 			var new_audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-			new_audio.max_distance = 700
 			add_child(new_audio)
 			new_audio.stream = selected_sound
 			new_audio.volume_db = sound_effect.volume

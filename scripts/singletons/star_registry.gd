@@ -14,7 +14,7 @@ var player_star_count: int = 44:
 ## 4: 3 star
 var stars: Dictionary[PackedScene, int] = {
 	LevelManager.tower_level: 1,
-	LevelManager.level_0: 0,
+	LevelManager.level_0: 1,
 	LevelManager.level_1: 0,
 	LevelManager.level_2: 0,
 	LevelManager.level_3a: 0,

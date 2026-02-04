@@ -48,7 +48,6 @@ func on_modify_stat_requested(perk_data: PerkData) -> void:
 			player.player_spell_spawner.spell_element_damage_perk_modifier[perk_data.element] += perk_data.base_value
 
 			# DIRECTLY MODIFY TowerGlobalData. Probably not a great idea but here we are...
-			print("test")
 			TowerGlobalData.tower_element_damage_perk_modifier[perk_data.element] += perk_data.base_value
 		PerkDataSpell.SpellStat.SPAWN_TOWER_MANA_AS_SPELL_MANA_CHANCE:
 			spawn_tower_mana_as_spell_mana_chance_incremented.emit(perk_data.base_value)
