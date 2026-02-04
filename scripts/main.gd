@@ -65,6 +65,7 @@ func _ready():
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
 	player_character.coin_collector.reward_collected.connect(coin_drop_manager.decrement_reward_remaining)
+	coin_drop_manager.player = player_character
 
 	# Configure ManaDropManager
 	EnemySpawner.enemy_died_with_global_pos_drop_chance.connect(mana_drop_manager.on_enemy_died)
