@@ -90,7 +90,6 @@ func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: Textur
 	else:
 		upgrade_action_charge_cirlce.hide()
 		upgrade_action_charge_cirlce.value = 0
-
 		
 		if preview_tower and preview_tower.visible:
 			if get_tower_placement_info()[0]:

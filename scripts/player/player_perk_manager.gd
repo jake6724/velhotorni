@@ -26,7 +26,6 @@ var timed_modify_stat_stack_count: Dictionary[PerkDataPlayer.PlayerStat, int] = 
 
 ## Modify a player stat based on perk data. All stat changes are either additive, or work off of a base value
 func on_modify_stat_requested(data: PerkData) -> float:
-	add_perk_mini_icon(data)
 	var modified_value: float
 	match data.stat:
 		PerkDataPlayer.PlayerStat.HEALTH: 

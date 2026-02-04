@@ -311,6 +311,7 @@ func add_hearts(_count: int) -> void:
 		player_hearts.add_child(new_heart)
 
 func add_perk_mini_icon(perk_mini_icon: AtlasTexture):
+	print("PlayerHUD.add_perk_mini_icon()")
 	var texture_rect: TextureRect = TextureRect.new()
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP
 	texture_rect.texture = perk_mini_icon
