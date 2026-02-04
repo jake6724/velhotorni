@@ -1,6 +1,8 @@
 class_name ManaDropManager
 extends Node
 
+var player: PlayerCharacter
+
 var mana_drop_scene: PackedScene = preload("res://scenes/player/ManaDrop.tscn")
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -11,12 +13,19 @@ const JITTER: float = 7
 const MANA_DROP_MOVE_SPEED: float = 150
 const DESTINATION_THRESHOLD: Vector2 = Vector2(5,5)
 
+func _ready():
+	WaveManager.wave_completed.connect(on_wave_complete)
+
 func initialize(player_spells: PlayerSpells) -> void:
 	for spell: SpellData in player_spells.spells.array:
 		selected_spell_mana_chances.append([spell, spell.mana_drop_chance]) # Chance value doesn't matter if they are all the same (in the weighted random algo)
 
 func _physics_process(delta):
 	for child: ManaDrop in get_children():
+		if child.wave_complete_collect:
+			var direction: Vector2 = child.global_position.direction_to(player.global_position)
+			child.global_position += direction * MANA_DROP_MOVE_SPEED * delta
+
 		if not child.destination_reached:
 			child.global_position += child.global_position.direction_to(child.destination) * MANA_DROP_MOVE_SPEED * delta
 			if abs(child.global_position - child.destination) < DESTINATION_THRESHOLD:
@@ -67,3 +76,11 @@ func on_spell_mana_drop_chance_multiplier_added(spell_data_list: Array[SpellData
 ## Observes CoinManager.gd's tower_mana_spawned signal. Used for perks which convert tower mana into spell mana
 func on_spell_mana_spawn_requested(_global_pos) -> void:
 	spawn_mana_drop(_global_pos, 1.0, 1.0)
+
+func on_wave_complete() -> void:
+	gather_wave_complete_mana_drops()
+
+func gather_wave_complete_mana_drops() -> void:
+	for child in get_children():
+		child.destination_reached = true
+		child.wave_complete_collect = true
