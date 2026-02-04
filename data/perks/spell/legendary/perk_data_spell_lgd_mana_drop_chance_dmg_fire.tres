@@ -1,10 +1,16 @@
-[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=4 format=3 uid="uid://dh4aeqxh2plkw"]
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://dh4aeqxh2plkw"]
 
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_d2msd"]
 [ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_eyd72"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_gq1wy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyd72"]
+atlas = ExtResource("1_d2msd")
+region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7m0o3"]
+atlas = ExtResource("2_gq1wy")
+region = Rect2(0, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_eyd72")
