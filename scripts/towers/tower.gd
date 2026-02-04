@@ -658,7 +658,7 @@ func die() -> void:
 
 	# Update WorldGrid
 	var tower_grid_position: Vector2 = WorldGrid.world_to_grid(global_position)
-	WorldGrid.data[tower_grid_position] = false
+	WorldGrid.data[tower_grid_position] = true
 
 	alive = false
 	died.emit(self)

@@ -283,6 +283,7 @@ func get_action_cost(_hovered_tower) -> int:
 	else:
 		return -1
 
+## TODO: Instead of calling this on tick in run, maybe just when input updates?
 ## Returns is_placement_positon_valid: bool, tower_grid_position: Vector2, cost: int
 func get_tower_placement_info() -> Array:
 	if preview_tower:
@@ -295,8 +296,14 @@ func get_tower_placement_info() -> Array:
 				var tower_grid_position: Vector2 = WorldGrid.world_to_grid(preview_tower.global_position)
 				if tower_grid_position in WorldGrid.data and WorldGrid.data[tower_grid_position]:
 					return [true, tower_grid_position, cost]
+				else:
+					return [false, -1, -1]
+			else: 
+				return [false, -1, -1]
+		else:
+			return [false, -1, -1]
+	else:
 		return [false, -1, -1]
-	return [false, -1, -1]
 
 func on_tower_detect_area_entered(intruder: Area2D) -> void:
 	if preview_tower:

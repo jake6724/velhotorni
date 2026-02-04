@@ -81,6 +81,7 @@ func on_wave_complete() -> void:
 	gather_wave_complete_mana_drops()
 
 func gather_wave_complete_mana_drops() -> void:
+	await get_tree().create_timer(.5).timeout
 	for child in get_children():
 		child.destination_reached = true
 		child.wave_complete_collect = true
