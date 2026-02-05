@@ -17,6 +17,7 @@ var bounce_speed: float = .05
 var original_position: Vector2
 
 signal bounce_complete
+signal card_populated
 
 var perk_data
 var highlight_texture: CompressedTexture2D = preload("res://assets/art/sprites/ui/spr_ui_box6.png")
@@ -30,7 +31,6 @@ func _ready():
 
 func animate(rarity_multiplier: float) -> void:
 	content.hide()
-	perk_icon.texture.region = Rect2(0,1,48,46)
 	card_background.size = Vector2(118, 16)
 	expand()
 	bounce_perk_icon()
@@ -76,6 +76,8 @@ func bounce_element(ui_element: Control, bounce_height: int) -> void:
 	bounce_down_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	target = ui_element.position + Vector2(0,bounce_height)
 	bounce_down_tween.tween_property(ui_element, "position", target, bounce_speed)
+	
+	await bounce_down_tween.finished
 
 	bounce_complete.emit()
 
@@ -106,6 +108,7 @@ func populate_card(_data, rarity_multiplier: float) -> void:
 			desc_data["value"] =  int(x)
 
 	description.text = _data.perk_desc.format(desc_data)
+	card_populated.emit()
 
 func highlight() -> void:
 	card_background.texture = highlight_texture

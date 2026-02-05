@@ -20,7 +20,6 @@ extends Resource
 
 	# Tower Basic
 	preload("res://data/perks/tower/basic/perk_data_tower_cap.tres"),
-	preload("res://data/perks/tower/basic/perk_data_tower_cost_fire.tres"),
 	preload("res://data/perks/tower/basic/perk_data_tower_range.tres"),
 	preload("res://data/perks/tower/basic/perk_data_tower_mana_drop.tres"),
 	preload("res://data/perks/tower/basic/perk_data_tower_fire_placement_cost.tres"),

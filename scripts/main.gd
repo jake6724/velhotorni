@@ -42,17 +42,11 @@ func _ready():
 	EnemySpawner.player = player_character
 
 	# Connect to WaveManager
-	# WaveManager.wave_failed.connect(on_wave_failed)
+	WaveManager.wave_started.connect(on_wave_started)
 
 	# Configure TowerGlobalData
 	TowerGlobalData.reset()
 	TowerGlobalData.tower_max = active_level.max_towers
-
-	# Configure PlayerController
-	# player_controller.setup()
-	# player_controller.bestiary_pressed.connect(pause_game_with_bestiary)
-	# coin_drop_manager.reward_completed.connect(player_controller.on_reward_complete)
-	# player_controller.coin_collector = player_character.coin_collector
 
 	# Configure PlayerCharacter
 	player_spawn_point = active_level.player_spawn_point
@@ -101,7 +95,6 @@ func _ready():
 	perk_manager.player_special = player_character.player_special
 
 	# Configure PerkUI
-	# WaveManager.wave_completed.connect(on_wave_completed)
 	player_character.player_hud.wave_complete_banner_animation_finished.connect(pause_game_with_perk_ui)
 	perk_ui.perk_selected.connect(on_perk_selected)
 	player_character.player_input.switch_selection_pressed.connect(perk_ui.switch_selected_card)
@@ -154,9 +147,6 @@ func unpause_game_with_bestiary() -> void:
 func set_can_pause(value: bool) -> void:
 	can_pause = value
 
-# func on_wave_completed() -> void:
-# 	pause_game_with_perk_ui()
-
 func pause_game_with_perk_ui() -> void:
 	pass
 	await get_tree().create_timer(PERK_UI_POPUP_DELAY).timeout
@@ -177,6 +167,7 @@ func pause_game_with_perk_ui() -> void:
 	if not GlobalSettings.controller_active:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+	await perk_ui.animation_complete
 	get_tree().paused = true
 
 func on_perk_selected(perk_data: PerkData) -> void:
@@ -190,10 +181,7 @@ func on_perk_selected(perk_data: PerkData) -> void:
 		player_character.player_build_ui.show()
 	
 	player_character.player_input.input_enabled = true
-
-# func on_wave_failed() -> void:
-# 	wave_failures += 1
-# 	LevelManager.restart_level()
+	player_character.player_input.can_start_wave = true
 
 func show_level_complete() -> void:
 	level_complete_panel.set_stars(calc_stars())
@@ -219,3 +207,6 @@ func on_unpause_menu_restart_level() -> void:
 func on_unpause_menu_exit_level() -> void:
 	get_tree().paused = false
 	LevelManager.exit_level()
+
+func on_wave_started() -> void:
+	player_character.player_input.can_start_wave = false

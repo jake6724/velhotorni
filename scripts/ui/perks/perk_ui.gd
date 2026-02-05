@@ -30,6 +30,8 @@ var curr_perk_card: PerkCard:
 			curr_perk_card.highlight()
 			curr_perk_card.pop_up()
 
+var populated_card_count: int = 0
+
 var candles_array: Array = []
 var candle_reset_position: Dictionary[TextureRect, Vector2] = {}
 
@@ -43,6 +45,7 @@ var candle_delay: float = .05
 var move_input_x: float
 
 signal perk_selected
+signal animation_complete
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
@@ -51,6 +54,7 @@ func _ready():
 		card.card_background.mouse_entered.connect(on_mouse_entered_perk_card.bind(card))
 		card.card_background.mouse_exited.connect(on_mouse_exited_perk_card)
 		card.card_background.focus_entered.connect(select_card)
+		card.card_populated.connect(on_card_populated)
 
 	candles_array = [%Candle1, %Candle2, %Candle3, %Candle4]
 	for candle: TextureRect in candles_array:
@@ -89,6 +93,9 @@ func set_card_data(perk_hand: Array[PerkData]) -> void:
 	perk_card_3.perk_data = perk_hand[2]
 
 func animate(rarity: PerkData.Rarity) -> void:
+	# Reset
+	populated_card_count = 0
+
 	top_letterbox.position = Vector2(-512, 0)
 	bottom_letterbox.position = Vector2(512, 256)
 
@@ -115,6 +122,11 @@ func animate(rarity: PerkData.Rarity) -> void:
 	# # Highlight middle card
 	# perk_cards_linked.head.value.highlight() 
 	# perk_cards_linked.head.value.pop_up()
+
+func on_card_populated() -> void:
+	populated_card_count += 1
+	if populated_card_count >= 3:
+		animation_complete.emit()
 
 func animate_reset() -> void:
 	animate_reset_letterboxes()

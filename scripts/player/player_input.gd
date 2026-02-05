@@ -18,6 +18,8 @@ var tower_action_press_multiplier: float = tower_action_press_multiplier_fast
 
 var input_enabled: bool = true
 
+var can_start_wave: bool = true # Set by Main
+
 signal primary_action_just_pressed
 signal primary_action_released
 signal special_action_pressed
@@ -99,7 +101,8 @@ func _input(event):
 			weapon_select_pressed.emit(3)
 
 		if event.is_action("start_wave_action") and event.is_pressed() and not event.is_echo():
-			WaveManager.start_wave()
+			if can_start_wave:
+				WaveManager.start_wave()
 
 		if event.is_action("escape") and event.is_pressed() and not event.is_echo():
 			escape_pressed.emit()
