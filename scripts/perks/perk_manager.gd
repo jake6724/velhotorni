@@ -94,9 +94,11 @@ func initialize(_perk_data_pool: PerkDataPool, player_spells: PlayerSpells, play
 	perk_data_filtered.append_array(valid_perk_data_player)
 	perk_data_filtered.append_array(valid_perk_data_base)
 
+
 	# print("perk_data_filtered.size(): ", perk_data_filtered.size())
 	# Sort into legendary or basic pools
 	for perk_data: PerkData in perk_data_filtered:
+		# print(perk_data.perk_name)
 		if perk_data.legendary:
 			valid_legendary_perk_data.append(perk_data)
 		else:

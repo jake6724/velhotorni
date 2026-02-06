@@ -15,7 +15,7 @@ region = Rect2(0, 0, 16, 16)
 [resource]
 script = ExtResource("1_rhx5x")
 stat = 11
-element = 0
+element = 1
 base_value = 0.25
 secondary_value = 2.0
 legendary = true

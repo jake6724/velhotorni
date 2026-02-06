@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="SpellDataBullet" load_steps=10 format=3 uid="uid://bcsl0e0prk758"]
+
+[ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_66w1m"]
+[ext_resource type="Script" uid="uid://r20hlvy6xofu" path="res://scripts/spells/data/spell_data_bullet.gd" id="1_emepg"]
+[ext_resource type="Texture2D" uid="uid://d0yrupn22aarx" path="res://assets/art/atlases/bullet/atl_bullet_dark_curse.png" id="1_gf4dx"]
+[ext_resource type="Resource" uid="uid://c8y4s3ogp8lsx" path="res://data/debuffs/debuff_data_weaken_dark.tres" id="2_66w1m"]
+[ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="4_31oy8"]
+[ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="6_bn2lt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31oy8"]
+atlas = ExtResource("1_66w1m")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bn2lt"]
+atlas = ExtResource("4_31oy8")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0atv"]
+atlas = ExtResource("6_bn2lt")
+region = Rect2(0, 105, 217, 15)
+
+[resource]
+script = ExtResource("1_emepg")
+speed = 400.0
+num_bullets = 1
+max_distance = 400.0
+atlas = ExtResource("1_gf4dx")
+element = 5
+damage = 60.0
+cooldown = 0.5
+debuff_data = ExtResource("2_66w1m")
+base_spell_mana_per_drop = 15
+initial_mana_amount = 50
+max_mana_amount = 50
+spell_name = "Dark Revolver"
+popup_name = "Dark Revolver"
+desc = "Dark Revolver"
+active_icon = SubResource("AtlasTexture_31oy8")
+inactive_icon = SubResource("AtlasTexture_bn2lt")
+staff_texture = SubResource("AtlasTexture_i0atv")
+camera_shake = 0.4
+metadata/_custom_type_script = "uid://r20hlvy6xofu"

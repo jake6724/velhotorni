@@ -34,6 +34,8 @@ var tower_mana_breakables: Array[Breakable] = []
 
 @export var start_first_wave_immediately: bool = false
 
+@export var show_wave_info_banner: bool = true
+
 var stars: int = 1 # Tracks the highest number of stars earned for this level
 var can_start_wave: bool = true # Used so that levels can disable wave start, specifically in the tutorial
 

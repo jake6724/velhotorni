@@ -27,3 +27,9 @@ func move(delta) -> void:
 			global_position += get_push_vector() * .5
 	else:
 			ap.play("idle")
+
+func on_debuff_apply_knockback(_value, _total_duration) -> void:
+	pass
+
+func on_debuff_remove_knockback() -> void:
+	pass

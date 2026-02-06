@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://cejulf1hekcl"]
+
+[ext_resource type="Script" uid="uid://b8tg1arhaceuc" path="res://scripts/ui/tower_action_radial_menu.gd" id="1_ltcld"]
+[ext_resource type="Texture2D" uid="uid://dbsjcjmeyree3" path="res://assets/art/sprites/ui/atl_ui_toweractions.png" id="1_qbi8j"]
+[ext_resource type="Texture2D" uid="uid://cwbuy2wmoursk" path="res://assets/art/atlases/atl_player_reticle.png" id="2_rwrmv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwrmv"]
+atlas = ExtResource("1_qbi8j")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbi8j"]
+atlas = ExtResource("1_qbi8j")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltcld"]
+atlas = ExtResource("1_qbi8j")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hentg"]
+atlas = ExtResource("2_rwrmv")
+region = Rect2(32, 0, 16, 16)
+
+[node name="TowerRadialMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ltcld")
+metadata/_custom_type_script = "uid://b8tg1arhaceuc"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09411765, 0.09411765, 0.2509804, 0.13725491)
+
+[node name="CenterPoint" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+
+[node name="UpgradeIcon" type="TextureRect" parent="CenterPoint"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+pivot_offset = Vector2(8, 8)
+texture = SubResource("AtlasTexture_rwrmv")
+stretch_mode = 2
+
+[node name="HealIcon" type="TextureRect" parent="CenterPoint"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+pivot_offset = Vector2(8, 8)
+texture = SubResource("AtlasTexture_qbi8j")
+stretch_mode = 2
+
+[node name="SellIcon" type="TextureRect" parent="CenterPoint"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+pivot_offset = Vector2(8, 8)
+texture = SubResource("AtlasTexture_ltcld")
+stretch_mode = 2
+
+[node name="Cursor" type="TextureRect" parent="CenterPoint"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -8.0
+offset_top = -40.0
+offset_right = 8.0
+offset_bottom = -24.0
+pivot_offset = Vector2(8, 8)
+texture = SubResource("AtlasTexture_hentg")
+stretch_mode = 2

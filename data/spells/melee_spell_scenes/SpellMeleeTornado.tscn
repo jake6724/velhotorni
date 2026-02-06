@@ -1,0 +1,127 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6v144q36maw3"]
+
+[ext_resource type="Texture2D" uid="uid://dr7x0rge1gww4" path="res://assets/art/sprites/spr_fx_slash_wind.png" id="1_1vm3f"]
+[ext_resource type="Script" uid="uid://dqkfqvkmjcn75" path="res://scripts/spells/spell_melee.gd" id="1_2yoa5"]
+
+[sub_resource type="Animation" id="Animation_ny843"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1xu0m"]
+resource_name = "attack"
+length = 0.3
+step = 0.075
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5vk8k"]
+_data = {
+&"RESET": SubResource("Animation_ny843"),
+&"attack": SubResource("Animation_1xu0m")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2yoa5"]
+radius = 24.0
+height = 48.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vm3f"]
+radius = 4.0
+height = 32.0
+
+[node name="SpellMeleeTornado" type="Sprite2D"]
+texture = ExtResource("1_1vm3f")
+hframes = 4
+script = ExtResource("1_2yoa5")
+metadata/_custom_type_script = "uid://dqkfqvkmjcn75"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5vk8k")
+}
+autoplay = "attack"
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 1048576
+collision_mask = 270352
+
+[node name="HitboxCollider" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_2yoa5")
+
+[node name="BulletBlock" type="Area2D" parent="."]
+collision_layer = 1048576
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletBlock"]
+position = Vector2(17, 0)
+shape = SubResource("CapsuleShape2D_1vm3f")
+disabled = true
+debug_color = Color(0.958419, 3.85046e-07, 0.527242, 0.42)

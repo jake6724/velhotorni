@@ -239,7 +239,7 @@ func on_ui_interact_pressed() -> void:
 		place_tower()
 
 func cast_spell() -> void:
-	player_spell_spawner.spawn_spell(player_aim.aim_input)
+	player_spell_spawner.spawn_spell(player_aim.aim_input, player_spells.active_spell)
 
 func place_tower() -> void:
 	player_build.place_tower()

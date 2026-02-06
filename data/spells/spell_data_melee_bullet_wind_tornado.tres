@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="SpellDataMeleeBullet" load_steps=11 format=3 uid="uid://co8hrkw6td36b"]
+
+[ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_oj8ti"]
+[ext_resource type="Script" uid="uid://lvjqoao88lvn" path="res://scripts/spells/data/spell_data_melee_bullet.gd" id="1_omgsa"]
+[ext_resource type="Texture2D" uid="uid://dwtej0bc78gp2" path="res://assets/art/atlases/bullet/atl_bullet_wind_tornado.png" id="2_oj8ti"]
+[ext_resource type="Resource" uid="uid://qllq302csbsr" path="res://data/debuffs/perk_debuffs/debuff_data_knockback_perk.tres" id="3_raihf"]
+[ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="3_t3x6o"]
+[ext_resource type="PackedScene" uid="uid://b6v144q36maw3" path="res://data/spells/melee_spell_scenes/SpellMeleeTornado.tscn" id="5_raihf"]
+[ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="6_62ifq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3x6o"]
+atlas = ExtResource("1_oj8ti")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62ifq"]
+atlas = ExtResource("3_t3x6o")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_raihf"]
+atlas = ExtResource("6_62ifq")
+region = Rect2(0, 120, 217, 15)
+
+[resource]
+script = ExtResource("1_omgsa")
+melee_damage = 30.0
+melee_spell_scene = ExtResource("5_raihf")
+bullet_damage = 15.0
+speed = 100.0
+num_bullets = 1
+pierce = 3
+max_distance = 100.0
+bullet_atlas = ExtResource("2_oj8ti")
+type = 6
+staff_type = 6
+element = 1
+cooldown = 0.25
+debuff_data = ExtResource("3_raihf")
+spell_name = "Feather"
+popup_name = "Feather"
+desc = "A feather"
+active_icon = SubResource("AtlasTexture_t3x6o")
+inactive_icon = SubResource("AtlasTexture_62ifq")
+staff_texture = SubResource("AtlasTexture_raihf")
+camera_shake = 0.3

@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="SpellDataMelee" load_steps=9 format=3 uid="uid://dydfigwx22o6i"]
+
+[ext_resource type="Script" uid="uid://dcu7dihypm0k3" path="res://scripts/spells/data/spell_data_melee.gd" id="1_aqs8y"]
+[ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_mda5w"]
+[ext_resource type="Texture2D" uid="uid://dr7x0rge1gww4" path="res://assets/art/sprites/spr_fx_slash_wind.png" id="2_chmqo"]
+[ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="3_chmqo"]
+[ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="5_ok47g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ok47g"]
+atlas = ExtResource("1_mda5w")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xmi5"]
+atlas = ExtResource("3_chmqo")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83hai"]
+atlas = ExtResource("5_ok47g")
+region = Rect2(0, 120, 217, 15)
+
+[resource]
+script = ExtResource("1_aqs8y")
+atlas = ExtResource("2_chmqo")
+staff_type = 6
+element = 1
+damage = 10.0
+cooldown = 0.4
+spell_name = "Feather"
+popup_name = "Feather"
+desc = "Feather"
+active_icon = SubResource("AtlasTexture_ok47g")
+inactive_icon = SubResource("AtlasTexture_3xmi5")
+staff_texture = SubResource("AtlasTexture_83hai")
+camera_shake = 0.3
+metadata/_custom_type_script = "uid://dcu7dihypm0k3"

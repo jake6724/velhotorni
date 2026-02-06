@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0klfs0sk3qw1"]
+
+[ext_resource type="Texture2D" uid="uid://12j83f7ekv4d" path="res://assets/art/atlases/enemy/atl_enemy_dark_death.png" id="1_31kvx"]
+
+[sub_resource type="Animation" id="Animation_31kvx"]
+resource_name = "appear"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_giytv"]
+_data = {
+&"appear": SubResource("Animation_31kvx")
+}
+
+[node name="Death" type="Node2D"]
+
+[node name="BossSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_31kvx")
+hframes = 6
+vframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_giytv")
+}

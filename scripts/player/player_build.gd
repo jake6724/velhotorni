@@ -3,6 +3,8 @@ extends Node2D
 
 enum TowerAction {HEAL, UPGRADE, SELL}
 
+# @onready var tower_radial_menu: TowerActionRadialMenu = %TowerRadialMenu
+
 @export var grid_follow_tower: bool = true # Debugging, should go away
 
 var tower_parent: Node = Node.new() # Towers are spawned under this Node so that their position will not affected by this class since it is a Node2D
@@ -46,6 +48,13 @@ signal reset_tower_action
 signal tower_action_changed
 signal tower_action_hint_requested
 signal tower_count_updated
+
+# func _input(_event):
+# 	if Input.is_action_pressed("x"):
+# 		if not tower_radial_menu.active:
+# 			tower_radial_menu.animate_open()
+# 	if Input.is_action_just_released("x"):
+# 		tower_radial_menu.animate_close()
 
 func _ready():
 	add_child(tower_parent)

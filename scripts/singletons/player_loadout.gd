@@ -16,11 +16,13 @@ var arcane_basic: SpellData = load("res://data/spells/spell_data_bullet_arcane_b
 var arcane_horn: SpellData = load("res://data/spells/spell_data_bullet_arcane_basic_triple.tres")
 var ice_sword: SpellData = load("res://data/spells/water/spell_data_melee_water_ice_sword.tres")
 var fireball: SpellData = load("res://data/spells/fire/spell_data_bullet_aoe_fireball.tres")
+var tornado: SpellData = load("res://data/spells/spell_data_melee_bullet_wind_tornado.tres")
+var dark_revolver: SpellData = load("res://data/spells/spell_data_bullet_dark_revolver.tres")
 
 # SPELLS ###################################################################################################################
 var equipped_spell_1: SpellData = arcane_basic
-var equipped_spell_2: SpellData = arcane_horn
-var equipped_spell_3: SpellData = fireball
+var equipped_spell_2: SpellData = tornado
+var equipped_spell_3: SpellData = dark_revolver
 var equipped_spell_4: SpellData = ice_sword
 var equipped_spells: Array[SpellData] = [equipped_spell_1, equipped_spell_2, equipped_spell_3, equipped_spell_4]
 

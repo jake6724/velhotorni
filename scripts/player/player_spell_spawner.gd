@@ -15,6 +15,7 @@ var attack_timer: Timer = Timer.new()
 var spell_scenes: Dictionary[SpellData.Type, PackedScene] = {
 	SpellData.Type.BULLET: preload("res://scenes/Spells/SpellBullet.tscn"), 
 	SpellData.Type.BULLET_AOE: preload("res://scenes/Spells/SpellBulletAOE.tscn"),
+	SpellData.Type.MELEE_BULLET: preload("res://scenes/Spells/SpellBullet.tscn"), ## TODO: Make the spell data provide these scenes
 	SpellData.Type.MELEE: preload("res://scenes/Spells/SpellMelee.tscn"),
 	SpellData.Type.BULLET_CHARGED: preload("res://scenes/Spells/SpellBulletCharged.tscn"),
 	SpellData.Type.SHIELD_DIRECTIONAL: preload("res://scenes/Spells/SpellShield.tscn")
@@ -88,14 +89,14 @@ func set_active_spell(_active_spell_data: SpellData) -> void:
 	spell_func = get_spell_func(curr_spell_data.type)
 
 ## Wrapper for the `spell_func` Callable. Used as an easy interface for other scripts to call.
-func spawn_spell(player_aim_direction: Vector2) -> void:
+func spawn_spell(player_aim_direction: Vector2, spell_data: SpellData) -> void:
 	if can_attack:
 		can_attack = false
-		if check_can_afford(curr_spell_data):
-			spell_func.call(player_aim_direction.normalized())
+		if check_can_afford(spell_data):
+			spell_func.call(player_aim_direction.normalized(), spell_data)
 		else:
 			check_can_afford_failed.emit()
-			start_attack_cooldown(curr_spell_data)
+			start_attack_cooldown(spell_data)
 
 func on_switch_spell(new_spell_data: SpellData) -> void:
 	curr_spell_data = new_spell_data
@@ -118,6 +119,11 @@ func get_spell_func(_spell_type: SpellData.Type) -> Callable:
 		SpellData.Type.MELEE: 
 			curr_spell_is_melee = true
 			return spawn_melee_spell
+
+		SpellData.Type.MELEE_BULLET:
+			curr_spell_is_melee = true
+			return parent_spawn_melee_bullet_spell
+
 		SpellData.Type.SHIELD_DIRECTIONAL:
 			curr_spell_is_melee = false
 			return spawn_shield_spell
@@ -130,8 +136,11 @@ func get_spell_func(_spell_type: SpellData.Type) -> Callable:
 			return parent_spawn_bullet_spell
 
 ## Spawn all bullets defined in the SpellDataBullet resource
-func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
-	var new_spell_data: SpellDataBullet = curr_spell_data
+func parent_spawn_bullet_spell(player_aim_direction: Vector2, active_spell_data: SpellData, spell_data_mana_key=null) -> void:
+	if not spell_data_mana_key:
+		spell_data_mana_key = active_spell_data
+
+	var new_spell_data: SpellDataBullet = active_spell_data
 	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
 
 	var angle_seperation: float = 0
@@ -156,12 +165,12 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2) -> void:
 			angle_seperation += new_spell_data.angle_seperation
 		angle_sign = -angle_sign
 		
-	spell_cast.emit(new_spell_data)
+	spell_cast.emit(spell_data_mana_key)
 
 ## Spawn a single spell bullet
 func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellDataBullet, new_spell_scene: PackedScene, angle_seperation: float, angle_sign: float) -> void:
 	for spell_spawn_point: Node2D in spell_spawn_points:
-		var new_spell: Spell = new_spell_scene.instantiate()
+		var new_spell: SpellBullet = new_spell_scene.instantiate()
 		new_spell.global_position = spell_spawn_point.global_position
 		new_spell.z_index = player.z_index + 2
 		var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
@@ -173,9 +182,18 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
 
-func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
-	var new_spell_data: SpellDataMelee = curr_spell_data
-	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
+func spawn_melee_spell(_player_aim_direction: Vector2, active_spell_data: SpellData, spell_data_mana_key=null) -> void:
+	if not spell_data_mana_key:
+		spell_data_mana_key = active_spell_data
+
+	var new_spell_data: SpellDataMelee = active_spell_data
+
+
+	var new_spell_scene: PackedScene
+	if new_spell_data.melee_spell_scene:
+		new_spell_scene = new_spell_data.melee_spell_scene
+	else:
+		new_spell_scene = spell_scenes[new_spell_data.type]
 
 	for melee_spell_spawn_point: Node2D in melee_spell_spawn_points:
 		var new_spell: Spell = new_spell_scene.instantiate()
@@ -189,7 +207,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 		new_spell.z_index = player.z_index + 2
 		add_child(new_spell)
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
-		spell_cast.emit(new_spell_data)
+		spell_cast.emit(spell_data_mana_key)
 
 	if new_spell_data.sound_effect:
 		AudioManager.create_2d_audio_at_location(spell_spawn_points[0].global_position, new_spell_data.sound_effect.type)
@@ -198,6 +216,93 @@ func spawn_melee_spell(_player_aim_direction: Vector2) -> void:
 	player.player_camera.apply_shake(curr_spell_data.camera_shake)
 	player.jump_forward()
 	melee_spell_cast.emit()
+
+func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell_data: SpellData) -> void:
+	var spell_data_melee: SpellDataMelee = SpellDataMelee.new()
+	# spell_data_melee.atlas = active_spell_data.melee_atlas
+	spell_data_melee.melee_spell_scene = active_spell_data.melee_spell_scene
+	spell_data_melee.sfx = active_spell_data.melee_sfx
+	spell_data_melee.type = active_spell_data.type
+	spell_data_melee.staff_type = active_spell_data.staff_type
+	spell_data_melee.element = active_spell_data.element
+	spell_data_melee.damage = active_spell_data.melee_damage
+	spell_data_melee.cooldown = active_spell_data.cooldown
+	spell_data_melee.debuff_data = active_spell_data.debuff_data
+	spell_data_melee.base_spell_mana_per_drop = active_spell_data.base_spell_mana_per_drop
+	spell_data_melee.initial_mana_amount = active_spell_data.initial_mana_amount
+	spell_data_melee.max_mana_amount = active_spell_data.max_mana_amount
+	spell_data_melee.mana_drop_chance = active_spell_data.mana_drop_chance
+	spell_data_melee.mana_cost = active_spell_data.mana_cost
+	spell_data_melee.mana_base_cost = active_spell_data.mana_base_cost
+	spell_data_melee.spell_name = active_spell_data.spell_name
+	spell_data_melee.popup_name = active_spell_data.popup_name
+	spell_data_melee.desc = active_spell_data.desc
+	spell_data_melee.active_icon = active_spell_data.active_icon
+	spell_data_melee.inactive_icon = active_spell_data.inactive_icon
+	spell_data_melee.staff_texture = active_spell_data.staff_texture
+	spell_data_melee.sound_effect = active_spell_data.sound_effect
+	spell_data_melee.camera_shake = active_spell_data.camera_shake
+	spell_data_melee.unlock_cost = active_spell_data.unlock_cost
+
+	spawn_melee_spell(player_aim_direction, spell_data_melee, active_spell_data)
+
+	var spell_data_bullet: SpellDataBullet = SpellDataBullet.new()
+	spell_data_bullet.atlas = active_spell_data.bullet_atlas
+	spell_data_bullet.sfx = active_spell_data.bullet_sfx
+	spell_data_bullet.type = active_spell_data.type
+	spell_data_bullet.staff_type = active_spell_data.staff_type
+	spell_data_bullet.element = active_spell_data.element
+	spell_data_bullet.damage = active_spell_data.bullet_damage
+	spell_data_bullet.speed = active_spell_data.speed
+	spell_data_bullet.max_distance = active_spell_data.max_distance
+	spell_data_bullet.pierce = active_spell_data.pierce
+	spell_data_bullet.cooldown = active_spell_data.cooldown
+	spell_data_bullet.debuff_data = active_spell_data.debuff_data
+	spell_data_bullet.base_spell_mana_per_drop = active_spell_data.base_spell_mana_per_drop
+	spell_data_bullet.initial_mana_amount = active_spell_data.initial_mana_amount
+	spell_data_bullet.max_mana_amount = active_spell_data.max_mana_amount
+	spell_data_bullet.mana_drop_chance = active_spell_data.mana_drop_chance
+	spell_data_bullet.mana_cost = active_spell_data.mana_cost
+	spell_data_bullet.mana_base_cost = active_spell_data.mana_base_cost
+	spell_data_bullet.spell_name = active_spell_data.spell_name
+	spell_data_bullet.popup_name = active_spell_data.popup_name
+	spell_data_bullet.desc = active_spell_data.desc
+	spell_data_bullet.active_icon = active_spell_data.active_icon
+	spell_data_bullet.inactive_icon = active_spell_data.inactive_icon
+	spell_data_bullet.staff_texture = active_spell_data.staff_texture
+	spell_data_bullet.sound_effect = active_spell_data.sound_effect
+	spell_data_bullet.camera_shake = active_spell_data.camera_shake
+	spell_data_bullet.unlock_cost = active_spell_data.unlock_cost
+
+	parent_spawn_bullet_spell(player_aim_direction, spell_data_bullet, active_spell_data)
+
+	# var new_spell_data: SpellDataMeleeBullet = curr_spell_data
+	# var new_spell_scene: PackedScene = new_spell_data.melee_spell_scene
+
+	# for melee_spell_spawn_point: Node2D in melee_spell_spawn_points:
+	# 	var new_spell: Spell = new_spell_scene.instantiate()
+
+	# 	new_spell.initialize(new_spell_data, player, spell_element_damage_perk_modifier[new_spell_data.element], 
+	# 	spell_execution_threshold, check_should_drop_double_spell_mana(), get_perk_debuffs())
+
+	# 	new_spell.global_position = melee_spell_spawn_point.global_position + (player_aim_direction * 16)
+	# 	new_spell.rotation = player_aim_direction.angle()
+
+	# 	new_spell.z_index = player.z_index + 2
+	# 	add_child(new_spell)
+	# 	new_spell.damage_dealt.connect(on_spell_damage_dealt)
+	# 	spell_cast.emit(new_spell_data)
+
+	# if new_spell_data.sound_effect:
+	# 	AudioManager.create_2d_audio_at_location(spell_spawn_points[0].global_position, new_spell_data.sound_effect.type)
+
+
+
+
+	# start_attack_cooldown(new_spell_data)
+	# player.player_camera.apply_shake(curr_spell_data.camera_shake)
+	# player.jump_forward()
+	# melee_spell_cast.emit()
 
 func spawn_shield_spell(_player_aim_direction: Vector2) -> void:
 	var new_spell_data: SpellDataShieldDirectional = curr_spell_data
