@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://cbitkck8fv4og"]
+
+[ext_resource type="Resource" uid="uid://ebmb3ids3d64" path="res://data/enemies/boss/enemy_data_boss_death.tres" id="1_3rg21"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_jhkv7"]
+
+[resource]
+script = ExtResource("1_jhkv7")
+enemy_data = ExtResource("1_3rg21")
+delay = 0.0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

@@ -1970,3 +1970,6 @@ polygon = PackedVector2Array(232, -24, 296, -24, 296, -88, 328, -88, 328, -24, 4
 polygon = PackedVector2Array(248, 40, 248, 72, 232, 72, 232, 136, 216, 136, 216, 160, 248, 160, 248, 216, 264, 216, 264, 152, 408, 152, 408, 136, 264, 136, 264, 40)
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Node/GroundInfoTrigger"]
+
+[node name="BossSpawnPoint" type="Node2D" parent="."]
+unique_name_in_owner = true

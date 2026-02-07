@@ -218,6 +218,10 @@ func spawn_melee_spell(_player_aim_direction: Vector2, active_spell_data: SpellD
 	melee_spell_cast.emit()
 
 func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell_data: SpellData) -> void:
+
+	# TODO: just go back to creating 2 nested data inside melee_bullet; one for the melee and one for the bullet. Then pull from
+	# them and pass the mana_spell_key thing like currently doing
+
 	var spell_data_melee: SpellDataMelee = SpellDataMelee.new()
 	# spell_data_melee.atlas = active_spell_data.melee_atlas
 	spell_data_melee.melee_spell_scene = active_spell_data.melee_spell_scene
@@ -254,6 +258,8 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_bullet.element = active_spell_data.element
 	spell_data_bullet.damage = active_spell_data.bullet_damage
 	spell_data_bullet.speed = active_spell_data.speed
+	spell_data_bullet.num_bullets = active_spell_data.num_bullets
+	spell_data_bullet.angle_seperation = active_spell_data.angle_seperation
 	spell_data_bullet.max_distance = active_spell_data.max_distance
 	spell_data_bullet.pierce = active_spell_data.pierce
 	spell_data_bullet.cooldown = active_spell_data.cooldown
@@ -275,34 +281,6 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_bullet.unlock_cost = active_spell_data.unlock_cost
 
 	parent_spawn_bullet_spell(player_aim_direction, spell_data_bullet, active_spell_data)
-
-	# var new_spell_data: SpellDataMeleeBullet = curr_spell_data
-	# var new_spell_scene: PackedScene = new_spell_data.melee_spell_scene
-
-	# for melee_spell_spawn_point: Node2D in melee_spell_spawn_points:
-	# 	var new_spell: Spell = new_spell_scene.instantiate()
-
-	# 	new_spell.initialize(new_spell_data, player, spell_element_damage_perk_modifier[new_spell_data.element], 
-	# 	spell_execution_threshold, check_should_drop_double_spell_mana(), get_perk_debuffs())
-
-	# 	new_spell.global_position = melee_spell_spawn_point.global_position + (player_aim_direction * 16)
-	# 	new_spell.rotation = player_aim_direction.angle()
-
-	# 	new_spell.z_index = player.z_index + 2
-	# 	add_child(new_spell)
-	# 	new_spell.damage_dealt.connect(on_spell_damage_dealt)
-	# 	spell_cast.emit(new_spell_data)
-
-	# if new_spell_data.sound_effect:
-	# 	AudioManager.create_2d_audio_at_location(spell_spawn_points[0].global_position, new_spell_data.sound_effect.type)
-
-
-
-
-	# start_attack_cooldown(new_spell_data)
-	# player.player_camera.apply_shake(curr_spell_data.camera_shake)
-	# player.jump_forward()
-	# melee_spell_cast.emit()
 
 func spawn_shield_spell(_player_aim_direction: Vector2) -> void:
 	var new_spell_data: SpellDataShieldDirectional = curr_spell_data

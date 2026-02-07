@@ -1,7 +1,7 @@
 class_name Enemy
 extends Area2D
 
-enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE, REPEATER_SMALL, REPEATER_LARGE, DUMMY_SMALL, SNAKE}
+enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE, REPEATER_SMALL, REPEATER_LARGE, DUMMY_SMALL, SNAKE, BOSS}
 
 @export var data: EnemyData
 
@@ -96,7 +96,8 @@ func _ready():
 	damage = data.damage
 	atlas = data.atlas
 	max_health = health
-	base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 
+	if LevelManager.active_level.base:
+		base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
 	light.visible = data.show_light
@@ -132,6 +133,8 @@ func _ready():
 
 	# Configure z_indexes
 	health_bar.z_index = Constants.z_index_map["enemy_healthbar"]
+
+	boss_initialize()
 
 func _physics_process(delta):
 	if is_alive:
@@ -436,3 +439,6 @@ func hide_all_fx() -> void:
 	fx_slow.hide()
 	fx_speed.hide()
 	fx_stun.hide()
+
+func boss_initialize() -> void:
+	pass

@@ -10,14 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="8_p1qut"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="8_yqoiu"]
 [ext_resource type="PackedScene" uid="uid://bwrw0vxyrshx2" path="res://scenes/level/EnemySpawnPortal.tscn" id="9_k7twg"]
-[ext_resource type="Shader" path="res://assets/art/heat_haze.gdshader" id="10_bpcou"]
+[ext_resource type="Shader" uid="uid://pvf7vah26qjs" path="res://assets/art/heat_haze.gdshader" id="10_bpcou"]
 [ext_resource type="Texture2D" uid="uid://bg5wqpo6k5mck" path="res://assets/art/sprites/spr_fx_heatmask.png" id="11_dj51x"]
 [ext_resource type="PackedScene" uid="uid://inrss5007qxm" path="res://scenes/breakables/BreakableCrystalSmall.tscn" id="12_j43g6"]
 [ext_resource type="PackedScene" uid="uid://dtbjym5jhrudw" path="res://scenes/ui/WaveInfo.tscn" id="13_gdaoa"]
 [ext_resource type="PackedScene" uid="uid://dght28oeuiccb" path="res://scenes/level/TeleportArea.tscn" id="14_k7twg"]
 [ext_resource type="PackedScene" uid="uid://8b1uucou5x1l" path="res://scenes/level/PromptArea.tscn" id="16_dj51x"]
 [ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="17_gdaoa"]
-[ext_resource type="Script" path="res://scripts/ui/controller_button_hint.gd" id="18_lhvu1"]
+[ext_resource type="Script" uid="uid://bshhqh6p6rwlx" path="res://scripts/ui/controller_button_hint.gd" id="18_lhvu1"]
 [ext_resource type="PackedScene" uid="uid://7pywjw1t8qqu" path="res://scenes/level/world_map/WorldMapMenu.tscn" id="19_lhvu1"]
 [ext_resource type="PackedScene" uid="uid://dx8fo7wasdbc1" path="res://scenes/ui/loadout/LoadoutUI.tscn" id="20_dq5yt"]
 [ext_resource type="PackedScene" uid="uid://cahss8ju2i2fv" path="res://scenes/ui/SkillTree/SkillTree.tscn" id="21_6p3h5"]
@@ -1812,6 +1812,9 @@ visible = false
 
 [node name="SkillTree" parent="UI" instance=ExtResource("21_6p3h5")]
 visible = false
+
+[node name="BossSpawnPoint" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [editable path="LoadoutPromptArea"]
 [editable path="SkillTreePromptArea"]

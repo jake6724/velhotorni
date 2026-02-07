@@ -1,17 +1,9 @@
-class_name EnemyBullet
-extends Sprite2D
+class_name EnemyBulletBossDeath
+extends EnemyBullet
 
-@onready var collision_area: Area2D = $CollisionArea
-@onready var ap: AnimationPlayer = $AnimationPlayer
+var returning: bool = false
 
-var active: bool = true
-var direction: Vector2
-var spawn_pos: Vector2
-var player_pos: Vector2 = Vector2.ZERO
-var damage: float
-var speed: float
-var max_distance: float
-var follow_on_hit: bool
+signal bullet_returned
 
 func _ready():
 	collision_area.body_entered.connect(on_body_entered)
@@ -19,17 +11,16 @@ func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 	hide()
 
-func initialize(_direction: Vector2, _spawn_pos: Vector2, _damage: int, _speed: float, _max_distance: float, _z_index: int, atlas: CompressedTexture2D) -> void:
+func initialize(_direction: Vector2, _spawn_pos: Vector2, _damage: int, _speed: float, _max_distance: float, _z_index: int, _atlas: CompressedTexture2D) -> void:
 	damage = _damage
 	speed = _speed
 	max_distance = _max_distance
 	spawn_pos = _spawn_pos
 	global_position = _spawn_pos
-	self.texture = atlas
 	z_index = _z_index
 	direction = _direction
 	ap.play("move")
-	await get_tree().create_timer(.001).timeout # TODO: Hmmmmmmmmmmmmmmmm what is this ......... ?
+	await get_tree().create_timer(.001).timeout # 
 	show()
 
 func _physics_process(delta) -> void:
@@ -39,18 +30,25 @@ func move(delta) -> void:
 	if active:
 		global_position += direction * speed * delta
 		if global_position.distance_to(spawn_pos) > max_distance:
-			active = false
-			ap.play("hit")
+			if not returning:
+				returning = true
+				direction = -direction
+				# ap.play("hit")
+		
+		if returning and global_position.distance_to(spawn_pos) <= 1:
+			bullet_returned.emit()
+			queue_free()
 
 ## Used to collide with terrain obstacles
 func on_body_entered(_intruder) -> void:
-	active = false
-	ap.play("hit")
+	pass
+	# active = false
+	# ap.play("hit")
 
 ## Used to collide with and damage player, tower, or enemy if reflected
 func on_area_entered(intruder: Area2D) -> void:
 	if active:
-		active = false
+		# active = false
 		if intruder is PlayerHurtbox:
 			var damage_received = intruder.take_bullet_damage(1, global_position, self)
 			if not damage_received:
@@ -72,7 +70,7 @@ func on_area_entered(intruder: Area2D) -> void:
 			intruder.take_damage(damage)
 			active = false
 
-		ap.play("hit")
+		# ap.play("hit")
 
 func on_animation_finished(anim_name: String) -> void:
 	if anim_name == "hit":
