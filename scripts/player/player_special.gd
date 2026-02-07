@@ -74,7 +74,7 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	
 	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.DASH)
 
-	player.velocity = player.velocity + (dash_power * direction)
+	player.velocity = (dash_power * direction)
 	player_special_activated.emit()
 	await get_tree().create_timer(dash_duration).timeout
 	active = false

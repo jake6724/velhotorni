@@ -25,6 +25,10 @@ extends Resource
 
 @export var special_charge_cooldown_duration: float = 2
 
+@export var dash_power: float
+
+@export var dash_duration: float
+
 @export var perk_data_pool: PerkDataPool
 
 @export var aoe_damage: float = 0.0

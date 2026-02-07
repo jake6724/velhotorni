@@ -129,6 +129,8 @@ func _ready():
 	special_charges_hide_timer.one_shot = true
 	special_charges_hide_timer.timeout.connect(on_special_charges_hide_timer_timeout)
 	add_child(special_charges_hide_timer)
+	player_special.dash_power = player_stats.dash_power
+	player_special.dash_duration = player_stats.dash_duration
 
 	# Configure AnimationPlayers
 	staff_ap.animation_finished.connect(on_staff_animation_finished)

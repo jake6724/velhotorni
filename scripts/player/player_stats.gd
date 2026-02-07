@@ -25,6 +25,9 @@ var aoe_damage: float = 0.0
 var aoe_debuffs: Array[DebuffData] = []
 var aoe_element: Constants.Element = Constants.Element.ARCANE
 
+var dash_power: float
+var dash_duration: float
+
 func load_player_data(data: PlayerData) -> void:
 	max_health = data.max_health
 	base_move_speed = data.base_move_speed
@@ -41,6 +44,8 @@ func load_player_data(data: PlayerData) -> void:
 	aoe_damage = data.aoe_damage
 	aoe_debuffs = data.aoe_debuffs
 	aoe_element = data.aoe_element
+	dash_power = data.dash_power
+	dash_duration = data.dash_duration
 
 var health: float = 8.0:
 	set(value):
