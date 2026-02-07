@@ -20,9 +20,6 @@ var hovered_tower: Tower
 const TOWER_PLACEMENT_RANGE: int = 16
 # const TOWER_MANA_COST_PER_HEAL: int = 1
 const TOWER_HEAL_AMOUNT: int = 25
-const TOWER_SHAKE_DURATION: float = .01
-const TOWER_SHAKE_LOOPS: int = 3
-const TOWER_SHAKE_DISTANCE: float = 1
 
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var shield_tower_scene: PackedScene = preload("res://scenes/towers/ShieldTower.tscn")
@@ -423,16 +420,17 @@ func get_active_debuff_types() -> Array[Debuff.Type]:
 
 func shake_preview_tower() -> void:
 	if preview_tower:
-		var tween: Tween = get_tree().create_tween()
-		tween.set_loops(TOWER_SHAKE_LOOPS)
-		var target = preview_tower.sprite.position.x + TOWER_SHAKE_DISTANCE
-		tween.tween_property(preview_tower.sprite, "position:x", target, TOWER_SHAKE_DURATION)
-		tween.tween_interval(TOWER_SHAKE_DURATION)
-		var return_target = preview_tower.sprite.position.x - TOWER_SHAKE_DISTANCE
-		tween.tween_property(preview_tower.sprite, "position:x", return_target, TOWER_SHAKE_DURATION)
-		tween.tween_interval(TOWER_SHAKE_DURATION)
-		tween.tween_property(preview_tower.sprite, "position:x", 0, TOWER_SHAKE_DURATION)
-		tween.tween_interval(TOWER_SHAKE_DURATION)
+		preview_tower.shake()
+		# var tween: Tween = get_tree().create_tween()
+		# tween.set_loops(TOWER_SHAKE_LOOPS)
+		# var target = preview_tower.sprite.position.x + TOWER_SHAKE_DISTANCE
+		# tween.tween_property(preview_tower.sprite, "position:x", target, TOWER_SHAKE_DURATION)
+		# tween.tween_interval(TOWER_SHAKE_DURATION)
+		# var return_target = preview_tower.sprite.position.x - TOWER_SHAKE_DISTANCE
+		# tween.tween_property(preview_tower.sprite, "position:x", return_target, TOWER_SHAKE_DURATION)
+		# tween.tween_interval(TOWER_SHAKE_DURATION)
+		# tween.tween_property(preview_tower.sprite, "position:x", 0, TOWER_SHAKE_DURATION)
+		# tween.tween_interval(TOWER_SHAKE_DURATION)
 
 func on_wave_started() -> void:
 	lock_in_tower_sell_prices()

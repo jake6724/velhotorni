@@ -168,6 +168,10 @@ const SPEED_BUFF_LEVEL_MODIFIER: float = .3334
 
 const FLOAT_ERROR_MARGIN: float = .00001
 
+const TOWER_SHAKE_DURATION: float = .01
+const TOWER_SHAKE_LOOPS: int = 3
+const TOWER_SHAKE_DISTANCE: float = 1
+
 # TowerData resources
 var data: TowerData
 var base_data: TowerData
@@ -648,6 +652,7 @@ func on_hit(_damage_amount: int) -> void:
 	if health <= 0:
 		die()
 	can_heal = true
+	shake()
 
 func heal(_value: int) -> void:
 	health = min(health + _value, max_health)
@@ -666,3 +671,15 @@ func die() -> void:
 	ap.play("die")
 	await ap.animation_finished
 	queue_free()
+
+func shake() -> void:
+	var tween: Tween = get_tree().create_tween()
+	tween.set_loops(TOWER_SHAKE_LOOPS)
+	var target = sprite.position.x + TOWER_SHAKE_DISTANCE
+	tween.tween_property(sprite, "position:x", target, TOWER_SHAKE_DURATION)
+	tween.tween_interval(TOWER_SHAKE_DURATION)
+	var return_target = sprite.position.x - TOWER_SHAKE_DISTANCE
+	tween.tween_property(sprite, "position:x", return_target, TOWER_SHAKE_DURATION)
+	tween.tween_interval(TOWER_SHAKE_DURATION)
+	tween.tween_property(sprite, "position:x", 0, TOWER_SHAKE_DURATION)
+	tween.tween_interval(TOWER_SHAKE_DURATION)

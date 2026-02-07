@@ -212,7 +212,6 @@ func _ready():
 	primary_action_timer.timeout.connect(on_primary_action_timer_timeout)
 
 func _physics_process(delta): # This can go in a state eventually
-	print(velocity)
 	if alive:
 		# Update Aim
 		player_aim.update_aim(delta, player_input.get_aim_input())
@@ -367,7 +366,6 @@ func on_staff_animation_finished(_anim_name) -> void:
 
 ## Does not update health
 func on_hit(_direction) -> void:
-	print("on hit called. hit = ", hit)
 	if not hit:
 		_direction = Constants.get_closest_cardinal_direction_normalized(_direction)
 		hit = true
@@ -376,10 +374,9 @@ func on_hit(_direction) -> void:
 			modulate.a = 1
 			die()
 			return
-		# print("Pre Updating velocity: ", velocity)
+			
 		hitstun_velocity = _direction * player_stats.knockback_multiplier
 		velocity = hitstun_velocity
-		# print("Post Updating velocity: ", velocity)
 		update_hurtbox_collider(true)
 		hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 
