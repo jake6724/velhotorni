@@ -21,6 +21,7 @@ enum Region {NONE, TUTORIAL, WIND, EARTH, WATER, FIRE, DARK, LIGHT, FINAL}
 @onready var tower_mana_breakables_parent: Node = %TowerManaBreakablesParent
 var tower_mana_breakables: Array[Breakable] = []
 
+@onready var boss_spawn_point = %BossSpawnPoint
 
 @onready var wave_info_panel_parent: Node = %WaveInfoPanelParent
 # Export vars

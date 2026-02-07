@@ -12,6 +12,7 @@ var can_spawn_enemy: bool
 var spawn_timers: Array[Timer] = []
 
 var boss_wave_active: bool = false
+var boss_spawn_position: Vector2 # Comes from the level environment
 
 var path_spawns: Array[Array] = [] # Contains sub-arrays, with each containing all of the spawns for 1 path
 var path_portals: Array = [] 
@@ -76,6 +77,7 @@ func configure_level(active_level: LevelEnvironment):
 	wave_enemy_total_updated.emit(get_wave_enemy_total(WaveManager.active_wave))
 
 	flying_spawn_points = active_level.flying_spawn_points
+	boss_spawn_position = active_level.boss_spawn_point.global_position
 
 ## Oberserves WaveManager.wave_started
 func start_wave() -> void:
@@ -144,7 +146,11 @@ func on_spawn_timer_timeout(path_index: int) -> void:
 func spawn_enemy(_spawn: Spawn) -> void:
 	# Configure new enemy
 	var _enemy_data: EnemyData = _spawn.enemy_data
-	var new_enemy: Enemy = enemy_scenes[_enemy_data.size].instantiate()
+	var new_enemy: Enemy
+	if _enemy_data.enemy_scene:
+		new_enemy = _enemy_data.enemy_scene.instantiate()
+	else:
+		new_enemy = enemy_scenes[_enemy_data.size].instantiate()
 	new_enemy.data = _enemy_data
 	new_enemy.died.connect(on_enemy_died)
 	add_child(new_enemy)
@@ -161,10 +167,17 @@ func spawn_enemy(_spawn: Spawn) -> void:
 
 	if new_enemy is EnemyRanged or new_enemy is EnemyRangedRepeater:
 		new_enemy.configure_ranged_enemy()
+
+	if new_enemy is EnemyBoss:
+		new_enemy.player = player
+		new_enemy.global_position = boss_spawn_position
+		new_enemy.z_as_relative = false
+		new_enemy.z_index = Constants.z_index_map["flying_enemy"] # TODO: Give its own layer!
 	
 	if new_enemy is EnemySnake:
 		new_enemy.configure_snake_enemy()
 
+	# TODO: Rework for new boss system
 	if boss_wave_active: 
 		new_enemy.is_boss = true
 		new_enemy.enemy_damage_recieved.connect(on_boss_enemy_damage_recieved)
