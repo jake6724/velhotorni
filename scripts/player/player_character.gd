@@ -160,6 +160,9 @@ func _ready():
 	player_mana.tower_mana_updated.connect(player_build.on_tower_mana_updated)
 	player_build.tower_action_changed.connect(tower_action_hint.display_tower_action_hint)
 
+	# Configure StaffSprite
+	player_aim.staff_rotation_offset_degrees = staff_sprite.switch_staff_texture(player_spells.active_spell)
+
 	# Connect to ManaDropCollector (SpellMana)
 	mana_drop_collector.mana_drop_collected.connect(on_spell_mana_collected)
 
@@ -201,9 +204,7 @@ func _ready():
 	add_child(primary_action_timer)
 	primary_action_timer.timeout.connect(on_primary_action_timer_timeout)
 
-
 func _physics_process(delta): # This can go in a state eventually
-
 	if alive:
 		# Update Aim
 		player_aim.update_aim(delta, player_input.get_aim_input())
@@ -245,10 +246,11 @@ func place_tower() -> void:
 	player_build.place_tower()
 	player_input.primary_action_pressed = false
 
-func on_spell_cast(spell_data) -> void:
-	if player_spell_spawner.free_cast_rng.randf() > player_spell_spawner.spell_element_free_cast_perk_modifier[spell_data.element]:
-		if WaveManager.wave_active: player_mana.decrement_spell_mana(spell_data)
-		player_hud.update_mana(player_spells.spells.array, player_mana)
+func on_spell_cast(spell_data: SpellData, consume_mana: bool) -> void:
+	if consume_mana:
+		if player_spell_spawner.free_cast_rng.randf() > player_spell_spawner.spell_element_free_cast_perk_modifier[spell_data.element]:
+			if WaveManager.wave_active: player_mana.decrement_spell_mana(spell_data)
+			player_hud.update_mana(player_spells.spells.array, player_mana)
 
 	staff_ap.play("fire")
 	spell_cast.emit()
@@ -260,7 +262,7 @@ func on_spell_cast_failed() -> void:
 	player_input.primary_action_pressed = false
 
 func on_special_input_pressed() -> void:
-	if not player_special.active:
+	if not player_special.active and not hit:
 		player_special.special(player_input.move_input, player_aim.aim_input)
 
 func on_switch_selection_pressed(_switch_direction) -> void:
@@ -354,18 +356,18 @@ func on_staff_animation_finished(_anim_name) -> void:
 
 ## Does not update health
 func on_hit(_direction) -> void:
-	_direction = Constants.get_closest_cardinal_direction_normalized(_direction)
+	print("on hit called. hit = ", hit)
 	if not hit:
+		_direction = Constants.get_closest_cardinal_direction_normalized(_direction)
 		hit = true
 		player_stats.health -= 1
 		if player_stats.health <= 0:
 			modulate.a = 1
 			die()
 			return
-			
+		print("Updating velocity: ", velocity)
 		velocity = _direction * player_stats.knockback_multiplier
-		update_hurtbox_collider(true)
-		velocity = _direction * player_stats.knockback_multiplier
+		# update_hurtbox_collider(true)
 		hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 
 		player_camera.apply_shake(1)

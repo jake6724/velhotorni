@@ -136,7 +136,7 @@ func get_spell_func(_spell_type: SpellData.Type) -> Callable:
 			return parent_spawn_bullet_spell
 
 ## Spawn all bullets defined in the SpellDataBullet resource
-func parent_spawn_bullet_spell(player_aim_direction: Vector2, active_spell_data: SpellData, spell_data_mana_key=null) -> void:
+func parent_spawn_bullet_spell(player_aim_direction: Vector2, active_spell_data: SpellData, spell_data_mana_key=null, consume_mana: bool=true) -> void:
 	if not spell_data_mana_key:
 		spell_data_mana_key = active_spell_data
 
@@ -165,7 +165,7 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2, active_spell_data:
 			angle_seperation += new_spell_data.angle_seperation
 		angle_sign = -angle_sign
 		
-	spell_cast.emit(spell_data_mana_key)
+	spell_cast.emit(spell_data_mana_key, consume_mana)
 
 ## Spawn a single spell bullet
 func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellDataBullet, new_spell_scene: PackedScene, angle_seperation: float, angle_sign: float) -> void:
@@ -182,7 +182,7 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
 
-func spawn_melee_spell(_player_aim_direction: Vector2, active_spell_data: SpellData, spell_data_mana_key=null) -> void:
+func spawn_melee_spell(_player_aim_direction: Vector2, active_spell_data: SpellData, spell_data_mana_key=null, consume_mana: bool=true) -> void:
 	if not spell_data_mana_key:
 		spell_data_mana_key = active_spell_data
 
@@ -207,7 +207,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2, active_spell_data: SpellD
 		new_spell.z_index = player.z_index + 2
 		add_child(new_spell)
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
-		spell_cast.emit(spell_data_mana_key)
+		spell_cast.emit(spell_data_mana_key, consume_mana)
 
 	if new_spell_data.sound_effect:
 		AudioManager.create_2d_audio_at_location(spell_spawn_points[0].global_position, new_spell_data.sound_effect.type)
@@ -227,7 +227,7 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_melee.melee_spell_scene = active_spell_data.melee_spell_scene
 	spell_data_melee.sfx = active_spell_data.melee_sfx
 	spell_data_melee.type = active_spell_data.type
-	spell_data_melee.staff_type = active_spell_data.staff_type
+	# spell_data_melee.staff_type = active_spell_data.staff_type
 	spell_data_melee.element = active_spell_data.element
 	spell_data_melee.damage = active_spell_data.melee_damage
 	spell_data_melee.cooldown = active_spell_data.cooldown
@@ -254,7 +254,7 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_bullet.atlas = active_spell_data.bullet_atlas
 	spell_data_bullet.sfx = active_spell_data.bullet_sfx
 	spell_data_bullet.type = active_spell_data.type
-	spell_data_bullet.staff_type = active_spell_data.staff_type
+	# spell_data_bullet.staff_type = active_spell_data.staff_type
 	spell_data_bullet.element = active_spell_data.element
 	spell_data_bullet.damage = active_spell_data.bullet_damage
 	spell_data_bullet.speed = active_spell_data.speed
@@ -280,10 +280,10 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_bullet.camera_shake = active_spell_data.camera_shake
 	spell_data_bullet.unlock_cost = active_spell_data.unlock_cost
 
-	parent_spawn_bullet_spell(player_aim_direction, spell_data_bullet, active_spell_data)
+	parent_spawn_bullet_spell(player_aim_direction, spell_data_bullet, active_spell_data, false)
 
-func spawn_shield_spell(_player_aim_direction: Vector2) -> void:
-	var new_spell_data: SpellDataShieldDirectional = curr_spell_data
+func spawn_shield_spell(_player_aim_direction: Vector2, active_spell_data: SpellData, spell_data_mana_key=active_spell_data, consume_mana: bool=true) -> void:
+	var new_spell_data: SpellDataShieldDirectional = active_spell_data
 	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
 
 	for shield_spell_spawn_point: Node2D in shield_spell_spawn_points:
@@ -298,7 +298,7 @@ func spawn_shield_spell(_player_aim_direction: Vector2) -> void:
 		new_spell.rotation = _player_aim_direction.angle()
 		new_spell.player_aim = player.player_aim
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
-		spell_cast.emit(new_spell_data)
+		spell_cast.emit(spell_data_mana_key, consume_mana)
 
 	start_attack_cooldown(new_spell_data)
 	player.player_camera.apply_shake(curr_spell_data.camera_shake)

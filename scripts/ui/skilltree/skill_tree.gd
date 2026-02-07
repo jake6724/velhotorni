@@ -102,6 +102,7 @@ func unlock_skill(skill: Skill) -> void:
 	
 	if skill is SpellSkill:
 		PlayerLoadout.spells[skill.data] = true
+		print(PlayerLoadout.spells)
 
 	skill.locked = false
 	StarRegistry.player_star_count -= skill.data.unlock_cost

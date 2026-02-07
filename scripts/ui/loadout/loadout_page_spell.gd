@@ -6,17 +6,16 @@ var equip_spell_card_2: SpellCard
 var equip_spell_card_3: SpellCard 
 var equip_spell_card_4: SpellCard 
 var equip_spell_cards: Array[SpellCard] = []
-@onready var equip_spell_cards_parent: HBoxContainer = %EquipSpellCardsParent
+var chest_spell_cards: Array[SpellCard] = []
 
+@onready var equip_spell_cards_parent: HBoxContainer = %EquipSpellCardsParent
 @onready var spell_name: Label = %SpellName
 @onready var spell_element: Label = %SpellElement
 @onready var spell_desc: Label = %SpellDesc
 @onready var spell_damage_value: Label = %SpellDamageValue
 @onready var spell_capacity_value: Label = %SpellCapacityValue
 @onready var spell_fire_rate_value: Label = %SpellFireRateValue
-
 @onready var chest_spell_cards_parent: GridContainer = %ChestSpellCards
-var chest_spell_cards: Array[SpellCard] = []
 
 var spell_card_scene: PackedScene = preload("res://scenes/ui/loadout/SpellCard.tscn")
 var selected_equip_spell_card: SpellCard = null
@@ -42,6 +41,8 @@ func _ready():
 
 	update_all_chest_disabled()
 
+	StarRegistry.player_star_count_updated.connect(on_player_star_count_updated)
+
 func populate_equip_cards() -> void:
 	for i in range(PlayerLoadout.equipped_spells.size()):
 		var new_spell_card: SpellCard = spell_card_scene.instantiate()
@@ -52,13 +53,22 @@ func populate_equip_cards() -> void:
 		new_spell_card.secondary_press.connect(on_equip_card_secondary_press.bind(new_spell_card))
 
 func populate_chest_cards() -> void:
+	# Get the data that already exists; don't re-add it
+	var existing_data: Array[SpellData] = []
+	for child in chest_spell_cards_parent.get_children():
+		var spell_card: SpellCard = child as SpellCard
+		if spell_card:
+			var spell_card_data: SpellData = spell_card.data
+			existing_data.append(spell_card_data)
+
 	for spell_data: SpellData in PlayerLoadout.spells.keys():
 		if PlayerLoadout.spells[spell_data]:
-			var new_spell_card: SpellCard = spell_card_scene.instantiate()
-			chest_spell_cards_parent.add_child(new_spell_card)
-			new_spell_card.populate(spell_data)
-			new_spell_card.primary_press.connect(on_card_pressed.bind(new_spell_card))
-			new_spell_card.primary_press.connect(on_chest_card_pressed.bind(new_spell_card))
+			if spell_data not in existing_data: # Do not add spell cards more than once per tower data
+				var new_spell_card: SpellCard = spell_card_scene.instantiate()
+				chest_spell_cards_parent.add_child(new_spell_card)
+				new_spell_card.populate(spell_data)
+				new_spell_card.primary_press.connect(on_card_pressed.bind(new_spell_card))
+				new_spell_card.primary_press.connect(on_chest_card_pressed.bind(new_spell_card))
 
 func on_equip_card_pressed(spell_card: SpellCard) -> void:
 	selected_equip_spell_card = spell_card
@@ -103,3 +113,8 @@ func update_player_loadout() -> void:
 	PlayerLoadout.equipped_spell_3 = equip_spell_card_3.data
 	PlayerLoadout.equipped_spell_4 = equip_spell_card_4.data
 	PlayerLoadout.trigger_spell_loadout_update()
+
+func on_player_star_count_updated() -> void:
+	populate_chest_cards()
+	update_all_chest_disabled() 
+

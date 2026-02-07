@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellDataMeleeBullet" load_steps=11 format=3 uid="uid://co8hrkw6td36b"]
 
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_oj8ti"]
-[ext_resource type="Script" path="res://scripts/spells/data/spell_data_melee_bullet.gd" id="1_omgsa"]
+[ext_resource type="Script" uid="uid://lvjqoao88lvn" path="res://scripts/spells/data/spell_data_melee_bullet.gd" id="1_omgsa"]
 [ext_resource type="Texture2D" uid="uid://dwtej0bc78gp2" path="res://assets/art/atlases/bullet/atl_bullet_wind_tornado.png" id="2_oj8ti"]
 [ext_resource type="Resource" uid="uid://4jvf3v73nm3c" path="res://data/debuffs/debuff_data_knockback_feather.tres" id="3_raihf"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="3_t3x6o"]
@@ -32,7 +32,6 @@ pierce = 3
 max_distance = 125.0
 bullet_atlas = ExtResource("2_oj8ti")
 type = 6
-staff_type = 6
 element = 1
 cooldown = 0.6
 debuff_data = ExtResource("3_raihf")
