@@ -89,6 +89,11 @@ signal staff_switched
 ## Used by PlayerClone
 signal spell_cast
 
+
+var normal_velocity: Vector2
+var hitstun_velocity: Vector2
+
+
 func _ready():
 	# Configure PlayerStats
 	player_stats.load_player_data(player_data)
@@ -210,14 +215,19 @@ func _physics_process(delta): # This can go in a state eventually
 		player_aim.update_aim(delta, player_input.get_aim_input())
 		if not hit:
 			if not player_special.active:
+				print("NORMAL VELOCITY")
 				# Update Movement
-				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.move_speed)
+				normal_velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.move_speed)
+				velocity = normal_velocity
 				player_animation.update_animation(delta)
 
 		else: # Hit stun recovery
-			velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
+			print("HIT VELOCITY: ", velocity)
+			hitstun_velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
+			velocity = hitstun_velocity
 			# Check if hitstun complete
-			if velocity == Vector2.ZERO:
+			if hitstun_velocity == Vector2.ZERO:
+				print("Recovered")
 				hit = false
 
 		# Primary Action
@@ -365,8 +375,10 @@ func on_hit(_direction) -> void:
 			modulate.a = 1
 			die()
 			return
-		print("Updating velocity: ", velocity)
-		velocity = _direction * player_stats.knockback_multiplier
+		print("Pre Updating velocity: ", velocity)
+		hitstun_velocity = _direction * player_stats.knockback_multiplier
+		velocity = hitstun_velocity
+		print("Post Updating velocity: ", velocity)
 		update_hurtbox_collider(true)
 		hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 
@@ -438,9 +450,6 @@ func on_tower_mana_spent(_value) -> void:
 	player_mana.tower_mana -= _value
 	player_hud.update_tower_mana(player_mana)
 	player_build_ui.update(player_mana)
-
-func on_velocity_update_requested(new_velocity: Vector2) -> void:
-	velocity = new_velocity
 
 func update_hurtbox_collider(_value) -> void:
 	player_hurtbox.collider.set_deferred("disabled", _value)

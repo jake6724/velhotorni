@@ -347,6 +347,7 @@ func update_current_combat_data() -> void:
 	_leveled_damage = (data.damage + (damage_level * (data.damage * DAMAGE_MODIFIER))) * TowerGlobalData.tower_element_damage_perk_modifier[data.base_element]
 	_leveled_speed = data.speed / (1.0 + (speed_level * SPEED_MODIFIER))
 	_leveled_range = data.attack_range * (1.0 + (range_level * RANGE_MODIFIER))
+	# _level_max_health
 	curr_damage = (_leveled_damage + _damage_buff) * _hex_damage_multiplier
 	curr_speed = (_leveled_speed + _speed_buff) * _hex_speed_multiplier
 	curr_range = (_leveled_range + _range_buff) * _hex_range_multiplier
