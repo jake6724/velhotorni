@@ -367,7 +367,7 @@ func on_hit(_direction) -> void:
 			return
 		print("Updating velocity: ", velocity)
 		velocity = _direction * player_stats.knockback_multiplier
-		# update_hurtbox_collider(true)
+		update_hurtbox_collider(true)
 		hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 
 		player_camera.apply_shake(1)
