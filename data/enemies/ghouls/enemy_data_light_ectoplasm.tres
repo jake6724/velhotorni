@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_1go3e"]
 [ext_resource type="Texture2D" uid="uid://ch0bt4tbqo6p6" path="res://assets/art/atlases/enemy/atl_enemy_light_ectoplasm.png" id="1_cikpg"]
-[ext_resource type="Resource" uid="uid://474ns8pkawgs" path="res://data/boons/boon_data_stealth_light_ectoplasm.tres" id="2_5wxa4"]
+[ext_resource type="Resource" uid="uid://ck7816yuedb31" path="res://data/boons/boon_data_conceal_earth_golem_boss.tres" id="2_5wxa4"]
 [ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="2_7h7l5"]
 [ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="3_66pqq"]
 [ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="5_5wxa4"]
@@ -17,7 +17,7 @@ size = 1
 element = 4
 strong_against_element = 5
 weak_against_element = 3
-health = 750.0
+health = 1250.0
 speed = 20.0
 damage = 2
 tower_mana_drop_chance_base = 10.0

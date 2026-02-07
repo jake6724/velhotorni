@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_oj8ti"]
 [ext_resource type="Script" uid="uid://lvjqoao88lvn" path="res://scripts/spells/data/spell_data_melee_bullet.gd" id="1_omgsa"]
 [ext_resource type="Texture2D" uid="uid://dwtej0bc78gp2" path="res://assets/art/atlases/bullet/atl_bullet_wind_tornado.png" id="2_oj8ti"]
-[ext_resource type="Resource" uid="uid://qllq302csbsr" path="res://data/debuffs/perk_debuffs/debuff_data_knockback_perk.tres" id="3_raihf"]
+[ext_resource type="Resource" uid="uid://4jvf3v73nm3c" path="res://data/debuffs/debuff_data_knockback_feather.tres" id="3_raihf"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="3_t3x6o"]
 [ext_resource type="PackedScene" uid="uid://b6v144q36maw3" path="res://data/spells/melee_spell_scenes/SpellMeleeTornado.tscn" id="5_raihf"]
 [ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="6_62ifq"]
@@ -27,7 +27,7 @@ melee_spell_scene = ExtResource("5_raihf")
 bullet_damage = 30.0
 speed = 150.0
 num_bullets = 3
-angle_seperation = 25.0
+angle_seperation = 15.0
 pierce = 3
 max_distance = 125.0
 bullet_atlas = ExtResource("2_oj8ti")
@@ -35,6 +35,7 @@ type = 6
 element = 1
 cooldown = 0.6
 debuff_data = ExtResource("3_raihf")
+base_spell_mana_per_drop = 12
 initial_mana_amount = 24
 max_mana_amount = 24
 mana_drop_chance = 2.0
