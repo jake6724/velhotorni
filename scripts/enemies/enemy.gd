@@ -179,7 +179,7 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element, execu
 
 		# Apply Weaken modifier
 		damage_recieved = damage_recieved + (damage_recieved * (weaken_percent/100))
-		# number_popup.display_damage_number(damage_recieved, global_position)
+		number_popup.display_damage_number(damage_recieved, global_position)
 
 		var damage_applied: float = min(health, damage_recieved)
 

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://bd70jq50uybp3"]
+
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_jfxjf"]
+[ext_resource type="Texture2D" uid="uid://csvkuy7cttbbn" path="res://assets/art/atlases/enemy/atl_enemy_earth_mushroom.png" id="1_v64wt"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="2_acuyo"]
+[ext_resource type="Resource" uid="uid://b74y7sb6vjpcp" path="res://data/boons/boon_data_speed_earth_mushroom.tres" id="2_xbrww"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="3_bx5bd"]
+[ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="3_jo2pp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbrww"]
+atlas = ExtResource("3_bx5bd")
+region = Rect2(32, 48, 16, 16)
+
+[resource]
+script = ExtResource("2_acuyo")
+element = 3
+strong_against_element = 4
+weak_against_element = 2
+health = 200.0
+speed = 30.0
+tower_mana_drop_chance_base = 2.0
+element_mana_drop_chance = 0.1
+atlas = ExtResource("1_v64wt")
+icon = SubResource("AtlasTexture_xbrww")
+explosion_sfx = ExtResource("3_jo2pp")
+boon_data = ExtResource("2_xbrww")
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

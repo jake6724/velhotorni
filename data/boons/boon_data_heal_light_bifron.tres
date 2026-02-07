@@ -4,16 +4,9 @@
 
 [resource]
 script = ExtResource("1_pnn2g")
-mode = 0
-self_cast = false
 ally_cast = true
 cast_speed = 0.25
 cast_radius = 50.0
-type = 0
-value = 20.0
+value = 5.0
 one_shot = true
-manual_disable = false
-total_duration = 0.0
-repeats = false
-repeat_duration = 0.0
 metadata/_custom_type_script = "uid://dlf5v11rla3hp"

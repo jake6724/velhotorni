@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://nk7l3o4xb7g7"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_db6mk"]
+[ext_resource type="Resource" uid="uid://bd70jq50uybp3" path="res://data/enemies/ghouls/enemy_data_earth_mushroom.tres" id="1_dy28u"]
+
+[resource]
+script = ExtResource("1_db6mk")
+enemy_data = ExtResource("1_dy28u")
+path_index = 1
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"
