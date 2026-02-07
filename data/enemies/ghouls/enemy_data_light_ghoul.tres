@@ -12,24 +12,17 @@ region = Rect2(0, 80, 16, 16)
 
 [resource]
 script = ExtResource("3_kdnea")
-size = 0
 element = 4
 strong_against_element = 5
 weak_against_element = 3
 health = 100.0
 speed = 20.0
-damage = 1
 tower_mana_drop_chance_base = 2.0
 element_mana_drop_chance = 0.05
-element_mana_drop_amount_multiplier = 1.0
 atlas = ExtResource("1_m3cyp")
 icon = SubResource("AtlasTexture_4ro2y")
 show_light = true
 explosion_sfx = ExtResource("2_24baa")
-wind_up = true
-wind_up_duration = 0.5
-hex_data_list = Array[ExtResource("4_i34bl")]([])
-knockback_multiplier = 1.5
 enemy_name = "Ghost"
 enemy_description = "A small spirit doomed to wander for an eternity."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

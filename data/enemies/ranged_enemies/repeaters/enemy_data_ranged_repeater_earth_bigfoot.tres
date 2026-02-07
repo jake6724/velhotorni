@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="EnemyDataRangedRepeater" load_steps=7 format=3 uid="uid://cg056hel8e4cp"]
+
+[ext_resource type="Texture2D" uid="uid://bvyugwb8bon7t" path="res://assets/art/atlases/enemy/atl_enemy_earth_bigfoot.png" id="1_chswl"]
+[ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_j88j8"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_oxhju"]
+[ext_resource type="Script" uid="uid://cfcg6s514pb3d" path="res://scripts/enemies/data/enemy_data_ranged_repeater.gd" id="3_chswl"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="4_0ugmv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmgui"]
+atlas = ExtResource("4_0ugmv")
+region = Rect2(64, 48, 16, 16)
+
+[resource]
+script = ExtResource("3_chswl")
+burst_cooldown = 0.4
+num_bursts = 5
+initial_delay = 2.0
+num_bullets_per_burst = 10
+angle_increment = 36.0
+burst_angle_increment = 18.0
+bullet_speed = 35.0
+bullet_max_distance = 180.0
+size = 7
+element = 3
+strong_against_element = 4
+weak_against_element = 2
+health = 1000.0
+speed = 20.0
+damage = 5
+tower_mana_drop_chance_base = 10.0
+element_mana_drop_chance = 0.75
+element_mana_drop_amount_multiplier = 2.0
+atlas = ExtResource("1_chswl")
+icon = SubResource("AtlasTexture_qmgui")
+metadata/_custom_type_script = "uid://cfcg6s514pb3d"

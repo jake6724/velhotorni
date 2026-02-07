@@ -21,17 +21,18 @@ region = Rect2(0, 105, 217, 15)
 
 [resource]
 script = ExtResource("1_emepg")
-speed = 400.0
+speed = 600.0
 num_bullets = 1
 max_distance = 400.0
 atlas = ExtResource("1_gf4dx")
 element = 5
-damage = 60.0
-cooldown = 0.5
+damage = 100.0
+cooldown = 0.65
 debuff_data = ExtResource("2_66w1m")
-base_spell_mana_per_drop = 15
-initial_mana_amount = 50
-max_mana_amount = 50
+base_spell_mana_per_drop = 6
+initial_mana_amount = 18
+max_mana_amount = 18
+mana_drop_chance = 2.0
 spell_name = "Soul Grinder"
 popup_name = "Soul Grinder"
 desc = "A cursed tool used by some demons to prepare their victims for consumption. It has a lot of kick."

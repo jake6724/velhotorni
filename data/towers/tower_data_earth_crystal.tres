@@ -12,8 +12,8 @@
 script = ExtResource("2_h0ijk")
 element = 14
 base_element = 3
-damage = 24.0
-speed = 0.8
+damage = 25.0
+speed = 0.75
 attack_range = 50.0
 max_health = 125.0
 upgrade_cost_base = 75

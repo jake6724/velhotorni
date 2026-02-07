@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://bqikf2dqaxqv7"]
+
+[ext_resource type="Texture2D" uid="uid://o4yi6a6gmudw" path="res://assets/art/atlases/enemy/atl_enemy_light_bifrons.png" id="1_4ofe4"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_apft0"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="2_80bsf"]
+[ext_resource type="Resource" uid="uid://3p8j08xil8f2" path="res://data/boons/boon_data_heal_light_bifron.tres" id="2_koouy"]
+[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="3_vxosl"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="5_uigbc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oklfh"]
+atlas = ExtResource("5_uigbc")
+region = Rect2(32, 80, 16, 16)
+
+[resource]
+script = ExtResource("2_80bsf")
+size = 1
+element = 4
+strong_against_element = 5
+weak_against_element = 3
+health = 300.0
+speed = 20.0
+damage = 2
+tower_mana_drop_chance_base = 3.0
+element_mana_drop_chance = 0.2
+element_mana_drop_amount_multiplier = 1.5
+atlas = ExtResource("1_4ofe4")
+icon = SubResource("AtlasTexture_oklfh")
+explosion_sfx = ExtResource("3_vxosl")
+boon_data = ExtResource("2_koouy")
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

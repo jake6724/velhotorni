@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SpawnFlying" load_steps=3 format=3 uid="uid://fyi1qeejq54b"]
+
+[ext_resource type="Script" uid="uid://bfdgnsa03uum7" path="res://scripts/enemies/spawn_flying.gd" id="1_hkdxs"]
+[ext_resource type="Resource" uid="uid://d0hw4ahcnc0cp" path="res://data/enemies/flying_enemies/enemy_data_flying_light_phantomsword.tres" id="1_iep8e"]
+
+[resource]
+script = ExtResource("1_hkdxs")
+enemy_data = ExtResource("1_iep8e")
+delay = 0.5
+metadata/_custom_type_script = "uid://bfdgnsa03uum7"
