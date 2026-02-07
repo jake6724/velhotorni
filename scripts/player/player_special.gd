@@ -5,8 +5,8 @@ var active: bool = false
 @onready var player: PlayerCharacter = get_owner()
 
 # Go into data file eventually
-@export var dash_velocity: float = 250.0
-@export var dash_duration: float = .1
+var dash_power: float = 500.0
+var dash_duration: float = .15
 
 var after_image_scene: PackedScene = preload("res://scenes/player/PlayerAfterImage.tscn")
 # This should always remain at 0, it is just a counter var
@@ -33,6 +33,7 @@ const CLONE_RESET_DURATION: float = 12.0
 signal camera_shake_requested
 signal hurtbox_update_requested
 signal special_charge_sprite_update_requested
+## Only used for perks, not oberved by PlayerCharacter
 signal player_special_activated
 
 var special_func: Callable = dash
@@ -73,15 +74,10 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	
 	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.DASH)
 
-	# var boost_velocity: Vector2 = player.velocity + (Vector2(dash_velocity*.25, dash_velocity*.25) * direction)
-	player.velocity = player.velocity + (Vector2(200, 200) * direction)
-	var target: Vector2 = player.velocity + (Vector2(dash_velocity, dash_velocity) * direction)
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(player, "velocity", target, dash_duration)
+	player.velocity = player.velocity + (dash_power * direction)
 	player_special_activated.emit()
-	await tween.finished
+	await get_tree().create_timer(dash_duration).timeout
 	active = false
-	await get_tree().create_timer(.5).timeout
 	hurtbox_update_requested.emit(false)
 	player.set_collision_mask_value(28, true)
 

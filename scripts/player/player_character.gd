@@ -210,24 +210,23 @@ func _ready():
 	primary_action_timer.timeout.connect(on_primary_action_timer_timeout)
 
 func _physics_process(delta): # This can go in a state eventually
+	print(velocity)
 	if alive:
 		# Update Aim
 		player_aim.update_aim(delta, player_input.get_aim_input())
 		if not hit:
 			if not player_special.active:
-				print("NORMAL VELOCITY")
 				# Update Movement
 				normal_velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.move_speed)
 				velocity = normal_velocity
 				player_animation.update_animation(delta)
 
 		else: # Hit stun recovery
-			print("HIT VELOCITY: ", velocity)
 			hitstun_velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
 			velocity = hitstun_velocity
 			# Check if hitstun complete
 			if hitstun_velocity == Vector2.ZERO:
-				print("Recovered")
+	
 				hit = false
 
 		# Primary Action
@@ -375,10 +374,10 @@ func on_hit(_direction) -> void:
 			modulate.a = 1
 			die()
 			return
-		print("Pre Updating velocity: ", velocity)
+		# print("Pre Updating velocity: ", velocity)
 		hitstun_velocity = _direction * player_stats.knockback_multiplier
 		velocity = hitstun_velocity
-		print("Post Updating velocity: ", velocity)
+		# print("Post Updating velocity: ", velocity)
 		update_hurtbox_collider(true)
 		hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 
