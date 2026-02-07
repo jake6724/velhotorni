@@ -10,7 +10,6 @@ region = Rect2(0, 150, 217, 15)
 [resource]
 script = ExtResource("1_6tdgc")
 type = 5
-staff_type = 5
 initial_mana_amount = 0
 max_mana_amount = 0
 staff_texture = SubResource("AtlasTexture_4oavr")
