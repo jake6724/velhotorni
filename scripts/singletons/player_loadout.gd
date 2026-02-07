@@ -11,6 +11,7 @@ func trigger_tower_loadout_update() -> void:
 	equipped_towers = [equipped_tower_1, equipped_tower_2, equipped_tower_3, equipped_tower_4, equipped_tower_5, equipped_tower_6]
 	tower_loadout_updated.emit() 
 
+# SPELLS ###################################################################################################################
 var light_shield: SpellData = load("res://data/spells/light/spell_data_shield_directional_light.tres")
 var arcane_basic: SpellData = load("res://data/spells/spell_data_bullet_arcane_basic.tres")
 var arcane_horn: SpellData = load("res://data/spells/spell_data_bullet_arcane_basic_triple.tres")
@@ -18,20 +19,23 @@ var ice_sword: SpellData = load("res://data/spells/water/spell_data_melee_water_
 var fireball: SpellData = load("res://data/spells/fire/spell_data_bullet_aoe_fireball.tres")
 var tornado: SpellData = load("res://data/spells/spell_data_melee_bullet_wind_tornado.tres")
 var dark_revolver: SpellData = load("res://data/spells/spell_data_bullet_dark_revolver.tres")
+var earth_drill: SpellData = load("res://data/spells/spell_data_bullet_earth_drill.tres")
 
-# SPELLS ###################################################################################################################
 var equipped_spell_1: SpellData = arcane_basic
-var equipped_spell_2: SpellData = tornado
-var equipped_spell_3: SpellData = dark_revolver
-var equipped_spell_4: SpellData = ice_sword
+var equipped_spell_2: SpellData = null
+var equipped_spell_3: SpellData = null
+var equipped_spell_4: SpellData = null
 var equipped_spells: Array[SpellData] = [equipped_spell_1, equipped_spell_2, equipped_spell_3, equipped_spell_4]
 
 var spells: Dictionary[SpellData, bool] = {
-	load("res://data/spells/spell_data_bullet_arcane_basic.tres"): true,
-	load("res://data/spells/spell_data_bullet_arcane_basic_triple.tres"): true,
-	load("res://data/spells/water/spell_data_melee_water_ice_sword.tres"): true,
-	load("res://data/spells/fire/spell_data_bullet_aoe_fireball.tres"): false,
+	arcane_basic: true,
+	arcane_horn: true,
+	ice_sword: true,
+	fireball: false,
 	light_shield: true,
+	tornado: false,
+	dark_revolver: false,
+	earth_drill: false,
 }
 
 # TOWERS ###################################################################################################################

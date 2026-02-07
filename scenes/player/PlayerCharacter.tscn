@@ -1649,7 +1649,6 @@ script = ExtResource("27_h3nqo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBeacon"]
 shape = SubResource("CapsuleShape2D_vy23r")
-disabled = true
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5.5)

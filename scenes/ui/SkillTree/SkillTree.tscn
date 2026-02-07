@@ -1,4 +1,4 @@
-[gd_scene load_steps=246 format=3 uid="uid://cahss8ju2i2fv"]
+[gd_scene load_steps=249 format=3 uid="uid://cahss8ju2i2fv"]
 
 [ext_resource type="Script" uid="uid://ypyma3ofdq7f" path="res://scripts/ui/pannable_scroll_container.gd" id="1_1d7ss"]
 [ext_resource type="Script" uid="uid://dmskb8qcegql3" path="res://scripts/ui/skilltree/skill_tree.gd" id="1_3rcrv"]
@@ -34,7 +34,9 @@
 [ext_resource type="Resource" uid="uid://6d73eb57qvfc" path="res://data/towers/tower_data_light_sun.tres" id="20_kjyia"]
 [ext_resource type="Resource" uid="uid://blmnxjcqyc488" path="res://data/towers/tower_data_dark.tres" id="21_sr1fv"]
 [ext_resource type="Resource" uid="uid://dq4uc4d53yy2p" path="res://data/towers/tower_data_dark_curse.tres" id="22_ronkx"]
+[ext_resource type="Script" uid="uid://bl76qpyojkh77" path="res://scripts/ui/skilltree/spell_skill.gd" id="25_2fixy"]
 [ext_resource type="Texture2D" uid="uid://0yl1m6wb46h7" path="res://assets/art/sprites/ui/atl_ui_spell_icon_locked.png" id="25_cmboo"]
+[ext_resource type="Resource" uid="uid://co8hrkw6td36b" path="res://data/spells/spell_data_melee_bullet_wind_tornado.tres" id="26_isx30"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="26_rnc26"]
 [ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="35_mtx67"]
 [ext_resource type="Texture2D" uid="uid://bw4irqp47tfd7" path="res://assets/art/sprites/ui/spr_ui_letterbox.png" id="36_mtx67"]
@@ -227,10 +229,13 @@ resource_local_to_scene = true
 atlas = ExtResource("7_cg3rd")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h3ooi"]
-resource_local_to_scene = true
-atlas = ExtResource("7_cg3rd")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl48o"]
+atlas = ExtResource("26_rnc26")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5e7d"]
+atlas = ExtResource("25_cmboo")
+region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ugpr"]
 resource_local_to_scene = true
@@ -259,7 +264,7 @@ region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6cpmr"]
 atlas = ExtResource("26_rnc26")
-region = Rect2(49, 1, 14, 15)
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qs4s"]
 atlas = ExtResource("25_cmboo")
@@ -1157,7 +1162,7 @@ texture_normal = SubResource("AtlasTexture_6vsbq")
 data = ExtResource("11_cmboo")
 locked_icon = SubResource("AtlasTexture_es6c7")
 unlocked_icon = SubResource("AtlasTexture_6vsbq")
-prereq_skills = [NodePath("../../SpellSkills/SpellSkill"), NodePath("../../SpellSkills/SpellSkill2")]
+prereq_skills = [NodePath("../../SpellSkills/SpellSkillTornado")]
 
 [node name="TowerSkillWater" parent="PannableScrollContainer/Tree/TowerSkills" instance=ExtResource("2_n2kq2")]
 layout_mode = 0
@@ -1334,14 +1339,19 @@ offset_bottom = 127.0
 texture_normal = SubResource("AtlasTexture_xcyfs")
 prereq_skills = [NodePath("../../TowerSkills/TowerSkillStorm")]
 
-[node name="SpellSkill2" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("6_k7m3q")]
+[node name="SpellSkillTornado" type="TextureButton" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills")]
 layout_mode = 0
 offset_left = 368.0
 offset_top = 127.0
 offset_right = 384.0
 offset_bottom = 143.0
-texture_normal = SubResource("AtlasTexture_h3ooi")
+texture_normal = SubResource("AtlasTexture_wl48o")
+script = ExtResource("25_2fixy")
+data = ExtResource("26_isx30")
+locked_icon = SubResource("AtlasTexture_y5e7d")
+unlocked_icon = SubResource("AtlasTexture_wl48o")
 prereq_skills = [NodePath("../../TowerSkills/TowerSkillStorm")]
+metadata/_custom_type_script = "uid://bl76qpyojkh77"
 
 [node name="SpellSkill3" parent="PannableScrollContainer/Tree/SpellSkills" instance=ExtResource("6_k7m3q")]
 layout_mode = 0
@@ -1388,8 +1398,8 @@ texture_normal = SubResource("AtlasTexture_tj2r1")
 layout_mode = 0
 offset_left = 344.0
 offset_top = 62.0
-offset_right = 360.0
-offset_bottom = 78.0
+offset_right = 358.0
+offset_bottom = 77.0
 texture_normal = SubResource("AtlasTexture_6cpmr")
 locked_icon = SubResource("AtlasTexture_4qs4s")
 unlocked_icon = SubResource("AtlasTexture_6cpmr")

@@ -2,10 +2,10 @@ class_name SpellData
 extends Resource
 
 enum Type {BULLET, BULLET_AOE, MELEE, BULLET_CHARGED, SHIELD_DIRECTIONAL, EMPTY, MELEE_BULLET}
-enum StaffType {ARCANE, WATER_SWORD, FIRE_STAFF, TRIPLE_STAFF, LIGHT_UMBRELLA, EMPTY, FEATHER, DARK_REVOLVER}
+enum StaffType {ARCANE, WATER_SWORD, FIRE_STAFF, TRIPLE_STAFF, LIGHT_UMBRELLA, EMPTY, FEATHER, DARK_REVOLVER, EARTH_DRILL}
 
 @export var type: Type
-@export var staff_type: StaffType = StaffType.ARCANE
+#@export var staff_type: StaffType = StaffType.ARCANE
 
 @export var element: Constants.Element
 @export var damage: float

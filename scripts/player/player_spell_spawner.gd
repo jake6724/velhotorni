@@ -227,7 +227,7 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_melee.melee_spell_scene = active_spell_data.melee_spell_scene
 	spell_data_melee.sfx = active_spell_data.melee_sfx
 	spell_data_melee.type = active_spell_data.type
-	spell_data_melee.staff_type = active_spell_data.staff_type
+	# spell_data_melee.staff_type = active_spell_data.staff_type
 	spell_data_melee.element = active_spell_data.element
 	spell_data_melee.damage = active_spell_data.melee_damage
 	spell_data_melee.cooldown = active_spell_data.cooldown
@@ -254,7 +254,7 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_bullet.atlas = active_spell_data.bullet_atlas
 	spell_data_bullet.sfx = active_spell_data.bullet_sfx
 	spell_data_bullet.type = active_spell_data.type
-	spell_data_bullet.staff_type = active_spell_data.staff_type
+	# spell_data_bullet.staff_type = active_spell_data.staff_type
 	spell_data_bullet.element = active_spell_data.element
 	spell_data_bullet.damage = active_spell_data.bullet_damage
 	spell_data_bullet.speed = active_spell_data.speed
@@ -282,8 +282,8 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 
 	parent_spawn_bullet_spell(player_aim_direction, spell_data_bullet, active_spell_data)
 
-func spawn_shield_spell(_player_aim_direction: Vector2) -> void:
-	var new_spell_data: SpellDataShieldDirectional = curr_spell_data
+func spawn_shield_spell(_player_aim_direction: Vector2, active_spell_data: SpellData, spell_data_mana_key=active_spell_data) -> void:
+	var new_spell_data: SpellDataShieldDirectional = active_spell_data
 	var new_spell_scene: PackedScene = spell_scenes[new_spell_data.type]
 
 	for shield_spell_spawn_point: Node2D in shield_spell_spawn_points:
@@ -298,7 +298,7 @@ func spawn_shield_spell(_player_aim_direction: Vector2) -> void:
 		new_spell.rotation = _player_aim_direction.angle()
 		new_spell.player_aim = player.player_aim
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
-		spell_cast.emit(new_spell_data)
+		spell_cast.emit(spell_data_mana_key)
 
 	start_attack_cooldown(new_spell_data)
 	player.player_camera.apply_shake(curr_spell_data.camera_shake)

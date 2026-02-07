@@ -160,6 +160,9 @@ func _ready():
 	player_mana.tower_mana_updated.connect(player_build.on_tower_mana_updated)
 	player_build.tower_action_changed.connect(tower_action_hint.display_tower_action_hint)
 
+	# Configure StaffSprite
+	player_aim.staff_rotation_offset_degrees = staff_sprite.switch_staff_texture(player_spells.active_spell)
+
 	# Connect to ManaDropCollector (SpellMana)
 	mana_drop_collector.mana_drop_collected.connect(on_spell_mana_collected)
 
