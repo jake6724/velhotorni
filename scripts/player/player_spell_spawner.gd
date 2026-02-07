@@ -298,7 +298,7 @@ func spawn_shield_spell(_player_aim_direction: Vector2, active_spell_data: Spell
 		new_spell.rotation = _player_aim_direction.angle()
 		new_spell.player_aim = player.player_aim
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
-		spell_cast.emit(spell_data_mana_key)
+		spell_cast.emit(spell_data_mana_key, consume_mana)
 
 	start_attack_cooldown(new_spell_data)
 	player.player_camera.apply_shake(curr_spell_data.camera_shake)

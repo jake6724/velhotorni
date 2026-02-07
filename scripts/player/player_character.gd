@@ -204,9 +204,7 @@ func _ready():
 	add_child(primary_action_timer)
 	primary_action_timer.timeout.connect(on_primary_action_timer_timeout)
 
-
 func _physics_process(delta): # This can go in a state eventually
-
 	if alive:
 		# Update Aim
 		player_aim.update_aim(delta, player_input.get_aim_input())
@@ -264,7 +262,7 @@ func on_spell_cast_failed() -> void:
 	player_input.primary_action_pressed = false
 
 func on_special_input_pressed() -> void:
-	if not player_special.active:
+	if not player_special.active and not hit:
 		player_special.special(player_input.move_input, player_aim.aim_input)
 
 func on_switch_selection_pressed(_switch_direction) -> void:
@@ -358,18 +356,18 @@ func on_staff_animation_finished(_anim_name) -> void:
 
 ## Does not update health
 func on_hit(_direction) -> void:
-	_direction = Constants.get_closest_cardinal_direction_normalized(_direction)
+	print("on hit called. hit = ", hit)
 	if not hit:
+		_direction = Constants.get_closest_cardinal_direction_normalized(_direction)
 		hit = true
 		player_stats.health -= 1
 		if player_stats.health <= 0:
 			modulate.a = 1
 			die()
 			return
-			
+		print("Updating velocity: ", velocity)
 		velocity = _direction * player_stats.knockback_multiplier
-		update_hurtbox_collider(true)
-		velocity = _direction * player_stats.knockback_multiplier
+		# update_hurtbox_collider(true)
 		hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 
 		player_camera.apply_shake(1)
