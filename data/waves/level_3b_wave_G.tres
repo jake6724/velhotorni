@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Wave" load_steps=22 format=3 uid="uid://bdsqojauedq27"]
+[gd_resource type="Resource" script_class="Wave" load_steps=20 format=3 uid="uid://bdsqojauedq27"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_yn8x8"]
 [ext_resource type="Resource" uid="uid://b7870v870xpqv" path="res://data/spawn/spawn_light_kuse_10.tres" id="2_1qt2o"]
@@ -14,16 +14,14 @@
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="12_g30bm"]
 [ext_resource type="Resource" uid="uid://bdm8bvwg431dx" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_dark_armor_1.tres" id="12_kgso6"]
 [ext_resource type="Resource" uid="uid://cohbf4dffiqyq" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_earth_mudman_10.tres" id="13_argof"]
-[ext_resource type="Resource" uid="uid://b6ar8i47q6jl0" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_1_light_ectoplasm_1.tres" id="14_6mcuf"]
 [ext_resource type="Resource" uid="uid://ccsvnn47vtltj" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_wind_barbatos.tres" id="14_kgso6"]
 [ext_resource type="Resource" uid="uid://b668sucylpsqa" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_wind_barbatos.tres" id="16_argof"]
-[ext_resource type="Resource" uid="uid://d02b6wy2b0ebc" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_light_ectoplasm_1.tres" id="17_2aknn"]
 [ext_resource type="Resource" uid="uid://dijvdeif86xw5" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_3_wind_ghoul_half.tres" id="18_2aknn"]
 [ext_resource type="Resource" uid="uid://bbamx88l3ph2u" path="res://data/spawn/spawn_path_2_ranged/spawn_fire_path_3_ukobach_1.tres" id="19_6lwp4"]
 [ext_resource type="Resource" uid="uid://cxras4u2e55ou" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_3_earth_mushroom_1.tres" id="20_6lwp4"]
 
 [resource]
 script = ExtResource("12_g30bm")
-data = Array[ExtResource("1_yn8x8")]([ExtResource("2_1qt2o"), ExtResource("3_aeuo2"), ExtResource("8_cqegs"), ExtResource("9_6mcuf"), ExtResource("10_arq3j"), ExtResource("11_5hagp"), ExtResource("12_kgso6"), ExtResource("13_argof"), ExtResource("14_kgso6"), ExtResource("14_6mcuf"), ExtResource("8_cqegs"), ExtResource("10_arq3j"), ExtResource("16_argof"), ExtResource("17_2aknn"), ExtResource("11_5hagp"), ExtResource("13_argof"), ExtResource("4_s0afv"), ExtResource("5_x27uy"), ExtResource("6_ydiod"), ExtResource("7_6ibyc"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("20_6lwp4"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("19_6lwp4"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn")])
+data = Array[ExtResource("1_yn8x8")]([ExtResource("2_1qt2o"), ExtResource("3_aeuo2"), ExtResource("8_cqegs"), ExtResource("9_6mcuf"), ExtResource("10_arq3j"), ExtResource("11_5hagp"), ExtResource("12_kgso6"), ExtResource("13_argof"), ExtResource("14_kgso6"), ExtResource("8_cqegs"), ExtResource("9_6mcuf"), ExtResource("10_arq3j"), ExtResource("16_argof"), ExtResource("12_kgso6"), ExtResource("11_5hagp"), ExtResource("13_argof"), ExtResource("4_s0afv"), ExtResource("5_x27uy"), ExtResource("6_ydiod"), ExtResource("7_6ibyc"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("20_6lwp4"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("19_6lwp4"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn")])
 token_reward = 150
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
