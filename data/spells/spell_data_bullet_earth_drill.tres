@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="SpellDataBullet" load_steps=9 format=3 uid="uid://bxp4u1i0065af"]
+[gd_resource type="Resource" script_class="SpellDataBullet" load_steps=10 format=3 uid="uid://bxp4u1i0065af"]
 
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_ufp23"]
 [ext_resource type="Script" uid="uid://r20hlvy6xofu" path="res://scripts/spells/data/spell_data_bullet.gd" id="1_y4yb0"]
 [ext_resource type="Texture2D" uid="uid://c0rsg1a2vxv7e" path="res://assets/art/atlases/bullet/atl_bullet_earth.png" id="1_y673t"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="3_sae2i"]
 [ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="5_ov7cu"]
+[ext_resource type="Resource" uid="uid://bds6mmcydfdt6" path="res://data/audio/sfx/sfx_earth_lance.tres" id="5_x141r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sae2i"]
 atlas = ExtResource("1_ufp23")
@@ -37,5 +38,6 @@ desc = "Earth Drill"
 active_icon = SubResource("AtlasTexture_sae2i")
 inactive_icon = SubResource("AtlasTexture_ov7cu")
 staff_texture = SubResource("AtlasTexture_x141r")
+sound_effect = ExtResource("5_x141r")
 camera_shake = 1.0
 metadata/_custom_type_script = "uid://r20hlvy6xofu"

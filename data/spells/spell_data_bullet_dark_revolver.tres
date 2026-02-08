@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpellDataBullet" load_steps=10 format=3 uid="uid://bcsl0e0prk758"]
+[gd_resource type="Resource" script_class="SpellDataBullet" load_steps=11 format=3 uid="uid://bcsl0e0prk758"]
 
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_66w1m"]
 [ext_resource type="Script" uid="uid://r20hlvy6xofu" path="res://scripts/spells/data/spell_data_bullet.gd" id="1_emepg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://c8y4s3ogp8lsx" path="res://data/debuffs/debuff_data_weaken_dark.tres" id="2_66w1m"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="4_31oy8"]
 [ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="6_bn2lt"]
+[ext_resource type="Resource" uid="uid://cqi7c6fw5otxt" path="res://data/audio/sfx/sfx_dark_revolver.tres" id="6_i0atv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_31oy8"]
 atlas = ExtResource("1_66w1m")
@@ -39,5 +40,6 @@ desc = "A cursed tool used by some demons to prepare their victims for consumpti
 active_icon = SubResource("AtlasTexture_31oy8")
 inactive_icon = SubResource("AtlasTexture_bn2lt")
 staff_texture = SubResource("AtlasTexture_i0atv")
+sound_effect = ExtResource("6_i0atv")
 camera_shake = 0.8
 metadata/_custom_type_script = "uid://r20hlvy6xofu"
