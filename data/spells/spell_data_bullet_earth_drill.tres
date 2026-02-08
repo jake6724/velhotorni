@@ -20,15 +20,15 @@ region = Rect2(0, 135, 217, 15)
 
 [resource]
 script = ExtResource("1_y4yb0")
-speed = 300.0
+speed = 600.0
 num_bullets = 1
 pierce = 5
 max_distance = 500.0
 spread = 3.0
 atlas = ExtResource("1_y673t")
 element = 3
-damage = 75.0
-cooldown = 1.0
+damage = 100.0
+cooldown = 2.0
 initial_mana_amount = 20
 max_mana_amount = 20
 spell_name = "Earth Drill"
@@ -37,4 +37,5 @@ desc = "Earth Drill"
 active_icon = SubResource("AtlasTexture_sae2i")
 inactive_icon = SubResource("AtlasTexture_ov7cu")
 staff_texture = SubResource("AtlasTexture_x141r")
+camera_shake = 1.0
 metadata/_custom_type_script = "uid://r20hlvy6xofu"
