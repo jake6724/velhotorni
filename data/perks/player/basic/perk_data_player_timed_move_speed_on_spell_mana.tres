@@ -7,11 +7,11 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4w4fw"]
 atlas = ExtResource("1_bt72r")
-region = Rect2(48, 288, 48, 48)
+region = Rect2(0, 432, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_68huv"]
 atlas = ExtResource("2_4w4fw")
-region = Rect2(16, 96, 16, 16)
+region = Rect2(0, 144, 16, 16)
 
 [resource]
 script = ExtResource("1_r3i8v")
@@ -25,4 +25,3 @@ perk_mini_icon = SubResource("AtlasTexture_68huv")
 perk_name = "Wind's Blessing"
 perk_desc = "Picking up summoning mana grants a {value}% move speed buff for 3 seconds. Stacks up to 6 times."
 perk_value_display_mode = 1
-metadata/_custom_type_script = "uid://tx0ls1d4gwxv"
