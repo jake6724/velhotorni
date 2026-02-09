@@ -29,7 +29,6 @@ max_distance = 90.0
 spread = 1.0
 atlas = ExtResource("1_xb1lc")
 sfx = ExtResource("3_fwiyq")
-staff_type = 3
 element = 19
 damage = 6.0
 cooldown = 0.2
