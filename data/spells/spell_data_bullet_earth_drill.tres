@@ -32,6 +32,7 @@ damage = 100.0
 cooldown = 2.0
 initial_mana_amount = 20
 max_mana_amount = 20
+kickback_power = 350.0
 spell_name = "Earth Drill"
 popup_name = "Earth Drill"
 desc = "Earth Drill"

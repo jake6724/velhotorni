@@ -12,7 +12,7 @@ region = Rect2(96, 48, 16, 16)
 
 [resource]
 script = ExtResource("2_pguf8")
-size = 2
+size = 3
 element = 3
 strong_against_element = 4
 weak_against_element = 2

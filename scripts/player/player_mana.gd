@@ -10,7 +10,6 @@ var spell_mana_maxes: Dictionary[SpellData, float] = {}
 var spell_mana_low: Dictionary[SpellData, bool] = {}
 
 var timer: Timer = Timer.new()
-var regen_rate: float = 1
 
 var tower_mana: float = 0:
 	set(value):
@@ -18,13 +17,13 @@ var tower_mana: float = 0:
 		tower_mana_updated.emit(tower_mana)
 
 signal tower_mana_updated
+signal weapon_max_mana_updated
 
 func _ready():
 	timer.autostart = false
 	timer.one_shot = false
 	timer.timeout.connect(on_timer_timeout)
 	add_child(timer)
-# timer.start(regen_rate)
 
 func on_timer_timeout() -> void:
 	increment_spell_mana(preload("res://data/spells/spell_data_bullet_arcane_basic.tres"), 1)
@@ -65,3 +64,4 @@ func increase_all_weapon_of_element_max_mana(element: Constants.Element, value: 
 		if spell_data.element == element:
 			spell_mana_maxes[spell_data] += (spell_mana_max_base[spell_data] * value)
 			spell_mana[spell_data] = spell_mana_maxes[spell_data]
+	weapon_max_mana_updated.emit()

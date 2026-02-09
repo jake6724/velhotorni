@@ -89,6 +89,8 @@ const PRIMARY_ACTION_TIMER_DELAY: float = 2
 const KICKBACK_DURATION_MULTIPLIER: float = 5000.0
 const MELEE_DASH_DURATION_MULTIPLIER: float = 5000.0
 
+const PLAYER_HEART_SCENE = preload("res://scenes/ui/player/PlayerHeart.tscn")
+
 signal player_respawned
 
 ## Used by PlayerClone
@@ -156,6 +158,7 @@ func _ready():
 	# Configure PlayerHUD
 	player_hud.initialize(player_spells.spells.array, player_mana, player_stats, player_build)
 	player_stats.health_updated.connect(player_hud.on_health_updated)
+	player_mana.weapon_max_mana_updated.connect(player_hud.on_weapon_max_mana_updated.bind(player_spells, player_mana))
 	# WaveManager.wave_completed.connect(func(): coin_collector.magnet_collider.shape.radius *= 5)
 
 	# Configure PlayerReticleAmmo
@@ -490,9 +493,10 @@ func on_swap_input_type() -> void:
 	player_aim.swap_input_type()
 
 func on_weapon_select_pressed(index: int) -> void:
-	player_spells.switch_to_index(index)
-	player_hud.update_spells(player_spells.spells.array)
-	player_hud.update_mana(player_spells.spells.array, player_mana)
+	if player_hud.weapons.visible:
+		player_spells.switch_to_index(index)
+		player_hud.update_spells(player_spells.spells.array)
+		player_hud.update_mana(player_spells.spells.array, player_mana)
 
 func update_reticle_ammo(_value: float) -> void:
 	reticle_ammo.value = _value
@@ -530,6 +534,11 @@ func display_hearts(_health) -> void:
 		heart.flash()
 
 	player_hearts_timer.start(DISPLAY_HEARTS_DURATION)
+
+func add_hearts(_count: int) -> void:
+	for i in range(_count):
+		var new_heart: PlayerHeart = PLAYER_HEART_SCENE.instantiate()
+		player_hearts.add_child(new_heart)
 
 func on_player_hearts_timer_timeout() -> void:
 	player_hearts.hide()

@@ -3,6 +3,7 @@ extends Area2D
 
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var collider: CollisionShape2D = $CollisionShape2D
 
 var health: float = 20.0
 

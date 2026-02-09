@@ -35,6 +35,7 @@ cooldown = 0.1
 base_spell_mana_per_drop = 999
 initial_mana_amount = 999
 max_mana_amount = 999
+kickback_power = 10.0
 spell_name = "Standard Issue Wand"
 popup_name = "Standard Issue Wand"
 desc = "The common tool of the king's finest. Rapidly fires bolts of arcane magic."

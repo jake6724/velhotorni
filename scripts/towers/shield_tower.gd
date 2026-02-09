@@ -9,12 +9,15 @@ const NUM_OF_SHIELDS: int = 4
 
 var shield_spawn_position_modifiers: Array[Vector2] = [Vector2(30,0), Vector2(-30,0), Vector2(0,30), Vector2(0,-30)]
 
+## Only used internally to ensure that disabling all shields only occurs after the shields have been created
+signal shield_setup_complete
+
 func child_initialize() -> void:
-	spawn_shields()
 	WaveManager.wave_completed.connect(spawn_shields)
-# func _input(event):
-# 	if Input.is_action_just_pressed("g"):
-# 		spawn_shields()
+	spawn_shields()
+	await shield_setup_complete
+	set_all_shield_colliders_disabled(true)
+
 
 func child_physics_process(delta: float) -> void:
 	tower_shield_parent.rotation_degrees += (delta * ROTATION_SPEED_MULTIPLIER)
@@ -39,7 +42,6 @@ func on_shield_ready() -> void:
 	set_physics_process(false)
 	tower_shield_parent.rotation_degrees = 0
 	var shields = tower_shield_parent.get_children()
-	
 	for i in range(NUM_OF_SHIELDS):
 		shields[i].z_index -= 1
 		shields[i].global_position = (tower_shield_parent.global_position + shield_spawn_position_modifiers[i])
@@ -48,3 +50,10 @@ func on_shield_ready() -> void:
 			2: shields[i].rotation_degrees = 90
 			3: shields[i].rotation_degrees = -90
 	set_physics_process(true)
+	shield_setup_complete.emit()
+
+func set_all_shield_colliders_disabled(_value: bool) -> void:
+	for tower_shield: TowerShield in tower_shield_parent.get_children():
+		tower_shield.collider.set_deferred("disabled", _value)
+
+

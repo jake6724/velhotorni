@@ -191,6 +191,9 @@ func place_tower() -> void:
 		if WaveManager.wave_active:
 			lock_in_tower_sell_prices()
 
+		if preview_tower is ShieldTower:
+			preview_tower.set_all_shield_colliders_disabled(false)
+
 		# Get a new preview tower
 		create_preview_tower()
 	else:

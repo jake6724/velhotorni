@@ -1741,11 +1741,12 @@ debug_color = Color(0.762496, 0.450093, 0.0390186, 0.42)
 [node name="PlayerHearts" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-offset_left = -17.0
+offset_left = -53.0
 offset_top = 9.0
-offset_right = 23.0
+offset_right = 54.0
 offset_bottom = 16.0
 theme_override_constants/separation = 1
+alignment = 1
 
 [node name="PlayerHeart" parent="PlayerHearts" instance=ExtResource("46_wsgx3")]
 layout_mode = 2

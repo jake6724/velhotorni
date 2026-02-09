@@ -1,6 +1,6 @@
 [gd_scene load_steps=125 format=3 uid="uid://c8cb5f8yo3wc3"]
 
-[ext_resource type="Script" uid="uid://dn6bxxa2tg45m" path="res://scripts/enemies/enemy.gd" id="1_nsxa5"]
+[ext_resource type="Script" uid="uid://bsna5j67twb5p" path="res://scripts/enemies/flying_enemy.gd" id="1_1kn2l"]
 [ext_resource type="Texture2D" uid="uid://bqv3p8q25aqyc" path="res://assets/art/atlases/enemy/atl_enemy_earth_mothman.png" id="2_1kn2l"]
 [ext_resource type="Texture2D" uid="uid://dtggcoamwimd8" path="res://assets/art/atlases/fx/atl_fx_status.png" id="3_pt5jy"]
 [ext_resource type="Texture2D" uid="uid://cy76j8i8ym8mf" path="res://assets/art/sprites/environment/spr_environment_light.png" id="4_8qwp1"]
@@ -901,8 +901,10 @@ resource_local_to_scene = true
 radius = 32.0
 
 [node name="FlyingLargeEnemy" type="Area2D"]
-script = ExtResource("1_nsxa5")
-metadata/_custom_type_script = "uid://dn6bxxa2tg45m"
+collision_layer = 262144
+collision_mask = 0
+script = ExtResource("1_1kn2l")
+metadata/_custom_type_script = "uid://bsna5j67twb5p"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
@@ -920,64 +922,75 @@ vframes = 4
 [node name="FXBurn" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(8, 0)
+position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_u7c86")
 animation = &"burn"
 
 [node name="FXHeal" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(8, 0)
+position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_6lo5p")
 animation = &"heal"
+frame = 10
+frame_progress = 1.0
 
 [node name="FXWeaken" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(8, 8)
+position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_s23m0")
 animation = &"weaken"
+frame_progress = 0.015835682
 
 [node name="FXSpeed" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(8, 0)
+position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_teawl")
 animation = &"speed"
+frame_progress = 0.5686092
 
 [node name="FXStun" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(8, 0)
+position = Vector2(17, 5)
 sprite_frames = SubResource("SpriteFrames_xvqtx")
 animation = &"stun"
+frame_progress = 0.43879396
 
 [node name="FXFreeze" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
-position = Vector2(8, 8)
+position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_hdtt6")
 animation = &"end_freeze"
+frame_progress = 1.0
 
 [node name="FXCleanse" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
-position = Vector2(8, 8)
+position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_jxhdq")
 animation = &"cleanse"
+frame = 10
+frame_progress = 1.0
 
 [node name="FXSlow" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1
-position = Vector2(8, 0)
+position = Vector2(17, 2)
 sprite_frames = SubResource("SpriteFrames_oms5k")
 animation = &"slow"
+frame_progress = 0.059002988
 
 [node name="FXPrevent" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 modulate = Color(1, 1, 1, 0.74902)
 z_index = 2
-position = Vector2(8, 8)
+position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_w4vop")
 animation = &"end_prevent"
+frame = 2
+frame_progress = 1.0
 
 [node name="Light" type="Sprite2D" parent="."]
 visible = false

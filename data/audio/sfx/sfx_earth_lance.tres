@@ -9,4 +9,6 @@
 script = ExtResource("1_4ak2n")
 type = 24
 sounds = Array[AudioStreamMP3]([ExtResource("2_1l7v6"), ExtResource("3_ugw1n"), ExtResource("4_j5kjr")])
+volume = -3.0
+pitch_randomness = 0.1
 metadata/_custom_type_script = "uid://cg5mrsass8jcd"

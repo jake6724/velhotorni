@@ -239,8 +239,6 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_melee.mana_drop_chance = active_spell_data.mana_drop_chance
 	spell_data_melee.mana_cost = active_spell_data.mana_cost
 	spell_data_melee.mana_base_cost = active_spell_data.mana_base_cost
-	spell_data_melee.kickback_power = active_spell_data.kickback_power
-	spell_data_melee.melee_dash_power = active_spell_data.melee_dash_power
 	spell_data_melee.spell_name = active_spell_data.spell_name
 	spell_data_melee.popup_name = active_spell_data.popup_name
 	spell_data_melee.desc = active_spell_data.desc
@@ -250,6 +248,8 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_melee.sound_effect = active_spell_data.sound_effect
 	spell_data_melee.camera_shake = active_spell_data.camera_shake
 	spell_data_melee.unlock_cost = active_spell_data.unlock_cost
+	spell_data_melee.kickback_power = 0
+	spell_data_melee.melee_dash_power = 0
 
 	spawn_melee_spell(player_aim_direction, spell_data_melee, active_spell_data)
 
@@ -282,6 +282,8 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_bullet.sound_effect = active_spell_data.sound_effect
 	spell_data_bullet.camera_shake = active_spell_data.camera_shake
 	spell_data_bullet.unlock_cost = active_spell_data.unlock_cost
+	spell_data_bullet.kickback_power = active_spell_data.kickback_power
+	spell_data_bullet.melee_dash_power = active_spell_data.melee_dash_power
 
 	parent_spawn_bullet_spell(player_aim_direction, spell_data_bullet, active_spell_data, false)
 
