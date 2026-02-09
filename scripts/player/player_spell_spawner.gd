@@ -164,7 +164,7 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2, active_spell_data:
 		if i % 2 == 1:
 			angle_seperation += new_spell_data.angle_seperation
 		angle_sign = -angle_sign
-		
+	player.velocity_bonus_kickback = active_spell_data.kickback_power * -player_aim_direction
 	spell_cast.emit(spell_data_mana_key, consume_mana)
 
 ## Spawn a single spell bullet
@@ -214,7 +214,8 @@ func spawn_melee_spell(_player_aim_direction: Vector2, active_spell_data: SpellD
 
 	start_attack_cooldown(new_spell_data)
 	player.player_camera.apply_shake(curr_spell_data.camera_shake)
-	player.jump_forward()
+	player.velocity_bonus_melee_dash = active_spell_data.melee_dash_power * _player_aim_direction
+	player.velocity_bonus_kickback = active_spell_data.kickback_power * -_player_aim_direction
 	melee_spell_cast.emit()
 
 func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell_data: SpellData) -> void:
@@ -238,6 +239,8 @@ func parent_spawn_melee_bullet_spell(player_aim_direction: Vector2, active_spell
 	spell_data_melee.mana_drop_chance = active_spell_data.mana_drop_chance
 	spell_data_melee.mana_cost = active_spell_data.mana_cost
 	spell_data_melee.mana_base_cost = active_spell_data.mana_base_cost
+	spell_data_melee.kickback_power = active_spell_data.kickback_power
+	spell_data_melee.melee_dash_power = active_spell_data.melee_dash_power
 	spell_data_melee.spell_name = active_spell_data.spell_name
 	spell_data_melee.popup_name = active_spell_data.popup_name
 	spell_data_melee.desc = active_spell_data.desc

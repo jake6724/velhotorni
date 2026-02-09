@@ -2,7 +2,7 @@ class_name PerkDataPool
 extends Resource
 
 @export var perks: Array[PerkData] = [
-	# Player Basic
+	# # Player Basic
 	preload("res://data/perks/player/basic/perk_data_player_health_on_wc.tres"),
 	preload("res://data/perks/player/basic/perk_data_player_max_health.tres"),
 	preload("res://data/perks/player/basic/perk_data_player_move_speed.tres"),
@@ -39,11 +39,11 @@ extends Resource
 	preload("res://data/perks/tower/basic/perk_data_tower_light_upgrade_cost.tres"),
 	preload("res://data/perks/tower/basic/perk_data_tower_dark_upgrade_cost.tres"),
 	preload("res://data/perks/tower/basic/perk_data_tower_earth_upgrade_cost.tres"),
-	# Tower Legendary
+	# # Tower Legendary
 	preload("res://data/perks/tower/legendary/perk_data_tower_lgd_knockback.tres"),
 	preload("res://data/perks/tower/legendary/perk_data_tower_lgd_reflect_chance.tres"),
 
-	# Spell Basic
+	# # Spell Basic
 	preload("res://data/perks/spell/basic/perk_data_spell_damage_fire.tres"),
 	preload("res://data/perks/spell/basic/perk_data_spell_damage_wind.tres"),
 	preload("res://data/perks/spell/basic/perk_data_spell_damage_water.tres"),
@@ -72,7 +72,7 @@ extends Resource
 	preload("res://data/perks/spell/basic/perk_data_spell_double_spell_mana_drop.tres"),
 	preload("res://data/perks/spell/basic/perk_data_spell_debuff_chance_knockback.tres"),
 	preload("res://data/perks/spell/basic/perk_data_spell_mana_drop.tres"),
-	# Spell Legendary
+	# # Spell Legendary
 	preload("res://data/perks/spell/legendary/perk_data_spell_lgd_triple_max_mana_fire_wind_water.tres"),
 	preload("res://data/perks/spell/legendary/perk_data_spell_lgd_mana_drop_chance_dmg_fire.tres"),
 	preload("res://data/perks/spell/legendary/perk_data_spell_lgd_mana_drop_chance_dmg_wind.tres"),
@@ -82,6 +82,6 @@ extends Resource
 	# Base Basic
 	preload("res://data/perks/base/basic/perk_data_base_health_on_wc.tres"),
 	preload("res://data/perks/base/basic/perk_data_base_max_health.tres"),
-	# Base Legendary
+	# # Base Legendary
 	preload("res://data/perks/base/legendary/perk_data_base_lgd_restore_health_on_spell_dmg.tres"),
 ]

@@ -69,6 +69,16 @@ var tower_prices: Dictionary[Constants.Element, int] = {
 	Constants.Element.ARCANE: tower_prices_base[Constants.Element.ARCANE],
 }
 
+var tower_price_modifier: Dictionary[Constants.Element, float] = {
+	Constants.Element.FIRE: 0.0,
+	Constants.Element.WIND: 0.0,
+	Constants.Element.WATER: 0.0,
+	Constants.Element.EARTH: 0.0,
+	Constants.Element.LIGHT: 0.0,
+	Constants.Element.DARK: 0.0,
+	Constants.Element.ARCANE: 0.0,
+}
+
 var tower_upgrade_price_modifier: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE:  1.0,
 	Constants.Element.WIND:  1.0,
@@ -229,12 +239,18 @@ func copy_dict_data(source: Dictionary, copy_to: Dictionary) -> void:
 		copy_to[item] = source[item]
 
 func on_modify_stat_requested(perk_data: PerkDataTower) -> void:
-	# This uses perk_data.base_value instead of value in the other because there is no wrapper for the TowerPerk's signal
 	match perk_data.stat:
-		PerkDataTower.TowerStat.PLACEMENT_COST: 
-			var new_price: int =  int(tower_prices[perk_data.element] - (roundf(tower_prices_base[perk_data.element] * perk_data.base_value)))
-			tower_prices[perk_data.element] = max(new_price, TOWER_MIN_PLACEMENT_PRICE)
+		PerkDataTower.TowerStat.PLACEMENT_COST:
+
+			tower_price_modifier[perk_data.element] += perk_data.base_value
+
+			for element: Constants.Element in tower_prices.keys():
+				tower_prices[element] = int(tower_prices[element] - (roundf(tower_prices_base[element] * tower_price_modifier[Constants.get_base_element(element)])))
 			tower_prices_updated.emit()
+
+			# var new_price: int =  int(tower_prices[perk_data.element] - (roundf(tower_prices_base[perk_data.element] * perk_data.base_value)))
+			# tower_prices[perk_data.element] = max(new_price, TOWER_MIN_PLACEMENT_PRICE)
+			# tower_prices_updated.emit()
 		PerkDataTower.TowerStat.UPGRADE_COST:
 			var new_upgrade_price_modifier: float = tower_upgrade_price_modifier[perk_data.element] + perk_data.base_value
 			tower_upgrade_price_modifier[perk_data.element] = max(new_upgrade_price_modifier, TOWER_MIN_UPGRADE_PRICE_MODIFIER)

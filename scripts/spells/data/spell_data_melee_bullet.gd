@@ -18,6 +18,5 @@ extends SpellData
 @export var angle_seperation: float
 @export var pierce: int
 @export var max_distance: float
-
 @export var bullet_atlas: CompressedTexture2D
 @export var bullet_sfx: SoundEffect

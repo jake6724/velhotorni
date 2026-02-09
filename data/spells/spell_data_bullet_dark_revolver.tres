@@ -33,6 +33,7 @@ base_spell_mana_per_drop = 12
 initial_mana_amount = 24
 max_mana_amount = 24
 mana_drop_chance = 2.0
+kickback_power = 200.0
 spell_name = "Soul Grinder"
 popup_name = "Soul Grinder"
 desc = "A cursed tool used by some demons to prepare their victims for consumption. It has a lot of kick."

@@ -21,7 +21,6 @@ region = Rect2(0, 120, 217, 15)
 [resource]
 script = ExtResource("1_aqs8y")
 atlas = ExtResource("2_chmqo")
-staff_type = 6
 element = 1
 damage = 15.0
 cooldown = 0.4

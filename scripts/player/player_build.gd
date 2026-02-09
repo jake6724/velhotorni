@@ -421,16 +421,6 @@ func get_active_debuff_types() -> Array[Debuff.Type]:
 func shake_preview_tower() -> void:
 	if preview_tower:
 		preview_tower.shake()
-		# var tween: Tween = get_tree().create_tween()
-		# tween.set_loops(TOWER_SHAKE_LOOPS)
-		# var target = preview_tower.sprite.position.x + TOWER_SHAKE_DISTANCE
-		# tween.tween_property(preview_tower.sprite, "position:x", target, TOWER_SHAKE_DURATION)
-		# tween.tween_interval(TOWER_SHAKE_DURATION)
-		# var return_target = preview_tower.sprite.position.x - TOWER_SHAKE_DISTANCE
-		# tween.tween_property(preview_tower.sprite, "position:x", return_target, TOWER_SHAKE_DURATION)
-		# tween.tween_interval(TOWER_SHAKE_DURATION)
-		# tween.tween_property(preview_tower.sprite, "position:x", 0, TOWER_SHAKE_DURATION)
-		# tween.tween_interval(TOWER_SHAKE_DURATION)
 
 func on_wave_started() -> void:
 	lock_in_tower_sell_prices()

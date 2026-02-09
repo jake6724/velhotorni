@@ -20,9 +20,9 @@ var wave_failures: int = 0
 
 const PERK_UI_POPUP_DELAY: float = .2
 
-# func _input(_event):
-# 	if Input.is_action_just_pressed("x"):
-# 		pause_game_with_perk_ui()
+func _input(_event):
+	if Input.is_action_just_pressed("x"):
+		pause_game_with_perk_ui()
 
 func _ready():
 	SceneTransition.scene_transition_complete.connect(set_can_pause.bind(true))

@@ -80,7 +80,14 @@ const DISPLAY_HEARTS_DURATION: float = 2
 
 # Used to trigger the firing playerhud player portrait after a delay of PRIMARY_ACTION_TIMER_DELAY
 var primary_action_timer: Timer = Timer.new()
+
+var velocity_bonus_melee_dash: Vector2 = Vector2.ZERO
+var velocity_bonus_kickback: Vector2 = Vector2.ZERO
+
 const PRIMARY_ACTION_TIMER_DELAY: float = 2
+
+const KICKBACK_DURATION_MULTIPLIER: float = 5000.0
+const MELEE_DASH_DURATION_MULTIPLIER: float = 5000.0
 
 signal player_respawned
 
@@ -88,11 +95,6 @@ signal player_respawned
 signal staff_switched
 ## Used by PlayerClone
 signal spell_cast
-
-
-var normal_velocity: Vector2
-var hitstun_velocity: Vector2
-
 
 func _ready():
 	# Configure PlayerStats
@@ -218,15 +220,17 @@ func _physics_process(delta): # This can go in a state eventually
 		if not hit:
 			if not player_special.active:
 				# Update Movement
-				normal_velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.move_speed)
-				velocity = normal_velocity
+				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.move_speed) + velocity_bonus_melee_dash + velocity_bonus_kickback
+
+				velocity_bonus_melee_dash = velocity_bonus_melee_dash.move_toward(Vector2.ZERO, delta * MELEE_DASH_DURATION_MULTIPLIER)
+				velocity_bonus_kickback = velocity_bonus_kickback.move_toward(Vector2.ZERO, delta * KICKBACK_DURATION_MULTIPLIER)
+				
 				player_animation.update_animation(delta)
 
 		else: # Hit stun recovery
-			hitstun_velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
-			velocity = hitstun_velocity
+			velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
 			# Check if hitstun complete
-			if hitstun_velocity == Vector2.ZERO:
+			if velocity == Vector2.ZERO:
 	
 				hit = false
 
@@ -375,8 +379,7 @@ func on_hit(_direction) -> void:
 			die()
 			return
 			
-		hitstun_velocity = _direction * player_stats.knockback_multiplier
-		velocity = hitstun_velocity
+		velocity = _direction * player_stats.knockback_multiplier
 		update_hurtbox_collider(true)
 		hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 

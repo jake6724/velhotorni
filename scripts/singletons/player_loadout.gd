@@ -23,7 +23,7 @@ var earth_drill: SpellData = load("res://data/spells/spell_data_bullet_earth_dri
 
 var equipped_spell_1: SpellData = arcane_basic
 var equipped_spell_2: SpellData = tornado
-var equipped_spell_3: SpellData = dark_revolver
+var equipped_spell_3: SpellData = earth_drill
 var equipped_spell_4: SpellData = ice_sword
 var equipped_spells: Array[SpellData] = [equipped_spell_1, equipped_spell_2, equipped_spell_3, equipped_spell_4]
 

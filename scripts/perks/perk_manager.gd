@@ -36,7 +36,7 @@ var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
 	PerkData.Rarity.FOUR: 2,
 }
 
-# For testing
+# # For testing
 # var rarity_maxes: Dictionary[PerkData.Rarity, int] = {
 # 	PerkData.Rarity.ONE: 1,
 # 	PerkData.Rarity.TWO: 0,
@@ -57,10 +57,6 @@ var test_perk_data: Array[PerkData] = [
 	preload("res://data/perks/tower/basic/perk_data_tower_burn.tres"), 
 ]
 
-# func _input(_event):
-# 	if Input.is_action_just_pressed("x"):
-# 		for perk_data: PerkData in test_perk_data:
-# 			create_perk(perk_data)
 
 func initialize(_perk_data_pool: PerkDataPool, player_spells: PlayerSpells, player_build: PlayerBuild) -> void:
 	var perk_data_unfiltered: Array[PerkData] = _perk_data_pool.perks

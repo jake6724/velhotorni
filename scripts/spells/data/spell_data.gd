@@ -21,6 +21,9 @@ enum StaffType {ARCANE, WATER_SWORD, FIRE_STAFF, TRIPLE_STAFF, LIGHT_UMBRELLA, E
 var mana_cost: float = 1
 var mana_base_cost = mana_cost
 
+@export var kickback_power: float
+@export var melee_dash_power: float
+
 @export var spell_name: String = ""
 @export var popup_name: String = ""
 @export var desc: String = ""

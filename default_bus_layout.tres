@@ -6,7 +6,6 @@ threshold = -1.0
 ratio = 36.0
 
 [resource]
-bus/0/mute = true
 bus/0/volume_db = 0.265018
 bus/0/effect/0/effect = SubResource("AudioEffectCompressor_j3pel")
 bus/0/effect/0/enabled = true

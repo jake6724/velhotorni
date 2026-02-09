@@ -198,16 +198,31 @@ func get_weighted_random(spawn_chance_array) -> Variant:
 	push_error("get_weighted_random reached final return, which should not be possible")
 	return # Only here to allow for typed return signature. Should never return here
 
-
-
-
-
-
-
-
-
-
-# Crit
+func get_base_element(element: Element) -> Element:
+	match element:
+		Element.FIRE:  return Element.FIRE
+		Element.WIND:  return Element.WIND
+		Element.WATER: return Element.WATER
+		Element.EARTH: return Element.EARTH
+		Element.LIGHT: return Element.LIGHT
+		Element.DARK:  return Element.DARK
+		Element.LAVA: return Element.FIRE
+		Element.PLASMA: return Element.FIRE
+		Element.STORM: return Element.WIND
+		Element.LIGHTNING: return Element.WIND
+		Element.ICE: return Element.WATER
+		Element.FLOOD: return Element.WATER
+		Element.MUD: return Element.EARTH
+		Element.CRYSTAL: return Element.EARTH
+		Element.SPIRIT: return Element.LIGHT
+		Element.SUN: return Element.LIGHT
+		Element.CURSE: return Element.DARK
+		Element.VOID: return Element.DARK
+		Element.ARCANE: return Element.ARCANE
+		Element.NONE: return Element.NONE
+		_: 
+			push_error("Constants.get_base_element() could not match element arg: ", element)
+			return Element.NONE
 
 var element_text: Dictionary[Element, String] ={
 	Element.FIRE: "Fire",

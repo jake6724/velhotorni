@@ -39,6 +39,7 @@ base_spell_mana_per_drop = 12
 initial_mana_amount = 24
 max_mana_amount = 24
 mana_drop_chance = 2.0
+kickback_power = 1000.0
 spell_name = "Feather"
 popup_name = "Feather"
 desc = "A feather"
