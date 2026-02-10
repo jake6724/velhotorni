@@ -170,8 +170,9 @@ func reset_drop_chance() -> void:
 ## Returns the amount of damage actually received (after calculating resistances and other modifiers)
 func take_damage(damage_recieved: float, tower_element: Constants.Element, execution_threshold_recieved: float, _double_spell_mana_drop: bool) -> float:
 	if is_alive:
+		if not is_taking_damage:
+			ap.play("hit")
 		is_taking_damage = true
-		ap.play("hit")
 		AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BULLET_IMPACT_FLESH)
 		# Hit by same element
 		if tower_element == data.element:

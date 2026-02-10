@@ -26,6 +26,7 @@ extends CharacterBody2D
 @onready var graphics_parent: Node2D = %GraphicsParent
 @onready var player_hearts: HBoxContainer = %PlayerHearts
 @onready var player_aoe: PlayerAOE = %PlayerAOE
+@onready var player_alert: PlayerAlert = %PlayerAlert
 
 @onready var character_sprite: Sprite2D = %CharacterSprite
 @onready var ap: AnimationPlayer = $AnimationPlayer
@@ -174,6 +175,10 @@ func _ready():
 
 	# Configure StaffSprite
 	player_aim.staff_rotation_offset_degrees = staff_sprite.switch_staff_texture(player_spells.active_spell)
+
+	# Configure PlayerAlert
+	AlertManager.alert_created.connect(player_alert.create_alert_arrow)
+	AlertManager.alert_expired.connect(player_alert.remove_alert_arrow)
 
 	# Connect to ManaDropCollector (SpellMana)
 	mana_drop_collector.mana_drop_collected.connect(on_spell_mana_collected)

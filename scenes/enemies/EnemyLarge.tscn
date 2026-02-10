@@ -807,7 +807,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_k7o7a"]
 resource_name = "hit"
-length = 0.05
+length = 0.2
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false

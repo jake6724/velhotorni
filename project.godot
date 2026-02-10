@@ -38,6 +38,7 @@ StarRegistry="*res://scripts/singletons/star_registry.gd"
 GlobalSettings="*res://scripts/singletons/global_settings.gd"
 PlayerLoadout="*res://scripts/singletons/player_loadout.gd"
 AudioManager="*res://scenes/audio/AudioManager.tscn"
+AlertManager="*res://scripts/singletons/alert_manager.gd"
 
 [debug]
 

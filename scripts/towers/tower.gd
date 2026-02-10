@@ -172,6 +172,8 @@ const TOWER_SHAKE_DURATION: float = .01
 const TOWER_SHAKE_LOOPS: int = 3
 const TOWER_SHAKE_DISTANCE: float = 1
 
+const TOWER_HEALTH_ALERT_THRESHOLD: float = .35
+
 # TowerData resources
 var data: TowerData
 var base_data: TowerData
@@ -651,6 +653,9 @@ func on_hit(_damage_amount: int) -> void:
 	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_HIT)
 	if health <= 0:
 		die()
+	
+	if (health/max_health) <= TOWER_HEALTH_ALERT_THRESHOLD:
+		AlertManager.submit_new_alert(global_position, Alert.Priority.HIGH, 5.0, "Tower health low!")
 	can_heal = true
 	shake()
 

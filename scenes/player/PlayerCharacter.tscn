@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=135 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Resource" uid="uid://dkeqm5qym5h01" path="res://data/player/player_data_mage.tres" id="2_5mqjb"]
@@ -47,6 +47,7 @@
 [ext_resource type="Script" uid="uid://cifyw7t2d2q8a" path="res://scripts/player/player_aoe.gd" id="46_ahw3v"]
 [ext_resource type="PackedScene" uid="uid://dc40niqoka1bq" path="res://scenes/ui/player/PlayerHeart.tscn" id="46_wsgx3"]
 [ext_resource type="Texture2D" uid="uid://2amsemavchfv" path="res://assets/art/sprites/spr_fx_wind_shockwave.png" id="47_ahw3v"]
+[ext_resource type="Script" uid="uid://db3aor41du651" path="res://scripts/player/player_alert.gd" id="48_rol34"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ykwnp"]
 shader = ExtResource("4_ykwnp")
@@ -1633,6 +1634,7 @@ visible = false
 
 [node name="PlayerHurtbox" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 131072
 collision_mask = 294928
 script = ExtResource("12_gsbha")
@@ -1651,6 +1653,7 @@ script = ExtResource("27_h3nqo")
 shape = SubResource("CapsuleShape2D_vy23r")
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_rwb4p")
 
@@ -1668,6 +1671,7 @@ metadata/_custom_type_script = "uid://ckfb2xehi2wqu"
 
 [node name="PlayerAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("14_kkcsf")
 
 [node name="PlayerParticles" type="GPUParticles2D" parent="."]
@@ -1700,6 +1704,7 @@ disabled = true
 
 [node name="UpgradeActionChargeCircle" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
+visible = false
 offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
@@ -1729,6 +1734,7 @@ script = ExtResource("39_cshdu")
 
 [node name="PitHurtbox" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 0
 collision_mask = 32768
 script = ExtResource("45_rwb4p")
@@ -1766,12 +1772,14 @@ texture = SubResource("AtlasTexture_2u747")
 
 [node name="PlayerAOE" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("46_ahw3v")
 metadata/_custom_type_script = "uid://cifyw7t2d2q8a"
 
 [node name="PlayerAOECollider" type="CollisionShape2D" parent="PlayerAOE"]
+visible = false
 shape = SubResource("CircleShape2D_rol34")
 debug_color = Color(0.84424186, 0.0010430897, 0.9147864, 0.41960785)
 
@@ -1786,6 +1794,7 @@ texture = ExtResource("47_ahw3v")
 hframes = 5
 
 [node name="PlayerGroundBeacon" type="Area2D" parent="."]
+visible = false
 collision_layer = 268435456
 collision_mask = 0
 
@@ -1794,4 +1803,10 @@ position = Vector2(1, 8)
 shape = SubResource("RectangleShape2D_ahw3v")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
+visible = false
 current = true
+
+[node name="PlayerAlert" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("48_rol34")
+metadata/_custom_type_script = "uid://db3aor41du651"
