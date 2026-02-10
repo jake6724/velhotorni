@@ -55,5 +55,3 @@ func on_shield_ready() -> void:
 func set_all_shield_colliders_disabled(_value: bool) -> void:
 	for tower_shield: TowerShield in tower_shield_parent.get_children():
 		tower_shield.collider.set_deferred("disabled", _value)
-
-

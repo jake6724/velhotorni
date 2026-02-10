@@ -19,15 +19,14 @@ region = Rect2(0, 75, 217, 15)
 
 [resource]
 script = ExtResource("2_g4s1j")
-shield_health = 12.0
+shield_health = 20.0
 shield_duration = 6.0
 type = 4
-staff_type = 4
 element = 4
 cooldown = 0.5
-base_spell_mana_per_drop = 2
-initial_mana_amount = 4
-max_mana_amount = 4
+base_spell_mana_per_drop = 3
+initial_mana_amount = 6
+max_mana_amount = 6
 mana_drop_chance = 2.0
 spell_name = "Paladin's Umbrella"
 popup_name = "Paladin's Umbrella"
