@@ -40,6 +40,8 @@ func configure_level(active_level: LevelEnvironment) -> void:
 	# Bosshealthbar
 	boss_wave_health = calc_boss_wave_health()
 
+	can_start_wave = true
+
 ## Intended to be called directly by current `PlayerController`
 func start_wave() -> void:
 	if not wave_active and LevelManager.active_level.can_start_wave:
