@@ -12,6 +12,9 @@ var boss_wave_health: float
 
 var wave_active: bool = false
 
+## Set by PlayerHUD when it completes banner animation
+var can_start_wave: bool = true
+
 signal wave_started
 signal wave_failed
 signal wave_completed
@@ -40,6 +43,7 @@ func configure_level(active_level: LevelEnvironment) -> void:
 ## Intended to be called directly by current `PlayerController`
 func start_wave() -> void:
 	if not wave_active and LevelManager.active_level.can_start_wave:
+		can_start_wave = false
 		is_wave_failed = false
 		if wave_index == 9:
 			final_wave_started.emit()

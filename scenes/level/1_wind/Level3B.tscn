@@ -1,7 +1,8 @@
-[gd_scene load_steps=37 format=4 uid="uid://drn4sppwachxq"]
+[gd_scene load_steps=38 format=4 uid="uid://drn4sppwachxq"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_eds8m"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_l0qwy"]
+[ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/wave_one_fire.tres" id="3_btpk1"]
 [ext_resource type="Resource" uid="uid://co7wcw64w51at" path="res://data/waves/level_3b_wave_1.tres" id="3_eds8m"]
 [ext_resource type="Resource" uid="uid://d0chydhfdxrx4" path="res://data/waves/level_3b_wave_C.tres" id="3_oxg84"]
 [ext_resource type="Resource" uid="uid://qjj0ao54fufb" path="res://data/waves/level_3b_wave_H.tres" id="3_pn61p"]
@@ -1803,7 +1804,7 @@ level_name = "Level 3B"
 region = 2
 initial_gold = 175
 initial_token = 1
-waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_uelw8"), ExtResource("4_h8vnd"), ExtResource("3_oxg84"), ExtResource("6_f1ecl"), ExtResource("7_o7b5e"), ExtResource("8_33jh3"), ExtResource("15_pn61p"), ExtResource("3_pn61p"), ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd")])
+waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_btpk1"), ExtResource("3_uelw8"), ExtResource("4_h8vnd"), ExtResource("3_oxg84"), ExtResource("6_f1ecl"), ExtResource("7_o7b5e"), ExtResource("8_33jh3"), ExtResource("15_pn61p"), ExtResource("3_pn61p"), ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd")])
 
 [node name="AnimationLayer" type="TileMapLayer" parent="."]
 z_index = 1

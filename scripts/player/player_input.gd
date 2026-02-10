@@ -16,6 +16,17 @@ var tower_action_press_multiplier_normal: float = 1.0
 var tower_action_press_multiplier_fast: float = 3.0
 var tower_action_press_multiplier: float = tower_action_press_multiplier_fast
 
+var start_wave_action_pressed: bool = false
+var start_wave_action_charge: float = 0.0
+const START_WAVE_ACTION_CHARGE_MULTIPLIER: float = 150.0
+const START_WAVE_ACTION_DISCHARGE_MULTIPLIER: float = 300.0
+
+var heal_all_action_pressed: bool = false
+var heal_all_action_charge: float = 0.0
+const HEAL_ALL_ACTION_CHARGE_MULTIPLIER: float = 150.0
+const HEAL_ALL_ACTION_DISCHARGE_MULTIPLIER: float = 300.0
+
+
 var input_enabled: bool = true
 
 var can_start_wave: bool = true # Set by Main
@@ -29,6 +40,8 @@ signal switch_tower_action_pressed
 signal weapon_select_pressed
 signal ui_interact_pressed
 signal escape_pressed
+signal start_wave_action_charge_updated
+signal heal_all_action_charge_updated
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -66,6 +79,27 @@ func _process(delta):
 	if upgrade_action_pressed:
 		upgrade_action_charge += delta * tower_action_press_multiplier
 		
+	# Build Phase Button input data
+	if start_wave_action_pressed:
+		start_wave_action_charge += (delta * START_WAVE_ACTION_CHARGE_MULTIPLIER)
+		start_wave_action_charge_updated.emit(start_wave_action_charge)
+		if start_wave_action_charge >= 100:
+			WaveManager.start_wave()
+			start_wave_action_charge = 0
+			start_wave_action_pressed = false
+
+	elif not start_wave_action_pressed and start_wave_action_charge > 0:
+		start_wave_action_charge = max(0, start_wave_action_charge - (delta * START_WAVE_ACTION_DISCHARGE_MULTIPLIER))
+		start_wave_action_charge_updated.emit(start_wave_action_charge)
+	
+	if heal_all_action_pressed:
+		heal_all_action_charge += (delta * HEAL_ALL_ACTION_CHARGE_MULTIPLIER)
+		heal_all_action_charge_updated.emit(heal_all_action_charge)
+
+	elif not heal_all_action_pressed and heal_all_action_charge > 0:
+		heal_all_action_charge = max(0, heal_all_action_charge - (delta * HEAL_ALL_ACTION_DISCHARGE_MULTIPLIER))
+		heal_all_action_charge_updated.emit(heal_all_action_charge)
+
 func _input(event):
 	if input_enabled:
 		check_primary_action_input(event)
@@ -100,9 +134,17 @@ func _input(event):
 		if event.is_action("weapon_select_3") and event.is_pressed() and not event.is_echo():
 			weapon_select_pressed.emit(3)
 
-		if event.is_action("start_wave_action") and event.is_pressed() and not event.is_echo():
-			if can_start_wave:
-				WaveManager.start_wave()
+		if event.is_action("start_wave_action") and event.is_pressed() and WaveManager.can_start_wave:
+			start_wave_action_pressed = true
+
+		if event.is_action("start_wave_action") and event.is_released():
+			start_wave_action_pressed = false
+
+		if event.is_action("heal_all_action") and event.is_pressed():
+			heal_all_action_pressed = true
+
+		if event.is_action("heal_all_action") and event.is_released():
+			heal_all_action_pressed = false 
 
 		if event.is_action("escape") and event.is_pressed() and not event.is_echo():
 			escape_pressed.emit()

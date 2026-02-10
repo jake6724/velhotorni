@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_temu6"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_hlgpr"]
-[ext_resource type="Resource" uid="uid://b6mmygvf76vlc" path="res://data/spawn/spawn_light_kuse_1.tres" id="2_jb8hy"]
+[ext_resource type="Resource" uid="uid://fhwurvcdissg" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_1.tres" id="2_jb8hy"]
 
 [resource]
 script = ExtResource("2_hlgpr")

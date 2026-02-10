@@ -157,7 +157,7 @@ func _ready():
 	player_mana.populate_spell_mana(player_spells.selected_spells)
 
 	# Configure PlayerHUD
-	player_hud.initialize(player_spells.spells.array, player_mana, player_stats, player_build)
+	player_hud.initialize(player_spells.spells.array, player_mana, player_stats, player_build, player_input)
 	player_stats.health_updated.connect(player_hud.on_health_updated)
 	player_mana.weapon_max_mana_updated.connect(player_hud.on_weapon_max_mana_updated.bind(player_spells, player_mana))
 	# WaveManager.wave_completed.connect(func(): coin_collector.magnet_collider.shape.radius *= 5)

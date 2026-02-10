@@ -51,6 +51,11 @@ var enemy_info_count: int
 @onready var banner: Sprite2D = %Banner
 @onready var banner_label: Label = %BannerLabel
 
+@onready var build_phase_buttons: VBoxContainer = %BuildPhaseButtons
+@onready var start_wave_progress_bar: TextureProgressBar = %StartWaveProgressBar
+@onready var heal_all_progress_bar: TextureProgressBar = %HealAllProgressBar
+@onready var heal_all_cost: Label = %HealAllCost
+
 var clear_spell_mana_drop_display_timer: Timer = Timer.new()
 const CLEAR_SPELL_MANA_DROP_DISPLAY_DELAY: float = 3.0
 
@@ -70,6 +75,7 @@ const PLAYER_HUD_HEART_SCENE: PackedScene = preload("res://scenes/ui/player/Play
 signal active_spell_mana_value_calculated
 signal wave_complete_banner_animation_finished
 signal wave_start_banner_animation_finished
+signal heal_all_requested
 
 func _ready():
 	active_spell_mana_label.bbcode_enabled = true
@@ -86,7 +92,7 @@ func _ready():
 	clear_spell_mana_drop_display_timer.timeout.connect(on_spell_mana_popup_timeout)
 	add_child(clear_spell_mana_drop_display_timer)
 
-func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats, player_build: PlayerBuild) -> void:
+func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats, player_build: PlayerBuild, player_input: PlayerInput) -> void:
 	on_spell_loadout_updated(spell_data_list, player_mana)
 	update_spells(spell_data_list)
 	update_mana(spell_data_list, player_mana)
@@ -103,6 +109,14 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 
 	EnemySpawner.wave_enemy_total_updated.connect(on_enemy_total_updated)
 	EnemySpawner.enemy_died.connect(on_enemy_count_decremented)
+
+	player_input.start_wave_action_charge_updated.connect(on_player_input_start_wave_action_charge_updated)
+	player_input.heal_all_action_charge_updated.connect(on_player_input_heal_all_action_charge_updated)
+
+	build_phase_buttons.position.x = -104
+	animate_show_build_phase_buttons()
+
+	wave_complete_banner_animation_finished.connect(on_wave_complete_banner_animation_finished)
 
 func on_spell_loadout_updated(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
 
@@ -297,6 +311,12 @@ func on_wave_complete() -> void:
 
 func on_wave_started() -> void:
 	show_banner("Wave Started", wave_start_banner_animation_finished)
+	animate_hide_build_phase_buttons()
+
+func on_wave_complete_banner_animation_finished() -> void:
+	WaveManager.can_start_wave = true
+	start_wave_progress_bar.value = 0
+	animate_show_build_phase_buttons()
 
 func show_banner(text: String, completed_signal: Signal) -> void:
 	banner_label.text = text
@@ -331,3 +351,25 @@ func add_perk_mini_icon(perk_mini_icon: AtlasTexture):
 
 func on_weapon_max_mana_updated(player_spells: PlayerSpells, player_mana: PlayerMana) -> void:
 	update_mana(player_spells.spells.array, player_mana)
+
+func on_player_input_start_wave_action_charge_updated(_value: float) -> void:
+	if start_wave_progress_bar.visible:
+		start_wave_progress_bar.value = _value
+
+func on_player_input_heal_all_action_charge_updated(_value) -> void:
+	if heal_all_progress_bar.visible:
+		heal_all_progress_bar.value = _value
+		if _value >= 100:
+			heal_all_requested.emit()
+
+func animate_show_build_phase_buttons() -> void:
+	build_phase_buttons.show()
+	var tween = get_tree().create_tween()
+	var target: float = 0
+	tween.tween_property(build_phase_buttons, "position:x", target, .2)
+
+func animate_hide_build_phase_buttons() -> void:
+	build_phase_buttons.hide()
+	var tween = get_tree().create_tween()
+	var target: float = build_phase_buttons.position.x - 104
+	tween.tween_property(build_phase_buttons, "position:x", target, .2)
