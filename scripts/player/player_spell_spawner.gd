@@ -6,11 +6,13 @@ extends Node
 var spell_spawn_points: Array[Node2D] # Set by PlayerCharacter
 var melee_spell_spawn_points: Array[Node2D] 
 var shield_spell_spawn_points: Array[Node2D]
- 
+
 var spell_func: Callable = Callable(parent_spawn_bullet_spell)
 
 var can_attack: bool = true
-var attack_timer: Timer = Timer.new()
+# var attack_timer: Timer = Timer.new()
+
+var spell_cooldown_timers: Dictionary[SpellData, Timer] = {}
 
 var spell_scenes: Dictionary[SpellData.Type, PackedScene] = {
 	SpellData.Type.BULLET: preload("res://scenes/Spells/SpellBullet.tscn"), 
@@ -78,11 +80,20 @@ signal check_can_afford_failed
 signal spell_damage_dealt
 
 func _ready():
-	attack_timer.autostart = false
-	attack_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
-	attack_timer.timeout.connect(on_attack_timer_timeout)
-	add_child(attack_timer)
+	# attack_timer.autostart = false
+	# attack_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	# attack_timer.timeout.connect(on_attack_timer_timeout)
+	# add_child(attack_timer)
 	initialize_perk_debuffs()
+
+func initialize(player_spells: PlayerSpells) -> void:
+	for spell_data: SpellData in player_spells.spells.array:
+		var new_spell_cooldown_timer: Timer = Timer.new()
+		new_spell_cooldown_timer.one_shot = true
+		new_spell_cooldown_timer.autostart = false
+		new_spell_cooldown_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+		add_child(new_spell_cooldown_timer)
+		spell_cooldown_timers[spell_data] = new_spell_cooldown_timer
 
 func set_active_spell(_active_spell_data: SpellData) -> void:
 	curr_spell_data = _active_spell_data
@@ -90,7 +101,7 @@ func set_active_spell(_active_spell_data: SpellData) -> void:
 
 ## Wrapper for the `spell_func` Callable. Used as an easy interface for other scripts to call.
 func spawn_spell(player_aim_direction: Vector2, spell_data: SpellData) -> void:
-	if can_attack:
+	if spell_cooldown_timers[spell_data].is_stopped():
 		can_attack = false
 		if check_can_afford(spell_data):
 			spell_func.call(player_aim_direction.normalized(), spell_data)
@@ -155,7 +166,7 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2, active_spell_data:
 	if new_spell_data.sound_effect:
 		AudioManager.create_2d_audio_at_location(spell_spawn_points[0].global_position, new_spell_data.sound_effect.type)
 
-	start_attack_cooldown(new_spell_data)
+	start_attack_cooldown(spell_data_mana_key)
 	player.player_camera.apply_shake(new_spell_data.camera_shake)
 
 	for i in range(new_spell_data.num_bullets - 1):
@@ -212,7 +223,7 @@ func spawn_melee_spell(_player_aim_direction: Vector2, active_spell_data: SpellD
 	if new_spell_data.sound_effect:
 		AudioManager.create_2d_audio_at_location(spell_spawn_points[0].global_position, new_spell_data.sound_effect.type)
 
-	start_attack_cooldown(new_spell_data)
+	start_attack_cooldown(spell_data_mana_key)
 	player.player_camera.apply_shake(curr_spell_data.camera_shake)
 	player.velocity_bonus_melee_dash = active_spell_data.melee_dash_power * _player_aim_direction
 	player.velocity_bonus_kickback = active_spell_data.kickback_power * -_player_aim_direction
@@ -312,7 +323,8 @@ func spawn_shield_spell(_player_aim_direction: Vector2, active_spell_data: Spell
 
 func start_attack_cooldown(_spell_data: SpellData) -> void:
 	var _cooldown: float = _spell_data.cooldown - (_spell_data.cooldown * spell_element_cooldown_perk_modifier[_spell_data.element])
-	attack_timer.start(_cooldown)
+	spell_cooldown_timers[_spell_data].start(_cooldown)
+	# attack_timer.start(_cooldown)
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true

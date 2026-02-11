@@ -117,6 +117,7 @@ func _ready():
 	GlobalSettings.input_type_changed.connect(on_swap_input_type)
 
 	# Configure PlayerSpellSpawner
+	player_spell_spawner.initialize(player_spells)
 	player_spell_spawner.set_active_spell(player_spells.active_spell)
 	player_spells.active_spell_switched.connect(player_spell_spawner.on_switch_spell)
 	player_spell_spawner.spell_spawn_points.append(spell_spawn_point)
