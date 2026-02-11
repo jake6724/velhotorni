@@ -166,7 +166,7 @@ func _ready():
 	player_hud.active_spell_mana_value_calculated.connect(update_reticle_ammo)
 
 	# Configure PlayerBuild
-	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area, player_mana)
+	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area, player_mana, player_input)
 	player_build.tower_mana_spent.connect(on_tower_mana_spent)
 	player_build.reset_tower_action.connect(on_reset_tower_action)
 	player_build.tower_action_hint_requested.connect(on_tower_action_hint_requested)

@@ -42,6 +42,7 @@ signal ui_interact_pressed
 signal escape_pressed
 signal start_wave_action_charge_updated
 signal heal_all_action_charge_updated
+signal heal_all_action_requested
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -73,32 +74,37 @@ func get_aim_input_mouse() -> Vector2:
 	return aim_input
 
 func _process(delta):
-	if primary_action_pressed:
-		primary_action_charge += delta
+	if input_enabled:
+		if primary_action_pressed:
+			primary_action_charge += delta
 
-	if upgrade_action_pressed:
-		upgrade_action_charge += delta * tower_action_press_multiplier
+		if upgrade_action_pressed:
+			upgrade_action_charge += delta * tower_action_press_multiplier
+			
+		# Build Phase Button input data
+		if start_wave_action_pressed:
+			start_wave_action_charge += (delta * START_WAVE_ACTION_CHARGE_MULTIPLIER)
+			start_wave_action_charge_updated.emit(start_wave_action_charge)
+			if start_wave_action_charge >= 100:
+				WaveManager.start_wave()
+				start_wave_action_charge = 0
+				start_wave_action_pressed = false
+
+		elif not start_wave_action_pressed and start_wave_action_charge > 0:
+			start_wave_action_charge = max(0, start_wave_action_charge - (delta * START_WAVE_ACTION_DISCHARGE_MULTIPLIER))
+			start_wave_action_charge_updated.emit(start_wave_action_charge)
 		
-	# Build Phase Button input data
-	if start_wave_action_pressed:
-		start_wave_action_charge += (delta * START_WAVE_ACTION_CHARGE_MULTIPLIER)
-		start_wave_action_charge_updated.emit(start_wave_action_charge)
-		if start_wave_action_charge >= 100:
-			WaveManager.start_wave()
-			start_wave_action_charge = 0
-			start_wave_action_pressed = false
+		if heal_all_action_pressed:
+			heal_all_action_charge += (delta * HEAL_ALL_ACTION_CHARGE_MULTIPLIER)
+			heal_all_action_charge_updated.emit(heal_all_action_charge)
+			if heal_all_action_charge >= 100:
+				heal_all_action_requested.emit()
+				heal_all_action_charge = 0
+				heal_all_action_pressed = false
 
-	elif not start_wave_action_pressed and start_wave_action_charge > 0:
-		start_wave_action_charge = max(0, start_wave_action_charge - (delta * START_WAVE_ACTION_DISCHARGE_MULTIPLIER))
-		start_wave_action_charge_updated.emit(start_wave_action_charge)
-	
-	if heal_all_action_pressed:
-		heal_all_action_charge += (delta * HEAL_ALL_ACTION_CHARGE_MULTIPLIER)
-		heal_all_action_charge_updated.emit(heal_all_action_charge)
-
-	elif not heal_all_action_pressed and heal_all_action_charge > 0:
-		heal_all_action_charge = max(0, heal_all_action_charge - (delta * HEAL_ALL_ACTION_DISCHARGE_MULTIPLIER))
-		heal_all_action_charge_updated.emit(heal_all_action_charge)
+		elif not heal_all_action_pressed and heal_all_action_charge > 0:
+			heal_all_action_charge = max(0, heal_all_action_charge - (delta * HEAL_ALL_ACTION_DISCHARGE_MULTIPLIER))
+			heal_all_action_charge_updated.emit(heal_all_action_charge)
 
 func _input(event):
 	if input_enabled:

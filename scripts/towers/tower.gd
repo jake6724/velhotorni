@@ -64,7 +64,7 @@ var health: float:
 		tower_health_updated.emit(self)
 
 var can_heal = false # Starts at full health so can't heal
-var heal_cost: float: # Set by player build, using the tower a container to pass along the info
+var heal_cost: float: # Set by player build, using the tower as a container to pass along the info
 	set(value):
 		heal_cost = value
 

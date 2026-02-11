@@ -148,7 +148,6 @@ func set_can_pause(value: bool) -> void:
 	can_pause = value
 
 func pause_game_with_perk_ui() -> void:
-	pass
 	await get_tree().create_timer(PERK_UI_POPUP_DELAY).timeout
 	player_character.player_input.input_enabled = false
 

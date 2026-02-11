@@ -55,6 +55,7 @@ var enemy_info_count: int
 @onready var start_wave_progress_bar: TextureProgressBar = %StartWaveProgressBar
 @onready var heal_all_progress_bar: TextureProgressBar = %HealAllProgressBar
 @onready var heal_all_cost: Label = %HealAllCost
+@onready var heal_all: MarginContainer = %HealAll
 
 var clear_spell_mana_drop_display_timer: Timer = Timer.new()
 const CLEAR_SPELL_MANA_DROP_DISPLAY_DELAY: float = 3.0
@@ -92,6 +93,9 @@ func _ready():
 	clear_spell_mana_drop_display_timer.timeout.connect(on_spell_mana_popup_timeout)
 	add_child(clear_spell_mana_drop_display_timer)
 
+	heal_all_cost.text = str(0)
+	heal_all.hide()
+
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats, player_build: PlayerBuild, player_input: PlayerInput) -> void:
 	on_spell_loadout_updated(spell_data_list, player_mana)
 	update_spells(spell_data_list)
@@ -118,8 +122,9 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 
 	wave_complete_banner_animation_finished.connect(on_wave_complete_banner_animation_finished)
 
-func on_spell_loadout_updated(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
+	player_build.heal_all_cost_updated.connect(on_player_build_heal_all_cost_updated)
 
+func on_spell_loadout_updated(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
 	for i in range(spell_data_list.size()):
 		spell_icons[spell_data_list[i]] = spell_icons_list[i]
 		spell_mana[spell_data_list[i]] = spell_mana_list[i]
@@ -373,3 +378,10 @@ func animate_hide_build_phase_buttons() -> void:
 	var tween = get_tree().create_tween()
 	var target: float = build_phase_buttons.position.x - 104
 	tween.tween_property(build_phase_buttons, "position:x", target, .2)
+
+func on_player_build_heal_all_cost_updated(cost: float) -> void:
+	heal_all_cost.text = str(int(cost))
+	if cost > 0:
+		heal_all.show()
+	else:
+		heal_all.hide()

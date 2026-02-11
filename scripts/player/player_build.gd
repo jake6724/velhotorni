@@ -45,6 +45,7 @@ signal reset_tower_action
 signal tower_action_changed
 signal tower_action_hint_requested
 signal tower_count_updated
+signal heal_all_cost_updated
 
 # func _input(_event):
 # 	if Input.is_action_pressed("x"):
@@ -56,8 +57,10 @@ signal tower_count_updated
 func _ready():
 	add_child(tower_parent)
 	WaveManager.wave_started.connect(on_wave_started)
+	heal_all_cost_updated.emit(0)
+	WaveManager.wave_completed.connect(on_wave_completed)
 
-func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _tower_detect_area: Area2D, player_mana: PlayerMana) -> void:
+func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _tower_detect_area: Area2D, player_mana: PlayerMana, player_input: PlayerInput) -> void:
 	player_build_ui = _player_build_ui
 	build_grid_sprite = _build_grid_sprite
 	tower_detect_area = _tower_detect_area
@@ -80,6 +83,8 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	TowerGlobalData.tower_prices_updated.connect(on_tower_prices_updated)
 
 	player_build_ui.configure_loadout(tower_element_options)
+
+	player_input.heal_all_action_requested.connect(on_player_input_heal_all)
 
 func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
 	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action(hovered_tower):
@@ -428,6 +433,9 @@ func shake_preview_tower() -> void:
 func on_wave_started() -> void:
 	lock_in_tower_sell_prices()
 
+func on_wave_completed() -> void:
+	heal_all_cost_updated.emit(get_heal_all_cost())
+
 func lock_in_tower_sell_prices() -> void:
 	for child in tower_parent.get_children():
 		var tower: Tower = child as Tower
@@ -438,3 +446,19 @@ func lock_in_tower_sell_prices() -> void:
 func on_tower_stat_updated(tower: Tower) -> void:
 	if hovered_tower and hovered_tower == tower:
 		configure_hovered_tower_for_action(hovered_tower)
+
+func on_player_input_heal_all() -> void:
+	# Can't use existing heal tower method, it intentionally only heals hovered tower
+	for tower: Tower in tower_parent.get_children():
+		tower.heal_cost = max(((tower.max_health - tower.health) / TOWER_HEAL_AMOUNT), 1)
+		if tower.heal_cost > 0:
+			tower_mana_spent.emit(tower.heal_cost)
+			tower.heal(tower.max_health)
+
+	heal_all_cost_updated.emit(get_heal_all_cost())
+
+func get_heal_all_cost() -> float:
+	var cost: float = 0
+	for tower: Tower in tower_parent.get_children():
+		cost += max(((tower.max_health - tower.health) / TOWER_HEAL_AMOUNT), 0)
+	return cost
