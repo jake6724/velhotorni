@@ -347,7 +347,6 @@ func add_hearts(_count: int) -> void:
 		player_hearts.add_child(new_heart)
 
 func add_perk_mini_icon(perk_mini_icon: AtlasTexture):
-	print("PlayerHUD.add_perk_mini_icon()")
 	var texture_rect: TextureRect = TextureRect.new()
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP
 	texture_rect.texture = perk_mini_icon
@@ -362,10 +361,22 @@ func on_player_input_start_wave_action_charge_updated(_value: float) -> void:
 		start_wave_progress_bar.value = _value
 
 func on_player_input_heal_all_action_charge_updated(_value) -> void:
-	if heal_all_progress_bar.visible:
+	if heal_all.visible:
 		heal_all_progress_bar.value = _value
-		if _value >= 100:
+		if _value >= 100 and heal_all.visible:
+			print("heal_all.visible: ", heal_all.visible)
+			print("Heal requested")
+			heal_all.hide()
 			heal_all_requested.emit()
+
+func on_player_build_heal_all_cost_updated(cost: float) -> void:
+	cost = int(cost)
+	heal_all_cost.text = str(int(cost))
+	if cost > 0:
+		heal_all.show()
+	else:
+		heal_all.hide()
+		print("heal_all.visible: ", heal_all.visible)
 
 func animate_show_build_phase_buttons() -> void:
 	build_phase_buttons.show()
@@ -378,10 +389,3 @@ func animate_hide_build_phase_buttons() -> void:
 	var tween = get_tree().create_tween()
 	var target: float = build_phase_buttons.position.x - 104
 	tween.tween_property(build_phase_buttons, "position:x", target, .2)
-
-func on_player_build_heal_all_cost_updated(cost: float) -> void:
-	heal_all_cost.text = str(int(cost))
-	if cost > 0:
-		heal_all.show()
-	else:
-		heal_all.hide()

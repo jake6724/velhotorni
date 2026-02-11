@@ -60,7 +60,7 @@ func _ready():
 	heal_all_cost_updated.emit(0)
 	WaveManager.wave_completed.connect(on_wave_completed)
 
-func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _tower_detect_area: Area2D, player_mana: PlayerMana, player_input: PlayerInput) -> void:
+func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _tower_detect_area: Area2D, player_mana: PlayerMana, player_hud: PlayerHUD) -> void:
 	player_build_ui = _player_build_ui
 	build_grid_sprite = _build_grid_sprite
 	tower_detect_area = _tower_detect_area
@@ -83,8 +83,7 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	TowerGlobalData.tower_prices_updated.connect(on_tower_prices_updated)
 
 	player_build_ui.configure_loadout(tower_element_options)
-
-	player_input.heal_all_action_requested.connect(on_player_input_heal_all)
+	player_hud.heal_all_requested.connect(on_player_hud_heal_all_requested)
 
 func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
 	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action(hovered_tower):
@@ -447,18 +446,21 @@ func on_tower_stat_updated(tower: Tower) -> void:
 	if hovered_tower and hovered_tower == tower:
 		configure_hovered_tower_for_action(hovered_tower)
 
-func on_player_input_heal_all() -> void:
+func on_player_hud_heal_all_requested() -> void:
 	# Can't use existing heal tower method, it intentionally only heals hovered tower
 	for tower: Tower in tower_parent.get_children():
 		tower.heal_cost = max(((tower.max_health - tower.health) / TOWER_HEAL_AMOUNT), 1)
 		if tower.heal_cost > 0:
 			tower_mana_spent.emit(tower.heal_cost)
 			tower.heal(tower.max_health)
-
 	heal_all_cost_updated.emit(get_heal_all_cost())
 
 func get_heal_all_cost() -> float:
 	var cost: float = 0
+	# var heal_required: bool = false
 	for tower: Tower in tower_parent.get_children():
-		cost += max(((tower.max_health - tower.health) / TOWER_HEAL_AMOUNT), 0)
+		if tower.can_heal:
+			# heal_required = true
+			cost += max(((tower.max_health - tower.health) / TOWER_HEAL_AMOUNT), 1)
+	
 	return cost

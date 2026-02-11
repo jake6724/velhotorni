@@ -18,7 +18,7 @@ var tower_action_press_multiplier: float = tower_action_press_multiplier_fast
 
 var start_wave_action_pressed: bool = false
 var start_wave_action_charge: float = 0.0
-const START_WAVE_ACTION_CHARGE_MULTIPLIER: float = 150.0
+const START_WAVE_ACTION_CHARGE_MULTIPLIER: float = 250.0
 const START_WAVE_ACTION_DISCHARGE_MULTIPLIER: float = 300.0
 
 var heal_all_action_pressed: bool = false
@@ -98,9 +98,9 @@ func _process(delta):
 			heal_all_action_charge += (delta * HEAL_ALL_ACTION_CHARGE_MULTIPLIER)
 			heal_all_action_charge_updated.emit(heal_all_action_charge)
 			if heal_all_action_charge >= 100:
-				heal_all_action_requested.emit()
 				heal_all_action_charge = 0
 				heal_all_action_pressed = false
+				heal_all_action_charge_updated.emit(heal_all_action_charge)
 
 		elif not heal_all_action_pressed and heal_all_action_charge > 0:
 			heal_all_action_charge = max(0, heal_all_action_charge - (delta * HEAL_ALL_ACTION_DISCHARGE_MULTIPLIER))
