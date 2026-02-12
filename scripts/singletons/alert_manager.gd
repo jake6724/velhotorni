@@ -28,7 +28,9 @@ func add_alert(new_alert: Alert) -> void:
 	add_child(new_alert_timer)
 	new_alert_timer.timeout.connect(on_alert_timer_timeout.bind(new_alert))
 	new_alert_timer.start(new_alert.duration)
-	player_hud_hint_requested.emit(new_alert.text, new_alert.duration)
+
+	if new_alert.text != "":
+		player_hud_hint_requested.emit(new_alert.text, new_alert.duration)
 
 ## Will replace the first instance of a lower priority alert with the newer incoming alert, if there
 ## is a lower priority alert to replace. If there is none, do nothing

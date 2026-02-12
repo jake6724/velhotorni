@@ -14,7 +14,7 @@ extends CharacterBody2D
 @onready var player_hurtbox: Area2D = %PlayerHurtbox
 @onready var player_camera: PlayerCamera = %PlayerCamera
 @onready var player_audio: PlayerAudio = %PlayerAudio
-@onready var player_particles: GPUParticles2D = %PlayerParticles
+@onready var player_walk_particles: GPUParticles2D = %PlayerWalkParticles
 @onready var player_build: PlayerBuild = $PlayerBuild
 @onready var player_hud: PlayerHUD = %PlayerHUD
 @onready var player_mana: PlayerMana = %PlayerMana
@@ -173,6 +173,9 @@ func _ready():
 	player_build.tower_action_hint_requested.connect(on_tower_action_hint_requested)
 	player_mana.tower_mana_updated.connect(player_build.on_tower_mana_updated)
 	player_build.tower_action_changed.connect(tower_action_hint.display_tower_action_hint)
+
+	# Configure PlayerWalkParticles
+	player_aim.sprite_flipped.connect(on_player_aim_sprite_flipped)
 
 	# Configure StaffSprite
 	player_aim.staff_rotation_offset_degrees = staff_sprite.switch_staff_texture(player_spells.active_spell)
@@ -555,3 +558,9 @@ func on_primary_action_timer_timeout() -> void:
 func on_primary_action_released() -> void:
 	primary_action_timer.stop()
 	player_hud.reset_player_portrait()
+
+func on_player_aim_sprite_flipped(_value) -> void:
+	if _value:
+		player_walk_particles.rotation_degrees = 0
+	else:
+		player_walk_particles.rotation_degrees = 180

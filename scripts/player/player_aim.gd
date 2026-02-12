@@ -30,6 +30,8 @@ var update_reticle_func: Callable = update_reticle_combat_func
 var staff_rotation_offset_degrees: float = 0.0
 var staff_rotation_sign: float = 1.0
 
+signal sprite_flipped
+
 func update_aim(delta, new_aim_input):
 	if new_aim_input:
 		aim_input = new_aim_input
@@ -111,6 +113,8 @@ func flip_sprite() -> void:
 		var flip = aim_input.x <= -0.001
 		player.character_sprite.flip_h = flip
 		player.staff_sprite.flip_v = flip
+		sprite_flipped.emit(flip)
+
 
 func swap_input_type() -> void:
 	if GlobalSettings.controller_active:
