@@ -4,6 +4,7 @@ extends SpellData
 # TODO: Add options for burst mode config
 
 @export var speed: float
+@export var speed_randomness: float = 0.0
 
 ## The number of bullets per shot
 @export var num_bullets: int

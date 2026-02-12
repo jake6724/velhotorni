@@ -57,6 +57,9 @@ var enemy_info_count: int
 @onready var heal_all_cost: Label = %HealAllCost
 @onready var heal_all: MarginContainer = %HealAll
 
+@onready var hint_label: Label = %HintLabel
+var hint_timer: Timer = Timer.new()
+
 var clear_spell_mana_drop_display_timer: Timer = Timer.new()
 const CLEAR_SPELL_MANA_DROP_DISPLAY_DELAY: float = 3.0
 
@@ -95,6 +98,14 @@ func _ready():
 
 	heal_all_cost.text = str(0)
 	heal_all.hide()
+
+	hint_timer.one_shot = true
+	hint_timer.autostart = false
+	add_child(hint_timer)
+	hint_timer.timeout.connect(on_hint_timer_timeout)
+	hint_label.hide()
+
+	AlertManager.player_hud_hint_requested.connect(on_alert_manager_player_hud_hint_requested)
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats, player_build: PlayerBuild, player_input: PlayerInput) -> void:
 	on_spell_loadout_updated(spell_data_list, player_mana)
@@ -364,8 +375,6 @@ func on_player_input_heal_all_action_charge_updated(_value) -> void:
 	if heal_all.visible:
 		heal_all_progress_bar.value = _value
 		if _value >= 100 and heal_all.visible:
-			print("heal_all.visible: ", heal_all.visible)
-			print("Heal requested")
 			heal_all.hide()
 			heal_all_requested.emit()
 
@@ -373,11 +382,11 @@ func on_player_build_heal_all_cost_updated(cost: float) -> void:
 	cost = int(cost)
 	heal_all_cost.text = str(int(cost))
 	if cost > 0:
+		heal_all_progress_bar.value = 0
 		heal_all.show()
 	else:
 		heal_all.hide()
-		print("heal_all.visible: ", heal_all.visible)
-
+		
 func animate_show_build_phase_buttons() -> void:
 	build_phase_buttons.show()
 	var tween = get_tree().create_tween()
@@ -389,3 +398,14 @@ func animate_hide_build_phase_buttons() -> void:
 	var tween = get_tree().create_tween()
 	var target: float = build_phase_buttons.position.x - 104
 	tween.tween_property(build_phase_buttons, "position:x", target, .2)
+
+func display_hint_text(_text, duration) -> void:
+	hint_label.text = _text
+	hint_label.show()
+	hint_timer.start(duration)
+
+func on_hint_timer_timeout() -> void:
+	hint_label.hide()
+
+func on_alert_manager_player_hud_hint_requested(_text, _duration) -> void:
+	display_hint_text(_text, _duration)

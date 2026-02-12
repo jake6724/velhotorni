@@ -15,7 +15,6 @@ func _process(_delta):
 		pair[0].look_at(pair[1].global_position)
 
 func create_alert_arrow(_alert: Alert) -> void:
-	print("Creating alert arrow!")
 	var new_arrow: Sprite2D = Sprite2D.new()
 	arrow_data[_alert] = new_arrow
 	arrow_and_alert.append([new_arrow, _alert])
@@ -25,6 +24,7 @@ func create_alert_arrow(_alert: Alert) -> void:
 	new_arrow.global_position = player.global_position
 	new_arrow.offset.x = ALERT_ARROW_OFFSET_X
 	new_arrow.look_at(_alert.global_position)
+	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ALERT)
 
 func remove_alert_arrow(_alert: Alert) -> void:
 	if arrow_data.has(_alert):

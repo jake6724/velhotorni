@@ -7,6 +7,7 @@ extends Spell
 var move_direction: Vector2
 var active: bool = true
 var pierce_count: int = 0
+var speed: float
 
 var original_position: Vector2
 
@@ -15,7 +16,7 @@ func _ready():
 	area.area_entered.connect(on_area_entered)
 	area.body_entered.connect(on_body_entered)
 
-func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_damage_perk_modifier: float, _execution_threshold: float, _double_spell_mana_drop: bool, _perk_debuffs: Array[DebuffData]) -> void:
+func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_damage_perk_modifier: float, _execution_threshold: float, _double_spell_mana_drop: bool, _perk_debuffs: Array[DebuffData], bullet_speed: float) -> void:
 	data = _data
 	original_position = global_position
 	if cast_direction:
@@ -29,9 +30,11 @@ func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_d
 	perk_debuffs = _perk_debuffs
 	texture = data.atlas
 
+	speed = bullet_speed
+
 func move(delta) -> void:
 	if active:
-		global_position += move_direction * data.speed * delta
+		global_position += move_direction * speed * delta
 
 	check_max_distance_reached()
 

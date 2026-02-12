@@ -37,6 +37,7 @@ func _ready():
 	WaveManager.configure_level(LevelManager.active_level)
 	EnemySpawner.configure_level(LevelManager.active_level)
 	TowerGlobalData.reset()
+	AlertManager.configure_level()
 
 	# Configure EnemySpawner
 	EnemySpawner.player = player_character

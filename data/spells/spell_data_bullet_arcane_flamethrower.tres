@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="SpellDataBullet" load_steps=6 format=3 uid="uid://chkrfhdctlapo"]
+
+[ext_resource type="Script" uid="uid://r20hlvy6xofu" path="res://scripts/spells/data/spell_data_bullet.gd" id="1_3s4dy"]
+[ext_resource type="Texture2D" uid="uid://bru0vasbogas4" path="res://assets/art/atlases/bullet/atl_bullet_arcane.png" id="1_arhqk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arhqk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xjk3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fk0sy"]
+
+[resource]
+script = ExtResource("1_3s4dy")
+speed = 60.0
+speed_randomness = 50.0
+num_bullets = 10
+pierce = 1000
+max_distance = 50.0
+spread = 20.0
+atlas = ExtResource("1_arhqk")
+element = 19
+damage = 1.0
+cooldown = 0.1
+active_icon = SubResource("AtlasTexture_arhqk")
+inactive_icon = SubResource("AtlasTexture_5xjk3")
+staff_texture = SubResource("AtlasTexture_fk0sy")
+metadata/_custom_type_script = "uid://r20hlvy6xofu"

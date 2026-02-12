@@ -20,6 +20,7 @@ var fireball: SpellData = load("res://data/spells/fire/spell_data_bullet_aoe_fir
 var tornado: SpellData = load("res://data/spells/spell_data_melee_bullet_wind_tornado.tres")
 var dark_revolver: SpellData = load("res://data/spells/spell_data_bullet_dark_revolver.tres")
 var earth_drill: SpellData = load("res://data/spells/spell_data_bullet_earth_drill.tres")
+var test: SpellData = load("res://data/spells/spell_data_bullet_arcane_flamethrower.tres")
 
 var equipped_spell_1: SpellData = arcane_basic
 var equipped_spell_2: SpellData = tornado

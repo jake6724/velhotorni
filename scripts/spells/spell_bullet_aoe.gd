@@ -4,7 +4,7 @@ extends SpellBullet
 @onready var aoe_area: Area2D = $AOEArea
 @onready var aoe_collider: CollisionShape2D = $AOEArea/AOECollider
 
-func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_damage_perk_modifier: float, _execution_threshold: float, _double_spell_mana_drop: bool, _perk_debuffs: Array[DebuffData]) -> void:
+func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_damage_perk_modifier: float, _execution_threshold: float, _double_spell_mana_drop: bool, _perk_debuffs: Array[DebuffData], bullet_speed: float) -> void:
 	data = _data
 	original_position = global_position
 	if cast_direction:
@@ -23,6 +23,8 @@ func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_d
 
 	aoe_collider.shape.radius = data.aoe_radius
 	aoe_collider.disabled = true
+
+	speed = bullet_speed
 
 func on_area_entered(_enemy: Enemy) -> void:
 	explode()

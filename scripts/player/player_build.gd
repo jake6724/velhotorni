@@ -450,7 +450,7 @@ func on_player_hud_heal_all_requested() -> void:
 	# Can't use existing heal tower method, it intentionally only heals hovered tower
 	for tower: Tower in tower_parent.get_children():
 		tower.heal_cost = max(((tower.max_health - tower.health) / TOWER_HEAL_AMOUNT), 1)
-		if tower.heal_cost > 0:
+		if tower.heal_cost > 0 and tower.can_heal:
 			tower_mana_spent.emit(tower.heal_cost)
 			tower.heal(tower.max_health)
 	heal_all_cost_updated.emit(get_heal_all_cost())

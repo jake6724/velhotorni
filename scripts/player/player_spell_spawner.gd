@@ -29,6 +29,7 @@ var spread_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var free_cast_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var double_spell_mana_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var perk_debuff_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 var spell_element_damage_perk_modifier: Dictionary[Constants.Element, float] = {
 	Constants.Element.FIRE: 1.0,
@@ -170,6 +171,7 @@ func parent_spawn_bullet_spell(player_aim_direction: Vector2, active_spell_data:
 	player.player_camera.apply_shake(new_spell_data.camera_shake)
 
 	for i in range(new_spell_data.num_bullets - 1):
+
 		spawn_bullet_spell(player_aim_direction, new_spell_data, new_spell_scene, angle_seperation, angle_sign)
 
 		if i % 2 == 1:
@@ -186,10 +188,10 @@ func spawn_bullet_spell(player_aim_direction: Vector2, new_spell_data: SpellData
 		new_spell.z_index = player.z_index + 2
 		var angle = spread_rng.randf_range(-new_spell_data.spread, new_spell_data.spread) + angle_seperation * angle_sign
 		add_child(new_spell)
-
+		var bullet_speed: float = new_spell_data.speed + rng.randf_range(0, new_spell_data.speed_randomness)
 		new_spell.initialize(new_spell_data, player_aim_direction.normalized().rotated(deg_to_rad(angle)), 
 		spell_element_damage_perk_modifier[new_spell_data.element], spell_execution_threshold, 
-		check_should_drop_double_spell_mana(), get_perk_debuffs())
+		check_should_drop_double_spell_mana(), get_perk_debuffs(), bullet_speed)
 
 		new_spell.damage_dealt.connect(on_spell_damage_dealt)
 
