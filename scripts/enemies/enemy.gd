@@ -245,8 +245,26 @@ func on_animation_finished(anim_name):
 
 	if anim_name == "corpse":
 		set_physics_process(false)
-		# queue_free()
+		if remove_corpse():
+			queue_free()
 
+func remove_corpse() -> bool:
+	#{SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE, REPEATER_SMALL, REPEATER_LARGE, DUMMY_SMALL, SNAKE, BOSS}
+	match data.size:
+		Size.SMALL: return true
+		Size.LARGE: return false
+		Size.FLYING_SMALL: return true
+		Size.FLYING_LARGE: return false
+		Size.RANGED_SMALL: return false
+		Size.RANGED_LARGE: return false
+		Size.REPEATER_SMALL: return false
+		Size.REPEATER_LARGE: return false
+		Size.DUMMY_SMALL: return true
+		Size.SNAKE: return true
+		Size.BOSS: return false
+		_: 
+			push_error("enemy.remove_corpse() data.size matched to unknown value")
+			return false
 # Child component signal requests
 func on_animation_requested(anim_name: String) -> void:
 	ap.play(anim_name)

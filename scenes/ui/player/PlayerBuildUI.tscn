@@ -462,6 +462,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TowerActions" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 2.0
 offset_top = 72.0

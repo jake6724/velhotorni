@@ -4,6 +4,8 @@ extends SpellBullet
 @onready var aoe_area: Area2D = $AOEArea
 @onready var aoe_collider: CollisionShape2D = $AOEArea/AOECollider
 
+const EXPLOSION_SCENE: PackedScene = preload("res://scenes/Spells/SpellExplosion.tscn")
+
 func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_damage_perk_modifier: float, _execution_threshold: float, _double_spell_mana_drop: bool, _perk_debuffs: Array[DebuffData], bullet_speed: float) -> void:
 	data = _data
 	original_position = global_position
@@ -27,11 +29,13 @@ func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_d
 	speed = bullet_speed
 
 func on_area_entered(_enemy: Enemy) -> void:
-	explode()
+	# explode()
+	create_explosion()
 
 ## Hit Terrain Obstacle
 func on_body_entered(_intruder) -> void:
-	explode()
+	# explode()
+	create_explosion()
 
 func on_animation_finished(anim_name) -> void:
 	if anim_name == "aoe_hit":
@@ -39,7 +43,8 @@ func on_animation_finished(anim_name) -> void:
 
 func check_max_distance_reached() -> void:
 	if active and abs(global_position.distance_to(original_position)) > data.max_distance:
-		explode()
+		# explode()
+		create_explosion()
 
 func explode() -> void:
 	if active:
@@ -51,3 +56,12 @@ func explode() -> void:
 
 func on_aoe_area_entered(enemy: Enemy) -> void:
 	deal_damage(enemy)
+
+func create_explosion() -> void:
+	var new_explosion: SpellExplosion = EXPLOSION_SCENE.instantiate()
+	call_deferred("add_child", new_explosion)
+	await new_explosion.ready
+	new_explosion.global_position = global_position
+	new_explosion.ap.play("explode")
+
+	queue_free()

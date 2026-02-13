@@ -26,6 +26,5 @@ element_mana_drop_amount_multiplier = 2.0
 atlas = ExtResource("1_cikpg")
 icon = SubResource("AtlasTexture_66pqq")
 explosion_sfx = ExtResource("3_66pqq")
-wind_up = false
 boon_data = ExtResource("2_5wxa4")
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

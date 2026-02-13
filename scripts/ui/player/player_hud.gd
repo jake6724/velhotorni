@@ -59,6 +59,7 @@ var enemy_info_count: int
 
 @onready var hint_label: Label = %HintLabel
 var hint_timer: Timer = Timer.new()
+var prev_hint_overwriteable: bool = false
 
 var clear_spell_mana_drop_display_timer: Timer = Timer.new()
 const CLEAR_SPELL_MANA_DROP_DISPLAY_DELAY: float = 3.0
@@ -104,8 +105,7 @@ func _ready():
 	add_child(hint_timer)
 	hint_timer.timeout.connect(on_hint_timer_timeout)
 	hint_label.hide()
-
-	AlertManager.player_hud_hint_requested.connect(on_alert_manager_player_hud_hint_requested)
+	prev_hint_overwriteable = false
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats, player_build: PlayerBuild, player_input: PlayerInput) -> void:
 	on_spell_loadout_updated(spell_data_list, player_mana)
@@ -134,6 +134,9 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 	wave_complete_banner_animation_finished.connect(on_wave_complete_banner_animation_finished)
 
 	player_build.heal_all_cost_updated.connect(on_player_build_heal_all_cost_updated)
+
+	player_build.player_hud_hint_requested.connect(display_hint_text)
+	AlertManager.player_hud_hint_requested.connect(display_hint_text)
 
 func on_spell_loadout_updated(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
 	for i in range(spell_data_list.size()):
@@ -399,13 +402,18 @@ func animate_hide_build_phase_buttons() -> void:
 	var target: float = build_phase_buttons.position.x - 104
 	tween.tween_property(build_phase_buttons, "position:x", target, .2)
 
-func display_hint_text(_text, duration) -> void:
-	hint_label.text = _text
-	hint_label.show()
-	hint_timer.start(duration)
+func display_hint_text(_text: String, _duration: float, overwriteable: bool) -> void:
+	if not hint_label.visible:
+		prev_hint_overwriteable = overwriteable
+		hint_label.text = _text
+		hint_label.show()
+		hint_timer.start(_duration)
+	elif hint_label.visible and prev_hint_overwriteable:
+		prev_hint_overwriteable = overwriteable
+		hint_label.text = _text
+		hint_label.show()
+		hint_timer.start(_duration)
+		
 
 func on_hint_timer_timeout() -> void:
 	hint_label.hide()
-
-func on_alert_manager_player_hud_hint_requested(_text, _duration) -> void:
-	display_hint_text(_text, _duration)

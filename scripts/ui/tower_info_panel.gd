@@ -73,10 +73,10 @@ func update_desc(_text: String) -> void:
 	desc.text = _text
 
 func update_lvl_icons(_tower: Tower) -> void:
-	damage_lvl.texture.region = Rect2(_tower.damage_level * 8, 0, 8, 10)
-	speed_lvl.texture.region = Rect2(_tower.speed_level * 8, 0, 8, 10)
-	range_lvl.texture.region = Rect2(_tower.range_level * 8, 0, 8, 10)
-	special_lvl.texture.region = Rect2(_tower.special_level * 8, 0, 8, 10)
+	damage_lvl.texture.region = Rect2(_tower.level * 8, 0, 8, 10)
+	speed_lvl.texture.region = Rect2(_tower.level * 8, 0, 8, 10)
+	range_lvl.texture.region = Rect2(_tower.level * 8, 0, 8, 10)
+	special_lvl.texture.region = Rect2(_tower.level * 8, 0, 8, 10)
 
 func update_can_lvl_icon(_tower: Tower, _gold: int) -> void:
 	if _gold >= _tower.level_upgrade_price:

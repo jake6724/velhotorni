@@ -2,6 +2,7 @@ class_name PlayerBuild
 extends Node2D
 
 enum TowerAction {HEAL, UPGRADE, SELL}
+enum TowerPlacementError {POSITION, COST, CAP, DISTANCE}
 
 # @onready var tower_radial_menu: TowerActionRadialMenu = %TowerRadialMenu
 
@@ -20,6 +21,7 @@ var hovered_tower: Tower
 const TOWER_PLACEMENT_RANGE: int = 16
 # const TOWER_MANA_COST_PER_HEAL: int = 1
 const TOWER_HEAL_AMOUNT: int = 25
+const MAX_PLACEMENT_DISTANCE: float = 150.0
 
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var shield_tower_scene: PackedScene = preload("res://scenes/towers/ShieldTower.tscn")
@@ -46,6 +48,7 @@ signal tower_action_changed
 signal tower_action_hint_requested
 signal tower_count_updated
 signal heal_all_cost_updated
+signal player_hud_hint_requested
 
 # func _input(_event):
 # 	if Input.is_action_pressed("x"):
@@ -103,9 +106,11 @@ func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: Textur
 		
 		if preview_tower and preview_tower.visible:
 			if get_tower_placement_info()[0]:
-				preview_tower.upgrade_button_hint.show()
+				preview_tower.placement_button_hint.show()
 			else:
-				preview_tower.upgrade_button_hint.hide()
+				preview_tower.placement_button_hint.hide()
+		else:
+			preview_tower.placement_button_hint.hide()
 
 ## Creates a new instance of `tower_scene`, fully initialized. Modulated to be transparent.
 ## This is an active and ready tower that just needs to be placed.
@@ -127,8 +132,8 @@ func create_preview_tower():
 		preview_tower.hurtbox_collider.set_deferred("disabled", true)
 		preview_tower.sprite.modulate.a = .75
 		preview_tower.can_show_range = true	
-		if not hovered_tower:
-			preview_tower.upgrade_button_hint.set_hint_icon("joypad_button_0")
+		# if not hovered_tower:
+		# 	preview_tower.upgrade_button_hint.set_hint_icon("joypad_button_0")
 
 		preview_tower.tower_action_cost_label.text = str(TowerGlobalData.tower_prices[preview_tower.data.element])
 		preview_tower.died.connect(on_tower_died)
@@ -145,7 +150,6 @@ func create_preview_tower():
 ## the position of `PlayerCharacter` and the current `aim_input`
 func update_preview_tower_position(player_global_position: Vector2, aim_input: Vector2) -> void:
 	if preview_tower:
-
 		if GlobalSettings.controller_active:
 			aim_input = Constants.get_closest_cardinal_4_direction_normalized(aim_input)
 			preview_tower_grid_position = WorldGrid.world_to_grid(player_global_position + (aim_input * TOWER_PLACEMENT_RANGE))
@@ -162,6 +166,13 @@ func update_preview_tower_position(player_global_position: Vector2, aim_input: V
 		else:
 			preview_tower_grid_position = WorldGrid.grid_to_world(WorldGrid.world_to_grid(get_global_mouse_position()))
 			preview_tower.global_position = preview_tower_grid_position
+
+			# Turn tower red if too far to place
+			if global_position.distance_to(preview_tower.global_position) > MAX_PLACEMENT_DISTANCE:
+				preview_tower.modulate.r = 20
+			else:
+				preview_tower.modulate.r = 1
+
 			build_grid_sprite.global_position = preview_tower.global_position + Vector2(8,8)
 
 func update_tower_detect_area_position() -> void:
@@ -180,6 +191,8 @@ func place_tower() -> void:
 		preview_tower.hurtbox_collider.set_deferred("disabled", false)
 		preview_tower.healthbar.visible = true	
 		preview_tower.ap.play("summon")
+		preview_tower.modulate.r = 1
+		preview_tower.placement_button_hint.hide()
 		AudioManager.create_2d_audio_at_location(WorldGrid.grid_to_world(tower_placement_info[1]), SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON)
 
 		# Update WorldGrid
@@ -203,6 +216,14 @@ func place_tower() -> void:
 	else:
 		shake_preview_tower()
 		AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON_FAIL)
+		var _hint_text: String = ""
+		match tower_placement_info[3]:
+			TowerPlacementError.COST: _hint_text = "Can't afford tower!"
+			TowerPlacementError.CAP: _hint_text = "Tower cap reached!"
+			TowerPlacementError.POSITION: _hint_text = "Can't place tower here!"
+			TowerPlacementError.DISTANCE: _hint_text = "Too far away!"
+		player_hud_hint_requested.emit(_hint_text, 1.0, true)
+		
 
 func switch_tower_action(player_input: PlayerInput) -> void:
 	tower_action_options.append(tower_action_options[0]) # Move front action to back 
@@ -224,7 +245,7 @@ func switch_tower_action(player_input: PlayerInput) -> void:
 func heal_tower() -> void:
 	if hovered_tower and hovered_tower.can_heal:
 		tower_mana_spent.emit(hovered_tower.heal_cost)
-		hovered_tower.heal(hovered_tower.max_health)
+		hovered_tower.heal(hovered_tower.curr_max_health)
 
 func upgrade_tower() -> void:
 	if hovered_tower:
@@ -245,12 +266,20 @@ func configure_hovered_tower_for_action(_hovered_tower) -> void:
 	if _hovered_tower:
 		_hovered_tower.show_action_cost_info(get_action_cost(_hovered_tower))
 
+		# # Turn tower red if too far to place
+		# if global_position.distance_to(_hovered_tower.global_position) > MAX_PLACEMENT_DISTANCE:
+		# 	_hovered_tower.modulate.r = 20
+		# else:
+		# 	_hovered_tower.modulate.r = 1
+
 		if check_can_perform_action(_hovered_tower):
 			if check_can_afford_action(_hovered_tower):
 				_hovered_tower.upgrade_button_hint.show()
+				_hovered_tower.placement_button_hint.hide()
 				_hovered_tower.upgrade_coin_icon.show()
 			else:
 				_hovered_tower.upgrade_button_hint.hide()
+				_hovered_tower.placement_button_hint.hide()
 				_hovered_tower.upgrade_coin_icon.show()
 		else:
 			_hovered_tower.upgrade_button_hint.hide()
@@ -258,6 +287,7 @@ func configure_hovered_tower_for_action(_hovered_tower) -> void:
 			_hovered_tower.tower_action_cost_label.text = " MAX"
 
 func check_can_perform_action(_hovered_tower) -> bool:
+	# if global_position.distance_to(_hovered_tower.global_position) < MAX_PLACEMENT_DISTANCE:
 	match tower_action:
 		TowerAction.HEAL:
 			if _hovered_tower.can_heal:
@@ -271,9 +301,12 @@ func check_can_perform_action(_hovered_tower) -> bool:
 				return false
 		TowerAction.SELL: 
 			return true
-
-	push_error("Unknown tower action: ", tower_action)
-	return false
+		_:
+			push_error("Unknown tower action: ", tower_action)
+			return false
+	# else:
+	# 	player_hud_hint_requested.emit("Tower far to perform action!", 1.0, true)
+	# 	return false
 
 func check_can_afford_action(_hovered_tower) -> bool: 
 	var cost: int = get_action_cost(_hovered_tower)
@@ -299,21 +332,24 @@ func get_action_cost(_hovered_tower) -> int:
 ## Returns is_placement_positon_valid: bool, tower_grid_position: Vector2, cost: int
 func get_tower_placement_info() -> Array:
 	if preview_tower:
-		# Check tower count
-		if active_towers.size() < TowerGlobalData.tower_max:
-			# Check can afford
-			var cost: int = TowerGlobalData.tower_prices[preview_tower.data.element]
-			if _tower_mana >= cost:
-				# Check if placement position is valid
-				var tower_grid_position: Vector2 = WorldGrid.world_to_grid(preview_tower.global_position)
-				if tower_grid_position in WorldGrid.data and WorldGrid.data[tower_grid_position]:
-					return [true, tower_grid_position, cost]
-				else:
-					return [false, -1, -1]
-			else: 
-				return [false, -1, -1]
+		if global_position.distance_to(preview_tower.global_position) < MAX_PLACEMENT_DISTANCE:
+			# Check tower count
+			if active_towers.size() < TowerGlobalData.tower_max:
+				# Check can afford
+				var cost: int = TowerGlobalData.tower_prices[preview_tower.data.element]
+				if _tower_mana >= cost:
+					# Check if placement position is valid
+					var tower_grid_position: Vector2 = WorldGrid.world_to_grid(preview_tower.global_position)
+					if tower_grid_position in WorldGrid.data and WorldGrid.data[tower_grid_position]:
+						return [true, tower_grid_position, cost]
+					else:
+						return [false, -1, -1, TowerPlacementError.POSITION]
+				else: 
+					return [false, -1, -1, TowerPlacementError.COST]
+			else:
+				return [false, -1, -1, TowerPlacementError.CAP]
 		else:
-			return [false, -1, -1]
+			return [false, -1, -1, TowerPlacementError.DISTANCE]
 	else:
 		return [false, -1, -1]
 
@@ -325,7 +361,7 @@ func on_tower_detect_area_entered(intruder: Area2D) -> void:
 	hovered_tower.show_action_cost_info(get_action_cost(hovered_tower))
 	hovered_tower.can_show_range = true
 	player_build_ui.update_tower_info_panel(hovered_tower)
-	hovered_tower.upgrade_button_hint.set_hint_icon("joypad_button_2")
+	# hovered_tower.upgrade_button_hint.set_hint_icon("joypad_button_2")
 	hovered_tower.upgrade_button_hint.show()
 	configure_hovered_tower_for_action(hovered_tower)
 	tower_action_hint_requested.emit(true)
@@ -342,7 +378,7 @@ func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 		hovered_tower = null
 
 	if preview_tower:
-		preview_tower.upgrade_button_hint.set_hint_icon("joypad_button_0")
+		# preview_tower.upgrade_button_hint.set_hint_icon("joypad_button_0")
 		player_build_ui.update_tower_info_panel(preview_tower)
 	
 	tower_action_hint_requested.emit(false)
@@ -452,7 +488,7 @@ func on_player_hud_heal_all_requested() -> void:
 		tower.heal_cost = max(((tower.max_health - tower.health) / TOWER_HEAL_AMOUNT), 1)
 		if tower.heal_cost > 0 and tower.can_heal:
 			tower_mana_spent.emit(tower.heal_cost)
-			tower.heal(tower.max_health)
+			tower.heal(tower.curr_max_health)
 	heal_all_cost_updated.emit(get_heal_all_cost())
 
 func get_heal_all_cost() -> float:

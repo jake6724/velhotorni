@@ -22,5 +22,4 @@ tower_mana_drop_chance_base = 2.0
 element_mana_drop_chance = 0.5
 atlas = ExtResource("1_u0qqs")
 icon = SubResource("AtlasTexture_34u3t")
-wind_up = false
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"
