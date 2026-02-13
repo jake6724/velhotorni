@@ -18,6 +18,6 @@
 [resource]
 script = ExtResource("12_se0s7")
 data = Array[ExtResource("1_2xjud")]([ExtResource("2_a42h4"), ExtResource("2_b1ufj"), ExtResource("3_i1f88"), ExtResource("4_2xjud"), ExtResource("5_j7eeq"), ExtResource("3_oqc7e"), ExtResource("8_a42h4"), ExtResource("5_nwkam"), ExtResource("6_a42h4"), ExtResource("6_a42h4"), ExtResource("7_oqc7e"), ExtResource("7_oqc7e"), ExtResource("8_b87im"), ExtResource("8_b87im"), ExtResource("9_nwkam"), ExtResource("9_nwkam"), ExtResource("6_a42h4"), ExtResource("6_a42h4"), ExtResource("7_oqc7e"), ExtResource("7_oqc7e"), ExtResource("8_b87im"), ExtResource("8_b87im"), ExtResource("9_nwkam"), ExtResource("9_nwkam")])
-reward = 200.0
+reward = 250.0
 token_reward = 100
 metadata/_custom_type_script = "uid://cskry1sw3vqba"

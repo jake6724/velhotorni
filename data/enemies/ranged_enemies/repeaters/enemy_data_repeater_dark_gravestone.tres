@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EnemyDataRangedRepeater" load_steps=7 format=3 uid="uid://ba2ouebw3se5t"]
+
+[ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_0m8sy"]
+[ext_resource type="Texture2D" uid="uid://ufilevm47cx" path="res://assets/art/atlases/enemy/atl_enemy_dark_gravestone.png" id="1_mcl1j"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_mcl1j"]
+[ext_resource type="Script" uid="uid://cfcg6s514pb3d" path="res://scripts/enemies/data/enemy_data_ranged_repeater.gd" id="3_hgxnr"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="4_hgxnr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaqg3"]
+atlas = ExtResource("4_hgxnr")
+region = Rect2(80, 64, 16, 16)
+
+[resource]
+script = ExtResource("3_hgxnr")
+attack_cooldown = 0.0
+burst_cooldown = 0.2
+num_bursts = 10
+initial_delay = 3.0
+num_bullets_per_burst = 1
+angle_increment = 36.0
+burst_angle_increment = 36.0
+bullet_speed = 20.0
+bullet_max_distance = 120.0
+size = 7
+element = 5
+weak_against_element = 4
+health = 1250.0
+speed = 20.0
+tower_mana_drop_chance_base = 10.0
+element_mana_drop_chance = 0.75
+element_mana_drop_amount_multiplier = 2.0
+atlas = ExtResource("1_mcl1j")
+icon = SubResource("AtlasTexture_yaqg3")
+metadata/_custom_type_script = "uid://cfcg6s514pb3d"

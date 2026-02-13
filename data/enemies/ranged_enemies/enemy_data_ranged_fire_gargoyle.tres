@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=7 format=3 uid="uid://htc4ag3pms2p"]
+
+[ext_resource type="Texture2D" uid="uid://c5lw1qdea1adi" path="res://assets/art/atlases/enemy/atl_enemy_fire_gargoyle.png" id="1_6cxeo"]
+[ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_hkbhg"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_6cxeo"]
+[ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="3_tq313"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="4_tq313"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adgd7"]
+atlas = ExtResource("4_tq313")
+region = Rect2(64, 0, 16, 16)
+
+[resource]
+script = ExtResource("3_tq313")
+attack_range = 120.0
+burst_cooldown = 0.33
+num_bursts = 3
+num_bullets_per_burst = 1
+bullet_speed = 300.0
+bullet_max_distance = 120.0
+size = 5
+strong_against_element = 1
+weak_against_element = 5
+health = 1250.0
+speed = 20.0
+damage = 2
+tower_mana_drop_chance_base = 10.0
+element_mana_drop_chance = 0.75
+element_mana_drop_amount_multiplier = 2.0
+atlas = ExtResource("1_6cxeo")
+icon = SubResource("AtlasTexture_adgd7")
+metadata/_custom_type_script = "uid://dtesebxklnsr8"
