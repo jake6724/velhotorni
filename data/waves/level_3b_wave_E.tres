@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=17 format=3 uid="uid://cuxcbyhx0k237"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_fbbbr"]
+[ext_resource type="Resource" uid="uid://08q0ac6hgnp0" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_ranged_water_kappa_2.tres" id="2_s1lys"]
+[ext_resource type="Resource" uid="uid://b8qo2bund5au8" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_water_kappa_2.tres" id="3_fb1o1"]
+[ext_resource type="Resource" uid="uid://cro2d3kf1qr8n" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothman_half_0.tres" id="4_j2tdc"]
+[ext_resource type="Resource" uid="uid://bqferpaeeqjvd" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_ranged_water_kappa_6.tres" id="4_jyjqo"]
+[ext_resource type="Resource" uid="uid://by7s5gj5chgyk" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothman_half_1.tres" id="5_khwsd"]
+[ext_resource type="Resource" uid="uid://cxtbpf647xkee" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothman_half_2.tres" id="6_fbbbr"]
+[ext_resource type="Resource" uid="uid://ccsvnn47vtltj" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_wind_barbatos.tres" id="6_gx2eb"]
+[ext_resource type="Resource" uid="uid://b668sucylpsqa" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_wind_barbatos.tres" id="7_1mqj0"]
+[ext_resource type="Resource" uid="uid://q2x0q4cgyaxu" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothman_half_3.tres" id="7_lq3w8"]
+[ext_resource type="Resource" uid="uid://25em23upunww" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_dark_armor_1.tres" id="8_gx2eb"]
+[ext_resource type="Resource" uid="uid://6ivehepdyq5d" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_fire_buer.tres" id="8_jyjqo"]
+[ext_resource type="Resource" uid="uid://bdm8bvwg431dx" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_dark_armor_1.tres" id="9_1mqj0"]
+[ext_resource type="Resource" uid="uid://cs5hxkbar77xh" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_water_kappa_10.tres" id="9_ma1rx"]
+[ext_resource type="Resource" uid="uid://d4nwi0i61gyxx" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_fire_buer.tres" id="9_pcrto"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="12_i2lhs"]
+
+[resource]
+script = ExtResource("12_i2lhs")
+data = Array[ExtResource("1_fbbbr")]([ExtResource("2_s1lys"), ExtResource("3_fb1o1"), ExtResource("2_s1lys"), ExtResource("3_fb1o1"), ExtResource("2_s1lys"), ExtResource("3_fb1o1"), ExtResource("2_s1lys"), ExtResource("3_fb1o1"), ExtResource("2_s1lys"), ExtResource("3_fb1o1"), ExtResource("2_s1lys"), ExtResource("3_fb1o1"), ExtResource("4_jyjqo"), ExtResource("4_j2tdc"), ExtResource("4_j2tdc"), ExtResource("5_khwsd"), ExtResource("5_khwsd"), ExtResource("6_fbbbr"), ExtResource("6_fbbbr"), ExtResource("7_lq3w8"), ExtResource("9_ma1rx"), ExtResource("8_gx2eb"), ExtResource("9_1mqj0"), ExtResource("7_lq3w8"), ExtResource("6_gx2eb"), ExtResource("7_1mqj0"), ExtResource("8_jyjqo"), ExtResource("9_pcrto")])
+reward = 250.0
+token_reward = 1
+metadata/_custom_type_script = "uid://cskry1sw3vqba"

@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="EnemyDataBossDeath" load_steps=7 format=3 uid="uid://ebmb3ids3d64"]
+
+[ext_resource type="PackedScene" uid="uid://c0klfs0sk3qw1" path="res://scenes/enemies/boss/Death.tscn" id="1_3v0kk"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_31agc"]
+[ext_resource type="Texture2D" uid="uid://12j83f7ekv4d" path="res://assets/art/atlases/enemy/atl_enemy_dark_death.png" id="1_opgif"]
+[ext_resource type="Script" uid="uid://ilcb4gib28h7" path="res://scripts/enemies/data/enemy_data_boss_death.gd" id="2_kbpur"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31agc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbpur"]
+
+[resource]
+script = ExtResource("2_kbpur")
+bullet_damage = 1.0
+bullet_speed = 200.0
+bullet_max_distance = 200.0
+melee_attack_dash_power = 200.0
+melee_attack_dash_duration = 0.5
+min_spawn_time = 0.5
+max_spawn_time = 3.0
+min_idle_time = 0.1
+max_idle_time = 1.5
+melee_spawn_distance_range_y = 16.0
+min_melee_spawn_distance_y = 4.0
+size = 10
+element = 5
+health = 100.0
+speed = 1.0
+atlas = SubResource("AtlasTexture_31agc")
+icon = SubResource("AtlasTexture_kbpur")
+enemy_scene = ExtResource("1_3v0kk")
+wind_up = false
+enemy_name = "Death"
+enemy_description = "Death
+"

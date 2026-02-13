@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://da36i50b6i5gg"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_nk7n1"]
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_vkivu"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_mhum8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aro3g"]
+atlas = ExtResource("1_nk7n1")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jih12"]
+atlas = ExtResource("2_mhum8")
+region = Rect2(32, 32, 16, 16)
+
+[resource]
+script = ExtResource("1_vkivu")
+stat = 3
+element = 4
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_aro3g")
+perk_mini_icon = SubResource("AtlasTexture_jih12")
+perk_name = "Radiant"
+perk_desc = "Increase damage from light spells by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

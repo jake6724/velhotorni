@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DebuffDataFreeze" load_steps=2 format=3 uid="uid://cynqcqgn1jfy6"]
+
+[ext_resource type="Script" uid="uid://cp5nndqm8f8ia" path="res://scripts/debuffs/data/debuff_data_freeze.gd" id="1_whyg2"]
+
+[resource]
+script = ExtResource("1_whyg2")
+total_duration = 1.0
+metadata/_custom_type_script = "uid://cp5nndqm8f8ia"

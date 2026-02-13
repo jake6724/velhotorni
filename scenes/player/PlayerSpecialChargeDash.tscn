@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch030tpgh87b2"]
+
+[ext_resource type="Texture2D" uid="uid://b7k0ny8ohbxa5" path="res://assets/art/sprites/ui/spr_ui_special_charge_dash_left.png" id="1_2f5vv"]
+[ext_resource type="Texture2D" uid="uid://rvp7st8c1j3b" path="res://assets/art/sprites/ui/spr_ui_special_charge_dash_center.png" id="2_4g4xe"]
+[ext_resource type="Texture2D" uid="uid://bi2mfcnql3864" path="res://assets/art/sprites/ui/spr_ui_special_charge_dash_right.png" id="3_4g4xe"]
+[ext_resource type="Texture2D" uid="uid://cawixg0vg3pvv" path="res://assets/art/sprites/ui/spr_ui_special_charge_dash_progress_under.png" id="4_8mlfm"]
+[ext_resource type="Texture2D" uid="uid://bp6xe1i3tau38" path="res://assets/art/sprites/ui/spr_ui_special_charge_dash_progress.png" id="4_ixin6"]
+
+[node name="PlayerSpecialChargeDash" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 6.0
+offset_right = 24.0
+offset_bottom = 12.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer"]
+z_index = -1
+layout_mode = 2
+max_value = 16.0
+step = 0.1
+value = 16.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_8mlfm")
+texture_progress = ExtResource("4_ixin6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_2f5vv")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_4g4xe")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_4g4xe")
+stretch_mode = 2

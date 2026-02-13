@@ -1,0 +1,297 @@
+[gd_scene load_steps=23 format=3 uid="uid://cywxbhd0t5saw"]
+
+[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="1_5cxp4"]
+[ext_resource type="Script" uid="uid://g64ma75emrwx" path="res://scripts/ui/bestiary_menu.gd" id="2_i10kn"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="6_f7g8o"]
+[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="8_e5r0i"]
+[ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="10_xrwg3"]
+[ext_resource type="Texture2D" uid="uid://grexondkj1ki" path="res://assets/art/sprites/ui/spr_ui_stat_health.png" id="11_cebma"]
+[ext_resource type="Texture2D" uid="uid://b35e2ntjvtv5c" path="res://assets/art/sprites/ui/spr_ui_stat_spcl_burn.png" id="13_yp7id"]
+[ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="17_fim8t"]
+[ext_resource type="Texture2D" uid="uid://b62ll37upwjx3" path="res://assets/art/sprites/ui/spr_ui_element_icons.png" id="17_i10kn"]
+
+[sub_resource type="Theme" id="Theme_f7g8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fim8t"]
+atlas = ExtResource("17_i10kn")
+region = Rect2(20, 10, 10, 10)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i10kn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fim8t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_efs5c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2agy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_irfo6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l6d2o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_scc12"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jcklg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivtkp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ifiym"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b0osb"]
+
+[node name="BestiaryMenu" type="NinePatchRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -111.0
+offset_right = 192.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5cxp4")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+script = ExtResource("2_i10kn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(106, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="EntryScroll" type="ScrollContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(62, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = SubResource("Theme_f7g8o")
+
+[node name="Entries" type="VBoxContainer" parent="MarginContainer/HBoxContainer/EntryScroll"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(52, 194)
+layout_mode = 2
+
+[node name="Details" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EntryName" type="Label" parent="MarginContainer/HBoxContainer/Details"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("6_f7g8o")
+theme_override_font_sizes/font_size = 8
+
+[node name="Body" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Details"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Description" type="RichTextLabel" parent="MarginContainer/HBoxContainer/Details/Body"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("6_f7g8o")
+theme_override_font_sizes/normal_font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/Details/Body"]
+layout_mode = 2
+
+[node name="Stats" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="Health" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Health"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("11_cebma")
+
+[node name="UpgradeLabel" type="Label" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Health"]
+custom_minimum_size = Vector2(48.38, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_f7g8o")
+theme_override_font_sizes/font_size = 8
+text = "Health"
+vertical_alignment = 1
+
+[node name="HealthValue" type="Label" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Health"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_f7g8o")
+theme_override_font_sizes/font_size = 8
+text = "-"
+
+[node name="Damage" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="DamageIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Damage"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_e5r0i")
+
+[node name="DamageLabel" type="Label" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Damage"]
+custom_minimum_size = Vector2(48.38, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_f7g8o")
+theme_override_font_sizes/font_size = 8
+text = "Damage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DamageValue" type="Label" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Damage"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_f7g8o")
+theme_override_font_sizes/font_size = 8
+text = "-"
+
+[node name="Speed" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Speed"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("10_xrwg3")
+
+[node name="UpgradeLabel" type="Label" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Speed"]
+custom_minimum_size = Vector2(48.38, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_f7g8o")
+theme_override_font_sizes/font_size = 8
+text = "Speed"
+vertical_alignment = 1
+
+[node name="SpeedValue" type="Label" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Speed"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_f7g8o")
+theme_override_font_sizes/font_size = 8
+text = "-"
+
+[node name="Element" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Element"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_yp7id")
+
+[node name="UpgradeLabel" type="Label" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Element"]
+custom_minimum_size = Vector2(58, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_f7g8o")
+theme_override_font_sizes/font_size = 8
+text = "Element"
+vertical_alignment = 1
+
+[node name="ElementIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Stats/Element"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_fim8t")
+stretch_mode = 2
+
+[node name="Close" type="NinePatchRect" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer"]
+custom_minimum_size = Vector2(65, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 1
+texture = ExtResource("17_fim8t")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 5
+
+[node name="CloseButton" type="Button" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Close"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_i10kn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_fim8t")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_efs5c")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_d2agy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_irfo6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_l6d2o")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_scc12")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jcklg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ivtkp")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ifiym")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b0osb")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Details/Body/MarginContainer/Close"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_f7g8o")
+theme_override_font_sizes/font_size = 8
+text = "Close"
+horizontal_alignment = 1
+vertical_alignment = 1

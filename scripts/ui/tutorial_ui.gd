@@ -1,3 +1,5 @@
+# TODO: this whole shit sucks
+
 class_name TutorialUI
 extends Control
 
@@ -25,7 +27,5 @@ func _ready():
 	skip_button.pressed.connect(on_skip_button_pressed)
 
 func on_skip_button_pressed():
-	GameManager.level_index = 1
-	GameManager.clear_level()
-	GameManager.configure_active_level()
-	SceneTransition.change_scene(main_scene)
+	LevelManager.load_next_level()
+	WaveManager.wave_completed.emit()

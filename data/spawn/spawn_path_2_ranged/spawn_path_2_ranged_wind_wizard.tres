@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://dufov0a8qj7ph"]
+
+[ext_resource type="Resource" uid="uid://dtsxss2wos66k" path="res://data/enemies/ranged_enemies/enemy_data_ranged_wind_wizard.tres" id="1_qxd5j"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_v1kgh"]
+
+[resource]
+script = ExtResource("2_v1kgh")
+enemy_data = ExtResource("1_qxd5j")
+delay = 1.0
+path_index = 1
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

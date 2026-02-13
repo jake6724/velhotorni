@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=7 format=3 uid="uid://bd2fwedn2x4gv"]
+
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="1_budxm"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_p055t"]
+[ext_resource type="Script" uid="uid://cm72v2ilme5nr" path="res://scripts/debuffs/data/debuff_data.gd" id="1_xty37"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_ivjrh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivjrh"]
+atlas = ExtResource("1_p055t")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xty37"]
+atlas = ExtResource("2_ivjrh")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_budxm")
+stat = 2
+base_value = 2.0
+perk_icon = SubResource("AtlasTexture_ivjrh")
+perk_mini_icon = SubResource("AtlasTexture_xty37")
+perk_name = "Guardian"
+perk_desc = "Increase your max health by {value}"

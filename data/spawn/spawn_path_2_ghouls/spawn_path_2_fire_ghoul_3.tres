@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://crd8l2562ecih"]
+
+[ext_resource type="Resource" uid="uid://btkmprtnsviar" path="res://data/enemies/ghouls/enemy_data_fire_ghoul.tres" id="1_pgctc"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_bk7ni"]
+
+[resource]
+script = ExtResource("2_bk7ni")
+enemy_data = ExtResource("1_pgctc")
+delay = 3.0
+path_index = 1
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

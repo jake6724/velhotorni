@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://bkcj4l42oj6lr"]
+
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="1_ljl7l"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_qesxu"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_earwm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_earwm"]
+atlas = ExtResource("1_qesxu")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nd12n"]
+atlas = ExtResource("2_earwm")
+region = Rect2(112, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_ljl7l")
+stat = 5
+element = 0
+debuff = 3
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_earwm")
+perk_mini_icon = SubResource("AtlasTexture_nd12n")
+perk_name = "Scorcher"
+perk_desc = "Increase the burn effect from fire familiars by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

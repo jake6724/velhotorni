@@ -1,0 +1,92 @@
+extends Node
+# Combines data from EnemySpawner, Base, and PlayerController to determine and propogate wave state
+
+var is_wave_failed: bool
+var level_waves: Array[Wave] = []
+var active_wave: Wave
+var wave_index: int
+var wave_total: int
+
+var wave_index_checkpoint: int
+var boss_wave_health: float
+
+var wave_active: bool = false
+
+## Set by PlayerHUD when it completes banner animation
+var can_start_wave: bool = true
+
+signal wave_started
+signal wave_failed
+signal wave_completed
+signal wave_completed_coin_manager
+signal all_waves_completed
+signal final_wave_started
+signal wave_total_updated
+
+func _ready():
+	# Connect to EnemySpawner
+	EnemySpawner.enemy_died_with_global_pos.connect(on_enemy_died)
+
+func configure_level(active_level: LevelEnvironment) -> void:
+	level_waves = active_level.waves
+	active_wave = level_waves[0]
+	wave_index = 0
+	wave_total = level_waves.size()
+	wave_total_updated.emit(wave_total)
+
+	# Connect to current Base
+	active_level.base.destroyed.connect(on_wave_failed)
+
+	# Bosshealthbar
+	boss_wave_health = calc_boss_wave_health()
+
+	can_start_wave = true
+
+## Intended to be called directly by current `PlayerController`
+func start_wave() -> void:
+	if not wave_active and LevelManager.active_level.can_start_wave:
+		can_start_wave = false
+		is_wave_failed = false
+		if wave_index == 9:
+			final_wave_started.emit()
+		wave_started.emit()
+		wave_active = true
+
+func check_wave_complete(global_pos: Vector2) -> void:
+	if EnemySpawner.enemy_index == active_wave.data.size():
+		if EnemySpawner.active_enemies.size() == 0:
+			if not is_wave_failed and LevelManager.active_level.base.health > 0: # Prevent race-condition between last enemy death and base death
+				wave_completed_coin_manager.emit(global_pos, active_wave.reward)
+				on_wave_complete()
+
+func on_wave_complete() -> void:
+	wave_index += 1
+	if wave_index < level_waves.size():
+		active_wave = level_waves[wave_index]
+	else:
+		active_wave = null
+		all_waves_completed.emit()
+	
+	wave_index_checkpoint = wave_index
+	wave_completed.emit()
+	wave_active = false
+
+func on_wave_failed() -> void:
+	wave_index = wave_index_checkpoint
+	wave_failed.emit()
+	is_wave_failed = true
+	reset()
+	LevelManager.restart_level()
+
+func reset() -> void:
+	wave_active = false
+	wave_index = 0
+
+func on_enemy_died(global_pos: Vector2) -> void:
+	check_wave_complete(global_pos)
+
+func calc_boss_wave_health() -> float:
+	var result: float = 0
+	for spawn: Spawn in level_waves[-1].data:
+		result += spawn.enemy_data.health
+	return result

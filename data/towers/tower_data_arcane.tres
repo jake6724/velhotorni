@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TowerData" load_steps=5 format=3 uid="uid://bcakhdf3t8wd3"]
+
+[ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_7nrk5"]
+[ext_resource type="Texture2D" uid="uid://c48ullm5mpqck" path="res://assets/art/atlases/tower/atl_tower_arcane.png" id="1_qcipg"]
+[ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="2_qcipg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uf5b"]
+
+[resource]
+script = ExtResource("2_qcipg")
+element = 19
+base_element = 19
+max_health = 15.0
+upgrade_cost_base = 50
+upgrade_cost_increment = 25
+atlas = ExtResource("1_qcipg")
+transform_hint_texture = SubResource("AtlasTexture_3uf5b")
+tower_name = "Arcane"
+metadata/_custom_type_script = "uid://v7b6nq74b314"

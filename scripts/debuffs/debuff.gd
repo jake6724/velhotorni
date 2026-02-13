@@ -1,0 +1,39 @@
+class_name Debuff
+extends Node
+
+enum Type {SLOW, STUN, FREEZE, BURN, WEAKEN, KNOCKBACK, NONE}
+enum Priority {LOWEST, LOW, MEDIUM, HIGH, HIGHEST}
+
+var data: DebuffData
+
+var total_timer: Timer = Timer.new()
+var repeat_timer: Timer = Timer.new()
+
+func _init(_data: DebuffData) -> void:
+	data = _data
+	total_timer.autostart = true
+	total_timer.wait_time = _data.total_duration
+
+## Call before add child. Primarily used to configure repeat timer for debuff_burn (which must be done before adding to scene)
+func initialize() -> void:
+	pass
+
+func _ready():
+	add_child(total_timer)
+	add_child(repeat_timer)
+
+	total_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	repeat_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+
+	total_timer.timeout.connect(on_total_timer_timeout)
+	repeat_timer.timeout.connect(on_repeat_timer_timeout)
+
+## Called by DebuffManager.create_debuff()
+func start_debuff() -> void:
+	pass
+
+func on_total_timer_timeout() -> void:
+	pass
+
+func on_repeat_timer_timeout() -> void:
+	pass

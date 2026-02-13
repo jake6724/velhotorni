@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=5 format=3 uid="uid://cqi7c6fw5otxt"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_laini"]
+[ext_resource type="AudioStream" uid="uid://bejc3w51t0ntc" path="res://assets/audio/dark_revolver_shoot_1_1.mp3" id="2_6sy8h"]
+[ext_resource type="AudioStream" uid="uid://cci45cqckvtpw" path="res://assets/audio/dark_revolver_shoot_1_2.mp3" id="3_4iutq"]
+[ext_resource type="AudioStream" uid="uid://2r6b3cnawqeo" path="res://assets/audio/dark_revolver_shoot_1_3.mp3" id="4_v7qv6"]
+
+[resource]
+script = ExtResource("1_laini")
+type = 25
+sounds = Array[AudioStreamMP3]([ExtResource("2_6sy8h"), ExtResource("3_4iutq"), ExtResource("4_v7qv6")])
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

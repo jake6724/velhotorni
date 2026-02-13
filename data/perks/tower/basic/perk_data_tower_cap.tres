@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://bf2ergywcmsu0"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_7ypl8"]
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="2_2o4ba"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_g45x8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6y4v3"]
+atlas = ExtResource("1_7ypl8")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu4bu"]
+atlas = ExtResource("2_g45x8")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+script = ExtResource("2_2o4ba")
+stat = 4
+base_value = 1.0
+perk_icon = SubResource("AtlasTexture_6y4v3")
+perk_mini_icon = SubResource("AtlasTexture_vu4bu")
+perk_name = "Mana Flow"
+perk_desc = "Increase the maximum number of familiars you can summon by {value}"
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://cqh4w6poaaob6"]
+
+[ext_resource type="Resource" uid="uid://blulg7nnexa6s" path="res://data/enemies/enemy_data_water_vepar.tres" id="1_6s53c"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_chlhw"]
+
+[resource]
+script = ExtResource("1_chlhw")
+enemy_data = ExtResource("1_6s53c")
+delay = 1.0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

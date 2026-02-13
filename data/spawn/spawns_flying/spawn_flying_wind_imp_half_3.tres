@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpawnFlying" load_steps=3 format=3 uid="uid://cn6dypb484hsx"]
+
+[ext_resource type="Resource" uid="uid://oi85m43dik4l" path="res://data/enemies/flying_enemies/enemy_data_flying_wind_imp.tres" id="1_dvyb5"]
+[ext_resource type="Script" uid="uid://bfdgnsa03uum7" path="res://scripts/enemies/spawn_flying.gd" id="2_bl6uk"]
+
+[resource]
+script = ExtResource("2_bl6uk")
+flying_spawn_index = 3
+enemy_data = ExtResource("1_dvyb5")
+delay = 0.5
+path_index = 0
+metadata/_custom_type_script = "uid://bfdgnsa03uum7"

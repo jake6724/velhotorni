@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=17 format=3 uid="uid://clnilluanisyt"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_se70q"]
+[ext_resource type="Resource" uid="uid://6ivehepdyq5d" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_fire_buer.tres" id="2_jt0ad"]
+[ext_resource type="Resource" uid="uid://d2n70rewc3fg5" path="res://data/spawn/spawn_path_1_ranged/spawn_repeater_wind_flatwoods_10.tres" id="4_kfx10"]
+[ext_resource type="Resource" uid="uid://d4nwi0i61gyxx" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_fire_buer.tres" id="5_kfx10"]
+[ext_resource type="Resource" uid="uid://bbwxpuvvksdtp" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_wind_flatwoods_10.tres" id="7_2su44"]
+[ext_resource type="Resource" uid="uid://bt6mbihohp7sw" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_1_earth_mushroom_1.tres" id="8_60vwh"]
+[ext_resource type="Resource" uid="uid://nk7l3o4xb7g7" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_earth_mushroom_1.tres" id="9_gx3kf"]
+[ext_resource type="Resource" uid="uid://b2e5gnk88wtav" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_1_earth_mushroom_10.tres" id="10_bamst"]
+[ext_resource type="Resource" uid="uid://ccsvnn47vtltj" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_wind_barbatos.tres" id="10_se70q"]
+[ext_resource type="Resource" uid="uid://b668sucylpsqa" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_wind_barbatos.tres" id="11_f827f"]
+[ext_resource type="Resource" uid="uid://dbtrvhy44yst1" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_earth_mushroom_10.tres" id="11_vvolt"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="12_bhv43"]
+[ext_resource type="Resource" uid="uid://cj5how8kuxvt2" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_1_light_bifron_1.tres" id="12_twt0a"]
+[ext_resource type="Resource" uid="uid://25em23upunww" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_dark_armor_1.tres" id="13_cwj4j"]
+[ext_resource type="Resource" uid="uid://dmjfomwkbcjg" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_light_bifron_1.tres" id="14_bamst"]
+[ext_resource type="Resource" uid="uid://bdm8bvwg431dx" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_dark_armor_1.tres" id="15_vvolt"]
+
+[resource]
+script = ExtResource("12_bhv43")
+data = Array[ExtResource("1_se70q")]([ExtResource("2_jt0ad"), ExtResource("4_kfx10"), ExtResource("5_kfx10"), ExtResource("7_2su44"), ExtResource("8_60vwh"), ExtResource("9_gx3kf"), ExtResource("8_60vwh"), ExtResource("9_gx3kf"), ExtResource("10_bamst"), ExtResource("11_vvolt"), ExtResource("10_se70q"), ExtResource("10_se70q"), ExtResource("11_f827f"), ExtResource("11_f827f"), ExtResource("10_bamst"), ExtResource("11_vvolt"), ExtResource("8_60vwh"), ExtResource("9_gx3kf"), ExtResource("8_60vwh"), ExtResource("9_gx3kf"), ExtResource("8_60vwh"), ExtResource("9_gx3kf"), ExtResource("12_twt0a"), ExtResource("13_cwj4j"), ExtResource("14_bamst"), ExtResource("12_twt0a"), ExtResource("15_vvolt"), ExtResource("14_bamst"), ExtResource("8_60vwh"), ExtResource("9_gx3kf"), ExtResource("8_60vwh"), ExtResource("9_gx3kf"), ExtResource("8_60vwh"), ExtResource("9_gx3kf"), ExtResource("10_bamst"), ExtResource("11_vvolt"), ExtResource("12_twt0a"), ExtResource("10_se70q"), ExtResource("11_f827f"), ExtResource("14_bamst")])
+reward = 300.0
+token_reward = 150
+metadata/_custom_type_script = "uid://cskry1sw3vqba"

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="PerkDataBase" load_steps=6 format=3 uid="uid://cmwbijvdksujh"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_1e4ra"]
+[ext_resource type="Script" uid="uid://cq0cpfg5ke2ax" path="res://scripts/perks/data/perk_data_base.gd" id="1_wf6pv"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_1cpbm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cpbm"]
+atlas = ExtResource("1_1e4ra")
+region = Rect2(288, 384, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8t35"]
+atlas = ExtResource("2_1cpbm")
+region = Rect2(96, 128, 16, 16)
+
+[resource]
+script = ExtResource("1_wf6pv")
+trigger = 1
+stat = 1
+base_value = 1.0
+perk_icon = SubResource("AtlasTexture_1cpbm")
+perk_mini_icon = SubResource("AtlasTexture_m8t35")
+perk_name = "Stonemason"
+perk_desc = "Restore {value} base health on wave completion"
+metadata/_custom_type_script = "uid://cq0cpfg5ke2ax"

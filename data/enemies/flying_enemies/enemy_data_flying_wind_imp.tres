@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=7 format=3 uid="uid://oi85m43dik4l"]
+
+[ext_resource type="Texture2D" uid="uid://mefdddf0j5ji" path="res://assets/art/atlases/enemy/atl_enemy_wind_imp.png" id="1_l37c3"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_ysb21"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="2_l37c3"]
+[ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="2_ldoy6"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="4_io73i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmyf2"]
+atlas = ExtResource("4_io73i")
+region = Rect2(16, 16, 16, 16)
+
+[resource]
+script = ExtResource("2_l37c3")
+size = 2
+element = 1
+strong_against_element = 2
+weak_against_element = 1
+health = 35.0
+speed = 75.0
+element_mana_drop_chance = 0.15
+element_mana_drop_amount_multiplier = 2.0
+atlas = ExtResource("1_l37c3")
+icon = SubResource("AtlasTexture_mmyf2")
+explosion_sfx = ExtResource("2_ldoy6")
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

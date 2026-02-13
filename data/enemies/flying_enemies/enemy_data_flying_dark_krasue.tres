@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=7 format=3 uid="uid://dekxvd72mi2o6"]
+
+[ext_resource type="Texture2D" uid="uid://8y31xggs5m2x" path="res://assets/art/atlases/enemy/atl_enemy_dark_krasue.png" id="1_e2p75"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_jxsb2"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="2_7j7bl"]
+[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="2_wq88n"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="4_ounvj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bly52"]
+atlas = ExtResource("4_ounvj")
+region = Rect2(16, 64, 16, 16)
+
+[resource]
+script = ExtResource("2_7j7bl")
+size = 2
+health = 100.0
+speed = 50.0
+tower_mana_drop_chance_base = 5.0
+element_mana_drop_chance = 0.65
+element_mana_drop_amount_multiplier = 2.0
+atlas = ExtResource("1_e2p75")
+icon = SubResource("AtlasTexture_bly52")
+explosion_sfx = ExtResource("2_wq88n")
+wind_up = false
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

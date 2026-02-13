@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://cqy5d4coui67r"]
+
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_gqh0p"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_p76hu"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_1s47u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqh0p"]
+atlas = ExtResource("1_p76hu")
+region = Rect2(240, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeist"]
+atlas = ExtResource("2_1s47u")
+region = Rect2(80, 112, 16, 16)
+
+[resource]
+script = ExtResource("1_gqh0p")
+stat = 10
+element_list = Array[int]([0, 1, 2])
+base_value = 2.0
+legendary = true
+perk_icon = SubResource("AtlasTexture_gqh0p")
+perk_mini_icon = SubResource("AtlasTexture_jeist")
+perk_name = "Naturalist"
+perk_desc = "Triple max mana for all fire, wind, and water spells. Refills ammo"
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

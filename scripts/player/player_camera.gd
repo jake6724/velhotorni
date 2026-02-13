@@ -1,53 +1,68 @@
+class_name PlayerCamera
 extends Camera2D
 
-var zoom_speed: float = 0.1
-var drag_sensitivity: float = 1.0
-var camera_move_speed: float = 35
-var target_zoom: Vector2 = Vector2(1.0, 1.0)
-var lerp_weight: float = .25
-var is_panning: bool = false
+@export var power: float
+@export var decay: float 
 
-# # Decent values for real gameplay
-# # Bigger numbers, closer to ground
-# ## Smaller numbers, further out from ground
-# var zoom_min: Vector2 = Vector2(0.5, 0.5)
-# var zoom_max: Vector2 = Vector2(2, 2)
+@onready var player: PlayerCharacter = get_owner()
 
-# # Dev values
-var zoom_min: Vector2 = Vector2(0.1, 0.1)
-var zoom_max: Vector2 = Vector2(2, 2)
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var curr_power: float
+var shake_offset: Vector2 = Vector2.ZERO
 
-# Consider moving to process
-# May get laggy
-func _physics_process(delta):
-	if zoom != target_zoom:
-		zoom = clamp(lerp(zoom, target_zoom, lerp_weight), zoom_min, zoom_max)
+var aim_follow_offset: Vector2 = Vector2.ZERO
+var aim_follow_multiplier: float = 40.0
+var aim_follow_speed: float = .3
+var prev_aim_input: Vector2 = Vector2(INF, INF)
 
-	# WASD or arrow movement
-	var input_vector = Input.get_vector("move_camera_left", "move_camera_right", "move_camera_up", "move_camera_down")
-	if input_vector != Vector2(0,0):
-		is_panning = true
-		var new_camera_vector = (input_vector * camera_move_speed) / zoom
-		position += ((new_camera_vector * camera_move_speed) * delta)
+var look_ahead_func: Callable = look_ahead_mouse
+
+const MOUSE_LOOK_AHEAD_SCALE: float = .15
+
+func _ready():
+	position_smoothing_enabled = true
+	position_smoothing_speed = 8.0
+
+func apply_shake(power_scale: float) -> void:
+	var new_power: float = power * power_scale
+	if new_power >= curr_power:
+		curr_power = new_power
+
+func _process(delta):
+	if not player.building:
+		look_ahead_func.call()
 	else:
-		is_panning = false
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "aim_follow_offset", Vector2(0,0), aim_follow_speed)
 
-func _input(event):
+	# Handle camera shake if power left
+	if curr_power > .1:
+		curr_power = snappedf(lerpf(curr_power, 0, decay * delta), 0.01)
+		shake_offset = get_random_offset()
+	else:
+		shake_offset = Vector2.ZERO
 
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			var new_zoom = zoom + Vector2(zoom_speed, zoom_speed) # Used to surpress "zoom cannot be zero" 
-			if new_zoom < zoom_max:
-				target_zoom += Vector2(zoom_speed, zoom_speed)
-			else:
-				target_zoom = zoom_max
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			var new_zoom = zoom - Vector2(zoom_speed, zoom_speed)
-			if new_zoom > zoom_min:
-				target_zoom -= Vector2(zoom_speed, zoom_speed)
-			else: 
-				target_zoom = zoom_min
-				
-	if not is_panning:
-		if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
-			position -= (event.relative * drag_sensitivity)
+	#print(aim_follow_offset)
+	offset = shake_offset + aim_follow_offset
+
+func look_ahead_controller() -> void:
+	if player.player_aim.aim_input != prev_aim_input:
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "aim_follow_offset", (player.player_aim.aim_input * aim_follow_multiplier), aim_follow_speed)
+		prev_aim_input = player.player_aim.aim_input
+
+## Mouse-based look ahead is based on the direction and distance of the mouse compared to the player, multiplied by a 
+## scaling constant which determines how far out the camera moves
+func look_ahead_mouse() -> void:
+	aim_follow_offset = (player.global_position.direction_to(get_global_mouse_position())
+	* (player.global_position.distance_to(get_global_mouse_position()) * MOUSE_LOOK_AHEAD_SCALE))
+
+## Used in camera shake
+func get_random_offset() -> Vector2:
+	return Vector2(rng.randf_range(-curr_power, curr_power), rng.randf_range(-curr_power, curr_power))
+
+func swap_input_type() -> void:
+	if GlobalSettings.controller_active:
+		look_ahead_func = look_ahead_controller
+	else:
+		look_ahead_func = look_ahead_mouse

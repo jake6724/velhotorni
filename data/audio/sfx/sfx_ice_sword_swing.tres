@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=5 format=3 uid="uid://dmtn484ob61ym"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_7e3w2"]
+[ext_resource type="AudioStream" uid="uid://cbmki44k40faa" path="res://assets/audio/ice_sword_swing_2_1.mp3" id="2_oi1w2"]
+[ext_resource type="AudioStream" uid="uid://d1q88kwj4cp5b" path="res://assets/audio/ice_sword_swing_2_2.mp3" id="3_itdfk"]
+[ext_resource type="AudioStream" uid="uid://d04tshtnxb483" path="res://assets/audio/ice_sword_swing_2_3.mp3" id="4_qtyje"]
+
+[resource]
+script = ExtResource("1_7e3w2")
+limit = 3
+type = 4
+sounds = Array[AudioStreamMP3]([ExtResource("2_oi1w2"), ExtResource("3_itdfk"), ExtResource("4_qtyje")])
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

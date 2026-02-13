@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://c7uurcu0v578c"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_3plox"]
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="1_tccar"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_r5l8n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tccar"]
+atlas = ExtResource("1_3plox")
+region = Rect2(336, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bvce"]
+atlas = ExtResource("2_r5l8n")
+region = Rect2(112, 112, 16, 16)
+
+[resource]
+script = ExtResource("1_tccar")
+stat = 10
+bullet_modifier = 0
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_tccar")
+perk_mini_icon = SubResource("AtlasTexture_6bvce")
+perk_name = "Mana lore"
+perk_desc = "Increase the mana drop effect from earth familiars by {value}% "
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

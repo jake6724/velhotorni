@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct17x8pe4vic5"]
+
+[ext_resource type="Script" uid="uid://bfdx1tq3mrovu" path="res://scripts/player/player_after_image.gd" id="1_6g7lg"]
+[ext_resource type="Shader" uid="uid://c4hipotqcfhqb" path="res://shader/color_mixer.gdshader" id="1_g2v2i"]
+[ext_resource type="Texture2D" uid="uid://c4fkiqyip11gx" path="res://assets/art/atlases/atl_player_mage.png" id="2_bo6p5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rx4mr"]
+shader = ExtResource("1_g2v2i")
+shader_parameter/opacity = 0.5
+shader_parameter/r = 0.0
+shader_parameter/g = 0.05
+shader_parameter/b = 1.125
+shader_parameter/mix_color = 0.3
+
+[node name="PlayerAfterImage" type="Sprite2D"]
+material = SubResource("ShaderMaterial_rx4mr")
+texture = ExtResource("2_bo6p5")
+script = ExtResource("1_6g7lg")
+metadata/_custom_type_script = "uid://bfdx1tq3mrovu"

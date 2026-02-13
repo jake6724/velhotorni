@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://bolv17o5gu2pj"]
+
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_4rbvq"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_fdoqe"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_1fxrs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rbvq"]
+atlas = ExtResource("1_fdoqe")
+region = Rect2(336, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mklx"]
+atlas = ExtResource("2_1fxrs")
+region = Rect2(112, 64, 16, 16)
+
+[resource]
+script = ExtResource("1_4rbvq")
+stat = 12
+base_value = 0.25
+legendary = true
+perk_icon = SubResource("AtlasTexture_4rbvq")
+perk_mini_icon = SubResource("AtlasTexture_1mklx")
+perk_name = "Transfigure"
+perk_desc = "{value}% of all summoning mana is spawned as spell mana instead"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

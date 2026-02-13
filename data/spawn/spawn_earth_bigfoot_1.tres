@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://c1dr5uq3adbb7"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_bk7ld"]
+[ext_resource type="Resource" uid="uid://hl73klqrpbb1" path="res://data/enemies/enemy_data_earth_bigfoot.tres" id="1_y6hmy"]
+
+[resource]
+script = ExtResource("1_bk7ld")
+enemy_data = ExtResource("1_y6hmy")
+delay = 1.0
+path_index = 0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

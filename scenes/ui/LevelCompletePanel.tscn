@@ -1,0 +1,222 @@
+[gd_scene load_steps=21 format=3 uid="uid://cg4hr6brmiyc4"]
+
+[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="1_htvhg"]
+[ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="2_dg558"]
+[ext_resource type="Script" uid="uid://dkwm6nmi7l54e" path="res://scripts/ui/level_complete_panel.gd" id="2_s6i0j"]
+[ext_resource type="Texture2D" uid="uid://ddifi16t2ehe6" path="res://assets/art/sprites/ui/spr_ui_star2.png" id="3_bisre"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="5_bisre"]
+[ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="5_s6i0j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6i0j"]
+atlas = ExtResource("3_bisre")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwalh"]
+atlas = ExtResource("3_bisre")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8800"]
+atlas = ExtResource("3_bisre")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dg558"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bisre"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s6i0j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cwalh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l8800"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kegk5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ph6j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2kul1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f4h3r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pcayv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_238av"]
+
+[node name="LevelCompletePanel" type="NinePatchRect"]
+custom_minimum_size = Vector2(200, 95)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -31.0
+offset_right = 100.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_htvhg")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+script = ExtResource("2_s6i0j")
+metadata/_custom_type_script = "uid://dkwm6nmi7l54e"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_dg558")
+theme_override_font_sizes/font_size = 16
+text = "Level Complete!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Star1" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_s6i0j")
+stretch_mode = 2
+
+[node name="Star2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_cwalh")
+stretch_mode = 2
+
+[node name="Star3" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_l8800")
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="WorldMap" type="NinePatchRect" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 1
+texture = ExtResource("5_s6i0j")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/WorldMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_bisre")
+theme_override_font_sizes/font_size = 8
+text = "World Map"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="WorldMapButton" type="Button" parent="MarginContainer/HBoxContainer/WorldMap"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dg558")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_bisre")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_s6i0j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_cwalh")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l8800")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_kegk5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6ph6j")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_2kul1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_f4h3r")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pcayv")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_238av")
+
+[node name="NextLevel" type="NinePatchRect" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 1
+texture = ExtResource("5_s6i0j")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/NextLevel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_bisre")
+theme_override_font_sizes/font_size = 8
+text = "next level"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NextLevelButton" type="Button" parent="MarginContainer/HBoxContainer/NextLevel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dg558")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_bisre")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_s6i0j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_cwalh")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l8800")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_kegk5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6ph6j")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_2kul1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_f4h3r")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pcayv")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_238av")

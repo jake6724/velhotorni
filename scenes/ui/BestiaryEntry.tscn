@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmjjuc3ex7t1w"]
+
+[ext_resource type="Script" uid="uid://ckyo0wkil5f54" path="res://scripts/ui/bestiary_entry.gd" id="1_tdhhx"]
+[ext_resource type="Texture2D" uid="uid://3ay88m71ilut" path="res://assets/art/sprites/ui/spr_ui_question_mark.png" id="2_1smjk"]
+
+[node name="BestiaryEntry" type="TextureButton"]
+stretch_mode = 3
+script = ExtResource("1_tdhhx")
+metadata/_custom_type_script = "uid://ckyo0wkil5f54"
+
+[node name="HiddenIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 0
+texture = ExtResource("2_1smjk")
+stretch_mode = 2

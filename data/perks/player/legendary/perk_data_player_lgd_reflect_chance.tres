@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=7 format=3 uid="uid://blqkxitswt1lr"]
+
+[ext_resource type="Script" uid="uid://cm72v2ilme5nr" path="res://scripts/debuffs/data/debuff_data.gd" id="1_blpg5"]
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="1_j0183"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_xhtmu"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_blpg5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl2vp"]
+atlas = ExtResource("1_xhtmu")
+region = Rect2(144, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2y5u"]
+atlas = ExtResource("2_blpg5")
+region = Rect2(48, 96, 16, 16)
+
+[resource]
+script = ExtResource("1_j0183")
+stat = 5
+base_value = 0.2
+legendary = true
+perk_icon = SubResource("AtlasTexture_kl2vp")
+perk_mini_icon = SubResource("AtlasTexture_h2y5u")
+perk_name = "Wind Cloak"
+perk_desc = "Gain a {value}% chance to reflect incoming bullets"
+perk_value_display_mode = 1

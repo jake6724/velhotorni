@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=7 format=3 uid="uid://cc4gqps7k5b3d"]
+
+[ext_resource type="Script" uid="uid://cm72v2ilme5nr" path="res://scripts/debuffs/data/debuff_data.gd" id="1_cfvr6"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_vtpjk"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_cfvr6"]
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="2_q18bq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfvr6"]
+atlas = ExtResource("1_vtpjk")
+region = Rect2(144, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s0o6"]
+atlas = ExtResource("2_cfvr6")
+region = Rect2(48, 80, 16, 16)
+
+[resource]
+script = ExtResource("2_q18bq")
+stat = 3
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_cfvr6")
+perk_mini_icon = SubResource("AtlasTexture_1s0o6")
+perk_name = "Fleet-footed"
+perk_desc = "Increase move speed by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

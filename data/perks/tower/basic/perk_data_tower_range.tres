@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://vugi5hhsrh7j"]
+
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="1_ad1ac"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_us1l1"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_5qwqo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qwqo"]
+atlas = ExtResource("1_us1l1")
+region = Rect2(288, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wnwp"]
+atlas = ExtResource("2_5qwqo")
+region = Rect2(96, 112, 16, 16)
+
+[resource]
+script = ExtResource("1_ad1ac")
+stat = 6
+buff = 0
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_5qwqo")
+perk_mini_icon = SubResource("AtlasTexture_8wnwp")
+perk_name = "Farsight"
+perk_desc = "Increase the range buff from light familiars by {value}% "
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

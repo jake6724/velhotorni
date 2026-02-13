@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://bdh5kim3twrvp"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_nak0b"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_kj8s3"]
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="2_qrs4c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsq20"]
+atlas = ExtResource("1_nak0b")
+region = Rect2(144, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpmjr"]
+atlas = ExtResource("2_kj8s3")
+region = Rect2(48, 64, 16, 16)
+
+[resource]
+script = ExtResource("2_qrs4c")
+stat = 3
+element = 3
+base_value = -0.1
+perk_icon = SubResource("AtlasTexture_gsq20")
+perk_mini_icon = SubResource("AtlasTexture_hpmjr")
+perk_name = "Earth Proficiency"
+perk_desc = "upgrade earth familiars for {value}% less mana"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

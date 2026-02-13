@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://c0xx0v05o7wj5"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_1ammv"]
+[ext_resource type="Resource" uid="uid://d0om07a7xwg53" path="res://data/enemies/ranged_enemies/repeaters/enemy_data_ranged_repeater_water_killerfish.tres" id="1_gqe1f"]
+
+[resource]
+script = ExtResource("1_1ammv")
+enemy_data = ExtResource("1_gqe1f")
+delay = 1.0
+path_index = 0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://bnslara3f5we1"]
+
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_dr67u"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_j5eio"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_v77j3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v77j3"]
+atlas = ExtResource("1_j5eio")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khyej"]
+atlas = ExtResource("2_v77j3")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_dr67u")
+stat = 6
+base_value = 0.04
+perk_icon = SubResource("AtlasTexture_v77j3")
+perk_mini_icon = SubResource("AtlasTexture_khyej")
+perk_name = "Arcane Judgement"
+perk_desc = "All spells execute enemies below {value}% health"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://b432glclfdfy0"]
+
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="1_h1aky"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_hwqkq"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_6ihqt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1aky"]
+atlas = ExtResource("1_hwqkq")
+region = Rect2(240, 384, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwqkq"]
+atlas = ExtResource("2_6ihqt")
+region = Rect2(80, 128, 16, 16)
+
+[resource]
+script = ExtResource("1_h1aky")
+stat = 5
+debuff = 5
+base_value = 2.0
+legendary = true
+perk_icon = SubResource("AtlasTexture_h1aky")
+perk_mini_icon = SubResource("AtlasTexture_hwqkq")
+perk_name = "Tempest"
+perk_desc = "Double the knockback distance from wind familiars "
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

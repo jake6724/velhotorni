@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=7 format=3 uid="uid://dlxnh6w0yiaxt"]
+
+[ext_resource type="Script" uid="uid://cm72v2ilme5nr" path="res://scripts/debuffs/data/debuff_data.gd" id="1_68huv"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_bt72r"]
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="1_r3i8v"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_4w4fw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w4fw"]
+atlas = ExtResource("1_bt72r")
+region = Rect2(0, 432, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68huv"]
+atlas = ExtResource("2_4w4fw")
+region = Rect2(0, 144, 16, 16)
+
+[resource]
+script = ExtResource("1_r3i8v")
+trigger = 3
+action = 1
+stat = 3
+duration = 3.0
+base_value = 0.05
+perk_icon = SubResource("AtlasTexture_4w4fw")
+perk_mini_icon = SubResource("AtlasTexture_68huv")
+perk_name = "Wind's Blessing"
+perk_desc = "Picking up summoning mana grants a {value}% move speed buff for 3 seconds. Stacks up to 6 times."
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

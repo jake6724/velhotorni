@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://dkv8rkdxv5p73"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_cggr6"]
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_cxgnp"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_ak5ph"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yudnl"]
+atlas = ExtResource("1_cggr6")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fn30"]
+atlas = ExtResource("2_ak5ph")
+region = Rect2(16, 16, 16, 16)
+
+[resource]
+script = ExtResource("1_cxgnp")
+stat = 4
+element = 1
+base_value = 0.05
+perk_icon = SubResource("AtlasTexture_yudnl")
+perk_mini_icon = SubResource("AtlasTexture_5fn30")
+perk_name = "Tailwind"
+perk_desc = "Increase the fire rate of wind spells by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

@@ -1,0 +1,251 @@
+[gd_scene load_steps=12 format=3 uid="uid://dl2jfi3hfgtdj"]
+
+[ext_resource type="Script" uid="uid://celgbrmvc2054" path="res://scripts/ui/wave_info_panel.gd" id="1_5i6j5"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_qrg85"]
+[ext_resource type="Texture2D" uid="uid://b62ll37upwjx3" path="res://assets/art/sprites/ui/spr_ui_element_icons.png" id="3_era8b"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="4_b2xdc"]
+[ext_resource type="Texture2D" uid="uid://cys3s6kcc47k8" path="res://assets/art/sprites/ui/percent.png" id="4_era8b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq3wy"]
+atlas = ExtResource("3_era8b")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0vwl"]
+atlas = ExtResource("3_era8b")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0qm0"]
+atlas = ExtResource("3_era8b")
+region = Rect2(0, 10, 9, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5esy"]
+atlas = ExtResource("3_era8b")
+region = Rect2(10, 10, 9, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6igii"]
+atlas = ExtResource("3_era8b")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itp2p"]
+atlas = ExtResource("3_era8b")
+region = Rect2(20, 10, 10, 10)
+
+[node name="WaveInfoPanel" type="NinePatchRect"]
+offset_left = 8.0
+offset_right = 232.0
+offset_bottom = 24.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_qrg85")
+region_rect = Rect2(1, 1, 30, 30)
+patch_margin_left = 11
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 11
+script = ExtResource("1_5i6j5")
+metadata/_custom_type_script = "uid://celgbrmvc2054"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Fire" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = -1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Fire"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_qq3wy")
+stretch_mode = 2
+
+[node name="FireLabel" type="Label" parent="MarginContainer/HBoxContainer/Fire"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_font_sizes/font_size = 8
+text = "100"
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/Fire"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("4_era8b")
+stretch_mode = 2
+
+[node name="Wind" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = -1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Wind"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_o0vwl")
+stretch_mode = 2
+
+[node name="WindLabel" type="Label" parent="MarginContainer/HBoxContainer/Wind"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_font_sizes/font_size = 8
+text = "50"
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/Wind"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("4_era8b")
+stretch_mode = 2
+
+[node name="Water" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = -1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Water"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_o0qm0")
+stretch_mode = 2
+
+[node name="WaterLabel" type="Label" parent="MarginContainer/HBoxContainer/Water"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_font_sizes/font_size = 8
+text = "50"
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/Water"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("4_era8b")
+stretch_mode = 2
+
+[node name="Earth" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = -1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Earth"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_c5esy")
+stretch_mode = 2
+
+[node name="EarthLabel" type="Label" parent="MarginContainer/HBoxContainer/Earth"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_font_sizes/font_size = 8
+text = "50"
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/Earth"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("4_era8b")
+stretch_mode = 2
+
+[node name="Light" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = -1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Light"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_6igii")
+stretch_mode = 2
+
+[node name="LightLabel" type="Label" parent="MarginContainer/HBoxContainer/Light"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_font_sizes/font_size = 8
+text = "50"
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/Light"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("4_era8b")
+stretch_mode = 2
+
+[node name="Dark" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = -1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Dark"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_itp2p")
+stretch_mode = 2
+
+[node name="DarkLabel" type="Label" parent="MarginContainer/HBoxContainer/Dark"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_b2xdc")
+theme_override_font_sizes/font_size = 8
+text = "50"
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/Dark"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("4_era8b")
+stretch_mode = 2

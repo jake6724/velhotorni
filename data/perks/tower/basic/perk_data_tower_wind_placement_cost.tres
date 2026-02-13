@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://dlyl1kxfyf3jn"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_rqqvn"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_1sunc"]
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="2_b3alq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5jvt"]
+atlas = ExtResource("1_rqqvn")
+region = Rect2(144, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0058"]
+atlas = ExtResource("2_1sunc")
+region = Rect2(48, 48, 16, 16)
+
+[resource]
+script = ExtResource("2_b3alq")
+stat = 2
+element = 1
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_u5jvt")
+perk_mini_icon = SubResource("AtlasTexture_a0058")
+perk_name = "Wind Conjurer"
+perk_desc = "summon wind familiars for {value}% less mana"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

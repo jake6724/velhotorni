@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=9 format=3 uid="uid://cgyt0ve4xsts2"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_e8a7t"]
+[ext_resource type="AudioStream" uid="uid://drtb56ylon6ta" path="res://assets/audio/footstep_grass_1.mp3" id="2_feidh"]
+[ext_resource type="AudioStream" uid="uid://btyd7pagpdp8n" path="res://assets/audio/footstep_grass_2.mp3" id="3_gj4wt"]
+[ext_resource type="AudioStream" uid="uid://b8cuddxwpibn3" path="res://assets/audio/footstep_grass_3.mp3" id="4_7ye26"]
+[ext_resource type="AudioStream" uid="uid://d1wf0f3krko2f" path="res://assets/audio/footstep_grass_4.mp3" id="5_ny8do"]
+[ext_resource type="AudioStream" uid="uid://bet5yf7huksts" path="res://assets/audio/footstep_grass_5.mp3" id="6_d3v2v"]
+[ext_resource type="AudioStream" uid="uid://bjl0j2y868bl5" path="res://assets/audio/footstep_grass_6.mp3" id="7_2p644"]
+[ext_resource type="AudioStream" uid="uid://djgkm41kvbpjm" path="res://assets/audio/footstep_grass_7.mp3" id="8_ssryh"]
+
+[resource]
+script = ExtResource("1_e8a7t")
+limit = 3
+type = 5
+sounds = Array[AudioStreamMP3]([ExtResource("2_feidh"), ExtResource("3_gj4wt"), ExtResource("4_7ye26"), ExtResource("5_ny8do"), ExtResource("6_d3v2v"), ExtResource("7_2p644"), ExtResource("8_ssryh")])
+volume = -20.0
+select_mode = 0
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

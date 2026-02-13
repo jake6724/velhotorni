@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://41fs5mriphw0"]
+
+[ext_resource type="Texture2D" uid="uid://bqypyifq66o2d" path="res://assets/art/atlases/tower/atl_tower_wind_lightning.png" id="1_jfqiq"]
+[ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_l3akd"]
+[ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="2_n4r6v"]
+[ext_resource type="PackedScene" uid="uid://c2m03283180o8" path="res://scenes/bullets/WindLightningBullet.tscn" id="3_jfqiq"]
+[ext_resource type="Texture2D" uid="uid://bt1v03t0h2bp6" path="res://assets/art/sprites/ui/spr_ui_water.png" id="4_ccr58"]
+[ext_resource type="Resource" uid="uid://bfkixr117m8v2" path="res://data/debuffs/debuff_data_stun_lightning.tres" id="4_jfqiq"]
+
+[resource]
+script = ExtResource("2_n4r6v")
+element = 10
+base_element = 1
+damage = 12.0
+speed = 0.8
+attack_range = 65.0
+max_health = 75.0
+upgrade_cost_base = 75
+upgrade_cost_increment = 25
+atlas = ExtResource("1_jfqiq")
+transform_hint_texture = ExtResource("4_ccr58")
+bullet = ExtResource("3_jfqiq")
+bullet_speed = 500.0
+debuff_data = ExtResource("4_jfqiq")
+tower_name = "Ukko"
+desc = "A creature in control of lightning."
+metadata/_custom_type_script = "uid://v7b6nq74b314"

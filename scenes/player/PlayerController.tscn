@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://btulqisr6vlgj"]
+[gd_scene load_steps=6 format=3 uid="uid://btulqisr6vlgj"]
 
 [ext_resource type="Script" uid="uid://dfvyivdwm67y1" path="res://scripts/player/player_controller.gd" id="1_ci81t"]
 [ext_resource type="PackedScene" uid="uid://ciicsqtfh31fh" path="res://scenes/ui/TowerMenu.tscn" id="2_awcob"]
+[ext_resource type="PackedScene" uid="uid://br3yofjq2l14o" path="res://scenes/ui/TowerUpgradeMenu.tscn" id="3_23doe"]
+[ext_resource type="PackedScene" uid="uid://klolb6rmuatb" path="res://scenes/ui/TowerEvolveMenu.tscn" id="4_6ev1f"]
+[ext_resource type="PackedScene" uid="uid://bno5o5pbi8s3e" path="res://scenes/player/CoinCollector.tscn" id="5_08ru5"]
 
 [node name="PlayerController" type="Node2D"]
 script = ExtResource("1_ci81t")
@@ -11,3 +14,11 @@ metadata/_custom_type_script = "uid://dfvyivdwm67y1"
 layer = 0
 
 [node name="TowerMenu" parent="UI" instance=ExtResource("2_awcob")]
+
+[node name="TowerUpgradeMenu" parent="UI" instance=ExtResource("3_23doe")]
+visible = false
+
+[node name="TowerEvolveMenu" parent="UI" instance=ExtResource("4_6ev1f")]
+visible = false
+
+[node name="CoinCollector" parent="." instance=ExtResource("5_08ru5")]

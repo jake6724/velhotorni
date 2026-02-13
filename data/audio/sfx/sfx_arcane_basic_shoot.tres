@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://3qnrbgkj5l3i"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_u4tcm"]
+[ext_resource type="AudioStream" uid="uid://qvxephqc4cub" path="res://assets/audio/arcane_basic_shoot_3_7.mp3" id="2_5e1my"]
+
+[resource]
+script = ExtResource("1_u4tcm")
+limit = 20
+type = 1
+sounds = Array[AudioStreamMP3]([ExtResource("2_5e1my")])
+volume = -5.0
+pitch_randomness = 0.05
+select_mode = 2
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

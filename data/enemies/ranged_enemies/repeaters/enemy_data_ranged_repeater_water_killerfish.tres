@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="EnemyDataRangedRepeater" load_steps=8 format=3 uid="uid://d0om07a7xwg53"]
+
+[ext_resource type="Texture2D" uid="uid://b7uwfr3bxqmvs" path="res://assets/art/atlases/enemy/atl_enemy_water_killerfish.png" id="1_es5dg"]
+[ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_lqa3j"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_es5dg"]
+[ext_resource type="Script" uid="uid://cfcg6s514pb3d" path="res://scripts/enemies/data/enemy_data_ranged_repeater.gd" id="3_vsw5l"]
+[ext_resource type="AudioStream" uid="uid://b2768of3a42kk" path="res://assets/audio/sfx/Water_Explosion.ogg" id="3_wyxhc"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="5_wyxhc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8142s"]
+atlas = ExtResource("5_wyxhc")
+region = Rect2(80, 32, 16, 16)
+
+[resource]
+script = ExtResource("3_vsw5l")
+attack_cooldown = 0.85
+burst_cooldown = 0.85
+num_bursts = 4
+initial_delay = 3.0
+num_bullets_per_burst = 6
+angle_increment = 18.0
+burst_angle_increment = -90.0
+bullet_speed = 100.0
+bullet_max_distance = 112.0
+size = 7
+element = 2
+strong_against_element = 3
+weak_against_element = 1
+health = 550.0
+speed = 20.0
+damage = 5
+tower_mana_drop_chance_base = 15.0
+element_mana_drop_chance = 0.5
+element_mana_drop_amount_multiplier = 2.0
+atlas = ExtResource("1_es5dg")
+icon = SubResource("AtlasTexture_8142s")
+explosion_sfx = ExtResource("3_wyxhc")
+metadata/_custom_type_script = "uid://cfcg6s514pb3d"

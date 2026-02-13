@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=6 format=3 uid="uid://cw0rue1g84hdo"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_ey7ia"]
+[ext_resource type="AudioStream" uid="uid://bv1ji51xamrph" path="res://assets/audio/tower_hit_1.mp3" id="2_rvni1"]
+[ext_resource type="AudioStream" uid="uid://c4tvv3wfdj4vd" path="res://assets/audio/tower_hit_2.mp3" id="3_iiw5q"]
+[ext_resource type="AudioStream" uid="uid://7cpy4u162gbb" path="res://assets/audio/tower_hit_3.mp3" id="4_ji7gk"]
+[ext_resource type="AudioStream" uid="uid://cqkysyel6hfbq" path="res://assets/audio/tower_hit_4.mp3" id="5_d1y2k"]
+
+[resource]
+script = ExtResource("1_ey7ia")
+limit = 8
+type = 21
+sounds = Array[AudioStreamMP3]([ExtResource("2_rvni1"), ExtResource("3_iiw5q"), ExtResource("4_ji7gk"), ExtResource("5_d1y2k")])
+volume = -8.0
+pitch_randomness = 0.1
+select_mode = 2
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

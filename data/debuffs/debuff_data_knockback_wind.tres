@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DebuffDataKnockback" load_steps=2 format=3 uid="uid://fem5s7qur7b8"]
+
+[ext_resource type="Script" uid="uid://cef6vfjmopgle" path="res://scripts/debuffs/data/debuff_data_knockback.gd" id="1_6a3o8"]
+
+[resource]
+script = ExtResource("1_6a3o8")
+value = 8.0
+total_duration = 0.5

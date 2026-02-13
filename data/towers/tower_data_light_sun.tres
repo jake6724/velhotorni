@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://6d73eb57qvfc"]
+
+[ext_resource type="Texture2D" uid="uid://kmi2frmpbjor" path="res://assets/art/atlases/tower/atl_tower_light_sun.png" id="1_8xd3f"]
+[ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_gs6bx"]
+[ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="2_gcyit"]
+[ext_resource type="Resource" uid="uid://bvtlv2esmmf64" path="res://data/buffs/buff_data_range_light_all.tres" id="3_bjscq"]
+[ext_resource type="PackedScene" uid="uid://bipr81qu1ic1t" path="res://scenes/bullets/LightSunBullet.tscn" id="4_lpiwl"]
+[ext_resource type="Texture2D" uid="uid://74nqbgxv1h31" path="res://assets/art/sprites/ui/spr_ui_dark.png" id="6_5cv31"]
+
+[resource]
+script = ExtResource("2_gcyit")
+element = 16
+base_element = 4
+damage = 120.0
+speed = 1.0
+attack_range = 75.0
+max_health = 75.0
+upgrade_cost_base = 100
+upgrade_cost_increment = 25
+atlas = ExtResource("1_8xd3f")
+transform_hint_texture = ExtResource("6_5cv31")
+bullet = ExtResource("4_lpiwl")
+bullet_speed = 500.0
+buff_data_list = Array[ExtResource("1_gs6bx")]([ExtResource("3_bjscq")])
+tower_name = "Byakko"
+desc = "A mythological creature of light."
+metadata/_custom_type_script = "uid://v7b6nq74b314"

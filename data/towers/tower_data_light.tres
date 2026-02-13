@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="TowerData" load_steps=8 format=3 uid="uid://h3wi30q1qn6i"]
+
+[ext_resource type="Texture2D" uid="uid://b8u7gspp5vpxa" path="res://assets/art/atlases/tower/atl_tower_light.png" id="1_8ft6f"]
+[ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="1_f600e"]
+[ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="2_b2u2v"]
+[ext_resource type="PackedScene" uid="uid://dyd66xpilo8lo" path="res://scenes/bullets/LightBullet.tscn" id="2_ms340"]
+[ext_resource type="Resource" uid="uid://bvtlv2esmmf64" path="res://data/buffs/buff_data_range_light_all.tres" id="3_b2u2v"]
+[ext_resource type="Texture2D" uid="uid://74nqbgxv1h31" path="res://assets/art/sprites/ui/spr_ui_dark.png" id="3_p611l"]
+[ext_resource type="Texture2D" uid="uid://3dti3chb4cnf" path="res://assets/art/sprites/ui/spr_ui_tower_light.png" id="5_006ys"]
+
+[resource]
+script = ExtResource("1_f600e")
+element = 4
+base_element = 4
+damage = 40.0
+speed = 2.0
+attack_range = 75.0
+max_health = 100.0
+upgrade_cost_base = 50
+upgrade_cost_increment = 25
+atlas = ExtResource("1_8ft6f")
+transform_hint_texture = ExtResource("3_p611l")
+portrait = ExtResource("5_006ys")
+bullet = ExtResource("2_ms340")
+bullet_speed = 400.0
+buff_data_list = Array[ExtResource("2_b2u2v")]([ExtResource("3_b2u2v")])
+tower_name = "Unicorn"
+desc = "A horse-like creature with a magical horn."
+metadata/_custom_type_script = "uid://v7b6nq74b314"

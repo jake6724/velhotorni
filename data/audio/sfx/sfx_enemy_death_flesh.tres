@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=6 format=3 uid="uid://co15g1onrjmas"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_2g1h8"]
+[ext_resource type="AudioStream" uid="uid://bigcca3yom1of" path="res://assets/audio/enemy_death_flesh_2_1.mp3" id="2_nmlvy"]
+[ext_resource type="AudioStream" uid="uid://3jl7nrix0tja" path="res://assets/audio/enemy_death_flesh_2_2.mp3" id="3_yj8uw"]
+[ext_resource type="AudioStream" uid="uid://dspt2e66gkxfe" path="res://assets/audio/enemy_death_flesh_2_3.mp3" id="4_3nqis"]
+[ext_resource type="AudioStream" uid="uid://cj78juhucwb2e" path="res://assets/audio/enemy_death_flesh_2_4.mp3" id="5_yj8uw"]
+
+[resource]
+script = ExtResource("1_2g1h8")
+limit = 10
+type = 12
+sounds = Array[AudioStreamMP3]([ExtResource("2_nmlvy"), ExtResource("3_yj8uw"), ExtResource("4_3nqis"), ExtResource("5_yj8uw")])
+volume = 10.0
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

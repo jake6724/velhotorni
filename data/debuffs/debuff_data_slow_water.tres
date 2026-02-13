@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DebuffDataSlow" load_steps=2 format=3 uid="uid://wu5nsovo6hnf"]
+
+[ext_resource type="Script" uid="uid://dwuvhdkd8kkxn" path="res://scripts/debuffs/data/debuff_data_slow.gd" id="1_ucjn5"]
+
+[resource]
+script = ExtResource("1_ucjn5")
+value = 75.0
+priority = 3
+total_duration = 0.55

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://beuimwrp6xdjo"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_begsq"]
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_xrp01"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_oyvit"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyd72"]
+atlas = ExtResource("1_begsq")
+region = Rect2(96, 384, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7m0o3"]
+atlas = ExtResource("2_oyvit")
+region = Rect2(32, 128, 16, 16)
+
+[resource]
+script = ExtResource("1_xrp01")
+stat = 11
+element = 0
+base_value = 0.25
+secondary_value = 2.0
+legendary = true
+perk_icon = SubResource("AtlasTexture_eyd72")
+perk_mini_icon = SubResource("AtlasTexture_7m0o3")
+perk_name = "Torrent"
+perk_desc = "Spell mana drops have double the chance to be water. Increase all water damage by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

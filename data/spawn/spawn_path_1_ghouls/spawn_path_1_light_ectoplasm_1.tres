@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://b6ar8i47q6jl0"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_87was"]
+[ext_resource type="Resource" uid="uid://c43tqhyyniyh2" path="res://data/enemies/ghouls/enemy_data_light_ectoplasm.tres" id="1_qnn47"]
+
+[resource]
+script = ExtResource("1_87was")
+enemy_data = ExtResource("1_qnn47")
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

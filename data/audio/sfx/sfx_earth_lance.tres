@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=5 format=3 uid="uid://bds6mmcydfdt6"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_4ak2n"]
+[ext_resource type="AudioStream" uid="uid://bgr5mh6fs7aga" path="res://assets/audio/earth_lance_shoot_1_1.mp3" id="2_1l7v6"]
+[ext_resource type="AudioStream" uid="uid://dtdnpoieldak4" path="res://assets/audio/earth_lance_shoot_1_2.mp3" id="3_ugw1n"]
+[ext_resource type="AudioStream" uid="uid://dcvum8llaflpg" path="res://assets/audio/earth_lance_shoot_1_3.mp3" id="4_j5kjr"]
+
+[resource]
+script = ExtResource("1_4ak2n")
+type = 24
+sounds = Array[AudioStreamMP3]([ExtResource("2_1l7v6"), ExtResource("3_ugw1n"), ExtResource("4_j5kjr")])
+volume = -3.0
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

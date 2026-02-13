@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://bavoilsmkemgj"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_xtgd1"]
+[ext_resource type="AudioStream" uid="uid://c2f3y8li8kkhd" path="res://assets/audio/ui_select_1.mp3" id="2_26bwq"]
+
+[resource]
+script = ExtResource("1_xtgd1")
+limit = 1
+type = 9
+sounds = Array[AudioStreamMP3]([ExtResource("2_26bwq")])
+volume = -2.0
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DebuffDataStun" load_steps=2 format=3 uid="uid://x1lj5eq27x76"]
+
+[ext_resource type="Script" uid="uid://bfymbewo23q0m" path="res://scripts/debuffs/data/debuff_data_stun.gd" id="1_fe2ng"]
+
+[resource]
+script = ExtResource("1_fe2ng")
+total_duration = 0.2

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://w6egxj05mllx"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_dl480"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_y4h2h"]
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="3_3jds6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kacy"]
+atlas = ExtResource("1_dl480")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rdlu"]
+atlas = ExtResource("2_y4h2h")
+region = Rect2(0, 48, 16, 16)
+
+[resource]
+script = ExtResource("3_3jds6")
+stat = 5
+element = 4
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_5kacy")
+perk_mini_icon = SubResource("AtlasTexture_1rdlu")
+perk_name = "Brilliance"
+perk_desc = "Gain a {value}% chance to cast light spells for free"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

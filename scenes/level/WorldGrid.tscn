@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://eierlhsm86n1"]
-
-[ext_resource type="Script" uid="uid://b0x6qi2y74wsm" path="res://scripts/world_grid.gd" id="1_tdajc"]
-
-[node name="WorldGrid" type="Node2D"]
-script = ExtResource("1_tdajc")
-metadata/_custom_type_script = "uid://b0x6qi2y74wsm"

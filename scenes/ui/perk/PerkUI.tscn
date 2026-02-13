@@ -1,0 +1,285 @@
+[gd_scene load_steps=22 format=3 uid="uid://ck21estk7dkvr"]
+
+[ext_resource type="Texture2D" uid="uid://bw4irqp47tfd7" path="res://assets/art/sprites/ui/spr_ui_letterbox.png" id="1_q4ku2"]
+[ext_resource type="Script" uid="uid://ep6fjr1545lw" path="res://scripts/ui/perks/perk_ui.gd" id="1_trnrl"]
+[ext_resource type="PackedScene" uid="uid://cwvwwlqpm2ccq" path="res://scenes/ui/perk/PerkCard.tscn" id="2_ebruu"]
+[ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="3_mk1p4"]
+[ext_resource type="Texture2D" uid="uid://c338q1day45os" path="res://assets/art/sprites/ui/spr_ui_candle_flame.png" id="5_8q562"]
+[ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="6_6io6w"]
+[ext_resource type="Script" path="res://scripts/ui/controller_button_hint.gd" id="7_julgd"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q4ku2"]
+load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebruu"]
+atlas = SubResource("CompressedTexture2D_q4ku2")
+region = Rect2(7, 6, 34, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2mlt"]
+atlas = ExtResource("5_8q562")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6io6w"]
+atlas = ExtResource("5_8q562")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_julgd"]
+atlas = ExtResource("5_8q562")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpl3q"]
+atlas = ExtResource("5_8q562")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_04n6p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2mlt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6io6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_julgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpl3q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mk1p4"]
+load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trnrl"]
+atlas = SubResource("CompressedTexture2D_mk1p4")
+region = Rect2(54, 7, 36, 73)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ebruu"]
+load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mk1p4"]
+atlas = SubResource("CompressedTexture2D_ebruu")
+region = Rect2(102, 7, 36, 73)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_trnrl"]
+load_path = "res://.godot/imported/atl_ui_candle.png-849793862a7ac0b2665415d052c99628.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q562"]
+atlas = SubResource("CompressedTexture2D_trnrl")
+region = Rect2(151, 7, 34, 73)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04n6p"]
+atlas = ExtResource("6_6io6w")
+region = Rect2(3, 3, 10, 10)
+
+[node name="PerkUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_trnrl")
+metadata/_custom_type_script = "uid://ep6fjr1545lw"
+
+[node name="TopLetterbox" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_right = 256.0
+offset_bottom = 32.0
+grow_horizontal = 2
+texture = ExtResource("1_q4ku2")
+stretch_mode = 2
+
+[node name="BottomLetterbox" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -36.0
+offset_right = 256.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_q4ku2")
+
+[node name="Candles" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = 101.0
+offset_right = 40.0
+offset_bottom = 141.0
+
+[node name="Candle1" type="TextureRect" parent="Candles"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 18.0
+offset_top = 219.0
+offset_right = 58.0
+offset_bottom = 293.0
+texture = SubResource("AtlasTexture_ebruu")
+stretch_mode = 3
+
+[node name="Flame1" type="AnimatedSprite2D" parent="Candles/Candle1"]
+position = Vector2(18, -12)
+sprite_frames = SubResource("SpriteFrames_04n6p")
+autoplay = "default"
+frame_progress = 0.75775
+
+[node name="Candle2" type="TextureRect" parent="Candles"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 72.0
+offset_top = 237.0
+offset_right = 112.0
+offset_bottom = 311.0
+texture = SubResource("AtlasTexture_trnrl")
+stretch_mode = 3
+
+[node name="Flame2" type="AnimatedSprite2D" parent="Candles/Candle2"]
+position = Vector2(19, -12)
+sprite_frames = SubResource("SpriteFrames_04n6p")
+autoplay = "default"
+frame_progress = 0.49701
+
+[node name="Candle3" type="TextureRect" parent="Candles"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 400.0
+offset_top = 237.0
+offset_right = 440.0
+offset_bottom = 311.0
+texture = SubResource("AtlasTexture_mk1p4")
+stretch_mode = 3
+
+[node name="Flame3" type="AnimatedSprite2D" parent="Candles/Candle3"]
+position = Vector2(19, -12)
+sprite_frames = SubResource("SpriteFrames_04n6p")
+autoplay = "default"
+frame_progress = 0.49701
+
+[node name="Candle4" type="TextureRect" parent="Candles"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 456.0
+offset_top = 219.0
+offset_right = 496.0
+offset_bottom = 293.0
+texture = SubResource("AtlasTexture_8q562")
+stretch_mode = 3
+
+[node name="Flame4" type="AnimatedSprite2D" parent="Candles/Candle4"]
+position = Vector2(19, -12)
+sprite_frames = SubResource("SpriteFrames_04n6p")
+autoplay = "default"
+frame_progress = 0.31012
+
+[node name="Flames" type="Control" parent="Candles"]
+anchors_preset = 0
+offset_top = -78.0
+offset_right = 40.0
+offset_bottom = -38.0
+
+[node name="PerkCards" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PerkCard1" parent="PerkCards" instance=ExtResource("2_ebruu")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 44.0
+offset_top = 52.0
+offset_right = 164.0
+offset_bottom = 196.0
+
+[node name="PerkCard2" parent="PerkCards" instance=ExtResource("2_ebruu")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 176.0
+offset_top = 52.0
+offset_right = 296.0
+offset_bottom = 196.0
+
+[node name="PerkCard3" parent="PerkCards" instance=ExtResource("2_ebruu")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 308.0
+offset_top = 52.0
+offset_right = 428.0
+offset_bottom = 196.0
+
+[node name="Header" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleLabel" type="Label" parent="Header"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 176.0
+offset_top = 6.0
+offset_right = 297.0
+offset_bottom = 21.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_mk1p4")
+theme_override_font_sizes/font_size = 16
+text = "Ancient Blessings"
+
+[node name="InstructionLabel" type="Label" parent="Header"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 197.0
+offset_top = 22.0
+offset_right = 273.0
+offset_bottom = 32.0
+grow_horizontal = 2
+text = "Choose one"
+
+[node name="SelectControllerHint" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 256.0
+offset_right = 62.0
+offset_bottom = 288.0
+
+[node name="ButtonHint" type="TextureRect" parent="SelectControllerHint"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_04n6p")
+stretch_mode = 2
+script = ExtResource("7_julgd")
+
+[node name="ActionNameLabel" type="Label" parent="SelectControllerHint"]
+layout_mode = 2
+text = "Select"
+vertical_alignment = 1
+
+[node name="RarityLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 235.0
+offset_top = 267.0
+offset_right = 283.0
+offset_bottom = 277.0
+text = "Rarity"

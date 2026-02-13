@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="EnemyDataRangedRepeater" load_steps=8 format=3 uid="uid://4bwoc75gg0hl"]
+
+[ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_2s712"]
+[ext_resource type="Texture2D" uid="uid://vtsqr6jfaomp" path="res://assets/art/atlases/enemy/atl_enemy_fire_buer.png" id="1_qh7e0"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_lbla7"]
+[ext_resource type="AudioStream" uid="uid://c6oqb8wi0q872" path="res://assets/audio/sfx/Fire_Explosion.ogg" id="3_jvtwc"]
+[ext_resource type="Script" uid="uid://cfcg6s514pb3d" path="res://scripts/enemies/data/enemy_data_ranged_repeater.gd" id="3_qh7e0"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="5_wapth"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsfis"]
+atlas = ExtResource("5_wapth")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+script = ExtResource("3_qh7e0")
+attack_cooldown = 0.08
+burst_cooldown = 0.08
+num_bursts = 10
+initial_delay = 3.0
+num_bullets_per_burst = 1
+burst_angle_increment = 36.0
+bullet_speed = 50.0
+bullet_max_distance = 96.0
+size = 7
+strong_against_element = 1
+weak_against_element = 5
+health = 500.0
+speed = 20.0
+damage = 3
+tower_mana_drop_chance_base = 10.0
+element_mana_drop_chance = 0.5
+element_mana_drop_amount_multiplier = 2.0
+atlas = ExtResource("1_qh7e0")
+icon = SubResource("AtlasTexture_hsfis")
+explosion_sfx = ExtResource("3_jvtwc")
+metadata/_custom_type_script = "uid://cfcg6s514pb3d"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://c4wvihk0f4c5s"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_lu4n2"]
+[ext_resource type="AudioStream" uid="uid://bvm72uu4i3nvg" path="res://assets/audio/level_ambiance_wind_1_3.mp3" id="2_l8cc8"]
+
+[resource]
+script = ExtResource("1_lu4n2")
+limit = 1
+type = 7
+sounds = Array[AudioStreamMP3]([ExtResource("2_l8cc8")])
+volume = -25.0
+select_mode = 0
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

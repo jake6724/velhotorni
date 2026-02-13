@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://ccabv0bvhqd5i"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_jx7bn"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_72j63"]
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="2_eo6dx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsq20"]
+atlas = ExtResource("1_jx7bn")
+region = Rect2(240, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot55c"]
+atlas = ExtResource("2_72j63")
+region = Rect2(80, 64, 16, 16)
+
+[resource]
+script = ExtResource("2_eo6dx")
+stat = 3
+element = 5
+base_value = -0.1
+perk_icon = SubResource("AtlasTexture_gsq20")
+perk_mini_icon = SubResource("AtlasTexture_ot55c")
+perk_name = "Dark Proficiency"
+perk_desc = "upgrade dark familiars for {value}% less mana"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

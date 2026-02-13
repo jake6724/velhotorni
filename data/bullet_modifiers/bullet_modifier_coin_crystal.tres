@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BulletModifierData" load_steps=2 format=3 uid="uid://du87ok63ed8e5"]
+
+[ext_resource type="Script" uid="uid://d2dn4lhxroxd6" path="res://scripts/bullet_modifiers/bullet_modifier_data.gd" id="1_52kfw"]
+
+[resource]
+script = ExtResource("1_52kfw")
+type = 0
+value = 1.0
+metadata/_custom_type_script = "uid://d2dn4lhxroxd6"

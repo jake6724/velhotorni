@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://d3i22tmalq22h"]
+
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="1_hun3m"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_srusf"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_en2y0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hun3m"]
+atlas = ExtResource("1_srusf")
+region = Rect2(192, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xev8v"]
+atlas = ExtResource("2_en2y0")
+region = Rect2(64, 112, 16, 16)
+
+[resource]
+script = ExtResource("1_hun3m")
+stat = 9
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_hun3m")
+perk_mini_icon = SubResource("AtlasTexture_xev8v")
+perk_name = "Mana Infusion"
+perk_desc = "Increase summoning mana drops by {value}%"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

@@ -1,19 +1,74 @@
-[gd_scene load_steps=5 format=3 uid="uid://vb1cipw2nthp"]
+[gd_scene load_steps=11 format=3 uid="uid://vb1cipw2nthp"]
 
 [ext_resource type="Script" uid="uid://c6gn0gwhvt2he" path="res://scripts/main.gd" id="1_0bbpv"]
-[ext_resource type="PackedScene" uid="uid://dmftkyu1m0r7n" path="res://scenes/ui/RoundInfo.tscn" id="3_0bbpv"]
-[ext_resource type="PackedScene" uid="uid://btulqisr6vlgj" path="res://scenes/player/PlayerController.tscn" id="4_rarhs"]
+[ext_resource type="Script" uid="uid://gu8su5txi8b8" path="res://scripts/coin_drops/coin_drop_manager.gd" id="5_c01mt"]
+[ext_resource type="Script" uid="uid://xlw22h6007at" path="res://scripts/coin_drops/mana_drop_manager.gd" id="5_lhr70"]
 [ext_resource type="PackedScene" uid="uid://cyqs2ueeu4k80" path="res://scenes/ui/PauseMenu.tscn" id="5_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://cywxbhd0t5saw" path="res://scenes/ui/BestiaryMenu.tscn" id="6_q8u5g"]
+[ext_resource type="Script" uid="uid://bjkhw2thvqfa4" path="res://scripts/perks/perk_manager.gd" id="6_wp0k4"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="7_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://cg4hr6brmiyc4" path="res://scenes/ui/LevelCompletePanel.tscn" id="8_jlsqs"]
+[ext_resource type="PackedScene" uid="uid://44wq0lwrobei" path="res://scenes/player/PlayerCharacter.tscn" id="10_lhr70"]
+[ext_resource type="PackedScene" uid="uid://ck21estk7dkvr" path="res://scenes/ui/perk/PerkUI.tscn" id="12_bjd11"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0bbpv")
 
-[node name="PlayerController" parent="." instance=ExtResource("4_rarhs")]
+[node name="CoinDropManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+rotation = -0.0217937
+script = ExtResource("5_c01mt")
+metadata/_custom_type_script = "uid://gu8su5txi8b8"
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("10_lhr70")]
+unique_name_in_owner = true
+position = Vector2(208, 120)
+
+[node name="ManaDropManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_lhr70")
+
+[node name="PerkManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_wp0k4")
+metadata/_custom_type_script = "uid://bjkhw2thvqfa4"
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="PauseMenu" parent="UI" node_paths=PackedStringArray("main") instance=ExtResource("5_vcsgt")]
 visible = false
 main = NodePath("../..")
 
-[node name="RoundInfo" parent="UI" instance=ExtResource("3_0bbpv")]
+[node name="BestiaryMenu" parent="UI" instance=ExtResource("6_q8u5g")]
+visible = false
+
+[node name="FPSLabel" type="Label" parent="UI"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -10.0
+offset_right = 1.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("7_nxtc6")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelCompletePanel" parent="UI" instance=ExtResource("8_jlsqs")]
+unique_name_in_owner = true
+visible = false
+offset_top = -47.5
+offset_bottom = 47.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="PerkUI" parent="CanvasLayer" instance=ExtResource("12_bjd11")]
+unique_name_in_owner = true
+visible = false

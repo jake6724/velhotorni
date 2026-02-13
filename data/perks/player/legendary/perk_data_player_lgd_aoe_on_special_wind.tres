@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=8 format=3 uid="uid://b271qon8b0tf7"]
+
+[ext_resource type="Script" uid="uid://cm72v2ilme5nr" path="res://scripts/debuffs/data/debuff_data.gd" id="1_2rx7n"]
+[ext_resource type="Resource" uid="uid://qllq302csbsr" path="res://data/debuffs/perk_debuffs/debuff_data_knockback_perk.tres" id="2_2rx7n"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="3_mx1c6"]
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="3_w123w"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="4_da8cv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqjyk"]
+atlas = ExtResource("3_mx1c6")
+region = Rect2(48, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo3p8"]
+atlas = ExtResource("4_da8cv")
+region = Rect2(16, 80, 16, 16)
+
+[resource]
+script = ExtResource("3_w123w")
+trigger = 5
+action = 2
+element = 1
+debuffs = Array[ExtResource("1_2rx7n")]([ExtResource("2_2rx7n")])
+base_value = 4.0
+legendary = true
+perk_icon = SubResource("AtlasTexture_sqjyk")
+perk_mini_icon = SubResource("AtlasTexture_lo3p8")
+perk_name = "Shockwave"
+perk_desc = "Casting your special ability knocks back all nearby enemies"
+metadata/_custom_type_script = "uid://73abv3ia3v27"

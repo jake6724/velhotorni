@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://5kegew63jmcv"]
+
+[ext_resource type="Script" uid="uid://bwchqvuvwcfa4" path="res://scripts/level/ground_info_trigger.gd" id="1_prhpd"]
+
+[node name="GroundInfoTrigger" type="Area2D"]
+collision_layer = 0
+collision_mask = 268435456
+script = ExtResource("1_prhpd")
+metadata/_custom_type_script = "uid://bwchqvuvwcfa4"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpawnFlying" load_steps=3 format=3 uid="uid://up4pfroipbak"]
+
+[ext_resource type="Script" uid="uid://bfdgnsa03uum7" path="res://scripts/enemies/spawn_flying.gd" id="1_c5rni"]
+[ext_resource type="Resource" uid="uid://buj8l23fwlk3x" path="res://data/enemies/flying_enemies/enemy_data_flying_earth_mothling.tres" id="1_s8q3p"]
+
+[resource]
+script = ExtResource("1_c5rni")
+flying_spawn_index = 2
+enemy_data = ExtResource("1_s8q3p")
+delay = 0.5
+path_index = 0
+metadata/_custom_type_script = "uid://bfdgnsa03uum7"

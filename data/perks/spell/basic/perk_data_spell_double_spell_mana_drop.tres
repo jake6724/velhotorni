@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="PerkDataSpell" load_steps=6 format=3 uid="uid://nqu4bjryjmgc"]
+
+[ext_resource type="Script" uid="uid://ce7tlskrqn27f" path="res://scripts/perks/data/perk_data_spell.gd" id="1_c1pg0"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_m4hqt"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_d50mp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1pg0"]
+atlas = ExtResource("1_m4hqt")
+region = Rect2(336, 384, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg7yt"]
+atlas = ExtResource("2_d50mp")
+region = Rect2(112, 128, 16, 16)
+
+[resource]
+script = ExtResource("1_c1pg0")
+stat = 7
+base_value = 0.1
+perk_icon = SubResource("AtlasTexture_c1pg0")
+perk_mini_icon = SubResource("AtlasTexture_mg7yt")
+perk_name = "Infuse Power"
+perk_desc = "gain a {value}% chance for enemies to drop double spell mana after being killed by a spell"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://ce7tlskrqn27f"

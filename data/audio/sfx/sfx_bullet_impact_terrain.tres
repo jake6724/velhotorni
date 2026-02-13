@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://dv7loudmpbevo"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_qvcli"]
+[ext_resource type="AudioStream" uid="uid://dv5f5wim21ess" path="res://assets/audio/bullet_impact_terrain_1.mp3" id="2_3nenn"]
+
+[resource]
+script = ExtResource("1_qvcli")
+limit = 10
+type = 10
+sounds = Array[AudioStreamMP3]([ExtResource("2_3nenn")])
+volume = -10.0
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://d1wwg3i5u02hf"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_71bhh"]
+[ext_resource type="AudioStream" uid="uid://c7ygqjkek3gdo" path="res://assets/audio/fireball_shoot.mp3" id="2_fy2my"]
+
+[resource]
+script = ExtResource("1_71bhh")
+limit = 2
+type = 14
+sounds = Array[AudioStreamMP3]([ExtResource("2_fy2my")])
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

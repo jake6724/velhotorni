@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TowerData" load_steps=7 format=3 uid="uid://b8qrr41200c0h"]
+
+[ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="1_2udl8"]
+[ext_resource type="Texture2D" uid="uid://1spe6jwuokia" path="res://assets/art/atlases/tower/atl_tower_fire_lava.png" id="1_vi8qm"]
+[ext_resource type="Script" uid="uid://v7b6nq74b314" path="res://scripts/towers/tower_data.gd" id="2_cov3p"]
+[ext_resource type="PackedScene" uid="uid://dj75iwdbovlfo" path="res://scenes/bullets/FireLavaBullet.tscn" id="3_pkruq"]
+[ext_resource type="Resource" uid="uid://bp1mimmx3x0eq" path="res://data/debuffs/debuff_data_burn_lava.tres" id="4_mkh2m"]
+[ext_resource type="Texture2D" uid="uid://wnb4niuilf1x" path="res://assets/art/sprites/ui/spr_ui_wind.png" id="6_y4xb0"]
+
+[resource]
+script = ExtResource("2_cov3p")
+element = 7
+damage = 30.0
+speed = 3.0
+attack_range = 40.0
+max_health = 150.0
+upgrade_cost_base = 75
+upgrade_cost_increment = 25
+atlas = ExtResource("1_vi8qm")
+transform_hint_texture = ExtResource("6_y4xb0")
+bullet = ExtResource("3_pkruq")
+debuff_data = ExtResource("4_mkh2m")
+tower_name = "Searing Slime"
+desc = "A monster made from lava."
+metadata/_custom_type_script = "uid://v7b6nq74b314"

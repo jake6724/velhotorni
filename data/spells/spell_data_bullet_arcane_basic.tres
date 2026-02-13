@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="SpellDataBullet" load_steps=11 format=3 uid="uid://lb41jg2fqrdd"]
+
+[ext_resource type="Texture2D" uid="uid://bru0vasbogas4" path="res://assets/art/atlases/bullet/atl_bullet_arcane.png" id="1_bqm4h"]
+[ext_resource type="Script" uid="uid://r20hlvy6xofu" path="res://scripts/spells/data/spell_data_bullet.gd" id="1_j800h"]
+[ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_v6qya"]
+[ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="3_2qlt8"]
+[ext_resource type="AudioStream" uid="uid://bohv8s7q5qk05" path="res://assets/audio/sfx/player/spells/player_basic_arcane.ogg" id="3_vuv85"]
+[ext_resource type="Resource" uid="uid://3qnrbgkj5l3i" path="res://data/audio/sfx/sfx_arcane_basic_shoot.tres" id="6_ablrq"]
+[ext_resource type="Texture2D" uid="uid://c3srg3aicmrm2" path="res://assets/art/atlases/atl_player_mage_staff.png" id="6_th0lx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qlt8"]
+atlas = ExtResource("1_v6qya")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th0lx"]
+atlas = ExtResource("3_2qlt8")
+region = Rect2(1, 1, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ablrq"]
+atlas = ExtResource("6_th0lx")
+region = Rect2(0, 0, 217, 15)
+
+[resource]
+script = ExtResource("1_j800h")
+speed = 200.0
+num_bullets = 1
+pierce = 1
+max_distance = 110.0
+spread = 9.0
+atlas = ExtResource("1_bqm4h")
+sfx = ExtResource("3_vuv85")
+element = 19
+damage = 9.0
+cooldown = 0.1
+base_spell_mana_per_drop = 999
+initial_mana_amount = 999
+max_mana_amount = 999
+kickback_power = 10.0
+spell_name = "Standard Issue Wand"
+popup_name = "Standard Issue Wand"
+desc = "The common tool of the king's finest. Rapidly fires bolts of arcane magic."
+active_icon = SubResource("AtlasTexture_2qlt8")
+inactive_icon = SubResource("AtlasTexture_th0lx")
+staff_texture = SubResource("AtlasTexture_ablrq")
+sound_effect = ExtResource("6_ablrq")
+metadata/_custom_type_script = "uid://r20hlvy6xofu"

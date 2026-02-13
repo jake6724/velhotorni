@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://dsoyidyl8ai8v"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_p2orx"]
+[ext_resource type="AudioStream" uid="uid://b5qqk8737nwmo" path="res://assets/audio/tower_shoot_explosion_fire.mp3" id="2_cnsxb"]
+
+[resource]
+script = ExtResource("1_p2orx")
+limit = 8
+type = 18
+sounds = Array[AudioStreamMP3]([ExtResource("2_cnsxb")])
+volume = -20.0
+pitch_randomness = 0.2
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

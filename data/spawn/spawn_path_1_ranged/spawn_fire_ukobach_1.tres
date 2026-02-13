@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://c8841rfnrhpw3"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_6galm"]
+[ext_resource type="Resource" uid="uid://cj6fcpqvwxqql" path="res://data/enemies/ranged_enemies/enemy_data_ranged_fire_ukobach.tres" id="1_rm7yv"]
+
+[resource]
+script = ExtResource("1_6galm")
+enemy_data = ExtResource("1_rm7yv")
+delay = 1.0
+path_index = 0
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

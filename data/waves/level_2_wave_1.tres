@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="Wave" load_steps=6 format=3 uid="uid://6cs1ovtpgbh3"]
+[gd_resource type="Resource" script_class="Wave" load_steps=11 format=3 uid="uid://b0ywdwxj1lr4r"]
 
-[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_sxsj3"]
-[ext_resource type="Resource" uid="uid://ctspemu02qf17" path="res://data/spawn/earth_3.tres" id="3_t2t3f"]
-[ext_resource type="Resource" uid="uid://b3l178oxgpimw" path="res://data/spawn/earth_half.tres" id="5_djola"]
-[ext_resource type="Resource" uid="uid://cjgavyk2t226r" path="res://data/spawn/water_half.tres" id="7_fpa2m"]
-[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="8_jw336"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_ufi64"]
+[ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_1hhdo"]
+[ext_resource type="Resource" uid="uid://dcfbh2qtj2uy7" path="res://data/spawn/spawn_path_1_ghouls/spawn_wind_ghoul_3.tres" id="2_sxsj3"]
+[ext_resource type="Resource" uid="uid://ind50oi64g1j" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_wind_ghoul_3.tres" id="3_uwr06"]
+[ext_resource type="Resource" uid="uid://bq0ou24k2tfwy" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_wind_ghoul_1.tres" id="4_o3hrp"]
+[ext_resource type="Resource" uid="uid://b7rvci4vb72wl" path="res://data/spawn/spawn_path_1_ranged/spawn_repeater_wind_flatwoods_1.tres" id="4_sxsj3"]
+[ext_resource type="Resource" uid="uid://fhwurvcdissg" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_1.tres" id="4_uwr06"]
+[ext_resource type="Resource" uid="uid://cbcg8g4owjgrc" path="res://data/spawn/spawn_path_1_ghouls/spawn_wind_ghoul_1.tres" id="5_qjkks"]
+[ext_resource type="Resource" uid="uid://88wopr8wpwsi" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_wind_harpy_1.tres" id="7_uwr06"]
+[ext_resource type="Resource" uid="uid://ckk4i8w477iwh" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_fire_ghoul_1.tres" id="8_o3hrp"]
 
 [resource]
-script = ExtResource("8_jw336")
-data = Array[ExtResource("1_sxsj3")]([ExtResource("5_djola"), ExtResource("5_djola"), ExtResource("5_djola"), ExtResource("3_t2t3f"), ExtResource("7_fpa2m"), ExtResource("7_fpa2m"), ExtResource("7_fpa2m"), ExtResource("7_fpa2m")])
-reward = 50.0
+script = ExtResource("2_1hhdo")
+data = Array[ExtResource("1_ufi64")]([ExtResource("2_sxsj3"), ExtResource("4_uwr06"), ExtResource("4_uwr06"), ExtResource("2_sxsj3"), ExtResource("5_qjkks"), ExtResource("4_uwr06"), ExtResource("2_sxsj3"), ExtResource("5_qjkks"), ExtResource("4_uwr06"), ExtResource("2_sxsj3"), ExtResource("5_qjkks"), ExtResource("4_uwr06"), ExtResource("2_sxsj3"), ExtResource("5_qjkks"), ExtResource("4_uwr06"), ExtResource("4_uwr06"), ExtResource("4_sxsj3"), ExtResource("3_uwr06"), ExtResource("4_o3hrp"), ExtResource("8_o3hrp"), ExtResource("3_uwr06"), ExtResource("4_o3hrp"), ExtResource("8_o3hrp"), ExtResource("3_uwr06"), ExtResource("4_o3hrp"), ExtResource("8_o3hrp"), ExtResource("3_uwr06"), ExtResource("7_uwr06"), ExtResource("4_o3hrp"), ExtResource("8_o3hrp"), ExtResource("4_o3hrp"), ExtResource("3_uwr06"), ExtResource("4_o3hrp"), ExtResource("8_o3hrp")])
+reward = 1.0
+token_reward = 50
 metadata/_custom_type_script = "uid://cskry1sw3vqba"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=7 format=3 uid="uid://dpl6u8jw014y4"]
+
+[ext_resource type="Script" uid="uid://cg5mrsass8jcd" path="res://scripts/audio/sound_effect_data.gd" id="1_wqxwt"]
+[ext_resource type="AudioStream" uid="uid://cjnkluu1esn4n" path="res://assets/audio/tower_mana_collect_1.mp3" id="2_l5s1j"]
+[ext_resource type="AudioStream" uid="uid://b31tasaexvfjd" path="res://assets/audio/tower_mana_collect_2.mp3" id="3_snrbu"]
+[ext_resource type="AudioStream" uid="uid://bkprkq1oksevc" path="res://assets/audio/tower_mana_collect_3.mp3" id="4_ee1an"]
+[ext_resource type="AudioStream" uid="uid://ctxkiydhle21u" path="res://assets/audio/tower_mana_collect_4.mp3" id="5_fmt6x"]
+[ext_resource type="AudioStream" uid="uid://dcn6dccbbuwjm" path="res://assets/audio/tower_mana_collect_5.mp3" id="6_o68kg"]
+
+[resource]
+script = ExtResource("1_wqxwt")
+limit = 8
+sounds = Array[AudioStreamMP3]([ExtResource("2_l5s1j"), ExtResource("3_snrbu"), ExtResource("4_ee1an"), ExtResource("5_fmt6x"), ExtResource("6_o68kg")])
+volume = -14.0
+pitch_randomness = 0.05
+metadata/_custom_type_script = "uid://cg5mrsass8jcd"

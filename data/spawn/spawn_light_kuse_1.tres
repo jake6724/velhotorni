@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://b6mmygvf76vlc"]
+
+[ext_resource type="Resource" uid="uid://civ0cfp12rlak" path="res://data/enemies/ranged_enemies/enemy_data_ranged_light_kuse.tres" id="1_734kd"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_n8qqi"]
+
+[resource]
+script = ExtResource("1_n8qqi")
+enemy_data = ExtResource("1_734kd")
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

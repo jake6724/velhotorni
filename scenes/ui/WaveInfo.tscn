@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtbjym5jhrudw"]
+
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_w3a2h"]
+[ext_resource type="Script" uid="uid://celgbrmvc2054" path="res://scripts/ui/wave_info_panel.gd" id="1_whx6b"]
+[ext_resource type="PackedScene" uid="uid://742vtobbbpj7" path="res://scenes/ui/UnitWaveInfo.tscn" id="2_whx6b"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_whx6b"]
+texture = ExtResource("1_w3a2h")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(1, 1, 30, 30)
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_whx6b")
+script = ExtResource("1_whx6b")
+metadata/_custom_type_script = "uid://celgbrmvc2054"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+columns = 3
+
+[node name="UnitWaveInfo" parent="GridContainer" instance=ExtResource("2_whx6b")]
+layout_mode = 2
+
+[node name="UnitWaveInfo2" parent="GridContainer" instance=ExtResource("2_whx6b")]
+layout_mode = 2
+
+[node name="UnitWaveInfo3" parent="GridContainer" instance=ExtResource("2_whx6b")]
+layout_mode = 2

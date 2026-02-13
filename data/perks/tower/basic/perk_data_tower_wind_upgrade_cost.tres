@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataTower" load_steps=6 format=3 uid="uid://cy2ay0n60rlhs"]
+
+[ext_resource type="Script" uid="uid://b0ilit3w1mtsn" path="res://scripts/perks/data/perk_data_tower.gd" id="1_7dp0e"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_oitpi"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_nvngi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsq20"]
+atlas = ExtResource("1_oitpi")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pb5ky"]
+atlas = ExtResource("2_nvngi")
+region = Rect2(16, 64, 16, 16)
+
+[resource]
+script = ExtResource("1_7dp0e")
+stat = 3
+element = 1
+base_value = -0.1
+perk_icon = SubResource("AtlasTexture_gsq20")
+perk_mini_icon = SubResource("AtlasTexture_pb5ky")
+perk_name = "Wind Proficiency"
+perk_desc = "upgrade wind familiars for {value}% less mana"
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://b0ilit3w1mtsn"

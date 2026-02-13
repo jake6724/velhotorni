@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=7 format=3 uid="uid://u8fs8orhyfe1"]
+
+[ext_resource type="Texture2D" uid="uid://c8noara2guef1" path="res://assets/art/atlases/enemy/atl_enemy_wind_ghoul.png" id="1_ehh3g"]
+[ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="2_ehh3g"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="3_ehh3g"]
+[ext_resource type="Script" uid="uid://buqpe6w72ojlb" path="res://scripts/enemies/enemy_data.gd" id="3_scn5m"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="4_scn5m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3rnc"]
+atlas = ExtResource("4_scn5m")
+region = Rect2(0, 16, 16, 16)
+
+[resource]
+script = ExtResource("3_scn5m")
+element = 1
+strong_against_element = 2
+health = 100.0
+speed = 20.0
+tower_mana_drop_chance_base = 2.0
+element_mana_drop_chance = 0.05
+atlas = ExtResource("1_ehh3g")
+icon = SubResource("AtlasTexture_n3rnc")
+explosion_sfx = ExtResource("2_ehh3g")
+enemy_name = "Wind Ghoul"
+enemy_description = "Defender of the great forest"
+metadata/_custom_type_script = "uid://buqpe6w72ojlb"

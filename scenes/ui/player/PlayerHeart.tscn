@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://dc40niqoka1bq"]
+
+[ext_resource type="Texture2D" uid="uid://cdqtjui7mmoog" path="res://assets/art/sprites/ui/atl_ui_health_small.png" id="1_1ixog"]
+[ext_resource type="Script" uid="uid://baao13l5v533i" path="res://scripts/ui/player/player_heart.gd" id="1_gdn8q"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gdn8q"]
+load_path = "res://.godot/imported/atl_ui_health_small.png-53e0309b308a87cd6c0528d444a0aa97.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ixog"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_gdn8q")
+region = Rect2(0, 0, 8, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3a7x8"]
+atlas = ExtResource("1_1ixog")
+region = Rect2(0, 0, 8, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gvek"]
+atlas = ExtResource("1_1ixog")
+region = Rect2(8, 0, 8, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfn4x"]
+atlas = ExtResource("1_1ixog")
+region = Rect2(0, 8, 8, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xboy"]
+atlas = ExtResource("1_1ixog")
+region = Rect2(8, 8, 8, 7)
+
+[node name="PlayerHeart" type="TextureRect"]
+offset_right = 8.0
+offset_bottom = 7.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_1ixog")
+stretch_mode = 2
+script = ExtResource("1_gdn8q")
+full_heart = SubResource("AtlasTexture_3a7x8")
+half_heart = SubResource("AtlasTexture_2gvek")
+empty_heart = SubResource("AtlasTexture_gfn4x")
+white_heart = SubResource("AtlasTexture_7xboy")
+metadata/_custom_type_script = "uid://baao13l5v533i"

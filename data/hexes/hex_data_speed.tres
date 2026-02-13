@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HexData" load_steps=2 format=3 uid="uid://5t2v6mjqeocq"]
+
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="1_gbrhb"]
+
+[resource]
+script = ExtResource("1_gbrhb")
+type = 1
+value = 0.5
+cast_radius = 0.0
+modified_value = 0.0
+metadata/_custom_type_script = "uid://bv3a3sefp6g0m"

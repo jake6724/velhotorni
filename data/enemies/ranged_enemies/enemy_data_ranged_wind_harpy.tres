@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="EnemyDataRanged" load_steps=8 format=3 uid="uid://bvdnin0dnn1yr"]
+
+[ext_resource type="Texture2D" uid="uid://7dt1l6se8f4k" path="res://assets/art/atlases/bullet/atl_bullet_enemy.png" id="1_qunc6"]
+[ext_resource type="Texture2D" uid="uid://b55stadqnynpd" path="res://assets/art/atlases/enemy/atl_enemy_wind_harpy.png" id="1_yy4uu"]
+[ext_resource type="Script" uid="uid://bv3a3sefp6g0m" path="res://scripts/hexes/data/hex_data.gd" id="2_vgi6n"]
+[ext_resource type="AudioStream" uid="uid://b4eqspuowqyxl" path="res://assets/audio/sfx/Wind_Explosion.ogg" id="3_nc2vp"]
+[ext_resource type="Script" uid="uid://dtesebxklnsr8" path="res://scripts/enemies/data/enemy_data_ranged.gd" id="3_yy4uu"]
+[ext_resource type="Texture2D" uid="uid://bes6k7tcbqhvx" path="res://assets/art/atlases/enemy/atl_enemy_icon.png" id="5_nc2vp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nat85"]
+atlas = ExtResource("5_nc2vp")
+region = Rect2(32, 16, 16, 16)
+
+[resource]
+script = ExtResource("3_yy4uu")
+attack_cooldown = 2.0
+attack_range = 128.0
+num_bullets_per_burst = 9
+angle_increment = 18.0
+spawn_center_bullet = false
+bullet_speed = 100.0
+bullet_max_distance = 128.0
+size = 5
+element = 1
+strong_against_element = 2
+health = 200.0
+speed = 20.0
+damage = 2
+tower_mana_drop_chance_base = 5.0
+element_mana_drop_chance = 0.3
+element_mana_drop_amount_multiplier = 2.0
+atlas = ExtResource("1_yy4uu")
+icon = SubResource("AtlasTexture_nat85")
+explosion_sfx = ExtResource("3_nc2vp")
+enemy_name = "Harpy"
+metadata/_custom_type_script = "uid://dtesebxklnsr8"

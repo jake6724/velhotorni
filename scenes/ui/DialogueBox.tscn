@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dubhjspmje3uk"]
 
-[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/spr_ui_box2.png" id="1_ggoq5"]
+[ext_resource type="Texture2D" uid="uid://du4eqmkqh76la" path="res://assets/art/sprites/ui/spr_ui_box2.png" id="1_ggoq5"]
 [ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="2_nfm5p"]
 [ext_resource type="Script" uid="uid://brt1wcqcr54ey" path="res://scripts/ui/dialogue_box.gd" id="2_rdkif"]
-[ext_resource type="Texture2D" uid="uid://b4fge8q2ko1pe" path="res://assets/art/sprites/spr_ui_portrait_mage.png" id="4_bjuha"]
+[ext_resource type="Texture2D" uid="uid://b4fge8q2ko1pe" path="res://assets/art/sprites/ui/spr_ui_portrait_mage.png" id="4_bjuha"]
 [ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="5_rdkif"]
 
 [node name="DialogueBox" type="NinePatchRect"]

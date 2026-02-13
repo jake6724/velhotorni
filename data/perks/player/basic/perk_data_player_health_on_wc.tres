@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=7 format=3 uid="uid://brclnsfuam8fs"]
+
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_ckreg"]
+[ext_resource type="Script" uid="uid://cm72v2ilme5nr" path="res://scripts/debuffs/data/debuff_data.gd" id="1_o38i7"]
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="2_cmijv"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_jbh5k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfpml"]
+atlas = ExtResource("1_ckreg")
+region = Rect2(96, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o38i7"]
+atlas = ExtResource("2_jbh5k")
+region = Rect2(32, 80, 16, 16)
+
+[resource]
+script = ExtResource("2_cmijv")
+trigger = 1
+stat = 1
+base_value = 3.0
+perk_icon = SubResource("AtlasTexture_gfpml")
+perk_mini_icon = SubResource("AtlasTexture_o38i7")
+perk_name = "Regenerator"
+perk_desc = "Restore {value} health after completing a wave"
+metadata/_custom_type_script = "uid://tx0ls1d4gwxv"

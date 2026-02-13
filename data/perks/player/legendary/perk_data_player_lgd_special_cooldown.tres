@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="PerkDataPlayer" load_steps=7 format=3 uid="uid://xx0tkq88prtk"]
+
+[ext_resource type="Script" uid="uid://73abv3ia3v27" path="res://scripts/perks/data/perk_data_player.gd" id="1_k3av8"]
+[ext_resource type="Script" uid="uid://cm72v2ilme5nr" path="res://scripts/debuffs/data/debuff_data.gd" id="1_nncjf"]
+[ext_resource type="Texture2D" uid="uid://b184gbbmjxp3t" path="res://assets/art/sprites/ui/atl_ui_perk_icon.png" id="1_ygywp"]
+[ext_resource type="Texture2D" uid="uid://crjtxe10fgbpa" path="res://assets/art/sprites/ui/atl_ui_perk_icon_small.png" id="2_uc2xk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uc2xk"]
+atlas = ExtResource("1_ygywp")
+region = Rect2(336, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nncjf"]
+atlas = ExtResource("2_uc2xk")
+region = Rect2(112, 80, 16, 16)
+
+[resource]
+script = ExtResource("1_k3av8")
+stat = 4
+base_value = 0.5
+legendary = true
+perk_icon = SubResource("AtlasTexture_uc2xk")
+perk_mini_icon = SubResource("AtlasTexture_nncjf")
+perk_name = "Quick-witted"
+perk_desc = "Reduce the cooldown of your special ability by {value}% "
+perk_value_display_mode = 1
+metadata/_custom_type_script = "uid://tx0ls1d4gwxv"
