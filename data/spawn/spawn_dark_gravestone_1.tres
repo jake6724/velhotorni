@@ -1,10 +1,9 @@
 [gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://diy4ykka03hoc"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_e75i7"]
-[ext_resource type="Resource" uid="uid://c3y1nkewtuylq" path="res://data/enemies/enemy_data_dark_gravestone.tres" id="1_ra7al"]
+[ext_resource type="Resource" uid="uid://ba2ouebw3se5t" path="res://data/enemies/ranged_enemies/repeaters/enemy_data_repeater_dark_gravestone.tres" id="1_ra7al"]
 
 [resource]
 script = ExtResource("1_e75i7")
 enemy_data = ExtResource("1_ra7al")
-delay = 1.0
 metadata/_custom_type_script = "uid://drj0bkkfpdi50"
