@@ -119,11 +119,12 @@ func on_bullet_returned() -> void:
 	idle_timer.start(idle_time)
 
 func set_boss_phase() -> void:
-	if health <= (max_health * .9) and phase < 1:
-		phase = 1
-		data.melee_attack_dash_power = data.melee_attack_dash_power * 2
-		data.melee_attack_dash_duration = data.melee_attack_dash_duration * .8
-		data.bullet_speed = data.bullet_speed * 1.8	
+	pass
+	# if health <= (max_health * .9) and phase < 1:
+	# 	phase = 1
+	# 	data.melee_attack_dash_power = data.melee_attack_dash_power * 2
+	# 	data.melee_attack_dash_duration = data.melee_attack_dash_duration * .8
+	# 	data.bullet_speed = data.bullet_speed * 1.8	
 
 func get_attack_info() -> Array:
 	if rng.randf() <= data.melee_attack_chance:
