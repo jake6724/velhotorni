@@ -108,7 +108,7 @@ func _ready():
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
 	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
 	player_input.switch_tower_action_pressed.connect(player_build.switch_tower_action.bind(player_input))
-	player_input.ui_interact_pressed.connect(on_ui_interact_pressed)
+	# player_input.ui_interact_pressed.connect(on_ui_interact_pressed)
 	player_input.weapon_select_pressed.connect(on_weapon_select_pressed)
 	player_input.primary_action_just_pressed.connect(func():primary_action_timer.start(PRIMARY_ACTION_TIMER_DELAY))
 	player_input.primary_action_released.connect(on_primary_action_released)
@@ -261,9 +261,9 @@ func on_primary_action_pressed() -> void:
 	if alive and can_fire:
 		primary_action_func.call()
 		
-func on_ui_interact_pressed() -> void:
-	if alive and building:
-		place_tower()
+# func on_ui_interact_pressed() -> void:
+# 	if alive and building:
+# 		place_tower()
 
 func cast_spell() -> void:
 	player_spell_spawner.spawn_spell(player_aim.aim_input, player_spells.active_spell)

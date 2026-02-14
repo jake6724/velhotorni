@@ -38,7 +38,6 @@ func populate_unit_wave_info(wave_index: int) -> void:
 			if wave_previews[wave_index].keys().size() == 0:
 				hide()
 			else:
-				print("Submitting alert!")
 				AlertManager.submit_new_alert(global_position, Alert.Priority.HIGHEST, 10.0)
 				show()
 		else:

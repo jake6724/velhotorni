@@ -534,6 +534,8 @@ func get_tower_data_copy(_input_data: TowerData) -> TowerData:
 	for buff_data: BuffData in _input_data.buff_data_list:
 		if buff_data:
 			new_data.buff_data_list.append(buff_data.duplicate(true))
+
+	new_data.debuff_data = _input_data.debuff_data.duplicate(true)
 	return new_data
 
 func hide_upgrade_info() -> void:
