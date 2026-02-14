@@ -24,6 +24,9 @@ var tower_mana_breakables: Array[Breakable] = []
 @onready var boss_spawn_point = %BossSpawnPoint
 
 @onready var wave_info_panel_parent: Node = %WaveInfoPanelParent
+
+@onready var tall_grass_parent: Node2D = %TallGrassParent
+
 # Export vars
 @export var level_name: String
 @export var region: Region

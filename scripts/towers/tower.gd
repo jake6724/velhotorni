@@ -535,7 +535,8 @@ func get_tower_data_copy(_input_data: TowerData) -> TowerData:
 		if buff_data:
 			new_data.buff_data_list.append(buff_data.duplicate(true))
 
-	new_data.debuff_data = _input_data.debuff_data.duplicate(true)
+	if _input_data.debuff_data:
+		new_data.debuff_data = _input_data.debuff_data.duplicate(true)
 	return new_data
 
 func hide_upgrade_info() -> void:
@@ -597,7 +598,7 @@ func on_hit(_damage_amount: int) -> void:
 		die()
 	
 	if (health/curr_max_health) <= TOWER_HEALTH_ALERT_THRESHOLD:
-		AlertManager.submit_new_alert(global_position, Alert.Priority.HIGH, 5.0, "Tower health low!")
+		AlertManager.submit_new_alert(global_position, Alert.Priority.HIGH, 5.0, "Familiar health low!")
 	can_heal = true
 	shake()
 

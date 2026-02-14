@@ -103,6 +103,11 @@ func _ready():
 	player_character.player_input = player_character.player_input
 	perk_ui.main = self
 
+	# Configure LevelEnvironment's TallGrass
+	for tall_grass: TallGrass in active_level.tall_grass_parent.get_children():
+		player_character.player_stopped.connect(tall_grass.on_player_stopped)
+		player_character.player_moving.connect(tall_grass.on_player_moving)
+
 	# Hide Cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 

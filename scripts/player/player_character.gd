@@ -93,6 +93,8 @@ const MELEE_DASH_DURATION_MULTIPLIER: float = 5000.0
 const PLAYER_HEART_SCENE = preload("res://scenes/ui/player/PlayerHeart.tscn")
 
 signal player_respawned
+signal player_stopped
+signal player_moving
 
 ## Used by PlayerClone
 signal staff_switched
@@ -254,6 +256,13 @@ func _physics_process(delta): # This can go in a state eventually
 			player_build.update_preview_tower_position(global_position, player_aim.aim_input)
 			player_build.update_tower_detect_area_position()
 			player_build.run(delta, player_input, upgrade_action_charge_cirlce)
+
+		if velocity == Vector2.ZERO:
+			print("Player stopped!")
+			player_stopped.emit()
+		else:
+			print("Player moving!")
+			player_moving.emit()
 
 		move_and_slide()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://drn4sppwachxq"]
+[gd_scene load_steps=47 format=4 uid="uid://drn4sppwachxq"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_eds8m"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_l0qwy"]
@@ -24,9 +24,10 @@
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="11_7ycjr"]
 [ext_resource type="PackedScene" uid="uid://dtbjym5jhrudw" path="res://scenes/ui/WaveInfo.tscn" id="11_eds8m"]
 [ext_resource type="Resource" uid="uid://bdsqojauedq27" path="res://data/waves/level_3b_wave_G.tres" id="15_pn61p"]
-[ext_resource type="Shader" uid="uid://b6jfsx1p8sx5s" path="res://assets/art/water.gdshader" id="18_h8vnd"]
+[ext_resource type="Shader" path="res://assets/art/water.gdshader" id="18_h8vnd"]
 [ext_resource type="Texture2D" uid="uid://cweaihdd066kf" path="res://assets/art/sprites/environment/spr_environment_wave.png" id="19_h8vnd"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="23_btpk1"]
+[ext_resource type="PackedScene" uid="uid://bwihg1ohfaadc" path="res://scenes/level/TallGrass.tscn" id="29_oxg84"]
 [ext_resource type="PackedScene" uid="uid://5kegew63jmcv" path="res://scenes/level/GroundInfoTrigger.tscn" id="30_wsimo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mssc7"]
@@ -2105,3 +2106,36 @@ initial_velocity_max = 6.0
 scale_amount_max = 2.0
 color = Color(0.09411765, 0.09411765, 0.2509804, 1)
 color_ramp = SubResource("Gradient_btpk1")
+
+[node name="TallGrassParent" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="TallGrass" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
+position = Vector2(624, 192)
+
+[node name="TallGrass2" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
+position = Vector2(624, 192)
+
+[node name="TallGrass3" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
+position = Vector2(640, 192)
+
+[node name="TallGrass4" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
+position = Vector2(624, 208)
+
+[node name="TallGrass5" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
+position = Vector2(640, 208)
+
+[node name="TallGrass6" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
+position = Vector2(656, 192)
+
+[node name="TallGrass7" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
+position = Vector2(656, 208)
+
+[node name="TallGrass8" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
+position = Vector2(656, 224)
+
+[node name="TallGrass9" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
+position = Vector2(640, 224)
+
+[node name="TallGrass10" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
+position = Vector2(624, 224)

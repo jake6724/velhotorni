@@ -145,6 +145,7 @@ var z_index_map: Dictionary[String, int] = {
 	"tower": -998,
 	"enemy_spawner": 1,
 	"player_character": 2,
+	"tall_grass": 100,
 	"flying_enemy": 1000,
 	"weather_scroll": 2000,
 	"tower_menu": 1000,
