@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="6_smqmd"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="7_7d7np"]
 [ext_resource type="Resource" uid="uid://cw144kg4gwhi1" path="res://data/waves/tutorial_waves/tutorial_wave_5.tres" id="7_swjki"]
-[ext_resource type="Shader" uid="uid://b6jfsx1p8sx5s" path="res://assets/art/water.gdshader" id="9_b1rh7"]
+[ext_resource type="Shader" path="res://assets/art/water.gdshader" id="9_b1rh7"]
 [ext_resource type="PackedScene" uid="uid://bwrw0vxyrshx2" path="res://scenes/level/EnemySpawnPortal.tscn" id="9_swjki"]
 [ext_resource type="Texture2D" uid="uid://d27w44gfbncv5" path="res://assets/art/sprites/environment/spr_environment_wave2.png" id="10_j2f44"]
 [ext_resource type="Texture2D" uid="uid://bwonyc48uhooj" path="res://assets/art/sprites/environment/spr_mask_fog.png" id="13_b1rh7"]
@@ -4157,3 +4157,6 @@ initial_velocity_max = 6.0
 scale_amount_max = 2.0
 color = Color(1, 1, 1, 0.490196)
 color_ramp = SubResource("Gradient_b1rh7")
+
+[node name="TallGrassParent" type="Node2D" parent="."]
+unique_name_in_owner = true

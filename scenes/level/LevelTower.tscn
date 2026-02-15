@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cm5ugpqpl32g4" path="res://assets/art/sprites/environment/spr_environment_animation_atlas.png" id="4_bpcou"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="4_d1vqo"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="5_ajg4h"]
-[ext_resource type="Shader" uid="uid://b6jfsx1p8sx5s" path="res://assets/art/water.gdshader" id="7_eduik"]
+[ext_resource type="Shader" path="res://assets/art/water.gdshader" id="7_eduik"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="7_y5rv3"]
 [ext_resource type="Texture2D" uid="uid://bwonyc48uhooj" path="res://assets/art/sprites/environment/spr_mask_fog.png" id="8_eduik"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="8_p1qut"]
@@ -1914,6 +1914,9 @@ visible = false
 visible = false
 
 [node name="BossSpawnPoint" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="TallGrassParent" type="Node2D" parent="."]
 unique_name_in_owner = true
 
 [editable path="LoadoutPromptArea"]

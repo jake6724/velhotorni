@@ -128,7 +128,7 @@ func _ready():
 	player_spell_spawner.spell_cast.connect(on_spell_cast)
 	player_spell_spawner.staff_switched.connect(on_staff_switched)
 	player_spell_spawner.check_can_afford_failed.connect(on_spell_cast_failed)
-
+	
 	# Configure PlayerSpecial
 	player_special.camera_shake_requested.connect(player_camera.apply_shake)
 	player_special.hurtbox_update_requested.connect(update_hurtbox_collider)
@@ -258,10 +258,8 @@ func _physics_process(delta): # This can go in a state eventually
 			player_build.run(delta, player_input, upgrade_action_charge_cirlce)
 
 		if velocity == Vector2.ZERO:
-			print("Player stopped!")
 			player_stopped.emit()
 		else:
-			print("Player moving!")
 			player_moving.emit()
 
 		move_and_slide()
@@ -527,6 +525,7 @@ func on_spell_loadout_updated() -> void:
 	player_spells.configure_spells()
 	player_mana.populate_spell_mana(player_spells.selected_spells)
 	player_hud.on_spell_loadout_updated(player_spells.spells.array, player_mana)
+	player_spell_spawner.initialize(player_spells)
 	player_spell_spawner.set_active_spell(player_spells.active_spell)
 	player_spell_spawner.on_switch_spell(player_spells.active_spell)
 

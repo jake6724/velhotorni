@@ -88,6 +88,7 @@ func _ready():
 	initialize_perk_debuffs()
 
 func initialize(player_spells: PlayerSpells) -> void:
+	spell_cooldown_timers = {}
 	for spell_data: SpellData in player_spells.spells.array:
 		var new_spell_cooldown_timer: Timer = Timer.new()
 		new_spell_cooldown_timer.one_shot = true

@@ -115,7 +115,6 @@ func flip_sprite() -> void:
 		player.staff_sprite.flip_v = flip
 		sprite_flipped.emit(flip)
 
-
 func swap_input_type() -> void:
 	if GlobalSettings.controller_active:
 		update_reticle_combat_func = update_reticle_combat_controller

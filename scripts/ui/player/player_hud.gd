@@ -151,8 +151,8 @@ func update_spells(spell_data_list: Array[SpellData]) -> void:
 		weapons.show()
 
 		# Hide all inactive spell icons. They will be shown below if required
-		for key in spell_icons.keys():
-			spell_icons[key].hide()
+		for icon in spell_icons_list:
+			icon.hide()
 
 		# The first spell in the array will be active
 		spell_icons[spell_data_list[0]].texture = spell_data_list[0].active_icon
