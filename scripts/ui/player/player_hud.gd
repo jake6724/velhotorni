@@ -109,8 +109,6 @@ func _ready():
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats, player_build: PlayerBuild, player_input: PlayerInput) -> void:
 	on_spell_loadout_updated(spell_data_list, player_mana)
-	update_spells(spell_data_list)
-	update_mana(spell_data_list, player_mana)
 	update_tower_mana(player_mana)
 	on_health_updated(player_stats.health)
 

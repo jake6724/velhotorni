@@ -1,4 +1,4 @@
-[gd_scene load_steps=275 format=3 uid="uid://cahss8ju2i2fv"]
+[gd_scene load_steps=276 format=3 uid="uid://cahss8ju2i2fv"]
 
 [ext_resource type="Script" uid="uid://ypyma3ofdq7f" path="res://scripts/ui/pannable_scroll_container.gd" id="1_1d7ss"]
 [ext_resource type="Script" uid="uid://dmskb8qcegql3" path="res://scripts/ui/skilltree/skill_tree.gd" id="1_3rcrv"]
@@ -43,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="26_rnc26"]
 [ext_resource type="Resource" uid="uid://b50w7syjdvdrf" path="res://data/spells/spell_data_bullet_arcane_basic_triple.tres" id="32_3qpvx"]
 [ext_resource type="Resource" uid="uid://uh4rcnnycu7s" path="res://data/spells/light/spell_data_shield_directional_light.tres" id="32_c62s6"]
+[ext_resource type="Resource" uid="uid://0ape3v2kdph1" path="res://data/spells/fire/spell_data_bullet_aoe_fireball.tres" id="32_cd4vv"]
 [ext_resource type="Resource" uid="uid://bcsl0e0prk758" path="res://data/spells/spell_data_bullet_dark_revolver.tres" id="33_kjyia"]
 [ext_resource type="Resource" uid="uid://hkc5p13wor1l" path="res://data/spells/spell_data_melee_arcane_dagger.tres" id="35_a8jhc"]
 [ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="35_mtx67"]
@@ -1245,7 +1246,7 @@ texture_normal = SubResource("AtlasTexture_4dwuw")
 data = ExtResource("13_2fixy")
 locked_icon = SubResource("AtlasTexture_2lkdr")
 unlocked_icon = SubResource("AtlasTexture_4dwuw")
-prereq_skills = [NodePath("../../SpellSkills/SpellSkill10"), NodePath("")]
+prereq_skills = [NodePath("../../SpellSkills/SpellSkill10"), null]
 
 [node name="TowerSkillIce" parent="PannableScrollContainer/Tree/TowerSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("2_n2kq2")]
 layout_mode = 0
@@ -1292,7 +1293,7 @@ texture_normal = SubResource("AtlasTexture_hmaxi")
 data = ExtResource("17_slq81")
 locked_icon = SubResource("AtlasTexture_84wxn")
 unlocked_icon = SubResource("AtlasTexture_hmaxi")
-prereq_skills = [NodePath(""), NodePath("../../SpellSkills/SpellSkill27")]
+prereq_skills = [null, NodePath("../../SpellSkills/SpellSkill27")]
 
 [node name="TowerSkillLight" parent="PannableScrollContainer/Tree/TowerSkills" instance=ExtResource("2_n2kq2")]
 layout_mode = 0
@@ -1315,7 +1316,7 @@ texture_normal = SubResource("AtlasTexture_6p3le")
 data = ExtResource("19_c62s6")
 locked_icon = SubResource("AtlasTexture_1fagp")
 unlocked_icon = SubResource("AtlasTexture_6p3le")
-prereq_skills = [NodePath(""), NodePath("../../SpellSkills/SpellSkill21")]
+prereq_skills = [null, NodePath("../../SpellSkills/SpellSkill21")]
 
 [node name="TowerSkillSun" parent="PannableScrollContainer/Tree/TowerSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("2_n2kq2")]
 layout_mode = 0
@@ -1362,7 +1363,7 @@ texture_normal = SubResource("AtlasTexture_cmboo")
 data = ExtResource("22_ronkx")
 locked_icon = SubResource("AtlasTexture_qbcqg")
 unlocked_icon = SubResource("AtlasTexture_cmboo")
-prereq_skills = [NodePath(""), NodePath("../../SpellSkills/SpellSkill15")]
+prereq_skills = [null, NodePath("../../SpellSkills/SpellSkill15")]
 
 [node name="TowerSkillArcane" type="TextureButton" parent="PannableScrollContainer/Tree/TowerSkills"]
 layout_mode = 0
@@ -1465,6 +1466,19 @@ offset_top = 62.0
 offset_right = 358.0
 offset_bottom = 77.0
 texture_normal = SubResource("AtlasTexture_6cpmr")
+data = ExtResource("32_cd4vv")
+locked_icon = SubResource("AtlasTexture_4qs4s")
+unlocked_icon = SubResource("AtlasTexture_6cpmr")
+prereq_skills = [NodePath("../../TowerSkills/TowerSkillPlasma")]
+
+[node name="SpellSkill11" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("6_k7m3q")]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 62.0
+offset_right = 358.0
+offset_bottom = 77.0
+texture_normal = SubResource("AtlasTexture_6cpmr")
+data = ExtResource("32_cd4vv")
 locked_icon = SubResource("AtlasTexture_4qs4s")
 unlocked_icon = SubResource("AtlasTexture_6cpmr")
 prereq_skills = [NodePath("../../TowerSkills/TowerSkillPlasma")]

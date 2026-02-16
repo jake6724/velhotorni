@@ -23,7 +23,6 @@ func start_debuff() -> void:
 func on_repeat_timer_timeout() -> void:
 	if can_burn:
 		debuff_apply_burn.emit(data.modified_value, data.element)
-		repeat_timer.call_deferred("start",data.repeat_duration)
 
 func on_total_timer_timeout() -> void:
 	can_burn = false
