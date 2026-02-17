@@ -11,7 +11,10 @@ extends Control
 @onready var upgrade_icon: TextureRect = %UpgradeIcon
 @onready var sell_margin_container: MarginContainer = %SellMarginContainer
 @onready var sell_icon: TextureRect = %SellIcon
-@onready var tower_action_button_hint_icon: TextureRect = %ButtonHintIcon
+# @onready var tower_action_button_hint_icon: TextureRect = %ButtonHintIcons
+@onready var tower_action_radial_menu: TowerActionRadialMenu = %TowerActionRadialMenu
+
+@onready var canvas_layer: CanvasLayer = %CanvasLayer
 
 var tower_action_icons: Array[TextureRect] = []
 
@@ -38,7 +41,7 @@ func _ready():
 	raise_button(tower_buttons[tower_index])
 
 	tower_action_icons = [heal_icon, upgrade_icon, sell_icon]
-	tower_action_button_hint_icon.z_index = Constants.z_index_map["tower_menu"]
+	# tower_action_button_hint_icon.z_index = Constants.z_index_map["tower_menu"]
 
 ## Set the element for each tower button, and prices. This DOES NOT update the actual icon of the button; that is 
 ## done in update(), which requires PlayerMana information. Ensure that update() is called from a parent script with
@@ -126,3 +129,13 @@ func position_tower_action_icons() -> void:
 	tower_action_icons[0].position += Vector2(-2,-2)
 	tower_action_icons[1].position += Vector2(0,0)
 	tower_action_icons[2].position += Vector2(2,2)
+
+## PlayerBuildUI has a child CanvasLayer; a CanvasLayer does not hide when its parent does, so we need to do so manually here
+func hide_ui() -> void:
+	hide()
+	canvas_layer.visible =  false
+
+## PlayerBuildUI has a child CanvasLayer; a CanvasLayer does not show when its parent does, so we need to do so manually here
+func show_ui() -> void:
+	show()
+	canvas_layer.visible =  true

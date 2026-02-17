@@ -26,7 +26,6 @@ extends Control
 @onready var spell_mana_list: Array[TextureProgressBar] = [spell_1_mana, spell_2_mana, spell_3_mana, spell_4_mana] # null is used to make array parallel in size to spell_data_list
 @onready var spell_mana: Dictionary[SpellData, TextureProgressBar]
 
-
 @onready var player_hearts: HBoxContainer = %PlayerHearts
 @onready var player_portrait: PlayerPortrait = %PlayerPortrait
 
@@ -47,7 +46,7 @@ extends Control
 var enemy_info_total: int
 var enemy_info_count: int
 
-@onready var banner_ap: AnimationPlayer = $BannerAnimationPlayer
+@onready var banner_ap: AnimationPlayer = $CanvasLayer/BannerAnimationPlayer
 @onready var banner: Sprite2D = %Banner
 @onready var banner_label: Label = %BannerLabel
 

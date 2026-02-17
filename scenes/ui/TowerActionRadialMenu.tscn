@@ -1,14 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://buxte38gfe437"]
+[gd_scene load_steps=9 format=3 uid="uid://buxte38gfe437"]
 
-[ext_resource type="Script" uid="uid://b8tg1arhaceuc" path="res://scripts/ui/tower_action_radial_menu.gd" id="1_j75xf"]
+[ext_resource type="Script" uid="uid://2un6ub7c4d5p" path="res://scripts/ui/tower_action_radial_menu.gd" id="1_j75xf"]
 [ext_resource type="Texture2D" uid="uid://dbsjcjmeyree3" path="res://assets/art/sprites/ui/atl_ui_toweractions.png" id="2_opjxm"]
 [ext_resource type="Texture2D" uid="uid://cwbuy2wmoursk" path="res://assets/art/atlases/atl_player_reticle.png" id="3_styfy"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_styfy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpjfx"]
 atlas = ExtResource("2_opjxm")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_opjxm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5v6vs"]
 atlas = ExtResource("2_opjxm")
 region = Rect2(0, 0, 16, 16)
 
@@ -16,32 +16,61 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("2_opjxm")
 region = Rect2(32, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_styfy"]
+atlas = ExtResource("2_opjxm")
+region = Rect2(48, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_6c34k"]
 atlas = ExtResource("3_styfy")
 region = Rect2(32, 0, 16, 16)
 
-[node name="TowerActionRadialMenu" type="Node2D"]
-position = Vector2(256, 128)
+[node name="TowerActionRadialMenu" type="Control"]
+physics_interpolation_mode = 0
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_j75xf")
 metadata/_custom_type_script = "uid://b8tg1arhaceuc"
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-
-[node name="CenterPoint" type="Node2D" parent="."]
+[node name="HealIcon" type="TextureRect" parent="."]
 unique_name_in_owner = true
+layout_mode = 0
+pivot_offset = Vector2(8, 8)
+texture = SubResource("AtlasTexture_gpjfx")
 
-[node name="HealIcon" type="Sprite2D" parent="."]
+[node name="UpgradeIcon" type="TextureRect" parent="."]
 unique_name_in_owner = true
-texture = SubResource("AtlasTexture_styfy")
+layout_mode = 0
+pivot_offset = Vector2(8, 8)
+texture = SubResource("AtlasTexture_5v6vs")
 
-[node name="UpgradeIcon" type="Sprite2D" parent="."]
+[node name="SellIcon" type="TextureRect" parent="."]
 unique_name_in_owner = true
-texture = SubResource("AtlasTexture_opjxm")
-
-[node name="SellIcon" type="Sprite2D" parent="."]
-unique_name_in_owner = true
+layout_mode = 0
+pivot_offset = Vector2(8, 8)
 texture = SubResource("AtlasTexture_31tcb")
 
-[node name="Cursor" type="Sprite2D" parent="."]
+[node name="InfoIcon" type="TextureRect" parent="."]
 unique_name_in_owner = true
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+pivot_offset = Vector2(8, 8)
+texture = SubResource("AtlasTexture_styfy")
+stretch_mode = 2
+
+[node name="Cursor" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
 texture = SubResource("AtlasTexture_6c34k")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

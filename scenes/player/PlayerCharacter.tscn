@@ -1708,13 +1708,11 @@ lifetime = 0.5
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_88aji")
 
-[node name="PlayerUI" type="CanvasLayer" parent="."]
-
-[node name="PlayerBuildUI" parent="PlayerUI" instance=ExtResource("26_djlof")]
+[node name="PlayerBuildUI" parent="." instance=ExtResource("26_djlof")]
 unique_name_in_owner = true
 visible = false
 
-[node name="PlayerHUD" parent="PlayerUI" instance=ExtResource("25_ydu3x")]
+[node name="PlayerHUD" parent="." instance=ExtResource("25_ydu3x")]
 unique_name_in_owner = true
 
 [node name="TowerDetectArea" type="Area2D" parent="."]

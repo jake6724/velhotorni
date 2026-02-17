@@ -169,7 +169,7 @@ func _ready():
 	player_hud.active_spell_mana_value_calculated.connect(update_reticle_ammo)
 
 	# Configure PlayerBuild
-	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area, player_mana, player_hud)
+	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area, player_mana, player_hud, self)
 	player_build.tower_mana_spent.connect(on_tower_mana_spent)
 	player_build.reset_tower_action.connect(on_reset_tower_action)
 	player_build.tower_action_hint_requested.connect(on_tower_action_hint_requested)
@@ -341,7 +341,7 @@ func switch_to_build_mode() -> void:
 	primary_action_func = place_tower 
 	switch_action_func = switch_tower
 	staff_sprite.hide()
-	player_build_ui.show()
+	player_build_ui.show_ui()
 	player_build_ui.raise_current()
 	player_build.create_preview_tower()
 	player_hud.weapons.hide()
@@ -360,7 +360,7 @@ func switch_to_combat_mode() -> void:
 	switch_action_func = switch_spell
 	if player_build.preview_tower:		# Remove preview tower
 		player_build.preview_tower.queue_free()
-	player_build_ui.hide()
+	player_build_ui.hide_ui()
 	player_hud.weapons.show()
 	build_grid_sprite.hide()
 	# player_stats.active_speed = player_stats.combat_speed

@@ -4,8 +4,6 @@ extends Node2D
 enum TowerAction {HEAL, UPGRADE, SELL}
 enum TowerPlacementError {POSITION, COST, CAP, DISTANCE}
 
-# @onready var tower_radial_menu: TowerActionRadialMenu = %TowerRadialMenu
-
 @export var grid_follow_tower: bool = true # Debugging, should go away
 
 var tower_parent: Node = Node.new() # Towers are spawned under this Node so that their position will not affected by this class since it is a Node2D
@@ -50,20 +48,13 @@ signal tower_count_updated
 signal heal_all_cost_updated
 signal player_hud_hint_requested
 
-# func _input(_event):
-# 	if Input.is_action_pressed("x"):
-# 		if not tower_radial_menu.active:
-# 			tower_radial_menu.animate_open()
-# 	if Input.is_action_just_released("x"):
-# 		tower_radial_menu.animate_close()
-
 func _ready():
 	add_child(tower_parent)
 	WaveManager.wave_started.connect(on_wave_started)
 	heal_all_cost_updated.emit(0)
 	WaveManager.wave_completed.connect(on_wave_completed)
 
-func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _tower_detect_area: Area2D, player_mana: PlayerMana, player_hud: PlayerHUD) -> void:
+func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _tower_detect_area: Area2D, player_mana: PlayerMana, player_hud: PlayerHUD, player: PlayerCharacter) -> void:
 	player_build_ui = _player_build_ui
 	build_grid_sprite = _build_grid_sprite
 	tower_detect_area = _tower_detect_area
@@ -87,6 +78,8 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 
 	player_build_ui.configure_loadout(tower_element_options)
 	player_hud.heal_all_requested.connect(on_player_hud_heal_all_requested)
+
+	player_build_ui.tower_action_radial_menu.player = player
 
 func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
 	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action(hovered_tower):
@@ -170,6 +163,7 @@ func update_preview_tower_position(player_global_position: Vector2, aim_input: V
 			# Turn tower red if too far to place
 			if global_position.distance_to(preview_tower.global_position) > MAX_PLACEMENT_DISTANCE:
 				preview_tower.modulate.r = 20
+
 			else:
 				preview_tower.modulate.r = 1
 
