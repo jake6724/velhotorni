@@ -47,3 +47,4 @@ active_icon = SubResource("AtlasTexture_t3x6o")
 inactive_icon = SubResource("AtlasTexture_62ifq")
 staff_texture = SubResource("AtlasTexture_raihf")
 camera_shake = 0.8
+ammo_color = Color(0.0627451, 0.64705884, 0, 1)

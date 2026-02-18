@@ -49,4 +49,5 @@ inactive_icon = SubResource("AtlasTexture_0wp76")
 staff_texture = SubResource("AtlasTexture_yham7")
 sound_effect = ExtResource("8_yham7")
 camera_shake = 1.0
+ammo_color = Color(0.8392157, 0.19215687, 0, 1)
 metadata/_custom_type_script = "uid://ckis74h51j2x4"

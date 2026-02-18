@@ -1,10 +1,12 @@
 class_name PlayerBuild
 extends Node2D
 
-enum TowerAction {HEAL, UPGRADE, SELL}
+enum TowerAction {HEAL, UPGRADE, SELL, INFO, NONE}
 enum TowerPlacementError {POSITION, COST, CAP, DISTANCE}
 
 @export var grid_follow_tower: bool = true # Debugging, should go away
+
+var player_camera: PlayerCamera
 
 var tower_parent: Node = Node.new() # Towers are spawned under this Node so that their position will not affected by this class since it is a Node2D
 
@@ -15,6 +17,9 @@ var player_build_ui: PlayerBuildUI # Set by PlayerCharacter
 var build_grid_sprite: Sprite2D # Set by PlayerCharacter
 var tower_detect_area: Area2D # Set by PlayerCharacter
 var hovered_tower: Tower
+var mouse_reset_warp_position: Vector2
+
+var tower_action_radial_menu_active: bool = false
 
 const TOWER_PLACEMENT_RANGE: int = 16
 # const TOWER_MANA_COST_PER_HEAL: int = 1
@@ -47,6 +52,13 @@ signal tower_action_hint_requested
 signal tower_count_updated
 signal heal_all_cost_updated
 signal player_hud_hint_requested
+signal set_player_enabled_requested
+
+"""
+TODO
+E is making preview tower move ? 
+
+"""
 
 func _ready():
 	add_child(tower_parent)
@@ -77,33 +89,62 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	TowerGlobalData.tower_prices_updated.connect(on_tower_prices_updated)
 
 	player_build_ui.configure_loadout(tower_element_options)
+
+	# TowerActionRadialMenu
+	player_build_ui.tower_action_radial_menu.initialize(player)
+	player.player_input.primary_action_just_pressed.connect(on_player_input_primary_action_just_pressed)
+	player_build_ui.tower_action_radial_menu.cost_requested.connect(on_tower_action_radial_menu_cost_requested)
+
 	player_hud.heal_all_requested.connect(on_player_hud_heal_all_requested)
 
-	player_build_ui.tower_action_radial_menu.player = player
+	player.player_input.ui_interact_pressed.connect(on_ui_interact_pressed)
+	player.player_input.ui_interact_released.connect(on_ui_interact_released)
 
-func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
-	if player_input.upgrade_action_charge and hovered_tower and check_can_perform_action(hovered_tower):
-		if check_can_afford_action(hovered_tower):
-			upgrade_action_charge_cirlce.show()
-			upgrade_action_charge_cirlce.value = player_input.upgrade_action_charge * 100
-			if player_input.upgrade_action_charge >= 1:
-				get_tower_action_callable(tower_action).call()
-				configure_hovered_tower_for_action(hovered_tower)
-				match tower_action:
-					TowerAction.HEAL: reset_tower_action.emit(false)
-					TowerAction.UPGRADE: reset_tower_action.emit(true)
-					TowerAction.SELL: reset_tower_action.emit(true)
-	else:
-		upgrade_action_charge_cirlce.hide()
-		upgrade_action_charge_cirlce.value = 0
-		
-		if preview_tower and preview_tower.visible:
-			if get_tower_placement_info()[0]:
-				preview_tower.placement_button_hint.show()
-			else:
-				preview_tower.placement_button_hint.hide()
+	player_camera = player.player_camera
+
+func on_ui_interact_pressed() -> void:
+	if hovered_tower:
+		hovered_tower.upgrade_button_hint.hide()
+		set_player_enabled_requested.emit(false)
+		mouse_reset_warp_position = get_viewport().get_mouse_position()
+		tower_action_radial_menu_active = true
+		player_build_ui.tower_action_radial_menu.animate_open()
+		hovered_tower.can_show_range = false
+		preview_tower.hide()
+
+func on_ui_interact_released() -> void: # TODO: Call this when unhovering a tower also
+	if tower_action_radial_menu_active:
+		set_player_enabled_requested.emit(true)
+		if hovered_tower:
+			hovered_tower.upgrade_button_hint.show()
+
+		player_build_ui.tower_action_radial_menu.animate_close() 
+		tower_action_radial_menu_active = false
+		get_viewport().warp_mouse(mouse_reset_warp_position)
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+func on_player_input_primary_action_just_pressed() -> void:
+	if tower_action_radial_menu_active and hovered_tower:
+		var selected_tower_action: TowerAction = player_build_ui.tower_action_radial_menu.select_action()
+		if check_can_perform_action(hovered_tower, selected_tower_action):
+			if check_can_afford_action(hovered_tower, selected_tower_action):
+				get_tower_action_callable(selected_tower_action).call()
+
+				# Post call cleanup and updates
+				match selected_tower_action:
+					TowerAction.SELL: on_ui_interact_released()
+					_: pass
+				on_tower_action_radial_menu_cost_requested(selected_tower_action)
+
+func on_tower_action_radial_menu_cost_requested(_tower_action: TowerAction) -> void:
+	if hovered_tower:
+		if _tower_action != TowerAction.SELL:
+			player_build_ui.tower_action_radial_menu.set_cost_label(get_action_cost(hovered_tower, _tower_action))
 		else:
-			preview_tower.placement_button_hint.hide()
+			player_build_ui.tower_action_radial_menu.set_cost_label(-get_action_cost(hovered_tower, _tower_action))
+ 
+func run(_delta, player_input: PlayerInput, upgrade_action_charge_cirlce: TextureProgressBar) -> void:
+	pass
 
 ## Creates a new instance of `tower_scene`, fully initialized. Modulated to be transparent.
 ## This is an active and ready tower that just needs to be placed.
@@ -142,7 +183,7 @@ func create_preview_tower():
 ## Update the `global_position` of `preview_tower`, which is calculated based on
 ## the position of `PlayerCharacter` and the current `aim_input`
 func update_preview_tower_position(player_global_position: Vector2, aim_input: Vector2) -> void:
-	if preview_tower:
+	if preview_tower and not tower_action_radial_menu_active:
 		if GlobalSettings.controller_active:
 			aim_input = Constants.get_closest_cardinal_4_direction_normalized(aim_input)
 			preview_tower_grid_position = WorldGrid.world_to_grid(player_global_position + (aim_input * TOWER_PLACEMENT_RANGE))
@@ -220,21 +261,7 @@ func place_tower() -> void:
 		
 
 func switch_tower_action(player_input: PlayerInput) -> void:
-	tower_action_options.append(tower_action_options[0]) # Move front action to back 
-	tower_action_options.remove_at(0)
-	tower_action = tower_action_options[0]
-	player_build_ui.animate_switch_tower_action()
-
-	# Configure Hovered tower
-	configure_hovered_tower_for_action(hovered_tower)
-
-	# Set tower_action_press_multiplier
-	if tower_action == TowerAction.HEAL:
-		player_input.tower_action_press_multiplier = player_input.tower_action_press_multiplier_fast
-	else:
-		player_input.tower_action_press_multiplier = player_input.tower_action_press_multiplier_normal
-
-	tower_action_changed.emit(tower_action)
+	pass
 
 func heal_tower() -> void:
 	if hovered_tower and hovered_tower.can_heal:
@@ -246,43 +273,22 @@ func upgrade_tower() -> void:
 		tower_mana_spent.emit(hovered_tower.level_upgrade_price)
 		hovered_tower.upgrade()
 		hovered_tower.heal(10000) # Heal em up full
+
 func sell_tower() -> void:
 	if hovered_tower:
-		# Update WorldGrid
-		var tower_grid_position: Vector2 = WorldGrid.world_to_grid(preview_tower.global_position)
-		WorldGrid.data[tower_grid_position] = true	
-
-		# Spend money and remove tower
+		# Reclaim money and remove tower
 		tower_mana_spent.emit(-hovered_tower.sell_price)
 		hovered_tower.die()
+		hovered_tower = null
 
 func configure_hovered_tower_for_action(_hovered_tower) -> void:
-	if _hovered_tower:
-		_hovered_tower.show_action_cost_info(get_action_cost(_hovered_tower))
+	pass
 
-		# # Turn tower red if too far to place
-		# if global_position.distance_to(_hovered_tower.global_position) > MAX_PLACEMENT_DISTANCE:
-		# 	_hovered_tower.modulate.r = 20
-		# else:
-		# 	_hovered_tower.modulate.r = 1
-
-		if check_can_perform_action(_hovered_tower):
-			if check_can_afford_action(_hovered_tower):
-				_hovered_tower.upgrade_button_hint.show()
-				_hovered_tower.placement_button_hint.hide()
-				_hovered_tower.upgrade_coin_icon.show()
-			else:
-				_hovered_tower.upgrade_button_hint.hide()
-				_hovered_tower.placement_button_hint.hide()
-				_hovered_tower.upgrade_coin_icon.show()
-		else:
-			_hovered_tower.upgrade_button_hint.hide()
-			_hovered_tower.upgrade_coin_icon.hide()
-			_hovered_tower.tower_action_cost_label.text = " MAX"
-
-func check_can_perform_action(_hovered_tower) -> bool:
+func check_can_perform_action(_hovered_tower, _tower_action: TowerAction=TowerAction.NONE) -> bool:
+	if _tower_action == TowerAction.NONE:
+		_tower_action = tower_action
 	# if global_position.distance_to(_hovered_tower.global_position) < MAX_PLACEMENT_DISTANCE:
-	match tower_action:
+	match _tower_action:
 		TowerAction.HEAL:
 			if _hovered_tower.can_heal:
 				return true
@@ -295,6 +301,8 @@ func check_can_perform_action(_hovered_tower) -> bool:
 				return false
 		TowerAction.SELL: 
 			return true
+		TowerAction.INFO:
+			return false #TODO: THIS NEED TO BE ALWAYS TRUE ONCE IMPLEMENTED!
 		_:
 			push_error("Unknown tower action: ", tower_action)
 			return false
@@ -302,22 +310,33 @@ func check_can_perform_action(_hovered_tower) -> bool:
 	# 	player_hud_hint_requested.emit("Tower far to perform action!", 1.0, true)
 	# 	return false
 
-func check_can_afford_action(_hovered_tower) -> bool: 
-	var cost: int = get_action_cost(_hovered_tower)
+func check_can_afford_action(_hovered_tower, _tower_action: TowerAction) -> bool: 
+	var cost: int = get_action_cost(_hovered_tower, _tower_action)
 	if _tower_mana >= cost:
 		return true
 	else:
 		return false
 
-func get_action_cost(_hovered_tower) -> int: 
+func get_action_cost(_hovered_tower, _tower_action: TowerAction=TowerAction.NONE) -> int: 
 	if _hovered_tower:
+		if _tower_action == TowerAction.NONE:
+			_tower_action = tower_action
+	
 		var cost: int = 0
-		match tower_action:
+		match _tower_action:
 			TowerAction.HEAL: 
-				cost = max(((_hovered_tower.max_health - _hovered_tower.health) / TOWER_HEAL_AMOUNT), 1)
-				_hovered_tower.heal_cost = cost
-			TowerAction.UPGRADE: cost = _hovered_tower.level_upgrade_price
+				if _hovered_tower.can_heal:
+					cost = max(((_hovered_tower.max_health - _hovered_tower.health) / TOWER_HEAL_AMOUNT), 1)
+					_hovered_tower.heal_cost = cost
+				else:
+					cost = 0
+			TowerAction.UPGRADE: 
+				if _hovered_tower.can_upgrade:
+					cost = _hovered_tower.level_upgrade_price
+				else:
+					cost = 0
 			TowerAction.SELL: cost = -_hovered_tower.sell_price
+			TowerAction.INFO: cost = 0
 		return cost
 	else:
 		return -1
@@ -352,13 +371,13 @@ func on_tower_detect_area_entered(intruder: Area2D) -> void:
 		preview_tower.hide()
 	
 	hovered_tower = intruder.owner
-	hovered_tower.show_action_cost_info(get_action_cost(hovered_tower))
+	# hovered_tower.show_action_cost_info(get_action_cost(hovered_tower))
 	hovered_tower.can_show_range = true
 	player_build_ui.update_tower_info_panel(hovered_tower)
 	# hovered_tower.upgrade_button_hint.set_hint_icon("joypad_button_2")
 	hovered_tower.upgrade_button_hint.show()
-	configure_hovered_tower_for_action(hovered_tower)
-	tower_action_hint_requested.emit(true)
+	# configure_hovered_tower_for_action(hovered_tower)
+	# tower_action_hint_requested.emit(true)
 
 func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 	reset_tower_action.emit(false)
@@ -367,7 +386,8 @@ func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 		
 	# var hovered_tower: Tower = intruder.owner
 	if hovered_tower:
-		hovered_tower.hide_upgrade_info()
+		# hovered_tower.hide_upgrade_info()
+		hovered_tower.upgrade_button_hint.hide()
 		hovered_tower.can_show_range = false
 		hovered_tower = null
 
@@ -477,6 +497,7 @@ func on_tower_stat_updated(tower: Tower) -> void:
 		configure_hovered_tower_for_action(hovered_tower)
 
 func on_player_hud_heal_all_requested() -> void:
+	#TODO: SHOULD BE ABLE TO USE THE NORMAL HEAL FUNCTION NOW!
 	# Can't use existing heal tower method, it intentionally only heals hovered tower
 	for tower: Tower in tower_parent.get_children():
 		tower.heal_cost = max(((tower.max_health - tower.health) / TOWER_HEAL_AMOUNT), 1)

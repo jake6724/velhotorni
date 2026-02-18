@@ -64,7 +64,8 @@ var health: float:
 		healthbar.value = (health / max_health) * 100
 		tower_health_updated.emit(self)
 
-var can_heal = false # Starts at full health so can't heal
+var can_heal: bool = false # Starts at full health so can't heal
+var can_upgrade: bool = true
 var heal_cost: float: # Set by player build, using the tower as a container to pass along the info
 	set(value):
 		heal_cost = value
@@ -236,7 +237,7 @@ func initialize(element: Constants.Element):
 	hex_manager.active_hex_removed.connect(on_remove_active_hex)
 
 	# Configure prices and price UI
-	update_upgrade_info()
+	level_upgrade_price = int((upgrade_cost_base + (upgrade_cost_increment * level)) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
 	sell_price = int(TowerGlobalData.tower_prices[data.element])
 
 	attack_timer.start(curr_speed)
@@ -540,6 +541,7 @@ func get_tower_data_copy(_input_data: TowerData) -> TowerData:
 	return new_data
 
 func hide_upgrade_info() -> void:
+	print("Hiding")
 	upgrade_display.hide()
 
 # Hexes
@@ -568,25 +570,30 @@ func on_remove_active_hex(hex: Hex):
 func upgrade() -> void:
 	level += 1
 	sell_price += int(level_upgrade_price / 2)
+	level_upgrade_price = int((upgrade_cost_base + (upgrade_cost_increment * level)) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
 	upgrade_icon.texture.region = Rect2((8 * level), 0, 8, 10)
-	update_upgrade_info()
 	ap.play("summon")
 
-func update_upgrade_info() -> void:
-	level_upgrade_price = int((upgrade_cost_base + (upgrade_cost_increment * level)) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
-	if level >= Constants.TOWER_MAX_LEVEL:
-		tower_action_cost_label.text = " MAX"
-		upgrade_coin_icon.hide()
-		upgrade_button_hint.hide()
-	else:
-		tower_action_cost_label.text = str(int(level_upgrade_price))
+	if level >= 3:
+		can_upgrade = false
 
-func show_action_cost_info(cost) -> void:
-	# if cost < 0:
-	# 	cost = -cost
-	cost = abs(cost) # Always show cost as positive, even if refunding for sell
-	tower_action_cost_label.text = str(cost)
-	upgrade_display.show()
+# func update_upgrade_info() -> void: # TODO: Unused since tower action radial menu
+# 	level_upgrade_price = int((upgrade_cost_base + (upgrade_cost_increment * level)) * TowerGlobalData.tower_upgrade_price_modifier[data.element])
+# 	# if level >= Constants.TOWER_MAX_LEVEL:
+# 	# 	# tower_action_cost_label.text = " MAX"
+# 	# 	# upgrade_coin_icon.hide()
+# 	# 	# upgrade_button_hint.hide()
+# 	# else:
+# 	# 	tower_action_cost_label.text = str(int(level_upgrade_price))
+
+func show_action_cost_info(cost) -> void: # TODO: Unused since tower action radial menu
+
+	# cost = abs(cost) # Always show cost as positive, even if refunding for sell
+	# tower_action_cost_label.text = str(cost)
+	# upgrade_display.show()
+
+	upgrade_display.hide()
+
 
 func on_hit(_damage_amount: int) -> void:
 	healthbar.show()
@@ -603,7 +610,6 @@ func on_hit(_damage_amount: int) -> void:
 	shake()
 
 func heal(_value: int) -> void:
-	print(_value)
 	health = min(health + _value, curr_max_health)
 	number_popup.display_tower_heal(global_position, health, curr_max_health)
 	if health >= curr_max_health:

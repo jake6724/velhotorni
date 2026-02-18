@@ -35,4 +35,5 @@ desc = "Arcane Dagger"
 active_icon = SubResource("AtlasTexture_rwq6q")
 inactive_icon = SubResource("AtlasTexture_gt5bk")
 staff_texture = SubResource("AtlasTexture_uk7sw")
+ammo_color = Color(0.972549, 0.15686275, 0.47058824, 1)
 metadata/_custom_type_script = "uid://dcu7dihypm0k3"

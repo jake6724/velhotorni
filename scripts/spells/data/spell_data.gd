@@ -39,3 +39,5 @@ var mana_base_cost = mana_cost
 @export var camera_shake: float = .1
 
 @export var unlock_cost: int = 1
+
+@export var ammo_color: Color = Color.hex(0x3928ff)

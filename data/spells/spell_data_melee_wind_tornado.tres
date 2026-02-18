@@ -34,4 +34,5 @@ active_icon = SubResource("AtlasTexture_ok47g")
 inactive_icon = SubResource("AtlasTexture_3xmi5")
 staff_texture = SubResource("AtlasTexture_83hai")
 camera_shake = 0.3
+ammo_color = null
 metadata/_custom_type_script = "uid://dcu7dihypm0k3"

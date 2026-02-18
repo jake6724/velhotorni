@@ -85,6 +85,10 @@ var primary_action_timer: Timer = Timer.new()
 var velocity_bonus_melee_dash: Vector2 = Vector2.ZERO
 var velocity_bonus_kickback: Vector2 = Vector2.ZERO
 
+## Used to allow UI elements to control the game without the player reacting to input.
+## PlayerInput can still be the source without the player moving, firing, etc.
+var player_enabled: bool = true
+
 const PRIMARY_ACTION_TIMER_DELAY: float = 2
 
 const KICKBACK_DURATION_MULTIPLIER: float = 5000.0
@@ -175,6 +179,7 @@ func _ready():
 	player_build.tower_action_hint_requested.connect(on_tower_action_hint_requested)
 	player_mana.tower_mana_updated.connect(player_build.on_tower_mana_updated)
 	player_build.tower_action_changed.connect(tower_action_hint.display_tower_action_hint)
+	player_build.set_player_enabled_requested.connect(set_character_for_ui)
 
 	# Configure PlayerWalkParticles
 	player_aim.sprite_flipped.connect(on_player_aim_sprite_flipped)
@@ -231,38 +236,44 @@ func _physics_process(delta): # This can go in a state eventually
 	if alive:
 		# Update Aim
 		player_aim.update_aim(delta, player_input.get_aim_input())
-		if not hit:
-			if not player_special.active:
-				# Update Movement
-				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.move_speed) + velocity_bonus_melee_dash + velocity_bonus_kickback
+		if player_enabled:
+			if not hit:
+				if not player_special.active:
+					# Update Movement
+					velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.move_speed) + velocity_bonus_melee_dash + velocity_bonus_kickback
 
-				velocity_bonus_melee_dash = velocity_bonus_melee_dash.move_toward(Vector2.ZERO, delta * MELEE_DASH_DURATION_MULTIPLIER)
-				velocity_bonus_kickback = velocity_bonus_kickback.move_toward(Vector2.ZERO, delta * KICKBACK_DURATION_MULTIPLIER)
-				
-				player_animation.update_animation(delta)
+					velocity_bonus_melee_dash = velocity_bonus_melee_dash.move_toward(Vector2.ZERO, delta * MELEE_DASH_DURATION_MULTIPLIER)
+					velocity_bonus_kickback = velocity_bonus_kickback.move_toward(Vector2.ZERO, delta * KICKBACK_DURATION_MULTIPLIER)
+					
+					player_animation.update_animation(delta)
 
-		else: # Hit stun recovery
-			velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
-			# Check if hitstun complete
+			else: # Hit stun recovery
+				velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
+				# Check if hitstun complete
+				if velocity == Vector2.ZERO:
+		
+					hit = false
+
+			# Primary Action
+			if player_input.primary_action_pressed:
+				on_primary_action_pressed()
+
+			if building:
+				player_build.update_preview_tower_position(global_position, player_aim.aim_input)
+				player_build.update_tower_detect_area_position()
+				player_build.run(delta, player_input, upgrade_action_charge_cirlce)
+
 			if velocity == Vector2.ZERO:
-	
-				hit = false
+				player_stopped.emit()
+			else:
+				player_moving.emit()
 
-		# Primary Action
-		if player_input.primary_action_pressed:
-			on_primary_action_pressed()
+			move_and_slide()
 
-		if building:
-			player_build.update_preview_tower_position(global_position, player_aim.aim_input)
-			player_build.update_tower_detect_area_position()
-			player_build.run(delta, player_input, upgrade_action_charge_cirlce)
-
-		if velocity == Vector2.ZERO:
-			player_stopped.emit()
-		else:
-			player_moving.emit()
-
-		move_and_slide()
+## Disable or enable parts of PlayerCharacter so that UI can take control
+func set_character_for_ui(_value: bool) -> void:
+	player_enabled = _value
+	player_input.primary_action_pressed = false # Prevent UI actions from carrying over
 
 func on_primary_action_pressed() -> void:
 	if alive and can_fire:
@@ -276,8 +287,9 @@ func cast_spell() -> void:
 	player_spell_spawner.spawn_spell(player_aim.aim_input, player_spells.active_spell)
 
 func place_tower() -> void:
-	player_build.place_tower()
-	player_input.primary_action_pressed = false
+	if player_enabled:
+		player_build.place_tower()
+		player_input.primary_action_pressed = false
 
 func on_spell_cast(spell_data: SpellData, consume_mana: bool) -> void:
 	if consume_mana:
@@ -413,6 +425,7 @@ func on_hit(_direction) -> void:
 
 
 func on_pit_entered() -> void:
+	## TODO: Find a way to snap to a position instead. Maybe use the pit hitbox position? 
 	global_position += player_input.move_input.normalized() * 10 # Move the character to be fully over the pit
 	reticle_sprite.hide()
 	staff_sprite.hide()
@@ -501,8 +514,9 @@ func on_reset_tower_action(_disable_press: bool) -> void:
 	if _disable_press:
 		player_input.upgrade_action_pressed = false
 
-func on_tower_action_hint_requested(_value: bool) -> void:
-	tower_action_hint.visible = _value
+func on_tower_action_hint_requested(_value: bool) -> void: # TODO: Cleanup and remove anything related to this
+	pass
+	# tower_action_hint.visible = _value
 
 func on_swap_input_type() -> void:
 	player_camera.swap_input_type()

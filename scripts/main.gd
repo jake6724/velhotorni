@@ -109,7 +109,7 @@ func _ready():
 		player_character.player_moving.connect(tall_grass.on_player_moving)
 
 	# Hide Cursor
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 
 	if active_level.start_first_wave_immediately:
 		WaveManager.start_wave()

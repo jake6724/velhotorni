@@ -43,4 +43,5 @@ active_icon = SubResource("AtlasTexture_2qlt8")
 inactive_icon = SubResource("AtlasTexture_th0lx")
 staff_texture = SubResource("AtlasTexture_ablrq")
 sound_effect = ExtResource("6_ablrq")
+ammo_color = Color(0.972549, 0.15686275, 0.47058824, 1)
 metadata/_custom_type_script = "uid://r20hlvy6xofu"

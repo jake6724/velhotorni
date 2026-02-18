@@ -12,10 +12,8 @@ func set_rarity_value() -> void:
 	match data.rarity:
 		PerkData.Rarity.ONE: pass
 		PerkData.Rarity.TWO: 
-			print("Updating data values for rare")
 			data.base_value *= 2
 		PerkData.Rarity.THREE: 
-			print("Updating data values for epic")
 			data.base_value *= 4
 	
 		PerkData.Rarity.FOUR: pass

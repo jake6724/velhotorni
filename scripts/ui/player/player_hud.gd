@@ -57,6 +57,7 @@ var enemy_info_count: int
 @onready var heal_all: MarginContainer = %HealAll
 
 @onready var hint_label: Label = %HintLabel
+
 var hint_timer: Timer = Timer.new()
 var prev_hint_overwriteable: bool = false
 
@@ -195,6 +196,8 @@ func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> 
 		for spell_data: SpellData in spell_data_list.slice(1, spell_data_list.size()):
 			spell_mana[spell_data].value =  (player_mana.spell_mana[spell_data] / player_mana.spell_mana_maxes[spell_data]) * 100
 
+		update_spell_mana_background(spell_data_list[0])
+
 func update_tower_mana(player_mana) -> void:
 	var text = str(int(player_mana.tower_mana))
 	var zero_pad: String = get_zero_padding(MAX_TOWER_MANA_DIGITS - len(text))
@@ -310,14 +313,14 @@ func get_spell_popup_by_spell_data(_spell_data: SpellData) -> void:
 	pass
 
 func on_enemy_total_updated(_total: int) -> void:
-	enemy_info_count = _total
+	enemy_info_count = 0
 	enemy_info_total = _total
 	enemy_progress.value = (float(enemy_info_count) / enemy_info_total) * 100* 100
 	enemy_total.text = str(enemy_info_total)
 	enemy_count.text = str(enemy_info_count)
 
 func on_enemy_count_decremented() -> void:
-	enemy_info_count -= 1
+	enemy_info_count += 1
 	enemy_count.text = str(enemy_info_count)
 	enemy_progress.value = (float(enemy_info_count) / enemy_info_total) * 100
 
@@ -411,6 +414,8 @@ func display_hint_text(_text: String, _duration: float, overwriteable: bool) -> 
 		hint_label.show()
 		hint_timer.start(_duration)
 		
-
 func on_hint_timer_timeout() -> void:
 	hint_label.hide()
+
+func update_spell_mana_background(spell_data: SpellData) -> void:
+	active_mana_progress_bar.modulate = spell_data.ammo_color
