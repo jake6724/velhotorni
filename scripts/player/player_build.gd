@@ -115,11 +115,13 @@ func on_ui_interact_pressed() -> void:
 func on_ui_interact_released() -> void: # TODO: Call this when unhovering a tower also
 	if tower_action_radial_menu_active:
 		set_player_enabled_requested.emit(true)
+		tower_action_radial_menu_active = false
+
 		if hovered_tower:
 			hovered_tower.upgrade_button_hint.show()
 
 		player_build_ui.tower_action_radial_menu.animate_close() 
-		tower_action_radial_menu_active = false
+
 		get_viewport().warp_mouse(mouse_reset_warp_position)
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
@@ -134,7 +136,14 @@ func on_player_input_primary_action_just_pressed() -> void:
 				match selected_tower_action:
 					TowerAction.SELL: on_ui_interact_released()
 					_: pass
+				player_build_ui.tower_action_radial_menu.animate_icon_by_tower_action(selected_tower_action)
 				on_tower_action_radial_menu_cost_requested(selected_tower_action)
+			else:
+				player_build_ui.tower_action_radial_menu.animate_icon_negative_by_tower_action(selected_tower_action)
+				player_hud_hint_requested.emit(get_tower_action_negative_text(selected_tower_action), 1.0, true)
+		else:
+			player_build_ui.tower_action_radial_menu.animate_icon_negative_by_tower_action(selected_tower_action)
+			player_hud_hint_requested.emit(get_tower_action_negative_text(selected_tower_action), 1.0, true)
 
 func on_tower_action_radial_menu_cost_requested(_tower_action: TowerAction) -> void:
 	if hovered_tower:
@@ -215,50 +224,55 @@ func update_tower_detect_area_position() -> void:
 
 ## Check if placement is valid and place `preview_tower`. Update `WorldGrid` and `preview_tower` accordingly.
 func place_tower() -> void:	
-	var tower_placement_info: Array = get_tower_placement_info()
-	if tower_placement_info[0]:
-		preview_tower.sprite.modulate.a = 1
-		preview_tower.can_show_range = false
-		preview_tower.attack_collider.set_deferred("disabled", false)
-		preview_tower.transform_collider.set_deferred("disabled", false)
-		preview_tower.buff_collider.set_deferred("disabled", false)
-		preview_tower.tower_obstacle_collider.set_deferred("disabled", false)
-		preview_tower.hurtbox_collider.set_deferred("disabled", false)
-		preview_tower.healthbar.visible = true	
-		preview_tower.ap.play("summon")
-		preview_tower.modulate.r = 1
-		preview_tower.placement_button_hint.hide()
-		AudioManager.create_2d_audio_at_location(WorldGrid.grid_to_world(tower_placement_info[1]), SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON)
+	if not tower_action_radial_menu_active:
+		var tower_placement_info: Array = get_tower_placement_info()
+		if tower_placement_info[0]:
+			var placed_tower = preview_tower
+			preview_tower.sprite.modulate.a = 1
+			preview_tower.can_show_range = false
+			preview_tower.attack_collider.set_deferred("disabled", false)
+			preview_tower.transform_collider.set_deferred("disabled", false)
+			preview_tower.buff_collider.set_deferred("disabled", false)
+			preview_tower.tower_obstacle_collider.set_deferred("disabled", false)
+			preview_tower.hurtbox_collider.set_deferred("disabled", false)
+			preview_tower.healthbar.visible = true	
+			preview_tower.ap.play("summon")
+			preview_tower.modulate.r = 1
+			preview_tower.placement_button_hint.hide()
+			preview_tower.hide_upgrade_info()
+			AudioManager.create_2d_audio_at_location(WorldGrid.grid_to_world(tower_placement_info[1]), SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON)
 
-		# Update WorldGrid
-		WorldGrid.data[tower_placement_info[1]] = false
+			# Update WorldGrid
+			WorldGrid.data[tower_placement_info[1]] = false
 
-		# Update internal data and BuildUI
-		active_towers.append(preview_tower)
-		player_build_ui.update_tower_count_label(active_towers.size())
-		tower_count_updated.emit(active_towers.size())
-		tower_mana_spent.emit(tower_placement_info[2])
+			# Update internal data and BuildUI
+			active_towers.append(preview_tower)
+			player_build_ui.update_tower_count_label(active_towers.size())
+			tower_count_updated.emit(active_towers.size())
+			tower_mana_spent.emit(tower_placement_info[2])
 
-		# If wave is running tower sell prices are immeadiately locked
-		if WaveManager.wave_active:
-			lock_in_tower_sell_prices()
+			# If wave is running tower sell prices are immeadiately locked
+			if WaveManager.wave_active:
+				lock_in_tower_sell_prices()
 
-		if preview_tower is ShieldTower:
-			preview_tower.set_all_shield_colliders_disabled(false)
+			if preview_tower is ShieldTower:
+				preview_tower.set_all_shield_colliders_disabled(false)
 
-		# Get a new preview tower
-		create_preview_tower()
-	else:
-		shake_preview_tower()
-		AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON_FAIL)
-		var _hint_text: String = ""
-		match tower_placement_info[3]:
-			TowerPlacementError.COST: _hint_text = "Can't afford tower!"
-			TowerPlacementError.CAP: _hint_text = "Tower cap reached!"
-			TowerPlacementError.POSITION: _hint_text = "Can't place tower here!"
-			TowerPlacementError.DISTANCE: _hint_text = "Too far away!"
-		player_hud_hint_requested.emit(_hint_text, 1.0, true)
-		
+			# Get a new preview tower
+			create_preview_tower()
+
+			placed_tower.show()
+		else:
+			shake_preview_tower()
+			AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON_FAIL)
+			var _hint_text: String = ""
+			match tower_placement_info[3]:
+				TowerPlacementError.COST: _hint_text = "Can't afford tower!"
+				TowerPlacementError.CAP: _hint_text = "Tower cap reached!"
+				TowerPlacementError.POSITION: _hint_text = "Can't place tower here!"
+				TowerPlacementError.DISTANCE: _hint_text = "Too far away!"
+			player_hud_hint_requested.emit(_hint_text, 1.0, true)
+			
 
 func switch_tower_action(player_input: PlayerInput) -> void:
 	pass
@@ -279,7 +293,19 @@ func sell_tower() -> void:
 		# Reclaim money and remove tower
 		tower_mana_spent.emit(-hovered_tower.sell_price)
 		hovered_tower.die()
-		hovered_tower = null
+
+func get_tower_action_negative_text(_tower_action: TowerAction) -> String:
+	var _text: String
+	match _tower_action:
+		TowerAction.HEAL: _text = "Tower health full!"
+		TowerAction.UPGRADE: _text = "Tower at max level!"
+		TowerAction.SELL: 
+			push_error("PlayerBuild.get_tower_action_negative_text where _tower_action is SELL. This action should never be negative") 
+			_text = ""
+		TowerAction.INFO: 
+			push_error("PlayerBuild.get_tower_action_negative_text where _tower_action is INFO. This action should never be negative") 
+			_text = ""
+	return _text
 
 func configure_hovered_tower_for_action(_hovered_tower) -> void:
 	pass

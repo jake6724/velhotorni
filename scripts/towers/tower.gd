@@ -541,7 +541,6 @@ func get_tower_data_copy(_input_data: TowerData) -> TowerData:
 	return new_data
 
 func hide_upgrade_info() -> void:
-	print("Hiding")
 	upgrade_display.hide()
 
 # Hexes
@@ -618,15 +617,13 @@ func heal(_value: int) -> void:
 		print("Can heal is true ??!")
 
 func die() -> void:
-
-	# Update WorldGrid
-	var tower_grid_position: Vector2 = WorldGrid.world_to_grid(global_position)
-	WorldGrid.data[tower_grid_position] = true
-
 	alive = false
 	died.emit(self)
 	ap.play("die")
 	await ap.animation_finished
+	# Update WorldGrid
+	var tower_grid_position: Vector2 = WorldGrid.world_to_grid(global_position)
+	WorldGrid.data[tower_grid_position] = true
 	queue_free()
 
 func shake() -> void:
