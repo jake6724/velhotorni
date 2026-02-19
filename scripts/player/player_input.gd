@@ -43,7 +43,7 @@ signal ui_interact_released
 signal escape_pressed
 signal start_wave_action_charge_updated
 signal heal_all_action_charge_updated
-signal angle_to_mouse_updated
+signal radial_wheel_data_updated
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -70,13 +70,14 @@ func get_aim_input_controller() -> Vector2:
 	aim_input = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
 	return aim_input
 
-## Returns the angle from PlayerInput (center of player character) to the mouse's global position. Useful for UI radial wheels
 func get_aim_input_mouse() -> Vector2: 
 	var mouse_position: Vector2 = get_global_mouse_position()
 	aim_input = get_owner().global_position.direction_to(mouse_position)
 	var angle_to_mouse: float = mouse_position.angle_to_point(global_position)
 
-	angle_to_mouse_updated.emit(angle_to_mouse)
+	var distance_squared_to_mouse = global_position.distance_squared_to(mouse_position)
+
+	radial_wheel_data_updated.emit(angle_to_mouse, distance_squared_to_mouse)
 	return aim_input
 
 func _process(delta):

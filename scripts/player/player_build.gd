@@ -25,6 +25,7 @@ const TOWER_PLACEMENT_RANGE: int = 16
 # const TOWER_MANA_COST_PER_HEAL: int = 1
 const TOWER_HEAL_AMOUNT: int = 25
 const MAX_PLACEMENT_DISTANCE: float = 150.0
+const TOWER_RADIAL_MENU_MOUSE_RADIUS: float = 48
 
 var tower_scene: PackedScene = preload("res://scenes/towers/Tower.tscn")
 var shield_tower_scene: PackedScene = preload("res://scenes/towers/ShieldTower.tscn")
@@ -59,6 +60,23 @@ TODO
 E is making preview tower move ? 
 
 """
+
+func _process(_delta):
+	queue_redraw()
+
+	if tower_action_radial_menu_active:
+		limit_mouse_radius(TOWER_RADIAL_MENU_MOUSE_RADIUS)
+
+func limit_mouse_radius(radius: float) -> void:
+	var mouse_position: Vector2 = get_global_mouse_position()	
+	var mouse_direction = mouse_position - global_position
+	if mouse_direction.length() > radius:
+		mouse_position = global_position + mouse_direction.limit_length(radius)
+	Input.warp_mouse(get_viewport_transform() * mouse_position)
+
+func _draw():
+	pass
+	# draw_circle(to_local(get_global_mouse_position()), 3, Color.WHITE, true)
 
 func _ready():
 	add_child(tower_parent)
@@ -103,7 +121,7 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	player_camera = player.player_camera
 
 func on_ui_interact_pressed() -> void:
-	if hovered_tower:
+	if hovered_tower and hovered_tower.alive:
 		hovered_tower.upgrade_button_hint.hide()
 		set_player_enabled_requested.emit(false)
 		mouse_reset_warp_position = get_viewport().get_mouse_position()
@@ -111,6 +129,9 @@ func on_ui_interact_pressed() -> void:
 		player_build_ui.tower_action_radial_menu.animate_open()
 		hovered_tower.can_show_range = false
 		preview_tower.hide()
+		build_grid_sprite.hide()
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+		limit_mouse_radius(1)
 
 func on_ui_interact_released() -> void: # TODO: Call this when unhovering a tower also
 	if tower_action_radial_menu_active:
@@ -119,11 +140,13 @@ func on_ui_interact_released() -> void: # TODO: Call this when unhovering a towe
 
 		if hovered_tower:
 			hovered_tower.upgrade_button_hint.show()
+			hovered_tower.can_show_range = true
 
 		player_build_ui.tower_action_radial_menu.animate_close() 
+		build_grid_sprite.show()
 
 		get_viewport().warp_mouse(mouse_reset_warp_position)
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 
 func on_player_input_primary_action_just_pressed() -> void:
 	if tower_action_radial_menu_active and hovered_tower:

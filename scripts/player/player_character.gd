@@ -253,7 +253,7 @@ func _physics_process(delta): # This can go in a state eventually
 				if velocity == Vector2.ZERO:
 		
 					hit = false
-
+			
 			# Primary Action
 			if player_input.primary_action_pressed:
 				on_primary_action_pressed()
