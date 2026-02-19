@@ -18,7 +18,7 @@ var can_pause: bool = false
 
 var wave_failures: int = 0
 
-const PERK_UI_POPUP_DELAY: float = .2
+const PERK_UI_POPUP_DELAY: float = .1
 
 # func _input(_event):
 # 	if Input.is_action_just_pressed("x"):
@@ -187,6 +187,8 @@ func on_perk_selected(perk_data: PerkData) -> void:
 	
 	player_character.player_input.input_enabled = true
 	player_character.player_input.can_start_wave = true
+
+	player_character.player_hud.configure_for_next_wave()
 
 func show_level_complete() -> void:
 	level_complete_panel.set_stars(calc_stars())

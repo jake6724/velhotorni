@@ -159,8 +159,8 @@ func spawn_enemy(_spawn: Spawn) -> void:
 	if new_enemy is FlyingEnemy or new_enemy is EnemySnake:
 		new_enemy.player = player
 		new_enemy.global_position = flying_spawn_points[_spawn.flying_spawn_index]
-		new_enemy.z_as_relative = false
-		new_enemy.z_index = Constants.z_index_map["flying_enemy"]
+		new_enemy.sprite.z_as_relative = false
+		new_enemy.sprite.z_index = Constants.z_index_map["flying_enemy"]
 	else:
 		active_path_enemies.append(new_enemy)
 		configure_enemy_pathing(new_enemy, _spawn)
@@ -172,7 +172,7 @@ func spawn_enemy(_spawn: Spawn) -> void:
 		new_enemy.player = player
 		new_enemy.global_position = boss_spawn_position
 		new_enemy.z_as_relative = false
-		new_enemy.z_index = Constants.z_index_map["flying_enemy"] # TODO: Give its own layer!
+		new_enemy.sprite.z_index = Constants.z_index_map["flying_enemy"] # TODO: Give its own layer!
 	
 	if new_enemy is EnemySnake:
 		new_enemy.configure_snake_enemy()

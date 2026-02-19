@@ -492,6 +492,7 @@ func on_tower_stat_updated(tower: Tower) -> void:
 func on_player_hud_heal_all_requested() -> void:
 	for tower: Tower in tower_parent.get_children():
 		heal_tower(tower)
+		await get_tree().create_timer(.01).timeout
 	heal_all_cost_updated.emit(get_heal_all_cost())
 
 func get_heal_all_cost() -> float:

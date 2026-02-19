@@ -23,7 +23,7 @@ var earth_drill: SpellData = load("res://data/spells/spell_data_bullet_earth_dri
 var test: SpellData = load("res://data/spells/spell_data_bullet_arcane_flamethrower.tres")
 var arcane_dagger: SpellData = load("res://data/spells/spell_data_melee_arcane_dagger.tres")
 
-var equipped_spell_1: SpellData = fireball
+var equipped_spell_1: SpellData = arcane_basic
 var equipped_spell_2: SpellData = earth_drill
 var equipped_spell_3: SpellData = ice_sword
 var equipped_spell_4: SpellData = tornado

@@ -18,13 +18,11 @@ func set_shader_properties() -> void:
 	# greyscale_shader_material.set("shader_parameter/mask_texture",(circle_mask))
 	# greyscale_shader_material.set("shader_parameter/use_different_texture",(true))
 	# greyscale_shader_material.set("shader_parameter/mask_size",Vector2(boon_collider.shape.radius * 2, boon_collider.shape.radius * 2))
-	# greyscale_shader_material.set("shader_parameter/wave_amplitude",float(0.1))
-	# greyscale_shader_material.set("shader_parameter/ripple_rate",float(12))
-
-	# greyscale_shader_material.set("shader_parameter/amplitude",float(1.6));
-	# greyscale_shader_material.set("shader_parameter/ripple_rate",float(4.0));
-	# greyscale_shader_material.set("shader_parameter/wave_amplitude",float(0.018));
-	# greyscale_shader_material.set("shader_parameter/wave_amplitude",float(15.0));
+	# greyscale_shader_material.set("shader_parameter/wave_amplitude",float(0.001))
+	# greyscale_shader_material.set("shader_parameter/amplitude",float(3))
+	# greyscale_shader_material.set("shader_parameter/ripple_rate",float(5))
+	# greyscale_shader_material.set("shader_parameter/frequency",float(2))
+	# greyscale_shader_material.set("shader_parameter/fill_amount",float(0.0))
 
 func _process(_delta):
 	queue_redraw()

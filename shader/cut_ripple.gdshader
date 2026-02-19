@@ -4,7 +4,7 @@ shader_type canvas_item;
 
 // Handles the concentric ripples
 uniform float frequency: hint_range(0, 15, 0.01) = 4.0;
-uniform float amplitude: hint_range(0, 3, 0.1) = 2.0;
+uniform float amplitude: hint_range(0, 10, 0.1) = 2.0;
 uniform float ripple_rate : hint_range(0, 20.0, 1) = 5;
 
 // Handles the waves themselves

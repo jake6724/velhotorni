@@ -84,7 +84,6 @@ signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
 signal coin_dropped
 signal enemy_damage_recieved
-# signal wind_up_completed
 
 func _ready():
 	data.resource_local_to_scene = true # TODO: probably/maybe not needed
@@ -105,8 +104,6 @@ func _ready():
 	spell_mana_drop_chance = data.element_mana_drop_chance
 
 	set_pos_offset()
-
-	z_as_relative = false
 
 	# Configure DebuffManager
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
@@ -130,6 +127,8 @@ func _ready():
 	enemy_movement.sprite_flip_requested.connect(on_sprite_flip_requested)
 	enemy_movement.damage_base_requested.connect(on_damage_base_requested)
 	enemy_movement.death_requested.connect(on_death_requested)
+
+	z_as_relative = false
 
 	# Configure z_indexes
 	health_bar.z_index = Constants.z_index_map["enemy_healthbar"]
@@ -218,6 +217,9 @@ func die() -> void:
 	health_bar.hide()
 	shield.hide()
 	weak.hide()
+
+
+
 	z_index = Constants.z_index_map["enemy_corpse"]
 	boon_area.can_show_boon_range = false
 

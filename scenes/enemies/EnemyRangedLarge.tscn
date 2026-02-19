@@ -1090,7 +1090,7 @@ debug_color = Color(0.986412, 0.114018, 3.85046e-07, 0.42)
 
 [node name="EnemyBulletParent" type="Node" parent="."]
 
-[node name="NumberPopup" type="Node" parent="."]
+[node name="NumberPopup" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("15_tw3kj")
 metadata/_custom_type_script = "uid://c75pt0b6io16g"

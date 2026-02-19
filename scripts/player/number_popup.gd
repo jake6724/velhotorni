@@ -1,12 +1,12 @@
 class_name NumberPopup
-extends Node
+extends Node2D
 # https://www.youtube.com/watch?v=F0DQLSiLkjg
 
 var font: FontFile = preload("res://assets/fonts/Early-GameBoy-Jake-Edit.ttf")
 const COLOR_WHITE: String = "#FFFFFF"
 const COLOR_BLACK: String = "#000000"
 const NO_MANA_TEXT: String = "EMPTY"
-const pos_offset: Vector2 = Vector2(0, -3)
+# const pos_offset: Vector2 = Vector2(0, -3)
 
 var outline_size: int = 0
 var shadow_offset: Vector2 = Vector2(1,1)
@@ -16,129 +16,180 @@ var up_distance: float = 64
 var up_time: float = 1
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-var jitter_range: float = 8
+var jitter_range: float = 16
 
-var element_text: Dictionary[Constants.Element, String] = {
-	Constants.Element.FIRE: "FIRE MANA",
-	Constants.Element.WIND: "WIND MANA",
-	Constants.Element.WATER: "WATER MANA",
-	Constants.Element.EARTH: "EARTH MANA",
-	Constants.Element.LIGHT: "LIGHT MANA",
-	Constants.Element.DARK: "DARK MANA",
-	Constants.Element.ARCANE: "ARCANE MANA",
-	Constants.Element.NONE: "",
-}
+var active_damage_number: Label
+var active_damage_number_timer: Timer = Timer.new()
 
-func display_mana_number(value: int, pos: Vector2, spell_data: SpellData):
-	var number: Label = Label.new()
-	number.global_position = pos
-	number.z_index = Constants.z_index_map["popup"]
-
-	if value > 1:
-		number.text = str(spell_data.popup_name, " +", str(value))
-	else:
-		number.text = str(spell_data.popup_name, " FULL")
-
-	number.label_settings = LabelSettings.new()
-	number.label_settings.font_color = COLOR_WHITE
-	number.label_settings.font_size = 8
-	number.label_settings.font = font
-	number.label_settings.outline_color = COLOR_WHITE
-	number.label_settings.outline_size = outline_size
-	number.label_settings.shadow_offset = shadow_offset
-	number.label_settings.shadow_size = shadow_size
-	number.label_settings.shadow_color = COLOR_BLACK
-
-	call_deferred("add_child", number)
-	await number.resized
-
-	number.pivot_offset = Vector2(number.size / 2)
-	number.position.x -= number.size.x / 2
-
-	var tween = get_tree().create_tween()
-	tween.tween_property(number, "position:y", number.position.y - up_distance, up_time).set_ease(Tween.EASE_OUT)
-	tween.tween_interval(.1)
-	await tween.finished
-
-	# Blink
-	var blink_tween = get_tree().create_tween()
-	blink_tween.set_loops(5)
-	blink_tween.tween_property(number, "modulate:a", 0.0, .01)
-	blink_tween.tween_interval(.075)
-	blink_tween.tween_property(number, "modulate:a", 1.0, .01)
-	blink_tween.tween_interval(.075)
-
-	await blink_tween.finished
-	number.queue_free()
-
+func _ready():
+	active_damage_number_timer.one_shot = true
+	active_damage_number_timer.autostart = false
+	add_child(active_damage_number_timer)
+	active_damage_number_timer.timeout.connect(on_active_damage_number_timer_timeout)
 
 func display_damage_number(value: int, pos: Vector2) -> void:
 	if value > 1:
-		var number: Label = Label.new()
-		number.global_position = pos + pos_offset
-		number.z_index = Constants.z_index_map["popup"]
-		number.text = str(value)
+		if active_damage_number:
+			active_damage_number.text = str(int(active_damage_number.text) + value)
+			shake_label(active_damage_number)
+			active_damage_number_timer.start(.5)
 
-		number.label_settings = LabelSettings.new()
-		number.label_settings.font_color = COLOR_WHITE
-		number.label_settings.font_size = 8
-		number.label_settings.font = font
-		number.label_settings.outline_color = COLOR_WHITE
-		number.label_settings.outline_size = outline_size
-		number.label_settings.shadow_offset = shadow_offset
-		number.label_settings.shadow_size = shadow_size
-		number.label_settings.shadow_color = COLOR_BLACK
+		else:
+			var number: Label = Label.new()
+			active_damage_number = number
+			number.global_position = to_local(global_position)
 
-		call_deferred("add_child", number)
-		await number.resized
+			number.text = str(value)
 
-		number.pivot_offset.x = (number.size.x / 2)
-		number.position.x += ((number.size.x / 2) + get_jitter())
+			number.label_settings = LabelSettings.new()
+			number.label_settings.font_color = COLOR_WHITE
+			number.label_settings.font_size = 8
+			number.label_settings.font = font
+			number.label_settings.outline_color = COLOR_WHITE
+			number.label_settings.outline_size = outline_size
+			number.label_settings.shadow_offset = shadow_offset
+			number.label_settings.shadow_size = shadow_size
+			number.label_settings.shadow_color = COLOR_BLACK
 
-		var tween = get_tree().create_tween()
-		tween.tween_property(number, "position:y", number.position.y - 8, .5).set_ease(Tween.EASE_OUT)
-		tween.tween_interval(.1)
-		await tween.finished
-		number.queue_free()
+			call_deferred("add_child", number)
+			number.z_index = Constants.z_index_map["popup"]
+			await number.resized
 
-func display_mana_empty(pos: Vector2) -> void:
-	var number: Label = Label.new()
-	number.global_position = pos + pos_offset + Vector2(0, -10)
-	number.z_index = Constants.z_index_map["popup"]
-	number.text = str(NO_MANA_TEXT)
+			number.pivot_offset.x = (number.size.x / 2)
+			number.position.x += get_jitter()
 
-	number.label_settings = LabelSettings.new()
-	number.label_settings.font_color = COLOR_WHITE
-	number.label_settings.font_size = 8
-	number.label_settings.font = font
-	number.label_settings.outline_color = COLOR_WHITE
-	number.label_settings.outline_size = outline_size
-	number.label_settings.shadow_offset = shadow_offset
-	number.label_settings.shadow_size = shadow_size
-	number.label_settings.shadow_color = COLOR_BLACK
+			var tween = get_tree().create_tween()
+			tween.tween_property(number, "position:y", number.position.y - 8, .5).set_ease(Tween.EASE_OUT)
+			
+			active_damage_number_timer.start(1)
 
-	call_deferred("add_child", number)
-	await number.resized
+func on_active_damage_number_timer_timeout() -> void:
+	if active_damage_number:
+		var temp = active_damage_number
+		active_damage_number = null
+		animate_label_die(temp)
 
-	number.pivot_offset = Vector2(number.size / 2)
-	number.position.x -= number.size.x / 2
+func get_jitter() -> float:
+	var x = rng.randf_range(10,15)
+	x *= [1,-1].pick_random()
+	return x
 
-	# Blink
-	var blink_tween = get_tree().create_tween()
-	blink_tween.set_loops(5)
-	blink_tween.tween_property(number, "modulate:a", 0.0, .01)
-	blink_tween.tween_interval(.125)
-	blink_tween.tween_property(number, "modulate:a", 1.0, .01)
-	blink_tween.tween_interval(.125)
+# func get_random_position_offset() -> Vector2:
+# 	var random_angle: float = randf() * .5 * PI
+# 	var random_direction: Vector2 = Vector2.RIGHT.rotated(random_angle)
+# 	# var _direction: Vector2 = Vector2(rng.randf_range(-1,1), rng.randf_range(-.4,.4))
+# 	# _direction = _direction.normalized()
 
-	var tween = get_tree().create_tween()
-	tween.tween_property(number, "position:y", number.position.y - up_distance, .75)
-	await tween.finished
-	number.queue_free()
+# 	var pos_offset: Vector2 = random_direction * randf_range(10,20)
+# 	print(rad_to_deg(pos_offset.angle()))
+# 	return pos_offset
+
+func shake_label(label: Label) -> void:
+	var shake_tween: Tween = get_tree().create_tween()
+	var shake_range: float = 6.3
+	var shake_duration: float = .03
+	var scale_target: Vector2 = Vector2(1.3, 1.3)
+	shake_tween.tween_property(label, "rotation_degrees", shake_range, shake_duration)
+	shake_tween.tween_interval(shake_duration)
+	shake_tween.tween_property(label, "rotation_degrees", 0, shake_duration)
+	shake_tween.tween_interval(shake_duration)
+	shake_tween.tween_property(label, "rotation_degrees", -shake_range, shake_duration)
+	shake_tween.tween_interval(shake_duration)
+	shake_tween.tween_property(label, "rotation_degrees", 0, shake_duration)
+	shake_tween.tween_interval(shake_duration)
+
+	var scale_tween: Tween = get_tree().create_tween()
+	scale_tween.tween_property(label, "scale", scale_target, .03)
+	scale_tween.tween_interval(shake_duration)
+	scale_tween.tween_property(label, "scale", Vector2.ONE, .03)
+
+func animate_label_die(label: Label) -> void:
+	var scale_tween: Tween = get_tree().create_tween()
+	var scale_target: Vector2 = Vector2(.1, .1)
+	scale_tween.tween_property(label, "scale", scale_target, .1)
+	await scale_tween.finished
+	label.queue_free()
+
+# func display_mana_number(value: int, pos: Vector2, spell_data: SpellData):
+# 	var number: Label = Label.new()
+# 	number.global_position = pos
+# 	number.z_index = Constants.z_index_map["popup"]
+
+# 	if value > 1:
+# 		number.text = str(spell_data.popup_name, " +", str(value))
+# 	else:
+# 		number.text = str(spell_data.popup_name, " FULL")
+
+# 	number.label_settings = LabelSettings.new()
+# 	number.label_settings.font_color = COLOR_WHITE
+# 	number.label_settings.font_size = 8
+# 	number.label_settings.font = font
+# 	number.label_settings.outline_color = COLOR_WHITE
+# 	number.label_settings.outline_size = outline_size
+# 	number.label_settings.shadow_offset = shadow_offset
+# 	number.label_settings.shadow_size = shadow_size
+# 	number.label_settings.shadow_color = COLOR_BLACK
+
+# 	call_deferred("add_child", number)
+# 	await number.resized
+
+# 	number.pivot_offset = Vector2(number.size / 2)
+# 	number.position.x -= number.size.x / 2
+
+# 	var tween = get_tree().create_tween()
+# 	tween.tween_property(number, "position:y", number.position.y - up_distance, up_time).set_ease(Tween.EASE_OUT)
+# 	tween.tween_interval(.1)
+# 	await tween.finished
+
+# 	# Blink
+# 	var blink_tween = get_tree().create_tween()
+# 	blink_tween.set_loops(5)
+# 	blink_tween.tween_property(number, "modulate:a", 0.0, .01)
+# 	blink_tween.tween_interval(.075)
+# 	blink_tween.tween_property(number, "modulate:a", 1.0, .01)
+# 	blink_tween.tween_interval(.075)
+
+# 	await blink_tween.finished
+# 	number.queue_free()
+
+# func display_mana_empty(pos: Vector2) -> void:
+# 	var number: Label = Label.new()
+# 	number.global_position = pos + pos_offset + Vector2(0, -10)
+# 	number.z_index = Constants.z_index_map["popup"]
+# 	number.text = str(NO_MANA_TEXT)
+
+# 	number.label_settings = LabelSettings.new()
+# 	number.label_settings.font_color = COLOR_WHITE
+# 	number.label_settings.font_size = 8
+# 	number.label_settings.font = font
+# 	number.label_settings.outline_color = COLOR_WHITE
+# 	number.label_settings.outline_size = outline_size
+# 	number.label_settings.shadow_offset = shadow_offset
+# 	number.label_settings.shadow_size = shadow_size
+# 	number.label_settings.shadow_color = COLOR_BLACK
+
+# 	call_deferred("add_child", number)
+# 	await number.resized
+
+# 	number.pivot_offset = Vector2(number.size / 2)
+# 	number.position.x -= number.size.x / 2
+
+# 	# Blink
+# 	var blink_tween = get_tree().create_tween()
+# 	blink_tween.set_loops(5)
+# 	blink_tween.tween_property(number, "modulate:a", 0.0, .01)
+# 	blink_tween.tween_interval(.125)
+# 	blink_tween.tween_property(number, "modulate:a", 1.0, .01)
+# 	blink_tween.tween_interval(.125)
+
+# 	var tween = get_tree().create_tween()
+# 	tween.tween_property(number, "position:y", number.position.y - up_distance, .75)
+# 	await tween.finished
+# 	number.queue_free()
 
 func display_tower_heal(pos: Vector2, value: int, max_value: int) -> void:
 	var number: Label = Label.new()
-	number.global_position = pos + pos_offset
+	number.global_position = to_local(global_position)
 	number.z_index = Constants.z_index_map["popup"]
 	number.text = str(value,"/",max_value)
 
@@ -157,22 +208,10 @@ func display_tower_heal(pos: Vector2, value: int, max_value: int) -> void:
 
 	number.pivot_offset = Vector2(number.size / 2)
 	number.position.x -= number.size.x / 2
+	number.position.x += get_jitter()
 
 	var tween = get_tree().create_tween()
 	tween.tween_property(number, "position:y", number.position.y - up_distance, up_time).set_ease(Tween.EASE_OUT)
-	tween.tween_interval(.1)
+	# tween.tween_interval(.1)
 	await tween.finished
-
-	# # Blink
-	# var blink_tween = get_tree().create_tween()
-	# blink_tween.set_loops(5)
-	# blink_tween.tween_property(number, "modulate:a", 0.0, .01)
-	# blink_tween.tween_interval(.125)
-	# blink_tween.tween_property(number, "modulate:a", 1.0, .01)
-	# blink_tween.tween_interval(.125)
-
-	# await blink_tween.finished
-	number.queue_free()
-
-func get_jitter() -> float:
-	return rng.randf_range(-jitter_range, jitter_range)
+	animate_label_die(number)

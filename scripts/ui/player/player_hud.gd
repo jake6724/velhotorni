@@ -129,8 +129,6 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 	build_phase_buttons.position.x = -104
 	animate_show_build_phase_buttons()
 
-	wave_complete_banner_animation_finished.connect(on_wave_complete_banner_animation_finished)
-
 	player_build.heal_all_cost_updated.connect(on_player_build_heal_all_cost_updated)
 
 	player_build.player_hud_hint_requested.connect(display_hint_text)
@@ -332,7 +330,7 @@ func on_wave_started() -> void:
 	show_banner("Wave Started", wave_start_banner_animation_finished)
 	animate_hide_build_phase_buttons()
 
-func on_wave_complete_banner_animation_finished() -> void:
+func configure_for_next_wave() -> void:
 	WaveManager.can_start_wave = true
 	start_wave_progress_bar.value = 0
 	animate_show_build_phase_buttons()

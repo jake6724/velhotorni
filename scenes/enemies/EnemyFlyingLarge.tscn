@@ -901,6 +901,8 @@ resource_local_to_scene = true
 radius = 32.0
 
 [node name="FlyingLargeEnemy" type="Area2D"]
+z_index = 1000
+z_as_relative = false
 collision_layer = 262144
 collision_mask = 0
 script = ExtResource("1_1kn2l")
@@ -1078,7 +1080,7 @@ script = ExtResource("13_qw6qg")
 script = ExtResource("14_tscoj")
 metadata/_custom_type_script = "uid://di3c54ykd28fx"
 
-[node name="NumberPopup" type="Node" parent="."]
+[node name="NumberPopup" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("15_5f3do")
 metadata/_custom_type_script = "uid://c75pt0b6io16g"

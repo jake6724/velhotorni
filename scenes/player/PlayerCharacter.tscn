@@ -1613,10 +1613,6 @@ script = ExtResource("17_07k56")
 unique_name_in_owner = true
 script = ExtResource("20_fyjgo")
 
-[node name="PlayerNumberPopup" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("23_hnid3")
-
 [node name="PlayerPerkManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("40_ykwnp")
@@ -1836,3 +1832,8 @@ current = true
 unique_name_in_owner = true
 script = ExtResource("48_rol34")
 metadata/_custom_type_script = "uid://db3aor41du651"
+
+[node name="PlayerNumberPopup" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("23_hnid3")
+metadata/_custom_type_script = "uid://bbqhea2s5008x"
