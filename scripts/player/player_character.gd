@@ -38,7 +38,7 @@ extends CharacterBody2D
 @onready var spell_spawn_point: Node2D = %SpellSpawnPoint
 @onready var coin_collector: CoinCollector = $CoinCollector
 @onready var mana_drop_collector: ManaDropCollector = %ManaDropCollector
-@onready var build_grid_sprite = $PlayerBuild/BuildGridSprite
+@onready var build_grid_sprite = %BuildGridSprite
 @onready var special_bar_dash: Sprite2D = %SpecialBarDash
 @onready var special_bar_clone: TextureProgressBar = %SpecialBarClone
 @onready var special_charges_hide_timer: Timer = Timer.new()
@@ -113,7 +113,6 @@ func _ready():
 	player_input.special_action_pressed.connect(on_special_input_pressed)
 	player_input.switch_selection_pressed.connect(on_switch_selection_pressed)
 	player_input.switch_player_mode_pressed.connect(on_switch_player_mode_pressed)
-	player_input.switch_tower_action_pressed.connect(player_build.switch_tower_action.bind(player_input))
 	# player_input.ui_interact_pressed.connect(on_ui_interact_pressed)
 	player_input.weapon_select_pressed.connect(on_weapon_select_pressed)
 	player_input.primary_action_just_pressed.connect(func():primary_action_timer.start(PRIMARY_ACTION_TIMER_DELAY))
@@ -175,10 +174,7 @@ func _ready():
 	# Configure PlayerBuild
 	player_build.initialize(player_build_ui, build_grid_sprite, tower_detect_area, player_mana, player_hud, self)
 	player_build.tower_mana_spent.connect(on_tower_mana_spent)
-	player_build.reset_tower_action.connect(on_reset_tower_action)
-	player_build.tower_action_hint_requested.connect(on_tower_action_hint_requested)
 	player_mana.tower_mana_updated.connect(player_build.on_tower_mana_updated)
-	player_build.tower_action_changed.connect(tower_action_hint.display_tower_action_hint)
 	player_build.set_player_enabled_requested.connect(set_character_for_ui)
 
 	# Configure PlayerWalkParticles
@@ -261,7 +257,6 @@ func _physics_process(delta): # This can go in a state eventually
 			if building:
 				player_build.update_preview_tower_position(global_position, player_aim.aim_input)
 				player_build.update_tower_detect_area_position()
-				player_build.run(delta, player_input, upgrade_action_charge_cirlce)
 
 			if velocity == Vector2.ZERO:
 				player_stopped.emit()

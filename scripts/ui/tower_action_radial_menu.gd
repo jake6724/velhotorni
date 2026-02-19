@@ -11,11 +11,6 @@ extends Control
 @onready var cost_label: Label = %CostLabel
 @onready var cost_panel: PanelContainer = %CostPanel
 
-var heal_color: Color = Color.hex(0x10a500)
-var upgrade_color: Color = Color.hex(0xf8d820)
-var sell_color: Color = Color.hex(0x282882)
-var info_color: Color = Color.hex(0xadb5bd)
-
 ## Stores the calculated location of the icon when radial menu is fully opened
 var icon_reset_positions: Dictionary[TextureRect, Vector2] = {}
 
@@ -195,22 +190,10 @@ func animate_icon_negative_by_tower_action(_tower_action: PlayerBuild.TowerActio
 func set_action_label(icon: TextureRect) -> void:
 	var _text: String
 	match icon:
-		heal_icon: 
-			_text = "Heal"
-			# background.color = heal_color
-			# background.modulate.a = BACKGROUND_MOD_A
-		upgrade_icon: 
-			_text = "Upgrade"
-			# background.color = upgrade_color
-			# background.modulate.a = BACKGROUND_MOD_A
-		sell_icon: 
-			_text = "Sell"
-			# background.color = sell_color
-			# background.modulate.a = BACKGROUND_MOD_A
-		info_icon:
-			_text = "Info"
-			# background.color = info_color
-			# background.modulate.a = BACKGROUND_MOD_A
+		heal_icon: _text = "Heal"
+		upgrade_icon: _text = "Upgrade"
+		sell_icon: _text = "Sell"
+		info_icon: _text = "Info"
 	action_label.text = _text
 	action_label.show()
 

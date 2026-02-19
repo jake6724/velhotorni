@@ -1631,7 +1631,10 @@ script = ExtResource("11_hkntq")
 [node name="PlayerBuild" type="Node2D" parent="."]
 script = ExtResource("13_6qouk")
 
-[node name="BuildGridSprite" type="Sprite2D" parent="PlayerBuild"]
+[node name="Buffer" type="Node" parent="PlayerBuild"]
+
+[node name="BuildGridSprite" type="Sprite2D" parent="PlayerBuild/Buffer"]
+unique_name_in_owner = true
 visible = false
 z_index = -2
 texture = ExtResource("7_vycf0")
