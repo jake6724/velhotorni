@@ -84,7 +84,7 @@ signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
 signal coin_dropped
 signal enemy_damage_recieved
-signal wind_up_completed
+# signal wind_up_completed
 
 func _ready():
 	data.resource_local_to_scene = true # TODO: probably/maybe not needed
@@ -219,6 +219,7 @@ func die() -> void:
 	shield.hide()
 	weak.hide()
 	z_index = Constants.z_index_map["enemy_corpse"]
+	boon_area.can_show_boon_range = false
 
 	# SFXPlayer.play_sfx_resource(data.explosion_sfx)
 	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.ENEMY_DEATH_FLESH)

@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://mlrck46bcluo"]
+
+[ext_resource type="Texture2D" uid="uid://bf2bq4hmbiio2" path="res://assets/placeholders/snake_head_placeholder.png" id="1_37kl0"]
+[ext_resource type="Shader" uid="uid://dqq36ekrnwd1s" path="res://shader/ripple.gdshader" id="2_8uh7m"]
+[ext_resource type="Shader" uid="uid://cquqdvwdx5ost" path="res://shader/cut_ripple.gdshader" id="3_ppyta"]
+[ext_resource type="Texture2D" uid="uid://bwus5dydn7cy5" path="res://assets/placeholders/snake_node_placeholder.png" id="4_ppyta"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uqi0"]
+shader = ExtResource("2_8uh7m")
+shader_parameter/frequency = 0.37999999150624
+shader_parameter/amplitude = 1.60000002384192
+shader_parameter/ripple_rate = 4.0
+shader_parameter/wave_amplitude = 0.018000000855
+shader_parameter/wave_frequency = 14.99999966472
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8uh7m"]
+shader = ExtResource("2_8uh7m")
+shader_parameter/frequency = 10.06999977491536
+shader_parameter/amplitude = 1.20000001788144
+shader_parameter/ripple_rate = 20.0
+shader_parameter/wave_amplitude = 0.0150000007125
+shader_parameter/wave_frequency = 4.0
+
+[sub_resource type="ImageTexture" id="ImageTexture_8uh7m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g14j6"]
+shader = ExtResource("3_ppyta")
+shader_parameter/frequency = 4.0
+shader_parameter/amplitude = 2.0
+shader_parameter/ripple_rate = 5.0
+shader_parameter/wave_amplitude = 0.05
+shader_parameter/wave_frequency = 4.0
+shader_parameter/fill_amount = 0.6550000311125
+shader_parameter/mask_rotation = 0.0
+shader_parameter/mask_offset = Vector2(0, 0)
+shader_parameter/mask_size = Vector2(4.275, 12.385)
+shader_parameter/mask_rotation_pivot = Vector2(0.5, 0.5)
+shader_parameter/mask_scale_pivot = Vector2(0.5, 0.5)
+shader_parameter/invert_mask = true
+shader_parameter/use_different_texture = true
+shader_parameter/mask_texture = ExtResource("4_ppyta")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(96, 48)
+texture = ExtResource("1_37kl0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_6uqi0")
+offset_left = 76.0
+offset_top = 28.0
+offset_right = 116.0
+offset_bottom = 68.0
+color = Color(1, 1, 1, 0.60784316)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_8uh7m")
+color = Color(0.89827543, 2.5990605e-06, 1.2513996e-06, 1)
+texture = SubResource("ImageTexture_8uh7m")
+polygon = PackedVector2Array(88, 27, 102, 27, 117, 30, 118, 35, 120, 44, 119, 57, 117, 62, 109, 67, 103, 68, 96, 69, 81, 66, 75, 62, 73, 53, 73, 44, 76, 39, 79, 33, 85, 30)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_g14j6")
+offset_left = 84.0
+offset_top = 39.0
+offset_right = 106.0
+offset_bottom = 58.0
+color = Color(0.48831058, 0.7835346, 0.18915026, 1)
