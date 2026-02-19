@@ -110,84 +110,42 @@ func animate_label_die(label: Label) -> void:
 	await scale_tween.finished
 	label.queue_free()
 
-# func display_mana_number(value: int, pos: Vector2, spell_data: SpellData):
-# 	var number: Label = Label.new()
-# 	number.global_position = pos
-# 	number.z_index = Constants.z_index_map["popup"]
+func display_mana_empty(_pos: Vector2) -> void:
+	var number: Label = Label.new()
+	number.global_position = to_local(global_position) + Vector2(0, -10)
+	number.z_index = Constants.z_index_map["popup"]
+	number.text = str(NO_MANA_TEXT)
 
-# 	if value > 1:
-# 		number.text = str(spell_data.popup_name, " +", str(value))
-# 	else:
-# 		number.text = str(spell_data.popup_name, " FULL")
+	number.label_settings = LabelSettings.new()
+	number.label_settings.font_color = COLOR_WHITE
+	number.label_settings.font_size = 8
+	number.label_settings.font = font
+	number.label_settings.outline_color = COLOR_WHITE
+	number.label_settings.outline_size = outline_size
+	number.label_settings.shadow_offset = shadow_offset
+	number.label_settings.shadow_size = shadow_size
+	number.label_settings.shadow_color = COLOR_BLACK
 
-# 	number.label_settings = LabelSettings.new()
-# 	number.label_settings.font_color = COLOR_WHITE
-# 	number.label_settings.font_size = 8
-# 	number.label_settings.font = font
-# 	number.label_settings.outline_color = COLOR_WHITE
-# 	number.label_settings.outline_size = outline_size
-# 	number.label_settings.shadow_offset = shadow_offset
-# 	number.label_settings.shadow_size = shadow_size
-# 	number.label_settings.shadow_color = COLOR_BLACK
+	call_deferred("add_child", number)
+	await number.resized
 
-# 	call_deferred("add_child", number)
-# 	await number.resized
+	number.pivot_offset = Vector2(number.size / 2)
+	number.position.x -= number.size.x / 2
 
-# 	number.pivot_offset = Vector2(number.size / 2)
-# 	number.position.x -= number.size.x / 2
+	# Blink
+	var blink_tween = get_tree().create_tween()
+	blink_tween.set_loops(5)
+	blink_tween.tween_property(number, "modulate:a", 0.0, .01)
+	blink_tween.tween_interval(.125)
+	blink_tween.tween_property(number, "modulate:a", 1.0, .01)
+	blink_tween.tween_interval(.125)
 
-# 	var tween = get_tree().create_tween()
-# 	tween.tween_property(number, "position:y", number.position.y - up_distance, up_time).set_ease(Tween.EASE_OUT)
-# 	tween.tween_interval(.1)
-# 	await tween.finished
+	var tween = get_tree().create_tween()
+	tween.tween_property(number, "position:y", number.position.y - up_distance, .75)
+	await tween.finished
+	animate_label_die(number)
 
-# 	# Blink
-# 	var blink_tween = get_tree().create_tween()
-# 	blink_tween.set_loops(5)
-# 	blink_tween.tween_property(number, "modulate:a", 0.0, .01)
-# 	blink_tween.tween_interval(.075)
-# 	blink_tween.tween_property(number, "modulate:a", 1.0, .01)
-# 	blink_tween.tween_interval(.075)
-
-# 	await blink_tween.finished
-# 	number.queue_free()
-
-# func display_mana_empty(pos: Vector2) -> void:
-# 	var number: Label = Label.new()
-# 	number.global_position = pos + pos_offset + Vector2(0, -10)
-# 	number.z_index = Constants.z_index_map["popup"]
-# 	number.text = str(NO_MANA_TEXT)
-
-# 	number.label_settings = LabelSettings.new()
-# 	number.label_settings.font_color = COLOR_WHITE
-# 	number.label_settings.font_size = 8
-# 	number.label_settings.font = font
-# 	number.label_settings.outline_color = COLOR_WHITE
-# 	number.label_settings.outline_size = outline_size
-# 	number.label_settings.shadow_offset = shadow_offset
-# 	number.label_settings.shadow_size = shadow_size
-# 	number.label_settings.shadow_color = COLOR_BLACK
-
-# 	call_deferred("add_child", number)
-# 	await number.resized
-
-# 	number.pivot_offset = Vector2(number.size / 2)
-# 	number.position.x -= number.size.x / 2
-
-# 	# Blink
-# 	var blink_tween = get_tree().create_tween()
-# 	blink_tween.set_loops(5)
-# 	blink_tween.tween_property(number, "modulate:a", 0.0, .01)
-# 	blink_tween.tween_interval(.125)
-# 	blink_tween.tween_property(number, "modulate:a", 1.0, .01)
-# 	blink_tween.tween_interval(.125)
-
-# 	var tween = get_tree().create_tween()
-# 	tween.tween_property(number, "position:y", number.position.y - up_distance, .75)
-# 	await tween.finished
-# 	number.queue_free()
-
-func display_tower_heal(pos: Vector2, value: int, max_value: int) -> void:
+func display_tower_heal(_pos: Vector2, value: int, max_value: int) -> void:
 	var number: Label = Label.new()
 	number.global_position = to_local(global_position)
 	number.z_index = Constants.z_index_map["popup"]
