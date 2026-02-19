@@ -6,6 +6,7 @@ extends PanelContainer
 
 var wave_previews: Array[Dictionary] = []
 var unit_wave_info_scene: PackedScene = preload("res://scenes/ui/UnitWaveInfo.tscn")
+var first_activation: bool = true
 
 func _ready():
 	z_index = Constants.z_index_map["top"]
@@ -38,7 +39,9 @@ func populate_unit_wave_info(wave_index: int) -> void:
 			if wave_previews[wave_index].keys().size() == 0:
 				hide()
 			else:
-				AlertManager.submit_new_alert(global_position, Alert.Priority.HIGHEST, 10.0, "New Portals have opened!")
+				if first_activation:
+					AlertManager.submit_new_alert(global_position, Alert.Priority.HIGHEST, 10.0, "New Portals have opened!")
+					first_activation = false
 				show()
 		else:
 			hide()

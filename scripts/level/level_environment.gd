@@ -75,7 +75,6 @@ func _ready():
 func child_custom_ready() -> void:
 	pass
 
-
 func configure_tower_mana_breakables() -> void:
 	for child: Breakable in tower_mana_breakables_parent.get_children():
 		tower_mana_breakables.append(child)
@@ -86,9 +85,10 @@ func on_wave_started_start_breakables() -> void:
 
 func configure_wave_info_panels() -> void:
 	for child in wave_info_panel_parent.get_children():
-		var wave_info: WaveInfoPanel = child as WaveInfoPanel
-		if wave_info:
-			wave_info.get_path_enemy_info(self)
+		var wave_info_panel: WaveInfoPanel = child as WaveInfoPanel
+		if wave_info_panel:
+			wave_info_panel.first_activation = true
+			wave_info_panel.get_path_enemy_info(self)
 
 	populate_wave_info_panels()
 
