@@ -388,39 +388,40 @@ func on_boon_connected(new_boon: Boon) -> void:
 		boon_manager.add_boon(new_boon)
 
 func on_boon_triggered(boon: Boon) -> void:
-	match boon.type:
-		Boon.Type.HEAL:
-			if (health + boon.value) > max_health:
-				health = max_health
-			else:
-				health += boon.value
-			fx_heal.show()
-			fx_heal.play("heal")
-			await fx_heal.animation_finished
-			fx_heal.hide()
-		Boon.Type.SPEED: 
-			speed += (data.speed * boon.value)
-			fx_speed.show()
-			fx_speed.play("speed")
-		Boon.Type.DAMAGE:
-			damage += boon.value
-		Boon.Type.STEALTH:
-			collider.set_deferred("disabled", true)
-			sprite.modulate.a = .65
-			death_position.emit(global_position)
-		Boon.Type.CLEANSE:
-			debuff_manager.remove_all_debuffs()
-			fx_cleanse.show()
-			fx_cleanse.play("cleanse")
-			await fx_cleanse.animation_finished
-			fx_cleanse.hide()
-		Boon.Type.PREVENT:
-			fx_prevent.show()
-			fx_prevent.play("start_prevent")
-			await fx_prevent.animation_finished
-			fx_prevent.play("loop_prevent")
-			debuff_manager.can_debuff = false
-		_: pass
+	if is_alive:
+		match boon.type:
+			Boon.Type.HEAL:
+				if (health + boon.value) > max_health:
+					health = max_health
+				else:
+					health += boon.value
+				fx_heal.show()
+				fx_heal.play("heal")
+				await fx_heal.animation_finished
+				fx_heal.hide()
+			Boon.Type.SPEED: 
+				speed += (data.speed * boon.value)
+				fx_speed.show()
+				fx_speed.play("speed")
+			Boon.Type.DAMAGE:
+				damage += boon.value
+			Boon.Type.STEALTH:
+				collider.set_deferred("disabled", true)
+				sprite.modulate.a = .65
+				death_position.emit(global_position)
+			Boon.Type.CLEANSE:
+				debuff_manager.remove_all_debuffs()
+				fx_cleanse.show()
+				fx_cleanse.play("cleanse")
+				await fx_cleanse.animation_finished
+				fx_cleanse.hide()
+			Boon.Type.PREVENT:
+				fx_prevent.show()
+				fx_prevent.play("start_prevent")
+				await fx_prevent.animation_finished
+				fx_prevent.play("loop_prevent")
+				debuff_manager.can_debuff = false
+			_: pass
 
 func on_boon_expired(boon: Boon) -> void:
 	boon_manager.on_boon_expired(boon)

@@ -293,7 +293,6 @@ func configure_hovered_tower_for_action(_hovered_tower) -> void:
 	pass
 
 func check_can_perform_action(_hovered_tower, _tower_action: TowerAction) -> bool:
-	# if global_position.distance_to(_hovered_tower.global_position) < MAX_PLACEMENT_DISTANCE:
 	match _tower_action:
 		TowerAction.HEAL:
 			if _hovered_tower.can_heal:
