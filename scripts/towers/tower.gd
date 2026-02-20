@@ -604,8 +604,6 @@ func on_hit(_damage_amount: int) -> void:
 		die()
 	
 	if (health/curr_max_health) <= TOWER_HEALTH_ALERT_THRESHOLD:
-		print("FAMILIAR HEALTH LOW CALC (health/curr_max_health): ", (health/curr_max_health))
-		print("Familiar health: ", health)
 		AlertManager.submit_new_alert(global_position, Alert.Priority.HIGH, 5.0, "Familiar health low!")
 	can_heal = true
 	shake()
