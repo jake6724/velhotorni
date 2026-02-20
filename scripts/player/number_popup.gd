@@ -5,6 +5,7 @@ extends Node2D
 var font: FontFile = preload("res://assets/fonts/Early-GameBoy-Jake-Edit.ttf")
 const COLOR_WHITE: String = "#FFFFFF"
 const COLOR_BLACK: String = "#000000"
+const COLOR_RED: String = "#d63100"
 const NO_MANA_TEXT: String = "EMPTY"
 # const pos_offset: Vector2 = Vector2(0, -3)
 
@@ -20,6 +21,9 @@ var jitter_range: float = 16
 
 var active_damage_number: Label
 var active_damage_number_timer: Timer = Timer.new()
+var red_tint_percentage: float = 0.0
+var red_tint_threshold: float = 0.2
+var parent_max_health: float 
 
 func _ready():
 	active_damage_number_timer.one_shot = true
@@ -27,12 +31,18 @@ func _ready():
 	add_child(active_damage_number_timer)
 	active_damage_number_timer.timeout.connect(on_active_damage_number_timer_timeout)
 
-func display_damage_number(value: int, pos: Vector2) -> void:
+func display_damage_number(value: int, pos: Vector2, moving_horizontally: bool=true, display_tint: bool=false) -> void:
 	if value > 1:
 		if active_damage_number:
-			active_damage_number.text = str(int(active_damage_number.text) + value)
+			var new_value: int = int(active_damage_number.text) + value
+			active_damage_number.text = str(new_value)
 			shake_label(active_damage_number)
 			active_damage_number_timer.start(.5)
+			red_tint_percentage += .1
+			if display_tint and red_tint_percentage >= red_tint_threshold:
+				var health_percentage: float = new_value / parent_max_health
+				active_damage_number.label_settings.font_color = active_damage_number.label_settings.font_color.lerp(COLOR_RED, health_percentage)
+				red_tint_threshold += .2
 
 		else:
 			var number: Label = Label.new()
@@ -42,7 +52,7 @@ func display_damage_number(value: int, pos: Vector2) -> void:
 			number.text = str(value)
 
 			number.label_settings = LabelSettings.new()
-			number.label_settings.font_color = COLOR_WHITE
+			number.label_settings.font_color = Color.WHITE
 			number.label_settings.font_size = 8
 			number.label_settings.font = font
 			number.label_settings.outline_color = COLOR_WHITE
@@ -50,16 +60,24 @@ func display_damage_number(value: int, pos: Vector2) -> void:
 			number.label_settings.shadow_offset = shadow_offset
 			number.label_settings.shadow_size = shadow_size
 			number.label_settings.shadow_color = COLOR_BLACK
+			
+			var health_percentage: float = value / parent_max_health
+			number.label_settings.font_color = number.label_settings.font_color.lerp(COLOR_RED, health_percentage)
 
 			call_deferred("add_child", number)
+			z_as_relative = false
 			number.z_index = Constants.z_index_map["popup"]
 			await number.resized
 
 			number.pivot_offset.x = (number.size.x / 2)
-			number.position.x += get_jitter()
+
+			if moving_horizontally:
+				number.position.y += get_jitter()
+			else:
+				number.position.x += get_jitter()
 
 			var tween = get_tree().create_tween()
-			tween.tween_property(number, "position:y", number.position.y - 8, .5).set_ease(Tween.EASE_OUT)
+			tween.tween_property(number, "position:y", number.position.y - 2, 1.2).set_ease(Tween.EASE_OUT)
 			
 			active_damage_number_timer.start(1)
 
@@ -68,6 +86,8 @@ func on_active_damage_number_timer_timeout() -> void:
 		var temp = active_damage_number
 		active_damage_number = null
 		animate_label_die(temp)
+		red_tint_percentage = 0.0
+		red_tint_threshold = 0.1
 
 func get_jitter() -> float:
 	var x = rng.randf_range(10,15)

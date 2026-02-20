@@ -61,7 +61,7 @@ var max_health: float
 var health: float:
 	set(value):
 		health = value
-		healthbar.value = (health / max_health) * 100
+		healthbar.value = (health / curr_max_health) * 100
 		tower_health_updated.emit(self)
 
 var can_heal: bool = false # Starts at full health so can't heal
@@ -604,6 +604,8 @@ func on_hit(_damage_amount: int) -> void:
 		die()
 	
 	if (health/curr_max_health) <= TOWER_HEALTH_ALERT_THRESHOLD:
+		print("FAMILIAR HEALTH LOW CALC (health/curr_max_health): ", (health/curr_max_health))
+		print("Familiar health: ", health)
 		AlertManager.submit_new_alert(global_position, Alert.Priority.HIGH, 5.0, "Familiar health low!")
 	can_heal = true
 	shake()

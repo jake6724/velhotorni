@@ -40,6 +40,7 @@ enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE,
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
 var prev_global_position: Vector2 # Used for flipping sprite
 var min_distance: float = 2
+var moving_horizontally: bool
 
 # Enemy Stats from Enemy Data Resource
 var element: Constants.Element
@@ -133,6 +134,9 @@ func _ready():
 	# Configure z_indexes
 	health_bar.z_index = Constants.z_index_map["enemy_healthbar"]
 
+	# Configure number popup
+	number_popup.parent_max_health = max_health
+
 	boss_initialize()
 
 func _physics_process(delta):
@@ -147,6 +151,8 @@ func move(delta) -> void:
 					ap.play("walk")
 
 				sprite.flip_h = path_follow.rotation_degrees >= 91
+
+				moving_horizontally = is_moving_horizontally(path_follow.rotation_degrees)
 					
 				if path_follow.progress_ratio < .99:
 					path_follow.progress += (speed - ((speed * (slow_percent/100)))) * delta
@@ -157,6 +163,14 @@ func move(delta) -> void:
 				ap.play("idle")
 
 	debuff_manager.enemy_progress = path_follow.progress
+
+func is_moving_horizontally(_path_follow_rotation_degrees: float) -> bool:
+	if _path_follow_rotation_degrees >= -1 and _path_follow_rotation_degrees <= 1:
+		return true
+	elif _path_follow_rotation_degrees >= 361.0 and _path_follow_rotation_degrees <= 361:
+		return true
+	else:
+		return false
 
 func apply_drop_chance_bonus(_drop_chance_bonus: float) -> void:
 	drop_chance = data.tower_mana_drop_chance_base + _drop_chance_bonus
@@ -182,7 +196,7 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element, execu
 
 		# Apply Weaken modifier
 		damage_recieved = damage_recieved + (damage_recieved * (weaken_percent/100))
-		number_popup.display_damage_number(damage_recieved, global_position)
+		number_popup.display_damage_number(damage_recieved, global_position, moving_horizontally, true)
 
 		var damage_applied: float = min(health, damage_recieved)
 
