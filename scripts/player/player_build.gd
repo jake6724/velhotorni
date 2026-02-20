@@ -89,7 +89,7 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 
 	# TowerActionRadialMenu
 	player_build_ui.tower_action_radial_menu.initialize(player)
-	player.player_input.primary_action_just_pressed.connect(on_player_input_primary_action_just_pressed)
+	# player.player_input.primary_action_just_pressed.connect(on_player_input_primary_action_just_pressed)
 	player_build_ui.tower_action_radial_menu.cost_requested.connect(on_tower_action_radial_menu_cost_requested)
 
 	player_hud.heal_all_requested.connect(on_player_hud_heal_all_requested)
