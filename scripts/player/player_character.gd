@@ -134,7 +134,7 @@ func _ready():
 	
 	# Configure PlayerSpecial
 	player_special.camera_shake_requested.connect(player_camera.apply_shake)
-	player_special.hurtbox_update_requested.connect(update_hurtbox_collider)
+	player_special.hurtbox_update_requested.connect(player_hurtbox.update_collider)
 	player_special.special_charge_sprite_update_requested.connect(on_special_charge_sprite_update_requested)
 	special_charges_hide_timer.autostart = false
 	special_charges_hide_timer.one_shot = true
@@ -247,7 +247,6 @@ func _physics_process(delta): # This can go in a state eventually
 				velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
 				# Check if hitstun complete
 				if velocity == Vector2.ZERO:
-		
 					hit = false
 			
 			# Primary Action
@@ -406,7 +405,7 @@ func on_hit(_direction) -> void:
 			return
 			
 		velocity = _direction * player_stats.knockback_multiplier
-		update_hurtbox_collider(true)
+		player_hurtbox.update_collider(true)
 		hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 
 		player_camera.apply_shake(1)
@@ -440,7 +439,7 @@ func respawn() -> void:
 	global_position = spawn_point
 	alive = true
 	player_stats.health = player_stats.max_health
-	update_hurtbox_collider(false)
+	player_hurtbox.update_collider(false)
 	hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 	player_hud.set_player_portrait(player_stats.health, player_stats.max_health)
 	player_respawned.emit()	
@@ -456,7 +455,7 @@ func hit_blink() -> void:
 	blink_tween.tween_interval(blink_time)
 
 func on_hurtbox_reset_timer_timeout() -> void:
-	update_hurtbox_collider(false)
+	player_hurtbox.update_collider(false)
 
 func show_staff_sprite_custom(): 
 	if alive and not building:
@@ -476,10 +475,6 @@ func on_tower_mana_spent(_value) -> void:
 	player_mana.tower_mana -= _value
 	player_hud.update_tower_mana(player_mana)
 	player_build_ui.update(player_mana)
-
-func update_hurtbox_collider(_value) -> void:
-	player_hurtbox.collider.set_deferred("disabled", _value)
-	pit_hurtbox.collider.set_deferred("disabled", _value)
 
 func on_special_charge_sprite_update_requested(_charges: int) -> void:
 	special_bar_dash.texture.region = Rect2(0, (4 - _charges) * 6, 24, 6)

@@ -161,6 +161,7 @@ func spawn_enemy(_spawn: Spawn) -> void:
 		new_enemy.global_position = flying_spawn_points[_spawn.flying_spawn_index]
 		new_enemy.sprite.z_as_relative = false
 		new_enemy.sprite.z_index = Constants.z_index_map["flying_enemy"]
+		new_enemy.initialize()
 	else:
 		active_path_enemies.append(new_enemy)
 		configure_enemy_pathing(new_enemy, _spawn)
