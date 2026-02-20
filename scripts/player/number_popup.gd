@@ -22,7 +22,8 @@ var jitter_range: float = 16
 
 var active_damage_number: Label
 var active_damage_number_timer: Timer = Timer.new()
-var active_damage_number_horizonal: bool
+var active_damage_number_horizontal: bool
+var active_damage_number_offset: float
 var parent_max_health: float 
 
 func _ready():
@@ -41,6 +42,21 @@ func display_damage_number(value: int, pos: Vector2, moving_horizontally: bool=t
 			if display_tint:
 				var health_percentage: float = new_value / parent_max_health
 				active_damage_number.label_settings.font_color = active_damage_number.label_settings.font_color.lerp(COLOR_RED, health_percentage)
+
+			if active_damage_number_horizontal != moving_horizontally:
+				if active_damage_number_horizontal:
+					# Remove the old offset
+					active_damage_number.position.y -= active_damage_number_offset
+					# Apply a new one on the opposite axis
+					active_damage_number_offset = get_jitter()
+					active_damage_number.position.x += active_damage_number_offset
+				else:
+					# Remove the old offset
+					active_damage_number.position.x -= active_damage_number_offset
+					# Apply a new one on the opposite axis
+					active_damage_number_offset = get_jitter()
+					active_damage_number.position.y += active_damage_number_offset
+				active_damage_number_horizontal = moving_horizontally
 
 		else:
 			var number: Label = Label.new()
@@ -67,12 +83,15 @@ func display_damage_number(value: int, pos: Vector2, moving_horizontally: bool=t
 			number.z_index = Constants.z_index_map["popup"]
 			await number.resized
 
-			number.pivot_offset.x = (number.size.x / 2)
+			number.pivot_offset = (number.size / 2)
 
 			if moving_horizontally:
-				number.position.y += get_jitter()
+				active_damage_number_offset = get_jitter()
+				number.position.y += active_damage_number_offset
 			else:
-				number.position.x += get_jitter()
+				active_damage_number_offset = get_jitter()
+				number.position.x += active_damage_number_offset
+			active_damage_number_horizontal = moving_horizontally
 
 			var tween = get_tree().create_tween()
 			tween.tween_property(number, "position:y", number.position.y - 2, 1.2).set_ease(Tween.EASE_OUT)
