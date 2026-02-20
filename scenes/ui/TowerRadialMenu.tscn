@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cejulf1hekcl"]
 
-[ext_resource type="Script" uid="uid://b8tg1arhaceuc" path="res://scripts/ui/tower_action_radial_menu.gd" id="1_ltcld"]
+[ext_resource type="Script" uid="uid://2un6ub7c4d5p" path="res://scripts/ui/tower_action_radial_menu.gd" id="1_ltcld"]
 [ext_resource type="Texture2D" uid="uid://dbsjcjmeyree3" path="res://assets/art/sprites/ui/atl_ui_toweractions.png" id="1_qbi8j"]
 [ext_resource type="Texture2D" uid="uid://cwbuy2wmoursk" path="res://assets/art/atlases/atl_player_reticle.png" id="2_rwrmv"]
 
@@ -28,7 +28,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ltcld")
-metadata/_custom_type_script = "uid://b8tg1arhaceuc"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -85,6 +84,7 @@ offset_left = -8.0
 offset_top = -40.0
 offset_right = 8.0
 offset_bottom = -24.0
+scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(8, 8)
 texture = SubResource("AtlasTexture_hentg")
 stretch_mode = 2

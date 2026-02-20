@@ -1712,12 +1712,14 @@ visible = false
 [node name="PlayerHUD" parent="." instance=ExtResource("25_ydu3x")]
 unique_name_in_owner = true
 
-[node name="TowerDetectArea" type="Area2D" parent="."]
+[node name="Buffer" type="Node" parent="."]
+
+[node name="TowerDetectArea" type="Area2D" parent="Buffer"]
 unique_name_in_owner = true
 visible = false
 collision_layer = 0
 
-[node name="TowerDetectCollider" type="CollisionShape2D" parent="TowerDetectArea"]
+[node name="TowerDetectCollider" type="CollisionShape2D" parent="Buffer/TowerDetectArea"]
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_a033j")
 disabled = true

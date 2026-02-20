@@ -232,23 +232,23 @@ func _physics_process(delta): # This can go in a state eventually
 	if alive:
 		# Update Aim
 		player_aim.update_aim(delta, player_input.get_aim_input())
+		if not hit:
+			if not player_special.active:
+				# Update Movement
+				velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.move_speed) + velocity_bonus_melee_dash + velocity_bonus_kickback
+
+				velocity_bonus_melee_dash = velocity_bonus_melee_dash.move_toward(Vector2.ZERO, delta * MELEE_DASH_DURATION_MULTIPLIER)
+				velocity_bonus_kickback = velocity_bonus_kickback.move_toward(Vector2.ZERO, delta * KICKBACK_DURATION_MULTIPLIER)
+				
+				player_animation.update_animation(delta)
+
+		else: # Hit stun recovery
+			velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
+			# Check if hitstun complete
+			if velocity == Vector2.ZERO:
+				hit = false
+
 		if player_enabled:
-			if not hit:
-				if not player_special.active:
-					# Update Movement
-					velocity = player_movement.get_velocity(player_input.get_move_input(), player_stats.move_speed) + velocity_bonus_melee_dash + velocity_bonus_kickback
-
-					velocity_bonus_melee_dash = velocity_bonus_melee_dash.move_toward(Vector2.ZERO, delta * MELEE_DASH_DURATION_MULTIPLIER)
-					velocity_bonus_kickback = velocity_bonus_kickback.move_toward(Vector2.ZERO, delta * KICKBACK_DURATION_MULTIPLIER)
-					
-					player_animation.update_animation(delta)
-
-			else: # Hit stun recovery
-				velocity = player_movement.get_hitstun_velocity(delta, velocity, player_stats.hitstun_recovery_multiplier)
-				# Check if hitstun complete
-				if velocity == Vector2.ZERO:
-					hit = false
-			
 			# Primary Action
 			if player_input.primary_action_pressed:
 				on_primary_action_pressed()
@@ -257,12 +257,12 @@ func _physics_process(delta): # This can go in a state eventually
 				player_build.update_preview_tower_position(global_position, player_aim.aim_input)
 				player_build.update_tower_detect_area_position()
 
-			if velocity == Vector2.ZERO:
-				player_stopped.emit()
-			else:
-				player_moving.emit()
+		if velocity == Vector2.ZERO:
+			player_stopped.emit()
+		else:
+			player_moving.emit()
 
-			move_and_slide()
+		move_and_slide()
 
 ## Disable or enable parts of PlayerCharacter so that UI can take control
 func set_character_for_ui(_value: bool) -> void:

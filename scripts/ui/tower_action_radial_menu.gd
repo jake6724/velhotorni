@@ -32,6 +32,7 @@ func _ready():
 	sell_icon.hide()
 	info_icon.hide()
 	z_index = Constants.z_index_map["popup"]
+	cursor.scale = Vector2(1.5,1.5)
 
 func initialize(player: PlayerCharacter) -> void:
 	player.player_input.radial_wheel_data_updated.connect(on_player_input_radial_wheel_data_updated)
@@ -69,10 +70,9 @@ func on_player_input_radial_wheel_data_updated(angle_to_mouse: float, distance_s
 		if selected_icon and active_icon != selected_icon:
 			if active:
 				active_icon = selected_icon
-				cursor.show()
-				cursor.scale = Vector2(1.5,1.5)
-				cursor.global_position = active_icon.global_position + Vector2(-4,-4)
 				animate_icon(active_icon)
+				cursor.show()
+				cursor.global_position = active_icon.global_position - Vector2(4,4)
 				set_action_label(active_icon)
 				cost_requested.emit(select_action())
 	else:
@@ -95,7 +95,6 @@ func select_action() -> PlayerBuild.TowerAction:
 	return PlayerBuild.TowerAction.NONE
 
 func animate_open() -> void:    
-	active = true
 	show()
 	background.show()
 	heal_icon.show()
@@ -111,9 +110,7 @@ func animate_open() -> void:
 	tween.tween_property(sell_icon, "position:x", (sell_icon.position.x - OPEN_OFFSET), OPEN_CLOSE_SPEED)
 	tween.tween_property(info_icon, "position:y", (info_icon.position.y + OPEN_OFFSET), OPEN_CLOSE_SPEED)
 	await tween.finished
-	active_icon = heal_icon
-	cursor.scale = Vector2(1.5,1.5)
-	cursor.global_position = active_icon.global_position + Vector2(-4,-4)
+	active = true
 
 func animate_close() -> void:    
 	active = false
@@ -149,10 +146,10 @@ func animate_icon(icon: TextureRect) -> void:
 		shake_tween.tween_interval(shake_duration)
 
 		var move_tween: Tween = get_tree().create_tween()
-		var reset: float = icon.position.y
-		move_tween.tween_property(icon, "position:y", reset - 1, .03)
+		# var reset: float = icon.position.y
+		move_tween.tween_property(icon, "position:y", icon_reset_positions[icon].y - 1, .03)
 		move_tween.tween_interval(shake_duration)
-		move_tween.tween_property(icon, "position:y", reset, .03)
+		move_tween.tween_property(icon, "position:y", icon_reset_positions[icon].y, .03)
 
 		var scale_tween: Tween = get_tree().create_tween()
 		scale_tween.tween_property(icon, "scale", scale_target, .03)

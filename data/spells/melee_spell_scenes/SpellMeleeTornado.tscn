@@ -111,7 +111,7 @@ autoplay = "attack"
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 1048576
-collision_mask = 270352
+collision_mask = 8208
 
 [node name="HitboxCollider" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CapsuleShape2D_2yoa5")

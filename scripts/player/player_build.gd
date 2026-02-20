@@ -43,8 +43,12 @@ signal player_hud_hint_requested
 signal set_player_enabled_requested
 
 func _process(_delta):
+	# queue_redraw()
 	if tower_action_radial_menu_active:
 		limit_mouse_radius(TOWER_RADIAL_MENU_MOUSE_RADIUS)
+
+# func _draw():
+# 	draw_circle(to_local(tower_detect_area.get_child(0).global_position), 3, Color.RED, true)
 
 func limit_mouse_radius(radius: float) -> void:
 	var mouse_position: Vector2 = get_global_mouse_position()	
@@ -110,6 +114,9 @@ func on_ui_interact_pressed() -> void:
 
 func on_ui_interact_released() -> void: # TODO: Call this when unhovering a tower also
 	if tower_action_radial_menu_active:
+
+		on_player_input_primary_action_just_pressed()
+
 		set_player_enabled_requested.emit(true)
 		tower_action_radial_menu_active = false
 
@@ -132,16 +139,13 @@ func on_player_input_primary_action_just_pressed() -> void:
 				get_tower_action_callable(selected_tower_action).call(hovered_tower)
 
 				# Post call cleanup and updates
-				match selected_tower_action:
-					TowerAction.SELL: on_ui_interact_released()
-					_: pass
-				player_build_ui.tower_action_radial_menu.animate_icon_by_tower_action(selected_tower_action)
+				# player_build_ui.tower_action_radial_menu.animate_icon_by_tower_action(selected_tower_action)
 				on_tower_action_radial_menu_cost_requested(selected_tower_action)
 			else:
-				player_build_ui.tower_action_radial_menu.animate_icon_negative_by_tower_action(selected_tower_action)
+				# player_build_ui.tower_action_radial_menu.animate_icon_negative_by_tower_action(selected_tower_action)
 				player_hud_hint_requested.emit(get_tower_action_negative_text(selected_tower_action), 1.0, true)
 		else:
-			player_build_ui.tower_action_radial_menu.animate_icon_negative_by_tower_action(selected_tower_action)
+			# player_build_ui.tower_action_radial_menu.animate_icon_negative_by_tower_action(selected_tower_action)
 			player_hud_hint_requested.emit(get_tower_action_negative_text(selected_tower_action), 1.0, true)
 
 ## Requested by TowerActionRadialMenu whenever a new action is hovered
@@ -174,8 +178,6 @@ func create_preview_tower():
 			preview_tower.can_show_range = true	
 			preview_tower.tower_action_cost_label.text = str(TowerGlobalData.tower_prices[preview_tower.data.element])
 			preview_tower.died.connect(on_tower_died)
-			preview_tower.sell_price_updated.connect(on_tower_stat_updated)
-			preview_tower.tower_health_updated.connect(on_tower_stat_updated)
 
 			if not hovered_tower:
 				player_build_ui.update_tower_info_panel(preview_tower)
@@ -289,9 +291,6 @@ func get_tower_action_negative_text(_tower_action: TowerAction) -> String:
 			_text = ""
 	return _text
 
-func configure_hovered_tower_for_action(_hovered_tower) -> void:
-	pass
-
 func check_can_perform_action(_hovered_tower, _tower_action: TowerAction) -> bool:
 	match _tower_action:
 		TowerAction.HEAL:
@@ -379,16 +378,17 @@ func on_tower_detect_area_entered(intruder: Area2D) -> void:
 	hovered_tower.upgrade_button_hint.show()
 
 func on_tower_detect_area_exited(_intruder: Area2D) -> void:
-	if preview_tower:
-		preview_tower.show()
-		
-	if hovered_tower:
-		hovered_tower.upgrade_button_hint.hide()
-		hovered_tower.can_show_range = false
-		hovered_tower = null
+	if not tower_action_radial_menu_active:
+		if preview_tower:
+			preview_tower.show()
+			
+		if hovered_tower:
+			hovered_tower.upgrade_button_hint.hide()
+			hovered_tower.can_show_range = false
+			hovered_tower = null
 
-	if preview_tower:
-		player_build_ui.update_tower_info_panel(preview_tower)
+		if preview_tower:
+			player_build_ui.update_tower_info_panel(preview_tower)
 
 func on_tower_died(tower: Tower) -> void:
 	if preview_tower == tower:
@@ -484,10 +484,6 @@ func lock_in_tower_sell_prices() -> void:
 		if tower and not tower.sell_price_locked_in:
 			tower.sell_price_locked_in = true
 			tower.sell_price = tower.sell_price / 2
-
-func on_tower_stat_updated(tower: Tower) -> void:
-	if hovered_tower and hovered_tower == tower:
-		configure_hovered_tower_for_action(hovered_tower)
 
 func on_player_hud_heal_all_requested() -> void:
 	for tower: Tower in tower_parent.get_children():

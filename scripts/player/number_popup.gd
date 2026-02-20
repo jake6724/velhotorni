@@ -32,7 +32,7 @@ func _ready():
 	add_child(active_damage_number_timer)
 	active_damage_number_timer.timeout.connect(on_active_damage_number_timer_timeout)
 
-func display_damage_number(value: int, pos: Vector2, moving_horizontally: bool=true, display_tint: bool=false) -> void:
+func display_damage_number(value: int, _pos: Vector2, moving_horizontally: bool=true, display_tint: bool=false) -> void:
 	if value > 1:
 		if active_damage_number:
 			var new_value: int = int(active_damage_number.text) + value
