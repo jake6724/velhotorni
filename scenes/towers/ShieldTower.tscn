@@ -476,9 +476,10 @@ value = 100.0
 texture_under = ExtResource("20_7at7f")
 texture_progress = ExtResource("21_b4j6r")
 
-[node name="NumberPopup" type="Node" parent="."]
+[node name="NumberPopup" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("22_ytucv")
+metadata/_custom_type_script = "uid://c75pt0b6io16g"
 
 [node name="TowerObstacleBody" type="StaticBody2D" parent="."]
 position = Vector2(8, 8)

@@ -5,7 +5,8 @@ extends Node2D
 var font: FontFile = preload("res://assets/fonts/Early-GameBoy-Jake-Edit.ttf")
 const COLOR_WHITE: String = "#FFFFFF"
 const COLOR_BLACK: String = "#000000"
-const COLOR_RED: String = "#d63100"
+# const COLOR_RED: String = "#d63100"
+const COLOR_RED: String = "#ed4918"
 const NO_MANA_TEXT: String = "EMPTY"
 # const pos_offset: Vector2 = Vector2(0, -3)
 
@@ -21,8 +22,7 @@ var jitter_range: float = 16
 
 var active_damage_number: Label
 var active_damage_number_timer: Timer = Timer.new()
-var red_tint_percentage: float = 0.0
-var red_tint_threshold: float = 0.2
+var active_damage_number_horizonal: bool
 var parent_max_health: float 
 
 func _ready():
@@ -38,11 +38,9 @@ func display_damage_number(value: int, pos: Vector2, moving_horizontally: bool=t
 			active_damage_number.text = str(new_value)
 			shake_label(active_damage_number)
 			active_damage_number_timer.start(.5)
-			red_tint_percentage += .1
-			if display_tint and red_tint_percentage >= red_tint_threshold:
+			if display_tint:
 				var health_percentage: float = new_value / parent_max_health
 				active_damage_number.label_settings.font_color = active_damage_number.label_settings.font_color.lerp(COLOR_RED, health_percentage)
-				red_tint_threshold += .2
 
 		else:
 			var number: Label = Label.new()
@@ -61,7 +59,7 @@ func display_damage_number(value: int, pos: Vector2, moving_horizontally: bool=t
 			number.label_settings.shadow_size = shadow_size
 			number.label_settings.shadow_color = COLOR_BLACK
 			
-			var health_percentage: float = value / parent_max_health
+			var health_percentage: float = min(1, value / parent_max_health)
 			number.label_settings.font_color = number.label_settings.font_color.lerp(COLOR_RED, health_percentage)
 
 			call_deferred("add_child", number)
@@ -86,8 +84,6 @@ func on_active_damage_number_timer_timeout() -> void:
 		var temp = active_damage_number
 		active_damage_number = null
 		animate_label_die(temp)
-		red_tint_percentage = 0.0
-		red_tint_threshold = 0.1
 
 func get_jitter() -> float:
 	var x = rng.randf_range(10,15)

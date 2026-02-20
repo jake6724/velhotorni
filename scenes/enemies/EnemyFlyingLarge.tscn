@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://c8cb5f8yo3wc3"]
+[gd_scene load_steps=126 format=3 uid="uid://c8cb5f8yo3wc3"]
 
 [ext_resource type="Script" uid="uid://bsna5j67twb5p" path="res://scripts/enemies/flying_enemy.gd" id="1_1kn2l"]
 [ext_resource type="Texture2D" uid="uid://bqv3p8q25aqyc" path="res://assets/art/atlases/enemy/atl_enemy_earth_mothman.png" id="2_1kn2l"]
@@ -900,24 +900,24 @@ resource_local_to_scene = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_f415h"]
 radius = 32.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1kn2l"]
+
 [node name="FlyingLargeEnemy" type="Area2D"]
 z_index = 1000
 z_as_relative = false
-collision_layer = 262144
+collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_1kn2l")
 metadata/_custom_type_script = "uid://bsna5j67twb5p"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
-position = Vector2(17, 16)
 shape = SubResource("CircleShape2D_o02r4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 z_as_relative = false
 texture = ExtResource("2_1kn2l")
-centered = false
 hframes = 4
 vframes = 4
 
@@ -1044,7 +1044,6 @@ script = ExtResource("10_pacpb")
 metadata/_custom_type_script = "uid://bk0wvciq3qs4s"
 
 [node name="BoonCollider" type="CollisionShape2D" parent="BoonArea"]
-position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_6nowk")
 debug_color = Color(1.61238e-06, 0.650282, 0.102136, 0.42)
 
@@ -1058,7 +1057,6 @@ collision_layer = 64
 collision_mask = 0
 
 [node name="BoonReceiveCollider" type="CollisionShape2D" parent="BoonReceiveArea"]
-position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_u8aok")
 debug_color = Color(0.561146, 0.559576, 0, 0.42)
 
@@ -1069,7 +1067,6 @@ script = ExtResource("12_bdtcv")
 metadata/_custom_type_script = "uid://b73facmk5sjrx"
 
 [node name="HexCollider" type="CollisionShape2D" parent="HexArea"]
-position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_f415h")
 debug_color = Color(0.373689, 0.476689, 1, 0.42)
 
@@ -1084,3 +1081,12 @@ metadata/_custom_type_script = "uid://di3c54ykd28fx"
 unique_name_in_owner = true
 script = ExtResource("15_5f3do")
 metadata/_custom_type_script = "uid://c75pt0b6io16g"
+
+[node name="PushArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 262144
+collision_mask = 262144
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
+shape = SubResource("CircleShape2D_1kn2l")
+debug_color = Color(0.6684668, 0.16282108, 0.9997687, 0.41960785)

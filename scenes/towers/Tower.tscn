@@ -449,7 +449,6 @@ texture = SubResource("AtlasTexture_o0oo6")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
 position = Vector2(8, 8)
 collision_layer = 8
 collision_mask = 524288
@@ -458,6 +457,7 @@ metadata/_custom_type_script = "uid://dryk4xnlrt6ig"
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="Hurtbox"]
 unique_name_in_owner = true
+visible = false
 shape = SubResource("CircleShape2D_wl0l1")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]

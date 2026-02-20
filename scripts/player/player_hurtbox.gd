@@ -46,6 +46,9 @@ func on_body_entered(_intruder) -> void:
 ## Used for walking into enemies
 func on_area_entered(_intruder) -> void:
 	take_damage(_intruder.damage, _intruder.global_position)
+	if _intruder is FlyingEnemy:
+		_intruder.reset_attack = true
+		_intruder.reset_attack_timer.start(.5)
 
 func reflect_bullet(bullet: EnemyBullet) -> void:
 	# Invert bullet direction

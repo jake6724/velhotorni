@@ -137,7 +137,11 @@ func _ready():
 	# Configure number popup
 	number_popup.parent_max_health = max_health
 
+	flying_enemy_ready()
 	boss_initialize()
+
+func flying_enemy_ready() -> void:
+	pass
 
 func _physics_process(delta):
 	if is_alive:
@@ -232,8 +236,6 @@ func die() -> void:
 	shield.hide()
 	weak.hide()
 
-
-
 	z_index = Constants.z_index_map["enemy_corpse"]
 	boon_area.can_show_boon_range = false
 
@@ -257,10 +259,11 @@ func on_animation_finished(anim_name):
 		is_taking_damage = false
 
 	if anim_name == "die":
-		sprite.z_index = -sprite.z_index
+		sprite.z_index = Constants.z_index_map["enemy_corpse"]
 		ap.play("corpse")
 
 	if anim_name == "corpse":
+		
 		set_physics_process(false)
 		if remove_corpse():
 			queue_free()
