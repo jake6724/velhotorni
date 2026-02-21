@@ -16,10 +16,10 @@ var reset_attack: bool = false
 
 const PUSH_VECTOR_INFLUENCE: float = .5
 const RESET_DISTANCE_THRESHOLD: float = 100.0
+const SPEED_MULTIPLIER: float = .3
 
 var angle: float = 0.0
 var rotation_speed: float = 2.0
-var radius: float = 10
 var speed_reset_value: float
 
 func flying_enemy_ready() -> void:
@@ -56,10 +56,11 @@ func move(delta) -> void:
 
 				if reset_attack:
 					direction = -direction
-					# var offset = player.global_position + Vector2(cos(angle), sin(angle)) * radius
-					# print(offset)
-					# global_position = offset
-
+					# var rotate_position = player.global_position + Vector2(cos(angle), sin(angle)) * global_position.distance_to(player.global_position)
+					# direction = global_position.direction_to(rotate_position)
+					# angle += 2
+					# global_position += direction * speed * delta
+	
 				global_position += direction.round().normalized() * speed * delta
 				global_position += get_push_vector() * PUSH_VECTOR_INFLUENCE
 
@@ -76,8 +77,8 @@ func on_player_hurtbox_disabled() -> void:
 	var distance_to_player: float = global_position.distance_to(player.global_position)
 	var time_to_reach_player = distance_to_player / speed
 	if time_to_reach_player <= player.player_stats.hurtbox_iframe_duration:
-		reset_attack = true
-		speed *= .1
+		# reset_attack = true
+		speed *= SPEED_MULTIPLIER
 
 func on_reset_attack_timer_timeout() -> void:
 	reset_attack = false

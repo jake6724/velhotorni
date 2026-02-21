@@ -93,6 +93,7 @@ const PRIMARY_ACTION_TIMER_DELAY: float = 2
 
 const KICKBACK_DURATION_MULTIPLIER: float = 5000.0
 const MELEE_DASH_DURATION_MULTIPLIER: float = 5000.0
+const PITFALL_TWEEN_DURATION: float = .05
 
 const PLAYER_HEART_SCENE = preload("res://scenes/ui/player/PlayerHeart.tscn")
 
@@ -158,6 +159,10 @@ func _ready():
 
 	# Configure PitHurtbox
 	pit_hurtbox.pit_entered.connect(on_pit_entered)
+	pit_hurtbox.pre_coyote_time = player_stats.pre_dash_coyote_time
+	player_special.pit_hurtbox_update_requested.connect(pit_hurtbox.update_collider)
+	player_special.pit_hurtbox_update_activate_requested.connect(pit_hurtbox.update_activate)
+	
 	
 	# Configure PlayerMana
 	player_mana.populate_spell_mana(player_spells.selected_spells)
@@ -419,10 +424,16 @@ func on_hit(_direction) -> void:
 
 
 func on_pit_entered() -> void:
-	## TODO: Find a way to snap to a position instead. Maybe use the pit hitbox position? 
-	global_position += player_input.move_input.normalized() * 10 # Move the character to be fully over the pit
+
+	# global_position += player_input.move_input.normalized() * 10 # Move the character to be fully over the pit
+
+	var fall_tween: Tween = get_tree().create_tween()
+	fall_tween.tween_property(self, "global_position", pit_hurtbox.pit_fall_global_position, PITFALL_TWEEN_DURATION)
+	await fall_tween.finished
+	# global_position = pit_hurtbox.pit_fall_global_position
 	reticle_sprite.hide()
 	staff_sprite.hide()
+	special_bar_dash.hide()
 	falling = true
 	alive = false
 
@@ -435,6 +446,7 @@ func die() -> void:
 func respawn() -> void:
 	character_sprite.show()
 	reticle_sprite.show()
+	special_bar_dash.show()
 	if not building: staff_sprite.show()
 	global_position = spawn_point
 	alive = true
@@ -442,6 +454,7 @@ func respawn() -> void:
 	player_hurtbox.update_collider(false)
 	hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 	player_hud.set_player_portrait(player_stats.health, player_stats.max_health)
+	pit_hurtbox.update_collider(false)
 	player_respawned.emit()	
 	hit_blink()
 

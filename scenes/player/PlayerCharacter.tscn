@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=137 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Resource" uid="uid://dkeqm5qym5h01" path="res://data/player/player_data_mage.tres" id="2_5mqjb"]
@@ -1352,7 +1352,7 @@ atlas = ExtResource("38_t4l3f")
 region = Rect2(8, 0, 8, 8)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dm1k7"]
-radius = 4.0
+radius = 2.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gdn8q"]
 load_path = "res://.godot/imported/atl_ui_health_small.png-53e0309b308a87cd6c0528d444a0aa97.ctex"
@@ -1468,6 +1468,19 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahw3v"]
 size = Vector2(12, 2)
+
+[sub_resource type="Gradient" id="Gradient_xhrp4"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5640327, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.2520276, 0.25202766, 0.25202763, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rol34"]
+gradient = SubResource("Gradient_xhrp4")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.7863248, 0.26068377)
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 collision_layer = 16384
@@ -1656,7 +1669,7 @@ visible = false
 [node name="PlayerHurtbox" type="Area2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 131072
-collision_mask = 32784
+collision_mask = 16
 script = ExtResource("12_gsbha")
 
 [node name="PlayerHurtboxCollider" type="CollisionShape2D" parent="PlayerHurtbox"]
@@ -1756,9 +1769,9 @@ script = ExtResource("39_cshdu")
 
 [node name="PitHurtbox" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
 collision_layer = 0
 collision_mask = 32768
+monitorable = false
 script = ExtResource("45_rwb4p")
 
 [node name="PitHurtboxCollider" type="CollisionShape2D" parent="PitHurtbox"]
@@ -1837,3 +1850,11 @@ metadata/_custom_type_script = "uid://db3aor41du651"
 unique_name_in_owner = true
 script = ExtResource("23_hnid3")
 metadata/_custom_type_script = "uid://bbqhea2s5008x"
+
+[node name="PlayerLight" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(-1, -2)
+color = Color(0.78534645, 0.41929215, 0.054744758, 1)
+range_z_min = -4096
+range_z_max = 4096
+texture = SubResource("GradientTexture2D_rol34")

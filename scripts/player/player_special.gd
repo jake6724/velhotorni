@@ -32,7 +32,9 @@ const CLONE_RESET_DURATION: float = 12.0
 
 signal camera_shake_requested
 signal hurtbox_update_requested
+signal pit_hurtbox_update_requested
 signal special_charge_sprite_update_requested
+signal pit_hurtbox_update_activate_requested
 ## Only used for perks, not oberved by PlayerCharacter
 signal player_special_activated
 
@@ -62,7 +64,9 @@ func special(_move_input: Vector2, _aim_input: Vector2) -> void:
 func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	active = true
 	camera_shake_requested.emit(1)
+	pit_hurtbox_update_activate_requested.emit(false)
 	hurtbox_update_requested.emit(true)
+	pit_hurtbox_update_requested.emit(true)
 	player.set_collision_mask_value(28, false)
 	var direction: Vector2
 	if _move_input:
@@ -78,8 +82,13 @@ func dash(_move_input: Vector2, _aim_input: Vector2) -> void:
 	player_special_activated.emit()
 	await get_tree().create_timer(dash_duration).timeout
 	active = false
-	hurtbox_update_requested.emit(false)
 	player.set_collision_mask_value(28, true)
+	hurtbox_update_requested.emit(false)
+	pit_hurtbox_update_activate_requested.emit(true)
+	
+	# Allow post coyote time
+	await get_tree().create_timer(player.player_stats.post_dash_coyote_time).timeout
+	pit_hurtbox_update_requested.emit(false)
 
 func create_after_image(after_image_lifetime, after_image_position_jitter_range) -> void:
 	var new_after_image: PlayerAfterImage = after_image_scene.instantiate()

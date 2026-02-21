@@ -29,6 +29,9 @@ extends Resource
 
 @export var dash_duration: float
 
+@export var pre_dash_coyote_time: float
+@export var post_dash_coyote_time: float
+
 @export var perk_data_pool: PerkDataPool
 
 @export var aoe_damage: float = 0.0

@@ -18,7 +18,7 @@ const OPEN_CLOSE_SPEED: float = .1
 const OPEN_OFFSET: float = 48.0
 const CLOSE_RESET_POSITION: Vector2 = Vector2(-8,-8)
 const DEADZONE_DISTANCE: float = 450.0
-const BACKGROUND_MOD_A: float = 1
+const CURSOR_POSITION_OFFSET: Vector2 = Vector2(-4,-4)
 
 var active: bool = false
 
@@ -33,6 +33,7 @@ func _ready():
 	info_icon.hide()
 	z_index = Constants.z_index_map["popup"]
 	cursor.scale = Vector2(1.5,1.5)
+	cursor.pivot_offset = Vector2(4,4)
 
 func initialize(player: PlayerCharacter) -> void:
 	player.player_input.radial_wheel_data_updated.connect(on_player_input_radial_wheel_data_updated)
@@ -72,7 +73,7 @@ func on_player_input_radial_wheel_data_updated(angle_to_mouse: float, distance_s
 				active_icon = selected_icon
 				animate_icon(active_icon)
 				cursor.show()
-				cursor.global_position = active_icon.global_position - Vector2(4,4)
+				cursor.global_position = active_icon.global_position + CURSOR_POSITION_OFFSET
 				set_action_label(active_icon)
 				cost_requested.emit(select_action())
 	else:

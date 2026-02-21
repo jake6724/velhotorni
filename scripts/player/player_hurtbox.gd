@@ -78,3 +78,4 @@ func update_collider(_value) -> void:
 		hurtbox_enabled.emit()
 
 	collider.set_deferred("disabled", _value)
+	

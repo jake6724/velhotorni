@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://drn4sppwachxq"]
+[gd_scene load_steps=48 format=4 uid="uid://drn4sppwachxq"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_eds8m"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_l0qwy"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cweaihdd066kf" path="res://assets/art/sprites/environment/spr_environment_wave.png" id="19_h8vnd"]
 [ext_resource type="Texture2D" uid="uid://bnsvgm0m0hbns" path="res://assets/art/sprites/environment/spr_mask_cloud.png" id="23_btpk1"]
 [ext_resource type="PackedScene" uid="uid://bwihg1ohfaadc" path="res://scenes/level/TallGrass.tscn" id="29_oxg84"]
+[ext_resource type="Script" uid="uid://bqhap4drhvx27" path="res://scripts/level/pit_area.gd" id="30_f1ecl"]
 [ext_resource type="PackedScene" uid="uid://5kegew63jmcv" path="res://scenes/level/GroundInfoTrigger.tscn" id="30_wsimo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mssc7"]
@@ -1826,7 +1827,6 @@ texture = ExtResource("9_d0lic")
 2:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0 = 0
 3:0/0/modulate = Color(1, 1, 1, 0.196078)
-3:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 
 [sub_resource type="TileSet" id="TileSet_m4axy"]
 physics_layer_0/collision_layer = 8192
@@ -1875,6 +1875,11 @@ region = 2
 initial_gold = 17500
 initial_token = 1
 waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_oxg84"), ExtResource("3_uelw8"), ExtResource("4_h8vnd"), ExtResource("6_f1ecl"), ExtResource("7_o7b5e"), ExtResource("8_33jh3"), ExtResource("15_pn61p"), ExtResource("3_pn61p"), ExtResource("3_btpk1"), ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd")])
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+position = Vector2(-296, -232)
+color = Color(0.09029739, 0.091909535, 0.24466753, 1)
 
 [node name="ParallaxBackground2" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.6, 0.6)
@@ -2139,3 +2144,216 @@ position = Vector2(640, 224)
 
 [node name="TallGrass10" parent="TallGrassParent" instance=ExtResource("29_oxg84")]
 position = Vector2(624, 224)
+
+[node name="Pit" type="Area2D" parent="."]
+visible = false
+collision_layer = 32768
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pit"]
+polygon = PackedVector2Array(401, 103, 401, 131, 416, 131, 416, 147, 432, 147, 432, 131, 447, 131, 447, 115, 511, 115, 511, 99, 558, 99, 559, 99, 559, 87, 417, 87, 417, 103)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Pit"]
+polygon = PackedVector2Array(497, 183, 511, 183, 511, 192, 512, 199, 527, 199, 527, 272, 495, 272, 495, 327, 511, 327, 511, 353, 482, 353, 481, 259, 465, 259, 465, 247, 497, 247)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Pit"]
+polygon = PackedVector2Array(321, 322, 335, 322, 335, 259, 351, 259, 351, 247, 335, 247, 335, 151, 321, 151, 321, 183, 305, 183, 305, 247, 289, 247, 289, 272, 321, 272)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Pit"]
+polygon = PackedVector2Array(401, 359, 415, 359, 415, 439, 431, 439, 431, 451, 386, 451, 385, 375, 401, 375)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Pit"]
+polygon = PackedVector2Array(529, 387, 543, 387, 543, 371, 575, 371, 575, 359, 529, 359)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="Pit"]
+polygon = PackedVector2Array(625, 359, 655, 359, 655, 371, 625, 371)
+
+[node name="PitParent" type="Node" parent="."]
+
+[node name="Pit" type="Area2D" parent="PitParent"]
+position = Vector2(466, 102)
+collision_layer = 32768
+collision_mask = 0
+script = ExtResource("30_f1ecl")
+
+[node name="FallNodeParent" type="Node" parent="PitParent/Pit"]
+
+[node name="Node2D" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
+position = Vector2(413, 117)
+
+[node name="Node2D8" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
+position = Vector2(424, 131)
+
+[node name="Node2D2" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
+position = Vector2(446, 103)
+
+[node name="Node2D3" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
+position = Vector2(487, 101)
+
+[node name="Node2D4" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
+position = Vector2(536, 93)
+
+[node name="Node2D5" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
+position = Vector2(536, 93)
+
+[node name="Node2D6" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
+position = Vector2(495, 102)
+
+[node name="Node2D10" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
+position = Vector2(428, 98)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit"]
+position = Vector2(-17, -1)
+polygon = PackedVector2Array(-17, 46, -33, 46, -33, 30, -48, 30, -48, 2, -32, 2, -32, -14, 110, -14, 110, -2, 62, -2, 62, 14, -2, 14, -2, 30, -17, 30)
+
+[node name="Pit2" type="Area2D" parent="PitParent"]
+position = Vector2(466, 102)
+collision_layer = 32768
+collision_mask = 0
+script = ExtResource("30_f1ecl")
+
+[node name="FallNodeParent" type="Node" parent="PitParent/Pit2"]
+
+[node name="Node2D" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
+position = Vector2(505, 192)
+
+[node name="Node2D2" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
+position = Vector2(512, 210)
+
+[node name="Node2D3" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
+position = Vector2(512, 228)
+
+[node name="Node2D4" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
+position = Vector2(512, 254)
+
+[node name="Node2D5" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
+position = Vector2(490, 256)
+
+[node name="Node2D6" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
+position = Vector2(472, 253)
+
+[node name="Node2D7" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
+position = Vector2(488, 275)
+
+[node name="Node2D8" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
+position = Vector2(488, 297)
+
+[node name="Node2D9" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
+position = Vector2(488, 322)
+
+[node name="Node2D10" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
+position = Vector2(495, 341)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit2"]
+position = Vector2(-17, -1)
+polygon = PackedVector2Array(48, 82, 62, 82, 62, 98, 78, 98, 78, 170, 46, 170, 46, 224, 46, 226, 62, 226, 62, 252, 32, 252, 32, 158, 16, 158, 16, 146, 48, 146, 48, 146)
+
+[node name="Pit3" type="Area2D" parent="PitParent"]
+position = Vector2(466, 102)
+collision_layer = 32768
+collision_mask = 0
+script = ExtResource("30_f1ecl")
+
+[node name="FallNodeParent" type="Node" parent="PitParent/Pit3"]
+
+[node name="Node2D" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
+position = Vector2(328, 169)
+
+[node name="Node2D2" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
+position = Vector2(320, 196)
+
+[node name="Node2D3" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
+position = Vector2(321, 223)
+
+[node name="Node2D4" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
+position = Vector2(320, 248)
+
+[node name="Node2D5" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
+position = Vector2(343, 253)
+
+[node name="Node2D6" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
+position = Vector2(298, 260)
+
+[node name="Node2D7" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
+position = Vector2(328, 268)
+
+[node name="Node2D8" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
+position = Vector2(328, 296)
+
+[node name="Node2D9" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
+position = Vector2(328, 315)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit3"]
+position = Vector2(-17, -1)
+polygon = PackedVector2Array(-128, 50, -114, 50, -114, 146, -98, 146, -98, 158, -115, 158, -114, 222, -128, 222, -128, 171, -159, 170, -160, 146, -144, 146, -144, 82, -128, 82)
+
+[node name="Pit4" type="Area2D" parent="PitParent"]
+position = Vector2(466, 102)
+collision_layer = 32768
+collision_mask = 0
+script = ExtResource("30_f1ecl")
+
+[node name="FallNodeParent" type="Node" parent="PitParent/Pit4"]
+
+[node name="Node2D" type="Node2D" parent="PitParent/Pit4/FallNodeParent"]
+position = Vector2(408, 367)
+
+[node name="Node2D2" type="Node2D" parent="PitParent/Pit4/FallNodeParent"]
+position = Vector2(401, 387)
+
+[node name="Node2D3" type="Node2D" parent="PitParent/Pit4/FallNodeParent"]
+position = Vector2(401, 417)
+
+[node name="Node2D4" type="Node2D" parent="PitParent/Pit4/FallNodeParent"]
+position = Vector2(399, 441)
+
+[node name="Node2D5" type="Node2D" parent="PitParent/Pit4/FallNodeParent"]
+position = Vector2(423, 446)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit4"]
+position = Vector2(-17, -1)
+polygon = PackedVector2Array(-64, 274, -48, 274, -48, 258, -34, 258, -35, 338, -18, 338, -18, 350, -64, 350)
+
+[node name="Pit5" type="Area2D" parent="PitParent"]
+position = Vector2(466, 102)
+collision_layer = 32768
+collision_mask = 0
+script = ExtResource("30_f1ecl")
+
+[node name="FallNodeParent" type="Node" parent="PitParent/Pit5"]
+
+[node name="Node2D" type="Node2D" parent="PitParent/Pit5/FallNodeParent"]
+position = Vector2(536, 378)
+
+[node name="Node2D2" type="Node2D" parent="PitParent/Pit5/FallNodeParent"]
+position = Vector2(537, 365)
+
+[node name="Node2D3" type="Node2D" parent="PitParent/Pit5/FallNodeParent"]
+position = Vector2(568, 365)
+
+[node name="Node2D4" type="Node2D" parent="PitParent/Pit5/FallNodeParent"]
+position = Vector2(553, 365)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit5"]
+position = Vector2(-17, -1)
+polygon = PackedVector2Array(80, 258, 126, 258, 126, 270, 94, 270, 94, 286, 80, 286)
+
+[node name="Pit6" type="Area2D" parent="PitParent"]
+position = Vector2(466, 102)
+collision_layer = 32768
+collision_mask = 0
+script = ExtResource("30_f1ecl")
+
+[node name="FallNodeParent" type="Node" parent="PitParent/Pit6"]
+
+[node name="Node2D" type="Node2D" parent="PitParent/Pit6/FallNodeParent"]
+position = Vector2(632, 366)
+
+[node name="Node2D2" type="Node2D" parent="PitParent/Pit6/FallNodeParent"]
+position = Vector2(647, 366)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit6"]
+position = Vector2(-17, -1)
+polygon = PackedVector2Array(176, 258, 206, 258, 206, 270, 176, 270)

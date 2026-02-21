@@ -3,6 +3,7 @@ extends Spell
 
 @onready var ap: AnimationPlayer = $AnimationPlayer
 @onready var area: Area2D = $Area2D
+@onready var light: PointLight2D = %Light
 
 var move_direction: Vector2
 var active: bool = true
@@ -50,12 +51,14 @@ func on_area_entered(enemy: Enemy) -> void:
 
 	if pierce_count >= data.pierce:
 		active = false
+		light.enabled = false
 		ap.play("hit")
 
 
 ## Hit Terrain Obstacle
 func on_body_entered(_intruder) -> void:
 	active = false
+	light.enabled = false
 	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BULLET_IMPACT_TERRAIN)
 	ap.play("hit")
 
@@ -66,4 +69,5 @@ func on_animation_finished(anim_name) -> void:
 func check_max_distance_reached() -> void:
 	if active and abs(global_position.distance_to(original_position)) > data.max_distance:
 		active = false
+		light.enabled = false
 		ap.play("hit")
