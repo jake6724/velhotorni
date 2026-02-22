@@ -1352,7 +1352,7 @@ atlas = ExtResource("38_t4l3f")
 region = Rect2(8, 0, 8, 8)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dm1k7"]
-radius = 2.0
+radius = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gdn8q"]
 load_path = "res://.godot/imported/atl_ui_health_small.png-53e0309b308a87cd6c0528d444a0aa97.ctex"
