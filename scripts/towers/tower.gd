@@ -599,6 +599,7 @@ func on_hit(_damage_amount: int) -> void:
 	ap.play("hit")
 	health -= _damage_amount
 	number_popup.display_damage_number(_damage_amount, global_position)
+	print(_damage_amount)
 	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_HIT)
 	if health <= 0:
 		die()

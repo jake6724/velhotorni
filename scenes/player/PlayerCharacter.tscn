@@ -1771,7 +1771,6 @@ script = ExtResource("39_cshdu")
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 32768
-monitorable = false
 script = ExtResource("45_rwb4p")
 
 [node name="PitHurtboxCollider" type="CollisionShape2D" parent="PitHurtbox"]

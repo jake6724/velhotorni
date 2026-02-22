@@ -33,15 +33,16 @@ func _ready():
 	active_damage_number_timer.timeout.connect(on_active_damage_number_timer_timeout)
 
 func display_damage_number(value: int, _pos: Vector2, moving_horizontally: bool=true, display_tint: bool=false) -> void:
-	if value > 1:
+	if value >= 1:
 		if active_damage_number:
 			var new_value: int = int(active_damage_number.text) + value
 			active_damage_number.text = str(new_value)
 			shake_label(active_damage_number)
 			active_damage_number_timer.start(.5)
 			if display_tint:
-				var health_percentage: float = new_value / parent_max_health
-				active_damage_number.label_settings.font_color = active_damage_number.label_settings.font_color.lerp(COLOR_RED, health_percentage)
+				var tint_percentage: float = min(1,value / parent_max_health)
+				# var health_percentage: float = new_value / parent_max_health
+				active_damage_number.label_settings.font_color = active_damage_number.label_settings.font_color.lerp(COLOR_RED, tint_percentage)
 
 			if active_damage_number_horizontal != moving_horizontally:
 				if active_damage_number_horizontal:
@@ -75,8 +76,9 @@ func display_damage_number(value: int, _pos: Vector2, moving_horizontally: bool=
 			number.label_settings.shadow_size = shadow_size
 			number.label_settings.shadow_color = COLOR_BLACK
 			
-			var health_percentage: float = min(1, value / parent_max_health)
-			number.label_settings.font_color = number.label_settings.font_color.lerp(COLOR_RED, health_percentage)
+			# var health_percentage: float = min(1, value / parent_max_health)
+			var tint_percentage: float = min(1,value / parent_max_health)
+			number.label_settings.font_color = number.label_settings.font_color.lerp(COLOR_RED, tint_percentage)
 
 			call_deferred("add_child", number)
 			z_as_relative = false

@@ -18,9 +18,11 @@ func _ready():
 	add_child(pre_coyote_timer)
 	pre_coyote_timer.timeout.connect(on_pre_coyote_timer_timeout)
 
+func debug(_intruder) -> void:
+	print("intruder: ", _intruder)
+
 func start_pre_coyote_timer(intruder: PitArea) -> void:
-	# pit_fall_global_position = global_position + (global_position.direction_to(intruder.global_position) * 5)
-	pit_fall_global_position = intruder.get_closest_fall_position(global_position)
+	pit_fall_global_position = intruder.global_position
 	update_collider(true)
 	pre_coyote_timer.start(pre_coyote_time)
 
