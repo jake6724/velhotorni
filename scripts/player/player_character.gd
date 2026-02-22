@@ -57,6 +57,7 @@ var alive: bool = true
 var respawn_time: float = 1.0
 var respawn_timer: Timer = Timer.new()
 var respawn_iframe_duration: float = 3.0
+var damage_on_respawn: bool = true
 var spawn_point: Vector2 = Vector2.ZERO # Set manually by main
 
 var aim_input: Vector2
@@ -386,6 +387,7 @@ func on_animation_finished(anim_name) -> void:
 	if anim_name == "fall":
 		falling = false
 		character_sprite.hide()
+		damage_on_respawn = false
 		respawn_timer.start(respawn_time)
 		
 	if anim_name == "die":
@@ -422,15 +424,11 @@ func on_hit(_direction) -> void:
 		player_hud.set_player_portrait(player_stats.health, player_stats.max_health) # Called here because it needs max health data that PlayerHUD does not have
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PLAYER_HIT)
 
-
 func on_pit_entered() -> void:
-
-	# global_position += player_input.move_input.normalized() * 10 # Move the character to be fully over the pit
-
+	player_special.active = false # To remove after-image, may cause issues
 	var fall_tween: Tween = get_tree().create_tween()
 	fall_tween.tween_property(self, "global_position", pit_hurtbox.pit_fall_global_position, PITFALL_TWEEN_DURATION)
 	await fall_tween.finished
-	# global_position = pit_hurtbox.pit_fall_global_position
 	reticle_sprite.hide()
 	staff_sprite.hide()
 	special_bar_dash.hide()
@@ -455,7 +453,9 @@ func respawn() -> void:
 	hurtbox_reset_timer.start(player_stats.hurtbox_iframe_duration)
 	player_hud.set_player_portrait(player_stats.health, player_stats.max_health)
 	pit_hurtbox.update_collider(false)
-	player_respawned.emit()	
+	if damage_on_respawn:
+		player_respawned.emit()	
+	damage_on_respawn = true
 	hit_blink()
 
 func hit_blink() -> void:
