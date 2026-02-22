@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://ud7onep5fs7j"]
+
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_2kl1h"]
+[ext_resource type="Script" uid="uid://cm3ys774fddyw" path="res://scripts/ui/tower/tower_info_menu.gd" id="1_avy5d"]
+[ext_resource type="Texture2D" uid="uid://brjnkoi3brlf3" path="res://assets/art/sprites/ui/spr_ui_stat_arrow_large.png" id="3_nqnwl"]
+[ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="4_j7b88"]
+[ext_resource type="Texture2D" uid="uid://1swsb4vm1uds" path="res://assets/art/sprites/ui/spr_ui_exit_icon.png" id="5_j7b88"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mrv8d"]
+texture = ExtResource("1_2kl1h")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(1, 1, 30, 30)
+
+[node name="TowerInfoMenu" type="PanelContainer"]
+custom_minimum_size = Vector2(384, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 40.0
+offset_right = -64.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mrv8d")
+script = ExtResource("1_avy5d")
+metadata/_custom_type_script = "uid://cm3ys774fddyw"
+
+[node name="TargetingSelect" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(150, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="TargetLeftButton" type="TextureButton" parent="TargetingSelect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+texture_normal = ExtResource("3_nqnwl")
+
+[node name="TargetPriorityLabel" type="Label" parent="TargetingSelect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("4_j7b88")
+theme_override_font_sizes/font_size = 8
+text = "First"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TargetRightButton" type="TextureButton" parent="TargetingSelect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+texture_normal = ExtResource("3_nqnwl")
+flip_h = true
+
+[node name="ExitButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture_normal = ExtResource("5_j7b88")

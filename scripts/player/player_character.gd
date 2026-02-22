@@ -119,6 +119,7 @@ func _ready():
 	player_input.weapon_select_pressed.connect(on_weapon_select_pressed)
 	player_input.primary_action_just_pressed.connect(func():primary_action_timer.start(PRIMARY_ACTION_TIMER_DELAY))
 	player_input.primary_action_released.connect(on_primary_action_released)
+	player_build.set_player_input_enabled_requested.connect(player_input.set_input_enabled)
 
 	# Connect to GlobalSettings
 	GlobalSettings.input_type_changed.connect(on_swap_input_type)
@@ -401,7 +402,7 @@ func on_staff_animation_finished(_anim_name) -> void:
 
 ## Does not update health
 func on_hit(_direction) -> void:
-	if not hit and alive:
+	if not hit and alive and not falling:
 		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PLAYER_HIT)
 		_direction = Constants.get_closest_cardinal_direction_normalized(_direction)
 		hit = true

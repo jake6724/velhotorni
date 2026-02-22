@@ -38,7 +38,8 @@ var tower_mana_breakables: Array[Breakable] = []
 
 @export var start_first_wave_immediately: bool = false
 
-@export var show_wave_info_banner: bool = true
+# Can prevent wave banner, path alerts
+@export var show_level_details: bool = true
 
 var stars: int = 1 # Tracks the highest number of stars earned for this level
 var can_start_wave: bool = true # Used so that levels can disable wave start, specifically in the tutorial
@@ -96,7 +97,7 @@ func populate_wave_info_panels() -> void:
 	for child in wave_info_panel_parent.get_children():
 		var wave_info: WaveInfoPanel = child as WaveInfoPanel
 		if wave_info:
-			wave_info.populate_unit_wave_info(WaveManager.wave_index)
+			wave_info.populate_unit_wave_info(WaveManager.wave_index, show_level_details)
 
 func hide_wave_info_panels() -> void:
 	for child in wave_info_panel_parent.get_children():

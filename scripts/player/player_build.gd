@@ -41,6 +41,7 @@ signal tower_count_updated
 signal heal_all_cost_updated
 signal player_hud_hint_requested
 signal set_player_enabled_requested
+signal set_player_input_enabled_requested
 
 func _process(_delta):
 	# queue_redraw()
@@ -92,6 +93,9 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 	# player.player_input.primary_action_just_pressed.connect(on_player_input_primary_action_just_pressed)
 	player_build_ui.tower_action_radial_menu.cost_requested.connect(on_tower_action_radial_menu_cost_requested)
 
+	# Connect to TowerInfoMenu
+	player_build_ui.tower_info_menu.exited.connect(on_tower_info_menu_exited)
+
 	player_hud.heal_all_requested.connect(on_player_hud_heal_all_requested)
 
 	player.player_input.ui_interact_pressed.connect(on_ui_interact_pressed)
@@ -115,6 +119,7 @@ func on_ui_interact_pressed() -> void:
 func on_ui_interact_released() -> void: # TODO: Call this when unhovering a tower also
 	if tower_action_radial_menu_active:
 
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 		on_player_input_primary_action_just_pressed()
 
 		set_player_enabled_requested.emit(true)
@@ -128,7 +133,6 @@ func on_ui_interact_released() -> void: # TODO: Call this when unhovering a towe
 		build_grid_sprite.show()
 
 		get_viewport().warp_mouse(mouse_reset_warp_position)
-		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 
 ## Performs checks and calls current TowerActionRadialMenu action. Uses PlayerInput to trigger.
 func on_player_input_primary_action_just_pressed() -> void:
@@ -147,6 +151,11 @@ func on_player_input_primary_action_just_pressed() -> void:
 		else:
 			# player_build_ui.tower_action_radial_menu.animate_icon_negative_by_tower_action(selected_tower_action)
 			player_hud_hint_requested.emit(get_tower_action_negative_text(selected_tower_action), 1.0, true)
+
+func on_tower_info_menu_exited() -> void:
+	player_build_ui.tower_info_menu.hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+	set_player_input_enabled_requested.emit(true)
 
 ## Requested by TowerActionRadialMenu whenever a new action is hovered
 func on_tower_action_radial_menu_cost_requested(_tower_action: TowerAction) -> void:
@@ -278,6 +287,12 @@ func sell_tower(_tower: Tower) -> void:
 		tower_mana_spent.emit(-_tower.sell_price)
 		_tower.die()
 
+func info_tower(_tower: Tower) -> void:
+	player_build_ui.tower_info_menu.show()
+	player_build_ui.tower_info_menu.tower = _tower
+	set_player_input_enabled_requested.emit(false)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+
 func get_tower_action_negative_text(_tower_action: TowerAction) -> String:
 	var _text: String
 	match _tower_action:
@@ -306,7 +321,7 @@ func check_can_perform_action(_hovered_tower, _tower_action: TowerAction) -> boo
 		TowerAction.SELL: 
 			return true
 		TowerAction.INFO:
-			return false #TODO: THIS NEED TO BE ALWAYS TRUE ONCE IMPLEMENTED!
+			return true
 		TowerAction.NONE:
 			return false
 		_:
@@ -408,6 +423,7 @@ func get_tower_action_callable(_tower_action: TowerAction) -> Callable:
 		TowerAction.HEAL: return heal_tower
 		TowerAction.UPGRADE: return upgrade_tower
 		TowerAction.SELL: return sell_tower
+		TowerAction.INFO: return info_tower
 	push_error("Passed TowerAction '", _tower_action, "' unknown")
 	return null_func
 	

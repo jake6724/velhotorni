@@ -13,6 +13,7 @@ extends Control
 @onready var sell_icon: TextureRect = %SellIcon
 # @onready var tower_action_button_hint_icon: TextureRect = %ButtonHintIcons
 @onready var tower_action_radial_menu: TowerActionRadialMenu = %TowerActionRadialMenu
+@onready var tower_info_menu: TowerInfoMenu = %TowerInfoMenu
 
 @onready var canvas_layer: CanvasLayer = %CanvasLayer
 

@@ -49,6 +49,7 @@ var enemy_info_count: int
 @onready var banner_ap: AnimationPlayer = $CanvasLayer/BannerAnimationPlayer
 @onready var banner: Sprite2D = %Banner
 @onready var banner_label: Label = %BannerLabel
+@onready var level_requires_banner: bool # Set by Main
 
 @onready var build_phase_buttons: VBoxContainer = %BuildPhaseButtons
 @onready var start_wave_progress_bar: TextureProgressBar = %StartWaveProgressBar
@@ -336,15 +337,16 @@ func configure_for_next_wave() -> void:
 	animate_show_build_phase_buttons()
 
 func show_banner(text: String, completed_signal: Signal) -> void:
-	banner_label.text = text
-	banner.show()
-	banner_ap.play("open")
-	await banner_ap.animation_finished
-	banner_ap.play("hold")
-	await get_tree().create_timer(2).timeout
-	banner_ap.play("close")
-	await banner_ap.animation_finished
-	banner.hide()
+	if level_requires_banner:
+		banner_label.text = text
+		banner.show()
+		banner_ap.play("open")
+		await banner_ap.animation_finished
+		banner_ap.play("hold")
+		await get_tree().create_timer(2).timeout
+		banner_ap.play("close")
+		await banner_ap.animation_finished
+		banner.hide()
 	completed_signal.emit()
 
 func show_banner_label() -> void:

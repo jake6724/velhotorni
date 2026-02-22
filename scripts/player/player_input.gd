@@ -199,6 +199,9 @@ func set_input_type(event) -> void:
 			GlobalSettings.controller_active = true			
 			swap_input_type()
 
+func set_input_enabled(_value) -> void:
+	input_enabled = _value
+
 ## `true` = controller active, 'false' = mouse active
 func swap_input_type() -> void:
 	print(GlobalSettings.controller_active)

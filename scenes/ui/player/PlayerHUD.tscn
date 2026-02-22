@@ -766,6 +766,7 @@ offset_top = 112.0
 offset_right = 504.0
 offset_bottom = 232.0
 size_flags_horizontal = 4
+mouse_filter = 2
 alignment = 2
 
 [node name="LevelDetails" type="MarginContainer" parent="CanvasLayer"]

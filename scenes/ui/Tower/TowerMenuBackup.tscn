@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://rvf7vwl6ny54" path="res://assets/art/sprites/ui/spr_ui_tower_earth.png" id="13_33jc8"]
 [ext_resource type="Texture2D" uid="uid://3dti3chb4cnf" path="res://assets/art/sprites/ui/spr_ui_tower_light.png" id="14_qml2e"]
 [ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="15_out3g"]
-[ext_resource type="PackedScene" uid="uid://ndrrlrv5t215" path="res://scenes/ui/TowerInfoPanel_OLD.tscn" id="16_o2hyv"]
+[ext_resource type="PackedScene" uid="uid://ndrrlrv5t215" path="res://scenes/ui/Tower/TowerInfoPanel_OLD.tscn" id="16_o2hyv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3bjd"]
 

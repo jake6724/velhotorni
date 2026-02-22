@@ -1880,7 +1880,7 @@ level_name = "Level 3B"
 region = 2
 initial_gold = 17500
 initial_token = 1
-waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_oxg84"), ExtResource("3_uelw8"), ExtResource("4_h8vnd"), ExtResource("6_f1ecl"), ExtResource("7_o7b5e"), ExtResource("8_33jh3"), ExtResource("15_pn61p"), ExtResource("3_pn61p"), ExtResource("3_btpk1"), ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd")])
+waves = Array[ExtResource("2_l0qwy")]([ExtResource("3_uelw8"), ExtResource("3_oxg84"), ExtResource("4_h8vnd"), ExtResource("6_f1ecl"), ExtResource("7_o7b5e"), ExtResource("8_33jh3"), ExtResource("15_pn61p"), ExtResource("3_pn61p"), ExtResource("3_btpk1"), ExtResource("3_eds8m"), ExtResource("4_mssc7"), ExtResource("5_tioql"), ExtResource("6_n6xay"), ExtResource("7_6muwd")])
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false

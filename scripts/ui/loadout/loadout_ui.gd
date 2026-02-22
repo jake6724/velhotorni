@@ -13,6 +13,7 @@ const TAB_BUTTON_POPUP_OFFSET: Vector2 = Vector2(0,-4)
 
 @onready var spell_page: LoadoutPageSpell = %LoadoutPageSpell
 @onready var tower_page: LoadoutPageTower = %LoadoutPageTower
+@onready var deity_page: LoadoutPageDeity = %LoadoutPageDeity
 @onready var curr_loadout_page: LoadoutPage = spell_page
 
 func _ready() -> void:
@@ -37,7 +38,6 @@ func on_tab_button_pressed(tab_button: Button) -> void:
 	if tab_button != _curr_tab_button:
 		_curr_tab_button = tab_button
 		popup_curr_tab_button()
-
 	show_page(_curr_tab_button)
 
 func popup_curr_tab_button() -> void:
@@ -51,7 +51,7 @@ func show_page(tab_button: Button) -> void:
 	match tab_button:
 		spell_tab_button: curr_loadout_page = spell_page
 		tower_tab_button: curr_loadout_page = tower_page
-		# deity_tab_button: _curr_page = deity_page
+		deity_tab_button: curr_loadout_page = deity_page
 	curr_loadout_page.show()
 
 # func _input(event):

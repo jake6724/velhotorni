@@ -1,22 +1,22 @@
 [gd_scene load_steps=16 format=3 uid="uid://du0wke3a8n1k8"]
 
-[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_iaug6"]
-[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="2_ak4j3"]
-[ext_resource type="Script" uid="uid://bcxrp1aahk8qf" path="res://scripts/ui/tower_info_panel.gd" id="2_k8i0m"]
-[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="3_k8i0m"]
-[ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="4_twomx"]
-[ext_resource type="Texture2D" uid="uid://dhxa8cu8yjj46" path="res://assets/art/sprites/ui/spr_ui_can_lvlup.png" id="4_v4fcr"]
-[ext_resource type="Texture2D" uid="uid://dpaj01np75c8o" path="res://assets/art/sprites/ui/spr_ui_stat_rng.png" id="5_afpeg"]
-[ext_resource type="Texture2D" uid="uid://b35e2ntjvtv5c" path="res://assets/art/sprites/ui/spr_ui_stat_spcl_burn.png" id="6_c0vut"]
-[ext_resource type="Texture2D" uid="uid://qr44ws5evlmm" path="res://assets/art/sprites/ui/atl_ui_lvlup_compact.png" id="7_jo43y"]
-[ext_resource type="Texture2D" uid="uid://biu0dfqvw886x" path="res://assets/art/sprites/ui/spr_ui_divider1.png" id="8_ou2nh"]
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_hdhmg"]
+[ext_resource type="Script" uid="uid://bcxrp1aahk8qf" path="res://scripts/ui/tower_info_panel.gd" id="2_nutxp"]
+[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="3_2fmsx"]
+[ext_resource type="Texture2D" uid="uid://dhxa8cu8yjj46" path="res://assets/art/sprites/ui/spr_ui_can_lvlup.png" id="4_hy057"]
+[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="5_tp6p7"]
+[ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="6_8nb35"]
+[ext_resource type="Texture2D" uid="uid://dpaj01np75c8o" path="res://assets/art/sprites/ui/spr_ui_stat_rng.png" id="7_2taqh"]
+[ext_resource type="Texture2D" uid="uid://b35e2ntjvtv5c" path="res://assets/art/sprites/ui/spr_ui_stat_spcl_burn.png" id="8_8a4mv"]
+[ext_resource type="Texture2D" uid="uid://qr44ws5evlmm" path="res://assets/art/sprites/ui/atl_ui_lvlup_compact.png" id="9_d83nj"]
+[ext_resource type="Texture2D" uid="uid://biu0dfqvw886x" path="res://assets/art/sprites/ui/spr_ui_divider1.png" id="10_0erfa"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tpjsh"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
-texture = ExtResource("1_iaug6")
+texture = ExtResource("1_hdhmg")
 texture_margin_left = 11.0
 texture_margin_top = 9.0
 texture_margin_right = 11.0
@@ -24,19 +24,19 @@ texture_margin_bottom = 10.0
 region_rect = Rect2(1, 1, 30, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpjsh"]
-atlas = ExtResource("7_jo43y")
+atlas = ExtResource("9_d83nj")
 region = Rect2(0, 0, 8, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtvi4"]
-atlas = ExtResource("7_jo43y")
+atlas = ExtResource("9_d83nj")
 region = Rect2(0, 0, 8, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v4fcr"]
-atlas = ExtResource("7_jo43y")
+atlas = ExtResource("9_d83nj")
 region = Rect2(0, 0, 8, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y5oeb"]
-atlas = ExtResource("7_jo43y")
+atlas = ExtResource("9_d83nj")
 region = Rect2(0, 0, 8, 10)
 
 [node name="TowerInfoPanel" type="PanelContainer"]
@@ -45,7 +45,7 @@ offset_right = 88.0
 offset_bottom = 88.0
 size_flags_horizontal = 6
 theme_override_styles/panel = SubResource("StyleBoxTexture_tpjsh")
-script = ExtResource("2_k8i0m")
+script = ExtResource("2_nutxp")
 metadata/_custom_type_script = "uid://bcxrp1aahk8qf"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -61,7 +61,7 @@ theme_override_constants/separation = -1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
-theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_fonts/font = ExtResource("3_2fmsx")
 theme_override_font_sizes/font_size = 8
 text = "Fire"
 
@@ -69,12 +69,12 @@ text = "Fire"
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-texture = ExtResource("4_v4fcr")
+texture = ExtResource("4_hy057")
 
 [node name="Label" type="Label" parent="VBoxContainer/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_fonts/font = ExtResource("3_2fmsx")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -97,11 +97,11 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("3_k8i0m")
+texture = ExtResource("5_tp6p7")
 
 [node name="DMG" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/Damage"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_fonts/font = ExtResource("3_2fmsx")
 theme_override_font_sizes/font_size = 8
 text = "DMG"
 
@@ -110,7 +110,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_fonts/font = ExtResource("3_2fmsx")
 theme_override_font_sizes/font_size = 8
 text = "2.25"
 
@@ -123,18 +123,18 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_twomx")
+texture = ExtResource("6_8nb35")
 
 [node name="SPD" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/Speed"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_fonts/font = ExtResource("3_2fmsx")
 theme_override_font_sizes/font_size = 8
 text = "SPD"
 
 [node name="SpeedLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/Speed"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_fonts/font = ExtResource("3_2fmsx")
 theme_override_font_sizes/font_size = 8
 text = "33.3"
 
@@ -147,18 +147,18 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("5_afpeg")
+texture = ExtResource("7_2taqh")
 
 [node name="RNG" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/Range"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_fonts/font = ExtResource("3_2fmsx")
 theme_override_font_sizes/font_size = 8
 text = "RNG"
 
 [node name="RangeLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/Range"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_fonts/font = ExtResource("3_2fmsx")
 theme_override_font_sizes/font_size = 8
 text = "45"
 
@@ -171,18 +171,18 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("6_c0vut")
+texture = ExtResource("8_8a4mv")
 
 [node name="SPC" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/Special"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_fonts/font = ExtResource("3_2fmsx")
 theme_override_font_sizes/font_size = 8
 text = "SPC"
 
 [node name="SpecialLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/Special"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_ak4j3")
+theme_override_fonts/font = ExtResource("3_2fmsx")
 theme_override_font_sizes/font_size = 8
 text = "3"
 
@@ -212,14 +212,14 @@ texture = SubResource("AtlasTexture_y5oeb")
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("8_ou2nh")
+texture = ExtResource("10_0erfa")
 
 [node name="Description" type="RichTextLabel" parent="VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_fonts/normal_font = ExtResource("2_ak4j3")
+theme_override_fonts/normal_font = ExtResource("3_2fmsx")
 theme_override_font_sizes/normal_font_size = 8
 text = "Knockback"
 scroll_active = false

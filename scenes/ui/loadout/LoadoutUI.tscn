@@ -1,30 +1,25 @@
-[gd_scene load_steps=20 format=3 uid="uid://dx8fo7wasdbc1"]
+[gd_scene load_steps=15 format=3 uid="uid://dx8fo7wasdbc1"]
 
 [ext_resource type="Script" uid="uid://o0ah8ynakwqi" path="res://scripts/ui/loadout/loadout_ui.gd" id="1_48vr1"]
 [ext_resource type="Texture2D" uid="uid://bo2earot85i1p" path="res://assets/art/sprites/ui/spr_ui_box9.png" id="3_is5or"]
 [ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="3_rgcv0"]
 [ext_resource type="Texture2D" uid="uid://h2irhp1vs2yk" path="res://assets/art/sprites/ui/spr_ui_box8_gray.png" id="3_sou2n"]
 [ext_resource type="PackedScene" uid="uid://bfj3fliiixpne" path="res://scenes/ui/loadout/LoadoutPageSpell.tscn" id="4_ag6ya"]
-[ext_resource type="Texture2D" uid="uid://c0a8rf6rqjted" path="res://assets/art/sprites/ui/spr_ui_equip.png" id="4_maai5"]
 [ext_resource type="Script" uid="uid://bshhqh6p6rwlx" path="res://scripts/ui/controller_button_hint.gd" id="4_sou2n"]
-[ext_resource type="Texture2D" uid="uid://go0bba7gghi8" path="res://assets/art/sprites/ui/spr_ui_divider2.png" id="5_mq5qe"]
-[ext_resource type="Texture2D" uid="uid://d0yijylvpeqaf" path="res://assets/art/sprites/ui/spr_ui_divider_vertical_2.png" id="6_rqhqp"]
-[ext_resource type="FontFile" uid="uid://cwmwdesn8l82o" path="res://assets/fonts/alagard.ttf" id="7_4dafm"]
-[ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="8_kpnvq"]
+[ext_resource type="PackedScene" uid="uid://dlyxe4t6m5e6g" path="res://scenes/ui/loadout/LoadoutPageDeity.tscn" id="6_o6ebn"]
 [ext_resource type="PackedScene" uid="uid://chvdnsi5v7rd0" path="res://scenes/ui/loadout/LoadoutPageTower.tscn" id="11_m0am3"]
-[ext_resource type="PackedScene" uid="uid://cyucuik70symo" path="res://scenes/ui/loadout/DeityCard.tscn" id="15_ag6ya"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4j13"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ag6ya"]
 texture = ExtResource("3_sou2n")
-texture_margin_left = 13.0
+texture_margin_left = 12.0
 texture_margin_top = 10.0
 texture_margin_right = 13.0
 texture_margin_bottom = 10.0
 region_rect = Rect2(1, 1, 30, 30)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ag6ya"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4j13"]
 texture = ExtResource("3_sou2n")
-texture_margin_left = 12.0
+texture_margin_left = 13.0
 texture_margin_top = 10.0
 texture_margin_right = 13.0
 texture_margin_bottom = 10.0
@@ -76,17 +71,17 @@ offset_left = 56.0
 offset_top = 16.0
 offset_right = 176.0
 offset_bottom = 64.0
-theme_override_styles/focus = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_h4j13")
 theme_override_styles/normal = SubResource("StyleBoxTexture_ag6ya")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/focus = SubResource("StyleBoxTexture_h4j13")
 
 [node name="TabLabel" type="Label" parent="Tabs/SpellTabButton"]
 layout_mode = 1
@@ -110,17 +105,17 @@ offset_left = 184.0
 offset_top = 16.0
 offset_right = 304.0
 offset_bottom = 64.0
-theme_override_styles/focus = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_h4j13")
 theme_override_styles/normal = SubResource("StyleBoxTexture_48vr1")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/focus = SubResource("StyleBoxTexture_h4j13")
 
 [node name="TabLabel" type="Label" parent="Tabs/TowerTabButton"]
 layout_mode = 0
@@ -138,17 +133,17 @@ offset_left = 312.0
 offset_top = 16.0
 offset_right = 432.0
 offset_bottom = 64.0
-theme_override_styles/focus = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/hover = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_h4j13")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_h4j13")
 theme_override_styles/normal = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_h4j13")
+theme_override_styles/focus = SubResource("StyleBoxTexture_h4j13")
 
 [node name="TabLabel" type="Label" parent="Tabs/DeityTabButton"]
 layout_mode = 0
@@ -170,118 +165,6 @@ patch_margin_left = 13
 patch_margin_top = 10
 patch_margin_right = 13
 patch_margin_bottom = 10
-
-[node name="DeityPage" type="MarginContainer" parent="Body"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 14
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Body/DeityPage"]
-layout_mode = 2
-theme_override_constants/separation = 7
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Body/DeityPage/HBoxContainer"]
-layout_mode = 2
-
-[node name="EquipHeader" type="VBoxContainer" parent="Body/DeityPage/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/separation = -1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Body/DeityPage/HBoxContainer/VBoxContainer/EquipHeader"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Body/DeityPage/HBoxContainer/VBoxContainer/EquipHeader/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("4_maai5")
-stretch_mode = 2
-
-[node name="Label" type="Label" parent="Body/DeityPage/HBoxContainer/VBoxContainer/EquipHeader/HBoxContainer"]
-layout_mode = 2
-text = "equip"
-
-[node name="TextureRect" type="TextureRect" parent="Body/DeityPage/HBoxContainer/VBoxContainer/EquipHeader"]
-layout_mode = 2
-texture = ExtResource("5_mq5qe")
-
-[node name="PerkGrid" type="GridContainer" parent="Body/DeityPage/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-columns = 2
-
-[node name="DeityCard1" parent="Body/DeityPage/HBoxContainer/VBoxContainer/PerkGrid" instance=ExtResource("15_ag6ya")]
-layout_mode = 2
-
-[node name="DeityCard2" parent="Body/DeityPage/HBoxContainer/VBoxContainer/PerkGrid" instance=ExtResource("15_ag6ya")]
-layout_mode = 2
-
-[node name="DeityCard3" parent="Body/DeityPage/HBoxContainer/VBoxContainer/PerkGrid" instance=ExtResource("15_ag6ya")]
-layout_mode = 2
-
-[node name="DeityCard4" parent="Body/DeityPage/HBoxContainer/VBoxContainer/PerkGrid" instance=ExtResource("15_ag6ya")]
-layout_mode = 2
-
-[node name="DeityCard5" parent="Body/DeityPage/HBoxContainer/VBoxContainer/PerkGrid" instance=ExtResource("15_ag6ya")]
-layout_mode = 2
-
-[node name="DeityCard6" parent="Body/DeityPage/HBoxContainer/VBoxContainer/PerkGrid" instance=ExtResource("15_ag6ya")]
-layout_mode = 2
-
-[node name="DeityCard7" parent="Body/DeityPage/HBoxContainer/VBoxContainer/PerkGrid" instance=ExtResource("15_ag6ya")]
-layout_mode = 2
-
-[node name="DeityCard8" parent="Body/DeityPage/HBoxContainer/VBoxContainer/PerkGrid" instance=ExtResource("15_ag6ya")]
-layout_mode = 2
-
-[node name="Divider" type="TextureRect" parent="Body/DeityPage/HBoxContainer"]
-custom_minimum_size = Vector2(0, 149)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-texture = ExtResource("6_rqhqp")
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="Body/DeityPage/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="WeaponName" type="Label" parent="Body/DeityPage/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_4dafm")
-theme_override_font_sizes/font_size = 16
-text = "Deity Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaponElement" type="Label" parent="Body/DeityPage/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("8_kpnvq")
-theme_override_font_sizes/font_size = 8
-text = "Element"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaponDesc" type="Label" parent="Body/DeityPage/HBoxContainer/VBoxContainer3"]
-custom_minimum_size = Vector2(175, 127)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.258824, 0.34902, 0.517647, 1)
-theme_override_fonts/font = ExtResource("8_kpnvq")
-theme_override_font_sizes/font_size = 8
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea com"
-vertical_alignment = 1
-autowrap_mode = 2
-clip_text = true
 
 [node name="LoadoutPageSpell" parent="Body" instance=ExtResource("4_ag6ya")]
 unique_name_in_owner = true
@@ -306,6 +189,22 @@ offset_left = 26.0
 offset_top = 15.0
 offset_right = 403.0
 offset_bottom = 186.0
+
+[node name="LoadoutPageDeity" parent="Body" instance=ExtResource("6_o6ebn")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.5
+offset_top = -85.5
+offset_right = 188.5
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TabSwitchLeftButtonHint" type="TextureRect" parent="."]
 layout_mode = 0

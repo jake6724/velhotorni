@@ -56,6 +56,7 @@ func _ready():
 	player_character.on_tower_mana_collected(active_level.initial_gold)
 	player_character.player_respawned.connect(active_level.base.take_damage.bind(1))
 	player_character.player_input.escape_pressed.connect(on_escape_pressed)
+	player_character.player_hud.level_requires_banner = active_level.show_level_details
 
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)

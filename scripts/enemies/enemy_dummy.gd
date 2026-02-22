@@ -25,6 +25,7 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element, _exec
 	if is_alive:
 		is_taking_damage = true
 		ap.play("hit")
+		AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BULLET_IMPACT_FLESH)
 
 		# Hit by same element
 		if tower_element == data.element:
