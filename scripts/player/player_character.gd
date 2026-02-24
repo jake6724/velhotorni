@@ -434,6 +434,7 @@ func fall_cancel() -> void:
 	falling = false
 	fall_locked_in  = false
 	alive = true
+	character_sprite.show()
 	damage_base_on_respawn = true
 	post_fall_coyote_timer.stop()
 	set_graphics_visibilty(true, false)
