@@ -36,6 +36,7 @@ func initialize(_data: SpellData, _spell_spawn_point: Node2D, spell_element_dama
 	post_bullet_stop_timer.timeout.connect(on_post_bullet_stop_timer_timeout)
 
 func on_enemy_hit(enemy: Enemy) -> void:
+	print(enemy)
 	deal_damage(enemy)
 	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BULLET_IMPACT_FLESH)
 
