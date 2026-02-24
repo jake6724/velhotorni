@@ -910,78 +910,81 @@ metadata/_custom_type_script = "uid://bsna5j67twb5p"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
-position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_hp2d3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 z_as_relative = false
 texture = ExtResource("2_dbysp")
-centered = false
 hframes = 4
 vframes = 4
 
 [node name="FXBurn" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(8, 0)
 sprite_frames = SubResource("SpriteFrames_l3hlv")
 animation = &"burn"
+frame_progress = 0.25204387
 
 [node name="FXHeal" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(8, 0)
 sprite_frames = SubResource("SpriteFrames_j7bit")
 animation = &"heal"
+frame = 10
+frame_progress = 1.0
 
 [node name="FXWeaken" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_oqdxu")
 animation = &"weaken"
+frame_progress = 0.46335104
 
 [node name="FXSpeed" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(8, 0)
 sprite_frames = SubResource("SpriteFrames_pr5d1")
 animation = &"speed"
+frame_progress = 0.00231265
 
 [node name="FXStun" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(8, 0)
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_7x518")
 animation = &"stun"
+frame_progress = 0.99616355
 
 [node name="FXFreeze" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
-position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_1gxi4")
 animation = &"end_freeze"
+frame_progress = 1.0
 
 [node name="FXCleanse" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
-position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_bc32l")
 animation = &"cleanse"
+frame = 10
+frame_progress = 1.0
 
 [node name="FXSlow" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1
-position = Vector2(8, 0)
+position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_pfdq7")
 animation = &"slow"
+frame_progress = 0.2779167
 
 [node name="FXPrevent" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 modulate = Color(1, 1, 1, 0.74902)
 z_index = 2
-position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_8iwro")
 animation = &"end_prevent"
+frame = 2
+frame_progress = 1.0
 
 [node name="Light" type="Sprite2D" parent="."]
 visible = false
@@ -1003,8 +1006,10 @@ texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_top = -4.0
-offset_right = 16.0
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 value = 100.0
 texture_under = ExtResource("5_fmdlp")
@@ -1012,16 +1017,17 @@ texture_progress = ExtResource("6_drtni")
 
 [node name="Shield" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(16, 3)
+position = Vector2(3, -4)
 texture = ExtResource("7_hwyxi")
 
 [node name="Weak" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(16, 3)
+position = Vector2(3, -4)
 texture = ExtResource("8_7noex")
 
 [node name="DebuffManager" type="Node2D" parent="."]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("9_gjr2d")
 metadata/_custom_type_script = "uid://bk2472hmw8gj8"
 
@@ -1033,7 +1039,6 @@ script = ExtResource("10_m5imn")
 metadata/_custom_type_script = "uid://bk0wvciq3qs4s"
 
 [node name="BoonCollider" type="CollisionShape2D" parent="BoonArea"]
-position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_b3euu")
 debug_color = Color(1.61238e-06, 0.650282, 0.102136, 0.42)
 
@@ -1047,7 +1052,6 @@ collision_layer = 64
 collision_mask = 0
 
 [node name="BoonReceiveCollider" type="CollisionShape2D" parent="BoonReceiveArea"]
-position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_y20wb")
 debug_color = Color(0.561146, 0.559576, 0, 0.42)
 
@@ -1058,7 +1062,6 @@ script = ExtResource("12_e6svu")
 metadata/_custom_type_script = "uid://b73facmk5sjrx"
 
 [node name="HexCollider" type="CollisionShape2D" parent="HexArea"]
-position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_s7n0w")
 debug_color = Color(0.373689, 0.476689, 1, 0.42)
 
@@ -1076,9 +1079,11 @@ metadata/_custom_type_script = "uid://c75pt0b6io16g"
 
 [node name="PushArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 262144
 collision_mask = 262144
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
+[node name="PushCollider" type="CollisionShape2D" parent="PushArea"]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_1pwev")
 debug_color = Color(0.6684668, 0.16282108, 0.9997687, 0.41960785)

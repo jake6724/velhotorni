@@ -28,6 +28,7 @@ var aoe_element: Constants.Element = Constants.Element.ARCANE
 var dash_power: float
 var dash_duration: float
 var pre_dash_coyote_time: float
+var post_fall_coyote_time: float
 var post_dash_coyote_time: float
 
 func load_player_data(data: PlayerData) -> void:
@@ -49,7 +50,9 @@ func load_player_data(data: PlayerData) -> void:
 	dash_power = data.dash_power
 	pre_dash_coyote_time = data.pre_dash_coyote_time
 	post_dash_coyote_time = data.post_dash_coyote_time
+	post_fall_coyote_time = data.post_fall_coyote_time
 	dash_duration = data.dash_duration
+
 
 var health: float = 8.0:
 	set(value):

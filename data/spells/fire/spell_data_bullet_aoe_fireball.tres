@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="SpellDataBulletAOE" load_steps=13 format=3 uid="uid://0ape3v2kdph1"]
+[gd_resource type="Resource" script_class="SpellDataBulletAOE" load_steps=12 format=3 uid="uid://0ape3v2kdph1"]
 
 [ext_resource type="Script" uid="uid://ckis74h51j2x4" path="res://scripts/spells/data/spell_data_bullet_aoe.gd" id="1_kxwn6"]
 [ext_resource type="Texture2D" uid="uid://bh723diwd4bi1" path="res://assets/art/sprites/ui/atl_ui_spell_icon_large.png" id="1_o1jq0"]
 [ext_resource type="Texture2D" uid="uid://3ub64jxwenmh" path="res://assets/art/atlases/bullet/atl_spell_bullet_fireball.png" id="1_tcqn3"]
-[ext_resource type="Texture2D" uid="uid://cn4jh65ii5hu7" path="res://assets/art/sprites/spr_fx_explosion_big.png" id="2_4vto4"]
 [ext_resource type="Resource" uid="uid://ddoy0mrmvm6u2" path="res://data/debuffs/debuff_data_burn_fire.tres" id="2_tcqn3"]
 [ext_resource type="AudioStream" uid="uid://cj7e86n5s2vln" path="res://assets/audio/sfx/Fire_Shot.ogg" id="3_hjvbd"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="5_g1hpo"]
@@ -24,10 +23,7 @@ region = Rect2(0, 45, 217, 15)
 
 [resource]
 script = ExtResource("1_kxwn6")
-aoe_radius = 22.0
-explosion_atlas = ExtResource("2_4vto4")
-explosion_spawn_radius_min = 15.0
-explosion_spawn_radius_max = 25.0
+explosion_spawn_delay_min = 0.05
 speed = 400.0
 num_bullets = 1
 pierce = 1

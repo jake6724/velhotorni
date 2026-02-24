@@ -254,6 +254,15 @@ func die() -> void:
 
 	hide_all_fx() # Somehow, the burn fx can turn back on. The debuff not seem to be active, just the fx. Ensure it is off
 
+	flying_enemy_died()
+	ranged_enemy_died()
+
+func flying_enemy_died() -> void:
+	pass
+
+func ranged_enemy_died() -> void:
+	pass
+
 func on_animation_finished(anim_name):
 	if anim_name == "hit":
 		is_taking_damage = false

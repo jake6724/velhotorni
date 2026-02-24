@@ -4,6 +4,7 @@ extends Enemy
 # Soft-collision avoidance guide: https://www.youtube.com/watch?v=ffXx0dPejWY
 
 @onready var push_area: Area2D = %PushArea
+@onready var push_collider: CollisionShape2D = %PushCollider
 
 var player: PlayerCharacter
 var spawn_pos: Vector2
@@ -79,6 +80,9 @@ func on_player_hurtbox_disabled() -> void:
 	if time_to_reach_player <= player.player_stats.hurtbox_iframe_duration:
 		# reset_attack = true
 		speed *= SPEED_MULTIPLIER
+
+func flying_enemy_died() -> void:
+	push_collider.set_deferred("disabled", true)
 
 func on_reset_attack_timer_timeout() -> void:
 	reset_attack = false

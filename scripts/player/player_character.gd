@@ -64,6 +64,8 @@ var aim_input: Vector2
 var prev_aim_input: Vector2
 
 var falling: bool = false
+var post_fall_coyote_timer: Timer = Timer.new()
+var fall_locked_in: bool = false
 
 var can_fire: bool = true
 var hit: bool = false
@@ -163,7 +165,7 @@ func _ready():
 	pit_hurtbox.pit_entered.connect(on_pit_entered)
 	pit_hurtbox.pre_coyote_time = player_stats.pre_dash_coyote_time
 	player_special.pit_hurtbox_update_requested.connect(pit_hurtbox.update_collider)
-	player_special.pit_hurtbox_update_activate_requested.connect(pit_hurtbox.update_activate)
+	player_special.pit_hurtbox_stop_pre_coyote_timer_requested.connect(pit_hurtbox.stop_pre_coyote_timer)
 	
 	
 	# Configure PlayerMana
@@ -234,6 +236,10 @@ func _ready():
 	primary_action_timer.autostart = false
 	add_child(primary_action_timer)
 	primary_action_timer.timeout.connect(on_primary_action_timer_timeout)
+	add_child(post_fall_coyote_timer)
+	post_fall_coyote_timer.one_shot = true
+	post_fall_coyote_timer.autostart = false
+	post_fall_coyote_timer.timeout.connect(on_post_fall_coyote_timer_timeout)
 
 func _physics_process(delta): # This can go in a state eventually
 	if alive:
@@ -386,9 +392,10 @@ func switch_to_combat_mode() -> void:
 
 func on_animation_finished(anim_name) -> void:
 	if anim_name == "fall":
-		falling = false
-		character_sprite.hide()
-		respawn_timer.start(respawn_time)
+		if fall_locked_in:
+			falling = false
+			character_sprite.hide()
+			respawn_timer.start(respawn_time)
 		
 	if anim_name == "die":
 		respawn_timer.start(respawn_time)
@@ -399,6 +406,55 @@ func on_staff_animation_finished(_anim_name) -> void:
 
 	if _anim_name == "fire":
 		staff_ap.play("idle")
+
+func on_pit_entered() -> void:
+	# Hide all grapics and prevent damage on respawn
+	damage_base_on_respawn = false
+	player_special.active = false # To remove after-image, may cause issues
+	set_graphics_visibilty(false)
+	
+	if alive:
+		# Update components to make sure no more damage is taken until respawn, update player location, update animation tree flags
+		alive = false
+		player_hurtbox.update_collider(true)
+		falling = true
+		hurtbox_reset_timer.stop()
+		var fall_tween: Tween = get_tree().create_tween()
+		fall_tween.tween_property(self, "global_position", pit_hurtbox.pit_fall_global_position, PITFALL_TWEEN_DURATION)
+		await fall_tween.finished
+		# print("Starting post_fall_coyote_timer with value: ", player_stats.post_fall_coyote_time)
+		post_fall_coyote_timer.start(player_stats.post_fall_coyote_time)
+
+	else:
+		# Typically `falling` would hide the character sprite when animation complete, do so manually since that animation will not run
+		character_sprite.hide()	
+
+## Called by PlayerSpecial to cancel a pitfall with dash. Can only be performed if post_fall_coyote_timer has not gone off yet
+func fall_cancel() -> void:
+	falling = false
+	fall_locked_in  = false
+	alive = true
+	damage_base_on_respawn = true
+	post_fall_coyote_timer.stop()
+	set_graphics_visibilty(true, false)
+
+## Used to set visibilty of all graphics on player death/respawn
+func set_graphics_visibilty(_value: bool, show_hearts: bool=true) -> void:
+	if _value:
+		reticle_sprite.visible = _value
+		staff_sprite.visible = _value
+		special_bar_dash.visible = _value
+		if show_hearts:
+			display_hearts(player_stats.health)
+	else:
+		reticle_sprite.visible = _value
+		staff_sprite.visible = _value
+		special_bar_dash.visible = _value
+		player_hearts.visible = _value
+
+func on_post_fall_coyote_timer_timeout() -> void:
+	# print("on_post_fall_coyote_timer_timeout()")
+	fall_locked_in = true
 
 ## Does not update health
 func on_hit(_direction) -> void:
@@ -424,28 +480,6 @@ func on_hit(_direction) -> void:
 
 		player_hud.set_player_portrait(player_stats.health, player_stats.max_health) # Called here because it needs max health data that PlayerHUD does not have
 
-func on_pit_entered() -> void:
-	# Hide all grapics and prevent damage on respawn
-	damage_base_on_respawn = false
-	reticle_sprite.hide()
-	staff_sprite.hide()
-	player_hearts.hide()
-	special_bar_dash.hide()
-	player_special.active = false # To remove after-image, may cause issues
-	
-	if alive:
-		# Update components to make sure no more damage is taken until respawn, update player location, update animation tree flags
-		alive = false
-		player_hurtbox.update_collider(true)
-		falling = true
-		hurtbox_reset_timer.stop()
-		var fall_tween: Tween = get_tree().create_tween()
-		fall_tween.tween_property(self, "global_position", pit_hurtbox.pit_fall_global_position, PITFALL_TWEEN_DURATION)
-		await fall_tween.finished
-	else:
-		# Typically `falling` would hide the character sprite when animation complete, do so manually since that animation will not run
-		character_sprite.hide()	
-
 func die() -> void:
 	reticle_sprite.hide()
 	staff_sprite.hide()
@@ -457,6 +491,8 @@ func respawn() -> void:
 	if damage_base_on_respawn or player_stats.health == 0:
 		player_stats.health = player_stats.max_health
 		player_respawned.emit()	# Base will only take damage if this signal emitted
+	damage_base_on_respawn = true # reset for next time
+	fall_locked_in = false
 
 	# Show grapics
 	character_sprite.show()
@@ -509,13 +545,14 @@ func on_tower_mana_spent(_value) -> void:
 	player_build_ui.update(player_mana)
 
 func on_special_charge_sprite_update_requested(_charges: int) -> void:
-	special_bar_dash.texture.region = Rect2(0, (4 - _charges) * 6, 24, 6)
+	if alive:
+		special_bar_dash.texture.region = Rect2(0, (4 - _charges) * 6, 24, 6)
 
-	if _charges == player_stats.special_charges_max:
-		special_charges_hide_timer.start(1)
-	else:
-		special_charges_hide_timer.stop()
-		special_bar_dash.show()
+		if _charges == player_stats.special_charges_max:
+			special_charges_hide_timer.start(1)
+		else:
+			special_charges_hide_timer.stop()
+			special_bar_dash.show()
 
 func on_special_charges_hide_timer_timeout() -> void:
 	special_bar_dash.hide()
@@ -533,10 +570,6 @@ func on_reset_tower_action(_disable_press: bool) -> void:
 	player_input.upgrade_action_charge = 0
 	if _disable_press:
 		player_input.upgrade_action_pressed = false
-
-func on_tower_action_hint_requested(_value: bool) -> void: # TODO: Cleanup and remove anything related to this
-	pass
-	# tower_action_hint.visible = _value
 
 func on_swap_input_type() -> void:
 	player_camera.swap_input_type()
