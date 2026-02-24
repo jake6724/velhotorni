@@ -19,6 +19,11 @@ extends Resource
 @export var upgrade_cost_increment: int
 @export_category("Upgrade Stats")
 @export var health_per_level: float = 100.0
+@export_category("ShieldTower Stats")
+@export var shield_health: float = 20.0
+@export var shield_health_per_level: float = 10.0
+@export var rotation_speed_multiplier: float = 40.0
+@export var rotation_speed_per_level: float = 20.0
 @export_category("Assets")
 ## The sprite atlas containing every animation for the tower. 
 @export var atlas: Texture2D

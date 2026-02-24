@@ -108,6 +108,7 @@ var level: int = 0:
 			on_remove_active_buff(buff)
 
 		update_current_combat_data()
+		update_shield_tower_data()
 		update_debuff_data()
 		update_buff_data()
 		update_bullet_modifier_data()
@@ -638,3 +639,6 @@ func shake() -> void:
 	tween.tween_interval(TOWER_SHAKE_DURATION)
 	tween.tween_property(sprite, "position:x", 0, TOWER_SHAKE_DURATION)
 	tween.tween_interval(TOWER_SHAKE_DURATION)
+
+func update_shield_tower_data() -> void:
+	pass
