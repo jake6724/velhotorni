@@ -17,7 +17,6 @@ var target_priority_label_options: Array[String] = ["First", "Last","Most Health
 @onready var exit_button: TextureButton = %ExitButton
 
 signal exited
-signal tower_target_priority_updated
 
 func _ready():
 	target_priority_index_max = target_priority_label_options.size()-1

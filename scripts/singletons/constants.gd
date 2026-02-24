@@ -137,6 +137,7 @@ func get_evolve_element_2(_element: Element) -> Element:
 
 var z_index_map: Dictionary[String, int] = {
 	"bg": -4096,
+	"scorchmark": -4095,
 	"melee_spell": -4094,
 	"enemy_corpse": -3500,
 	"tower_shield": -3000,
@@ -149,6 +150,7 @@ var z_index_map: Dictionary[String, int] = {
 	"player_character": 2,
 	"tall_grass": 100,
 	"flying_enemy": 1000,
+	"explosion": 1001,
 	"weather_scroll": 2000,
 	"tower_menu": 1000,
 	"tower_upgrade_menu": 1001,

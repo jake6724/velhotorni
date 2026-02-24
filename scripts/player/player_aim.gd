@@ -107,7 +107,8 @@ func swing_staff() -> void:
 	var tween: Tween = get_tree().create_tween()
 	var target = player.staff_sprite.rotation_degrees + SWING_DEGREE_INCREMENT
 	tween.tween_property(player.staff_sprite, "rotation_degrees", target, SWING_ROTATION_SPEED)
-
+	player.staff_sprite.flip_v = not player.staff_sprite.flip_v
+	
 func flip_sprite() -> void:
 	if aim_input:
 		var flip = aim_input.x <= -0.001

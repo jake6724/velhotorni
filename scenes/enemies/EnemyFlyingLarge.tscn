@@ -924,14 +924,12 @@ vframes = 4
 [node name="FXBurn" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_u7c86")
 animation = &"burn"
 
 [node name="FXHeal" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_6lo5p")
 animation = &"heal"
 frame = 10
@@ -940,7 +938,6 @@ frame_progress = 1.0
 [node name="FXWeaken" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_s23m0")
 animation = &"weaken"
 frame_progress = 0.015835682
@@ -948,7 +945,6 @@ frame_progress = 0.015835682
 [node name="FXSpeed" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_teawl")
 animation = &"speed"
 frame_progress = 0.5686092
@@ -956,21 +952,18 @@ frame_progress = 0.5686092
 [node name="FXStun" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1000
-position = Vector2(17, 5)
 sprite_frames = SubResource("SpriteFrames_xvqtx")
 animation = &"stun"
 frame_progress = 0.43879396
 
 [node name="FXFreeze" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
-position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_hdtt6")
 animation = &"end_freeze"
 frame_progress = 1.0
 
 [node name="FXCleanse" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
-position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_jxhdq")
 animation = &"cleanse"
 frame = 10
@@ -979,7 +972,6 @@ frame_progress = 1.0
 [node name="FXSlow" type="AnimatedSprite2D" parent="Sprite2D"]
 visible = false
 z_index = 1
-position = Vector2(17, 2)
 sprite_frames = SubResource("SpriteFrames_oms5k")
 animation = &"slow"
 frame_progress = 0.059002988
@@ -988,14 +980,12 @@ frame_progress = 0.059002988
 visible = false
 modulate = Color(1, 1, 1, 0.74902)
 z_index = 2
-position = Vector2(17, 16)
 sprite_frames = SubResource("SpriteFrames_w4vop")
 animation = &"end_prevent"
 frame = 2
 frame_progress = 1.0
 
 [node name="Light" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(8, 7.96659)
 scale = Vector2(1, 0.995824)
 texture = ExtResource("4_8qwp1")
