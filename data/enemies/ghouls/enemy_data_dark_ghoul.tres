@@ -12,24 +12,16 @@ region = Rect2(0, 64, 16, 16)
 
 [resource]
 script = ExtResource("5_y0xca")
-size = 0
 element = 5
-strong_against_element = 0
 weak_against_element = 4
 health = 100.0
-speed = 20.0
-damage = 1
+speed = 15.0
 tower_mana_drop_chance_base = 2.0
 element_mana_drop_chance = 0.05
-element_mana_drop_amount_multiplier = 1.0
 atlas = ExtResource("1_k2u4y")
 icon = SubResource("AtlasTexture_6uchg")
-show_light = false
 explosion_sfx = ExtResource("2_3hmq5")
 wind_up = true
-wind_up_duration = 0.5
-hex_data_list = Array[ExtResource("3_f7ox8")]([])
-knockback_multiplier = 1.5
 enemy_name = "Fire Ghoul"
 enemy_description = "Animated corpse of a violent criminal who died in a fire."
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

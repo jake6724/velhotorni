@@ -94,8 +94,8 @@ radius = 8.0
 height = 32.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4gs5m"]
-radius = 4.0
-height = 10.0
+radius = 3.9997828
+height = 26.01945
 
 [node name="SpellMeleeArcaneDagger" type="Sprite2D"]
 texture = ExtResource("1_x13pt")
@@ -124,7 +124,8 @@ collision_mask = 0
 
 [node name="BulletBlockCollider" type="CollisionShape2D" parent="BulletBlock"]
 unique_name_in_owner = true
-position = Vector2(19, 0)
+position = Vector2(6.9999995, 5.3290705e-15)
+rotation = -1.5812266
 shape = SubResource("CapsuleShape2D_4gs5m")
 disabled = true
 debug_color = Color(0.958419, 3.85046e-07, 0.527242, 0.42)

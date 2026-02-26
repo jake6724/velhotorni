@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://cl8brxmuq4rbd"]
+
+[ext_resource type="Resource" uid="uid://bqikf2dqaxqv7" path="res://data/enemies/ghouls/enemy_data_light_bifron.tres" id="1_tur00"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="2_i23yv"]
+
+[resource]
+script = ExtResource("2_i23yv")
+enemy_data = ExtResource("1_tur00")
+delay = 10.0
+path_index = 1
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"
