@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://1rdl0eiscf7d"]
+[gd_scene load_steps=9 format=3 uid="uid://1rdl0eiscf7d"]
 
 [ext_resource type="Texture2D" uid="uid://3ub64jxwenmh" path="res://assets/art/atlases/bullet/atl_spell_bullet_fireball.png" id="1_p5rjy"]
 [ext_resource type="Script" uid="uid://iy0t84qkqr0q" path="res://scripts/spells/spell_bullet_aoe.gd" id="1_yq231"]
@@ -166,9 +166,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_p5rjy"]
 radius = 2.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yq231"]
-radius = 20.0
-
 [node name="SpellBulletAoe" type="Sprite2D"]
 texture = ExtResource("1_p5rjy")
 hframes = 4
@@ -184,14 +181,7 @@ autoplay = "move"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 512
-collision_mask = 270352
+collision_mask = 8208
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_p5rjy")
-
-[node name="AOEArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 262160
-
-[node name="AOECollider" type="CollisionShape2D" parent="AOEArea"]
-shape = SubResource("CircleShape2D_yq231")

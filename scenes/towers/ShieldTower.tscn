@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dvampp25lkg6q"]
+[gd_scene load_steps=39 format=3 uid="uid://dvampp25lkg6q"]
 
 [ext_resource type="Script" uid="uid://b2c0x53fqqowa" path="res://scripts/towers/shield_tower.gd" id="1_kvm0y"]
 [ext_resource type="Texture2D" uid="uid://cy76j8i8ym8mf" path="res://assets/art/sprites/environment/spr_environment_light.png" id="2_djp37"]
@@ -16,9 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://qr44ws5evlmm" path="res://assets/art/sprites/ui/atl_ui_lvlup_compact.png" id="14_gdtcv"]
 [ext_resource type="Texture2D" uid="uid://d3uwhutrtqgwi" path="res://assets/art/sprites/ui/spr_ui_coin_small.png" id="15_u6r4h"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="16_badbf"]
-[ext_resource type="Texture2D" uid="uid://bhingvy700wlr" path="res://assets/art/atlases/atl_ui_controllerbuttons.png" id="17_3vo71"]
 [ext_resource type="Script" uid="uid://bshhqh6p6rwlx" path="res://scripts/ui/controller_button_hint.gd" id="18_ygj3w"]
 [ext_resource type="Script" uid="uid://dryk4xnlrt6ig" path="res://scripts/towers/tower_hurtbox.gd" id="19_lju3i"]
+[ext_resource type="PackedScene" uid="uid://b26c6r5s37hup" path="res://scenes/ui/ButtonHint.tscn" id="19_lp64o"]
+[ext_resource type="Texture2D" uid="uid://cybjsvtwpn6sv" path="res://assets/art/atlases/atl_ui_pcbuttons.png" id="20_1jtvh"]
 [ext_resource type="Texture2D" uid="uid://bs1li1amcuwmf" path="res://assets/art/sprites/ui/spr_ui_health_bg.png" id="20_7at7f"]
 [ext_resource type="Texture2D" uid="uid://rwec3xnhkxkf" path="res://assets/art/sprites/ui/spr_ui_health_bar.png" id="21_b4j6r"]
 [ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="22_ytucv"]
@@ -250,9 +251,17 @@ resource_local_to_scene = true
 atlas = ExtResource("14_gdtcv")
 region = Rect2(0, 0, 8, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wl0l1"]
-atlas = ExtResource("17_3vo71")
-region = Rect2(35, 3, 10, 10)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdkp3"]
+resource_local_to_scene = true
+atlas = ExtResource("20_1jtvh")
+region = Rect2(48, 80, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3xpr4"]
+load_path = "res://.godot/imported/atl_ui_pcbuttons.png-a4856d9994c8574dd782cdfb8ed6a4b4.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djp37"]
+atlas = SubResource("CompressedTexture2D_3xpr4")
+region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wl0l1"]
 radius = 5.0
@@ -414,16 +423,27 @@ theme_override_font_sizes/font_size = 8
 text = "250"
 vertical_alignment = 1
 
+[node name="PlacementButtonHint" parent="UpgradeDisplay" instance=ExtResource("19_lp64o")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 23.0
+offset_right = 32.0
+offset_bottom = 39.0
+texture = SubResource("AtlasTexture_bdkp3")
+
 [node name="UpgradeButtonHint" type="TextureRect" parent="UpgradeDisplay"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
-offset_left = 18.0
-offset_top = 24.0
-offset_right = 28.0
-offset_bottom = 34.0
+offset_left = 16.0
+offset_top = 23.0
+offset_right = 32.0
+offset_bottom = 39.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = SubResource("AtlasTexture_wl0l1")
+texture = SubResource("AtlasTexture_djp37")
 stretch_mode = 2
 script = ExtResource("18_ygj3w")
 
@@ -456,9 +476,10 @@ value = 100.0
 texture_under = ExtResource("20_7at7f")
 texture_progress = ExtResource("21_b4j6r")
 
-[node name="NumberPopup" type="Node" parent="."]
+[node name="NumberPopup" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("22_ytucv")
+metadata/_custom_type_script = "uid://c75pt0b6io16g"
 
 [node name="TowerObstacleBody" type="StaticBody2D" parent="."]
 position = Vector2(8, 8)

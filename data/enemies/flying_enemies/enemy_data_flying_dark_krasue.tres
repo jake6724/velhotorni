@@ -21,5 +21,4 @@ element_mana_drop_amount_multiplier = 2.0
 atlas = ExtResource("1_e2p75")
 icon = SubResource("AtlasTexture_bly52")
 explosion_sfx = ExtResource("2_wq88n")
-wind_up = false
 metadata/_custom_type_script = "uid://buqpe6w72ojlb"

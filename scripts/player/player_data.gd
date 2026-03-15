@@ -29,6 +29,11 @@ extends Resource
 
 @export var dash_duration: float
 
+@export var pre_dash_coyote_time: float
+@export var post_dash_coyote_time: float
+## Player Fall animation is currently 0.4 seconds. This value should <= 0.4.
+@export var post_fall_coyote_time: float
+
 @export var perk_data_pool: PerkDataPool
 
 @export var aoe_damage: float = 0.0

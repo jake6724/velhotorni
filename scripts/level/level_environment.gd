@@ -24,6 +24,9 @@ var tower_mana_breakables: Array[Breakable] = []
 @onready var boss_spawn_point = %BossSpawnPoint
 
 @onready var wave_info_panel_parent: Node = %WaveInfoPanelParent
+
+@onready var tall_grass_parent: Node2D = %TallGrassParent
+
 # Export vars
 @export var level_name: String
 @export var region: Region
@@ -35,7 +38,8 @@ var tower_mana_breakables: Array[Breakable] = []
 
 @export var start_first_wave_immediately: bool = false
 
-@export var show_wave_info_banner: bool = true
+# Can prevent wave banner, path alerts
+@export var show_level_details: bool = true
 
 var stars: int = 1 # Tracks the highest number of stars earned for this level
 var can_start_wave: bool = true # Used so that levels can disable wave start, specifically in the tutorial
@@ -72,7 +76,6 @@ func _ready():
 func child_custom_ready() -> void:
 	pass
 
-
 func configure_tower_mana_breakables() -> void:
 	for child: Breakable in tower_mana_breakables_parent.get_children():
 		tower_mana_breakables.append(child)
@@ -83,9 +86,10 @@ func on_wave_started_start_breakables() -> void:
 
 func configure_wave_info_panels() -> void:
 	for child in wave_info_panel_parent.get_children():
-		var wave_info: WaveInfoPanel = child as WaveInfoPanel
-		if wave_info:
-			wave_info.get_path_enemy_info(self)
+		var wave_info_panel: WaveInfoPanel = child as WaveInfoPanel
+		if wave_info_panel:
+			wave_info_panel.first_activation = true
+			wave_info_panel.get_path_enemy_info(self)
 
 	populate_wave_info_panels()
 
@@ -93,7 +97,7 @@ func populate_wave_info_panels() -> void:
 	for child in wave_info_panel_parent.get_children():
 		var wave_info: WaveInfoPanel = child as WaveInfoPanel
 		if wave_info:
-			wave_info.populate_unit_wave_info(WaveManager.wave_index)
+			wave_info.populate_unit_wave_info(WaveManager.wave_index, show_level_details)
 
 func hide_wave_info_panels() -> void:
 	for child in wave_info_panel_parent.get_children():

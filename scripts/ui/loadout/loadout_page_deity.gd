@@ -1,0 +1,2 @@
+class_name LoadoutPageDeity
+extends LoadoutPage

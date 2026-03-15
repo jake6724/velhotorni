@@ -1080,7 +1080,7 @@ metadata/_custom_type_script = "uid://bm2jek1l03frj"
 script = ExtResource("14_vx0gd")
 metadata/_custom_type_script = "uid://di3c54ykd28fx"
 
-[node name="NumberPopup" type="Node" parent="."]
+[node name="NumberPopup" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("15_bae5j")
 metadata/_custom_type_script = "uid://c75pt0b6io16g"

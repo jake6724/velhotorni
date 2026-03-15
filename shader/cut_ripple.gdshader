@@ -1,0 +1,91 @@
+// Attach to a ColorRect in front of texture/background
+
+shader_type canvas_item;
+
+// Handles the concentric ripples
+uniform float frequency: hint_range(0, 15, 0.01) = 4.0;
+uniform float amplitude: hint_range(0, 10, 0.1) = 2.0;
+uniform float ripple_rate : hint_range(0, 20.0, 1) = 5;
+
+// Handles the waves themselves
+uniform float wave_amplitude: hint_range(0.001, 0.1, 0.001) = 0.05;
+uniform float wave_frequency: hint_range(0, 15, 0.01) = 4.0;
+
+// Cut vars
+uniform float fill_amount : hint_range(0.0, 1.0) = 0.5;
+uniform float mask_rotation : hint_range(-360.0, 360.0, 0.1) = 0;
+uniform vec2 mask_offset = vec2(0, 0);
+uniform vec2 mask_size = vec2(1, 1);
+uniform vec2 mask_rotation_pivot = vec2(0.5, 0.5);
+uniform vec2 mask_scale_pivot = vec2(0.5, 0.5);
+
+uniform bool invert_mask = false;
+uniform bool use_different_texture = false;
+uniform sampler2D mask_texture : filter_nearest;
+
+uniform sampler2D noise;
+
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
+
+vec2 rotate_degrees(vec2 uv, vec2 pivot, float deg){
+	float rad = radians(deg + 90.0);
+	mat2 rotation = mat2(vec2(sin(rad), -cos(rad)),vec2(cos(rad), sin(rad)));
+
+	uv -= pivot;
+	uv = uv * rotation;
+	uv += pivot;
+	return uv;
+}
+
+vec2 scale(vec2 uv, vec2 pivot, vec2 scale){
+	uv -= pivot;
+	uv = uv / scale;
+	uv += pivot;
+	return uv;
+}
+
+vec2 wave(vec2 uv, float time) {
+    return vec2(
+        uv.x + sin(uv.y * wave_frequency + time) * wave_amplitude,
+        uv.y + sin(uv.x * wave_frequency + time) * wave_amplitude
+    );
+}
+
+void fragment() {
+	vec2 center_position = -1.0 + 2.0 * UV / (1.0 / TEXTURE_PIXEL_SIZE);
+	float center_distance = length(center_position);
+	
+	float ripple = sin(center_distance * -frequency * PI + ripple_rate * TIME) * amplitude / (center_distance + 1.0);
+	
+	vec2 uv = FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy + (center_position/center_distance) * ripple * wave_amplitude;
+    vec2 background_wave = wave(uv, TIME);
+	vec4 background_texture = texture(SCREEN_TEXTURE,background_wave) * sqrt(amplitude);
+
+	float alpha_scalar = (1.0 - min(center_distance, 1.0)) * background_texture.x * 2.5; 
+	
+	background_texture.a *= 1.0 * alpha_scalar * (ripple + background_texture.x * background_texture.y);
+	background_texture.a = max(background_texture.a - (background_texture.y * 0.45), 0.0);
+	
+	COLOR = vec4(background_texture.xyz, background_texture.a);
+
+    vec2 uv_rotated = rotate_degrees(UV, mask_rotation_pivot, mask_rotation);
+	vec2 uv_position = scale(uv_rotated, mask_scale_pivot, mask_size * (1.0 - fill_amount)) + mask_offset;
+
+	float alpha_total = texture(TEXTURE, uv_position).a;
+
+	if (use_different_texture)
+		alpha_total = texture(mask_texture, uv_position).a;
+
+	bool is_within_bounds = uv_position.x >= 0.0 && uv_position.y >= 0.0 && uv_position.x <= 1.0 && uv_position.y <= 1.0;
+
+	if (!invert_mask){
+		if (is_within_bounds)
+			COLOR.a -= alpha_total;
+	}
+	else{
+		COLOR.a -= 1.0 - alpha_total;
+
+		if (!is_within_bounds)
+			COLOR.a = 0.0;
+	}
+}

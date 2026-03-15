@@ -18,7 +18,7 @@ var can_pause: bool = false
 
 var wave_failures: int = 0
 
-const PERK_UI_POPUP_DELAY: float = .2
+const PERK_UI_POPUP_DELAY: float = .1
 
 # func _input(_event):
 # 	if Input.is_action_just_pressed("x"):
@@ -56,6 +56,7 @@ func _ready():
 	player_character.on_tower_mana_collected(active_level.initial_gold)
 	player_character.player_respawned.connect(active_level.base.take_damage.bind(1))
 	player_character.player_input.escape_pressed.connect(on_escape_pressed)
+	player_character.player_hud.level_requires_banner = active_level.show_level_details
 
 	# Configure CoinDrop Manager and Coin Collector
 	EnemySpawner.enemy_spawned_with_ref.connect(coin_drop_manager.on_enemy_spawned)
@@ -103,8 +104,13 @@ func _ready():
 	player_character.player_input = player_character.player_input
 	perk_ui.main = self
 
+	# Configure LevelEnvironment's TallGrass
+	for tall_grass: TallGrass in active_level.tall_grass_parent.get_children():
+		player_character.player_stopped.connect(tall_grass.on_player_stopped)
+		player_character.player_moving.connect(tall_grass.on_player_moving)
+
 	# Hide Cursor
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 
 	if active_level.start_first_wave_immediately:
 		WaveManager.start_wave()
@@ -182,6 +188,8 @@ func on_perk_selected(perk_data: PerkData) -> void:
 	
 	player_character.player_input.input_enabled = true
 	player_character.player_input.can_start_wave = true
+
+	player_character.player_hud.configure_for_next_wave()
 
 func show_level_complete() -> void:
 	level_complete_panel.set_stars(calc_stars())

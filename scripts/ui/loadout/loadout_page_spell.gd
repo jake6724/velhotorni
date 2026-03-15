@@ -23,24 +23,7 @@ var selected_equip_spell_card: SpellCard = null
 func _ready():
 	populate_equip_cards()
 	populate_chest_cards()
-
-	for child in equip_spell_cards_parent.get_children():
-		if child is SpellCard:
-			equip_spell_cards.append(child)
-
-	equip_spell_card_1 = equip_spell_cards[0]
-	equip_spell_card_2 = equip_spell_cards[1]
-	equip_spell_card_3 = equip_spell_cards[2]
-	equip_spell_card_4 = equip_spell_cards[3]
-
-	for child in chest_spell_cards_parent.get_children():
-		if child is SpellCard:
-			chest_spell_cards.append(child)
-
-	start_card = equip_spell_cards[0]
-
 	update_all_chest_disabled()
-
 	StarRegistry.player_star_count_updated.connect(on_player_star_count_updated)
 
 func populate_equip_cards() -> void:
@@ -51,6 +34,16 @@ func populate_equip_cards() -> void:
 		new_spell_card.primary_press.connect(on_card_pressed.bind(new_spell_card))
 		new_spell_card.primary_press.connect(on_equip_card_pressed.bind(new_spell_card))
 		new_spell_card.secondary_press.connect(on_equip_card_secondary_press.bind(new_spell_card))
+
+	for child in equip_spell_cards_parent.get_children():
+		if child is SpellCard:
+			equip_spell_cards.append(child)
+
+	equip_spell_card_1 = equip_spell_cards[0]
+	equip_spell_card_2 = equip_spell_cards[1]
+	equip_spell_card_3 = equip_spell_cards[2]
+	equip_spell_card_4 = equip_spell_cards[3]
+	start_card = equip_spell_cards[0]
 
 func populate_chest_cards() -> void:
 	# Get the data that already exists; don't re-add it
@@ -69,6 +62,10 @@ func populate_chest_cards() -> void:
 				new_spell_card.populate(spell_data)
 				new_spell_card.primary_press.connect(on_card_pressed.bind(new_spell_card))
 				new_spell_card.primary_press.connect(on_chest_card_pressed.bind(new_spell_card))
+
+	for child in chest_spell_cards_parent.get_children():
+		if child is SpellCard:
+			chest_spell_cards.append(child)
 
 func on_equip_card_pressed(spell_card: SpellCard) -> void:
 	selected_equip_spell_card = spell_card
@@ -113,8 +110,9 @@ func update_player_loadout() -> void:
 	PlayerLoadout.equipped_spell_3 = equip_spell_card_3.data
 	PlayerLoadout.equipped_spell_4 = equip_spell_card_4.data
 	PlayerLoadout.trigger_spell_loadout_update()
+	populate_chest_cards()
+	update_all_chest_disabled()
 
 func on_player_star_count_updated() -> void:
 	populate_chest_cards()
-	update_all_chest_disabled() 
-
+	update_all_chest_disabled()

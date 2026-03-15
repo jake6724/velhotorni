@@ -9,6 +9,7 @@ var coin_drop_scene: PackedScene = preload("res://scenes/enemies/CoinDrop.tscn")
 var COIN_MOVE_SPEED: float = 150
 const JITTER: float = 7
 const REWARD_JITTER: float = 10
+const REWARD_SPAWN_DELAY: float = .005
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 var reward_remaining: int = 0
@@ -68,7 +69,7 @@ func spawn_reward(_global_pos, drop_chance) -> void:
 		coin.destination_direction = coin.global_position.direction_to(coin.destination)
 
 		drop_chance -= 1.0
-		await get_tree().create_timer(.01).timeout
+		await get_tree().create_timer(REWARD_SPAWN_DELAY).timeout
 		if drop_chance > 0.0:
 			spawn_reward(_global_pos, drop_chance)
 		else:

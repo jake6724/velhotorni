@@ -39,10 +39,11 @@ signal switch_player_mode_pressed
 signal switch_tower_action_pressed
 signal weapon_select_pressed
 signal ui_interact_pressed
+signal ui_interact_released
 signal escape_pressed
 signal start_wave_action_charge_updated
 signal heal_all_action_charge_updated
-signal heal_all_action_requested
+signal radial_wheel_data_updated
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -70,7 +71,13 @@ func get_aim_input_controller() -> Vector2:
 	return aim_input
 
 func get_aim_input_mouse() -> Vector2: 
-	aim_input = get_owner().global_position.direction_to(get_global_mouse_position())
+	var mouse_position: Vector2 = get_global_mouse_position()
+	aim_input = get_owner().global_position.direction_to(mouse_position)
+	var angle_to_mouse: float = mouse_position.angle_to_point(global_position)
+
+	var distance_squared_to_mouse = global_position.distance_squared_to(mouse_position)
+
+	radial_wheel_data_updated.emit(angle_to_mouse, distance_squared_to_mouse)
 	return aim_input
 
 func _process(delta):
@@ -128,6 +135,9 @@ func _input(event):
 		if event.is_action("ui_interact") and event.is_pressed() and not event.is_echo():
 			ui_interact_pressed.emit()
 
+		if event.is_action("ui_interact") and event.is_released() and not event.is_echo():
+			ui_interact_released.emit()
+
 		if event.is_action("weapon_select_0") and event.is_pressed() and not event.is_echo():
 			weapon_select_pressed.emit(0)
 		
@@ -158,7 +168,7 @@ func _input(event):
 		set_input_type(event)
 
 func check_primary_action_input(event) -> void:
-	if Input.is_action_just_pressed("primary_action"):
+	if Input.is_action_just_pressed("primary_action") and not event.is_echo():
 		primary_action_pressed = true
 		primary_action_just_pressed.emit()
 
@@ -188,6 +198,9 @@ func set_input_type(event) -> void:
 		if abs(movement_joystick_input_strength) > Vector2(.2, .2) or aim_joystick_input_strength > Vector2(.2, .2):
 			GlobalSettings.controller_active = true			
 			swap_input_type()
+
+func set_input_enabled(_value) -> void:
+	input_enabled = _value
 
 ## `true` = controller active, 'false' = mouse active
 func swap_input_type() -> void:

@@ -10,10 +10,8 @@ const HITSTOP_DURATION: float = .1
 
 func _input(_event):
 	if Input.is_action_just_pressed("q"):
-		print("Hold")
 		set_fast_forward_speed()
 	if Input.is_action_just_released("q"):
-		print("Release")
 		set_normal_speed()
 
 func _ready():
@@ -30,7 +28,6 @@ func _ready():
 	hitstun_timer.timeout.connect(on_hitstun_timer_timeout)
 
 func set_fast_forward_speed() -> void:
-	print("Setting speed")
 	Engine.time_scale = FAST_FORWARD_SPEED 
 	Engine.physics_ticks_per_second = 60 * FAST_FORWARD_SPEED
 

@@ -26,7 +26,6 @@ extends Control
 @onready var spell_mana_list: Array[TextureProgressBar] = [spell_1_mana, spell_2_mana, spell_3_mana, spell_4_mana] # null is used to make array parallel in size to spell_data_list
 @onready var spell_mana: Dictionary[SpellData, TextureProgressBar]
 
-
 @onready var player_hearts: HBoxContainer = %PlayerHearts
 @onready var player_portrait: PlayerPortrait = %PlayerPortrait
 
@@ -47,9 +46,10 @@ extends Control
 var enemy_info_total: int
 var enemy_info_count: int
 
-@onready var banner_ap: AnimationPlayer = $BannerAnimationPlayer
+@onready var banner_ap: AnimationPlayer = $CanvasLayer/BannerAnimationPlayer
 @onready var banner: Sprite2D = %Banner
 @onready var banner_label: Label = %BannerLabel
+@onready var level_requires_banner: bool # Set by Main
 
 @onready var build_phase_buttons: VBoxContainer = %BuildPhaseButtons
 @onready var start_wave_progress_bar: TextureProgressBar = %StartWaveProgressBar
@@ -58,7 +58,9 @@ var enemy_info_count: int
 @onready var heal_all: MarginContainer = %HealAll
 
 @onready var hint_label: Label = %HintLabel
+
 var hint_timer: Timer = Timer.new()
+var prev_hint_overwriteable: bool = false
 
 var clear_spell_mana_drop_display_timer: Timer = Timer.new()
 const CLEAR_SPELL_MANA_DROP_DISPLAY_DELAY: float = 3.0
@@ -104,13 +106,10 @@ func _ready():
 	add_child(hint_timer)
 	hint_timer.timeout.connect(on_hint_timer_timeout)
 	hint_label.hide()
-
-	AlertManager.player_hud_hint_requested.connect(on_alert_manager_player_hud_hint_requested)
+	prev_hint_overwriteable = false
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats, player_build: PlayerBuild, player_input: PlayerInput) -> void:
 	on_spell_loadout_updated(spell_data_list, player_mana)
-	update_spells(spell_data_list)
-	update_mana(spell_data_list, player_mana)
 	update_tower_mana(player_mana)
 	on_health_updated(player_stats.health)
 
@@ -131,9 +130,10 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 	build_phase_buttons.position.x = -104
 	animate_show_build_phase_buttons()
 
-	wave_complete_banner_animation_finished.connect(on_wave_complete_banner_animation_finished)
-
 	player_build.heal_all_cost_updated.connect(on_player_build_heal_all_cost_updated)
+
+	player_build.player_hud_hint_requested.connect(display_hint_text)
+	AlertManager.player_hud_hint_requested.connect(display_hint_text)
 
 func on_spell_loadout_updated(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> void:
 	for i in range(spell_data_list.size()):
@@ -148,8 +148,8 @@ func update_spells(spell_data_list: Array[SpellData]) -> void:
 		weapons.show()
 
 		# Hide all inactive spell icons. They will be shown below if required
-		for key in spell_icons.keys():
-			spell_icons[key].hide()
+		for icon in spell_icons_list:
+			icon.hide()
 
 		# The first spell in the array will be active
 		spell_icons[spell_data_list[0]].texture = spell_data_list[0].active_icon
@@ -194,6 +194,8 @@ func update_mana(spell_data_list: Array[SpellData], player_mana: PlayerMana) -> 
 
 		for spell_data: SpellData in spell_data_list.slice(1, spell_data_list.size()):
 			spell_mana[spell_data].value =  (player_mana.spell_mana[spell_data] / player_mana.spell_mana_maxes[spell_data]) * 100
+
+		update_spell_mana_background(spell_data_list[0])
 
 func update_tower_mana(player_mana) -> void:
 	var text = str(int(player_mana.tower_mana))
@@ -310,14 +312,14 @@ func get_spell_popup_by_spell_data(_spell_data: SpellData) -> void:
 	pass
 
 func on_enemy_total_updated(_total: int) -> void:
-	enemy_info_count = _total
+	enemy_info_count = 0
 	enemy_info_total = _total
 	enemy_progress.value = (float(enemy_info_count) / enemy_info_total) * 100* 100
 	enemy_total.text = str(enemy_info_total)
 	enemy_count.text = str(enemy_info_count)
 
 func on_enemy_count_decremented() -> void:
-	enemy_info_count -= 1
+	enemy_info_count += 1
 	enemy_count.text = str(enemy_info_count)
 	enemy_progress.value = (float(enemy_info_count) / enemy_info_total) * 100
 
@@ -329,21 +331,22 @@ func on_wave_started() -> void:
 	show_banner("Wave Started", wave_start_banner_animation_finished)
 	animate_hide_build_phase_buttons()
 
-func on_wave_complete_banner_animation_finished() -> void:
+func configure_for_next_wave() -> void:
 	WaveManager.can_start_wave = true
 	start_wave_progress_bar.value = 0
 	animate_show_build_phase_buttons()
 
 func show_banner(text: String, completed_signal: Signal) -> void:
-	banner_label.text = text
-	banner.show()
-	banner_ap.play("open")
-	await banner_ap.animation_finished
-	banner_ap.play("hold")
-	await get_tree().create_timer(2).timeout
-	banner_ap.play("close")
-	await banner_ap.animation_finished
-	banner.hide()
+	if level_requires_banner:
+		banner_label.text = text
+		banner.show()
+		banner_ap.play("open")
+		await banner_ap.animation_finished
+		banner_ap.play("hold")
+		await get_tree().create_timer(2).timeout
+		banner_ap.play("close")
+		await banner_ap.animation_finished
+		banner.hide()
 	completed_signal.emit()
 
 func show_banner_label() -> void:
@@ -399,13 +402,20 @@ func animate_hide_build_phase_buttons() -> void:
 	var target: float = build_phase_buttons.position.x - 104
 	tween.tween_property(build_phase_buttons, "position:x", target, .2)
 
-func display_hint_text(_text, duration) -> void:
-	hint_label.text = _text
-	hint_label.show()
-	hint_timer.start(duration)
-
+func display_hint_text(_text: String, _duration: float, overwriteable: bool) -> void:
+	if not hint_label.visible:
+		prev_hint_overwriteable = overwriteable
+		hint_label.text = _text
+		hint_label.show()
+		hint_timer.start(_duration)
+	elif hint_label.visible and prev_hint_overwriteable:
+		prev_hint_overwriteable = overwriteable
+		hint_label.text = _text
+		hint_label.show()
+		hint_timer.start(_duration)
+		
 func on_hint_timer_timeout() -> void:
 	hint_label.hide()
 
-func on_alert_manager_player_hud_hint_requested(_text, _duration) -> void:
-	display_hint_text(_text, _duration)
+func update_spell_mana_background(spell_data: SpellData) -> void:
+	active_mana_progress_bar.modulate = spell_data.ammo_color

@@ -5,6 +5,8 @@ enum Element {
 	LAVA, PLASMA, STORM, LIGHTNING, ICE, FLOOD, MUD, CRYSTAL, SPIRIT, SUN, CURSE, VOID,
 	ARCANE}
 
+enum ZIndexLayer {PLAYER, }
+
 var DIRECTIONS = [
 	Vector2(0, -1),  			  # Up
 	Vector2(1, -1).normalized(),  # Up Right
@@ -135,6 +137,7 @@ func get_evolve_element_2(_element: Element) -> Element:
 
 var z_index_map: Dictionary[String, int] = {
 	"bg": -4096,
+	"scorchmark": -4095,
 	"melee_spell": -4094,
 	"enemy_corpse": -3500,
 	"tower_shield": -3000,
@@ -145,15 +148,16 @@ var z_index_map: Dictionary[String, int] = {
 	"tower": -998,
 	"enemy_spawner": 1,
 	"player_character": 2,
+	"tall_grass": 100,
 	"flying_enemy": 1000,
+	"explosion": 1001,
 	"weather_scroll": 2000,
 	"tower_menu": 1000,
 	"tower_upgrade_menu": 1001,
-	"popup": 2000,
 	"reticle": 2001,
-	"enemy_healthbar": 4000, 
+	"enemy_healthbar": 2000, 
+	"popup": 4050,
 	"top": 4096
-
 }
 
 func get_closest_cardinal_direction_normalized(input_vector) -> Vector2:

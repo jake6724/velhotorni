@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsnxdycnstbxx"]
+[gd_scene load_steps=10 format=3 uid="uid://bsnxdycnstbxx"]
 
 [ext_resource type="Texture2D" uid="uid://bru0vasbogas4" path="res://assets/art/atlases/bullet/atl_bullet_arcane.png" id="1_6fm6w"]
 [ext_resource type="Script" uid="uid://nea0jnsnjkk3" path="res://scripts/spells/spell_bullet.gd" id="2_xhrp4"]
@@ -135,6 +135,19 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhrp4"]
 radius = 2.0
 
+[sub_resource type="Gradient" id="Gradient_xhrp4"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.26158038, 0.52997273, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.2520276, 0.25202766, 0.25202763, 1, 0.103743605, 0.103743516, 0.103743516, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6fm6w"]
+gradient = SubResource("Gradient_xhrp4")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.7863248, 0.26068377)
+
 [node name="SpellBullet" type="Sprite2D"]
 texture = ExtResource("1_6fm6w")
 hframes = 4
@@ -151,7 +164,18 @@ autoplay = "move"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 512
-collision_mask = 270352
+collision_mask = 8208
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_xhrp4")
+
+[node name="Light" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+visible = false
+color = Color(0.972549, 0.15686275, 0.47058824, 1)
+energy = 8.0
+range_z_min = -4096
+range_z_max = 4096
+range_layer_min = -3165
+range_layer_max = 12155
+texture = SubResource("GradientTexture2D_6fm6w")

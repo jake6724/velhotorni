@@ -6,6 +6,7 @@ extends PanelContainer
 
 var wave_previews: Array[Dictionary] = []
 var unit_wave_info_scene: PackedScene = preload("res://scenes/ui/UnitWaveInfo.tscn")
+var first_activation: bool = true
 
 func _ready():
 	z_index = Constants.z_index_map["top"]
@@ -23,7 +24,7 @@ func get_path_enemy_info(active_level: LevelEnvironment) -> void:
 				else:
 					wave_previews[i][spawn.enemy_data] = 1
 				
-func populate_unit_wave_info(wave_index: int) -> void:
+func populate_unit_wave_info(wave_index: int, show_path_alerts: bool) -> void:
 	if wave_index < wave_previews.size():
 		if wave_previews and wave_previews[wave_index] and wave_previews[wave_index].keys():
 			# Remove existing children to make way for new wave
@@ -38,8 +39,9 @@ func populate_unit_wave_info(wave_index: int) -> void:
 			if wave_previews[wave_index].keys().size() == 0:
 				hide()
 			else:
-				print("Submitting alert!")
-				AlertManager.submit_new_alert(global_position, Alert.Priority.HIGHEST, 10.0)
+				if first_activation and show_path_alerts:
+					AlertManager.submit_new_alert(global_position, Alert.Priority.HIGHEST, 10.0, "New Portals have opened!")
+					first_activation = false
 				show()
 		else:
 			hide()

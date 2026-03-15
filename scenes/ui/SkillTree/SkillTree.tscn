@@ -1,4 +1,4 @@
-[gd_scene load_steps=249 format=3 uid="uid://cahss8ju2i2fv"]
+[gd_scene load_steps=276 format=3 uid="uid://cahss8ju2i2fv"]
 
 [ext_resource type="Script" uid="uid://ypyma3ofdq7f" path="res://scripts/ui/pannable_scroll_container.gd" id="1_1d7ss"]
 [ext_resource type="Script" uid="uid://dmskb8qcegql3" path="res://scripts/ui/skilltree/skill_tree.gd" id="1_3rcrv"]
@@ -34,13 +34,23 @@
 [ext_resource type="Resource" uid="uid://6d73eb57qvfc" path="res://data/towers/tower_data_light_sun.tres" id="20_kjyia"]
 [ext_resource type="Resource" uid="uid://blmnxjcqyc488" path="res://data/towers/tower_data_dark.tres" id="21_sr1fv"]
 [ext_resource type="Resource" uid="uid://dq4uc4d53yy2p" path="res://data/towers/tower_data_dark_curse.tres" id="22_ronkx"]
+[ext_resource type="Texture2D" uid="uid://dic12q6f5l7vq" path="res://assets/art/sprites/ui/spr_ui_skill_tower_locked.png" id="23_slq81"]
+[ext_resource type="Script" uid="uid://c6p8bvsehtw0k" path="res://scripts/ui/skilltree/tower_skill.gd" id="24_3qpvx"]
 [ext_resource type="Script" uid="uid://bl76qpyojkh77" path="res://scripts/ui/skilltree/spell_skill.gd" id="25_2fixy"]
+[ext_resource type="Resource" uid="uid://bcakhdf3t8wd3" path="res://data/towers/tower_data_arcane.tres" id="25_c62s6"]
 [ext_resource type="Texture2D" uid="uid://0yl1m6wb46h7" path="res://assets/art/sprites/ui/atl_ui_spell_icon_locked.png" id="25_cmboo"]
 [ext_resource type="Resource" uid="uid://co8hrkw6td36b" path="res://data/spells/spell_data_melee_bullet_wind_tornado.tres" id="26_isx30"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="26_rnc26"]
+[ext_resource type="Resource" uid="uid://b50w7syjdvdrf" path="res://data/spells/spell_data_bullet_arcane_basic_triple.tres" id="32_3qpvx"]
+[ext_resource type="Resource" uid="uid://uh4rcnnycu7s" path="res://data/spells/light/spell_data_shield_directional_light.tres" id="32_c62s6"]
+[ext_resource type="Resource" uid="uid://0ape3v2kdph1" path="res://data/spells/fire/spell_data_bullet_aoe_fireball.tres" id="32_cd4vv"]
+[ext_resource type="Resource" uid="uid://bcsl0e0prk758" path="res://data/spells/spell_data_bullet_dark_revolver.tres" id="33_kjyia"]
+[ext_resource type="Resource" uid="uid://hkc5p13wor1l" path="res://data/spells/spell_data_melee_arcane_dagger.tres" id="35_a8jhc"]
 [ext_resource type="Texture2D" uid="uid://cj4gbog723cvk" path="res://assets/art/sprites/ui/spr_ui_box3_hollow.png" id="35_mtx67"]
+[ext_resource type="Resource" uid="uid://bxp4u1i0065af" path="res://data/spells/spell_data_bullet_earth_drill.tres" id="35_sr1fv"]
 [ext_resource type="Texture2D" uid="uid://bw4irqp47tfd7" path="res://assets/art/sprites/ui/spr_ui_letterbox.png" id="36_mtx67"]
 [ext_resource type="Texture2D" uid="uid://cfudyx8vbglxd" path="res://assets/art/atlases/bullet/special_bar_clone_under.png" id="36_r5buj"]
+[ext_resource type="Resource" uid="uid://bcov2rckhliwp" path="res://data/spells/water/spell_data_melee_water_ice_sword.tres" id="36_ronkx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n2kq2"]
 atlas = ExtResource("1_xu6eb")
@@ -211,13 +221,16 @@ resource_local_to_scene = true
 atlas = SubResource("CompressedTexture2D_vwhyl")
 region = Rect2(16, 32, 16, 16)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ajyg"]
-load_path = "res://.godot/imported/spr_ui_skill_tower_locked.png-a28b3697cdb527ecfd5fb026ee5428f0.ctex"
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxk7v"]
+atlas = ExtResource("3_ritm0")
+region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7gn44"]
-resource_local_to_scene = true
-atlas = SubResource("CompressedTexture2D_5ajyg")
-region = Rect2(0, 0, 16, 16)
+atlas = ExtResource("23_slq81")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ajyg"]
+load_path = "res://.godot/imported/spr_ui_skill_tower_locked.png-a28b3697cdb527ecfd5fb026ee5428f0.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bxxxa"]
 resource_local_to_scene = true
@@ -280,22 +293,12 @@ resource_local_to_scene = true
 atlas = ExtResource("7_cg3rd")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ksb1l"]
-resource_local_to_scene = true
-atlas = ExtResource("7_cg3rd")
-region = Rect2(0, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_x27b6"]
 resource_local_to_scene = true
 atlas = ExtResource("7_cg3rd")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7owil"]
-resource_local_to_scene = true
-atlas = ExtResource("7_cg3rd")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4q8hn"]
 resource_local_to_scene = true
 atlas = ExtResource("7_cg3rd")
 region = Rect2(0, 0, 16, 16)
@@ -325,11 +328,6 @@ resource_local_to_scene = true
 atlas = ExtResource("7_cg3rd")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f3cqg"]
-resource_local_to_scene = true
-atlas = ExtResource("7_cg3rd")
-region = Rect2(0, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2megm"]
 resource_local_to_scene = true
 atlas = ExtResource("7_cg3rd")
@@ -355,22 +353,7 @@ resource_local_to_scene = true
 atlas = ExtResource("7_cg3rd")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jp454"]
-resource_local_to_scene = true
-atlas = ExtResource("7_cg3rd")
-region = Rect2(0, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_q6763"]
-resource_local_to_scene = true
-atlas = ExtResource("7_cg3rd")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lhbr8"]
-resource_local_to_scene = true
-atlas = ExtResource("7_cg3rd")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d0tdb"]
 resource_local_to_scene = true
 atlas = ExtResource("7_cg3rd")
 region = Rect2(0, 0, 16, 16)
@@ -404,6 +387,84 @@ region = Rect2(0, 0, 16, 16)
 resource_local_to_scene = true
 atlas = ExtResource("7_cg3rd")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c62s6"]
+load_path = "res://.godot/imported/atl_ui_spell_icon.png-2d4ec889fd34c194e8f179ef3ab524fa.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjbbj"]
+atlas = SubResource("CompressedTexture2D_c62s6")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8ugpr"]
+load_path = "res://.godot/imported/atl_ui_spell_icon_locked.png-f03470254a7e83fe80f0ab3d1a83a73c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hms70"]
+atlas = SubResource("CompressedTexture2D_8ugpr")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7ml7f"]
+load_path = "res://.godot/imported/atl_ui_spell_icon.png-2d4ec889fd34c194e8f179ef3ab524fa.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgici"]
+atlas = SubResource("CompressedTexture2D_7ml7f")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v3q4t"]
+load_path = "res://.godot/imported/atl_ui_spell_icon_locked.png-f03470254a7e83fe80f0ab3d1a83a73c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_333hn"]
+atlas = SubResource("CompressedTexture2D_v3q4t")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3hxf"]
+atlas = ExtResource("26_rnc26")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyf1p"]
+atlas = ExtResource("25_cmboo")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3qpvx"]
+load_path = "res://.godot/imported/atl_ui_spell_icon.png-2d4ec889fd34c194e8f179ef3ab524fa.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tymhl"]
+atlas = SubResource("CompressedTexture2D_3qpvx")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k5mx0"]
+load_path = "res://.godot/imported/atl_ui_spell_icon_locked.png-f03470254a7e83fe80f0ab3d1a83a73c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3ooi"]
+atlas = SubResource("CompressedTexture2D_k5mx0")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fo771"]
+load_path = "res://.godot/imported/atl_ui_spell_icon.png-2d4ec889fd34c194e8f179ef3ab524fa.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw0nn"]
+atlas = SubResource("CompressedTexture2D_fo771")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1m5lt"]
+load_path = "res://.godot/imported/atl_ui_spell_icon_locked.png-f03470254a7e83fe80f0ab3d1a83a73c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wxj8"]
+atlas = SubResource("CompressedTexture2D_1m5lt")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kw0nn"]
+load_path = "res://.godot/imported/atl_ui_spell_icon.png-2d4ec889fd34c194e8f179ef3ab524fa.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq845"]
+atlas = SubResource("CompressedTexture2D_kw0nn")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kl2vq"]
+load_path = "res://.godot/imported/atl_ui_spell_icon_locked.png-f03470254a7e83fe80f0ab3d1a83a73c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fo771"]
+atlas = SubResource("CompressedTexture2D_kl2vq")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvpl5"]
 resource_local_to_scene = true
@@ -1185,7 +1246,7 @@ texture_normal = SubResource("AtlasTexture_4dwuw")
 data = ExtResource("13_2fixy")
 locked_icon = SubResource("AtlasTexture_2lkdr")
 unlocked_icon = SubResource("AtlasTexture_4dwuw")
-prereq_skills = [NodePath("../../SpellSkills/SpellSkill10"), NodePath("../../SpellSkills/SpellSkill11")]
+prereq_skills = [NodePath("../../SpellSkills/SpellSkill10"), null]
 
 [node name="TowerSkillIce" parent="PannableScrollContainer/Tree/TowerSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("2_n2kq2")]
 layout_mode = 0
@@ -1232,7 +1293,7 @@ texture_normal = SubResource("AtlasTexture_hmaxi")
 data = ExtResource("17_slq81")
 locked_icon = SubResource("AtlasTexture_84wxn")
 unlocked_icon = SubResource("AtlasTexture_hmaxi")
-prereq_skills = [NodePath("../../SpellSkills/SpellSkill26"), NodePath("../../SpellSkills/SpellSkill27")]
+prereq_skills = [null, NodePath("../../SpellSkills/SpellSkill27")]
 
 [node name="TowerSkillLight" parent="PannableScrollContainer/Tree/TowerSkills" instance=ExtResource("2_n2kq2")]
 layout_mode = 0
@@ -1255,7 +1316,7 @@ texture_normal = SubResource("AtlasTexture_6p3le")
 data = ExtResource("19_c62s6")
 locked_icon = SubResource("AtlasTexture_1fagp")
 unlocked_icon = SubResource("AtlasTexture_6p3le")
-prereq_skills = [NodePath("../../SpellSkills/SpellSkill20"), NodePath("../../SpellSkills/SpellSkill21")]
+prereq_skills = [null, NodePath("../../SpellSkills/SpellSkill21")]
 
 [node name="TowerSkillSun" parent="PannableScrollContainer/Tree/TowerSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("2_n2kq2")]
 layout_mode = 0
@@ -1302,19 +1363,23 @@ texture_normal = SubResource("AtlasTexture_cmboo")
 data = ExtResource("22_ronkx")
 locked_icon = SubResource("AtlasTexture_qbcqg")
 unlocked_icon = SubResource("AtlasTexture_cmboo")
-prereq_skills = [NodePath("../../SpellSkills/SpellSkill14"), NodePath("../../SpellSkills/SpellSkill15")]
+prereq_skills = [null, NodePath("../../SpellSkills/SpellSkill15")]
 
-[node name="TowerSkill" parent="PannableScrollContainer/Tree/TowerSkills" instance=ExtResource("2_n2kq2")]
+[node name="TowerSkillArcane" type="TextureButton" parent="PannableScrollContainer/Tree/TowerSkills"]
 layout_mode = 0
 offset_left = 264.0
-offset_top = 159.0
+offset_top = 156.0
 offset_right = 280.0
-offset_bottom = 175.0
-texture_normal = SubResource("AtlasTexture_7gn44")
-data = ExtResource("6_o1fcm")
+offset_bottom = 172.0
+texture_normal = SubResource("AtlasTexture_nxk7v")
+script = ExtResource("24_3qpvx")
+data = ExtResource("25_c62s6")
 locked_icon = SubResource("AtlasTexture_7gn44")
+unlocked_icon = SubResource("AtlasTexture_nxk7v")
+metadata/_custom_type_script = "uid://c6p8bvsehtw0k"
 
 [node name="TowerSkill2" parent="PannableScrollContainer/Tree/TowerSkills" instance=ExtResource("2_n2kq2")]
+visible = false
 layout_mode = 0
 offset_left = 264.0
 offset_top = 205.0
@@ -1401,6 +1466,19 @@ offset_top = 62.0
 offset_right = 358.0
 offset_bottom = 77.0
 texture_normal = SubResource("AtlasTexture_6cpmr")
+data = ExtResource("32_cd4vv")
+locked_icon = SubResource("AtlasTexture_4qs4s")
+unlocked_icon = SubResource("AtlasTexture_6cpmr")
+prereq_skills = [NodePath("../../TowerSkills/TowerSkillPlasma")]
+
+[node name="SpellSkill11" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("6_k7m3q")]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 62.0
+offset_right = 358.0
+offset_bottom = 77.0
+texture_normal = SubResource("AtlasTexture_6cpmr")
+data = ExtResource("32_cd4vv")
 locked_icon = SubResource("AtlasTexture_4qs4s")
 unlocked_icon = SubResource("AtlasTexture_6cpmr")
 prereq_skills = [NodePath("../../TowerSkills/TowerSkillPlasma")]
@@ -1423,15 +1501,6 @@ offset_bottom = 191.0
 texture_normal = SubResource("AtlasTexture_u5a68")
 prereq_skills = [NodePath("../../TowerSkills/TowerSkillIce")]
 
-[node name="SpellSkill11" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("6_k7m3q")]
-layout_mode = 0
-offset_left = 337.0
-offset_top = 191.0
-offset_right = 353.0
-offset_bottom = 207.0
-texture_normal = SubResource("AtlasTexture_ksb1l")
-prereq_skills = [NodePath("../../TowerSkills/TowerSkillIce")]
-
 [node name="SpellSkill12" parent="PannableScrollContainer/Tree/SpellSkills" instance=ExtResource("6_k7m3q")]
 layout_mode = 0
 offset_left = 400.0
@@ -1447,15 +1516,6 @@ offset_top = 206.0
 offset_right = 401.0
 offset_bottom = 222.0
 texture_normal = SubResource("AtlasTexture_7owil")
-
-[node name="SpellSkill14" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("6_k7m3q")]
-layout_mode = 0
-offset_left = 216.0
-offset_top = 56.0
-offset_right = 232.0
-offset_bottom = 72.0
-texture_normal = SubResource("AtlasTexture_4q8hn")
-prereq_skills = [NodePath("../../TowerSkills/TowerSkillCurse")]
 
 [node name="SpellSkill15" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("6_k7m3q")]
 layout_mode = 0
@@ -1498,15 +1558,6 @@ offset_right = 174.0
 offset_bottom = 56.0
 texture_normal = SubResource("AtlasTexture_l6gn2")
 
-[node name="SpellSkill20" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("6_k7m3q")]
-layout_mode = 0
-offset_left = 175.0
-offset_top = 111.0
-offset_right = 191.0
-offset_bottom = 127.0
-texture_normal = SubResource("AtlasTexture_f3cqg")
-prereq_skills = [NodePath("../../TowerSkills/TowerSkillSun")]
-
 [node name="SpellSkill21" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("6_k7m3q")]
 layout_mode = 0
 offset_left = 159.0
@@ -1548,15 +1599,6 @@ offset_right = 143.0
 offset_bottom = 171.0
 texture_normal = SubResource("AtlasTexture_rplrg")
 
-[node name="SpellSkill26" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("6_k7m3q")]
-layout_mode = 0
-offset_left = 174.0
-offset_top = 175.0
-offset_right = 190.0
-offset_bottom = 191.0
-texture_normal = SubResource("AtlasTexture_jp454")
-prereq_skills = [NodePath("../../TowerSkills/TowerSkillMud")]
-
 [node name="SpellSkill27" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills") instance=ExtResource("6_k7m3q")]
 layout_mode = 0
 offset_left = 190.0
@@ -1565,22 +1607,6 @@ offset_right = 206.0
 offset_bottom = 207.0
 texture_normal = SubResource("AtlasTexture_q6763")
 prereq_skills = [NodePath("../../TowerSkills/TowerSkillMud")]
-
-[node name="SpellSkill28" parent="PannableScrollContainer/Tree/SpellSkills" instance=ExtResource("6_k7m3q")]
-layout_mode = 0
-offset_left = 248.0
-offset_top = 182.0
-offset_right = 264.0
-offset_bottom = 198.0
-texture_normal = SubResource("AtlasTexture_lhbr8")
-
-[node name="SpellSkill29" parent="PannableScrollContainer/Tree/SpellSkills" instance=ExtResource("6_k7m3q")]
-layout_mode = 0
-offset_left = 280.0
-offset_top = 182.0
-offset_right = 296.0
-offset_bottom = 198.0
-texture_normal = SubResource("AtlasTexture_d0tdb")
 
 [node name="SpellSkill30" parent="PannableScrollContainer/Tree/SpellSkills" instance=ExtResource("6_k7m3q")]
 layout_mode = 0
@@ -1629,6 +1655,90 @@ offset_top = 223.0
 offset_right = 385.0
 offset_bottom = 239.0
 texture_normal = SubResource("AtlasTexture_2goc7")
+
+[node name="SpellSkillLightShield" type="TextureButton" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills")]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 111.0
+offset_right = 191.0
+offset_bottom = 127.0
+texture_normal = SubResource("AtlasTexture_sjbbj")
+script = ExtResource("25_2fixy")
+data = ExtResource("32_c62s6")
+locked_icon = SubResource("AtlasTexture_hms70")
+unlocked_icon = SubResource("AtlasTexture_sjbbj")
+prereq_skills = [NodePath("../../TowerSkills/TowerSkillSun")]
+metadata/_custom_type_script = "uid://bl76qpyojkh77"
+
+[node name="SpellSkillDarkRevolver" type="TextureButton" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills")]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 52.0
+offset_right = 232.0
+offset_bottom = 68.0
+texture_normal = SubResource("AtlasTexture_fgici")
+script = ExtResource("25_2fixy")
+data = ExtResource("33_kjyia")
+locked_icon = SubResource("AtlasTexture_333hn")
+unlocked_icon = SubResource("AtlasTexture_fgici")
+prereq_skills = [NodePath("../../TowerSkills/TowerSkillVoid")]
+metadata/_custom_type_script = "uid://bl76qpyojkh77"
+
+[node name="SpellSkillArcaneHorn" type="TextureButton" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills")]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 182.0
+offset_right = 264.0
+offset_bottom = 198.0
+texture_normal = SubResource("AtlasTexture_g3hxf")
+script = ExtResource("25_2fixy")
+data = ExtResource("32_3qpvx")
+locked_icon = SubResource("AtlasTexture_iyf1p")
+unlocked_icon = SubResource("AtlasTexture_g3hxf")
+prereq_skills = [NodePath("../../TowerSkills/TowerSkillArcane")]
+metadata/_custom_type_script = "uid://bl76qpyojkh77"
+
+[node name="SpellSkillArcaneDagger" type="TextureButton" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills")]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 181.0
+offset_right = 296.0
+offset_bottom = 197.0
+texture_normal = SubResource("AtlasTexture_tymhl")
+script = ExtResource("25_2fixy")
+data = ExtResource("35_a8jhc")
+locked_icon = SubResource("AtlasTexture_h3ooi")
+unlocked_icon = SubResource("AtlasTexture_tymhl")
+prereq_skills = [NodePath("../../TowerSkills/TowerSkillArcane")]
+metadata/_custom_type_script = "uid://bl76qpyojkh77"
+
+[node name="SpellSkillEarthDrill" type="TextureButton" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills")]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 175.0
+offset_right = 190.0
+offset_bottom = 191.0
+texture_normal = SubResource("AtlasTexture_kw0nn")
+script = ExtResource("25_2fixy")
+data = ExtResource("35_sr1fv")
+locked_icon = SubResource("AtlasTexture_5wxj8")
+unlocked_icon = SubResource("AtlasTexture_kw0nn")
+prereq_skills = [NodePath("../../TowerSkills/TowerSkillMud")]
+metadata/_custom_type_script = "uid://bl76qpyojkh77"
+
+[node name="SpellSkillIceSword" type="TextureButton" parent="PannableScrollContainer/Tree/SpellSkills" node_paths=PackedStringArray("prereq_skills")]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 191.0
+offset_right = 353.0
+offset_bottom = 207.0
+texture_normal = SubResource("AtlasTexture_qq845")
+script = ExtResource("25_2fixy")
+data = ExtResource("36_ronkx")
+locked_icon = SubResource("AtlasTexture_fo771")
+unlocked_icon = SubResource("AtlasTexture_qq845")
+prereq_skills = [NodePath("../../TowerSkills/TowerSkillIce")]
+metadata/_custom_type_script = "uid://bl76qpyojkh77"
 
 [node name="DeitySkills" type="Control" parent="PannableScrollContainer/Tree"]
 unique_name_in_owner = true

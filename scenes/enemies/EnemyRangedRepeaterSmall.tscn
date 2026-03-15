@@ -1070,7 +1070,7 @@ metadata/_custom_type_script = "uid://di3c54ykd28fx"
 
 [node name="EnemyBulletParent" type="Node" parent="."]
 
-[node name="NumberPopup" type="Node" parent="."]
+[node name="NumberPopup" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("15_opmk6")
 metadata/_custom_type_script = "uid://c75pt0b6io16g"

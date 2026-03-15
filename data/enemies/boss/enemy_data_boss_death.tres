@@ -29,7 +29,6 @@ speed = 1.0
 atlas = SubResource("AtlasTexture_31agc")
 icon = SubResource("AtlasTexture_kbpur")
 enemy_scene = ExtResource("1_3v0kk")
-wind_up = false
 enemy_name = "Death"
 enemy_description = "Death
 "

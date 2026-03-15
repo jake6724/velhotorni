@@ -34,4 +34,5 @@ desc = "A defensive tool that forms a barrier of light when opened. Blocks proje
 active_icon = SubResource("AtlasTexture_avrr5")
 inactive_icon = SubResource("AtlasTexture_g4s1j")
 staff_texture = SubResource("AtlasTexture_cqdug")
+ammo_color = Color(0.5803922, 1, 0.7411765, 1)
 metadata/_custom_type_script = "uid://3dqja03a1opn"

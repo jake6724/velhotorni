@@ -5,6 +5,8 @@ extends Area2D
 
 signal hit
 signal hit_no_data
+signal hurtbox_enabled
+signal hurtbox_disabled
 signal pit_entered
 signal camera_shake_requested
 
@@ -30,7 +32,7 @@ func take_bullet_damage(_damage: float, bullet_pos: Vector2, bullet: EnemyBullet
 		reflect_bullet(bullet)
 		camera_shake_requested.emit(REFLECT_CAMERA_SHAKE)
 		return false
-
+	
 	hit.emit(calc_knockback_direction(bullet_pos))
 	hit_no_data.emit()
 	return true
@@ -46,6 +48,9 @@ func on_body_entered(_intruder) -> void:
 ## Used for walking into enemies
 func on_area_entered(_intruder) -> void:
 	take_damage(_intruder.damage, _intruder.global_position)
+	# if _intruder is FlyingEnemy:
+	# 	_intruder.reset_attack = true
+	# 	_intruder.reset_attack_timer.start(.5)
 
 func reflect_bullet(bullet: EnemyBullet) -> void:
 	# Invert bullet direction
@@ -65,3 +70,12 @@ func reflect_bullet(bullet: EnemyBullet) -> void:
 
 func on_reflect_chance_updated(_reflect_chance: float) -> void:
 	reflect_chance = _reflect_chance
+
+func update_collider(_value) -> void:
+	if _value:
+		hurtbox_disabled.emit()
+	else:
+		hurtbox_enabled.emit()
+
+	collider.set_deferred("disabled", _value)
+	

@@ -84,3 +84,6 @@ func spawn_enemy_bullet(direction: Vector2, spawn_pos) -> void:
 	enemy_bullet_parent.call_deferred("add_child", new_enemy_bullet)
 	new_enemy_bullet.call_deferred("initialize", direction, spawn_pos, data.bullet_damage, data.bullet_speed, data.bullet_max_distance,
 	z_index + 1, data.bullet_atlas)
+
+func ranged_enemy_died() -> void:
+	attack_collider.set_deferred("disabled", true)

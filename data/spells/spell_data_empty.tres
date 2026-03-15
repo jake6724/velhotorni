@@ -14,4 +14,5 @@ initial_mana_amount = 0
 max_mana_amount = 0
 staff_texture = SubResource("AtlasTexture_4oavr")
 camera_shake = 0.0
+ammo_color = null
 metadata/_custom_type_script = "uid://bpllj5ap3pp45"

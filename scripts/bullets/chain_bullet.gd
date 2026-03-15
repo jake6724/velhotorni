@@ -56,7 +56,7 @@ func on_primary_area_entered(intruder):
 		explode()
 
 func on_aoe_area_entered(intruder):
-	if intruder is Enemy:
+	if intruder and intruder is Enemy and intruder.is_alive:
 		if intruder != target and intruder not in in_range_enemies:
 			if intruder.path_follow.progress_ratio < target.path_follow.progress_ratio:
 				in_range_enemies.append(intruder)

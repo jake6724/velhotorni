@@ -9,5 +9,7 @@
 script = ExtResource("1_aeyg5")
 dash_power = 500.0
 dash_duration = 0.15
+post_dash_coyote_time = 0.2
+post_fall_coyote_time = 0.3
 perk_data_pool = ExtResource("1_1gvs6")
 aoe_debuffs = Array[ExtResource("1_3vvp6")]([ExtResource("2_vvlji")])

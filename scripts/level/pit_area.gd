@@ -1,0 +1,2 @@
+class_name PitArea
+extends Area2D

@@ -11,12 +11,7 @@ func move(delta) -> void:
 
 			sprite.flip_h = path_follow.rotation_degrees >= 91
 			path_follow.progress += (speed - ((speed * (slow_percent/100)))) * delta
-
-			# if path_follow.progress_ratio < .99:
-			# 	path_follow.progress += (speed - ((speed * (slow_percent/100)))) * delta
-			# else:
-			# 	base.take_damage(damage)
-			# 	die()
+			moving_horizontally = is_moving_horizontally(path_follow.rotation_degrees)
 
 		else:
 			ap.play("idle")
@@ -30,6 +25,7 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element, _exec
 	if is_alive:
 		is_taking_damage = true
 		ap.play("hit")
+		AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BULLET_IMPACT_FLESH)
 
 		# Hit by same element
 		if tower_element == data.element:
@@ -41,7 +37,7 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element, _exec
 		# Apply Weaken modifier
 		damage_recieved = damage_recieved + (damage_recieved * (weaken_percent/100))
 
-		number_popup.display_damage_number(damage_recieved, global_position)
+		number_popup.display_damage_number(damage_recieved, global_position, moving_horizontally, true)
 
 		var damage_applied: float = min(health, damage_recieved)
 

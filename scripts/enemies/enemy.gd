@@ -40,6 +40,7 @@ enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE,
 var path_follow: PathFollow2D # Update `progress_ration` to move along path
 var prev_global_position: Vector2 # Used for flipping sprite
 var min_distance: float = 2
+var moving_horizontally: bool
 
 # Enemy Stats from Enemy Data Resource
 var element: Constants.Element
@@ -84,7 +85,6 @@ signal died # Pass ref to the enemy object
 signal death_position # Pass global_position
 signal coin_dropped
 signal enemy_damage_recieved
-signal wind_up_completed
 
 func _ready():
 	data.resource_local_to_scene = true # TODO: probably/maybe not needed
@@ -105,8 +105,6 @@ func _ready():
 	spell_mana_drop_chance = data.element_mana_drop_chance
 
 	set_pos_offset()
-
-	z_as_relative = false
 
 	# Configure DebuffManager
 	debuff_manager.add_new_debuff.connect(on_add_new_debuff)
@@ -131,10 +129,19 @@ func _ready():
 	enemy_movement.damage_base_requested.connect(on_damage_base_requested)
 	enemy_movement.death_requested.connect(on_death_requested)
 
+	z_as_relative = false
+
 	# Configure z_indexes
 	health_bar.z_index = Constants.z_index_map["enemy_healthbar"]
 
+	# Configure number popup
+	number_popup.parent_max_health = max_health
+
+	flying_enemy_ready()
 	boss_initialize()
+
+func flying_enemy_ready() -> void:
+	pass
 
 func _physics_process(delta):
 	if is_alive:
@@ -148,6 +155,8 @@ func move(delta) -> void:
 					ap.play("walk")
 
 				sprite.flip_h = path_follow.rotation_degrees >= 91
+
+				moving_horizontally = is_moving_horizontally(path_follow.rotation_degrees)
 					
 				if path_follow.progress_ratio < .99:
 					path_follow.progress += (speed - ((speed * (slow_percent/100)))) * delta
@@ -158,6 +167,14 @@ func move(delta) -> void:
 				ap.play("idle")
 
 	debuff_manager.enemy_progress = path_follow.progress
+
+func is_moving_horizontally(_path_follow_rotation_degrees: float) -> bool:
+	if _path_follow_rotation_degrees >= -1 and _path_follow_rotation_degrees <= 1:
+		return true
+	elif _path_follow_rotation_degrees >= 361.0 and _path_follow_rotation_degrees <= 361:
+		return true
+	else:
+		return false
 
 func apply_drop_chance_bonus(_drop_chance_bonus: float) -> void:
 	drop_chance = data.tower_mana_drop_chance_base + _drop_chance_bonus
@@ -183,7 +200,7 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element, execu
 
 		# Apply Weaken modifier
 		damage_recieved = damage_recieved + (damage_recieved * (weaken_percent/100))
-		number_popup.display_damage_number(damage_recieved, global_position)
+		number_popup.display_damage_number(damage_recieved, global_position, moving_horizontally, true)
 
 		var damage_applied: float = min(health, damage_recieved)
 
@@ -218,7 +235,9 @@ func die() -> void:
 	health_bar.hide()
 	shield.hide()
 	weak.hide()
+
 	z_index = Constants.z_index_map["enemy_corpse"]
+	boon_area.can_show_boon_range = false
 
 	# SFXPlayer.play_sfx_resource(data.explosion_sfx)
 	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.ENEMY_DEATH_FLESH)
@@ -235,18 +254,46 @@ func die() -> void:
 
 	hide_all_fx() # Somehow, the burn fx can turn back on. The debuff not seem to be active, just the fx. Ensure it is off
 
+	flying_enemy_died()
+	ranged_enemy_died()
+
+func flying_enemy_died() -> void:
+	pass
+
+func ranged_enemy_died() -> void:
+	pass
+
 func on_animation_finished(anim_name):
 	if anim_name == "hit":
 		is_taking_damage = false
 
 	if anim_name == "die":
-		sprite.z_index = -sprite.z_index
+		sprite.z_index = Constants.z_index_map["enemy_corpse"]
 		ap.play("corpse")
 
 	if anim_name == "corpse":
+		
 		set_physics_process(false)
-		# queue_free()
+		if remove_corpse():
+			queue_free()
 
+func remove_corpse() -> bool:
+	#{SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE, REPEATER_SMALL, REPEATER_LARGE, DUMMY_SMALL, SNAKE, BOSS}
+	match data.size:
+		Size.SMALL: return true
+		Size.LARGE: return false
+		Size.FLYING_SMALL: return true
+		Size.FLYING_LARGE: return false
+		Size.RANGED_SMALL: return false
+		Size.RANGED_LARGE: return false
+		Size.REPEATER_SMALL: return false
+		Size.REPEATER_LARGE: return false
+		Size.DUMMY_SMALL: return true
+		Size.SNAKE: return true
+		Size.BOSS: return false
+		_: 
+			push_error("enemy.remove_corpse() data.size matched to unknown value")
+			return false
 # Child component signal requests
 func on_animation_requested(anim_name: String) -> void:
 	ap.play(anim_name)
@@ -370,39 +417,40 @@ func on_boon_connected(new_boon: Boon) -> void:
 		boon_manager.add_boon(new_boon)
 
 func on_boon_triggered(boon: Boon) -> void:
-	match boon.type:
-		Boon.Type.HEAL:
-			if (health + boon.value) > max_health:
-				health = max_health
-			else:
-				health += boon.value
-			fx_heal.show()
-			fx_heal.play("heal")
-			await fx_heal.animation_finished
-			fx_heal.hide()
-		Boon.Type.SPEED: 
-			speed += (data.speed * boon.value)
-			fx_speed.show()
-			fx_speed.play("speed")
-		Boon.Type.DAMAGE:
-			damage += boon.value
-		Boon.Type.STEALTH:
-			collider.set_deferred("disabled", true)
-			sprite.modulate.a = .65
-			death_position.emit(global_position)
-		Boon.Type.CLEANSE:
-			debuff_manager.remove_all_debuffs()
-			fx_cleanse.show()
-			fx_cleanse.play("cleanse")
-			await fx_cleanse.animation_finished
-			fx_cleanse.hide()
-		Boon.Type.PREVENT:
-			fx_prevent.show()
-			fx_prevent.play("start_prevent")
-			await fx_prevent.animation_finished
-			fx_prevent.play("loop_prevent")
-			debuff_manager.can_debuff = false
-		_: pass
+	if is_alive:
+		match boon.type:
+			Boon.Type.HEAL:
+				if (health + boon.value) > max_health:
+					health = max_health
+				else:
+					health += boon.value
+				fx_heal.show()
+				fx_heal.play("heal")
+				await fx_heal.animation_finished
+				fx_heal.hide()
+			Boon.Type.SPEED: 
+				speed += (data.speed * boon.value)
+				fx_speed.show()
+				fx_speed.play("speed")
+			Boon.Type.DAMAGE:
+				damage += boon.value
+			Boon.Type.STEALTH:
+				collider.set_deferred("disabled", true)
+				sprite.modulate.a = .65
+				death_position.emit(global_position)
+			Boon.Type.CLEANSE:
+				debuff_manager.remove_all_debuffs()
+				fx_cleanse.show()
+				fx_cleanse.play("cleanse")
+				await fx_cleanse.animation_finished
+				fx_cleanse.hide()
+			Boon.Type.PREVENT:
+				fx_prevent.show()
+				fx_prevent.play("start_prevent")
+				await fx_prevent.animation_finished
+				fx_prevent.play("loop_prevent")
+				debuff_manager.can_debuff = false
+			_: pass
 
 func on_boon_expired(boon: Boon) -> void:
 	boon_manager.on_boon_expired(boon)

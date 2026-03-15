@@ -41,4 +41,5 @@ desc = "A wand fashioned from old brass instruments. Monsters loathe the sound i
 active_icon = SubResource("AtlasTexture_fwiyq")
 inactive_icon = SubResource("AtlasTexture_rver8")
 staff_texture = SubResource("AtlasTexture_ump1r")
+ammo_color = Color(0.972549, 0.15686275, 0.47058824, 1)
 metadata/_custom_type_script = "uid://r20hlvy6xofu"

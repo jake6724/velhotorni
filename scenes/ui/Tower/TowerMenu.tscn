@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://3dti3chb4cnf" path="res://assets/art/sprites/ui/spr_ui_tower_light.png" id="12_638he"]
 [ext_resource type="Texture2D" uid="uid://rvf7vwl6ny54" path="res://assets/art/sprites/ui/spr_ui_tower_earth.png" id="12_gfj4e"]
 [ext_resource type="Texture2D" uid="uid://bw0ontj3kn7i4" path="res://assets/art/sprites/ui/spr_ui_tower_dark.png" id="12_ur1ae"]
-[ext_resource type="PackedScene" uid="uid://du0wke3a8n1k8" path="res://scenes/ui/TowerInfoPanel.tscn" id="16_pieka"]
+[ext_resource type="PackedScene" uid="uid://du0wke3a8n1k8" path="res://scenes/ui/Tower/TowerInfoPanel.tscn" id="16_pieka"]
 [ext_resource type="Texture2D" uid="uid://3pw18ittvgn5" path="res://assets/art/sprites/ui/eye_open.png" id="18_e3xib"]
 [ext_resource type="Texture2D" uid="uid://cqduan450w60k" path="res://assets/art/sprites/ui/eye_closed.png" id="19_pieka"]
 [ext_resource type="Texture2D" uid="uid://d4e1p57nq45w7" path="res://assets/art/sprites/ui/spr_ui_bestiary_icon_hover.png" id="20_k5e7a"]
@@ -294,7 +294,7 @@ mouse_filter = 1
 texture_normal = ExtResource("8_4bluh")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/FireVbox/FireButton"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 5.0
 offset_top = -7.00002
 offset_right = 29.0
@@ -346,7 +346,7 @@ size_flags_vertical = 8
 texture_normal = ExtResource("10_g5j4q")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/WindVbox/WindButton"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 5.0
 offset_top = -7.0
 offset_right = 32.0
@@ -392,7 +392,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("11_r3bjd")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/WaterVbox/WaterButton"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 5.0
 offset_top = -7.00002
 offset_right = 32.0
@@ -438,7 +438,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("12_gfj4e")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/EarthVbox/EarthButton"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 5.0
 offset_top = -7.0
 offset_right = 32.0
@@ -484,7 +484,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("12_638he")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/LightVbox/LightButton"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 4.99997
 offset_top = -7.00002
 offset_right = 32.0
@@ -530,7 +530,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource("12_ur1ae")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TowerButtons/DarkVbox/DarkButton"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 4.99997
 offset_top = -7.0
 offset_right = 32.0

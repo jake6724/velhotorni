@@ -5,10 +5,35 @@ extends Area2D
 
 var boon_data: BoonData
 var cast_timer: Timer
+var can_show_boon_range: bool = false
+
+var greyscale_shader = preload("res://shader/cut_ripple.gdshader")
+var greyscale_shader_material = ShaderMaterial.new()
+var circle_mask: CompressedTexture2D = load("res://assets/placeholders/snake_node_placeholder.png")
+
+func set_shader_properties() -> void:
+	pass
+	# greyscale_shader_material.shader = greyscale_shader
+	# greyscale_shader_material.set("shader_parameter/invert_mask",bool(true))
+	# greyscale_shader_material.set("shader_parameter/mask_texture",(circle_mask))
+	# greyscale_shader_material.set("shader_parameter/use_different_texture",(true))
+	# greyscale_shader_material.set("shader_parameter/mask_size",Vector2(boon_collider.shape.radius * 2, boon_collider.shape.radius * 2))
+	# greyscale_shader_material.set("shader_parameter/wave_amplitude",float(0.001))
+	# greyscale_shader_material.set("shader_parameter/amplitude",float(3))
+	# greyscale_shader_material.set("shader_parameter/ripple_rate",float(5))
+	# greyscale_shader_material.set("shader_parameter/frequency",float(2))
+	# greyscale_shader_material.set("shader_parameter/fill_amount",float(0.0))
+
+func _process(_delta):
+	queue_redraw()
 
 func initialize(_boon_data: BoonData):
 	boon_data = _boon_data
 	boon_collider.shape.radius = _boon_data.cast_radius
+	if boon_data.type == Boon.Type.STEALTH:
+		# set_shader_properties()
+		can_show_boon_range = true
+		# show_boon_range()
 	match boon_data.mode:
 		Boon.Mode.TIMER: 
 			cast_timer = Timer.new()
@@ -55,3 +80,45 @@ func create_boon(_boon_data) -> Boon:
 	var new_boon: Boon = Boon.new(_boon_data)
 	new_boon.source = self
 	return new_boon
+
+func _draw():
+	if can_show_boon_range:
+		draw_circle(to_local(global_position + Vector2(8,8)), boon_collider.shape.radius, Color(1,1,1,.3), false, 1.0, false)
+
+func show_boon_range() -> void:
+	pass
+	# draw_circle(to_local(global_position + Vector2(8,8)), boon_collider.shape.radius, Color(1,1,1,.3), true)
+
+	# var radius = boon_collider.shape.radius
+	# var num_points = 32 # Higher number = smoother circle
+	# # var circle_color = Color(1,1,1,.3)
+	# var circle_color = Color.RED
+	# var polygon_points = PackedVector2Array()
+	# var offset: Vector2 = Vector2(8,8)
+	
+	# # Generate points around the circumference
+	# for i in range(num_points):
+	# 	var angle = (float(i) / num_points) * PI * 2
+	# 	var point = (Vector2(cos(angle), sin(angle)) * radius) + offset
+	# 	polygon_points.append(point)
+
+	# var new_polygon: Polygon2D = Polygon2D.new()
+	# new_polygon.polygon = polygon_points
+	# new_polygon.color = circle_color
+	# new_polygon.material = greyscale_shader_material
+	# add_child(new_polygon)
+	
+	# # Draw the filled polygon
+	# draw_polygon(polygon_points, PackedColorArray([circle_color]))
+
+
+	# var new_color_rect: ColorRect = ColorRect.new()
+	# add_child(new_color_rect)
+	# new_color_rect.size = Vector2(boon_collider.shape.radius * 2, boon_collider.shape.radius * 2) # Set size to fit circle
+	# new_color_rect.pivot_offset = new_color_rect.size / 2
+	# new_color_rect.global_position = (global_position - (new_color_rect.size/2)) + Vector2(8,8)
+	# new_color_rect.color = Color.RED
+	# new_color_rect.material = greyscale_shader_material
+	# new_color_rect.material
+
+

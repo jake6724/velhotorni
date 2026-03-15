@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://d218nr004vv6w"]
+[gd_scene load_steps=41 format=3 uid="uid://d218nr004vv6w"]
 
 [ext_resource type="Script" uid="uid://cngopxpmylq3o" path="res://scripts/ui/player/player_hud.gd" id="1_l3s77"]
 [ext_resource type="Texture2D" uid="uid://dn1k3t6kwnj45" path="res://assets/art/sprites/ui/atl_ui_spell_icon.png" id="2_rq211"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://7v2st6m3nxlm" path="res://assets/art/sprites/ui/atl_ui_playerportrait.png" id="15_44ko1"]
 [ext_resource type="Texture2D" uid="uid://blkuov8h47q88" path="res://assets/art/sprites/ui/spr_ui_ammo_progress.png" id="18_5f4n5"]
 [ext_resource type="Texture2D" uid="uid://b8lqfj415mlyq" path="res://assets/art/sprites/ui/spr_ui_notification_flag.png" id="19_jbb8n"]
+[ext_resource type="Texture2D" uid="uid://df0ng7rs672k" path="res://assets/art/sprites/ui/spr_ui_fill_bar.png" id="21_3yius"]
 [ext_resource type="Texture2D" uid="uid://d3uwhutrtqgwi" path="res://assets/art/sprites/ui/spr_ui_coin_small.png" id="22_fl26y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_44ko1"]
@@ -67,7 +68,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Banner:frame")
+tracks/0/path = NodePath("CanvasLayer/Banner:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -79,7 +80,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Banner:hframes")
+tracks/1/path = NodePath("CanvasLayer/Banner:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -91,7 +92,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Banner:vframes")
+tracks/2/path = NodePath("CanvasLayer/Banner:vframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -107,7 +108,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Banner:hframes")
+tracks/0/path = NodePath("CanvasLayer/Banner:hframes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -119,7 +120,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Banner:vframes")
+tracks/1/path = NodePath("CanvasLayer/Banner:vframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -131,7 +132,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Banner:frame")
+tracks/2/path = NodePath("CanvasLayer/Banner:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -163,7 +164,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Banner:frame")
+tracks/0/path = NodePath("CanvasLayer/Banner:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -179,7 +180,7 @@ step = 0.0833
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Banner:frame")
+tracks/0/path = NodePath("CanvasLayer/Banner:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -235,23 +236,24 @@ grow_vertical = 2
 script = ExtResource("1_l3s77")
 metadata/_custom_type_script = "uid://cngopxpmylq3o"
 
-[node name="PlayerInfo" type="NinePatchRect" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerInfo" type="NinePatchRect" parent="CanvasLayer"]
 z_index = -1
-layout_mode = 0
 offset_top = 2.0
 offset_right = 109.0
 offset_bottom = 32.0
 texture = ExtResource("14_84rr0")
 patch_margin_right = 2
 
-[node name="PlayerPortrait" parent="PlayerInfo" instance=ExtResource("3_2twuf")]
+[node name="PlayerPortrait" parent="CanvasLayer/PlayerInfo" instance=ExtResource("3_2twuf")]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = 1.0
 offset_bottom = 26.0
 texture = SubResource("AtlasTexture_44ko1")
 
-[node name="TowerManaIcon" type="TextureRect" parent="PlayerInfo"]
+[node name="TowerManaIcon" type="TextureRect" parent="CanvasLayer/PlayerInfo"]
 custom_minimum_size = Vector2(42, 10)
 layout_mode = 0
 offset_left = 49.0
@@ -261,7 +263,7 @@ offset_bottom = 26.0
 texture = ExtResource("6_knakh")
 stretch_mode = 2
 
-[node name="TowerManaLabel" type="RichTextLabel" parent="PlayerInfo/TowerManaIcon"]
+[node name="TowerManaLabel" type="RichTextLabel" parent="CanvasLayer/PlayerInfo/TowerManaIcon"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 8)
 layout_mode = 0
@@ -275,7 +277,7 @@ text = "00000"
 scroll_active = false
 vertical_alignment = 1
 
-[node name="PlayerHearts" type="HBoxContainer" parent="PlayerInfo"]
+[node name="PlayerHearts" type="HBoxContainer" parent="CanvasLayer/PlayerInfo"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 50.0
@@ -283,25 +285,24 @@ offset_right = 110.0
 offset_bottom = 14.0
 theme_override_constants/separation = 2
 
-[node name="PlayerHudHeart1" parent="PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
+[node name="PlayerHudHeart1" parent="CanvasLayer/PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_2twuf")
 
-[node name="PlayerHudHeart2" parent="PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
+[node name="PlayerHudHeart2" parent="CanvasLayer/PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_nrxgm")
 
-[node name="PlayerHudHeart3" parent="PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
+[node name="PlayerHudHeart3" parent="CanvasLayer/PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_5koxd")
 
-[node name="PlayerHudHeart4" parent="PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
+[node name="PlayerHudHeart4" parent="CanvasLayer/PlayerInfo/PlayerHearts" instance=ExtResource("6_tmo30")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_84rr0")
 
-[node name="RoundInfo" type="NinePatchRect" parent="."]
+[node name="RoundInfo" type="NinePatchRect" parent="CanvasLayer"]
 z_index = -1
-layout_mode = 0
 offset_left = 403.0
 offset_top = 2.0
 offset_right = 512.0
@@ -311,7 +312,7 @@ region_rect = Rect2(0, 0, 30, 30)
 patch_margin_left = 2
 patch_margin_bottom = 3
 
-[node name="WaveIcon" type="TextureRect" parent="RoundInfo"]
+[node name="WaveIcon" type="TextureRect" parent="CanvasLayer/RoundInfo"]
 layout_mode = 0
 offset_left = 11.0
 offset_top = 3.0
@@ -320,7 +321,7 @@ offset_bottom = 9.0
 texture = ExtResource("9_84rr0")
 stretch_mode = 2
 
-[node name="WaveInfo" type="HBoxContainer" parent="RoundInfo/WaveIcon"]
+[node name="WaveInfo" type="HBoxContainer" parent="CanvasLayer/RoundInfo/WaveIcon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -336,28 +337,28 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="WaveCount" type="Label" parent="RoundInfo/WaveIcon/WaveInfo"]
+[node name="WaveCount" type="Label" parent="CanvasLayer/RoundInfo/WaveIcon/WaveInfo"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Slash" type="TextureRect" parent="RoundInfo/WaveIcon/WaveInfo"]
+[node name="Slash" type="TextureRect" parent="CanvasLayer/RoundInfo/WaveIcon/WaveInfo"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("14_nopip")
 stretch_mode = 2
 
-[node name="WaveTotal" type="Label" parent="RoundInfo/WaveIcon/WaveInfo"]
+[node name="WaveTotal" type="Label" parent="CanvasLayer/RoundInfo/WaveIcon/WaveInfo"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "30"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TowerIcon" type="TextureRect" parent="RoundInfo"]
+[node name="TowerIcon" type="TextureRect" parent="CanvasLayer/RoundInfo"]
 layout_mode = 0
 offset_left = 61.0
 offset_top = 3.0
@@ -366,7 +367,7 @@ offset_bottom = 9.0
 texture = ExtResource("8_5koxd")
 stretch_mode = 2
 
-[node name="TowerInfo" type="HBoxContainer" parent="RoundInfo/TowerIcon"]
+[node name="TowerInfo" type="HBoxContainer" parent="CanvasLayer/RoundInfo/TowerIcon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -382,28 +383,28 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TowerCount" type="Label" parent="RoundInfo/TowerIcon/TowerInfo"]
+[node name="TowerCount" type="Label" parent="CanvasLayer/RoundInfo/TowerIcon/TowerInfo"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Slash" type="TextureRect" parent="RoundInfo/TowerIcon/TowerInfo"]
+[node name="Slash" type="TextureRect" parent="CanvasLayer/RoundInfo/TowerIcon/TowerInfo"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("14_nopip")
 stretch_mode = 2
 
-[node name="TowerTotal" type="Label" parent="RoundInfo/TowerIcon/TowerInfo"]
+[node name="TowerTotal" type="Label" parent="CanvasLayer/RoundInfo/TowerIcon/TowerInfo"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "30"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EnemyIcon" type="TextureRect" parent="RoundInfo"]
+[node name="EnemyIcon" type="TextureRect" parent="CanvasLayer/RoundInfo"]
 layout_mode = 0
 offset_left = 11.0
 offset_top = 17.0
@@ -412,7 +413,7 @@ offset_bottom = 23.0
 texture = ExtResource("10_44ko1")
 stretch_mode = 2
 
-[node name="EnemyProgress" type="NinePatchRect" parent="RoundInfo"]
+[node name="EnemyProgress" type="NinePatchRect" parent="CanvasLayer/RoundInfo"]
 layout_mode = 0
 offset_left = 21.0
 offset_top = 15.0
@@ -424,7 +425,7 @@ patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
 
-[node name="EnemyProgressbar" type="TextureProgressBar" parent="RoundInfo/EnemyProgress"]
+[node name="EnemyProgressbar" type="TextureProgressBar" parent="CanvasLayer/RoundInfo/EnemyProgress"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 2.0
@@ -435,7 +436,7 @@ value = 44.0
 nine_patch_stretch = true
 texture_progress = ExtResource("13_o6umb")
 
-[node name="EnemyProgessInfo" type="HBoxContainer" parent="RoundInfo/EnemyProgress"]
+[node name="EnemyProgessInfo" type="HBoxContainer" parent="CanvasLayer/RoundInfo/EnemyProgress"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -450,36 +451,37 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="EnemyCount" type="Label" parent="RoundInfo/EnemyProgress/EnemyProgessInfo"]
+[node name="EnemyCount" type="Label" parent="CanvasLayer/RoundInfo/EnemyProgress/EnemyProgessInfo"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Slash" type="TextureRect" parent="RoundInfo/EnemyProgress/EnemyProgessInfo"]
+[node name="Slash" type="TextureRect" parent="CanvasLayer/RoundInfo/EnemyProgress/EnemyProgessInfo"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("14_nopip")
 stretch_mode = 2
 
-[node name="EnemyTotal" type="Label" parent="RoundInfo/EnemyProgress/EnemyProgessInfo"]
+[node name="EnemyTotal" type="Label" parent="CanvasLayer/RoundInfo/EnemyProgress/EnemyProgessInfo"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "30"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Weapons" type="Control" parent="."]
+[node name="Weapons" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 0
 offset_left = 412.0
 offset_top = 232.0
 offset_right = 497.0
 offset_bottom = 260.0
 
-[node name="ActiveSpellManaLabel" type="RichTextLabel" parent="Weapons"]
+[node name="ActiveSpellManaLabel" type="RichTextLabel" parent="CanvasLayer/Weapons"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(25, 9)
@@ -496,7 +498,7 @@ scroll_active = false
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="Weapons/ActiveSpellManaLabel"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Weapons/ActiveSpellManaLabel"]
 unique_name_in_owner = true
 z_index = -2
 custom_minimum_size = Vector2(8, 8)
@@ -507,7 +509,7 @@ offset_bottom = 12.0
 size_flags_horizontal = 0
 color = Color(0.0941176, 0.0941176, 0.25098, 1)
 
-[node name="ActiveSpellMana" type="TextureProgressBar" parent="Weapons/ActiveSpellManaLabel"]
+[node name="ActiveSpellMana" type="TextureProgressBar" parent="CanvasLayer/Weapons/ActiveSpellManaLabel"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
@@ -524,7 +526,7 @@ stretch_margin_bottom = 1
 texture_under = ExtResource("3_0741g")
 texture_progress = ExtResource("4_bhg3x")
 
-[node name="InactiveSpells" type="HBoxContainer" parent="Weapons"]
+[node name="InactiveSpells" type="HBoxContainer" parent="CanvasLayer/Weapons"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 12.0
@@ -534,14 +536,14 @@ size_flags_horizontal = 0
 size_flags_vertical = 6
 theme_override_constants/separation = 1
 
-[node name="InactiveSpell1Icon" type="TextureRect" parent="Weapons/InactiveSpells"]
+[node name="InactiveSpell1Icon" type="TextureRect" parent="CanvasLayer/Weapons/InactiveSpells"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 texture = SubResource("AtlasTexture_bhg3x")
 stretch_mode = 2
 
-[node name="InactiveSpell1Mana" type="TextureProgressBar" parent="Weapons/InactiveSpells/InactiveSpell1Icon"]
+[node name="InactiveSpell1Mana" type="TextureProgressBar" parent="CanvasLayer/Weapons/InactiveSpells/InactiveSpell1Icon"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -560,14 +562,14 @@ value = 100.0
 texture_under = ExtResource("3_0741g")
 texture_progress = ExtResource("4_bhg3x")
 
-[node name="InactiveSpell2Icon" type="TextureRect" parent="Weapons/InactiveSpells"]
+[node name="InactiveSpell2Icon" type="TextureRect" parent="CanvasLayer/Weapons/InactiveSpells"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 texture = SubResource("AtlasTexture_bhg3x")
 stretch_mode = 2
 
-[node name="InactiveSpell2Mana" type="TextureProgressBar" parent="Weapons/InactiveSpells/InactiveSpell2Icon"]
+[node name="InactiveSpell2Mana" type="TextureProgressBar" parent="CanvasLayer/Weapons/InactiveSpells/InactiveSpell2Icon"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -586,14 +588,14 @@ value = 100.0
 texture_under = ExtResource("3_0741g")
 texture_progress = ExtResource("4_bhg3x")
 
-[node name="InactiveSpell3Icon" type="TextureRect" parent="Weapons/InactiveSpells"]
+[node name="InactiveSpell3Icon" type="TextureRect" parent="CanvasLayer/Weapons/InactiveSpells"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 texture = SubResource("AtlasTexture_fd7yi")
 stretch_mode = 2
 
-[node name="InactiveSpell3Mana" type="TextureProgressBar" parent="Weapons/InactiveSpells/InactiveSpell3Icon"]
+[node name="InactiveSpell3Mana" type="TextureProgressBar" parent="CanvasLayer/Weapons/InactiveSpells/InactiveSpell3Icon"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -611,14 +613,14 @@ value = 100.0
 texture_under = ExtResource("3_0741g")
 texture_progress = ExtResource("4_bhg3x")
 
-[node name="InactiveSpell4Icon" type="TextureRect" parent="Weapons/InactiveSpells"]
+[node name="InactiveSpell4Icon" type="TextureRect" parent="CanvasLayer/Weapons/InactiveSpells"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 texture = SubResource("AtlasTexture_0741g")
 stretch_mode = 2
 
-[node name="InactiveSpell4Mana" type="TextureProgressBar" parent="Weapons/InactiveSpells/InactiveSpell4Icon"]
+[node name="InactiveSpell4Mana" type="TextureProgressBar" parent="CanvasLayer/Weapons/InactiveSpells/InactiveSpell4Icon"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -636,7 +638,7 @@ value = 100.0
 texture_under = ExtResource("3_0741g")
 texture_progress = ExtResource("4_bhg3x")
 
-[node name="MarginContainer" type="MarginContainer" parent="Weapons"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Weapons"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.4
@@ -649,7 +651,7 @@ offset_right = 4.0299997
 offset_bottom = 19.995998
 theme_override_constants/margin_left = 0
 
-[node name="NoManaLabel" type="Label" parent="Weapons/MarginContainer"]
+[node name="NoManaLabel" type="Label" parent="CanvasLayer/Weapons/MarginContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 texture_repeat = 1
@@ -665,7 +667,7 @@ theme_override_font_sizes/font_size = 8
 text = "empty"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="Weapons/MarginContainer/NoManaLabel"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Weapons/MarginContainer/NoManaLabel"]
 z_index = -2
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 1
@@ -676,7 +678,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0941176, 0.0941176, 0.25098, 1)
 
-[node name="ActiveSpellMana" type="NinePatchRect" parent="Weapons"]
+[node name="ActiveSpellMana" type="NinePatchRect" parent="CanvasLayer/Weapons"]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 35.0
@@ -688,7 +690,7 @@ patch_margin_top = 1
 patch_margin_right = 1
 patch_margin_bottom = 1
 
-[node name="ActiveSpellManaProgressBar" type="TextureProgressBar" parent="Weapons/ActiveSpellMana"]
+[node name="ActiveSpellManaProgressBar" type="TextureProgressBar" parent="CanvasLayer/Weapons/ActiveSpellMana"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 2.0
@@ -700,7 +702,7 @@ value = 44.0
 nine_patch_stretch = true
 texture_progress = ExtResource("18_5f4n5")
 
-[node name="ActiveSpellManaInfo" type="HBoxContainer" parent="Weapons/ActiveSpellMana"]
+[node name="ActiveSpellManaInfo" type="HBoxContainer" parent="CanvasLayer/Weapons/ActiveSpellMana"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -715,38 +717,37 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="ManaCount" type="Label" parent="Weapons/ActiveSpellMana/ActiveSpellManaInfo"]
+[node name="ManaCount" type="Label" parent="CanvasLayer/Weapons/ActiveSpellMana/ActiveSpellManaInfo"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "446"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Slash" type="TextureRect" parent="Weapons/ActiveSpellMana/ActiveSpellManaInfo"]
+[node name="Slash" type="TextureRect" parent="CanvasLayer/Weapons/ActiveSpellMana/ActiveSpellManaInfo"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("14_nopip")
 stretch_mode = 2
 
-[node name="ManaTotal" type="Label" parent="Weapons/ActiveSpellMana/ActiveSpellManaInfo"]
+[node name="ManaTotal" type="Label" parent="CanvasLayer/Weapons/ActiveSpellMana/ActiveSpellManaInfo"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="Weapons/ActiveSpellMana"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Weapons/ActiveSpellMana"]
 z_index = -1
 layout_mode = 0
 offset_right = 80.0
 offset_bottom = 10.0
 color = Color(0.09411765, 0.09411765, 0.2509804, 1)
 
-[node name="LevelInfo" type="MarginContainer" parent="."]
+[node name="LevelInfo" type="MarginContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -756,47 +757,48 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SpellManaDropDisplay" type="VBoxContainer" parent="."]
+[node name="SpellManaDropDisplay" type="VBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
 clip_contents = true
 layout_direction = 2
-layout_mode = 0
 offset_left = 424.0
 offset_top = 112.0
 offset_right = 504.0
 offset_bottom = 232.0
 size_flags_horizontal = 4
+mouse_filter = 2
 alignment = 2
 
-[node name="LevelDetails" type="MarginContainer" parent="."]
+[node name="LevelDetails" type="MarginContainer" parent="CanvasLayer"]
 visible = false
-layout_mode = 0
 offset_left = 360.0
 offset_right = 512.0
 offset_bottom = 64.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelDetails"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LevelDetails"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LevelDetails/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/LevelDetails/VBoxContainer"]
 layout_mode = 2
 text = "Wave 7 of 10"
 
-[node name="Label2" type="Label" parent="LevelDetails/VBoxContainer"]
+[node name="Label2" type="Label" parent="CanvasLayer/LevelDetails/VBoxContainer"]
 layout_mode = 2
 text = "40 enemies remaining"
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BannerAnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="BannerAnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_fl26y")
 }
 
-[node name="Banner" type="Sprite2D" parent="."]
+[node name="Banner" type="Sprite2D" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(256, 72)
@@ -804,7 +806,7 @@ texture = ExtResource("19_jbb8n")
 hframes = 5
 vframes = 4
 
-[node name="BannerLabel" type="Label" parent="Banner"]
+[node name="BannerLabel" type="Label" parent="CanvasLayer/Banner"]
 unique_name_in_owner = true
 visible = false
 offset_left = -62.0
@@ -818,9 +820,8 @@ text = "Wave Cleared"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PerkMiniIcons" type="HBoxContainer" parent="."]
+[node name="PerkMiniIcons" type="HBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.41400003
 anchor_right = 0.586
@@ -831,20 +832,21 @@ offset_bottom = -0.12800026
 grow_horizontal = 2
 theme_override_constants/separation = 2
 
-[node name="TextureRect" type="TextureRect" parent="PerkMiniIcons"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PerkMiniIcons"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Hint" type="Control" parent="."]
+[node name="Hint" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 0
 offset_left = 128.0
 offset_top = 224.0
 offset_right = 384.0
 offset_bottom = 248.0
 
-[node name="CenterContainer" type="CenterContainer" parent="Hint"]
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Hint"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -852,7 +854,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HintLabel" type="Label" parent="Hint/CenterContainer"]
+[node name="HintLabel" type="Label" parent="CanvasLayer/Hint/CenterContainer"]
 unique_name_in_owner = true
 visible = false
 clip_contents = true
@@ -861,7 +863,7 @@ text = "Tower health low!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="Hint/CenterContainer/HintLabel"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Hint/CenterContainer/HintLabel"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -871,44 +873,46 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.09411765, 0.09411765, 0.2509804, 1)
 
-[node name="BuildPhaseButtons" type="VBoxContainer" parent="."]
+[node name="BuildPhaseButtons" type="VBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_top = 128.0
+offset_top = 32.0
 offset_right = 104.0
-offset_bottom = 168.0
-theme_override_constants/separation = 8
+offset_bottom = 72.0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
 
-[node name="StartWave" type="MarginContainer" parent="BuildPhaseButtons"]
+[node name="StartWave" type="MarginContainer" parent="CanvasLayer/BuildPhaseButtons"]
+custom_minimum_size = Vector2(104, 16)
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/margin_right = 0
 
-[node name="MarginContainer2" type="MarginContainer" parent="BuildPhaseButtons/StartWave"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/BuildPhaseButtons/StartWave"]
 layout_mode = 2
 theme_override_constants/margin_right = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BuildPhaseButtons/StartWave/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BuildPhaseButtons/StartWave/MarginContainer2"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="BuildPhaseButtons/StartWave/MarginContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BuildPhaseButtons/StartWave/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_fl26y")
 
-[node name="Label" type="Label" parent="BuildPhaseButtons/StartWave/MarginContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/BuildPhaseButtons/StartWave/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 text = "Start Wave"
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="BuildPhaseButtons/StartWave"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BuildPhaseButtons/StartWave"]
 z_index = -1
 layout_mode = 2
 color = Color(0.09411765, 0.09411765, 0.2509804, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="BuildPhaseButtons/StartWave"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BuildPhaseButtons/StartWave"]
 z_index = -1
 layout_mode = 2
 theme_override_constants/margin_left = 2
@@ -916,56 +920,58 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="StartWaveProgressBar" type="TextureProgressBar" parent="BuildPhaseButtons/StartWave/MarginContainer"]
+[node name="StartWaveProgressBar" type="TextureProgressBar" parent="CanvasLayer/BuildPhaseButtons/StartWave/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 step = 0.1
 nine_patch_stretch = true
-texture_progress = ExtResource("18_5f4n5")
+texture_progress = ExtResource("21_3yius")
 
-[node name="HealAll" type="MarginContainer" parent="BuildPhaseButtons"]
+[node name="HealAll" type="MarginContainer" parent="CanvasLayer/BuildPhaseButtons"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/margin_right = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BuildPhaseButtons/HealAll"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BuildPhaseButtons/HealAll"]
+custom_minimum_size = Vector2(104, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="BuildPhaseButtons/HealAll/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BuildPhaseButtons/HealAll/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_3yius")
 
-[node name="Label" type="Label" parent="BuildPhaseButtons/HealAll/HBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/BuildPhaseButtons/HealAll/HBoxContainer"]
 layout_mode = 2
 text = "Heal All"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BuildPhaseButtons/HealAll/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BuildPhaseButtons/HealAll/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="TextureRect2" type="TextureRect" parent="BuildPhaseButtons/HealAll/HBoxContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/BuildPhaseButtons/HealAll/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("22_fl26y")
 stretch_mode = 2
 
-[node name="HealAllCost" type="Label" parent="BuildPhaseButtons/HealAll/HBoxContainer/HBoxContainer"]
+[node name="HealAllCost" type="Label" parent="CanvasLayer/BuildPhaseButtons/HealAll/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "25"
 
-[node name="ColorRect" type="ColorRect" parent="BuildPhaseButtons/HealAll"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BuildPhaseButtons/HealAll"]
 z_index = -1
 layout_mode = 2
 color = Color(0.09411765, 0.09411765, 0.2509804, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="BuildPhaseButtons/HealAll"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BuildPhaseButtons/HealAll"]
 z_index = -1
 layout_mode = 2
 theme_override_constants/margin_left = 2
@@ -973,9 +979,9 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="HealAllProgressBar" type="TextureProgressBar" parent="BuildPhaseButtons/HealAll/MarginContainer"]
+[node name="HealAllProgressBar" type="TextureProgressBar" parent="CanvasLayer/BuildPhaseButtons/HealAll/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 step = 0.1
 nine_patch_stretch = true
-texture_progress = ExtResource("18_5f4n5")
+texture_progress = ExtResource("21_3yius")

@@ -71,7 +71,7 @@ func on_area_entered(intruder: Area2D) -> void:
 		if intruder is TowerShield:
 			intruder.take_damage(damage)
 			active = false
-
+		
 		ap.play("hit")
 
 func on_animation_finished(anim_name: String) -> void:

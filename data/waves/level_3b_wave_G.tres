@@ -1,28 +1,30 @@
-[gd_resource type="Resource" script_class="Wave" load_steps=20 format=3 uid="uid://bdsqojauedq27"]
+[gd_resource type="Resource" script_class="Wave" load_steps=22 format=3 uid="uid://bdsqojauedq27"]
 
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_yn8x8"]
-[ext_resource type="Resource" uid="uid://b7870v870xpqv" path="res://data/spawn/spawn_light_kuse_10.tres" id="2_1qt2o"]
-[ext_resource type="Resource" uid="uid://wu20yb4mlymq" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_light_ghoul_10.tres" id="3_aeuo2"]
+[ext_resource type="Resource" uid="uid://b7870v870xpqv" path="res://data/spawn/spawn_light_kuse_15.tres" id="2_argof"]
+[ext_resource type="Resource" uid="uid://b7fvbxvpskkb1" path="res://data/spawn/spawn_path_2_light_kuse_15.tres" id="3_2aknn"]
+[ext_resource type="Resource" uid="uid://dwtl188tqvqox" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_1_earth_mudman_1.tres" id="4_6lwp4"]
 [ext_resource type="Resource" uid="uid://fyi1qeejq54b" path="res://data/spawn/spawns_flying/spawn_flying_light_phantomsword_half_0.tres" id="4_s0afv"]
 [ext_resource type="Resource" uid="uid://dcryvn72k62q3" path="res://data/spawn/spawns_flying/spawn_flying_light_phantomsword_half_1.tres" id="5_x27uy"]
+[ext_resource type="Resource" uid="uid://dm02v0hqciwle" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_1_light_bifron_10.tres" id="6_kgso6"]
 [ext_resource type="Resource" uid="uid://c8wvxj52fmfbd" path="res://data/spawn/spawns_flying/spawn_flying_light_phantomsword_half_2.tres" id="6_ydiod"]
 [ext_resource type="Resource" uid="uid://bsrqg5d7p342g" path="res://data/spawn/spawns_flying/spawn_flying_light_phantomsword_half_3.tres" id="7_6ibyc"]
+[ext_resource type="Resource" uid="uid://0svfnglhsoug" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_earth_mudman_1.tres" id="7_bdypl"]
 [ext_resource type="Resource" uid="uid://bl1fnm2ebyrdm" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_1_earth_bigfoot_1.tres" id="8_cqegs"]
 [ext_resource type="Resource" uid="uid://25em23upunww" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_dark_armor_1.tres" id="9_6mcuf"]
-[ext_resource type="Resource" uid="uid://dmrtos2bqhvpc" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_1_earth_mudman_10.tres" id="10_arq3j"]
+[ext_resource type="Resource" uid="uid://cl8brxmuq4rbd" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_light_bifron_10.tres" id="9_argof"]
 [ext_resource type="Resource" uid="uid://deusi2oy5em4a" path="res://data/spawn/spawn_path_1_ghouls/spawn_path_2_earth_bigfoot_1.tres" id="11_5hagp"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="12_g30bm"]
 [ext_resource type="Resource" uid="uid://bdm8bvwg431dx" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_dark_armor_1.tres" id="12_kgso6"]
-[ext_resource type="Resource" uid="uid://cohbf4dffiqyq" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_2_earth_mudman_10.tres" id="13_argof"]
 [ext_resource type="Resource" uid="uid://ccsvnn47vtltj" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_wind_barbatos.tres" id="14_kgso6"]
 [ext_resource type="Resource" uid="uid://b668sucylpsqa" path="res://data/spawn/spawn_path_2_ranged/spawn_path_2_wind_barbatos.tres" id="16_argof"]
-[ext_resource type="Resource" uid="uid://dijvdeif86xw5" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_3_wind_ghoul_half.tres" id="18_2aknn"]
-[ext_resource type="Resource" uid="uid://bbamx88l3ph2u" path="res://data/spawn/spawn_path_2_ranged/spawn_fire_path_3_ukobach_1.tres" id="19_6lwp4"]
+[ext_resource type="Resource" uid="uid://p8q7uh4mcxpc" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_3_wind_ghoul_8.tres" id="18_6lwp4"]
+[ext_resource type="Resource" uid="uid://csd26pl561qn6" path="res://data/spawn/spawn_path_3_fire_gargoyle_3.tres" id="19_bdypl"]
 [ext_resource type="Resource" uid="uid://cxras4u2e55ou" path="res://data/spawn/spawn_path_2_ghouls/spawn_path_3_earth_mushroom_1.tres" id="20_6lwp4"]
 
 [resource]
 script = ExtResource("12_g30bm")
-data = Array[ExtResource("1_yn8x8")]([ExtResource("2_1qt2o"), ExtResource("3_aeuo2"), ExtResource("8_cqegs"), ExtResource("9_6mcuf"), ExtResource("10_arq3j"), ExtResource("11_5hagp"), ExtResource("12_kgso6"), ExtResource("13_argof"), ExtResource("14_kgso6"), ExtResource("8_cqegs"), ExtResource("9_6mcuf"), ExtResource("10_arq3j"), ExtResource("16_argof"), ExtResource("12_kgso6"), ExtResource("11_5hagp"), ExtResource("13_argof"), ExtResource("4_s0afv"), ExtResource("5_x27uy"), ExtResource("6_ydiod"), ExtResource("7_6ibyc"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("20_6lwp4"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("19_6lwp4"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn"), ExtResource("18_2aknn")])
+data = Array[ExtResource("1_yn8x8")]([ExtResource("2_argof"), ExtResource("3_2aknn"), ExtResource("4_6lwp4"), ExtResource("9_6mcuf"), ExtResource("6_kgso6"), ExtResource("7_bdypl"), ExtResource("12_kgso6"), ExtResource("9_argof"), ExtResource("14_kgso6"), ExtResource("9_6mcuf"), ExtResource("8_cqegs"), ExtResource("16_argof"), ExtResource("12_kgso6"), ExtResource("11_5hagp"), ExtResource("4_s0afv"), ExtResource("5_x27uy"), ExtResource("6_ydiod"), ExtResource("7_6ibyc"), ExtResource("18_6lwp4"), ExtResource("19_bdypl"), ExtResource("20_6lwp4"), ExtResource("20_6lwp4"), ExtResource("19_bdypl"), ExtResource("20_6lwp4"), ExtResource("20_6lwp4"), ExtResource("19_bdypl")])
 reward = 300.0
 token_reward = 150
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
