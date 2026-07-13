@@ -7,42 +7,19 @@ var main: Main # Reference used to change RoundInfo UI
 
 var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # The scene that 'exit' in menu takes you to
 
-var tower_level: PackedScene = load("res://scenes/level/LevelTower.tscn")
-var level_0: PackedScene = load("res://scenes/level/0_tutorial/LevelTutorial.tscn")
-var level_1: PackedScene = load("res://scenes/level/1_wind/Level1.tscn")
-var level_2: PackedScene = load("res://scenes/level/1_wind/Level2.tscn")
-var level_3a: PackedScene = load("res://scenes/level/1_wind/Level3A.tscn")
-var level_3b: PackedScene = load("res://scenes/level/1_wind/Level3B.tscn")
-var level_4: PackedScene = load("res://scenes/level/2_earth/Level4.tscn")
-var level_5: PackedScene = load("res://scenes/level/2_earth/Level5.tscn")
-var level_6a: PackedScene = load("res://scenes/level/2_earth/Level6A.tscn")
-var level_6b: PackedScene = load("res://scenes/level/2_earth/Level6B.tscn")
-var level_7: PackedScene = load("res://scenes/level/3_water/Level7.tscn")
-var level_8: PackedScene = load("res://scenes/level/3_water/Level8.tscn")
-var level_9a: PackedScene = load("res://scenes/level/3_water/Level9A.tscn")
-var level_9b: PackedScene = load("res://scenes/level/3_water/Level9B.tscn")
-var level_10: PackedScene = load("res://scenes/level/4_fire/Level10.tscn")
-var level_11: PackedScene = load("res://scenes/level/4_fire/Level11.tscn")
-var level_12a: PackedScene = load("res://scenes/level/4_fire/Level12A.tscn")
-var level_12b: PackedScene = load("res://scenes/level/4_fire/Level12B.tscn")
-var level_13: PackedScene = load("res://scenes/level/5_dark/Level13.tscn")
-var level_14: PackedScene = load("res://scenes/level/5_dark/Level14.tscn")
-var level_15a: PackedScene = load("res://scenes/level/5_dark/Level15A.tscn")
-var level_15b: PackedScene = load("res://scenes/level/5_dark/Level15B.tscn")
-var level_16: PackedScene = load("res://scenes/level/6_light/Level16.tscn")
-var level_17: PackedScene = load("res://scenes/level/6_light/Level17.tscn")
-var level_18a: PackedScene = load("res://scenes/level/6_light/Level18A.tscn")
-var level_18b: PackedScene = load("res://scenes/level/6_light/Level18B.tscn")
-var level_19: PackedScene = load("res://scenes/level/7_final/Level19.tscn")
-var level_20: PackedScene = load("res://scenes/level/7_final/Level20.tscn")
-var level_21: PackedScene = load("res://scenes/level/7_final/Level21.tscn")
-var level_22: PackedScene = load("res://scenes/level/7_final/Level22.tscn")
+var tower_level: PackedScene = load("uid://dnilok8ickyxd")
+var level_1: PackedScene = load("uid://c834s0blo3yw2")
+var level_2: PackedScene
+var level_3: PackedScene = load("uid://bq1dqq33vdbh2")
 
-var levels: Array[PackedScene] = [tower_level, level_0, level_1, level_2, level_3a, level_3b, level_4, level_5, level_6a, level_6b, 
-level_7, level_8, level_9a, level_9b, level_10, level_11, level_12a, level_12b, level_13, level_14, level_15a, level_15b, 
-level_16, level_17, level_18a, level_18b, level_19, level_20, level_21, level_22]
-var level_index: int = 5
+var level_environments: Dictionary[LevelTag, PackedScene]
+
+var levels: Array[PackedScene] = [tower_level, level_1, level_2, level_3]
+
+var level_index: int = 0
 var active_level: LevelEnvironment
+
+enum LevelTag {TUTORIAL}
 
 func _ready():
 	# configure_level() called in main - level only configured when main is ready to parent it
@@ -52,7 +29,7 @@ func _ready():
 ## triggers the `configure_level()` methods of other singletons here.
 func configure_level(_main: Main):
 	main = _main # Reference provided by current main itself
-	active_level = levels[level_index].instantiate()
+	active_level = levels[level_index].instantiate() #TODO get ref from main?
 
 ## Observes `WaveManager.all_waves_complete`.
 func on_level_complete():
@@ -75,11 +52,21 @@ func restart_level():
 	SceneTransition.change_scene_no_animation(main_scene)
 
 func load_specific_level(_level_environment):
-	level_index = levels.find(_level_environment)
-	if level_index != -1:
-		SceneTransition.change_scene(main_scene)
-	else:
-		push_error("Level not found!")
+	SceneTransition.change_scene(_level_environment)
+	# level_index = levels.find(_level_environment)
+	# if level_index != -1:
+	# 	SceneTransition.change_scene(main_scene)
+	# else:
+	# 	push_error("Level not found!")
+
+func load_specific_level_by_level_tag(_level_tag: LevelTag):
+	var scene_to_load: PackedScene
+	match _level_tag:
+		LevelTag.TUTORIAL: scene_to_load = level_1
+		_:
+			push_error("LevelManager.load_specific_level_by_level_tag(), LevelTag '", _level_tag, "' could not be found.")
+
+	SceneTransition.change_scene(scene_to_load)
 
 func exit_level() -> void: # TODO: Eventually this should load the tower not the map
 	EnemySpawner.reset()

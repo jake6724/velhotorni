@@ -167,7 +167,6 @@ func _ready():
 	player_special.pit_hurtbox_update_requested.connect(pit_hurtbox.update_collider)
 	player_special.pit_hurtbox_stop_pre_coyote_timer_requested.connect(pit_hurtbox.stop_pre_coyote_timer)
 	
-	
 	# Configure PlayerMana
 	player_mana.populate_spell_mana(player_spells.selected_spells)
 

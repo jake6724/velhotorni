@@ -9,6 +9,7 @@ signal hurtbox_enabled
 signal hurtbox_disabled
 signal pit_entered
 signal camera_shake_requested
+signal bullet_reflected
 
 var reflect_chance: float # Set manually by PlayerCharacter
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -48,9 +49,6 @@ func on_body_entered(_intruder) -> void:
 ## Used for walking into enemies
 func on_area_entered(_intruder) -> void:
 	take_damage(_intruder.damage, _intruder.global_position)
-	# if _intruder is FlyingEnemy:
-	# 	_intruder.reset_attack = true
-	# 	_intruder.reset_attack_timer.start(.5)
 
 func reflect_bullet(bullet: EnemyBullet) -> void:
 	# Invert bullet direction
@@ -67,6 +65,8 @@ func reflect_bullet(bullet: EnemyBullet) -> void:
 	bullet.collision_area.set_collision_mask_value.call_deferred(5,true) # see enemies
 
 	bullet.active = true # Make bullet active again
+
+	bullet_reflected.emit()
 
 func on_reflect_chance_updated(_reflect_chance: float) -> void:
 	reflect_chance = _reflect_chance

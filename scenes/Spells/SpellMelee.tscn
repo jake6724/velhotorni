@@ -93,9 +93,8 @@ _data = {
 radius = 24.0
 height = 48.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1xu0m"]
-radius = 3.0
-height = 32.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1xu0m"]
+radius = 21.0
 
 [node name="SpellMelee" type="Sprite2D"]
 z_as_relative = false
@@ -122,6 +121,6 @@ collision_mask = 0
 
 [node name="BulletBlockCollider" type="CollisionShape2D" parent="BulletBlock"]
 unique_name_in_owner = true
-position = Vector2(17, 0)
-shape = SubResource("CapsuleShape2D_1xu0m")
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_1xu0m")
 debug_color = Color(0.958419, 3.85046e-07, 0.527242, 0.42)

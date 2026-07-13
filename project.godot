@@ -39,6 +39,8 @@ GlobalSettings="*res://scripts/singletons/global_settings.gd"
 PlayerLoadout="*res://scripts/singletons/player_loadout.gd"
 AudioManager="*res://scenes/audio/AudioManager.tscn"
 AlertManager="*res://scripts/singletons/alert_manager.gd"
+DataTracker="*res://scripts/singletons/data_tracker.gd"
+flowerwall_crt="*res://addons/flowerwall_postprocess/scenes/flowerwall_pp.tscn"
 
 [debug]
 
@@ -51,6 +53,7 @@ gdscript/warnings/narrowing_conversion=0
 window/size/viewport_width=512
 window/size/viewport_height=288
 window/size/initial_position_type=2
+window/size/always_on_top=true
 window/size/window_width_override=1440
 window/size/window_height_override=810
 window/stretch/mode="canvas_items"
@@ -58,7 +61,7 @@ mouse_cursor/custom_image="uid://d0ggh0ipjxkie"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/tabby_explorer/plugin.cfg")
+enabled=PackedStringArray("res://addons/flowerwall_postprocess/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg")
 
 [gui]
 

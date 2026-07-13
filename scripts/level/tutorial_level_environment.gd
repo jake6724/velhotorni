@@ -47,7 +47,7 @@ func child_custom_ready() -> void:
 			child.wave_started_allowed.connect(allow_wave_start)
 
 	# This is not a great loophole, but should be fine for just the tutorial
-	player = LevelManager.main.player_character 
+	player = LevelManager.main.player_character
 	player.player_build.tower_mana_spent.connect(on_player_tower_mana_spent)
 	player.player_input.switch_player_mode_pressed.connect(on_player_mode_switched)
 

@@ -185,7 +185,7 @@ func reset_drop_chance() -> void:
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
 ## Returns the amount of damage actually received (after calculating resistances and other modifiers)
-func take_damage(damage_recieved: float, tower_element: Constants.Element, execution_threshold_recieved: float, _double_spell_mana_drop: bool) -> float:
+func take_damage(damage_recieved: float, tower_element: Constants.Element, execution_threshold_recieved: float, _double_spell_mana_drop: bool, damage_source: Variant=null) -> float:
 	if is_alive:
 		if not is_taking_damage:
 			ap.play("hit")
@@ -203,6 +203,8 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element, execu
 		number_popup.display_damage_number(damage_recieved, global_position, moving_horizontally, true)
 
 		var damage_applied: float = min(health, damage_recieved)
+		if damage_source:
+			DataTracker.submit_damage_data(damage_source, damage_applied)
 
 		health = max(0, health - damage_recieved)
 

@@ -125,7 +125,6 @@ var tower_icon_atl_regions: Dictionary[Constants.Element, Rect2] = {
 	Constants.Element.ARCANE: Rect2(0,96,32,32),
 }
 
-
 # TODO: I think this is obsolete
 var ui_tower_sprites: Dictionary[Constants.Element, Texture] = {
  	Constants.Element.FIRE: preload("res://assets/art/sprites/ui/spr_ui_tower_fire.png"),

@@ -53,9 +53,9 @@ var enemy_info_count: int
 
 @onready var build_phase_buttons: VBoxContainer = %BuildPhaseButtons
 @onready var start_wave_progress_bar: TextureProgressBar = %StartWaveProgressBar
-@onready var heal_all_progress_bar: TextureProgressBar = %HealAllProgressBar
-@onready var heal_all_cost: Label = %HealAllCost
-@onready var heal_all: MarginContainer = %HealAll
+# @onready var heal_all_progress_bar: TextureProgressBar = %HealAllProgressBar
+# @onready var heal_all_cost: Label = %HealAllCost
+# @onready var heal_all: MarginContainer = %HealAll
 
 @onready var hint_label: Label = %HintLabel
 
@@ -98,8 +98,8 @@ func _ready():
 	clear_spell_mana_drop_display_timer.timeout.connect(on_spell_mana_popup_timeout)
 	add_child(clear_spell_mana_drop_display_timer)
 
-	heal_all_cost.text = str(0)
-	heal_all.hide()
+	# heal_all_cost.text = str(0)
+	# heal_all.hide()
 
 	hint_timer.one_shot = true
 	hint_timer.autostart = false
@@ -125,12 +125,12 @@ func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, play
 	EnemySpawner.enemy_died.connect(on_enemy_count_decremented)
 
 	player_input.start_wave_action_charge_updated.connect(on_player_input_start_wave_action_charge_updated)
-	player_input.heal_all_action_charge_updated.connect(on_player_input_heal_all_action_charge_updated)
+	# player_input.heal_all_action_charge_updated.connect(on_player_input_heal_all_action_charge_updated)
 
 	build_phase_buttons.position.x = -104
 	animate_show_build_phase_buttons()
 
-	player_build.heal_all_cost_updated.connect(on_player_build_heal_all_cost_updated)
+	# player_build.heal_all_cost_updated.connect(on_player_build_heal_all_cost_updated)
 
 	player_build.player_hud_hint_requested.connect(display_hint_text)
 	AlertManager.player_hud_hint_requested.connect(display_hint_text)
@@ -374,21 +374,21 @@ func on_player_input_start_wave_action_charge_updated(_value: float) -> void:
 	if start_wave_progress_bar.visible:
 		start_wave_progress_bar.value = _value
 
-func on_player_input_heal_all_action_charge_updated(_value) -> void:
-	if heal_all.visible:
-		heal_all_progress_bar.value = _value
-		if _value >= 100 and heal_all.visible:
-			heal_all.hide()
-			heal_all_requested.emit()
+# func on_player_input_heal_all_action_charge_updated(_value) -> void:
+# 	if heal_all.visible:
+# 		heal_all_progress_bar.value = _value
+# 		if _value >= 100 and heal_all.visible:
+# 			heal_all.hide()
+# 			heal_all_requested.emit()
 
-func on_player_build_heal_all_cost_updated(cost: float) -> void:
-	cost = int(cost)
-	heal_all_cost.text = str(int(cost))
-	if cost > 0:
-		heal_all_progress_bar.value = 0
-		heal_all.show()
-	else:
-		heal_all.hide()
+# func on_player_build_heal_all_cost_updated(cost: float) -> void:
+# 	cost = int(cost)
+# 	heal_all_cost.text = str(int(cost))
+# 	if cost > 0:
+# 		heal_all_progress_bar.value = 0
+# 		heal_all.show()
+# 	else:
+# 		heal_all.hide()
 		
 func animate_show_build_phase_buttons() -> void:
 	build_phase_buttons.show()

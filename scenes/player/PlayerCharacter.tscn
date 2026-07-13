@@ -1470,7 +1470,6 @@ _data = {
 size = Vector2(12, 2)
 
 [sub_resource type="Gradient" id="Gradient_xhrp4"]
-interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.5640327, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.2520276, 0.25202766, 0.25202763, 1, 0, 0, 0, 1)
 
@@ -1480,7 +1479,7 @@ width = 128
 height = 128
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.7863248, 0.26068377)
+fill_to = Vector2(0.85897434, 0.14529915)
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 collision_layer = 16384
@@ -1550,6 +1549,7 @@ value = 100.0
 fill_mode = 3
 texture_under = ExtResource("9_gg8xu")
 texture_progress = ExtResource("10_5mqjb")
+metadata/_edit_use_anchors_ = true
 
 [node name="StaffSprite" type="Sprite2D" parent="GraphicsParent"]
 unique_name_in_owner = true
@@ -1725,6 +1725,7 @@ visible = false
 
 [node name="PlayerHUD" parent="." instance=ExtResource("25_ydu3x")]
 unique_name_in_owner = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Buffer" type="Node" parent="."]
 
@@ -1854,7 +1855,6 @@ metadata/_custom_type_script = "uid://bbqhea2s5008x"
 [node name="PlayerLight" type="PointLight2D" parent="."]
 visible = false
 position = Vector2(-1, -2)
-color = Color(0.78534645, 0.41929215, 0.054744758, 1)
 range_z_min = -4096
-range_z_max = 4096
+range_z_max = 3
 texture = SubResource("GradientTexture2D_rol34")

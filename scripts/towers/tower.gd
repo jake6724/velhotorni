@@ -276,7 +276,7 @@ func on_attack_timer_timeout() -> void:
 	
 func spawn_bullet() -> void:
 	var new_bullet = data.bullet.instantiate()
-	new_bullet.initialize(active_target, data.base_element, curr_damage, data.debuff_data, data.bullet_speed, curr_range, data.bullet_modifier_data)
+	new_bullet.initialize(active_target, data.base_element, curr_damage, data.debuff_data, data.bullet_speed, curr_range, data.bullet_modifier_data, data.bullet_pierce, self)
 	new_bullet.position += new_bullet._pos_offset
 	add_child(new_bullet)
 
@@ -600,7 +600,6 @@ func on_hit(_damage_amount: int) -> void:
 	ap.play("hit")
 	health -= _damage_amount
 	number_popup.display_damage_number(_damage_amount, global_position)
-	print(_damage_amount)
 	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_HIT)
 	if health <= 0:
 		die()
@@ -615,8 +614,6 @@ func heal(_value: int) -> void:
 	number_popup.display_tower_heal(global_position, health, curr_max_health)
 	if health >= curr_max_health:
 		can_heal = false
-	else:
-		print("Can heal is true ??!")
 
 func die() -> void:
 	alive = false

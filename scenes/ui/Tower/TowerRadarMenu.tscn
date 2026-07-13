@@ -1,0 +1,129 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmtymmquhkqms"]
+
+[ext_resource type="Texture2D" uid="uid://dhx5yrbtwdm7n" path="res://assets/art/sprites/ui/spr_ui_circle_longpress.png" id="1_v4euq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7do5"]
+bg_color = Color(0.15686275, 0.15686275, 0.50980395, 1)
+
+[sub_resource type="Gradient" id="Gradient_j7do5"]
+interpolation_mode = 1
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v4euq"]
+gradient = SubResource("Gradient_j7do5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.475, 0.48)
+
+[node name="TowerRadarMenu" type="Panel"]
+custom_minimum_size = Vector2(96, 96)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 80.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_j7do5")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(16, 8)
+color = Color(0.09411765, 0.09411765, 0.2509804, 1)
+polygon = PackedVector2Array(48, 14, 16, 29, 8, 72, 48, 70, 78, 66, 68, 36)
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_filter = 1
+position = Vector2(16, 8)
+points = PackedVector2Array(48, 8, 8, 24, 8, 72, 48, 88, 88, 72, 88, 24, 48, 8, 16.289383, 20.68425)
+closed = true
+width = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_v4euq")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 6.0
+offset_right = 76.0
+offset_bottom = 16.0
+text = "DPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = -27.0
+offset_top = 9.0
+offset_right = 29.0
+offset_bottom = 32.0
+text = "Crowd
+Control"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line2D2" type="Line2D" parent="."]
+points = PackedVector2Array(64, 56, 104, 32)
+width = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Line2D2"]
+position = Vector2(58.999996, 53)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_v4euq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Line2D2"]
+position = Vector2(48.999996, 47)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_v4euq")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Line2D2"]
+position = Vector2(38.999996, 41)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_v4euq")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Line2D2"]
+position = Vector2(31.999996, 37)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_v4euq")
+
+[node name="Line2D3" type="Line2D" parent="."]
+points = PackedVector2Array(64, 56, 64, 16)
+width = 1.0
+
+[node name="Line2D4" type="Line2D" parent="."]
+points = PackedVector2Array(64, 56, 24, 32)
+width = 1.0
+
+[node name="Line2D5" type="Line2D" parent="."]
+points = PackedVector2Array(64, 56, 24, 80)
+width = 1.0
+
+[node name="Line2D6" type="Line2D" parent="."]
+points = PackedVector2Array(64, 56, 64, 96)
+width = 1.0
+
+[node name="Line2D7" type="Line2D" parent="."]
+points = PackedVector2Array(64, 56, 104, 80)
+width = 1.0
+
+[node name="Line2D8" type="Line2D" parent="."]
+points = PackedVector2Array(68, 52)

@@ -8,6 +8,9 @@ var player_in_range: bool = false
 
 var player: PlayerCharacter
 
+signal activated
+signal deactivated
+
 func _ready():
 	body_entered.connect(on_body_entered)
 	body_exited.connect(on_body_exited)
@@ -25,11 +28,13 @@ func on_body_entered(_player: PlayerCharacter) -> void:
 	player_in_range = true
 	button_hint.show()
 	player = _player
+	activated.emit()
 
 func on_body_exited(_player: PlayerCharacter) -> void:
 	player_in_range = false
 	button_hint.hide()
 	hide_ui()
+	deactivated.emit()
 
 func show_ui() -> void:
 	player.player_input.input_enabled = false

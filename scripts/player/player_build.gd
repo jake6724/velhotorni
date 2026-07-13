@@ -289,9 +289,10 @@ func sell_tower(_tower: Tower) -> void:
 
 func info_tower(_tower: Tower) -> void:
 	player_build_ui.tower_info_menu.show()
-	player_build_ui.tower_info_menu.tower = _tower
+	player_build_ui.tower_info_menu.update(_tower)
 	set_player_input_enabled_requested.emit(false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+
 
 func get_tower_action_negative_text(_tower_action: TowerAction) -> String:
 	var _text: String
