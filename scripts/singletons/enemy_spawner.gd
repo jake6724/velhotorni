@@ -22,16 +22,16 @@ var flying_spawn_points: Array[Vector2] = []
 var player: PlayerCharacter # Set by main
 
 var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
-	Enemy.Size.SMALL: preload("res://scenes/enemies/EnemySmall.tscn"),
-	Enemy.Size.LARGE: preload("res://scenes/enemies/EnemyLarge.tscn"),
-	Enemy.Size.FLYING_SMALL: preload("res://scenes/enemies/EnemyFlyingSmall.tscn"),
-	Enemy.Size.FLYING_LARGE: preload("res://scenes/enemies/EnemyFlyingLarge.tscn"),
-	Enemy.Size.RANGED_SMALL: preload("res://scenes/enemies/EnemyRangedSmall.tscn"),
-	Enemy.Size.RANGED_LARGE: preload("res://scenes/enemies/EnemyRangedLarge.tscn"),
-	Enemy.Size.REPEATER_SMALL: preload("res://scenes/enemies/EnemyRangedRepeaterSmall.tscn"),
-	Enemy.Size.REPEATER_LARGE: preload("res://scenes/enemies/EnemyRangedRepeaterLarge.tscn"),
-	Enemy.Size.DUMMY_SMALL: preload("res://scenes/enemies/EnemyDummySmall.tscn"),
-	Enemy.Size.SNAKE: preload("res://scenes/enemies/EnemySnake.tscn"),
+	Enemy.Size.SMALL: load("res://scenes/enemies/EnemySmall.tscn"),
+	Enemy.Size.LARGE: load("res://scenes/enemies/EnemyLarge.tscn"),
+	Enemy.Size.FLYING_SMALL: load("res://scenes/enemies/EnemyFlyingSmall.tscn"),
+	Enemy.Size.FLYING_LARGE: load("res://scenes/enemies/EnemyFlyingLarge.tscn"),
+	Enemy.Size.RANGED_SMALL: load("res://scenes/enemies/EnemyRangedSmall.tscn"),
+	Enemy.Size.RANGED_LARGE: load("res://scenes/enemies/EnemyRangedLarge.tscn"),
+	Enemy.Size.REPEATER_SMALL: load("res://scenes/enemies/EnemyRangedRepeaterSmall.tscn"),
+	Enemy.Size.REPEATER_LARGE: load("res://scenes/enemies/EnemyRangedRepeaterLarge.tscn"),
+	Enemy.Size.DUMMY_SMALL: load("res://scenes/enemies/EnemyDummySmall.tscn"),
+	Enemy.Size.SNAKE: load("res://scenes/enemies/EnemySnake.tscn"),
 }
 
 # Signals

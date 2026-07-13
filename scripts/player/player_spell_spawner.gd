@@ -15,12 +15,12 @@ var can_attack: bool = true
 var spell_cooldown_timers: Dictionary[SpellData, Timer] = {}
 
 var spell_scenes: Dictionary[SpellData.Type, PackedScene] = {
-	SpellData.Type.BULLET: preload("res://scenes/Spells/SpellBullet.tscn"), 
-	SpellData.Type.BULLET_AOE: preload("res://scenes/Spells/SpellBulletAOE.tscn"),
-	SpellData.Type.MELEE_BULLET: preload("res://scenes/Spells/SpellBullet.tscn"), ## TODO: Make the spell data provide these scenes
-	SpellData.Type.MELEE: preload("res://scenes/Spells/SpellMelee.tscn"),
-	SpellData.Type.BULLET_CHARGED: preload("res://scenes/Spells/SpellBulletCharged.tscn"),
-	SpellData.Type.SHIELD_DIRECTIONAL: preload("res://scenes/Spells/SpellShield.tscn")
+	SpellData.Type.BULLET: load("res://scenes/Spells/SpellBullet.tscn"), 
+	SpellData.Type.BULLET_AOE: load("res://scenes/Spells/SpellBulletAOE.tscn"),
+	SpellData.Type.MELEE_BULLET: load("res://scenes/Spells/SpellBullet.tscn"), ## TODO: Make the spell data provide these scenes
+	SpellData.Type.MELEE: load("res://scenes/Spells/SpellMelee.tscn"),
+	SpellData.Type.BULLET_CHARGED: load("res://scenes/Spells/SpellBulletCharged.tscn"),
+	SpellData.Type.SHIELD_DIRECTIONAL: load("res://scenes/Spells/SpellShield.tscn")
 }
 
 var curr_spell_data: SpellData
@@ -63,12 +63,12 @@ var spell_element_free_cast_perk_modifier: Dictionary[Constants.Element, float] 
 
 ## DebuffData to apply and chance to pass on to spell
 var perk_debuffs: Dictionary[DebuffData, float] = {
-	preload("res://data/debuffs/perk_debuffs/debuff_data_knockback_perk.tres"): 0.0,
-	preload("res://data/debuffs/perk_debuffs/debuff_data_slow_perk.tres"): 0.0,
-	preload("res://data/debuffs/perk_debuffs/debuff_data_burn_perk.tres"): 0.0,
-	preload("res://data/debuffs/perk_debuffs/debuff_data_weaken_perk.tres"): 0.0,
-	preload("res://data/debuffs/perk_debuffs/debuff_data_freeze_perk.tres"): 0.0,
-	preload("res://data/debuffs/perk_debuffs/debuff_data_stun_perk.tres"): 0.0,
+	load("res://data/debuffs/perk_debuffs/debuff_data_knockback_perk.tres"): 0.0,
+	load("res://data/debuffs/perk_debuffs/debuff_data_slow_perk.tres"): 0.0,
+	load("res://data/debuffs/perk_debuffs/debuff_data_burn_perk.tres"): 0.0,
+	load("res://data/debuffs/perk_debuffs/debuff_data_weaken_perk.tres"): 0.0,
+	load("res://data/debuffs/perk_debuffs/debuff_data_freeze_perk.tres"): 0.0,
+	load("res://data/debuffs/perk_debuffs/debuff_data_stun_perk.tres"): 0.0,
 }
 
 var spell_execution_threshold: float = 0.0
