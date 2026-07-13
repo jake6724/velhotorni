@@ -44,12 +44,8 @@ signal set_player_enabled_requested
 signal set_player_input_enabled_requested
 
 func _process(_delta):
-	# queue_redraw()
 	if tower_action_radial_menu_active:
 		limit_mouse_radius(TOWER_RADIAL_MENU_MOUSE_RADIUS)
-
-# func _draw():
-# 	draw_circle(to_local(tower_detect_area.get_child(0).global_position), 3, Color.RED, true)
 
 func limit_mouse_radius(radius: float) -> void:
 	var mouse_position: Vector2 = get_global_mouse_position()	
@@ -493,7 +489,8 @@ func on_wave_started() -> void:
 	lock_in_tower_sell_prices()
 
 func on_wave_completed() -> void:
-	heal_all_cost_updated.emit(get_heal_all_cost())
+	heal_all_towers(active_towers)
+	#heal_all_cost_updated.emit(get_heal_all_cost())
 
 func lock_in_tower_sell_prices() -> void:
 	for child in tower_parent.get_children():
@@ -514,3 +511,7 @@ func get_heal_all_cost() -> float:
 		if tower.can_heal:
 			cost += max(((tower.max_health - tower.health) / TOWER_HEAL_AMOUNT), 1)
 	return cost
+
+func heal_all_towers(_towers: Array[Tower]) -> void:
+	for t: Tower in _towers:
+		t.heal(t.curr_max_health)

@@ -5,7 +5,7 @@ var main_scene: PackedScene = load("res://scenes/Main.tscn")
 var main_menu_scene: PackedScene = load("res://scenes/MainMenu.tscn")
 var main: Main # Reference used to change RoundInfo UI
 
-var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # The scene that 'exit' in menu takes you to
+# var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # The scene that 'exit' in menu takes you to
 
 var tower_level: PackedScene = load("uid://dnilok8ickyxd")
 var level_1: PackedScene = load("uid://c834s0blo3yw2")
@@ -68,10 +68,10 @@ func load_specific_level_by_level_tag(_level_tag: LevelTag):
 
 	SceneTransition.change_scene(scene_to_load)
 
-func exit_level() -> void: # TODO: Eventually this should load the tower not the map
-	EnemySpawner.reset()
-	WaveManager.reset()
-	SceneTransition.change_scene(exit_scene)
+# func exit_level() -> void: # TODO: Eventually this should load the tower not the map
+# 	EnemySpawner.reset()
+# 	WaveManager.reset()
+# 	SceneTransition.change_scene(exit_scene)
 
 func complete_game() -> void:
 	level_index = 0

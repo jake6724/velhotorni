@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Spawn" load_steps=3 format=3 uid="uid://ctttkru7woq6k"]
+
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="1_4v8xy"]
+[ext_resource type="Resource" uid="uid://htc4ag3pms2p" path="res://data/enemies/ranged_enemies/enemy_data_ranged_fire_gargoyle.tres" id="1_puoa3"]
+
+[resource]
+script = ExtResource("1_4v8xy")
+enemy_data = ExtResource("1_puoa3")
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"

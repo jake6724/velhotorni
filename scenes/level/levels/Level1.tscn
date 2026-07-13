@@ -3400,7 +3400,7 @@ tile_set = SubResource("TileSet_ps1ik")
 collision_visibility_mode = 1
 
 [node name="Base" parent="." instance=ExtResource("6_smqmd")]
-position = Vector2(392, -256)
+position = Vector2(392, -216)
 
 [node name="WeatherScroll" type="Sprite2D" parent="."]
 z_index = 7

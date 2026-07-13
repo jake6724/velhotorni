@@ -33,6 +33,9 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var upgrade_button_hint: ButtonHint = %UpgradeButtonHint
 @onready var placement_button_hint: ButtonHint = %PlacementButtonHint
 
+@onready var fx_disabled: AnimatedSprite2D
+var disabled: bool = false
+
 var alive: bool = true
 
 # Internal data

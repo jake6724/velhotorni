@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://bq1dqq33vdbh2"]
+[gd_scene load_steps=47 format=4 uid="uid://bq1dqq33vdbh2"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_n3v8h"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_24qix"]
@@ -9,13 +9,8 @@
 [ext_resource type="Resource" uid="uid://cuxcbyhx0k237" path="res://data/waves/level_3b_wave_E.tres" id="7_2ylnc"]
 [ext_resource type="Resource" uid="uid://clnilluanisyt" path="res://data/waves/level_3b_wave_F.tres" id="8_hnjgc"]
 [ext_resource type="Resource" uid="uid://bdsqojauedq27" path="res://data/waves/level_3b_wave_G.tres" id="9_ppmws"]
-[ext_resource type="Resource" uid="uid://qjj0ao54fufb" path="res://data/waves/level_3b_wave_H.tres" id="10_j71bk"]
-[ext_resource type="Resource" uid="uid://br2xim7hrgwrm" path="res://data/waves/wave_one_fire.tres" id="11_guebr"]
-[ext_resource type="Resource" uid="uid://co7wcw64w51at" path="res://data/waves/level_3b_wave_1.tres" id="12_2ka1y"]
-[ext_resource type="Resource" uid="uid://7l8w0eldkpg6" path="res://data/waves/level_3B_wave_2_1.tres" id="13_7yl1f"]
-[ext_resource type="Resource" uid="uid://422mucaf6pga" path="res://data/waves/level_3B_wave_3_1.tres" id="14_kfduf"]
-[ext_resource type="Resource" uid="uid://b2hk0mgojeylo" path="res://data/waves/level_3B_wave_4_1.tres" id="15_ilgnw"]
-[ext_resource type="Resource" uid="uid://wrgqiym0m33q" path="res://data/waves/level_3B_wave_5_1.tres" id="16_8rqln"]
+[ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="10_o40qk"]
+[ext_resource type="Resource" uid="uid://civ0cfp12rlak" path="res://data/enemies/ranged_enemies/enemy_data_ranged_light_kuse.tres" id="11_jdwc4"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="17_th2su"]
 [ext_resource type="Shader" uid="uid://b6jfsx1p8sx5s" path="res://assets/art/water.gdshader" id="18_fjs4m"]
 [ext_resource type="Texture2D" uid="uid://cweaihdd066kf" path="res://assets/art/sprites/environment/spr_environment_wave.png" id="19_f1jyx"]
@@ -31,6 +26,16 @@
 [ext_resource type="PackedScene" uid="uid://5kegew63jmcv" path="res://scenes/level/GroundInfoTrigger.tscn" id="29_7182r"]
 [ext_resource type="PackedScene" uid="uid://bwihg1ohfaadc" path="res://scenes/level/TallGrass.tscn" id="30_5ctke"]
 [ext_resource type="Script" uid="uid://bqhap4drhvx27" path="res://scripts/level/pit_area.gd" id="31_5kerq"]
+
+[sub_resource type="Resource" id="Resource_4ga13"]
+script = ExtResource("10_o40qk")
+enemy_data = ExtResource("11_jdwc4")
+metadata/_custom_type_script = "uid://drj0bkkfpdi50"
+
+[sub_resource type="Resource" id="Resource_0k02l"]
+script = ExtResource("2_24qix")
+data = Array[ExtResource("10_o40qk")]([SubResource("Resource_4ga13")])
+metadata/_custom_type_script = "uid://cskry1sw3vqba"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mssc7"]
 texture = ExtResource("17_th2su")
@@ -1880,7 +1885,7 @@ level_name = "Level 3B"
 region = 2
 initial_gold = 175
 initial_token = 1
-waves = Array[ExtResource("2_24qix")]([ExtResource("3_nyig2"), ExtResource("4_cipa6"), ExtResource("5_hi3tm"), ExtResource("6_bdb0j"), ExtResource("7_2ylnc"), ExtResource("8_hnjgc"), ExtResource("9_ppmws"), ExtResource("10_j71bk"), ExtResource("11_guebr"), ExtResource("12_2ka1y"), ExtResource("13_7yl1f"), ExtResource("14_kfduf"), ExtResource("15_ilgnw"), ExtResource("16_8rqln")])
+waves = Array[ExtResource("2_24qix")]([SubResource("Resource_0k02l"), ExtResource("3_nyig2"), ExtResource("4_cipa6"), ExtResource("5_hi3tm"), ExtResource("6_bdb0j"), ExtResource("7_2ylnc"), ExtResource("8_hnjgc"), ExtResource("9_ppmws")])
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
