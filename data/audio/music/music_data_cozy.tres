@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MusicData" load_steps=3 format=3 uid="uid://dnm70tb2uewd8"]
+
+[ext_resource type="Script" uid="uid://cudxlol6t5xf3" path="res://scripts/audio/music_data.gd" id="1_rbl8n"]
+[ext_resource type="AudioStream" uid="uid://b7noo3n5n5gg4" path="res://assets/audio/music/LobbyMusic_120_Cmaj_roughmix.mp3" id="2_40r34"]
+
+[resource]
+script = ExtResource("1_rbl8n")
+sound = ExtResource("2_40r34")
+volume = -20.0
+metadata/_custom_type_script = "uid://cudxlol6t5xf3"

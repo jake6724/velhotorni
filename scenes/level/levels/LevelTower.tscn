@@ -1,8 +1,9 @@
-[gd_scene load_steps=44 format=4 uid="uid://dnilok8ickyxd"]
+[gd_scene load_steps=46 format=4 uid="uid://dnilok8ickyxd"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_qvp6q"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_tpnjg"]
 [ext_resource type="Resource" uid="uid://1dh3h441gmxk" path="res://data/waves/wave_tower_level.tres" id="3_bpcou"]
+[ext_resource type="Resource" uid="uid://dnm70tb2uewd8" path="res://data/audio/music/music_data_cozy.tres" id="4_3wkwp"]
 [ext_resource type="Texture2D" uid="uid://cm5ugpqpl32g4" path="res://assets/art/sprites/environment/spr_environment_animation_atlas.png" id="4_bpcou"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="4_d1vqo"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="5_ajg4h"]
@@ -25,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cahss8ju2i2fv" path="res://scenes/ui/SkillTree/SkillTree.tscn" id="21_6p3h5"]
 [ext_resource type="Script" uid="uid://bolpgu7h6pcp8" path="res://scripts/level/area_scene_transition.gd" id="25_00s02"]
 [ext_resource type="PackedScene" uid="uid://qnkbfad0chue" path="res://scenes/level/Cat.tscn" id="25_1wxp3"]
+[ext_resource type="PackedScene" uid="uid://bsh30vfua6xdw" path="res://scenes/enemies/TargetDummy.tscn" id="26_1wxp3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpffg"]
 texture = ExtResource("4_d1vqo")
@@ -1617,6 +1619,7 @@ level_name = "Level 0"
 region = 1
 initial_gold = 1000
 waves = Array[ExtResource("2_tpnjg")]([ExtResource("3_bpcou")])
+music_data = ExtResource("4_3wkwp")
 start_first_wave_immediately = true
 show_level_details = false
 
@@ -1704,6 +1707,7 @@ position = Vector2(-264, 144)
 [node name="PathParent" type="Node" parent="."]
 
 [node name="EnemyPath" type="Path2D" parent="PathParent"]
+position = Vector2(-1592, -120)
 curve = SubResource("Curve2D_bpcou")
 
 [node name="PortalParent" type="Node" parent="."]
@@ -1942,6 +1946,35 @@ shape = SubResource("RectangleShape2D_1wxp3")
 [node name="Cat" parent="." node_paths=PackedStringArray("prompt_area") instance=ExtResource("25_1wxp3")]
 position = Vector2(176, 96)
 prompt_area = NodePath("../LoadoutPromptArea")
+
+[node name="TargetDummies" type="Node" parent="."]
+
+[node name="TargetDummy" parent="TargetDummies" instance=ExtResource("26_1wxp3")]
+position = Vector2(760, 176)
+
+[node name="TargetDummy6" parent="TargetDummies" instance=ExtResource("26_1wxp3")]
+position = Vector2(736, 176)
+
+[node name="TargetDummy7" parent="TargetDummies" instance=ExtResource("26_1wxp3")]
+position = Vector2(712, 176)
+
+[node name="TargetDummy8" parent="TargetDummies" instance=ExtResource("26_1wxp3")]
+position = Vector2(880, 176)
+
+[node name="TargetDummy9" parent="TargetDummies" instance=ExtResource("26_1wxp3")]
+position = Vector2(904, 176)
+
+[node name="TargetDummy2" parent="TargetDummies" instance=ExtResource("26_1wxp3")]
+position = Vector2(784, 176)
+
+[node name="TargetDummy3" parent="TargetDummies" instance=ExtResource("26_1wxp3")]
+position = Vector2(808, 176)
+
+[node name="TargetDummy4" parent="TargetDummies" instance=ExtResource("26_1wxp3")]
+position = Vector2(832, 176)
+
+[node name="TargetDummy5" parent="TargetDummies" instance=ExtResource("26_1wxp3")]
+position = Vector2(856, 176)
 
 [editable path="LoadoutPromptArea"]
 [editable path="SkillTreePromptArea"]

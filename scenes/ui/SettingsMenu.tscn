@@ -160,7 +160,8 @@ theme_override_font_sizes/font_size = 16
 text = "CRT Filter:"
 horizontal_alignment = 2
 
-[node name="SFXCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/VBoxContainer2/CRTSettings"]
+[node name="CRTCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/VBoxContainer2/CRTSettings"]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
 theme = SubResource("Theme_llyjd")
