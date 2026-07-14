@@ -59,6 +59,9 @@ var enemy_info_count: int
 
 @onready var hint_label: Label = %HintLabel
 
+@onready var build_mode_indicator: HBoxContainer = %BuildModeIndicator
+@onready var tower_menu_indicator: Label = %TowerMenuIndicator
+
 var hint_timer: Timer = Timer.new()
 var prev_hint_overwriteable: bool = false
 

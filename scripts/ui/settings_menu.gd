@@ -30,6 +30,7 @@ func _ready():
 	music_check_box.pressed.connect(on_music_check_pressed)
 
 	crt_check_box.pressed.connect(on_crt_check_pressed)
+	crt_check_box.button_pressed = flowerwall_crt.crt.visible
 
 	# Configure BackButton
 	back_button.pressed.connect(on_back_button_pressed)

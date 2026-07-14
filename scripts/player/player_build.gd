@@ -42,6 +42,7 @@ signal heal_all_cost_updated
 signal player_hud_hint_requested
 signal set_player_enabled_requested
 signal set_player_input_enabled_requested
+signal request_tower_menu_indicator
 
 func _process(_delta):
 	if tower_action_radial_menu_active:
@@ -101,6 +102,7 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 
 func on_ui_interact_pressed() -> void:
 	if hovered_tower and hovered_tower.alive:
+		request_tower_menu_indicator.emit(false)
 		hovered_tower.upgrade_button_hint.hide()
 		set_player_enabled_requested.emit(false)
 		mouse_reset_warp_position = get_viewport().get_mouse_position()
@@ -113,8 +115,8 @@ func on_ui_interact_pressed() -> void:
 		limit_mouse_radius(1)
 
 func on_ui_interact_released() -> void: # TODO: Call this when unhovering a tower also
-	if tower_action_radial_menu_active:
-
+	if tower_action_radial_menu_active:	
+		request_tower_menu_indicator.emit(true)
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 		on_player_input_primary_action_just_pressed()
 
@@ -233,6 +235,15 @@ func place_tower() -> void:
 			preview_tower.modulate.r = 1
 			preview_tower.placement_button_hint.hide()
 			preview_tower.hide_upgrade_info()
+
+			print("Placing tower, OA's: ", preview_tower.area_detect_mana_well.get_overlapping_areas())
+			for area in preview_tower.area_detect_mana_well.get_overlapping_areas():
+				if area is ManaWell:
+					print("Adding buffs")
+					preview_tower.buff_manager.add_buff((area.buff_data_list[0]), area.buff_area)
+					preview_tower.buff_manager.add_buff((area.buff_data_list[1]), area.buff_area)
+					preview_tower.buff_manager.add_buff((area.buff_data_list[2]), area.buff_area)
+
 			AudioManager.create_2d_audio_at_location(WorldGrid.grid_to_world(tower_placement_info[1]), SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON)
 
 			# Update WorldGrid
@@ -390,6 +401,8 @@ func on_tower_detect_area_entered(intruder: Area2D) -> void:
 	hovered_tower.upgrade_button_hint.show()
 	hovered_tower.scale_up()
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1)
+	owner.player_hud.tower_menu_indicator.show()
+	request_tower_menu_indicator.emit(true)
 
 func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 	if not tower_action_radial_menu_active:
@@ -403,6 +416,8 @@ func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 
 		if preview_tower:
 			player_build_ui.update_tower_info_panel(preview_tower)
+
+	request_tower_menu_indicator.emit(false)
 
 func on_tower_died(tower: Tower) -> void:
 	if preview_tower == tower:

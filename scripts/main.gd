@@ -121,7 +121,8 @@ func _ready():
 		WaveManager.start_wave()
 
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.AMBIANCE_WIND_1)
-	MusicManager.create_audio(MusicData.MUSIC_TRACK.COZY)
+	if active_level.music_data:
+		MusicManager.create_audio(active_level.music_data.track)
 
 func on_banner_animation_finished() -> void:
 	player_character.player_input.input_enabled = true

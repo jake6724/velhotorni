@@ -16,7 +16,7 @@ var level_environments: Dictionary[LevelTag, PackedScene]
 
 var levels: Array[PackedScene] = [tower_level, level_1, level_2, level_3]
 
-var level_index: int = 0
+var level_index: int = 3
 var active_level: LevelEnvironment
 
 enum LevelTag {TUTORIAL}

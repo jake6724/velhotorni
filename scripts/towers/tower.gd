@@ -22,6 +22,7 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var tower_audio: TowerAudio = $TowerAudio
 @onready var hurtbox: TowerHurtbox = %Hurtbox
 @onready var hurtbox_collider: CollisionShape2D = %HurtboxCollider
+@onready var area_detect_mana_well: Area2D = %AreaDetectManaWell
 @onready var healthbar: TextureProgressBar = %HealthBar
 @onready var number_popup: NumberPopup = %NumberPopup
 @onready var tower_obstacle_collider: CollisionShape2D = %TowerObstacleCollider
@@ -269,14 +270,15 @@ func child_physics_process(_delta) -> void:
 	pass
 
 func attack() -> void:
-	active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
-	if active_target:
-		can_attack = false
-		attack_timer.start(curr_speed)
-		flip_to_face_active_target()
-		spawn_bullet()
-		if data.shoot_sfx:
-			AudioManager.create_2d_audio_at_location(global_position, data.shoot_sfx.type)
+	if not disabled:
+		active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
+		if active_target:
+			can_attack = false
+			attack_timer.start(curr_speed)
+			flip_to_face_active_target()
+			spawn_bullet()
+			if data.shoot_sfx:
+				AudioManager.create_2d_audio_at_location(global_position, data.shoot_sfx.type)
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
@@ -499,6 +501,7 @@ func _draw():
 
 # Buffs
 func on_add_new_buff(buff: Buff):
+	print("Tower adding buff")
 	match buff.data.type:
 		Buff.Type.RANGE:
 			_range_buff += _leveled_range * buff.data.modified_value

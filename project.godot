@@ -43,6 +43,7 @@ DataTracker="*res://scripts/singletons/data_tracker.gd"
 flowerwall_crt="*res://addons/flowerwall_postprocess/scenes/flowerwall_pp.tscn"
 MusicManager="*res://scenes/audio/MusicManager.tscn"
 TweenFX="*res://addons/TweenFX/TweenFX.gd"
+XPManager="*res://scripts/singletons/xp_manager.gd"
 
 [debug]
 
@@ -317,6 +318,7 @@ heal_all_action={
 2d_physics/layer_27="TowerObstacleBody"
 2d_physics/layer_28="Obstacle"
 2d_physics/layer_29="PlayerGroundBeacon"
+2d_physics/layer_30="ManaWell"
 
 [rendering]
 

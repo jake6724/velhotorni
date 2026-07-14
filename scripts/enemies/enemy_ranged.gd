@@ -19,7 +19,7 @@ func configure_ranged_enemy() -> void:
 	attack_area.area_entered.connect(on_area_entered)
 	attack_collider.shape.radius = data.attack_range
 
-func on_area_entered(intruder: Area2D) -> void:
+func on_area_entered(intruder) -> void:
 	if can_attack:
 		# if data.wind_up: 
 		# 	wind_up()
@@ -27,7 +27,10 @@ func on_area_entered(intruder: Area2D) -> void:
 		# 	attack_target(intruder.global_position)
 		# else:
 		# 	attack_target(intruder.global_position)
-		attack_target(intruder.global_position)
+		if intruder.owner is Tower and not intruder.owner.disabled:
+			attack_target(intruder.global_position)
+		else:
+			attack_target(intruder.global_position)
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
@@ -46,8 +49,12 @@ func check_for_target() -> void:
 				attack_target(area.global_position)
 				return
 		
-		if areas[0]: # If player not in range, attack the first found target
-			attack_target(areas[0].global_position)
+		# If player isn't in range, attack the first non-disabled tower
+		for a in areas:
+			if a.owner is Tower and not a.owner.disabled:
+				attack_target(a.global_position)
+				break
+
 
 func attack_target(target_pos: Vector2) -> void:
 	if is_alive and can_attack:

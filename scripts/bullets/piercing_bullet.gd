@@ -13,7 +13,6 @@ func _physics_process(delta):
 		ap.play("hit")
 
 func on_primary_area_entered(intruder) -> void:
-	print(intruder)
 	if is_active and _enemies_hit < data.pierce:
 		if intruder is Enemy:
 			intruder.apply_drop_chance_bonus(data.drop_chance_bonus)

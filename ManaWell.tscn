@@ -1,0 +1,61 @@
+[gd_scene load_steps=13 format=3 uid="uid://b25ntv7cw871v"]
+
+[ext_resource type="Script" uid="uid://85ruxf75ft4j" path="res://scripts/level/mana_well.gd" id="1_nbmcc"]
+[ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="2_fboeu"]
+[ext_resource type="Resource" uid="uid://bdfrtx4jqecxh" path="res://data/buffs/buff_data_mana_well_damage.tres" id="3_614i6"]
+[ext_resource type="Resource" uid="uid://bpxwrex62gy02" path="res://data/buffs/buff_data_mana_well_speed.tres" id="4_1bxsi"]
+[ext_resource type="Resource" uid="uid://deqmkfbtda14q" path="res://data/buffs/buff_data_mana_well_range.tres" id="5_40l2v"]
+[ext_resource type="Texture2D" uid="uid://b0keh1vpt7pp0" path="res://assets/art/sprites/environment/manawell.png" id="6_614i6"]
+[ext_resource type="Script" uid="uid://b07kx8y1ebqjj" path="res://scripts/buffs/buff_area.gd" id="7_614i6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bxsi"]
+atlas = ExtResource("6_614i6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40l2v"]
+atlas = ExtResource("6_614i6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v34uc"]
+atlas = ExtResource("6_614i6")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kp6ue"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bxsi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40l2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v34uc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbmcc"]
+size = Vector2(16, 16)
+
+[node name="ManaWell" type="Area2D" node_paths=PackedStringArray("buff_area", "sprite")]
+collision_layer = 536870912
+collision_mask = 0
+script = ExtResource("1_nbmcc")
+buff_data_list = Array[ExtResource("2_fboeu")]([ExtResource("3_614i6"), ExtResource("4_1bxsi"), ExtResource("5_40l2v")])
+buff_area = NodePath("BuffArea")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kp6ue")
+autoplay = "default"
+frame_progress = 0.26959616
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nbmcc")
+
+[node name="BuffArea" type="Area2D" parent="."]
+script = ExtResource("7_614i6")
+metadata/_custom_type_script = "uid://b07kx8y1ebqjj"
