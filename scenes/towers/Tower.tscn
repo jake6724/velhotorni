@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bpg5vj2118tkk"]
+[gd_scene load_steps=52 format=3 uid="uid://bpg5vj2118tkk"]
 
 [ext_resource type="Script" uid="uid://1v42jjyvr5ed" path="res://scripts/towers/tower.gd" id="1_cqx8d"]
 [ext_resource type="Texture2D" uid="uid://5nl3odlo5q6d" path="res://assets/art/atlases/tower/atl_tower_wind.png" id="3_3xpr4"]
@@ -273,19 +273,47 @@ height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7cth"]
 atlas = ExtResource("24_o0oo6")
-region = Rect2(0, 208, 16, 16)
+region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n145c"]
 atlas = ExtResource("24_o0oo6")
-region = Rect2(16, 208, 16, 16)
+region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yggcq"]
 atlas = ExtResource("24_o0oo6")
-region = Rect2(32, 208, 16, 16)
+region = Rect2(32, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l84v1"]
 atlas = ExtResource("24_o0oo6")
-region = Rect2(48, 208, 16, 16)
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fayuc"]
+atlas = ExtResource("24_o0oo6")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxhid"]
+atlas = ExtResource("24_o0oo6")
+region = Rect2(80, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gfag"]
+atlas = ExtResource("24_o0oo6")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnnd4"]
+atlas = ExtResource("24_o0oo6")
+region = Rect2(112, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itim6"]
+atlas = ExtResource("24_o0oo6")
+region = Rect2(128, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ceew"]
+atlas = ExtResource("24_o0oo6")
+region = Rect2(144, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6od7"]
+atlas = ExtResource("24_o0oo6")
+region = Rect2(160, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fayuc"]
 animations = [{
@@ -301,6 +329,27 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l84v1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fayuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxhid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gfag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnnd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itim6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ceew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6od7")
 }],
 "loop": true,
 "name": &"default",
@@ -322,13 +371,11 @@ movie_quit_on_finish = true
 
 [node name="Light" type="Sprite2D" parent="."]
 position = Vector2(8, 7.96659)
-scale = Vector2(1, 0.995824)
 texture = ExtResource("3_ig0xk")
 hframes = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(1, 0.995824)
 texture = ExtResource("3_3xpr4")
 centered = false
 hframes = 4
@@ -529,7 +576,9 @@ unique_name_in_owner = true
 shape = SubResource("CapsuleShape2D_3d6kj")
 
 [node name="FXDisabled" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 visible = false
-position = Vector2(9, 9)
+position = Vector2(8, 0)
 sprite_frames = SubResource("SpriteFrames_fayuc")
-frame_progress = 0.71523565
+autoplay = "default"
+frame_progress = 0.6539858

@@ -41,6 +41,7 @@ AudioManager="*res://scenes/audio/AudioManager.tscn"
 AlertManager="*res://scripts/singletons/alert_manager.gd"
 DataTracker="*res://scripts/singletons/data_tracker.gd"
 flowerwall_crt="*res://addons/flowerwall_postprocess/scenes/flowerwall_pp.tscn"
+MusicManager="*res://scenes/audio/MusicManager.tscn"
 
 [debug]
 

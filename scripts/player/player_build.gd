@@ -388,6 +388,8 @@ func on_tower_detect_area_entered(intruder: Area2D) -> void:
 	hovered_tower.can_show_range = true
 	player_build_ui.update_tower_info_panel(hovered_tower)
 	hovered_tower.upgrade_button_hint.show()
+	hovered_tower.scale_up()
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1)
 
 func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 	if not tower_action_radial_menu_active:
@@ -514,4 +516,4 @@ func get_heal_all_cost() -> float:
 
 func heal_all_towers(_towers: Array[Tower]) -> void:
 	for t: Tower in _towers:
-		t.heal(t.curr_max_health)
+		t.heal(99999)

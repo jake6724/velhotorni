@@ -493,3 +493,7 @@ func hide_all_fx() -> void:
 
 func boss_initialize() -> void:
 	pass
+
+# func scale_up() -> void:
+# 	var tween: Tween = get_tree().create_tween()
+# 	tween.tween_property(sprite, "scale", Vector2(1,1), .33).from(Vector2(1.2,1.2))

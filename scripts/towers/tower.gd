@@ -33,10 +33,12 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var upgrade_button_hint: ButtonHint = %UpgradeButtonHint
 @onready var placement_button_hint: ButtonHint = %PlacementButtonHint
 
-@onready var fx_disabled: AnimatedSprite2D
+@onready var fx_disabled: AnimatedSprite2D = %FXDisabled
 var disabled: bool = false
 
 var alive: bool = true
+
+var grayscale_shader: ShaderMaterial = load("uid://d11g335u6jhey")
 
 # Internal data
 var active_target: Enemy
@@ -206,6 +208,8 @@ func _ready():
 	tower_action_cost_label.z_index = Constants.z_index_map["top"]
 
 	z_index = Constants.z_index_map["tower"]
+
+	material = null
 
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
@@ -618,15 +622,16 @@ func heal(_value: int) -> void:
 	if health >= curr_max_health:
 		can_heal = false
 
+	disabled = false
+	fx_disabled.hide()
+	sprite.material = null
+
 func die() -> void:
-	alive = false
-	died.emit(self)
-	ap.play("die")
-	await ap.animation_finished
-	# Update WorldGrid
-	var tower_grid_position: Vector2 = WorldGrid.world_to_grid(global_position)
-	WorldGrid.data[tower_grid_position] = true
-	queue_free()
+
+	disabled = true
+	fx_disabled.show()
+	sprite.material = grayscale_shader
+	healthbar.hide()
 
 func shake() -> void:
 	var tween: Tween = get_tree().create_tween()
@@ -639,6 +644,10 @@ func shake() -> void:
 	tween.tween_interval(TOWER_SHAKE_DURATION)
 	tween.tween_property(sprite, "position:x", 0, TOWER_SHAKE_DURATION)
 	tween.tween_interval(TOWER_SHAKE_DURATION)
+
+func scale_up() -> void:
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(sprite, "scale", Vector2(1,1), .5).from(Vector2(1.2,1.2))
 
 func update_shield_tower_data() -> void:
 	pass

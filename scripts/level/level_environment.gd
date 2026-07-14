@@ -35,6 +35,7 @@ var tower_mana_breakables: Array[Breakable] = []
 @export var initial_token: int
 @export var waves: Array[Wave]
 @export var max_towers: int = 10
+@export var music_data: MusicData
 
 @export var start_first_wave_immediately: bool = false
 
