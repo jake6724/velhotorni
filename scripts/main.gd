@@ -75,8 +75,10 @@ func _ready():
 	# Configure PauseMenu
 	pause_menu.parent_scene = self
 	pause_menu.restart.show()
-
-	# Configure Bestiary
+	if not active_level.show_pause_menu_restart:
+		pause_menu.restart.hide()
+	
+	# Configure Bestiary	
 	bestiary_menu.parent_scene = self
 	bestiary_menu.add_entries()
 	EnemySpawner.enemy_spawned_with_ref.connect(bestiary_menu.on_enemy_spawned)

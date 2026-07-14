@@ -42,6 +42,7 @@ AlertManager="*res://scripts/singletons/alert_manager.gd"
 DataTracker="*res://scripts/singletons/data_tracker.gd"
 flowerwall_crt="*res://addons/flowerwall_postprocess/scenes/flowerwall_pp.tscn"
 MusicManager="*res://scenes/audio/MusicManager.tscn"
+TweenFX="*res://addons/TweenFX/TweenFX.gd"
 
 [debug]
 
@@ -61,7 +62,7 @@ mouse_cursor/custom_image="uid://d0ggh0ipjxkie"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/flowerwall_postprocess/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg")
+enabled=PackedStringArray("res://addons/TweenFX/plugin.cfg", "res://addons/flowerwall_postprocess/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg")
 
 [gui]
 

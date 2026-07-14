@@ -1620,6 +1620,7 @@ region = 1
 initial_gold = 1000
 waves = Array[ExtResource("2_tpnjg")]([ExtResource("3_bpcou")])
 music_data = ExtResource("4_3wkwp")
+show_pause_menu_restart = false
 start_first_wave_immediately = true
 show_level_details = false
 
