@@ -212,6 +212,15 @@ func _ready():
 
 	material = null
 
+	var parents: Array[Node] = []
+	var current_parent = get_parent()
+	
+	while current_parent != null:
+		parents.append(current_parent)
+		current_parent = current_parent.get_parent()
+
+	print(parents)
+
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
 	base_data = get_tower_data_copy(TowerGlobalData.tower_data[element])

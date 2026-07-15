@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=3 uid="uid://44wq0lwrobei"]
+[gd_scene load_steps=139 format=3 uid="uid://44wq0lwrobei"]
 
 [ext_resource type="Script" uid="uid://bdt1awa6ksgjm" path="res://scripts/player/player_character.gd" id="1_6nsgb"]
 [ext_resource type="Resource" uid="uid://dkeqm5qym5h01" path="res://data/player/player_data_mage.tres" id="2_5mqjb"]
@@ -1481,7 +1481,15 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.85897434, 0.14529915)
 
+[sub_resource type="Gradient" id="Gradient_rol34"]
+interpolation_mode = 1
+colors = PackedColorArray(0.0627451, 1, 1, 1, 0.0627451, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1s53w"]
+gradient = SubResource("Gradient_rol34")
+
 [node name="PlayerCharacter" type="CharacterBody2D"]
+visibility_layer = 3
 collision_layer = 16384
 collision_mask = 218112000
 script = ExtResource("1_6nsgb")
@@ -1639,6 +1647,7 @@ script = ExtResource("26_gg8xu")
 script = ExtResource("11_hkntq")
 
 [node name="PlayerBuild" type="Node2D" parent="."]
+visibility_layer = 3
 script = ExtResource("13_6qouk")
 
 [node name="Buffer" type="Node" parent="PlayerBuild"]
@@ -1859,3 +1868,9 @@ position = Vector2(-1, -2)
 range_z_min = -4096
 range_z_max = 3
 texture = SubResource("GradientTexture2D_rol34")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visibility_layer = 2
+z_index = 4000
+scale = Vector2(0.24999999, 0.25)
+texture = SubResource("GradientTexture2D_1s53w")

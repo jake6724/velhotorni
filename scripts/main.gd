@@ -124,6 +124,7 @@ func _ready():
 	if active_level.music_data:
 		MusicManager.create_audio(active_level.music_data.track)
 
+	get_tree().root.get_viewport().canvas_cull_mask = get_tree().root.get_viewport().canvas_cull_mask -2
 func on_banner_animation_finished() -> void:
 	player_character.player_input.input_enabled = true
 	player_character.player_input.can_start_wave = true

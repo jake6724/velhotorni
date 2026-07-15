@@ -53,6 +53,8 @@ func _ready():
 	WaveManager.all_waves_completed.connect(reset)
 	WaveManager.final_wave_started.connect(on_final_wave_started)
 
+	set_visibility_layer_bit(1, true)
+
 func _physics_process(_delta):
 	sort_path_enemies_z_index_by_progress()
 

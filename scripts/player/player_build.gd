@@ -175,6 +175,7 @@ func create_preview_tower():
 				preview_tower = tower_scene.instantiate()
 
 			tower_parent.add_child(preview_tower)
+			#add_child(preview_tower)
 			preview_tower.initialize(tower_element_options[tower_index])
 			preview_tower.attack_collider.set_deferred("disabled", true)
 			preview_tower.transform_collider.set_deferred("disabled", true)

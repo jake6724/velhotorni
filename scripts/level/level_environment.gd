@@ -37,6 +37,7 @@ var tower_mana_breakables: Array[Breakable] = []
 @export var max_towers: int = 10
 @export var music_data: MusicData
 @export var show_pause_menu_restart: bool = true
+@export var minimap_camera_anchor: Marker2D
 
 @export var start_first_wave_immediately: bool = false
 

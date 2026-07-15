@@ -23,6 +23,7 @@ enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE,
 @onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
 @onready var indicator: EnemyIndicator = $EnemyIndicator
 @onready var number_popup: NumberPopup = %NumberPopup
+@onready var sprite_minimap: Sprite2D = %SpriteMinimap
 
 @onready var enemy_movement: EnemyMovement = $EnemyMovement
 
@@ -237,6 +238,7 @@ func die() -> void:
 	health_bar.hide()
 	shield.hide()
 	weak.hide()
+	sprite_minimap.hide()
 
 	z_index = Constants.z_index_map["enemy_corpse"]
 	boon_area.can_show_boon_range = false
@@ -274,7 +276,6 @@ func on_animation_finished(anim_name):
 		ap.play("corpse")
 
 	if anim_name == "corpse":
-		
 		set_physics_process(false)
 		if remove_corpse():
 			queue_free()
