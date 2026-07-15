@@ -68,8 +68,9 @@ func on_entry_mouse_exited() -> void:
 func on_close_button_pressed():
 	parent_scene.unpause_game_with_bestiary()
 
-func on_enemy_spawned(enemy: Enemy) -> void:
-	if enemy_data_in_level[enemy.data]:
-		enemy_data_in_level[enemy.data] = false
+func on_enemy_spawned(_enemy: Enemy) -> void:
+	pass
+	# if enemy_data_in_level[enemy.data]:
+	# 	enemy_data_in_level[enemy.data] = false
 
-		entry_map[enemy.data].hidden_icon.hide()
+	# 	entry_map[enemy.data].hidden_icon.hide()

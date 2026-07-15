@@ -38,6 +38,6 @@ extends EnemyData
 ## value
 @export var min_melee_spawn_distance_y: float = 0
 
-@export var melee_attack_chance: float = 1.0
-@export var ranged_attack_chance: float = 1.0
-@export var summon_attack_chance: float = .25
+@export var melee_attack_chance: float = .33
+@export var ranged_attack_chance: float = .33
+@export var summon_attack_chance: float = .33

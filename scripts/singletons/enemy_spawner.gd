@@ -143,7 +143,7 @@ func on_spawn_timer_timeout(path_index: int) -> void:
 					spawn_timers[spawn_data.path_index].stop()
 					LevelManager.active_level.enemy_portals[path_index].close()
 
-func spawn_enemy(_spawn: Spawn) -> void:
+func spawn_enemy(_spawn: Spawn, _position_override: Vector2=Vector2(0,0)) -> void:
 	# Configure new enemy
 	var _enemy_data: EnemyData = _spawn.enemy_data
 	var new_enemy: Enemy
@@ -158,7 +158,12 @@ func spawn_enemy(_spawn: Spawn) -> void:
 
 	if new_enemy is FlyingEnemy or new_enemy is EnemySnake:
 		new_enemy.player = player
-		new_enemy.global_position = flying_spawn_points[_spawn.flying_spawn_index]
+
+		if _position_override == Vector2(0,0):
+			new_enemy.global_position = flying_spawn_points[_spawn.flying_spawn_index]
+		else:
+			new_enemy.global_position = _position_override
+
 		new_enemy.sprite.z_as_relative = false
 		new_enemy.sprite.z_index = Constants.z_index_map["flying_enemy"]
 		new_enemy.initialize()
