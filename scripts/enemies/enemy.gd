@@ -98,6 +98,7 @@ func _ready():
 	atlas = data.atlas
 	max_health = health
 	if LevelManager.active_level.base:
+		print(LevelManager.active_level)
 		base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)

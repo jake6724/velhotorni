@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dxslvcvmsbb0f"
+path="res://.godot/imported/COMBAT TRACK_139_Fmin.mp3-55a2b31a240d9bfa11efc08cb3529da8.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/COMBAT TRACK_139_Fmin.mp3"
+dest_files=["res://.godot/imported/COMBAT TRACK_139_Fmin.mp3-55a2b31a240d9bfa11efc08cb3529da8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

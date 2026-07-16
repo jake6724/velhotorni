@@ -8,9 +8,9 @@
 [ext_resource type="Script" uid="uid://bjkhw2thvqfa4" path="res://scripts/perks/perk_manager.gd" id="6_wp0k4"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://cg4hr6brmiyc4" path="res://scenes/ui/LevelCompletePanel.tscn" id="8_jlsqs"]
-[ext_resource type="Script" path="res://scenes/MiniMapSubViewport.gd" id="10_bjd11"]
+[ext_resource type="Script" uid="uid://bn6x607p7m5aq" path="res://scenes/MiniMapSubViewport.gd" id="10_bjd11"]
 [ext_resource type="PackedScene" uid="uid://44wq0lwrobei" path="res://scenes/player/PlayerCharacter.tscn" id="10_lhr70"]
-[ext_resource type="Script" path="res://scenes/camera_minimap.gd" id="10_wp0k4"]
+[ext_resource type="Script" uid="uid://cwqdnv0hfkqud" path="res://scenes/camera_minimap.gd" id="10_wp0k4"]
 [ext_resource type="PackedScene" uid="uid://ck21estk7dkvr" path="res://scenes/ui/perk/PerkUI.tscn" id="12_bjd11"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjd11"]
@@ -111,6 +111,7 @@ script = ExtResource("10_bjd11")
 [node name="MiniMapCamera" type="Camera2D" parent="UI/PanelContainer/SubViewportContainer/SubViewport" node_paths=PackedStringArray("player")]
 position = Vector2(-201, 87)
 scale = Vector2(0.15, 0.15)
+zoom = Vector2(0.15, 0.15)
 script = ExtResource("10_wp0k4")
 player = NodePath("../../../../../PlayerCharacter")
 

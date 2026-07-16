@@ -127,7 +127,8 @@ func _ready():
 
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.AMBIANCE_WIND_1)
 	if active_level.music_data:
-		MusicManager.create_audio(active_level.music_data.track)
+		MusicManager.fade(active_level.music_data.track)
+		# MusicManager.create_audio(active_level.music_data.track)
 
 	get_tree().root.get_viewport().canvas_cull_mask = get_tree().root.get_viewport().canvas_cull_mask -2
 

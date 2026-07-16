@@ -1611,7 +1611,7 @@ radius = 30.149632
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wxp3"]
 size = Vector2(16, 16)
 
-[node name="LevelTower" type="Node2D"]
+[node name="LevelTower" type="Node2D" node_paths=PackedStringArray("minimap_camera_marker")]
 z_index = -2
 z_as_relative = false
 script = ExtResource("1_qvp6q")
@@ -1621,6 +1621,7 @@ initial_gold = 1000
 waves = Array[ExtResource("2_tpnjg")]([ExtResource("3_bpcou")])
 music_data = ExtResource("4_3wkwp")
 show_pause_menu_restart = false
+minimap_camera_marker = NodePath("Marker2D")
 start_first_wave_immediately = true
 show_level_details = false
 
@@ -1976,6 +1977,8 @@ position = Vector2(832, 176)
 
 [node name="TargetDummy5" parent="TargetDummies" instance=ExtResource("26_1wxp3")]
 position = Vector2(856, 176)
+
+[node name="Marker2D" type="Marker2D" parent="."]
 
 [editable path="LoadoutPromptArea"]
 [editable path="SkillTreePromptArea"]

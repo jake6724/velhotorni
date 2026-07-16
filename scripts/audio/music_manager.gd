@@ -10,7 +10,7 @@ var music_track_dict: Dictionary[MusicData.MUSIC_TRACK, MusicData] = {} ## Loads
 
 @export var music_data: Array[MusicData] ## Stores all possible MusicData that can be played.
 
-
+@export var music_player: AudioStreamPlayer
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -24,12 +24,22 @@ func _ready() -> void:
 func create_audio(track: MusicData.MUSIC_TRACK) -> void:
 	if music_track_dict.has(track):
 		var data: MusicData = music_track_dict[track]
-		var new_audio: AudioStreamPlayer = AudioStreamPlayer.new()
-		add_child(new_audio)
-		new_audio.stream = data.sound
-		new_audio.volume_db = data.volume
+		# var new_audio: AudioStreamPlayer = AudioStreamPlayer.new()
+		# add_child(new_audio)
+		music_player.stream = data.sound
+		music_player.volume_db = data.volume
+		print(music_player.volume_db)
 		# # new_audio.finished.connect(data.on_audio_finished)
 		# new_audio.finished.connect(new_audio.queue_free)
-		new_audio.play()
+		music_player.play()
 	else:
 		push_error("Audio Manager failed to find setting for track ", track)
+
+func fade(new_track: MusicData.MUSIC_TRACK) -> void:
+	var fade_tween: Tween = get_tree().create_tween()
+	fade_tween.tween_property(music_player, "volume_linear", 0.0, 1.0)
+	print(music_player.volume_db)
+	await fade_tween.finished
+	create_audio(new_track)
+	# var fade_in_tween: Tween = get_tree().create_tween()
+	# fade_in_tween.tween_property(music_player, "volume_linear", music_player.volume_linear, 0.0)

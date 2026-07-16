@@ -20,6 +20,8 @@ var levels: Array[PackedScene] = [tower_level, level_1, level_2, level_3, level_
 var level_index: int = 4
 var active_level: LevelEnvironment
 
+var exit_scene: PackedScene = tower_level
+
 enum LevelTag {TUTORIAL}
 
 func _ready():
@@ -69,10 +71,11 @@ func load_specific_level_by_level_tag(_level_tag: LevelTag):
 
 	SceneTransition.change_scene(scene_to_load)
 
-# func exit_level() -> void: # TODO: Eventually this should load the tower not the map
-# 	EnemySpawner.reset()
-# 	WaveManager.reset()
-# 	SceneTransition.change_scene(exit_scene)
+func exit_level() -> void: # TODO: Eventually this should load the tower not the map
+	EnemySpawner.reset()
+	WaveManager.reset()
+	level_index = 0
+	SceneTransition.change_scene(main_scene)
 
 func complete_game() -> void:
 	level_index = 0

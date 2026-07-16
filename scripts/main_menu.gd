@@ -15,7 +15,7 @@ extends Control
 @onready var settings_menu: SettingsMenu = %SettingsMenu
 @onready var credits_menu: CreditsMenu = %CreditsMenu
 
-var main_scene: PackedScene = load("res://scenes/Main.tscn")
+var main_scene: PackedScene = load("uid://vb1cipw2nthp") #Main.tscn
 # var world_map: PackedScene = preload("res://scenes/level/world_map/WorldMap.tscn")
 var tower_level: PackedScene = load("uid://dnilok8ickyxd")
 var level_3: PackedScene = load("uid://drn4sppwachxq")

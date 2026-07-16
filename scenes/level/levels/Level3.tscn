@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://bq1dqq33vdbh2"]
+[gd_scene load_steps=50 format=4 uid="uid://bq1dqq33vdbh2"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_n3v8h"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_24qix"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://bdsqojauedq27" path="res://data/waves/level_3b_wave_G.tres" id="9_ppmws"]
 [ext_resource type="Script" uid="uid://drj0bkkfpdi50" path="res://scripts/enemies/spawn.gd" id="10_o40qk"]
 [ext_resource type="Resource" uid="uid://civ0cfp12rlak" path="res://data/enemies/ranged_enemies/enemy_data_ranged_light_kuse.tres" id="11_jdwc4"]
+[ext_resource type="Resource" uid="uid://bjylckqy2ekox" path="res://data/audio/music/music_data_combat_1.tres" id="14_0k02l"]
 [ext_resource type="TileSet" uid="uid://dygybtw47em30" path="res://scenes/level/LevelMaskTileset.tres" id="16_o40qk"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="17_th2su"]
 [ext_resource type="Shader" uid="uid://b6jfsx1p8sx5s" path="res://assets/art/water.gdshader" id="18_fjs4m"]
@@ -1898,6 +1899,7 @@ region = 2
 initial_gold = 400000
 initial_token = 1
 waves = Array[ExtResource("2_24qix")]([ExtResource("3_nyig2"), SubResource("Resource_0k02l"), SubResource("Resource_jdwc4"), ExtResource("4_cipa6"), ExtResource("5_hi3tm"), ExtResource("6_bdb0j"), ExtResource("7_2ylnc"), ExtResource("8_hnjgc"), ExtResource("9_ppmws")])
+music_data = ExtResource("14_0k02l")
 minimap_camera_marker = NodePath("Marker2D")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
