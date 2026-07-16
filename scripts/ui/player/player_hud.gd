@@ -115,7 +115,10 @@ func _ready():
 	prev_hint_overwriteable = false
 
 	timer_hint_start_wave.timeout.connect(on_timer_hint_start_wave_timeout)
-	timer_hint_start_wave.start(20)
+	timer_hint_start_wave.start(15)
+	
+	await get_tree().create_timer(5).timeout
+	TweenFX.pulsate(build_mode_indicator, 1, 1.6)
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats, player_build: PlayerBuild, player_input: PlayerInput) -> void:
 	on_spell_loadout_updated(spell_data_list, player_mana)
@@ -432,7 +435,7 @@ func update_spell_mana_background(spell_data: SpellData) -> void:
 
 func on_timer_hint_start_wave_timeout() -> void:
 	hint_start_wave()
-	timer_hint_start_wave.start(20)
+	timer_hint_start_wave.start(10)
 
 func hint_start_wave() -> void:
-	TweenFX.shake(start_wave)
+	TweenFX.shake(start_wave, .8, 10, 5)
