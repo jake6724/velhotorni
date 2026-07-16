@@ -19,7 +19,6 @@ var spawn_delay: float
 signal coin_dropped
 
 func _ready():
-
 	on_spawn_timer_timeout()
 
 	# Randomly modify shimmer_delay
@@ -42,7 +41,7 @@ func _ready():
 
 	WaveManager.wave_completed.connect(on_spawn_timer_timeout)
 
-	ap.play("corpse")
+	# ap.play("corpse")
 
 func start_grow() -> void:
 	if broken:
@@ -61,6 +60,7 @@ func on_area_entered(_intruder) -> void:
 		break_collider.set_deferred("disabled", true)
 
 func on_spawn_timer_timeout() -> void:
+	print("SPAWN")
 	ap.play("spawn")
 	await ap.animation_finished
 	ap.play("idle")
