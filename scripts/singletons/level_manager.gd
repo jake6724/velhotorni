@@ -11,10 +11,11 @@ var tower_level: PackedScene = load("uid://dnilok8ickyxd")
 var level_1: PackedScene = load("uid://c834s0blo3yw2")
 var level_2: PackedScene
 var level_3: PackedScene = load("uid://bq1dqq33vdbh2")
+var level_4: PackedScene = load("uid://cql1ddc1e3523")
 
 var level_environments: Dictionary[LevelTag, PackedScene]
 
-var levels: Array[PackedScene] = [tower_level, level_1, level_2, level_3]
+var levels: Array[PackedScene] = [tower_level, level_1, level_2, level_3, level_4]
 
 var level_index: int = 3
 var active_level: LevelEnvironment

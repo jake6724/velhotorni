@@ -63,6 +63,10 @@ func _physics_process(_delta):
 
 ## Called by LevelManager.
 func configure_level(active_level: LevelEnvironment):
+
+	for wave: Wave in active_level.waves:
+		wave.configure_data()
+
 	active_enemies = []
 	active_path_enemies = []
 	enemy_index = 0
