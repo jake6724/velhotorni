@@ -111,6 +111,7 @@ script = ExtResource("10_bjd11")
 [node name="MiniMapCamera" type="Camera2D" parent="UI/PanelContainer/SubViewportContainer/SubViewport" node_paths=PackedStringArray("player")]
 position = Vector2(-201, 87)
 scale = Vector2(0.15, 0.15)
+zoom = Vector2(0.2, 0.2)
 script = ExtResource("10_wp0k4")
 player = NodePath("../../../../../PlayerCharacter")
 

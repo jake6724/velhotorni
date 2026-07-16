@@ -9,7 +9,7 @@ extends Node2D
 var broken: bool = true
 var shimmer_timer: Timer = Timer.new()
 var shimmer_delay: float = 3.0
-var drop_chance: float = 3.0
+var drop_chance: float = 75
 
 var spawn_timer: Timer = Timer.new()
 var spawn_delay_base: float = 5.0
