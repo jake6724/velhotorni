@@ -12,7 +12,7 @@
 script = ExtResource("1_f600e")
 element = 4
 base_element = 4
-damage = 40.0
+damage = 35.0
 speed = 2.0
 attack_range = 75.0
 max_health = 100.0

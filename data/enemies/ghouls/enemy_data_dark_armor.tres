@@ -18,7 +18,6 @@ weak_against_element = 4
 health = 750.0
 speed = 15.0
 damage = 3
-tower_mana_drop_chance_base = 10.0
 atlas = ExtResource("1_pq011")
 icon = SubResource("AtlasTexture_1c5fe")
 boon_data = ExtResource("2_422k0")

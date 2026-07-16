@@ -4,6 +4,5 @@
 
 [resource]
 script = ExtResource("1_sppx3")
-value = 40.0
-priority = 0
+value = 50.0
 total_duration = 1.5

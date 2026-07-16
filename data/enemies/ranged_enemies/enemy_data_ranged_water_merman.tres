@@ -27,7 +27,6 @@ weak_against_element = 1
 health = 350.0
 speed = 15.0
 damage = 2
-tower_mana_drop_chance_base = 5.0
 element_mana_drop_chance = 0.3
 element_mana_drop_amount_multiplier = 2.0
 atlas = ExtResource("1_5u6c3")
