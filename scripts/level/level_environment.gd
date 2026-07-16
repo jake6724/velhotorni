@@ -39,6 +39,8 @@ var tower_mana_breakables: Array[Breakable] = []
 @export var show_pause_menu_restart: bool = true
 @export var minimap_camera_marker: Marker2D
 @export var exits_to_main_menu: bool = false
+@export var ambience_sfx: SoundEffect
+@export var show_minimap: bool = true
 
 @export var start_first_wave_immediately: bool = false
 

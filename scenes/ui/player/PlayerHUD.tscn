@@ -223,7 +223,7 @@ region = Rect2(16, 32, 16, 16)
 atlas = ExtResource("22_3yius")
 region = Rect2(32, 82, 16, 13)
 
-[node name="PlayerHUD" type="Control"]
+[node name="PlayerHUD" type="Control" node_paths=PackedStringArray("start_wave", "timer_hint_start_wave")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -231,6 +231,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l3s77")
+start_wave = NodePath("CanvasLayer/BuildPhaseButtons/StartWave")
+timer_hint_start_wave = NodePath("TimerHintStartWave")
 metadata/_custom_type_script = "uid://cngopxpmylq3o"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -985,3 +987,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.09411765, 0.09411765, 0.2509804, 1)
+
+[node name="TimerHintStartWave" type="Timer" parent="."]
+one_shot = true

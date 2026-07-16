@@ -1,9 +1,10 @@
-[gd_scene load_steps=49 format=4 uid="uid://c834s0blo3yw2"]
+[gd_scene load_steps=50 format=4 uid="uid://c834s0blo3yw2"]
 
 [ext_resource type="Script" uid="uid://f60hwpg87qo0" path="res://scripts/level/tutorial_level_environment.gd" id="1_m4hgg"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_g7icy"]
 [ext_resource type="Texture2D" uid="uid://cm5ugpqpl32g4" path="res://assets/art/sprites/environment/spr_environment_animation_atlas.png" id="2_p3lqo"]
 [ext_resource type="Resource" uid="uid://ccuqnbo2h1akj" path="res://data/waves/tutorial_waves/tutorial_wave_1.tres" id="3_g7icy"]
+[ext_resource type="Resource" uid="uid://bsdiqtrq8cqe7" path="res://data/audio/ambiance/ambiance_high_air.tres" id="4_3okvy"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="4_mi3hr"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="5_g7icy"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="6_smqmd"]
@@ -3681,6 +3682,7 @@ region = 1
 waves = Array[ExtResource("2_g7icy")]([ExtResource("3_g7icy")])
 minimap_camera_marker = NodePath("Marker2D")
 exits_to_main_menu = true
+ambience_sfx = ExtResource("4_3okvy")
 metadata/_custom_type_script = "uid://f60hwpg87qo0"
 
 [node name="ParallaxBackground2" type="Parallax2D" parent="."]

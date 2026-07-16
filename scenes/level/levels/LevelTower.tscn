@@ -1623,8 +1623,10 @@ music_data = ExtResource("4_3wkwp")
 show_pause_menu_restart = false
 minimap_camera_marker = NodePath("Marker2D")
 exits_to_main_menu = true
+show_minimap = false
 start_first_wave_immediately = true
 show_level_details = false
+metadata/_edit_lock_ = true
 
 [node name="Midground" type="TileMapLayer" parent="."]
 z_index = -1

@@ -62,6 +62,9 @@ var enemy_info_count: int
 @onready var build_mode_indicator: HBoxContainer = %BuildModeIndicator
 @onready var tower_menu_indicator: Label = %TowerMenuIndicator
 
+@export var start_wave: MarginContainer
+@export var timer_hint_start_wave: Timer
+
 var hint_timer: Timer = Timer.new()
 var prev_hint_overwriteable: bool = false
 
@@ -110,6 +113,9 @@ func _ready():
 	hint_timer.timeout.connect(on_hint_timer_timeout)
 	hint_label.hide()
 	prev_hint_overwriteable = false
+
+	timer_hint_start_wave.timeout.connect(on_timer_hint_start_wave_timeout)
+	timer_hint_start_wave.start(20)
 
 func initialize(spell_data_list: Array[SpellData], player_mana: PlayerMana, player_stats: PlayerCharacterStats, player_build: PlayerBuild, player_input: PlayerInput) -> void:
 	on_spell_loadout_updated(spell_data_list, player_mana)
@@ -331,6 +337,7 @@ func on_wave_complete() -> void:
 	show_banner("Wave Complete", wave_complete_banner_animation_finished)
 
 func on_wave_started() -> void:
+	timer_hint_start_wave.stop()
 	show_banner("Wave Started", wave_start_banner_animation_finished)
 	animate_hide_build_phase_buttons()
 
@@ -422,3 +429,10 @@ func on_hint_timer_timeout() -> void:
 
 func update_spell_mana_background(spell_data: SpellData) -> void:
 	active_mana_progress_bar.modulate = spell_data.ammo_color
+
+func on_timer_hint_start_wave_timeout() -> void:
+	hint_start_wave()
+	timer_hint_start_wave.start(20)
+
+func hint_start_wave() -> void:
+	TweenFX.shake(start_wave)

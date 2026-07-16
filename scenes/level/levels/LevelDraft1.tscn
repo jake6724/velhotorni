@@ -3855,25 +3855,49 @@ position = Vector2(656, 168)
 unique_name_in_owner = true
 
 [node name="PanelContainer" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
-offset_left = -8.0
-offset_top = 121.0
-offset_right = 56.0
-offset_bottom = 161.0
+offset_left = 16.0
+offset_top = 208.0
+offset_right = 80.0
+offset_bottom = 248.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer2" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
-offset_left = 88.0
-offset_top = 408.0
-offset_right = 152.0
-offset_bottom = 448.0
+offset_left = 16.0
+offset_top = 304.0
+offset_right = 80.0
+offset_bottom = 344.0
 path = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer3" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
-offset_left = 280.0
-offset_top = -16.0
-offset_right = 344.0
-offset_bottom = 24.0
+offset_left = 312.0
+offset_top = 624.0
+offset_right = 376.0
+offset_bottom = 664.0
+path = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer4" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
+offset_left = 408.0
+offset_top = 624.0
+offset_right = 472.0
+offset_bottom = 664.0
+path = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer5" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
+offset_left = 768.0
+offset_top = 304.0
+offset_right = 832.0
+offset_bottom = 344.0
+path = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer6" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
+offset_left = 768.0
+offset_top = 208.0
+offset_right = 832.0
+offset_bottom = 248.0
 path = 2
 metadata/_edit_use_anchors_ = true
 

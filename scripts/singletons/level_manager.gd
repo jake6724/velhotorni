@@ -7,11 +7,11 @@ var main: Main # Reference used to change RoundInfo UI
 
 var tower_level: PackedScene = load("uid://dnilok8ickyxd")
 var level_1: PackedScene = load("uid://c834s0blo3yw2")
-var level_2: PackedScene
+var level_2: PackedScene = load("uid://b87ndohcw2gmr")
 var level_3: PackedScene = load("uid://bq1dqq33vdbh2")
 var level_4: PackedScene = load("uid://cql1ddc1e3523")
 var levels: Array[PackedScene] = [tower_level, level_1, level_2, level_3, level_4]
-var level_index: int = 1
+var level_index: int = 2
 var active_level: LevelEnvironment
 
 var exit_scene: PackedScene = tower_level

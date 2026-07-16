@@ -13,6 +13,7 @@ extends Node2D
 @onready var perk_ui: PerkUI = %PerkUI
 var player_spawn_point: Node2D
 @export var camera_minimap: Camera2D
+@export var minimap: PanelContainer
 
 var active_level: LevelEnvironment
 var can_pause: bool = false
@@ -107,7 +108,9 @@ func _ready():
 	if active_level.start_first_wave_immediately:
 		WaveManager.start_wave()
 
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.AMBIANCE_WIND_1)
+	if active_level.ambience_sfx:
+		AudioManager.create_audio(active_level.ambience_sfx.type)
+
 	if active_level.music_data:
 		MusicManager.fade(active_level.music_data.track)
 		# MusicManager.create_audio(active_level.music_data.track)
@@ -117,6 +120,9 @@ func _ready():
 	print(camera_minimap)
 	print(active_level.minimap_camera_marker)
 	camera_minimap.global_position = active_level.minimap_camera_marker.global_position
+
+	if not active_level.show_minimap:
+		minimap.hide()
 
 func on_banner_animation_finished() -> void:
 	if not level_complete:

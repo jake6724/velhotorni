@@ -14,6 +14,7 @@ var sound_effect_sequence_index_dict: Dictionary[SoundEffect, int]
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	for sound_effect: SoundEffect in sound_effects:
@@ -42,7 +43,7 @@ func create_2d_audio_at_location(location: Vector2, type: SoundEffect.SOUND_EFFE
 		push_error("Audio Manager failed to find setting for type ", type)
 
 ## Creates a sound effect if the limit has not been reached. Pass [param type] for the SoundEffect to be queued.
-func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE, is_ambient: bool=false) -> void:
 	if sound_effect_dict.has(type):
 		var sound_effect: SoundEffect = sound_effect_dict[type]
 		if sound_effect.has_open_limit():
