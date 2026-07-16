@@ -11,7 +11,7 @@
 script = ExtResource("2_1ekxt")
 element = 18
 base_element = 5
-damage = 30.0
+damage = 15.0
 speed = 0.25
 attack_range = 30.0
 max_health = 100.0

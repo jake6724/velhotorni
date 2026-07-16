@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://cql1ddc1e3523"]
+[gd_scene load_steps=69 format=4 uid="uid://cql1ddc1e3523"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_ougw0"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_iniyu"]
@@ -6,8 +6,13 @@
 [ext_resource type="Script" uid="uid://cwxt5p6yg0eh8" path="res://scripts/level/path_wave.gd" id="4_eplh1"]
 [ext_resource type="Resource" uid="uid://fhwurvcdissg" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_1.tres" id="5_86i01"]
 [ext_resource type="Resource" uid="uid://b5jw4xjsb7ffa" path="res://data/spawn/spawn_path_1_ghouls/spawn_fire_ghoul_3.tres" id="6_7xafx"]
+[ext_resource type="Resource" uid="uid://c5lfwv1d4v351" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothling_half_0.tres" id="6_55t36"]
+[ext_resource type="Resource" uid="uid://coro28emmkqoq" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothling_half_1.tres" id="6_me2ou"]
 [ext_resource type="Resource" uid="uid://yk771ttwfw6a" path="res://data/spawn/spawn_path_1_ghouls/spawn_water_ghoul_1.tres" id="7_86i01"]
+[ext_resource type="Resource" uid="uid://up4pfroipbak" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothling_half_2.tres" id="7_lumqv"]
 [ext_resource type="Resource" uid="uid://b7rvci4vb72wl" path="res://data/spawn/spawn_path_1_ranged/spawn_repeater_wind_flatwoods_1.tres" id="8_7xafx"]
+[ext_resource type="Resource" uid="uid://ma2vkjap3ne7" path="res://data/spawn/spawns_flying/spawn_flying_earth_mothling_half_3.tres" id="8_ougw0"]
+[ext_resource type="Resource" uid="uid://25em23upunww" path="res://data/spawn/spawn_path_1_ranged/spawn_path_1_dark_armor_1.tres" id="9_7xafx"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="17_iv1j7"]
 [ext_resource type="Shader" uid="uid://b6jfsx1p8sx5s" path="res://assets/art/water.gdshader" id="18_jml4v"]
 [ext_resource type="Texture2D" uid="uid://cweaihdd066kf" path="res://assets/art/sprites/environment/spr_environment_wave.png" id="19_kod0a"]
@@ -25,7 +30,53 @@
 [ext_resource type="PackedScene" uid="uid://bwihg1ohfaadc" path="res://scenes/level/TallGrass.tscn" id="30_fhwym"]
 [ext_resource type="PackedScene" uid="uid://b25ntv7cw871v" path="res://ManaWell.tscn" id="32_iniyu"]
 
-[sub_resource type="Resource" id="Resource_7xafx"]
+[sub_resource type="Resource" id="Resource_syfov"]
+resource_local_to_scene = true
+script = ExtResource("4_eplh1")
+spawns = Array[ExtResource("3_ggast")]([ExtResource("9_7xafx"), ExtResource("6_me2ou"), ExtResource("7_lumqv"), ExtResource("8_ougw0"), ExtResource("6_55t36")])
+metadata/_custom_type_script = "uid://cwxt5p6yg0eh8"
+
+[sub_resource type="Resource" id="Resource_glrgr"]
+resource_local_to_scene = true
+script = ExtResource("4_eplh1")
+path_index = 1
+spawns = Array[ExtResource("3_ggast")]([ExtResource("9_7xafx"), ExtResource("6_me2ou"), ExtResource("7_lumqv"), ExtResource("8_ougw0"), ExtResource("6_55t36")])
+metadata/_custom_type_script = "uid://cwxt5p6yg0eh8"
+
+[sub_resource type="Resource" id="Resource_hh6x4"]
+resource_local_to_scene = true
+script = ExtResource("4_eplh1")
+path_index = 2
+spawns = Array[ExtResource("3_ggast")]([ExtResource("9_7xafx"), ExtResource("6_me2ou"), ExtResource("7_lumqv"), ExtResource("8_ougw0"), ExtResource("6_55t36")])
+metadata/_custom_type_script = "uid://cwxt5p6yg0eh8"
+
+[sub_resource type="Resource" id="Resource_j3g1h"]
+resource_local_to_scene = true
+script = ExtResource("4_eplh1")
+path_index = 3
+spawns = Array[ExtResource("3_ggast")]([ExtResource("9_7xafx"), ExtResource("6_me2ou"), ExtResource("7_lumqv"), ExtResource("8_ougw0"), ExtResource("6_55t36")])
+metadata/_custom_type_script = "uid://cwxt5p6yg0eh8"
+
+[sub_resource type="Resource" id="Resource_s0rie"]
+resource_local_to_scene = true
+script = ExtResource("4_eplh1")
+path_index = 4
+spawns = Array[ExtResource("3_ggast")]([ExtResource("9_7xafx"), ExtResource("6_me2ou"), ExtResource("7_lumqv"), ExtResource("8_ougw0"), ExtResource("6_55t36")])
+metadata/_custom_type_script = "uid://cwxt5p6yg0eh8"
+
+[sub_resource type="Resource" id="Resource_31xft"]
+resource_local_to_scene = true
+script = ExtResource("4_eplh1")
+path_index = 5
+spawns = Array[ExtResource("3_ggast")]([ExtResource("9_7xafx"), ExtResource("6_me2ou"), ExtResource("7_lumqv"), ExtResource("8_ougw0"), ExtResource("6_55t36")])
+metadata/_custom_type_script = "uid://cwxt5p6yg0eh8"
+
+[sub_resource type="Resource" id="Resource_iniyu"]
+script = ExtResource("2_iniyu")
+path_data_list = Array[ExtResource("4_eplh1")]([SubResource("Resource_syfov"), SubResource("Resource_glrgr"), SubResource("Resource_hh6x4"), SubResource("Resource_j3g1h"), SubResource("Resource_s0rie"), SubResource("Resource_31xft")])
+metadata/_custom_type_script = "uid://cskry1sw3vqba"
+
+[sub_resource type="Resource" id="Resource_gvjet"]
 resource_local_to_scene = true
 script = ExtResource("4_eplh1")
 spawns = Array[ExtResource("3_ggast")]([ExtResource("6_7xafx"), ExtResource("5_86i01"), ExtResource("7_86i01"), ExtResource("7_86i01"), ExtResource("6_7xafx"), ExtResource("8_7xafx")])
@@ -38,7 +89,7 @@ path_index = 1
 spawns = Array[ExtResource("3_ggast")]([ExtResource("6_7xafx"), ExtResource("5_86i01"), ExtResource("7_86i01"), ExtResource("7_86i01"), ExtResource("6_7xafx")])
 metadata/_custom_type_script = "uid://cwxt5p6yg0eh8"
 
-[sub_resource type="Resource" id="Resource_gvjet"]
+[sub_resource type="Resource" id="Resource_ossun"]
 resource_local_to_scene = true
 script = ExtResource("4_eplh1")
 path_index = 2
@@ -68,7 +119,7 @@ metadata/_custom_type_script = "uid://cwxt5p6yg0eh8"
 
 [sub_resource type="Resource" id="Resource_b6558"]
 script = ExtResource("2_iniyu")
-path_data_list = Array[ExtResource("4_eplh1")]([SubResource("Resource_7xafx"), SubResource("Resource_55t36"), SubResource("Resource_gvjet"), SubResource("Resource_me2ou"), SubResource("Resource_lumqv"), SubResource("Resource_ougw0")])
+path_data_list = Array[ExtResource("4_eplh1")]([SubResource("Resource_gvjet"), SubResource("Resource_55t36"), SubResource("Resource_ossun"), SubResource("Resource_me2ou"), SubResource("Resource_lumqv"), SubResource("Resource_ougw0")])
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mssc7"]
@@ -3632,7 +3683,7 @@ script = ExtResource("1_ougw0")
 level_name = "Level 3B"
 region = 2
 initial_token = 1
-waves = Array[ExtResource("2_iniyu")]([SubResource("Resource_b6558")])
+waves = Array[ExtResource("2_iniyu")]([SubResource("Resource_iniyu"), SubResource("Resource_b6558"), SubResource("Resource_iniyu")])
 minimap_camera_marker = NodePath("Marker2D")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

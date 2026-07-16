@@ -12,6 +12,7 @@ region = Rect2(80, 16, 16, 16)
 
 [resource]
 script = ExtResource("3_mo727")
+attack_cooldown = 1.5
 attack_range = 144.0
 burst_cooldown = 0.2
 num_bursts = 3
@@ -23,7 +24,6 @@ element = 1
 strong_against_element = 2
 health = 250.0
 speed = 12.0
-damage = 2
 element_mana_drop_chance = 0.3
 element_mana_drop_amount_multiplier = 2.0
 atlas = ExtResource("1_gmv7n")

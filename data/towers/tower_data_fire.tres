@@ -12,7 +12,7 @@
 [resource]
 script = ExtResource("1_1uxtb")
 damage = 2.0
-speed = 0.35
+speed = 0.2
 attack_range = 40.0
 max_health = 100.0
 upgrade_cost_base = 50

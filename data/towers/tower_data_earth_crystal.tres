@@ -25,4 +25,5 @@ bullet = ExtResource("3_xiexo")
 bullet_speed = 150.0
 bullet_modifier_data = ExtResource("4_vi1tn")
 tower_name = "Crystal Golem"
+desc = "Drops Familiar Mana"
 metadata/_custom_type_script = "uid://v7b6nq74b314"

@@ -19,7 +19,6 @@ weak_against_element = 2
 health = 50.0
 speed = 65.0
 element_mana_drop_chance = 0.15
-element_mana_drop_amount_multiplier = 2.0
 atlas = ExtResource("1_kuft3")
 icon = SubResource("AtlasTexture_ianon")
 explosion_sfx = ExtResource("2_6s6tl")
