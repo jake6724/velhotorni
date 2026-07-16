@@ -3861,19 +3861,6 @@ position = Vector2(384, 288)
 unique_name_in_owner = true
 
 [node name="PanelContainer" parent="WaveInfoPanelParent" instance=ExtResource("28_ll6tu")]
-<<<<<<< Updated upstream
-offset_left = 120.0
-offset_top = 264.0
-offset_right = 184.0
-offset_bottom = 304.0
-metadata/_edit_use_anchors_ = true
-
-[node name="PanelContainer2" parent="WaveInfoPanelParent" instance=ExtResource("28_ll6tu")]
-offset_left = 88.0
-offset_top = 360.0
-offset_right = 152.0
-offset_bottom = 400.0
-=======
 offset_left = 360.0
 offset_top = 520.0
 offset_right = 424.0
@@ -3885,7 +3872,6 @@ offset_left = 80.0
 offset_top = 272.0
 offset_right = 144.0
 offset_bottom = 312.0
->>>>>>> Stashed changes
 path = 1
 metadata/_edit_use_anchors_ = true
 
