@@ -16,10 +16,10 @@ func _ready():
 		button.pivot_offset = button.size/2
 		button.mouse_entered.connect(shake_ui_node.bind(button))
 
-	tutorial_button.pressed.connect(on_tutorial_button_pressed)
+	# tutorial_button.pressed.connect(on_tutorial_button_pressed)
 
-func on_tutorial_button_pressed() -> void:
-	LevelManager.load_specific_level_by_level_tag(LevelManager.LevelTag.TUTORIAL)
+# func on_tutorial_button_pressed() -> void:
+# 	LevelManager.load_specific_level_by_level_tag(LevelManager.LevelTag.TUTORIAL)
 
 func shake_ui_node(node: Control) -> void:
 	var shake_tween: Tween = get_tree().create_tween()

@@ -44,9 +44,10 @@ func _ready():
 	# ap.play("corpse")
 
 func start_grow() -> void:
-	if broken:
-		spawn_delay = Constants.weighted_random_rng.randf_range(0, spawn_delay_range)
-		spawn_timer.start(spawn_delay)
+	pass
+	# if broken:
+	# 	spawn_delay = Constants.weighted_random_rng.randf_range(0, spawn_delay_range)
+	# 	spawn_timer.start(spawn_delay)
 
 func on_area_entered(_intruder) -> void:
 	if not broken:

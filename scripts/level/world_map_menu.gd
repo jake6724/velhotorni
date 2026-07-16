@@ -35,7 +35,7 @@ func _ready():
 	for button: LevelButton in level_buttons.get_children():
 		button.level_hovered.connect(on_level_hovered.bind(button))
 		button.level_unhovered.connect(on_level_unhovered.bind(button))
-		button.level_button_pressed.connect(on_level_button_pressed)
+		# button.level_button_pressed.connect(on_level_button_pressed)
 
 	# Configure PauseMenu
 	# pause_menu.parent_scene = self
@@ -79,10 +79,10 @@ func on_hide_timer_timeout() -> void:
 		var tween: Tween = get_tree().create_tween()
 		tween.tween_property(active_panel, "position", active_panel.original_pos, .4)
 
-func on_level_button_pressed(_level_scene: PackedScene) -> void:
-	hide_timer.stop()
-	on_hide_timer_timeout()
-	LevelManager.load_specific_level(_level_scene)
+# func on_level_button_pressed(_level_scene: PackedScene) -> void:
+# 	hide_timer.stop()
+# 	on_hide_timer_timeout()
+# 	LevelManager.load_specific_level(_level_scene)
 
 # PauseMenu functions
 func pause_game():

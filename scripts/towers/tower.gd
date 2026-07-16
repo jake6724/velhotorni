@@ -621,7 +621,7 @@ func on_hit(_damage_amount: int) -> void:
 	number_popup.display_damage_number(_damage_amount, global_position)
 	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_HIT)
 	if health <= 0:
-		die()
+		disable()
 	
 	if (health/curr_max_health) <= TOWER_HEALTH_ALERT_THRESHOLD:
 		AlertManager.submit_new_alert(global_position, Alert.Priority.HIGH, 5.0, "Familiar health low!")
@@ -638,12 +638,21 @@ func heal(_value: int) -> void:
 	fx_disabled.hide()
 	sprite.material = null
 
-func die() -> void:
-
+func disable() -> void:
 	disabled = true
 	fx_disabled.show()
 	sprite.material = grayscale_shader
 	healthbar.hide()
+
+func die() -> void:
+	alive = false
+	died.emit(self)
+	ap.play("die")
+	await ap.animation_finished
+	# Update WorldGrid
+	var tower_grid_position: Vector2 = WorldGrid.world_to_grid(global_position)
+	WorldGrid.data[tower_grid_position] = true
+	queue_free()
 
 func shake() -> void:
 	var tween: Tween = get_tree().create_tween()

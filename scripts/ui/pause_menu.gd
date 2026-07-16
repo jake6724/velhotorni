@@ -51,8 +51,6 @@ func _ready():
 	exit.mouse_entered.connect(func x(): AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1))
 	exit.mouse_exited.connect(un_highlight_ui_element.bind(exit))
 
-	
-
 func _input(_event):
 	if Input.is_action_just_pressed("exit_menu"):
 		if pause_menu.visible:

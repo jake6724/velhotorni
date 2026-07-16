@@ -8,7 +8,8 @@ func _ready() -> void:
 	body_entered.connect(on_body_entered)
 
 func on_body_entered(_player: PlayerCharacter) -> void:
-	LevelManager.level_index = 3
-	EnemySpawner.reset()
-	WaveManager.reset()
-	SceneTransition.change_scene(main_scene)
+	LevelManager.load_level_from_index(PlayerLoadout.player_level_index	)
+	# LevelManager.level_index = PlayerLoadout.player_level_index
+	# EnemySpawner.reset()
+	# WaveManager.reset()
+	# SceneTransition.change_scene(main_scene)

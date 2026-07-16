@@ -1,17 +1,13 @@
-[gd_scene load_steps=50 format=4 uid="uid://c834s0blo3yw2"]
+[gd_scene load_steps=49 format=4 uid="uid://c834s0blo3yw2"]
 
 [ext_resource type="Script" uid="uid://f60hwpg87qo0" path="res://scripts/level/tutorial_level_environment.gd" id="1_m4hgg"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_g7icy"]
 [ext_resource type="Texture2D" uid="uid://cm5ugpqpl32g4" path="res://assets/art/sprites/environment/spr_environment_animation_atlas.png" id="2_p3lqo"]
 [ext_resource type="Resource" uid="uid://ccuqnbo2h1akj" path="res://data/waves/tutorial_waves/tutorial_wave_1.tres" id="3_g7icy"]
 [ext_resource type="Texture2D" uid="uid://mx037l5wyj6c" path="res://assets/art/sprites/environment/spr_environment_atlas.png" id="4_mi3hr"]
-[ext_resource type="Resource" uid="uid://cigirbulhhhxe" path="res://data/waves/tutorial_waves/tutorial_wave_2.tres" id="4_smqmd"]
-[ext_resource type="Resource" uid="uid://dmjwjpa4wkts4" path="res://data/waves/tutorial_waves/tutorial_wave_3.tres" id="5_7d7np"]
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="5_g7icy"]
-[ext_resource type="Resource" uid="uid://0dgcmy1s85qt" path="res://data/waves/tutorial_waves/tutorial_wave_4.tres" id="6_nvnvk"]
 [ext_resource type="PackedScene" uid="uid://c0jbspdabhoc1" path="res://scenes/level/Base.tscn" id="6_smqmd"]
 [ext_resource type="Shader" uid="uid://btn76211mct8c" path="res://assets/art/scroll.gdshader" id="7_7d7np"]
-[ext_resource type="Resource" uid="uid://cw144kg4gwhi1" path="res://data/waves/tutorial_waves/tutorial_wave_5.tres" id="7_swjki"]
 [ext_resource type="Shader" uid="uid://b6jfsx1p8sx5s" path="res://assets/art/water.gdshader" id="9_b1rh7"]
 [ext_resource type="PackedScene" uid="uid://bwrw0vxyrshx2" path="res://scenes/level/EnemySpawnPortal.tscn" id="9_swjki"]
 [ext_resource type="Texture2D" uid="uid://d27w44gfbncv5" path="res://assets/art/sprites/environment/spr_environment_wave2.png" id="10_j2f44"]
@@ -20,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bshhqh6p6rwlx" path="res://scripts/ui/controller_button_hint.gd" id="15_g7icy"]
 [ext_resource type="PackedScene" uid="uid://b26c6r5s37hup" path="res://scenes/ui/ButtonHint.tscn" id="16_g7icy"]
 [ext_resource type="Script" uid="uid://bqlvm84h6ory3" path="res://scripts/level/trigger_area.gd" id="17_b1rh7"]
+[ext_resource type="Texture2D" uid="uid://dx1t2gpa2tw6j" path="res://assets/art/atlases/level/minimap_atlas.png" id="19_4jhjb"]
 [ext_resource type="Texture2D" uid="uid://cybjsvtwpn6sv" path="res://assets/art/atlases/atl_ui_pcbuttons.png" id="21_j2f44"]
 [ext_resource type="PackedScene" uid="uid://5kegew63jmcv" path="res://scenes/level/GroundInfoTrigger.tscn" id="22_j2f44"]
 
@@ -3607,7 +3604,7 @@ sources/0 = SubResource("TileSetAtlasSource_mxkvb")
 
 [sub_resource type="Curve2D" id="Curve2D_g7icy"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 176, -224, 0, 0, 0, 0, 176, -144, 0, 0, 0, 0, 128, -144, 0, 0, 0, 0, 128, -80, 0, 0, 0, 0, 176, -80, 0, 0, 0, 0, 176, -32, 0, 0, 0, 0, 384, -32, 0, 0, 0, 0, 416, -32, 0, 0, 0, 0, 416, -80, 0, 0, 0, 0, 416, -144, 0, 0, 0, 0, 384, -144, 0, 0, 0, 0, 384, -224)
+"points": PackedVector2Array(0, 0, 0, 0, 176, -224, 0, 0, 0, 0, 176, -144, 0, 0, 0, 0, 128, -144, 0, 0, 0, 0, 128, -80, 0, 0, 0, 0, 176, -80, 0, 0, 0, 0, 176, -32, 0, 0, 0, 0, 384, -32, 0, 0, 0, 0, 416, -32, 0, 0, 0, 0, 416, -80, 0, 0, 0, 0, 416, -144, 0, 0, 0, 0, 384, -144, 0, 0, 0, 0, 384, -192)
 }
 point_count = 12
 
@@ -3665,11 +3662,25 @@ load_path = "res://.godot/imported/spr_ui_box2.png-0dd94c0cf4b3909f276c409ca529f
 offsets = PackedFloat32Array(0, 0.121951, 0.821138, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.784314, 1, 1, 1, 0.490196, 1, 1, 1, 0)
 
-[node name="LevelTutorial" type="Node2D"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3okvy"]
+texture = ExtResource("19_4jhjb")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_uiuym"]
+sources/0 = SubResource("TileSetAtlasSource_3okvy")
+
+[node name="LevelTutorial" type="Node2D" node_paths=PackedStringArray("minimap_camera_marker")]
+visibility_layer = 3
 script = ExtResource("1_m4hgg")
 level_name = "Tutorial"
 region = 1
-waves = Array[ExtResource("2_g7icy")]([ExtResource("3_g7icy"), ExtResource("4_smqmd"), ExtResource("5_7d7np"), ExtResource("6_nvnvk"), ExtResource("7_swjki")])
+waves = Array[ExtResource("2_g7icy")]([ExtResource("3_g7icy")])
+minimap_camera_marker = NodePath("Marker2D")
+exits_to_main_menu = true
 metadata/_custom_type_script = "uid://f60hwpg87qo0"
 
 [node name="ParallaxBackground2" type="Parallax2D" parent="."]
@@ -3773,7 +3784,7 @@ collision_visibility_mode = 1
 
 [node name="Base" parent="." instance=ExtResource("6_smqmd")]
 z_index = -2000
-position = Vector2(392, -216)
+position = Vector2(392, -224)
 
 [node name="PathParent" type="Node" parent="."]
 unique_name_in_owner = true
@@ -4543,3 +4554,11 @@ polygon = PackedVector2Array(-8, 40, -8, 72, -24, 72, -24, 104, -40, 104, -40, 1
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Node/GroundInfoTrigger"]
 polygon = PackedVector2Array(408, 88, 408, 104, 392, 104, 392, 136, 408, 136, 408, 152, 424, 152, 424, 168, 440, 168, 440, 152, 424, 149, 424, 136, 440, 136, 440, 120, 424, 120, 424, 88)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(288, -128)
+
+[node name="MiniMapLayer" type="TileMapLayer" parent="."]
+visibility_layer = 2
+tile_map_data = PackedByteArray("AAALAPP/AAAAAAAAAAALAPT/AAAAAAAAAAALAPX/AAAAAAAAAAALAPb/AAAAAAAAAAALAPf/AAAAAAAAAAAIAPf/AAAAAAAAAAAJAPf/AAAAAAAAAAAKAPf/AAAAAAAAAAAIAPj/AAAAAAAAAAAIAPn/AAAAAAAAAAAIAPr/AAAAAAAAAAAIAPv/AAAAAAAAAAAJAPv/AAAAAAAAAAAKAPv/AAAAAAAAAAALAPv/AAAAAAAAAAALAPz/AAAAAAAAAAALAP3/AAAAAAAAAAALAP7/AAAAAAAAAAAMAP7/AAAAAAAAAAANAP7/AAAAAAAAAAAOAP7/AAAAAAAAAAAPAP7/AAAAAAAAAAAQAP7/AAAAAAAAAAARAP7/AAAAAAAAAAASAP7/AAAAAAAAAAATAP7/AAAAAAAAAAAUAP7/AAAAAAAAAAAVAP7/AAAAAAAAAAAWAP7/AAAAAAAAAAAXAP7/AAAAAAAAAAAYAP7/AAAAAAAAAAAZAP7/AAAAAAAAAAAaAP7/AAAAAAAAAAAaAPj/AAAAAAAAAAAaAPn/AAAAAAAAAAAaAPr/AAAAAAAAAAAaAPv/AAAAAAAAAAAaAPz/AAAAAAAAAAAaAP3/AAAAAAAAAAAYAPf/AAAAAAAAAAAZAPf/AAAAAAAAAAAaAPf/AAAAAAAAAAAYAPX/AAAAAAAAAAAYAPb/AAAAAAAAAAAXAPH/AAAEAAAAAAAXAPL/AAAEAAAAAAAXAPP/AAAEAAAAAAAXAPT/AAAEAAAAAAAYAPH/AAAEAAAAAAAYAPL/AAAEAAAAAAAYAPP/AAAEAAAAAAAYAPT/AAAEAAAAAAAZAPH/AAAEAAAAAAAZAPL/AAAEAAAAAAAZAPP/AAAEAAAAAAAZAPT/AAAEAAAAAAA=")
+tile_set = SubResource("TileSet_uiuym")
