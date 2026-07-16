@@ -19,6 +19,9 @@ var spawn_delay: float
 signal coin_dropped
 
 func _ready():
+
+	on_spawn_timer_timeout()
+
 	# Randomly modify shimmer_delay
 	var shimmer_delay_modifier: float = Constants.weighted_random_rng.randf_range(0, 1)
 	shimmer_delay += shimmer_delay_modifier
@@ -30,12 +33,14 @@ func _ready():
 	shimmer_timer.timeout.connect(on_shimmer_timer_timeout)
 	add_child(shimmer_timer)
 
-	spawn_timer.autostart = false
-	spawn_timer.one_shot = true
-	spawn_timer.timeout.connect(on_spawn_timer_timeout)
-	add_child(spawn_timer)
+	# spawn_timer.autostart = false
+	# spawn_timer.one_shot = true
+	# spawn_timer.timeout.connect(on_spawn_timer_timeout)
+	# add_child(spawn_timer)
 
 	z_index = Constants.z_index_map["tower"]
+
+	WaveManager.wave_completed.connect(on_spawn_timer_timeout)
 
 	ap.play("corpse")
 
