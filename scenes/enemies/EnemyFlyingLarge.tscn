@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://c8cb5f8yo3wc3"]
+[gd_scene load_steps=127 format=3 uid="uid://c8cb5f8yo3wc3"]
 
 [ext_resource type="Script" uid="uid://bsna5j67twb5p" path="res://scripts/enemies/flying_enemy.gd" id="1_1kn2l"]
 [ext_resource type="Texture2D" uid="uid://bqv3p8q25aqyc" path="res://assets/art/atlases/enemy/atl_enemy_earth_mothman.png" id="2_1kn2l"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bm2jek1l03frj" path="res://scripts/enemies/enemy_indicator.gd" id="13_qw6qg"]
 [ext_resource type="Script" uid="uid://di3c54ykd28fx" path="res://scripts/enemies/enemy_movement.gd" id="14_tscoj"]
 [ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="15_5f3do"]
+[ext_resource type="Texture2D" uid="uid://hnxttmgepy4x" path="res://assets/placeholders/enemy_placeholder.png" id="16_pt5jy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o02r4"]
 radius = 12.0
@@ -1082,3 +1083,11 @@ collision_mask = 262144
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_1kn2l")
 debug_color = Color(0.6684668, 0.16282108, 0.9997687, 0.41960785)
+
+[node name="SpriteMinimap" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+light_mask = 0
+visibility_layer = 2
+position = Vector2(-2.3841858e-07, -2.3841858e-07)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("16_pt5jy")
