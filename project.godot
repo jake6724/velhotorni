@@ -63,7 +63,7 @@ mouse_cursor/custom_image="uid://d0ggh0ipjxkie"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/TweenFX/plugin.cfg", "res://addons/flowerwall_postprocess/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg")
+enabled=PackedStringArray("res://addons/TweenFX/plugin.cfg", "res://addons/flowerwall_postprocess/plugin.cfg", "res://addons/parallax2d_preview/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg")
 
 [gui]
 
