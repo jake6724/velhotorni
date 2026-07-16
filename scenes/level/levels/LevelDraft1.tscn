@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=4 uid="uid://cql1ddc1e3523"]
+[gd_scene load_steps=57 format=4 uid="uid://cql1ddc1e3523"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_ougw0"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_iniyu"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://dtbjym5jhrudw" path="res://scenes/ui/WaveInfo.tscn" id="28_nwk42"]
 [ext_resource type="PackedScene" uid="uid://5kegew63jmcv" path="res://scenes/level/GroundInfoTrigger.tscn" id="29_r74tm"]
 [ext_resource type="PackedScene" uid="uid://bwihg1ohfaadc" path="res://scenes/level/TallGrass.tscn" id="30_fhwym"]
-[ext_resource type="Script" uid="uid://bqhap4drhvx27" path="res://scripts/level/pit_area.gd" id="31_tqnh5"]
 [ext_resource type="PackedScene" uid="uid://b25ntv7cw871v" path="res://ManaWell.tscn" id="32_iniyu"]
 
 [sub_resource type="Resource" id="Resource_7xafx"]
@@ -3614,7 +3613,7 @@ point_count = 6
 offsets = PackedFloat32Array(0, 0.121951, 0.821138, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.784314, 1, 1, 1, 0.490196, 1, 1, 1, 0)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_86i01"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xafx"]
 texture = ExtResource("23_eplh1")
 0:0/0 = 0
 1:0/0 = 0
@@ -3623,7 +3622,7 @@ texture = ExtResource("23_eplh1")
 4:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_7xafx"]
-sources/0 = SubResource("TileSetAtlasSource_86i01")
+sources/0 = SubResource("TileSetAtlasSource_7xafx")
 
 [node name="Level3B" type="Node2D" node_paths=PackedStringArray("minimap_camera_marker")]
 visibility_layer = 3
@@ -3806,45 +3805,45 @@ position = Vector2(712, 536)
 [node name="PortalParent" type="Node" parent="."]
 
 [node name="EnemySpawnPortal" parent="PortalParent" instance=ExtResource("27_3k3hf")]
-visible = false
 z_index = 6
-position = Vector2(16, 104)
-animation = &"open"
+position = Vector2(24, 232)
+animation = &"star"
+autoplay = "star"
 frame_progress = 0.0
 
 [node name="EnemySpawnPortal2" parent="PortalParent" instance=ExtResource("27_3k3hf")]
-visible = false
 z_index = 6
-position = Vector2(72, 456)
+position = Vector2(24, 328)
 animation = &"star"
-frame_progress = 0.416337
+autoplay = "star"
+frame_progress = 0.0
 
 [node name="EnemySpawnPortal3" parent="PortalParent" instance=ExtResource("27_3k3hf")]
-visible = false
 z_index = 6
-position = Vector2(376, -40)
+position = Vector2(344, 592)
 animation = &"star"
+autoplay = "star"
 frame_progress = 0.698516
 
 [node name="EnemySpawnPortal4" parent="PortalParent" instance=ExtResource("27_3k3hf")]
-visible = false
 z_index = 6
-position = Vector2(376, -40)
+position = Vector2(440, 600)
 animation = &"star"
+autoplay = "star"
 frame_progress = 0.698516
 
 [node name="EnemySpawnPortal5" parent="PortalParent" instance=ExtResource("27_3k3hf")]
-visible = false
 z_index = 6
-position = Vector2(376, -40)
+position = Vector2(760, 328)
 animation = &"star"
+autoplay = "star"
 frame_progress = 0.698516
 
 [node name="EnemySpawnPortal6" parent="PortalParent" instance=ExtResource("27_3k3hf")]
-visible = false
 z_index = 6
-position = Vector2(376, -40)
+position = Vector2(760, 232)
 animation = &"star"
+autoplay = "star"
 frame_progress = 0.698516
 
 [node name="PlayerSpawnPoint" type="Node2D" parent="."]
@@ -3855,49 +3854,49 @@ position = Vector2(656, 168)
 unique_name_in_owner = true
 
 [node name="PanelContainer" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
-offset_left = 16.0
-offset_top = 208.0
-offset_right = 80.0
-offset_bottom = 248.0
+offset_left = 56.0
+offset_top = 176.0
+offset_right = 120.0
+offset_bottom = 216.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer2" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
-offset_left = 16.0
-offset_top = 304.0
-offset_right = 80.0
-offset_bottom = 344.0
+offset_left = 56.0
+offset_top = 344.0
+offset_right = 120.0
+offset_bottom = 384.0
 path = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer3" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
-offset_left = 312.0
-offset_top = 624.0
-offset_right = 376.0
-offset_bottom = 664.0
-path = 2
+offset_left = 264.0
+offset_top = 568.0
+offset_right = 328.0
+offset_bottom = 608.0
+path = 5
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer4" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
-offset_left = 408.0
-offset_top = 624.0
-offset_right = 472.0
-offset_bottom = 664.0
-path = 2
+offset_left = 456.0
+offset_top = 568.0
+offset_right = 520.0
+offset_bottom = 608.0
+path = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer5" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
-offset_left = 768.0
-offset_top = 304.0
-offset_right = 832.0
-offset_bottom = 344.0
-path = 2
+offset_left = 704.0
+offset_top = 344.0
+offset_right = 768.0
+offset_bottom = 384.0
+path = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer6" parent="WaveInfoPanelParent" instance=ExtResource("28_nwk42")]
-offset_left = 768.0
-offset_top = 208.0
-offset_right = 832.0
-offset_bottom = 248.0
+offset_left = 704.0
+offset_top = 176.0
+offset_right = 768.0
+offset_bottom = 216.0
 path = 2
 metadata/_edit_use_anchors_ = true
 
@@ -4066,206 +4065,6 @@ position = Vector2(416, 448)
 
 [node name="TallGrass42" parent="TallGrassParent" instance=ExtResource("30_fhwym")]
 position = Vector2(416, 464)
-
-[node name="PitParent" type="Node" parent="."]
-
-[node name="Pit" type="Area2D" parent="PitParent"]
-visible = false
-position = Vector2(466, 102)
-collision_layer = 32768
-collision_mask = 0
-script = ExtResource("31_tqnh5")
-
-[node name="FallNodeParent" type="Node" parent="PitParent/Pit"]
-
-[node name="Node2D" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
-position = Vector2(413, 117)
-
-[node name="Node2D8" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
-position = Vector2(424, 131)
-
-[node name="Node2D2" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
-position = Vector2(446, 103)
-
-[node name="Node2D3" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
-position = Vector2(487, 101)
-
-[node name="Node2D4" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
-position = Vector2(536, 93)
-
-[node name="Node2D5" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
-position = Vector2(536, 93)
-
-[node name="Node2D6" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
-position = Vector2(495, 102)
-
-[node name="Node2D10" type="Node2D" parent="PitParent/Pit/FallNodeParent"]
-position = Vector2(428, 98)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit"]
-position = Vector2(-17, -1)
-polygon = PackedVector2Array(-17, 46, -33, 46, -33, 30, -48, 30, -48, 2, -32, 2, -32, -14, 110, -14, 110, -2, 62, -2, 62, 14, -2, 14, -2, 30, -17, 30)
-disabled = true
-
-[node name="Pit2" type="Area2D" parent="PitParent"]
-visible = false
-position = Vector2(466, 102)
-collision_layer = 32768
-collision_mask = 0
-script = ExtResource("31_tqnh5")
-
-[node name="FallNodeParent" type="Node" parent="PitParent/Pit2"]
-
-[node name="Node2D" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
-position = Vector2(505, 192)
-
-[node name="Node2D2" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
-position = Vector2(512, 210)
-
-[node name="Node2D3" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
-position = Vector2(512, 228)
-
-[node name="Node2D4" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
-position = Vector2(512, 254)
-
-[node name="Node2D5" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
-position = Vector2(490, 256)
-
-[node name="Node2D6" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
-position = Vector2(472, 253)
-
-[node name="Node2D7" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
-position = Vector2(488, 275)
-
-[node name="Node2D8" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
-position = Vector2(488, 297)
-
-[node name="Node2D9" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
-position = Vector2(488, 322)
-
-[node name="Node2D10" type="Node2D" parent="PitParent/Pit2/FallNodeParent"]
-position = Vector2(495, 341)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit2"]
-position = Vector2(-17, -1)
-polygon = PackedVector2Array(48, 82, 62, 82, 62, 98, 78, 98, 78, 170, 46, 170, 46, 224, 46, 226, 62, 226, 62, 252, 32, 252, 32, 158, 16, 158, 16, 146, 48, 146, 48, 146)
-disabled = true
-
-[node name="Pit3" type="Area2D" parent="PitParent"]
-visible = false
-position = Vector2(466, 102)
-collision_layer = 32768
-collision_mask = 0
-script = ExtResource("31_tqnh5")
-
-[node name="FallNodeParent" type="Node" parent="PitParent/Pit3"]
-
-[node name="Node2D" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
-position = Vector2(328, 169)
-
-[node name="Node2D2" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
-position = Vector2(320, 196)
-
-[node name="Node2D3" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
-position = Vector2(321, 223)
-
-[node name="Node2D4" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
-position = Vector2(320, 248)
-
-[node name="Node2D5" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
-position = Vector2(343, 253)
-
-[node name="Node2D6" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
-position = Vector2(298, 260)
-
-[node name="Node2D7" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
-position = Vector2(328, 268)
-
-[node name="Node2D8" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
-position = Vector2(328, 296)
-
-[node name="Node2D9" type="Node2D" parent="PitParent/Pit3/FallNodeParent"]
-position = Vector2(328, 315)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit3"]
-position = Vector2(-17, -1)
-polygon = PackedVector2Array(-128, 50, -114, 50, -114, 146, -98, 146, -98, 158, -115, 158, -114, 222, -128, 222, -128, 171, -159, 170, -160, 146, -144, 146, -144, 82, -128, 82)
-disabled = true
-
-[node name="Pit4" type="Area2D" parent="PitParent"]
-visible = false
-position = Vector2(466, 102)
-collision_layer = 32768
-collision_mask = 0
-script = ExtResource("31_tqnh5")
-
-[node name="FallNodeParent" type="Node" parent="PitParent/Pit4"]
-
-[node name="Node2D" type="Node2D" parent="PitParent/Pit4/FallNodeParent"]
-position = Vector2(408, 367)
-
-[node name="Node2D2" type="Node2D" parent="PitParent/Pit4/FallNodeParent"]
-position = Vector2(401, 387)
-
-[node name="Node2D3" type="Node2D" parent="PitParent/Pit4/FallNodeParent"]
-position = Vector2(401, 417)
-
-[node name="Node2D4" type="Node2D" parent="PitParent/Pit4/FallNodeParent"]
-position = Vector2(399, 441)
-
-[node name="Node2D5" type="Node2D" parent="PitParent/Pit4/FallNodeParent"]
-position = Vector2(423, 446)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit4"]
-position = Vector2(-17, -1)
-polygon = PackedVector2Array(-64, 274, -48, 274, -48, 258, -34, 258, -35, 338, -18, 338, -18, 350, -64, 350)
-disabled = true
-
-[node name="Pit5" type="Area2D" parent="PitParent"]
-visible = false
-position = Vector2(466, 102)
-collision_layer = 32768
-collision_mask = 0
-script = ExtResource("31_tqnh5")
-
-[node name="FallNodeParent" type="Node" parent="PitParent/Pit5"]
-
-[node name="Node2D" type="Node2D" parent="PitParent/Pit5/FallNodeParent"]
-position = Vector2(536, 378)
-
-[node name="Node2D2" type="Node2D" parent="PitParent/Pit5/FallNodeParent"]
-position = Vector2(537, 365)
-
-[node name="Node2D3" type="Node2D" parent="PitParent/Pit5/FallNodeParent"]
-position = Vector2(568, 365)
-
-[node name="Node2D4" type="Node2D" parent="PitParent/Pit5/FallNodeParent"]
-position = Vector2(553, 365)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit5"]
-position = Vector2(-17, -1)
-polygon = PackedVector2Array(80, 258, 126, 258, 126, 270, 94, 270, 94, 286, 80, 286)
-disabled = true
-
-[node name="Pit6" type="Area2D" parent="PitParent"]
-visible = false
-position = Vector2(466, 102)
-collision_layer = 32768
-collision_mask = 0
-script = ExtResource("31_tqnh5")
-
-[node name="FallNodeParent" type="Node" parent="PitParent/Pit6"]
-
-[node name="Node2D" type="Node2D" parent="PitParent/Pit6/FallNodeParent"]
-position = Vector2(632, 366)
-
-[node name="Node2D2" type="Node2D" parent="PitParent/Pit6/FallNodeParent"]
-position = Vector2(647, 366)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitParent/Pit6"]
-position = Vector2(-17, -1)
-polygon = PackedVector2Array(176, 258, 206, 258, 206, 270, 176, 270)
-disabled = true
 
 [node name="ManaWell" parent="." instance=ExtResource("32_iniyu")]
 position = Vector2(648, 280)

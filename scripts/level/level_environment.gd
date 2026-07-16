@@ -56,6 +56,9 @@ func _ready():
 	# level_mask_layer.z_index = Constants.z_index_map["bg"]
 	weather_scroll.z_index = Constants.z_index_map["weather_scroll"]
 
+	for wave: Wave in waves:
+		wave.configure_data()
+
 	for child in path_parent.get_children():
 		if child is Path2D:
 			enemy_paths.append(child)
@@ -110,12 +113,3 @@ func hide_wave_info_panels() -> void:
 		var wave_info: WaveInfoPanel = child as WaveInfoPanel
 		if wave_info:
 			wave_info.hide()
-
-# # Set the `z_index` of each tile based on its `z_index_map_key` custom data value. This value is painted onto
-# # the tile in the editor.
-# func set_tilemap_z_indexes() -> void:
-# 	for tile_index: Vector2i in tilemap.get_used_cells():
-# 		var tile_data: TileData = tilemap.get_cell_tile_data(tile_index)
-# 		if tile_data:
-# 			tilemap.set_cell_
-# 			tile_data.z_index = Constants.z_index_map[tile_data.get_custom_data("z_index_map_key")]

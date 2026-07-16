@@ -11,12 +11,12 @@ var level_2: PackedScene = load("uid://b87ndohcw2gmr")
 var level_3: PackedScene = load("uid://bq1dqq33vdbh2")
 var level_4: PackedScene = load("uid://cql1ddc1e3523")
 var levels: Array[PackedScene] = [tower_level, level_1, level_2, level_3, level_4]
-var level_index: int = 2
+var level_index: int = 4
 var active_level: LevelEnvironment
 
 var exit_scene: PackedScene = tower_level
 
-func _ready():
+func _ready():	
 	# configure_level() called in main - level only configured when main is ready to parent it
 	WaveManager.all_waves_completed.connect(on_level_complete)
 
