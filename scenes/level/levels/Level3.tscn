@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://bq1dqq33vdbh2"]
+[gd_scene load_steps=49 format=4 uid="uid://bq1dqq33vdbh2"]
 
 [ext_resource type="Script" uid="uid://b2p4p3fvxv2jk" path="res://scripts/level/level_environment.gd" id="1_n3v8h"]
 [ext_resource type="Script" uid="uid://cskry1sw3vqba" path="res://scripts/level/wave.gd" id="2_24qix"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://daxe1ewhkxmu6" path="res://data/waves/level_3b_wave_B.tres" id="4_cipa6"]
 [ext_resource type="Resource" uid="uid://cbitkck8fv4og" path="res://data/spawn/boss/spawn_boss_death.tres" id="4_o40qk"]
 [ext_resource type="Resource" uid="uid://d0chydhfdxrx4" path="res://data/waves/level_3b_wave_C.tres" id="5_hi3tm"]
+[ext_resource type="Script" uid="uid://cwxt5p6yg0eh8" path="res://scripts/level/path_wave.gd" id="6_4ga13"]
 [ext_resource type="Resource" uid="uid://bimuqqcuyyb36" path="res://data/waves/level_3b_wave_D.tres" id="6_bdb0j"]
 [ext_resource type="Resource" uid="uid://cuxcbyhx0k237" path="res://data/waves/level_3b_wave_E.tres" id="7_2ylnc"]
 [ext_resource type="Resource" uid="uid://clnilluanisyt" path="res://data/waves/level_3b_wave_F.tres" id="8_hnjgc"]
