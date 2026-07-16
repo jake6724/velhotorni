@@ -130,7 +130,7 @@ func _ready():
 		MusicManager.fade(active_level.music_data.track)
 		# MusicManager.create_audio(active_level.music_data.track)
 
-	get_tree().root.get_viewport().canvas_cull_mask = get_tree().root.get_viewport().canvas_cull_mask -2
+	get_tree().root.get_viewport().canvas_cull_mask = 4294967293 # The specific layer value lol
 
 	print(camera_minimap)
 	print(active_level.minimap_camera_marker)
