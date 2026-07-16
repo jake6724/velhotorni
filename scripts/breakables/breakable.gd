@@ -9,7 +9,7 @@ extends Node2D
 var broken: bool = true
 var shimmer_timer: Timer = Timer.new()
 var shimmer_delay: float = 3.0
-var drop_chance: float = 3.0
+var drop_chance: float = 75
 
 var spawn_timer: Timer = Timer.new()
 var spawn_delay_base: float = 5.0
@@ -19,6 +19,8 @@ var spawn_delay: float
 signal coin_dropped
 
 func _ready():
+	on_spawn_timer_timeout()
+
 	# Randomly modify shimmer_delay
 	var shimmer_delay_modifier: float = Constants.weighted_random_rng.randf_range(0, 1)
 	shimmer_delay += shimmer_delay_modifier
@@ -30,19 +32,22 @@ func _ready():
 	shimmer_timer.timeout.connect(on_shimmer_timer_timeout)
 	add_child(shimmer_timer)
 
-	spawn_timer.autostart = false
-	spawn_timer.one_shot = true
-	spawn_timer.timeout.connect(on_spawn_timer_timeout)
-	add_child(spawn_timer)
+	# spawn_timer.autostart = false
+	# spawn_timer.one_shot = true
+	# spawn_timer.timeout.connect(on_spawn_timer_timeout)
+	# add_child(spawn_timer)
 
 	z_index = Constants.z_index_map["tower"]
 
-	ap.play("corpse")
+	WaveManager.wave_completed.connect(on_spawn_timer_timeout)
+
+	# ap.play("corpse")
 
 func start_grow() -> void:
-	if broken:
-		spawn_delay = Constants.weighted_random_rng.randf_range(0, spawn_delay_range)
-		spawn_timer.start(spawn_delay)
+	pass
+	# if broken:
+	# 	spawn_delay = Constants.weighted_random_rng.randf_range(0, spawn_delay_range)
+	# 	spawn_timer.start(spawn_delay)
 
 func on_area_entered(_intruder) -> void:
 	if not broken:
@@ -56,6 +61,7 @@ func on_area_entered(_intruder) -> void:
 		break_collider.set_deferred("disabled", true)
 
 func on_spawn_timer_timeout() -> void:
+	print("SPAWN")
 	ap.play("spawn")
 	await ap.animation_finished
 	ap.play("idle")

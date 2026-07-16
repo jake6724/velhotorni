@@ -14,6 +14,5 @@
 [resource]
 script = ExtResource("2_l0q2t")
 data = Array[ExtResource("1_f5jwf")]([ExtResource("2_g0kwc"), ExtResource("3_cqnfm"), ExtResource("4_7p8qh"), ExtResource("5_2uk4m"), ExtResource("3_cqnfm"), ExtResource("4_7p8qh"), ExtResource("5_2uk4m"), ExtResource("3_cqnfm"), ExtResource("4_7p8qh"), ExtResource("5_2uk4m"), ExtResource("3_cqnfm"), ExtResource("4_7p8qh"), ExtResource("5_2uk4m"), ExtResource("3_cqnfm"), ExtResource("4_7p8qh"), ExtResource("5_2uk4m"), ExtResource("3_cqnfm"), ExtResource("4_7p8qh"), ExtResource("5_2uk4m"), ExtResource("3_cqnfm"), ExtResource("4_7p8qh"), ExtResource("5_2uk4m"), ExtResource("3_cqnfm"), ExtResource("4_7p8qh"), ExtResource("3_cqnfm"), ExtResource("6_323hq"), ExtResource("7_iwyt8"), ExtResource("8_qyili"), ExtResource("6_323hq"), ExtResource("7_iwyt8"), ExtResource("8_qyili"), ExtResource("6_323hq"), ExtResource("7_iwyt8"), ExtResource("8_qyili"), ExtResource("6_323hq"), ExtResource("7_iwyt8"), ExtResource("8_qyili"), ExtResource("3_v6isl"), ExtResource("6_323hq"), ExtResource("7_iwyt8"), ExtResource("8_qyili"), ExtResource("6_323hq"), ExtResource("7_iwyt8"), ExtResource("8_qyili"), ExtResource("6_323hq"), ExtResource("7_iwyt8"), ExtResource("8_qyili"), ExtResource("6_323hq"), ExtResource("7_iwyt8"), ExtResource("6_323hq")])
-reward = 1.0
 token_reward = 100
 metadata/_custom_type_script = "uid://cskry1sw3vqba"

@@ -4,11 +4,11 @@ extends AudioStreamPlayer2D
 var element: Constants.Element
 
 var sfxs: Dictionary[String, AudioStreamOggVorbis] = {
-	"fire_shot": preload("res://assets/audio/sfx/Fire_Shot.ogg"),
-	"wind_shot": preload("res://assets/audio/sfx/Wind_Shot.ogg"),
-	"water_shot": preload("res://assets/audio/sfx/Water_Shot.ogg"),
-	"earth_shot": preload("res://assets/audio/sfx/Rock_Shoot.ogg"),
-	"light_shot": preload("res://assets/audio/sfx/Light_Shoot.ogg"),
+	"fire_shot": load("res://assets/audio/sfx/Fire_Shot.ogg"),
+	"wind_shot": load("res://assets/audio/sfx/Wind_Shot.ogg"),
+	"water_shot": load("res://assets/audio/sfx/Water_Shot.ogg"),
+	"earth_shot": load("res://assets/audio/sfx/Rock_Shoot.ogg"),
+	"light_shot": load("res://assets/audio/sfx/Light_Shoot.ogg"),
 }
 
 var shot_sfx: AudioStreamOggVorbis

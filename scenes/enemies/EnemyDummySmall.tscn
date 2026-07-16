@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://dhchl2qs01221"]
+[gd_scene load_steps=126 format=3 uid="uid://dhchl2qs01221"]
 
 [ext_resource type="Script" uid="uid://bch6s0by6amls" path="res://scripts/enemies/enemy_dummy.gd" id="1_gcjok"]
 [ext_resource type="Texture2D" uid="uid://d01v81ufk0jvj" path="res://assets/art/atlases/enemy/atl_enemy_fire_ghoul.png" id="2_iolhg"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bm2jek1l03frj" path="res://scripts/enemies/enemy_indicator.gd" id="13_5l8pd"]
 [ext_resource type="Script" uid="uid://di3c54ykd28fx" path="res://scripts/enemies/enemy_movement.gd" id="14_jxd41"]
 [ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="15_ktoc0"]
+[ext_resource type="Texture2D" uid="uid://hnxttmgepy4x" path="res://assets/placeholders/enemy_placeholder.png" id="16_evuvg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yrq1a"]
 radius = 8.06226
@@ -1071,3 +1072,11 @@ metadata/_custom_type_script = "uid://di3c54ykd28fx"
 unique_name_in_owner = true
 script = ExtResource("15_ktoc0")
 metadata/_custom_type_script = "uid://c75pt0b6io16g"
+
+[node name="SpriteMinimap" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+light_mask = 0
+visibility_layer = 2
+position = Vector2(12, 12)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("16_evuvg")

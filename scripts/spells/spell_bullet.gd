@@ -17,6 +17,9 @@ func _ready():
 	ap.animation_finished.connect(on_animation_finished)
 	area.area_entered.connect(on_area_entered)
 	area.body_entered.connect(on_body_entered)
+	# z_as_relative = false
+	# z_index = Constants.z_index_map["spell_bullet"]
+	
 
 func initialize(_data: SpellDataBullet, cast_direction: Vector2, spell_element_damage_perk_modifier: float, _execution_threshold: float, _double_spell_mana_drop: bool, _perk_debuffs: Array[DebuffData], bullet_speed: float) -> void:
 	data = _data
@@ -54,7 +57,6 @@ func on_area_entered(enemy: Enemy) -> void:
 		active = false
 		# light.enabled = false
 		ap.play("hit")
-
 
 ## Hit Terrain Obstacle
 func on_body_entered(_intruder) -> void:

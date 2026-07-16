@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://c50xuc0oaexbj"]
+[gd_scene load_steps=127 format=3 uid="uid://c50xuc0oaexbj"]
 
 [ext_resource type="Script" uid="uid://bsna5j67twb5p" path="res://scripts/enemies/flying_enemy.gd" id="1_dbysp"]
 [ext_resource type="Texture2D" uid="uid://mefdddf0j5ji" path="res://assets/art/atlases/enemy/atl_enemy_wind_imp.png" id="2_dbysp"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bm2jek1l03frj" path="res://scripts/enemies/enemy_indicator.gd" id="13_ks2os"]
 [ext_resource type="Script" uid="uid://di3c54ykd28fx" path="res://scripts/enemies/enemy_movement.gd" id="14_ryuyi"]
 [ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="15_1pwev"]
+[ext_resource type="Texture2D" uid="uid://hnxttmgepy4x" path="res://assets/placeholders/enemy_placeholder.png" id="16_wxw0t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hp2d3"]
 radius = 8.06226
@@ -903,6 +904,7 @@ radius = 32.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pwev"]
 
 [node name="FlyingSmallEnemy" type="Area2D"]
+visibility_layer = 3
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_dbysp")
@@ -1087,3 +1089,10 @@ collision_mask = 262144
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_1pwev")
 debug_color = Color(0.6684668, 0.16282108, 0.9997687, 0.41960785)
+
+[node name="SpriteMinimap" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+light_mask = 0
+visibility_layer = 2
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("16_wxw0t")

@@ -9,24 +9,24 @@ signal victory_sfx_complete
 signal base_explosion_sfx_complete
 
 var sfxs: Dictionary[String, AudioStreamOggVorbis] = {
-	"fire_shot": preload("res://assets/audio/sfx/Fire_Shot.ogg"),
-	"water_shot": preload("res://assets/audio/sfx/Water_Shot.ogg"),
-	"wind_shot": preload("res://assets/audio/sfx/Wind_Shot.ogg"),
-	"go": preload("res://assets/audio/sfx/Go_2.ogg"),
-	"fire_select": preload("res://assets/audio/sfx/Fire_Selection.ogg"),
-	"wind_select": preload("res://assets/audio/sfx/Wind_Selection.ogg"),
-	"water_select": preload("res://assets/audio/sfx/Water_Selection.ogg"),
-	"fire_explosion": preload("res://assets/audio/sfx/Fire_Explosion.ogg"),
-	"wind_explosion": preload("res://assets/audio/sfx/Wind_Explosion.ogg"),
-	"water_explosion": preload("res://assets/audio/sfx/Water_Explosion.ogg"),
-	"click_1": preload("res://assets/audio/sfx/Click_1_8bit.ogg"),
-	"click_2": preload("res://assets/audio/sfx/Click_2_8bit.ogg"),
-	"fire_click": preload("res://assets/audio/sfx/Fire_Click.ogg"),
-	"wind_click": preload("res://assets/audio/sfx/Wind_Click.ogg"),
-	"water_click": preload("res://assets/audio/sfx/Water_Click.ogg"),
-	"base_explosion": preload("res://assets/audio/sfx/Tower_Explosion.ogg"),
-	"victory": preload("res://assets/audio/sfx/Victory_8bit.ogg"),
-	"coin_collect": preload("res://assets/audio/sfx/coins/coin_collect.ogg")
+	"fire_shot": load("res://assets/audio/sfx/Fire_Shot.ogg"),
+	"water_shot": load("res://assets/audio/sfx/Water_Shot.ogg"),
+	"wind_shot": load("res://assets/audio/sfx/Wind_Shot.ogg"),
+	"go": load("res://assets/audio/sfx/Go_2.ogg"),
+	"fire_select": load("res://assets/audio/sfx/Fire_Selection.ogg"),
+	"wind_select": load("res://assets/audio/sfx/Wind_Selection.ogg"),
+	"water_select": load("res://assets/audio/sfx/Water_Selection.ogg"),
+	"fire_explosion": load("res://assets/audio/sfx/Fire_Explosion.ogg"),
+	"wind_explosion": load("res://assets/audio/sfx/Wind_Explosion.ogg"),
+	"water_explosion": load("res://assets/audio/sfx/Water_Explosion.ogg"),
+	"click_1": load("res://assets/audio/sfx/Click_1_8bit.ogg"),
+	"click_2": load("res://assets/audio/sfx/Click_2_8bit.ogg"),
+	"fire_click": load("res://assets/audio/sfx/Fire_Click.ogg"),
+	"wind_click": load("res://assets/audio/sfx/Wind_Click.ogg"),
+	"water_click": load("res://assets/audio/sfx/Water_Click.ogg"),
+	"base_explosion": load("res://assets/audio/sfx/Tower_Explosion.ogg"),
+	"victory": load("res://assets/audio/sfx/Victory_8bit.ogg"),
+	"coin_collect": load("res://assets/audio/sfx/coins/coin_collect.ogg")
 }
 
 func _ready():

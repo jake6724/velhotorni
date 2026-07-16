@@ -22,6 +22,7 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var tower_audio: TowerAudio = $TowerAudio
 @onready var hurtbox: TowerHurtbox = %Hurtbox
 @onready var hurtbox_collider: CollisionShape2D = %HurtboxCollider
+@onready var area_detect_mana_well: Area2D = %AreaDetectManaWell
 @onready var healthbar: TextureProgressBar = %HealthBar
 @onready var number_popup: NumberPopup = %NumberPopup
 @onready var tower_obstacle_collider: CollisionShape2D = %TowerObstacleCollider
@@ -33,7 +34,12 @@ enum TargetPriority {FIRST, LAST, HIGHEST, LOWEST}
 @onready var upgrade_button_hint: ButtonHint = %UpgradeButtonHint
 @onready var placement_button_hint: ButtonHint = %PlacementButtonHint
 
+@onready var fx_disabled: AnimatedSprite2D = %FXDisabled
+var disabled: bool = false
+
 var alive: bool = true
+
+var grayscale_shader: ShaderMaterial = load("uid://d11g335u6jhey")
 
 # Internal data
 var active_target: Enemy
@@ -204,6 +210,17 @@ func _ready():
 
 	z_index = Constants.z_index_map["tower"]
 
+	material = null
+
+	var parents: Array[Node] = []
+	var current_parent = get_parent()
+	
+	while current_parent != null:
+		parents.append(current_parent)
+		current_parent = current_parent.get_parent()
+
+	print(parents)
+
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
 	base_data = get_tower_data_copy(TowerGlobalData.tower_data[element])
@@ -262,21 +279,22 @@ func child_physics_process(_delta) -> void:
 	pass
 
 func attack() -> void:
-	active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
-	if active_target:
-		can_attack = false
-		attack_timer.start(curr_speed)
-		flip_to_face_active_target()
-		spawn_bullet()
-		if data.shoot_sfx:
-			AudioManager.create_2d_audio_at_location(global_position, data.shoot_sfx.type)
+	if not disabled:
+		active_target = tower_targeting.get_active_target(target_priority, in_range_targets)
+		if active_target:
+			can_attack = false
+			attack_timer.start(curr_speed)
+			flip_to_face_active_target()
+			spawn_bullet()
+			if data.shoot_sfx:
+				AudioManager.create_2d_audio_at_location(global_position, data.shoot_sfx.type)
 
 func on_attack_timer_timeout() -> void:
 	can_attack = true
 	
 func spawn_bullet() -> void:
 	var new_bullet = data.bullet.instantiate()
-	new_bullet.initialize(active_target, data.base_element, curr_damage, data.debuff_data, data.bullet_speed, curr_range, data.bullet_modifier_data)
+	new_bullet.initialize(active_target, data.base_element, curr_damage, data.debuff_data, data.bullet_speed, curr_range, data.bullet_modifier_data, data.bullet_pierce, self)
 	new_bullet.position += new_bullet._pos_offset
 	add_child(new_bullet)
 
@@ -492,6 +510,7 @@ func _draw():
 
 # Buffs
 func on_add_new_buff(buff: Buff):
+	print("Tower adding buff")
 	match buff.data.type:
 		Buff.Type.RANGE:
 			_range_buff += _leveled_range * buff.data.modified_value
@@ -600,10 +619,9 @@ func on_hit(_damage_amount: int) -> void:
 	ap.play("hit")
 	health -= _damage_amount
 	number_popup.display_damage_number(_damage_amount, global_position)
-	print(_damage_amount)
 	AudioManager.create_2d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.TOWER_HIT)
 	if health <= 0:
-		die()
+		disable()
 	
 	if (health/curr_max_health) <= TOWER_HEALTH_ALERT_THRESHOLD:
 		AlertManager.submit_new_alert(global_position, Alert.Priority.HIGH, 5.0, "Familiar health low!")
@@ -615,8 +633,16 @@ func heal(_value: int) -> void:
 	number_popup.display_tower_heal(global_position, health, curr_max_health)
 	if health >= curr_max_health:
 		can_heal = false
-	else:
-		print("Can heal is true ??!")
+
+	disabled = false
+	fx_disabled.hide()
+	sprite.material = null
+
+func disable() -> void:
+	disabled = true
+	fx_disabled.show()
+	sprite.material = grayscale_shader
+	healthbar.hide()
 
 func die() -> void:
 	alive = false
@@ -639,6 +665,10 @@ func shake() -> void:
 	tween.tween_interval(TOWER_SHAKE_DURATION)
 	tween.tween_property(sprite, "position:x", 0, TOWER_SHAKE_DURATION)
 	tween.tween_interval(TOWER_SHAKE_DURATION)
+
+func scale_up() -> void:
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(sprite, "scale", Vector2(1,1), .5).from(Vector2(1.2,1.2))
 
 func update_shield_tower_data() -> void:
 	pass

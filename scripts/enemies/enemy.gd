@@ -23,6 +23,7 @@ enum Size {SMALL, LARGE, FLYING_SMALL, FLYING_LARGE, RANGED_SMALL, RANGED_LARGE,
 @onready var hex_collider: CollisionShape2D = $HexArea/HexCollider
 @onready var indicator: EnemyIndicator = $EnemyIndicator
 @onready var number_popup: NumberPopup = %NumberPopup
+@onready var sprite_minimap: Sprite2D = %SpriteMinimap
 
 @onready var enemy_movement: EnemyMovement = $EnemyMovement
 
@@ -97,6 +98,7 @@ func _ready():
 	atlas = data.atlas
 	max_health = health
 	if LevelManager.active_level.base:
+		print(LevelManager.active_level)
 		base = LevelManager.active_level.base # TODO: This is potentially bad; a collision box with layer that can only see base would be better ? 
 	sprite.texture = atlas
 	ap.animation_finished.connect(on_animation_finished)
@@ -185,7 +187,7 @@ func reset_drop_chance() -> void:
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
 ## Returns the amount of damage actually received (after calculating resistances and other modifiers)
-func take_damage(damage_recieved: float, tower_element: Constants.Element, execution_threshold_recieved: float, _double_spell_mana_drop: bool) -> float:
+func take_damage(damage_recieved: float, tower_element: Constants.Element, execution_threshold_recieved: float, _double_spell_mana_drop: bool, damage_source: Variant=null) -> float:
 	if is_alive:
 		if not is_taking_damage:
 			ap.play("hit")
@@ -203,6 +205,8 @@ func take_damage(damage_recieved: float, tower_element: Constants.Element, execu
 		number_popup.display_damage_number(damage_recieved, global_position, moving_horizontally, true)
 
 		var damage_applied: float = min(health, damage_recieved)
+		if damage_source:
+			DataTracker.submit_damage_data(damage_source, damage_applied)
 
 		health = max(0, health - damage_recieved)
 
@@ -235,6 +239,7 @@ func die() -> void:
 	health_bar.hide()
 	shield.hide()
 	weak.hide()
+	sprite_minimap.hide()
 
 	z_index = Constants.z_index_map["enemy_corpse"]
 	boon_area.can_show_boon_range = false
@@ -272,7 +277,6 @@ func on_animation_finished(anim_name):
 		ap.play("corpse")
 
 	if anim_name == "corpse":
-		
 		set_physics_process(false)
 		if remove_corpse():
 			queue_free()
@@ -491,3 +495,7 @@ func hide_all_fx() -> void:
 
 func boss_initialize() -> void:
 	pass
+
+# func scale_up() -> void:
+# 	var tween: Tween = get_tree().create_tween()
+# 	tween.tween_property(sprite, "scale", Vector2(1,1), .33).from(Vector2(1.2,1.2))

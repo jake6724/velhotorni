@@ -28,9 +28,7 @@ func populate_nodes() -> void:
 			snake_node_parent.add_child(new_node)
 			new_node.global_position = global_position
 			new_node.speed = (data.speed - 10)
-	
 
-		print(new_node.speed)
 		prev_node = new_node
 		speed_offset -= 2
 

@@ -1,23 +1,32 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dygybtw47em30"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dygybtw47em30"]
 
 [ext_resource type="Texture2D" uid="uid://degbmywv1fes" path="res://assets/art/atlases/level/atl_level_mask.png" id="1_hli2g"]
+[ext_resource type="PackedScene" uid="uid://dhatkucfd1t32" path="res://PitArea.tscn" id="2_v1lk3"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_74c5d"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yedvh"]
 texture = ExtResource("1_hli2g")
 0:0/0 = 0
-0:0/0/modulate = Color(1, 1, 1, 0.196078)
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/modulate = Color(1, 1, 1, 0.5764706)
 0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
-1:0/0/modulate = Color(1, 1, 1, 0.196078)
+1:0/0/modulate = Color(1, 1, 1, 0.5764706)
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
-2:0/0/modulate = Color(1, 1, 1, 0.196078)
+2:0/0/modulate = Color(1, 1, 1, 0.5764706)
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/modulate = Color(1, 1, 1, 0.5764706)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_wsimo"]
+resource_name = "Hazards"
+scenes/1/scene = ExtResource("2_v1lk3")
 
 [resource]
 physics_layer_0/collision_layer = 4096
 physics_layer_0/collision_mask = 0
 physics_layer_1/collision_layer = 8192
 physics_layer_1/collision_mask = 0
-sources/0 = SubResource("TileSetAtlasSource_74c5d")
+physics_layer_2/collision_layer = 32768
+physics_layer_2/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_yedvh")
+sources/1 = SubResource("TileSetScenesCollectionSource_wsimo")

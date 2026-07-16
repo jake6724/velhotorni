@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu4xbpg087w3b"]
+
+[ext_resource type="Script" uid="uid://uamm7d05v7s4" path="res://scripts/audio/music_manager.gd" id="1_6kfwh"]
+[ext_resource type="Script" uid="uid://cudxlol6t5xf3" path="res://scripts/audio/music_data.gd" id="2_ufibd"]
+[ext_resource type="Resource" uid="uid://dnm70tb2uewd8" path="res://data/audio/music/music_data_cozy.tres" id="3_cdgwq"]
+[ext_resource type="Resource" uid="uid://bjylckqy2ekox" path="res://data/audio/music/music_data_combat_1.tres" id="4_cdgwq"]
+
+[node name="MusicManager" type="Node2D" node_paths=PackedStringArray("music_player")]
+script = ExtResource("1_6kfwh")
+music_data = Array[ExtResource("2_ufibd")]([ExtResource("3_cdgwq"), ExtResource("4_cdgwq")])
+music_player = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

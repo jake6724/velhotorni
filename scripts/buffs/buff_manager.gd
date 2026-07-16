@@ -13,6 +13,7 @@ func add_buff(new_buff_data: BuffData, _source: BuffArea) -> void:
 
 func calc_buff_modified_value(_buff_data: BuffData) -> float:
 	var _modified_value: float = _buff_data.leveled_value / (2 ** get_buff_type_count(_buff_data.type))
+	print(_buff_data.leveled_value)
 	return _modified_value
 
 func create_buff(_data: BuffData, _source: BuffArea, _modified_value: float) -> Buff:

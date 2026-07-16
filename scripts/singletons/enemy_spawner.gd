@@ -22,16 +22,16 @@ var flying_spawn_points: Array[Vector2] = []
 var player: PlayerCharacter # Set by main
 
 var enemy_scenes: Dictionary[Enemy.Size, PackedScene] = {
-	Enemy.Size.SMALL: preload("res://scenes/enemies/EnemySmall.tscn"),
-	Enemy.Size.LARGE: preload("res://scenes/enemies/EnemyLarge.tscn"),
-	Enemy.Size.FLYING_SMALL: preload("res://scenes/enemies/EnemyFlyingSmall.tscn"),
-	Enemy.Size.FLYING_LARGE: preload("res://scenes/enemies/EnemyFlyingLarge.tscn"),
-	Enemy.Size.RANGED_SMALL: preload("res://scenes/enemies/EnemyRangedSmall.tscn"),
-	Enemy.Size.RANGED_LARGE: preload("res://scenes/enemies/EnemyRangedLarge.tscn"),
-	Enemy.Size.REPEATER_SMALL: preload("res://scenes/enemies/EnemyRangedRepeaterSmall.tscn"),
-	Enemy.Size.REPEATER_LARGE: preload("res://scenes/enemies/EnemyRangedRepeaterLarge.tscn"),
-	Enemy.Size.DUMMY_SMALL: preload("res://scenes/enemies/EnemyDummySmall.tscn"),
-	Enemy.Size.SNAKE: preload("res://scenes/enemies/EnemySnake.tscn"),
+	Enemy.Size.SMALL: load("res://scenes/enemies/EnemySmall.tscn"),
+	Enemy.Size.LARGE: load("res://scenes/enemies/EnemyLarge.tscn"),
+	Enemy.Size.FLYING_SMALL: load("res://scenes/enemies/EnemyFlyingSmall.tscn"),
+	Enemy.Size.FLYING_LARGE: load("res://scenes/enemies/EnemyFlyingLarge.tscn"),
+	Enemy.Size.RANGED_SMALL: load("res://scenes/enemies/EnemyRangedSmall.tscn"),
+	Enemy.Size.RANGED_LARGE: load("res://scenes/enemies/EnemyRangedLarge.tscn"),
+	Enemy.Size.REPEATER_SMALL: load("res://scenes/enemies/EnemyRangedRepeaterSmall.tscn"),
+	Enemy.Size.REPEATER_LARGE: load("res://scenes/enemies/EnemyRangedRepeaterLarge.tscn"),
+	Enemy.Size.DUMMY_SMALL: load("res://scenes/enemies/EnemyDummySmall.tscn"),
+	Enemy.Size.SNAKE: load("res://scenes/enemies/EnemySnake.tscn"),
 }
 
 # Signals
@@ -53,6 +53,8 @@ func _ready():
 	WaveManager.all_waves_completed.connect(reset)
 	WaveManager.final_wave_started.connect(on_final_wave_started)
 
+	set_visibility_layer_bit(1, true)
+
 func _physics_process(_delta):
 	sort_path_enemies_z_index_by_progress()
 
@@ -61,6 +63,10 @@ func _physics_process(_delta):
 
 ## Called by LevelManager.
 func configure_level(active_level: LevelEnvironment):
+
+	for wave: Wave in active_level.waves:
+		wave.configure_data()
+
 	active_enemies = []
 	active_path_enemies = []
 	enemy_index = 0
@@ -100,14 +106,15 @@ func reset() -> void:
 	reset_indexes()
 
 func on_wave_complete() -> void:
-	active_enemies = []
-	active_path_enemies = []
-	can_spawn_enemy = false
-	wave_enemy_total_updated.emit(get_wave_enemy_total(WaveManager.active_wave))
-	stop_all_spawn_timers()
-	sort_enemies_by_path()
-	preview_portals() 
-	reset_indexes()
+	if WaveManager.wave_index < WaveManager.wave_total:
+		active_enemies = []
+		active_path_enemies = []
+		can_spawn_enemy = false
+		wave_enemy_total_updated.emit(get_wave_enemy_total(WaveManager.active_wave))
+		stop_all_spawn_timers()
+		sort_enemies_by_path()
+		preview_portals() 
+		reset_indexes()
 
 func reset_indexes() -> void:
 	enemy_index = 0
@@ -143,7 +150,7 @@ func on_spawn_timer_timeout(path_index: int) -> void:
 					spawn_timers[spawn_data.path_index].stop()
 					LevelManager.active_level.enemy_portals[path_index].close()
 
-func spawn_enemy(_spawn: Spawn) -> void:
+func spawn_enemy(_spawn: Spawn, _position_override: Vector2=Vector2(0,0)) -> void:
 	# Configure new enemy
 	var _enemy_data: EnemyData = _spawn.enemy_data
 	var new_enemy: Enemy
@@ -158,7 +165,12 @@ func spawn_enemy(_spawn: Spawn) -> void:
 
 	if new_enemy is FlyingEnemy or new_enemy is EnemySnake:
 		new_enemy.player = player
-		new_enemy.global_position = flying_spawn_points[_spawn.flying_spawn_index]
+
+		if _position_override == Vector2(0,0):
+			new_enemy.global_position = flying_spawn_points[_spawn.flying_spawn_index]
+		else:
+			new_enemy.global_position = _position_override
+
 		new_enemy.sprite.z_as_relative = false
 		new_enemy.sprite.z_index = Constants.z_index_map["flying_enemy"]
 		new_enemy.initialize()

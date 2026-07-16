@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MusicData" load_steps=3 format=3 uid="uid://bjylckqy2ekox"]
+
+[ext_resource type="Script" uid="uid://cudxlol6t5xf3" path="res://scripts/audio/music_data.gd" id="1_amulu"]
+[ext_resource type="AudioStream" uid="uid://dxslvcvmsbb0f" path="res://assets/audio/music/COMBAT TRACK_139_Fmin.mp3" id="2_sy17r"]
+
+[resource]
+script = ExtResource("1_amulu")
+track = 1
+sound = ExtResource("2_sy17r")
+volume = -25.0
+metadata/_custom_type_script = "uid://cudxlol6t5xf3"

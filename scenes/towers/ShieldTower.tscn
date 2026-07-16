@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dvampp25lkg6q"]
+[gd_scene load_steps=40 format=3 uid="uid://dvampp25lkg6q"]
 
 [ext_resource type="Script" uid="uid://b2c0x53fqqowa" path="res://scripts/towers/shield_tower.gd" id="1_kvm0y"]
 [ext_resource type="Texture2D" uid="uid://cy76j8i8ym8mf" path="res://assets/art/sprites/environment/spr_environment_light.png" id="2_djp37"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://bs1li1amcuwmf" path="res://assets/art/sprites/ui/spr_ui_health_bg.png" id="20_7at7f"]
 [ext_resource type="Texture2D" uid="uid://rwec3xnhkxkf" path="res://assets/art/sprites/ui/spr_ui_health_bar.png" id="21_b4j6r"]
 [ext_resource type="Script" uid="uid://c75pt0b6io16g" path="res://scripts/player/number_popup.gd" id="22_ytucv"]
+[ext_resource type="Material" uid="uid://bf02u5il8bmgp" path="res://shader/shader_material_outline.tres" id="24_lp64o"]
 
 [sub_resource type="Animation" id="Animation_bfb4r"]
 length = 0.001
@@ -493,3 +494,14 @@ shape = SubResource("CapsuleShape2D_3d6kj")
 [node name="TowerShieldParent" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(8, 8)
+
+[node name="SpriteOutline" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+material = ExtResource("24_lp64o")
+scale = Vector2(1, 0.995824)
+texture = ExtResource("3_lp64o")
+centered = false
+hframes = 4
+vframes = 4

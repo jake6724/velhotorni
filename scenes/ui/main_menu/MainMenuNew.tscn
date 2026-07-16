@@ -1,0 +1,186 @@
+[gd_scene load_steps=28 format=3 uid="uid://d3derlgv0uml0"]
+
+[ext_resource type="PackedScene" uid="uid://t814n5237hhc" path="res://scenes/ui/main_menu/ScrollBackgroundNew.tscn" id="1_kerae"]
+[ext_resource type="Script" uid="uid://bexqabxdiia4k" path="res://scripts/ui/main_menu/main_menu_new.gd" id="1_wjeyi"]
+[ext_resource type="Texture2D" uid="uid://fi6ymq1x17ow" path="res://assets/art/sprites/ui/spr_ui_menuart.png" id="2_6bldl"]
+[ext_resource type="Texture2D" uid="uid://djq3huplgujyb" path="res://assets/art/sprites/ui/spr_ui_logo.png" id="3_xjcu2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t6gch"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kerae"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6bldl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wjeyi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xjcu2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pub6d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_26y6u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iv7ra"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgo7n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qodwf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2dh3n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q853p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iastm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s6agq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfkmq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ttoj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7lr66"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kvkt0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qhk5j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_robe0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qv7xp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lym21"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qxnoc"]
+
+[node name="MainMenuNew" type="Panel" node_paths=PackedStringArray("tutorial_button", "play_button", "options_button", "credits_button", "exit_button", "buttons")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t6gch")
+script = ExtResource("1_wjeyi")
+tutorial_button = NodePath("Panel/VBoxContainer/TutorialButton")
+play_button = NodePath("Panel/VBoxContainer/PlayButton")
+options_button = NodePath("Panel/VBoxContainer/OptionsButton")
+credits_button = NodePath("Panel/VBoxContainer/CreditsButton")
+exit_button = NodePath("Panel/VBoxContainer/ExitButton")
+buttons = [NodePath("Panel/VBoxContainer/TutorialButton"), NodePath("Panel/VBoxContainer/PlayButton"), NodePath("Panel/VBoxContainer/OptionsButton"), NodePath("Panel/VBoxContainer/CreditsButton"), NodePath("Panel/VBoxContainer/ExitButton")]
+metadata/_custom_type_script = "uid://bexqabxdiia4k"
+
+[node name="ScrollBackgroundNew" parent="." instance=ExtResource("1_kerae")]
+layout_mode = 1
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 80.0
+offset_right = 368.0
+offset_bottom = 168.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kerae")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -36.0
+offset_right = 32.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="TutorialButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.6784314, 0.70980394, 0.7411765, 1)
+theme_override_colors/font_hover_color = Color(0.6784314, 0.70980394, 0.7411765, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6bldl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wjeyi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xjcu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pub6d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_26y6u")
+text = "Tutorial"
+
+[node name="PlayButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.6784314, 0.70980394, 0.7411765, 1)
+theme_override_colors/font_hover_color = Color(0.6784314, 0.70980394, 0.7411765, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6bldl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iv7ra")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xgo7n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qodwf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2dh3n")
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.6784314, 0.70980394, 0.7411765, 1)
+theme_override_colors/font_hover_color = Color(0.6784314, 0.70980394, 0.7411765, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6bldl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_q853p")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iastm")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_s6agq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vfkmq")
+text = "Options"
+
+[node name="CreditsButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.6784314, 0.70980394, 0.7411765, 1)
+theme_override_colors/font_hover_color = Color(0.6784314, 0.70980394, 0.7411765, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6bldl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0ttoj")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7lr66")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kvkt0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qhk5j")
+text = "Credits"
+
+[node name="ExitButton" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.6784314, 0.70980394, 0.7411765, 1)
+theme_override_colors/font_hover_color = Color(0.6784314, 0.70980394, 0.7411765, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6bldl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_robe0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qv7xp")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_lym21")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qxnoc")
+text = "exit"
+
+[node name="MenuArt" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_right = 584.0
+offset_bottom = 288.0
+mouse_filter = 2
+texture = ExtResource("2_6bldl")
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 8.0
+offset_right = 408.0
+offset_bottom = 72.0
+mouse_filter = 2
+texture = ExtResource("3_xjcu2")

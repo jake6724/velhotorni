@@ -52,7 +52,6 @@ func on_shield_ready() -> void:
 		tower_shield_parent.rotation_degrees = 0
 		var shields = tower_shield_parent.get_children()
 		for i in range(shields.size()):
-			print(i)
 			shields[i].z_index -= 1
 			shields[i].initialize(shield_health)
 			shields[i].global_position = (tower_shield_parent.global_position + shield_spawn_position_modifiers[i])

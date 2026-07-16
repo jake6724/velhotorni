@@ -22,7 +22,7 @@ var _min_distance: float
 
 var direction_at_collision: Vector2 # Shot animation will move in this direction
 
-func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _debuff_data, _speed: float, _tower_range: float, _bullet_modifier_data: BulletModifierData) -> void:
+func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _debuff_data, _speed: float, _tower_range: float, _bullet_modifier_data: BulletModifierData, pierce: int, _damage_source: Tower) -> void:
 	data.element = _element
 	data.damage = _damage
 	data.debuff_data = _debuff_data
@@ -30,6 +30,8 @@ func initialize(_target: Enemy, _element: Constants.Element, _damage: float, _de
 	data.tower_range = _tower_range
 	data.max_distance = _tower_range + (_tower_range * .5)
 	data.bullet_modifier_data = _bullet_modifier_data
+	data.pierce = pierce
+	data.damage_source = _damage_source
 	target = _target
 	is_active = true
 
@@ -89,7 +91,7 @@ func on_primary_area_entered(intruder: Node2D) -> void:
 			direction_at_collision = global_position.direction_to(target.global_position + _pos_offset)
 			is_active = false
 			target.apply_drop_chance_bonus(data.drop_chance_bonus)
-			target.take_damage(data.damage, data.element, 0.0, false)
+			target.take_damage(data.damage, data.element, 0.0, false, owner)
 			if data.debuff_data and target.debuff_manager:
 				target.debuff_manager.add_debuff(data.debuff_data)
 

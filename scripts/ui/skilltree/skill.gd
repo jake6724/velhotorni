@@ -19,7 +19,7 @@ func set_icon() -> void:
 
 func check_prereq_met() -> bool:
 	for skill: Skill in prereq_skills:
-		if not skill.locked:
+		if skill and not skill.locked:
 			return true
 
 	return false

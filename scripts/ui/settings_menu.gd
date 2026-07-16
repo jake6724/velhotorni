@@ -5,6 +5,7 @@ extends NinePatchRect
 @onready var sfx_check_box: CheckBox = %SFXCheckBox
 @onready var music_volume_slider: HSlider = %MusicVolumeSlider
 @onready var music_check_box: CheckBox = %MusicCheckBox
+@onready var crt_check_box: CheckBox = %CRTCheckBox
 
 @onready var back: NinePatchRect = %Back
 @onready var back_button: Button = %BackButton
@@ -27,6 +28,9 @@ func _ready():
 	music_volume_slider.value = MusicPlayer.bus_volume_linear
 	music_volume_slider.value_changed.connect(on_music_volume_changed)
 	music_check_box.pressed.connect(on_music_check_pressed)
+
+	crt_check_box.pressed.connect(on_crt_check_pressed)
+	crt_check_box.button_pressed = flowerwall_crt.crt.visible
 
 	# Configure BackButton
 	back_button.pressed.connect(on_back_button_pressed)
@@ -76,3 +80,11 @@ func highlight_ui_element(ui_element: Control) -> void:
 
 func un_highlight_ui_element(ui_element: Control) -> void:
 	ui_element.self_modulate = Color.WHITE
+
+func on_crt_check_pressed() -> void:
+	if crt_check_box.button_pressed: # Checked
+		flowerwall_crt.enable_all(true)
+	else:
+		SFXPlayer.volume_linear = 0
+		SFXPlayer.update_bus_volume(0)
+		flowerwall_crt.enable_all(false)

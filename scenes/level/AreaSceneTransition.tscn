@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://waqqtscrvt77"]
+
+[node name="AreaSceneTransition" type="Area2D"]

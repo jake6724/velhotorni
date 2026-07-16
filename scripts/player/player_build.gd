@@ -42,14 +42,11 @@ signal heal_all_cost_updated
 signal player_hud_hint_requested
 signal set_player_enabled_requested
 signal set_player_input_enabled_requested
+signal request_tower_menu_indicator
 
 func _process(_delta):
-	# queue_redraw()
 	if tower_action_radial_menu_active:
 		limit_mouse_radius(TOWER_RADIAL_MENU_MOUSE_RADIUS)
-
-# func _draw():
-# 	draw_circle(to_local(tower_detect_area.get_child(0).global_position), 3, Color.RED, true)
 
 func limit_mouse_radius(radius: float) -> void:
 	var mouse_position: Vector2 = get_global_mouse_position()	
@@ -105,6 +102,7 @@ func initialize(_player_build_ui: PlayerBuildUI, _build_grid_sprite: Sprite2D, _
 
 func on_ui_interact_pressed() -> void:
 	if hovered_tower and hovered_tower.alive:
+		request_tower_menu_indicator.emit(false)
 		hovered_tower.upgrade_button_hint.hide()
 		set_player_enabled_requested.emit(false)
 		mouse_reset_warp_position = get_viewport().get_mouse_position()
@@ -117,8 +115,8 @@ func on_ui_interact_pressed() -> void:
 		limit_mouse_radius(1)
 
 func on_ui_interact_released() -> void: # TODO: Call this when unhovering a tower also
-	if tower_action_radial_menu_active:
-
+	if tower_action_radial_menu_active:	
+		request_tower_menu_indicator.emit(true)
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 		on_player_input_primary_action_just_pressed()
 
@@ -177,6 +175,7 @@ func create_preview_tower():
 				preview_tower = tower_scene.instantiate()
 
 			tower_parent.add_child(preview_tower)
+			#add_child(preview_tower)
 			preview_tower.initialize(tower_element_options[tower_index])
 			preview_tower.attack_collider.set_deferred("disabled", true)
 			preview_tower.transform_collider.set_deferred("disabled", true)
@@ -237,6 +236,15 @@ func place_tower() -> void:
 			preview_tower.modulate.r = 1
 			preview_tower.placement_button_hint.hide()
 			preview_tower.hide_upgrade_info()
+
+			print("Placing tower, OA's: ", preview_tower.area_detect_mana_well.get_overlapping_areas())
+			for area in preview_tower.area_detect_mana_well.get_overlapping_areas():
+				if area is ManaWell:
+					print("Adding buffs")
+					preview_tower.buff_manager.add_buff((area.buff_data_list[0]), area.buff_area)
+					preview_tower.buff_manager.add_buff((area.buff_data_list[1]), area.buff_area)
+					preview_tower.buff_manager.add_buff((area.buff_data_list[2]), area.buff_area)
+
 			AudioManager.create_2d_audio_at_location(WorldGrid.grid_to_world(tower_placement_info[1]), SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON)
 
 			# Update WorldGrid
@@ -289,9 +297,10 @@ func sell_tower(_tower: Tower) -> void:
 
 func info_tower(_tower: Tower) -> void:
 	player_build_ui.tower_info_menu.show()
-	player_build_ui.tower_info_menu.tower = _tower
+	player_build_ui.tower_info_menu.update(_tower)
 	set_player_input_enabled_requested.emit(false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+
 
 func get_tower_action_negative_text(_tower_action: TowerAction) -> String:
 	var _text: String
@@ -391,6 +400,10 @@ func on_tower_detect_area_entered(intruder: Area2D) -> void:
 	hovered_tower.can_show_range = true
 	player_build_ui.update_tower_info_panel(hovered_tower)
 	hovered_tower.upgrade_button_hint.show()
+	hovered_tower.scale_up()
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.UI_HOVER_1)
+	owner.player_hud.tower_menu_indicator.show()
+	request_tower_menu_indicator.emit(true)
 
 func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 	if not tower_action_radial_menu_active:
@@ -404,6 +417,8 @@ func on_tower_detect_area_exited(_intruder: Area2D) -> void:
 
 		if preview_tower:
 			player_build_ui.update_tower_info_panel(preview_tower)
+
+	request_tower_menu_indicator.emit(false)
 
 func on_tower_died(tower: Tower) -> void:
 	if preview_tower == tower:
@@ -492,7 +507,8 @@ func on_wave_started() -> void:
 	lock_in_tower_sell_prices()
 
 func on_wave_completed() -> void:
-	heal_all_cost_updated.emit(get_heal_all_cost())
+	heal_all_towers(active_towers)
+	#heal_all_cost_updated.emit(get_heal_all_cost())
 
 func lock_in_tower_sell_prices() -> void:
 	for child in tower_parent.get_children():
@@ -513,3 +529,7 @@ func get_heal_all_cost() -> float:
 		if tower.can_heal:
 			cost += max(((tower.max_health - tower.health) / TOWER_HEAL_AMOUNT), 1)
 	return cost
+
+func heal_all_towers(_towers: Array[Tower]) -> void:
+	for t: Tower in _towers:
+		t.heal(99999)

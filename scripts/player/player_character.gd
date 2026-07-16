@@ -167,7 +167,6 @@ func _ready():
 	player_special.pit_hurtbox_update_requested.connect(pit_hurtbox.update_collider)
 	player_special.pit_hurtbox_stop_pre_coyote_timer_requested.connect(pit_hurtbox.stop_pre_coyote_timer)
 	
-	
 	# Configure PlayerMana
 	player_mana.populate_spell_mana(player_spells.selected_spells)
 
@@ -185,6 +184,7 @@ func _ready():
 	player_build.tower_mana_spent.connect(on_tower_mana_spent)
 	player_mana.tower_mana_updated.connect(player_build.on_tower_mana_updated)
 	player_build.set_player_enabled_requested.connect(set_character_for_ui)
+	player_build.request_tower_menu_indicator.connect(on_request_tower_menu_indicator)
 
 	# Configure PlayerWalkParticles
 	player_aim.sprite_flipped.connect(on_player_aim_sprite_flipped)
@@ -364,6 +364,7 @@ func switch_to_build_mode() -> void:
 	player_build_ui.raise_current()
 	player_build.create_preview_tower()
 	player_hud.weapons.hide()
+	player_hud.build_mode_indicator.hide()
 	build_grid_sprite.show()
 	# player_stats.active_speed = player_stats.build_speed
 	tower_detect_collider.set_deferred("disabled", false)
@@ -381,6 +382,7 @@ func switch_to_combat_mode() -> void:
 		player_build.preview_tower.queue_free()
 	player_build_ui.hide_ui()
 	player_hud.weapons.show()
+	player_hud.build_mode_indicator.show()
 	build_grid_sprite.hide()
 	# player_stats.active_speed = player_stats.combat_speed
 	tower_detect_collider.set_deferred("disabled", true)
@@ -640,3 +642,7 @@ func on_player_aim_sprite_flipped(_value) -> void:
 		player_walk_particles.rotation_degrees = 0
 	else:
 		player_walk_particles.rotation_degrees = 180
+
+func on_request_tower_menu_indicator(_value) -> void:
+	player_hud.tower_menu_indicator.visible = _value
+	

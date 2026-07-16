@@ -14,12 +14,19 @@ var spawn_timer: Timer = Timer.new()
 
 var attacking: bool = true
 
-const BULLET_SCENE = preload("res://scenes/bullets/enemy_bullets/EnemyBulletDeath.tscn")
+var BULLET_SCENE = load("res://scenes/bullets/enemy_bullets/EnemyBulletDeath.tscn")
+var KRASUE_SPAWN = load("uid://bwulu1o4kofy2")
 
 var melee_dash_direction: Vector2
 var melee_attack_active: bool = false
 var melee_attack_timer: Timer = Timer.new()
 var melee_attack_chance: float = .5 # Start lower
+
+var attack_chances = [
+	["melee_attack_start", 0],
+	["ranged_attack_start", 0],
+	["summon", 0],
+]
 
 # State vars
 var active_attack_animation_name: String
@@ -42,6 +49,10 @@ func boss_initialize() -> void:
 	idle_timer.one_shot = true
 	idle_timer.timeout.connect(on_idle_timer_timeout)
 	add_child(idle_timer)
+
+	attack_chances[0][1] = data.melee_attack_chance
+	attack_chances[1][1] = data.ranged_attack_chance
+	attack_chances[2][1] = data.summon_attack_chance
 
 func _physics_process(delta):
 	if is_alive:
@@ -109,6 +120,24 @@ func on_melee_attack_timer_timeout() -> void:
 	var idle_time = get_idle_time()
 	idle_timer.start(idle_time)
 
+func summon_minions() -> void:
+
+	var r: float = 30.0
+	var a: float = 60.0
+	var t: float = 0.0
+	for i in range(6):
+		var offset: Vector2 = Vector2(r * cos(t), r * sin(t))
+		EnemySpawner.spawn_enemy(KRASUE_SPAWN, global_position + offset)
+		t += a
+		await get_tree().create_timer(.05).timeout
+
+
+func end_summon() -> void:
+	# Run post-attack idle
+	ap.play("idle")
+	var idle_time = get_idle_time()
+	idle_timer.start(idle_time)
+
 func on_bullet_returned() -> void:
 	ap.play("ranged_attack_end")
 	await ap.animation_finished
@@ -119,18 +148,21 @@ func on_bullet_returned() -> void:
 	idle_timer.start(idle_time)
 
 func set_boss_phase() -> void:
-	pass
-	# if health <= (max_health * .9) and phase < 1:
-	# 	phase = 1
-	# 	data.melee_attack_dash_power = data.melee_attack_dash_power * 2
-	# 	data.melee_attack_dash_duration = data.melee_attack_dash_duration * .8
-	# 	data.bullet_speed = data.bullet_speed * 1.8	
+	if health <= (max_health * .5) and phase < 1:
+		phase = 1
+		data.melee_attack_dash_power = data.melee_attack_dash_power * 1.75
+		data.melee_attack_dash_duration = data.melee_attack_dash_duration * .6
+		data.bullet_speed = data.bullet_speed * 1.5
 
 func get_attack_info() -> Array:
-	if rng.randf() <= data.melee_attack_chance:
-		return ["melee_attack_start", get_melee_spawn_position()]
-	else:
-		return ["ranged_attack_start", get_ranged_spawn_position()]
+	var animation_name: String = Constants.get_weighted_random(attack_chances)
+	match animation_name:
+		"melee_attack_start": return [animation_name, get_melee_spawn_position()]
+		"ranged_attack_start": return [animation_name, get_ranged_spawn_position()]
+		"summon": return [animation_name, get_ranged_spawn_position()]
+		_:
+			push_error("Death.get_attack_info() failed to return a valid animation name: ", animation_name)
+			return []
 
 func on_idle_timer_timeout() -> void:
 	if is_pre_attack_idle:
@@ -153,7 +185,7 @@ func sprite_flash() -> void:
 ## Reduce enemies `health` stat by `damage_recieved`. Return `true` if enemy died, `false` otherwise.
 ## Handles despawning enemy in the case of death.
 ## Returns the amount of damage actually received (after calculating resistances and other modifiers)
-func take_damage(damage_recieved: float, tower_element: Constants.Element, execution_threshold_recieved: float, _double_spell_mana_drop: bool) -> float:
+func take_damage(damage_recieved: float, tower_element: Constants.Element, execution_threshold_recieved: float, _double_spell_mana_drop: bool, damage_source: Variant=null) -> float:
 	if is_alive:
 		is_taking_damage = true
 

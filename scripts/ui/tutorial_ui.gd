@@ -24,8 +24,8 @@ func _ready():
 	for db in dbs:
 		db.hide()	
 
-	skip_button.pressed.connect(on_skip_button_pressed)
+	# skip_button.pressed.connect(on_skip_button_pressed)
 
-func on_skip_button_pressed():
-	LevelManager.load_next_level()
-	WaveManager.wave_completed.emit()
+# func on_skip_button_pressed():
+# 	LevelManager.load_next_level()
+# 	WaveManager.wave_completed.emit()

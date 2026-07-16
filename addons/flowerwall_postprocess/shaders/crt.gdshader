@@ -22,7 +22,7 @@ uniform float vignette_smoothness: hint_range(0.05, 5.0, 0.05) = 0.4;
 
 group_uniforms scanlines_settings;
 uniform float scanlines_interval: hint_range(0.0, 20.0, 1.0) = 6.0;
-uniform float scanline_opacity: hint_range(0, 1, 0.05) = 0.45;
+uniform float scanline_opacity: hint_range(0, 1) = 0.45;
 uniform float scanline_thickness: hint_range(0, 10, 1.0) = 3;
 
 group_uniforms chromatic_aberration_settings;

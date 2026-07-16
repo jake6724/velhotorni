@@ -17,5 +17,6 @@ health_per_level = 10.0
 rotation_speed_per_level = 40.0
 atlas = ExtResource("1_qcipg")
 transform_hint_texture = SubResource("AtlasTexture_3uf5b")
+bullet_pierce = 0
 tower_name = "Arcane"
 metadata/_custom_type_script = "uid://v7b6nq74b314"

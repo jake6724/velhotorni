@@ -1,41 +1,26 @@
 class_name TowerInfoMenu
-extends PanelContainer
+extends Panel
 
-var tower: Tower:
-	set(_tower):
-		tower = _tower
-		target_priority_index = tower.target_priority as int
-		target_priority_label.text = target_priority_label_options[target_priority_index]
-
-@onready var target_left_button: TextureButton = %TargetLeftButton
-@onready var target_right_button: TextureButton = %TargetRightButton
-@onready var target_priority_label: Label = %TargetPriorityLabel
-var target_priority_index: int = 0
-var target_priority_index_max: int
-var target_priority_label_options: Array[String] = ["First", "Last","Most Health", "Least Health"]
+@export_group("Pages")
+@export var page_1: TowerInfoMenuPage1
 
 @onready var exit_button: TextureButton = %ExitButton
+
+var tower: Tower
 
 signal exited
 
 func _ready():
-	target_priority_index_max = target_priority_label_options.size()-1
-	target_left_button.pressed.connect(on_tower_target_button_pressed.bind(-1))
-	target_right_button.pressed.connect(on_tower_target_button_pressed.bind(1))
-	
+	page_1.tower_targeting_priority_updated.connect(on_tower_targeting_priority_updated)
 	exit_button.pressed.connect(on_exit_button_pressed)
 
-func on_tower_target_button_pressed(_direction: int) -> void:
-	target_priority_index += _direction
-	if target_priority_index > target_priority_index_max:
-		target_priority_index = 0
-	elif target_priority_index < 0:
-		target_priority_index = target_priority_index_max
-	print(target_priority_index)
-	target_priority_label.text = target_priority_label_options[target_priority_index]
-	
-	tower.target_priority = target_priority_index as Tower.TargetPriority
+func update(_tower: Tower) -> void:
+	tower = _tower
+	page_1.update(_tower)
 
 func on_exit_button_pressed() -> void:
-	print("Press")
+	tower = null
 	exited.emit()
+
+func on_tower_targeting_priority_updated(_target_priority) -> void:
+	tower.target_priority = _target_priority as Tower.TargetPriority

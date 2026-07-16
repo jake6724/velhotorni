@@ -22,10 +22,10 @@ func _ready() -> void:
 	flowerwall_crt_config_ui.visible = false
 
 #Open Menu
-func _unhandled_key_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_F1:
-			flowerwall_crt_config_ui.visible = !flowerwall_crt_config_ui.visible
+# func _unhandled_key_input(event: InputEvent) -> void:
+# 	if event is InputEventKey:
+# 		if event.pressed and event.keycode == KEY_F1:
+# 			flowerwall_crt_config_ui.visible = !flowerwall_crt_config_ui.visible
 
 func should_enable_dither() -> void:
 	if DITHERING_SHADER.get("shader_parameter/downscaling_strength") > 1.0: 
@@ -168,5 +168,12 @@ func _on_vignette_smoothness_slider_value_changed(value: float) -> void:
 func _on_curvature_slider_value_changed(value: float) -> void:
 	CRT_SHADER.set("shader_parameter/curve_power", value)
 	should_enable_crt()
+
+func enable_all(_value: bool) -> void:
+	crt.visible = _value
+	post_bloom.visible = _value
+	dither.visible = _value
+	preblur_x.visible = _value
+	preblur_y.visible = _value
 
 #endregion

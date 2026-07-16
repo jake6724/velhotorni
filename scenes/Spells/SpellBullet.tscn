@@ -172,10 +172,9 @@ shape = SubResource("CircleShape2D_xhrp4")
 [node name="Light" type="PointLight2D" parent="."]
 unique_name_in_owner = true
 visible = false
-color = Color(0.972549, 0.15686275, 0.47058824, 1)
-energy = 8.0
+energy = 5.0
 range_z_min = -4096
-range_z_max = 4096
+range_z_max = 0
 range_layer_min = -3165
 range_layer_max = 12155
 texture = SubResource("GradientTexture2D_6fm6w")

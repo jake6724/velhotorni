@@ -27,7 +27,6 @@ var tower_stat_property_names: Array[String] = ["tower_stat", "tower_stat_modify
 @export var tower_stat_modify_percentage: float = -.1
 
 func _validate_property(property: Dictionary):
-	print("Perk Type: ", perk_type)
 	match perk_type:
 		"PlayerStat":
 			if property.name in player_stat_property_names or property.name in always_show_property_names:

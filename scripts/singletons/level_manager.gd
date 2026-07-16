@@ -5,44 +5,16 @@ var main_scene: PackedScene = load("res://scenes/Main.tscn")
 var main_menu_scene: PackedScene = load("res://scenes/MainMenu.tscn")
 var main: Main # Reference used to change RoundInfo UI
 
-var exit_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn") # The scene that 'exit' in menu takes you to
-
-var tower_level: PackedScene = load("res://scenes/level/LevelTower.tscn")
-var level_0: PackedScene = load("res://scenes/level/0_tutorial/LevelTutorial.tscn")
-var level_1: PackedScene = load("res://scenes/level/1_wind/Level1.tscn")
-var level_2: PackedScene = load("res://scenes/level/1_wind/Level2.tscn")
-var level_3a: PackedScene = load("res://scenes/level/1_wind/Level3A.tscn")
-var level_3b: PackedScene = load("res://scenes/level/1_wind/Level3B.tscn")
-var level_4: PackedScene = load("res://scenes/level/2_earth/Level4.tscn")
-var level_5: PackedScene = load("res://scenes/level/2_earth/Level5.tscn")
-var level_6a: PackedScene = load("res://scenes/level/2_earth/Level6A.tscn")
-var level_6b: PackedScene = load("res://scenes/level/2_earth/Level6B.tscn")
-var level_7: PackedScene = load("res://scenes/level/3_water/Level7.tscn")
-var level_8: PackedScene = load("res://scenes/level/3_water/Level8.tscn")
-var level_9a: PackedScene = load("res://scenes/level/3_water/Level9A.tscn")
-var level_9b: PackedScene = load("res://scenes/level/3_water/Level9B.tscn")
-var level_10: PackedScene = load("res://scenes/level/4_fire/Level10.tscn")
-var level_11: PackedScene = load("res://scenes/level/4_fire/Level11.tscn")
-var level_12a: PackedScene = load("res://scenes/level/4_fire/Level12A.tscn")
-var level_12b: PackedScene = load("res://scenes/level/4_fire/Level12B.tscn")
-var level_13: PackedScene = load("res://scenes/level/5_dark/Level13.tscn")
-var level_14: PackedScene = load("res://scenes/level/5_dark/Level14.tscn")
-var level_15a: PackedScene = load("res://scenes/level/5_dark/Level15A.tscn")
-var level_15b: PackedScene = load("res://scenes/level/5_dark/Level15B.tscn")
-var level_16: PackedScene = load("res://scenes/level/6_light/Level16.tscn")
-var level_17: PackedScene = load("res://scenes/level/6_light/Level17.tscn")
-var level_18a: PackedScene = load("res://scenes/level/6_light/Level18A.tscn")
-var level_18b: PackedScene = load("res://scenes/level/6_light/Level18B.tscn")
-var level_19: PackedScene = load("res://scenes/level/7_final/Level19.tscn")
-var level_20: PackedScene = load("res://scenes/level/7_final/Level20.tscn")
-var level_21: PackedScene = load("res://scenes/level/7_final/Level21.tscn")
-var level_22: PackedScene = load("res://scenes/level/7_final/Level22.tscn")
-
-var levels: Array[PackedScene] = [tower_level, level_0, level_1, level_2, level_3a, level_3b, level_4, level_5, level_6a, level_6b, 
-level_7, level_8, level_9a, level_9b, level_10, level_11, level_12a, level_12b, level_13, level_14, level_15a, level_15b, 
-level_16, level_17, level_18a, level_18b, level_19, level_20, level_21, level_22]
-var level_index: int = 5
+var tower_level: PackedScene = load("uid://dnilok8ickyxd")
+var level_1: PackedScene = load("uid://c834s0blo3yw2")
+var level_2: PackedScene
+var level_3: PackedScene = load("uid://bq1dqq33vdbh2")
+var level_4: PackedScene = load("uid://cql1ddc1e3523")
+var levels: Array[PackedScene] = [tower_level, level_1, level_2, level_3, level_4]
+var level_index: int = 1
 var active_level: LevelEnvironment
+
+var exit_scene: PackedScene = tower_level
 
 func _ready():
 	# configure_level() called in main - level only configured when main is ready to parent it
@@ -52,21 +24,13 @@ func _ready():
 ## triggers the `configure_level()` methods of other singletons here.
 func configure_level(_main: Main):
 	main = _main # Reference provided by current main itself
-	active_level = levels[level_index].instantiate()
+	active_level = levels[level_index].instantiate() #TODO get ref from main?
 
-## Observes `WaveManager.all_waves_complete`.
-func on_level_complete():
-	# Check if full game complete, or move to next level
-	if level_index + 1 == levels.size():
-		main.round_info.show_game_complete() # TODO: This should go back to world?
-	else:
-		main.show_level_complete()
-
-	# level_complete_timer.start(level_complete_duration)
-	play_level_complete_sfx()
-
-func load_next_level():
-	level_index += 1
+func load_level_from_index(_index: int) -> void:
+	EnemySpawner.reset()
+	WaveManager.reset()
+	level_index = _index
+	print("level_index: ", level_index)
 	SceneTransition.change_scene(main_scene)
 
 func restart_level():
@@ -74,28 +38,17 @@ func restart_level():
 	WaveManager.reset()
 	SceneTransition.change_scene_no_animation(main_scene)
 
-func load_specific_level(_level_environment):
-	level_index = levels.find(_level_environment)
-	if level_index != -1:
-		SceneTransition.change_scene(main_scene)
-	else:
-		push_error("Level not found!")
-
-func exit_level() -> void: # TODO: Eventually this should load the tower not the map
+func exit_level() -> void:
 	EnemySpawner.reset()
 	WaveManager.reset()
-	SceneTransition.change_scene(exit_scene)
-
-func complete_game() -> void:
 	level_index = 0
-	get_tree().change_scene_to_packed(main_menu_scene)
+	SceneTransition.change_scene(main_scene)
 
-func play_level_complete_sfx() -> void:
-	MusicPlayer.fade_out()
-	await MusicPlayer.fade_out_complete
+func exit_to_main_menu() -> void:
+	EnemySpawner.reset()
+	WaveManager.reset()
+	SceneTransition.change_scene(main_menu_scene)
 
-	SFXPlayer.play_sfx("victory")
-	await SFXPlayer.victory_sfx_complete
-
-	MusicPlayer.fade_in()
-	await MusicPlayer.fade_in_complete
+## Observes WaveManager.all_waves_complete
+func on_level_complete():
+	main.show_level_complete()

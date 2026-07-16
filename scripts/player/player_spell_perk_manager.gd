@@ -29,12 +29,12 @@ func on_modify_stat_requested(perk_data: PerkData) -> void:
 		PerkDataSpell.SpellStat.PERK_DEBUFF_CHANCE: #TODO: Not the cleanest way to do this
 			var debuff_data: DebuffData
 			match perk_data.debuff_type:
-				Debuff.Type.BURN: debuff_data = preload("res://data/debuffs/perk_debuffs/debuff_data_burn_perk.tres")
-				Debuff.Type.KNOCKBACK: debuff_data = preload("res://data/debuffs/perk_debuffs/debuff_data_knockback_perk.tres")
-				Debuff.Type.SLOW: debuff_data = preload("res://data/debuffs/perk_debuffs/debuff_data_slow_perk.tres")
-				Debuff.Type.FREEZE: debuff_data = preload("res://data/debuffs/perk_debuffs/debuff_data_freeze_perk.tres")
-				Debuff.Type.STUN: debuff_data = preload("res://data/debuffs/perk_debuffs/debuff_data_stun_perk.tres")
-				Debuff.Type.WEAKEN: debuff_data = preload("res://data/debuffs/perk_debuffs/debuff_data_weaken_perk.tres")
+				Debuff.Type.BURN: debuff_data = load("res://data/debuffs/perk_debuffs/debuff_data_burn_perk.tres")
+				Debuff.Type.KNOCKBACK: debuff_data = load("res://data/debuffs/perk_debuffs/debuff_data_knockback_perk.tres")
+				Debuff.Type.SLOW: debuff_data = load("res://data/debuffs/perk_debuffs/debuff_data_slow_perk.tres")
+				Debuff.Type.FREEZE: debuff_data = load("res://data/debuffs/perk_debuffs/debuff_data_freeze_perk.tres")
+				Debuff.Type.STUN: debuff_data = load("res://data/debuffs/perk_debuffs/debuff_data_stun_perk.tres")
+				Debuff.Type.WEAKEN: debuff_data = load("res://data/debuffs/perk_debuffs/debuff_data_weaken_perk.tres")
 			player.player_spell_spawner.perk_debuffs[debuff_data] += perk_data.base_value
 
 		PerkDataSpell.SpellStat.SPELL_MANA_DROP:

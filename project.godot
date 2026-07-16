@@ -39,6 +39,11 @@ GlobalSettings="*res://scripts/singletons/global_settings.gd"
 PlayerLoadout="*res://scripts/singletons/player_loadout.gd"
 AudioManager="*res://scenes/audio/AudioManager.tscn"
 AlertManager="*res://scripts/singletons/alert_manager.gd"
+DataTracker="*res://scripts/singletons/data_tracker.gd"
+flowerwall_crt="*res://addons/flowerwall_postprocess/scenes/flowerwall_pp.tscn"
+MusicManager="*res://scenes/audio/MusicManager.tscn"
+TweenFX="*res://addons/TweenFX/TweenFX.gd"
+XPManager="*res://scripts/singletons/xp_manager.gd"
 
 [debug]
 
@@ -58,7 +63,7 @@ mouse_cursor/custom_image="uid://d0ggh0ipjxkie"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/tabby_explorer/plugin.cfg")
+enabled=PackedStringArray("res://addons/TweenFX/plugin.cfg", "res://addons/flowerwall_postprocess/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg")
 
 [gui]
 
@@ -313,6 +318,7 @@ heal_all_action={
 2d_physics/layer_27="TowerObstacleBody"
 2d_physics/layer_28="Obstacle"
 2d_physics/layer_29="PlayerGroundBeacon"
+2d_physics/layer_30="ManaWell"
 
 [rendering]
 

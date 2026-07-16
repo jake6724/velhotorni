@@ -1,0 +1,357 @@
+[gd_scene load_steps=20 format=3 uid="uid://c83yi6i2g24jq"]
+
+[ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="1_lqox5"]
+[ext_resource type="Texture2D" uid="uid://brjnkoi3brlf3" path="res://assets/art/sprites/ui/spr_ui_stat_arrow_large.png" id="1_poyhk"]
+[ext_resource type="Script" uid="uid://lh1kpj4fvmo0" path="res://scripts/ui/tower/tower_info_menu_page_1.gd" id="2_b204o"]
+[ext_resource type="FontFile" uid="uid://b4s1nia7yq8yo" path="res://assets/fonts/EarlyGameBoy.ttf" id="2_lqox5"]
+[ext_resource type="Texture2D" uid="uid://kmi2frmpbjor" path="res://assets/art/atlases/tower/atl_tower_light_sun.png" id="5_60m7e"]
+[ext_resource type="Texture2D" uid="uid://tkbvc3cmwix0" path="res://assets/art/sprites/ui/spr_ui_stat_dmg.png" id="6_lqox5"]
+[ext_resource type="Texture2D" uid="uid://drf7yi8crfsgw" path="res://assets/art/sprites/ui/spr_ui_stat_spd.png" id="7_5fv1x"]
+[ext_resource type="Texture2D" uid="uid://dpaj01np75c8o" path="res://assets/art/sprites/ui/spr_ui_stat_rng.png" id="8_60m7e"]
+[ext_resource type="Texture2D" uid="uid://grexondkj1ki" path="res://assets/art/sprites/ui/spr_ui_stat_health.png" id="9_rtfek"]
+[ext_resource type="Texture2D" uid="uid://dugw6td7t0lel" path="res://assets/art/sprites/ui/spr_ui_stat_arrow.png" id="10_0hc8j"]
+[ext_resource type="Texture2D" uid="uid://d0yijylvpeqaf" path="res://assets/art/sprites/ui/spr_ui_divider_vertical_2.png" id="10_rtfek"]
+[ext_resource type="Texture2D" uid="uid://bpp3iat7h7hd0" path="res://assets/placeholders/spr_ui_slash_2.png" id="12_0hc8j"]
+[ext_resource type="Texture2D" uid="uid://broq3a5l86ngh" path="res://assets/art/sprites/ui/spr_ui_lvlup.png" id="13_hebmq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5fv1x"]
+texture = ExtResource("1_lqox5")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(1, 1, 30, 30)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b204o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hc8j"]
+atlas = ExtResource("5_60m7e")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rma6"]
+atlas = ExtResource("13_hebmq")
+region = Rect2(8, 0, 8, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_poyhk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtfek"]
+
+[node name="TowerInfoMenuPage1" type="Panel" node_paths=PackedStringArray("tower_display", "tower_level_display", "targeting_left_button", "targeting_right_button", "target_priority_label", "stat_damage", "stat_speed", "stat_range", "stat_health", "stat_max_health", "stat_pierce", "special_label", "secondary_label", "hint_parent", "hint_1", "hint_2", "hint_3")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -108.0
+offset_right = 192.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5fv1x")
+script = ExtResource("2_b204o")
+tower_display = NodePath("TowerDisplay")
+tower_level_display = NodePath("TowerLevelDisplay")
+targeting_left_button = NodePath("Targeting/TargetingSelect/TargetLeftButton")
+targeting_right_button = NodePath("Targeting/TargetingSelect/TargetRightButton")
+target_priority_label = NodePath("Targeting/TargetingSelect/TargetPriorityLabel")
+target_option_text_0 = "First"
+target_option_text_1 = "Last"
+target_option_text_2 = "Most Health"
+target_option_text_3 = "Least Health"
+stat_damage = NodePath("TowerStats/HBoxContainer/VBoxContainer2/StatLabelDamage")
+stat_speed = NodePath("TowerStats/HBoxContainer/VBoxContainer2/StatLabelSpeed")
+stat_range = NodePath("TowerStats/HBoxContainer/VBoxContainer2/StatLabelRange")
+stat_health = NodePath("TowerStats/HBoxContainer/VBoxContainer2/StatHealth/StatLabelHealth")
+stat_max_health = NodePath("TowerStats/HBoxContainer/VBoxContainer2/StatHealth/StatLabelMaxHealth")
+stat_pierce = NodePath("TowerStats/HBoxContainer/VBoxContainer2/StatLabelPierce")
+special_label = NodePath("TowerStats/VBoxContainer/SpecialLabel")
+secondary_label = NodePath("TowerStats/VBoxContainer/SecondaryLabel")
+debuff_text_slow = "Slows by {value}% for {modified_total_duration} sec"
+debuff_text_stun = "Stuns for {modified_total_duration} sec"
+debuff_text_freeze = "Freezes for {modified_total_duration} sec"
+debuff_text_burn = "burns for {modified_value} dmg every {repeat_duration} sec for {total_duration} sec"
+debuff_text_weaken = "Weakens by {value}% for {modified_total_duration} sec"
+debuff_text_knockback = "Knockback {modified_value} pixels over {total_duration} sec"
+buff_text_range = "Increase the range of nearby familiars by {modified_value}%"
+buff_text_speed = "Increase the fire rate of nearby familiars by {modified_value}%"
+buff_text_damage = "Increase the damage of nearby familiars by {modified_value}%"
+shield_text = "Spawns 4 shields with {shield_health} HP each. Shields regenerate each wave"
+bullet_modifier_coin_text = "Enemies drop extra summoning mana"
+hint_parent = NodePath("Hints/HintParent")
+hint_1 = NodePath("Hints/HintParent/Hint1")
+hint_2 = NodePath("Hints/HintParent/Hint2")
+hint_3 = NodePath("Hints/HintParent/Hint3")
+metadata/_custom_type_script = "uid://lh1kpj4fvmo0"
+metadata/_edit_horizontal_guides_ = [16.0]
+
+[node name="Targeting" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 164.0
+offset_right = 360.0
+offset_bottom = 196.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b204o")
+
+[node name="TargetingHeaderLabel" type="Label" parent="Targeting"]
+layout_mode = 0
+offset_left = 17.0
+offset_right = 135.0
+offset_bottom = 10.0
+size_flags_horizontal = 4
+text = "Target Priority"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TargetingSelect" type="HBoxContainer" parent="Targeting"]
+custom_minimum_size = Vector2(150, 16)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 16.0
+offset_right = 151.0
+offset_bottom = 32.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="TargetLeftButton" type="TextureButton" parent="Targeting/TargetingSelect"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_poyhk")
+
+[node name="TargetPriorityLabel" type="Label" parent="Targeting/TargetingSelect"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("2_lqox5")
+theme_override_font_sizes/font_size = 8
+text = "First"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TargetRightButton" type="TextureButton" parent="Targeting/TargetingSelect"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture_normal = ExtResource("1_poyhk")
+flip_h = true
+
+[node name="TowerDisplay" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 36.0
+offset_right = 120.0
+offset_bottom = 84.0
+texture = SubResource("AtlasTexture_0hc8j")
+
+[node name="TowerLevelDisplay" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 68.0
+offset_right = 128.0
+offset_bottom = 84.0
+texture = SubResource("AtlasTexture_4rma6")
+stretch_mode = 2
+
+[node name="TowerStats" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 20.0
+offset_right = 336.0
+offset_bottom = 156.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_poyhk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TowerStats"]
+layout_mode = 1
+offset_top = 8.0
+offset_right = 149.0
+offset_bottom = 74.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TowerStats/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TowerStats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TowerStats/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_lqox5")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Damage"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TowerStats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TowerStats/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("7_5fv1x")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Fire rate"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="TowerStats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TowerStats/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("8_60m7e")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Range"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="TowerStats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TowerStats/HBoxContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("9_rtfek")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "health"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="TowerStats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TowerStats/HBoxContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+texture = ExtResource("10_0hc8j")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "Pierce"
+
+[node name="TextureRect" type="TextureRect" parent="TowerStats/HBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("10_rtfek")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TowerStats/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="StatLabelDamage" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "75"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLabelSpeed" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLabelRange" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "200"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatHealth" type="HBoxContainer" parent="TowerStats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="StatLabelHealth" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer2/StatHealth"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "150"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TowerStats/HBoxContainer/VBoxContainer2/StatHealth"]
+layout_mode = 2
+texture = ExtResource("12_0hc8j")
+
+[node name="StatLabelMaxHealth" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer2/StatHealth"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "200"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLabelPierce" type="Label" parent="TowerStats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TowerStats"]
+layout_mode = 0
+offset_top = 82.0
+offset_right = 152.0
+offset_bottom = 136.0
+theme_override_constants/separation = 8
+
+[node name="SpecialLabel" type="Label" parent="TowerStats/VBoxContainer"]
+custom_minimum_size = Vector2(152, 23)
+layout_mode = 2
+text = "Burns for 10 dmg
+every 1 second"
+autowrap_mode = 2
+
+[node name="SecondaryLabel" type="Label" parent="TowerStats/VBoxContainer"]
+custom_minimum_size = Vector2(152, 23)
+layout_mode = 2
+text = "Each shield has 10 health"
+autowrap_mode = 3
+
+[node name="Hints" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 92.0
+offset_right = 192.0
+offset_bottom = 196.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rtfek")
+
+[node name="HintParent" type="VBoxContainer" parent="Hints"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Hint1" type="Label" parent="Hints/HintParent"]
+custom_minimum_size = Vector2(176, 0)
+layout_mode = 2
+size_flags_vertical = 6
+text = "- Long-range and high damage"
+autowrap_mode = 2
+
+[node name="Hint2" type="Label" parent="Hints/HintParent"]
+custom_minimum_size = Vector2(176, 0)
+layout_mode = 2
+size_flags_vertical = 6
+text = "- Can be placed outside the range of enemies"
+autowrap_mode = 2
+
+[node name="Hint3" type="Label" parent="Hints/HintParent"]
+custom_minimum_size = Vector2(176, 0)
+layout_mode = 2
+size_flags_vertical = 6
+text = "- Poor against multiple weak targets, no utility"
+autowrap_mode = 3

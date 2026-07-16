@@ -35,6 +35,7 @@ extends Resource
 @export_category("Bullet")
 @export var bullet: PackedScene
 @export var bullet_speed: float
+@export var bullet_pierce: int = 1
 @export var bullet_modifier_data: BulletModifierData
 ## This value may be left as <empty> if no Debuff is required.
 @export var debuff_data: DebuffData = null
@@ -43,5 +44,8 @@ extends Resource
 @export_category("Other")
 @export var tower_name: String = ""
 @export var desc: String = ""
+@export_multiline var tower_info_menu_hint_1: String
+@export_multiline var tower_info_menu_hint_2: String
+@export_multiline var tower_info_menu_hint_3: String
 
 @export var unlock_cost: int = 1

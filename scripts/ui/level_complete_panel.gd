@@ -9,10 +9,10 @@ extends NinePatchRect
 @onready var world_map_button: Button = %WorldMapButton
 @onready var next_level_button: Button = %NextLevelButton
 var stars: Array[TextureRect] = []
-var world_map_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn")
+# var world_map_scene: PackedScene = load("res://scenes/level/world_map/WorldMap.tscn")
 
 func _ready():
-	world_map_button.pressed.connect(on_world_map_button_pressed)
+	# world_map_button.pressed.connect(on_world_map_button_pressed)
 	next_level_button.pressed.connect(on_next_level_button_pressed)
 	stars = [star_1, star_2, star_3]
 
@@ -29,11 +29,11 @@ func set_stars(count: int) -> void:
 	for i in range(count):
 		stars[i].texture.region = Rect2(16, 0, 16, 16)
 
-func on_world_map_button_pressed() -> void:
-	SceneTransition.change_scene(world_map_scene)
+# func on_world_map_button_pressed() -> void:
+# 	SceneTransition.change_scene(world_map_scene)
 
 func on_next_level_button_pressed() -> void:
-	LevelManager.load_next_level()
+	LevelManager.exit_level()
 
 func highlight_ui_element(ui_element: Control) -> void:
 	ui_element.self_modulate = Color(Constants.ui_color_select)

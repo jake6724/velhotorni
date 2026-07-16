@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://vb1cipw2nthp"]
+[gd_scene load_steps=14 format=3 uid="uid://vb1cipw2nthp"]
 
 [ext_resource type="Script" uid="uid://c6gn0gwhvt2he" path="res://scripts/main.gd" id="1_0bbpv"]
 [ext_resource type="Script" uid="uid://gu8su5txi8b8" path="res://scripts/coin_drops/coin_drop_manager.gd" id="5_c01mt"]
@@ -8,11 +8,23 @@
 [ext_resource type="Script" uid="uid://bjkhw2thvqfa4" path="res://scripts/perks/perk_manager.gd" id="6_wp0k4"]
 [ext_resource type="FontFile" uid="uid://cu0ib6xd161v2" path="res://assets/fonts/Early-GameBoy-Jake-Edit.ttf" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://cg4hr6brmiyc4" path="res://scenes/ui/LevelCompletePanel.tscn" id="8_jlsqs"]
+[ext_resource type="Script" uid="uid://bn6x607p7m5aq" path="res://scenes/MiniMapSubViewport.gd" id="10_bjd11"]
 [ext_resource type="PackedScene" uid="uid://44wq0lwrobei" path="res://scenes/player/PlayerCharacter.tscn" id="10_lhr70"]
+[ext_resource type="Script" uid="uid://cwqdnv0hfkqud" path="res://scenes/camera_minimap.gd" id="10_wp0k4"]
 [ext_resource type="PackedScene" uid="uid://ck21estk7dkvr" path="res://scenes/ui/perk/PerkUI.tscn" id="12_bjd11"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjd11"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.09411765, 0.09411765, 0.2509804, 0)
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("camera_minimap")]
+visibility_layer = 3
 script = ExtResource("1_0bbpv")
+camera_minimap = NodePath("UI/PanelContainer/SubViewportContainer/SubViewport/MiniMapCamera")
 
 [node name="CoinDropManager" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -60,11 +72,46 @@ theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PanelContainer" type="PanelContainer" parent="UI"]
+offset_left = 392.0
+offset_top = 8.0
+offset_right = 524.0
+offset_bottom = 140.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_bjd11")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/PanelContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/PanelContainer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+gui_snap_controls_to_pixels = false
+canvas_cull_mask = 4293918722
+oversampling = false
+size = Vector2i(128, 128)
+render_target_update_mode = 4
+script = ExtResource("10_bjd11")
+
+[node name="MiniMapCamera" type="Camera2D" parent="UI/PanelContainer/SubViewportContainer/SubViewport" node_paths=PackedStringArray("player")]
+position = Vector2(-201, 87)
+scale = Vector2(0.15, 0.15)
+zoom = Vector2(0.2, 0.2)
+script = ExtResource("10_wp0k4")
+player = NodePath("../../../../../PlayerCharacter")
+
 [node name="LevelCompletePanel" parent="UI" instance=ExtResource("8_jlsqs")]
 unique_name_in_owner = true
 visible = false
-offset_top = -47.5
-offset_bottom = 47.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
