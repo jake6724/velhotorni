@@ -3,6 +3,8 @@ extends Node
 signal spell_loadout_updated
 signal tower_loadout_updated
 
+var player_level_index: int = 1
+
 func trigger_spell_loadout_update() -> void:
 	equipped_spells = [equipped_spell_1, equipped_spell_2, equipped_spell_3, equipped_spell_4]
 	spell_loadout_updated.emit()

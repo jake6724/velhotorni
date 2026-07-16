@@ -17,7 +17,7 @@ var level_environments: Dictionary[LevelTag, PackedScene]
 
 var levels: Array[PackedScene] = [tower_level, level_1, level_2, level_3, level_4]
 
-var level_index: int = 4
+var level_index: int = 0
 var active_level: LevelEnvironment
 
 var exit_scene: PackedScene = tower_level
@@ -36,14 +36,14 @@ func configure_level(_main: Main):
 
 ## Observes `WaveManager.all_waves_complete`.
 func on_level_complete():
-	# Check if full game complete, or move to next level
-	if level_index + 1 == levels.size():
-		main.round_info.show_game_complete() # TODO: This should go back to world?
-	else:
-		main.show_level_complete()
+	# # Check if full game complete, or move to next level
+	# if level_index + 1 == levels.size():
+	# 	main.round_info.show_game_complete() # TODO: This should go back to world?
+	# else:
+	main.show_level_complete()
 
 	# level_complete_timer.start(level_complete_duration)
-	play_level_complete_sfx()
+	# play_level_complete_sfx()
 
 func load_next_level():
 	level_index += 1

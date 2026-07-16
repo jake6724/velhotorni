@@ -33,7 +33,7 @@ func set_stars(count: int) -> void:
 # 	SceneTransition.change_scene(world_map_scene)
 
 func on_next_level_button_pressed() -> void:
-	LevelManager.load_next_level()
+	LevelManager.exit_level()
 
 func highlight_ui_element(ui_element: Control) -> void:
 	ui_element.self_modulate = Color(Constants.ui_color_select)

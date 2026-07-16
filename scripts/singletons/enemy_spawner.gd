@@ -106,14 +106,15 @@ func reset() -> void:
 	reset_indexes()
 
 func on_wave_complete() -> void:
-	active_enemies = []
-	active_path_enemies = []
-	can_spawn_enemy = false
-	wave_enemy_total_updated.emit(get_wave_enemy_total(WaveManager.active_wave))
-	stop_all_spawn_timers()
-	sort_enemies_by_path()
-	preview_portals() 
-	reset_indexes()
+	if WaveManager.wave_index < WaveManager.wave_total:
+		active_enemies = []
+		active_path_enemies = []
+		can_spawn_enemy = false
+		wave_enemy_total_updated.emit(get_wave_enemy_total(WaveManager.active_wave))
+		stop_all_spawn_timers()
+		sort_enemies_by_path()
+		preview_portals() 
+		reset_indexes()
 
 func reset_indexes() -> void:
 	enemy_index = 0

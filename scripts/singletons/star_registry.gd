@@ -16,6 +16,7 @@ var stars: Dictionary[PackedScene, int] = {
 	LevelManager.level_1: 0,
 	LevelManager.level_2: 0,
 	LevelManager.level_3: 0,
+	LevelManager.level_4: 0,
 }
 
 var region_stars: Array[int] = [0, 0, 0 ,0 ,0 ,0, 0, 0]

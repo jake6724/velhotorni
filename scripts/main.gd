@@ -17,6 +17,8 @@ var player_spawn_point: Node2D
 var active_level: LevelEnvironment
 var can_pause: bool = false
 
+var level_complete: bool = false
+
 var wave_failures: int = 0
 
 const PERK_UI_POPUP_DELAY: float = .1
@@ -137,9 +139,10 @@ func _ready():
 	camera_minimap.global_position = active_level.minimap_camera_marker.global_position
 
 func on_banner_animation_finished() -> void:
-	player_character.player_input.input_enabled = true
-	player_character.player_input.can_start_wave = true
-	player_character.player_hud.configure_for_next_wave()
+	if not level_complete:
+		player_character.player_input.input_enabled = true
+		player_character.player_input.can_start_wave = true
+		player_character.player_hud.configure_for_next_wave()
 
 func on_escape_pressed() -> void:
 	if can_pause:
@@ -212,16 +215,21 @@ func set_can_pause(value: bool) -> void:
 # 		player_character.player_build_ui.show()
 
 func show_level_complete() -> void:
+	player_character.player_input.input_enabled = false
+	player_character.reticle_sprite.hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	level_complete = true
 	level_complete_panel.set_stars(calc_stars())
-	# player_controller.tower_menu.hide()
 	level_complete_panel.show()
 
 func calc_stars() -> int:
 	var count: int = 2
+	
 	if wave_failures == 0:
 		count += 1
-		if active_level.base.health == 10:
-			count += 1
+	
+	if active_level.base.health == 10:
+		count += 1
 	
 	if count > StarRegistry.stars[LevelManager.levels[LevelManager.level_index]]:
 		StarRegistry.stars[LevelManager.levels[LevelManager.level_index]] = count
