@@ -14,4 +14,4 @@ metadata/_custom_type_script = "uid://bqhap4drhvx27"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qra61")
-debug_color = Color(0.7529412, 0, 0.05882353, 0.35686275)
+debug_color = Color(0.9019608, 0.4509804, 0.09019608, 0.35686275)
