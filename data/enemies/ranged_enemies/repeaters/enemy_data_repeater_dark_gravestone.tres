@@ -12,7 +12,7 @@ region = Rect2(80, 64, 16, 16)
 
 [resource]
 script = ExtResource("3_hgxnr")
-attack_cooldown = 0.0
+attack_cooldown = 2.0
 burst_cooldown = 0.2
 num_bursts = 10
 initial_delay = 3.0
@@ -24,7 +24,7 @@ bullet_max_distance = 120.0
 size = 7
 element = 5
 weak_against_element = 4
-health = 1250.0
+health = 500.0
 speed = 12.0
 element_mana_drop_chance = 0.75
 element_mana_drop_amount_multiplier = 2.0
