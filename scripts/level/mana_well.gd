@@ -13,13 +13,12 @@ func _ready() -> void:
 	sprite.z_index = Constants.z_index_map["tower_shield"]
 	update_buff_data()
 
-
 func update_buff_data() -> void:
-	# # Connect to BuffArea
-	# if buff_data_list.size() > 0:
-	# 	buff_area.initialize()
-	# else:
-	# 	buff_area.uninitialize()
+	# Connect to BuffArea
+	if buff_data_list.size() > 0:
+		buff_area.initialize()
+	else:
+		buff_area.uninitialize()
 
 	for buff_data: BuffData in buff_data_list:
 		buff_data.leveled_value = buff_data.value		
@@ -33,4 +32,4 @@ func update_buff_data() -> void:
 			Buff.Type.SPEED:
 				buff_data_list[0].leveled_value = (buff_data_list[0].value + ((buff_data_list[0].value * SPEED_BUFF_LEVEL_MODIFIER) * TowerGlobalData.buff_perk_modifier[buff_data_list[0].type]) * 0)
 
-		buff_data_list = buff_data_list.duplicate(true)
+		buff_area.buff_data_list = buff_data_list.duplicate(true)

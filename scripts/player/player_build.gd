@@ -236,14 +236,12 @@ func place_tower() -> void:
 			preview_tower.modulate.r = 1
 			preview_tower.placement_button_hint.hide()
 			preview_tower.hide_upgrade_info()
-
-			print("Placing tower, OA's: ", preview_tower.area_detect_mana_well.get_overlapping_areas())
-			for area in preview_tower.area_detect_mana_well.get_overlapping_areas():
-				if area is ManaWell:
-					print("Adding buffs")
-					preview_tower.buff_manager.add_buff((area.buff_data_list[0]), area.buff_area)
-					preview_tower.buff_manager.add_buff((area.buff_data_list[1]), area.buff_area)
-					preview_tower.buff_manager.add_buff((area.buff_data_list[2]), area.buff_area)
+			
+			# for area in preview_tower.area_detect_mana_well.get_overlapping_areas():
+			# 	if area is ManaWell:
+			# 		preview_tower.buff_manager.add_buff((area.buff_data_list[0]), area.buff_area)
+			# 		preview_tower.buff_manager.add_buff((area.buff_data_list[1]), area.buff_area)
+			# 		preview_tower.buff_manager.add_buff((area.buff_data_list[2]), area.buff_area)
 
 			AudioManager.create_2d_audio_at_location(WorldGrid.grid_to_world(tower_placement_info[1]), SoundEffect.SOUND_EFFECT_TYPE.TOWER_SUMMON)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b25ntv7cw871v"]
+[gd_scene load_steps=14 format=3 uid="uid://b25ntv7cw871v"]
 
 [ext_resource type="Script" uid="uid://85ruxf75ft4j" path="res://scripts/level/mana_well.gd" id="1_nbmcc"]
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="2_fboeu"]
@@ -40,8 +40,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbmcc"]
 size = Vector2(16, 16)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_614i6"]
+radius = 6.0
+
 [node name="ManaWell" type="Area2D" node_paths=PackedStringArray("buff_area", "sprite")]
-collision_layer = 536870912
+collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_nbmcc")
 buff_data_list = Array[ExtResource("2_fboeu")]([ExtResource("3_614i6"), ExtResource("4_1bxsi"), ExtResource("5_40l2v")])
@@ -57,5 +60,11 @@ frame_progress = 0.26959616
 shape = SubResource("RectangleShape2D_nbmcc")
 
 [node name="BuffArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1073741824
 script = ExtResource("7_614i6")
 metadata/_custom_type_script = "uid://b07kx8y1ebqjj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuffArea"]
+shape = SubResource("CircleShape2D_614i6")
+debug_color = Color(0.2603746, 0.6344206, 0, 0.41960785)

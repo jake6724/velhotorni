@@ -14,6 +14,8 @@ func get_first_target(in_range_targets:Array[Enemy]) -> Enemy:
 	var selected_target: Enemy = null
 	if in_range_targets.size() != 0:
 		for enemy: Enemy in in_range_targets:
+			if enemy is FlyingEnemy: # Prioritize flying enemies!
+				return enemy
 			if enemy.path_follow.progress_ratio > max_progress:
 				max_progress = enemy.path_follow.progress_ratio
 				selected_target = enemy

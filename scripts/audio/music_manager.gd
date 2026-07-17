@@ -16,7 +16,6 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	print(music_data)
 	for data: MusicData in music_data:
 		music_track_dict[data.track] = data
 
@@ -28,7 +27,6 @@ func create_audio(track: MusicData.MUSIC_TRACK) -> void:
 		# add_child(new_audio)
 		music_player.stream = data.sound
 		music_player.volume_db = data.volume
-		print(music_player.volume_db)
 		# # new_audio.finished.connect(data.on_audio_finished)
 		# new_audio.finished.connect(new_audio.queue_free)
 		music_player.play()
@@ -38,7 +36,6 @@ func create_audio(track: MusicData.MUSIC_TRACK) -> void:
 func fade(new_track: MusicData.MUSIC_TRACK) -> void:
 	var fade_tween: Tween = get_tree().create_tween()
 	fade_tween.tween_property(music_player, "volume_linear", 0.0, 1.0)
-	print(music_player.volume_db)
 	await fade_tween.finished
 	create_audio(new_track)
 	# var fade_in_tween: Tween = get_tree().create_tween()

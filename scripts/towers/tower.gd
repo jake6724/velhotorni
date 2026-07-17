@@ -219,8 +219,6 @@ func _ready():
 		parents.append(current_parent)
 		current_parent = current_parent.get_parent()
 
-	print(parents)
-
 ## Must be called after `Tower` has been added to scene with `add_child()`.
 func initialize(element: Constants.Element):
 	base_data = get_tower_data_copy(TowerGlobalData.tower_data[element])
@@ -471,7 +469,7 @@ func on_enemy_died(enemy: Enemy) -> void:
 		active_target = null
 		
 func on_attack_area_entered(intruder: Area2D) -> void:
-	if intruder is Enemy and not intruder is FlyingEnemy:
+	if intruder is Enemy: #and not intruder is FlyingEnemy:
 		in_range_targets.append(intruder)
 		if not intruder.died.is_connected(on_enemy_died):
 			intruder.died.connect(on_enemy_died)
@@ -510,7 +508,6 @@ func _draw():
 
 # Buffs
 func on_add_new_buff(buff: Buff):
-	print("Tower adding buff")
 	match buff.data.type:
 		Buff.Type.RANGE:
 			_range_buff += _leveled_range * buff.data.modified_value
@@ -637,12 +634,14 @@ func heal(_value: int) -> void:
 	disabled = false
 	fx_disabled.hide()
 	sprite.material = null
+	hurtbox.set_deferred("monitorable", true)
 
 func disable() -> void:
 	disabled = true
 	fx_disabled.show()
 	sprite.material = grayscale_shader
 	healthbar.hide()
+	hurtbox.set_deferred("monitorable", false)
 
 func die() -> void:
 	alive = false

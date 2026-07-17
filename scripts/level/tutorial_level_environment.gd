@@ -97,7 +97,6 @@ func on_player_tower_mana_spent(_value) -> void:
 		_: pass
 
 func on_player_mode_switched() -> void:
-	print("Tutorial calling on_player_mode_switched!")
 	if is_first_time_in_build: 
 		is_first_time_in_build = false
 		cycle_dboxes()

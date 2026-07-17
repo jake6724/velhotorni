@@ -30,7 +30,6 @@ func load_level_from_index(_index: int) -> void:
 	EnemySpawner.reset()
 	WaveManager.reset()
 	level_index = _index
-	print("level_index: ", level_index)
 	SceneTransition.change_scene(main_scene)
 
 func restart_level():

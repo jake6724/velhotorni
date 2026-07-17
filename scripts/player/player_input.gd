@@ -204,7 +204,7 @@ func set_input_enabled(_value) -> void:
 
 ## `true` = controller active, 'false' = mouse active
 func swap_input_type() -> void:
-	print(GlobalSettings.controller_active)
+	# print(GlobalSettings.controller_active)
 	if GlobalSettings.controller_active:
 		get_aim_input_func = get_aim_input_controller
 		get_move_input_func = get_move_input_controller
@@ -213,10 +213,11 @@ func swap_input_type() -> void:
 		get_move_input_func = get_move_input_keyboard
 
 func get_controller_info() -> void:
-	var connected_joypads = Input.get_connected_joypads()
-	for device_id in connected_joypads:
-		var joy_name = Input.get_joy_name(device_id)
-		print("Joypad ", device_id, " name: ", joy_name)
+	pass
+	# var connected_joypads = Input.get_connected_joypads()
+	# for device_id in connected_joypads:
+	# 	var joy_name = Input.get_joy_name(device_id)
+	# 	print("Joypad ", device_id, " name: ", joy_name)
 
 func null_func() -> Vector2:
 	return Vector2.ZERO

@@ -32,7 +32,7 @@ func _ready():
 
 	flowerwall_crt.enable_all(false)
 
-	# await active_level.ready
+	# await active_level.readyt
 	
 	# Configure other singletons
 	WorldGrid.configure_level(LevelManager.active_level)
@@ -117,8 +117,6 @@ func _ready():
 
 	get_tree().root.get_viewport().canvas_cull_mask = 4294967293 # The specific layer value lol
 
-	print(camera_minimap)
-	print(active_level.minimap_camera_marker)
 	camera_minimap.global_position = active_level.minimap_camera_marker.global_position
 
 	if not active_level.show_minimap:

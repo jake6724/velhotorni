@@ -61,7 +61,6 @@ func on_area_entered(_intruder) -> void:
 		break_collider.set_deferred("disabled", true)
 
 func on_spawn_timer_timeout() -> void:
-	print("SPAWN")
 	ap.play("spawn")
 	await ap.animation_finished
 	ap.play("idle")

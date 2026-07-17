@@ -319,6 +319,7 @@ heal_all_action={
 2d_physics/layer_28="Obstacle"
 2d_physics/layer_29="PlayerGroundBeacon"
 2d_physics/layer_30="ManaWell"
+2d_physics/layer_31="TowerRecieveBuff"
 
 [rendering]
 
