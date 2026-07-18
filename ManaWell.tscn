@@ -1,12 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://b25ntv7cw871v"]
+[gd_scene load_steps=16 format=3 uid="uid://b25ntv7cw871v"]
 
 [ext_resource type="Script" uid="uid://85ruxf75ft4j" path="res://scripts/level/mana_well.gd" id="1_nbmcc"]
 [ext_resource type="Script" uid="uid://cxqxpioy3ppam" path="res://scripts/buffs/data/buff_data.gd" id="2_fboeu"]
 [ext_resource type="Resource" uid="uid://bdfrtx4jqecxh" path="res://data/buffs/buff_data_mana_well_damage.tres" id="3_614i6"]
 [ext_resource type="Resource" uid="uid://bpxwrex62gy02" path="res://data/buffs/buff_data_mana_well_speed.tres" id="4_1bxsi"]
 [ext_resource type="Resource" uid="uid://deqmkfbtda14q" path="res://data/buffs/buff_data_mana_well_range.tres" id="5_40l2v"]
+[ext_resource type="Texture2D" uid="uid://ui2f1xkfpea3" path="res://assets/art/sprites/environment/manawell_particle.png" id="6_1bxsi"]
 [ext_resource type="Texture2D" uid="uid://b0keh1vpt7pp0" path="res://assets/art/sprites/environment/manawell.png" id="6_614i6"]
 [ext_resource type="Script" uid="uid://b07kx8y1ebqjj" path="res://scripts/buffs/buff_area.gd" id="7_614i6"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_40l2v"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1bxsi"]
 atlas = ExtResource("6_614i6")
@@ -50,6 +57,18 @@ script = ExtResource("1_nbmcc")
 buff_data_list = Array[ExtResource("2_fboeu")]([ExtResource("3_614i6"), ExtResource("4_1bxsi"), ExtResource("5_40l2v")])
 buff_area = NodePath("BuffArea")
 sprite = NodePath("AnimatedSprite2D")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 1
+material = SubResource("CanvasItemMaterial_40l2v")
+amount = 4
+texture = ExtResource("6_1bxsi")
+lifetime = 1.4000000000000001
+emission_shape = 3
+emission_rect_extents = Vector2(6, 1)
+gravity = Vector2(0, -16)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kp6ue")
