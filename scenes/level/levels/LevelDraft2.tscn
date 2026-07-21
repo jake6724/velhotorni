@@ -32,7 +32,7 @@ script = ExtResource("2_j3i2c")
 path_data_list = Array[ExtResource("4_a2al4")]([SubResource("Resource_3jhh8")])
 metadata/_custom_type_script = "uid://cskry1sw3vqba"
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mssc7"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a2al4"]
 texture = ExtResource("17_id6jd")
 0:0/0 = 0
 0:0/0/z_index = -4096
@@ -1697,7 +1697,7 @@ texture = ExtResource("17_id6jd")
 4:32/0/z_index = -4096
 
 [sub_resource type="TileSet" id="TileSet_tioql"]
-sources/0 = SubResource("TileSetAtlasSource_mssc7")
+sources/0 = SubResource("TileSetAtlasSource_a2al4")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_h8vnd"]
 frequency = 0.0001
