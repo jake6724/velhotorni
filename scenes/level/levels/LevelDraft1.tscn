@@ -4126,11 +4126,32 @@ z_index = 7
 texture_filter = 1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_1rson")
-position = Vector2(391, 379.99997)
+position = Vector2(391, 512)
 scale = Vector2(1, 1.04)
 texture = ExtResource("25_ulpm1")
 region_enabled = true
 region_rect = Rect2(0, 0, 1400, 800)
+
+[node name="WeatherScroll2" type="Sprite2D" parent="."]
+z_index = 7
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_1rson")
+position = Vector2(424, 15.999999)
+texture = ExtResource("25_ulpm1")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 32)
+
+[node name="WeatherScroll3" type="Sprite2D" parent="."]
+z_index = 7
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_1rson")
+position = Vector2(384, 64.09)
+scale = Vector2(2.6666667, 1.9943749)
+texture = ExtResource("25_ulpm1")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 32)
 
 [node name="PathParent" type="Node" parent="."]
 
