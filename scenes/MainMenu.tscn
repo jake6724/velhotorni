@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://yaumfsyoni78"]
+[gd_scene load_steps=26 format=4 uid="uid://yaumfsyoni78"]
 
 [ext_resource type="Script" uid="uid://glpr25c7d5yd" path="res://scripts/main_menu.gd" id="1_yqorp"]
 [ext_resource type="PackedScene" uid="uid://d37yx87886ct2" path="res://scenes/placeholders/scroll_background_test.tscn" id="2_0ykhv"]
@@ -8,9 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://y4nqie58r50j" path="res://assets/art/sprites/ui/spr_menu_mockup.png" id="4_8vx4p"]
 [ext_resource type="Texture2D" uid="uid://dolrcafh5ess" path="res://assets/art/sprites/ui/spr_ui_box3.png" id="5_mipys"]
 [ext_resource type="Texture2D" uid="uid://oq8tieow4ln8" path="res://assets/art/sprites/ui/spr_menu_tower.png" id="5_tdapf"]
+[ext_resource type="Texture2D" uid="uid://cmo4s13och15u" path="res://assets/art/sprites/ui/spr_menu_island.png" id="5_v41fp"]
 [ext_resource type="Texture2D" uid="uid://djq3huplgujyb" path="res://assets/art/sprites/ui/spr_ui_logo.png" id="6_ucygd"]
 [ext_resource type="Texture2D" uid="uid://c5p3h8280xjt4" path="res://assets/art/sprites/ui/spr_menu_mage.png" id="6_v41fp"]
+[ext_resource type="Texture2D" uid="uid://dfdruktjn6qtl" path="res://assets/art/sprites/ui/spr_menu_icesprite.png" id="7_1n6yq"]
 [ext_resource type="Texture2D" uid="uid://baxhyvlhbnp7a" path="res://assets/art/sprites/ui/spr_menu_orbaura.png" id="7_7shrw"]
+[ext_resource type="Texture2D" uid="uid://coqjlg3r5m1ay" path="res://assets/art/sprites/ui/spr_menu_firesprite.png" id="7_viowm"]
 [ext_resource type="PackedScene" uid="uid://bd8qcphj4essk" path="res://scenes/ui/SettingsMenu.tscn" id="8_mipys"]
 [ext_resource type="Texture2D" uid="uid://b0ie6xqrqxtpw" path="res://assets/art/sprites/ui/spr_menu_orb.png" id="8_viowm"]
 [ext_resource type="Texture2D" uid="uid://bwy4go67mguwp" path="res://assets/art/sprites/ui/spr_menu_fairy.png" id="9_1n6yq"]
@@ -57,35 +60,50 @@ position = Vector2(0, 80)
 texture = ExtResource("4_8vx4p")
 metadata/parallax_strength = 0.1
 
+[node name="Island" type="Sprite2D" parent="Node2D"]
+position = Vector2(-128, -74)
+texture = ExtResource("5_v41fp")
+metadata/parallax_strength = 0.01
+
 [node name="Tower" type="Sprite2D" parent="Node2D"]
 position = Vector2(-178, -99)
 texture = ExtResource("5_tdapf")
-metadata/parallax_strength = 0.01
+metadata/parallax_strength = 0.03
+
+[node name="Ice" type="Sprite2D" parent="Node2D"]
+position = Vector2(-36, -27)
+texture = ExtResource("7_1n6yq")
+metadata/parallax_strength = 0.04
+
+[node name="Fire" type="Sprite2D" parent="Node2D"]
+position = Vector2(-24, 21)
+texture = ExtResource("7_viowm")
+metadata/parallax_strength = 0.05
 
 [node name="Mage" type="Sprite2D" parent="Node2D"]
 position = Vector2(-81, 93)
 texture = ExtResource("6_v41fp")
-metadata/parallax_strength = 0.04
+metadata/parallax_strength = 0.06
+
+[node name="Orb" type="Sprite2D" parent="Node2D"]
+position = Vector2(-166, -14)
+texture = ExtResource("8_viowm")
+metadata/parallax_strength = 0.07
 
 [node name="OrbAura" type="Sprite2D" parent="Node2D"]
 position = Vector2(-166, -14)
 texture = ExtResource("7_7shrw")
 metadata/parallax_strength = 0.08
 
-[node name="Orb" type="Sprite2D" parent="Node2D"]
-position = Vector2(-166, -14)
-texture = ExtResource("8_viowm")
-metadata/parallax_strength = 0.06
-
 [node name="OrbRing" type="Sprite2D" parent="Node2D"]
 position = Vector2(-166, -14)
 texture = ExtResource("9_tdapf")
-metadata/parallax_strength = 0.07
+metadata/parallax_strength = 0.1
 
 [node name="Fairy" type="Sprite2D" parent="Node2D"]
 position = Vector2(-182, 74)
 texture = ExtResource("9_1n6yq")
-metadata/parallax_strength = 0.08
+metadata/parallax_strength = 0.09
 
 [node name="TitleMenu" type="Control" parent="."]
 unique_name_in_owner = true
