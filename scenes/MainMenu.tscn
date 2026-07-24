@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://yaumfsyoni78"]
+[gd_scene load_steps=27 format=4 uid="uid://yaumfsyoni78"]
 
 [ext_resource type="Script" uid="uid://glpr25c7d5yd" path="res://scripts/main_menu.gd" id="1_yqorp"]
 [ext_resource type="PackedScene" uid="uid://d37yx87886ct2" path="res://scenes/placeholders/scroll_background_test.tscn" id="2_0ykhv"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dfdruktjn6qtl" path="res://assets/art/sprites/ui/spr_menu_icesprite.png" id="7_1n6yq"]
 [ext_resource type="Texture2D" uid="uid://baxhyvlhbnp7a" path="res://assets/art/sprites/ui/spr_menu_orbaura.png" id="7_7shrw"]
 [ext_resource type="Texture2D" uid="uid://coqjlg3r5m1ay" path="res://assets/art/sprites/ui/spr_menu_firesprite.png" id="7_viowm"]
+[ext_resource type="Texture2D" uid="uid://bp7cnim3am4v1" path="res://assets/art/sprites/ui/spr_menu_sparkles.png" id="7_yovvs"]
 [ext_resource type="PackedScene" uid="uid://bd8qcphj4essk" path="res://scenes/ui/SettingsMenu.tscn" id="8_mipys"]
 [ext_resource type="Texture2D" uid="uid://b0ie6xqrqxtpw" path="res://assets/art/sprites/ui/spr_menu_orb.png" id="8_viowm"]
 [ext_resource type="Texture2D" uid="uid://bwy4go67mguwp" path="res://assets/art/sprites/ui/spr_menu_fairy.png" id="9_1n6yq"]
@@ -68,6 +69,11 @@ metadata/parallax_strength = 0.01
 [node name="Tower" type="Sprite2D" parent="Node2D"]
 position = Vector2(-178, -99)
 texture = ExtResource("5_tdapf")
+metadata/parallax_strength = 0.02
+
+[node name="Sparkles" type="Sprite2D" parent="Node2D"]
+position = Vector2(-109, -13)
+texture = ExtResource("7_yovvs")
 metadata/parallax_strength = 0.03
 
 [node name="Ice" type="Sprite2D" parent="Node2D"]
