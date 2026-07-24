@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://yaumfsyoni78"]
+[gd_scene load_steps=30 format=4 uid="uid://yaumfsyoni78"]
 
 [ext_resource type="Script" uid="uid://glpr25c7d5yd" path="res://scripts/main_menu.gd" id="1_yqorp"]
 [ext_resource type="PackedScene" uid="uid://d37yx87886ct2" path="res://scenes/placeholders/scroll_background_test.tscn" id="2_0ykhv"]
@@ -22,6 +22,18 @@
 [ext_resource type="Script" uid="uid://fgag164jvyrr" path="res://scripts/menu_parallax.gd" id="10_2nypq"]
 [ext_resource type="PackedScene" uid="uid://dmbo5qx2htxpa" path="res://scenes/ui/CreditsMenu.tscn" id="10_7la6k"]
 [ext_resource type="Texture2D" uid="uid://cq4rdtwa1687c" path="res://assets/art/sprites/spr_black.png" id="12_bky6r"]
+[ext_resource type="Texture2D" uid="uid://ct8jh2crdppqc" path="res://assets/art/sprites/ui/spr_menu_glyph.png" id="15_yovvs"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2axsc"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_wrgne"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.52284265, 0.5456853)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2nypq"]
 
@@ -110,6 +122,23 @@ metadata/parallax_strength = 0.1
 position = Vector2(-182, 74)
 texture = ExtResource("9_1n6yq")
 metadata/parallax_strength = 0.09
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_2axsc")
+position = Vector2(256, 144)
+amount = 1
+texture = ExtResource("15_yovvs")
+lifetime = 15.0
+emission_shape = 3
+emission_rect_extents = Vector2(176, 112)
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 10.0
+angle_min = -15.0
+angle_max = 15.0
+color_ramp = SubResource("Gradient_wrgne")
+anim_speed_min = 5.0
+anim_speed_max = 10.0
 
 [node name="TitleMenu" type="Control" parent="."]
 unique_name_in_owner = true
